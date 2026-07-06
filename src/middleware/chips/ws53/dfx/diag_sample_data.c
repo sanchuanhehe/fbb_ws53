@@ -35,7 +35,7 @@ errcode_t diag_cmd_wlan_module_sample_data(uint16_t cmd_id, void *cmd_param, uin
         goto report_ack;
     }
 
-    osal_printk("flag:%d, transmit_id:%d, sample_size:%d, sample_type:%d,msg_cnt:%d.\n",
+    osal_printk("flag:%d, id:%d, size:%d, type:%d, cnt:%d.\n",
                 cmd->flag, cmd->transmit_id, cmd->sample_size, cmd->sample_type, g_sample_running.msg_cnt);
 
     if (g_sample_running.running == false && cmd->flag == ZDIAG_SAMPLE_START) { /* start */
@@ -46,7 +46,7 @@ errcode_t diag_cmd_wlan_module_sample_data(uint16_t cmd_id, void *cmd_param, uin
         g_sample_running.running = false;
         ack.ret = func_cb(cmd_param, cmd_param_size);
     } else {
-        osal_printk("diag_cmd_wlan_module_sample_data:sample_running:%d, sample_start:%d, msg_cnt:%d.\n",
+        osal_printk("diag sample data:running:%d, start:%d, cnt:%d.\n",
             g_sample_running.running, cmd->flag, g_sample_running.msg_cnt);
         goto report_ack;
     }

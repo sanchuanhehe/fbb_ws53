@@ -457,7 +457,8 @@ static void ws53_ftm_mode_init(uint32_t image_addr)
 
     if (mfg_key_area->image_id == FACTORYBOOT_KEY_AREA_IMAGE_ID && mfg_factory_cfg.factory_valid == MFG_FACTORY_VALID &&
         mfg_key_area->structure_length == sizeof(image_key_area_t)) {
-        dmmu_set(image_addr, image_addr + image_size, jump_addr, 0);
+        // dmmu配置都是闭区间，- 0x1才是源区间的结束地址, 0: 第0组dmmu配置
+        dmmu_set(image_addr, image_addr + image_size - 0x1, jump_addr, 0);
     }
 }
 
@@ -487,7 +488,10 @@ static void ws53_get_image_addr(uint32_t *image_addr)
     ws53_flash_encrypt_config(jump_addr, image_size); /* flash加密配置 */
     ws53_verify_app_handle(jump_addr); /* app验签 */
     if (ccore_img_addr != jump_addr) {
-        dmmu_set(ccore_img_addr, ccore_img_addr + image_size, jump_addr, 0);
+        // dmmu配置都是闭区间，- 0x1才是源区间的结束地址, 0: 第0组dmmu配置
+        dmmu_set(ccore_img_addr, ccore_img_addr + image_size - 0x1, jump_addr, 0);
+        // dmmu配置都是闭区间，- 0x1才是源区间的结束地址, 1: 第1组dmmu配置
+        dmmu_set(jump_addr, jump_addr + image_size - 0x1, ccore_img_addr, 1);
     }
 #else // 压缩
     uint32_t ccore_img_size = ccore_img_info.part_info.addr_info.size;

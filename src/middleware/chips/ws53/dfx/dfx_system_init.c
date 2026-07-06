@@ -165,7 +165,7 @@ static errcode_t thread_msg_event_init(void)
     }
     osal_kthread_lock();
     if (osal_kthread_set_priority(task, TASK_PRIORITY_DFX_MSG) != OSAL_SUCCESS) {
-        print_str("osal_kthread_set_priority excute failed!!! \r\n");
+        print_str("kthread set priority fail\r\n");
     }
     osal_kthread_unlock();
     return ERRCODE_SUCC;

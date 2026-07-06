@@ -1907,6 +1907,7 @@ OSAL_STATIC osal_s32 hmac_ccpriv_alg_set_udata_fix_rate(hmac_vap_stru *hmac_vap,
     frw_msg msg_info = {0};
 
     tx_rate_param.alg_cfg = MAC_ALG_CFG_AUTORATE_FIX_RATE;
+    tx_rate_param.cfg_frame_type = ALG_SET_FIX_PARAMS_TYPE_DATA;
     if (hmac_ccpriv_alg_get_udata_fix_rate_cfg(&tx_rate_param, &param) != OAL_SUCC) {
         return OAL_FAIL;
     }

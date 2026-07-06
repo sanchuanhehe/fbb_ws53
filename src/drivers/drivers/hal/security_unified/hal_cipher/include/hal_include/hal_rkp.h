@@ -18,6 +18,8 @@ extern "C" {
 #endif /* __cplusplus */
 #endif /* __cplusplus */
 
+void hal_rkp_init(void);
+
 td_s32 hal_rkp_lock(td_void);
 
 td_s32 hal_rkp_unlock(td_void);

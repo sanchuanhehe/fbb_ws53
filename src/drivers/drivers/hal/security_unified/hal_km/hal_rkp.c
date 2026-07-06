@@ -11,6 +11,29 @@
 #include "crypto_drv_common.h"
 #include "crypto_common_macro.h"
 
+/* update rootkey for efuse. */
+void hal_rkp_init(void)
+{
+    int32_t ret;
+    uint32_t i;
+    uint32_t rkp_key_list[] = {
+        CRYPTO_KDF_OTP_KEY_MRK1, CRYPTO_KDF_OTP_KEY_RUSK
+    };
+
+    ret = hal_rkp_lock();
+    if (ret != 0) {
+        crypto_log_err("rkp lock failed, ret is 0x%x\n", ret);
+        return;
+    }
+    for (i = 0; i < crypto_array_size(rkp_key_list); i++) {
+        ret = hal_rkp_deob_update(rkp_key_list[i], CRYPTO_KDF_UPDATE_ALG_AES);
+        if (ret != 0) {
+            crypto_log_err("rkp deob update failed, ret is 0x%x, otp_key is 0x%x\n", ret, rkp_key_list[i]);
+        }
+    }
+    hal_rkp_unlock();
+}
+
 td_s32 hal_rkp_lock(td_void)
 {
     td_u32 i = 0;

@@ -440,9 +440,9 @@ def get_group_owner(data_dict, save_name, target_name):
             # ws53 C core flash
             'control_ws53.map_flash':{'PLAT' : 11, 'WIFI':57.15, 'BTC': 112.35, 'BTH': 6, 'UNKNOWN': 0.1},
             # ws53 A core flash
-            'application.map_flash':{'PLAT' : 225.5, 'WIFI':632.3, 'BTC': 1, 'BTC_CHBA': 10.6, 'BTH': 220.01, 'UNKNOWN': 41.8},
+            'application.map_flash':{'PLAT' : 225.6, 'WIFI':632.3, 'BTC': 1, 'BTC_CHBA': 10.6, 'BTH': 220.01, 'UNKNOWN': 41.8},
             # ws53 A core ram
-            'application.map_ram':{'PLAT' : 37.5, 'WIFI':47.48, 'BTC': 1, 'BTC_CHBA': 0.2, 'BTH': 3.107, 'STACK':8, 'UNKNOWN': 3.26},
+            'application.map_ram':{'PLAT' : 37.61, 'WIFI':47.48, 'BTC': 1, 'BTC_CHBA': 0.2, 'BTH': 3.107, 'STACK':8, 'UNKNOWN': 3.26},
             # ws63 flash
             'ws63-liteos-app.map_flash':{'PLAT' : 202, 'WIFI':645, 'RADAR':52, 'BTC': 163.5, 'BTC_CHBA': 16, 'BTH': 246, 'UNKNOWN': 0.5}}
         target_list = {'ws53_control_app', 'ws53_liteos_app', 'ws63_liteos_app'}

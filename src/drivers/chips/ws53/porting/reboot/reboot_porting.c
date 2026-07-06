@@ -229,12 +229,12 @@ uint32_t reboot_port_get_rst_reason(void)
 void reboot_port_rst_reason_dump(void)
 {
     reboot_port_rst_reason_t main_rst = reboot_port_get_rst_reason();
-    PRINT("main_rst_reason: %s\r\n", main_rst_reason[main_rst]);
+    PRINT("rst_reason: %s\r\n", main_rst_reason[main_rst]);
 #ifdef CONFIG_SUPPORT_RST_RSN_SAVE_TO_FLASH
     rst_reason_t reset_cause = RST_REASON_NOT_SOFTWARE_REBOOT;
     reboot_port_is_software_reboot(&reset_cause);
     if (reset_cause <= REBOOT_BY_SOFT_RST) {
-        PRINT("last_rst_reason: %s\r\n", rst_reason[reset_cause]);
+        PRINT("details: %s\r\n", rst_reason[reset_cause]);
     }
     if (reset_cause != NON_SOFTWARE_REBOOT) {
         reset_cause_set(NON_SOFTWARE_REBOOT);

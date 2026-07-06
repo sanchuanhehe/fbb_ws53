@@ -9,6 +9,7 @@
 #include "crypto_curve_param.h"
 #include "hal_cipher_trng.h"
 #include "hal_pke.h"
+#include "hal_rkp.h"
 #include "drv_common.h"
 #include "kapi_inner.h"
 #include "crypto_drv_irq.h"
@@ -79,6 +80,8 @@ td_s32 crypto_drv_mod_resume(td_void)
     drv_func_list.get_cpu_type = liteos_get_cpu_type;
     drv_func_list.get_pke_rom_lib_start_addr = liteos_get_pke_rom_lib_start_addr;
     (td_void)drv_cipher_register_func(&drv_func_list);
+
+    hal_rkp_init();
 
     ret = hal_cipher_trng_init();
     crypto_chk_print(ret != TD_SUCCESS, "trng init failed, ret = 0x%u\n", ret);

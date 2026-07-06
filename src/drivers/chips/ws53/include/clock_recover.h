@@ -263,4 +263,6 @@ uint8_t get_chip_type(void);
 uint8_t get_rc_switch_status(void);
 void cpu_cache_reset(void);
 void ccore_sfc_lock(void);
+
+void dmmu_remap_reg_restore(void);
 #endif

@@ -13,6 +13,9 @@
 #include "upg_debug.h"
 #include "upg_verify.h"
 #include "upg_porting.h"
+#ifdef CONFIG_MIDDLEWARE_SUPPORT_UPG_SAMPLE_VERIFY
+#include "secure_verify_boot.h"
+#endif
 #include "upg_ab.h"
 
 #define UPG_AB_REGION_CONFIG_SIZE 0x1000
@@ -337,10 +340,12 @@ errcode_t upg_region_erase(upg_region_index region)
  */
 errcode_t upg_region_verify(upg_region_index region)
 {
+    unused(region);
     errcode_t ret;
     uint8_t hash_result[SHA_256_LENGTH];
-    const upg_fota_info_data_t *code_info;
+    const image_code_info_t *code_info;
     uint32_t region_b_addr;
+    uint32_t region_a_size;
 
     region_b_addr = upg_get_region_addr(UPG_REGION_B);
     if (region_b_addr == 0) {
@@ -348,22 +353,31 @@ errcode_t upg_region_verify(upg_region_index region)
         return ERRCODE_FAIL;
     }
 
-    code_info = (upg_fota_info_data_t *)(uintptr_t)(region_b_addr + FLASH_START + IMAGE_KEY_AREA_LEN);
-    if (code_info == NULL) {
+    region_a_size = upg_get_region_size(UPG_REGION_A);
+    if (region_a_size <= IMAGE_HEADER_LENGTH) {
+        return ERRCODE_FAIL;
+    }
+
+    code_info = (image_code_info_t *)(uintptr_t)(region_b_addr + FLASH_START + IMAGE_KEY_AREA_LEN);
+    if ((code_info == NULL) || (code_info->code_area_len == 0) ||
+        (code_info->code_area_len > (region_a_size - IMAGE_HEADER_LENGTH))) {
         upg_log_err("[UPG] verify header err\r\n");
         return ERRCODE_FAIL;
     }
-    ret = calc_hash(region_b_addr + FLASH_START + IMAGE_HEADER_LENGTH, code_info->image_hash_table_length,
+    ret = calc_hash(region_b_addr + FLASH_START + IMAGE_HEADER_LENGTH, code_info->code_area_len,
                     hash_result, SHA_256_LENGTH);
     if (ret != ERRCODE_SUCC) {
         return ret;
     }
 
-    ret = verify_hash_cmp(code_info->image_hash_table_hash, hash_result, SHA_256_LENGTH);
+    ret = verify_hash_cmp(code_info->code_area_hash, hash_result, SHA_256_LENGTH);
     if (ret != ERRCODE_SUCC) {
         return ret;
     }
-    upg_log_err("[UPG] upg_region_verify region %d succ.\r\n", region);
+
+    upg_region_index run_region = upg_get_run_region();
+    upg_region_index verify_region = (run_region == UPG_REGION_A) ? UPG_REGION_B : UPG_REGION_A;
+    upg_log_err("[UPG] upg_region_verify region %d succ.\r\n", verify_region);
     return ERRCODE_SUCC;
 }
 
