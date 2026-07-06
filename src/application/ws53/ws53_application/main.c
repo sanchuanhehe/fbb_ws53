@@ -509,7 +509,7 @@ static void hw_init(void)
 #ifdef CONFIG_DEBUG_UART_SUPPORT
     sw_debug_uart_init(DEBUG_UART_BAUD_RATE);
 #endif
-    PRINT("Debug uart init succ.\r\n");
+    PRINT("dbg init succ\r\n");
 #endif
     uapi_systick_init();
     uapi_timer_init();

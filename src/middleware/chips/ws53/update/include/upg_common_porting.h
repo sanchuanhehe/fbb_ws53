@@ -1,5 +1,5 @@
 /*
- * Copyright (c) HiSilicon (Shanghai) Technologies Co., Ltd.. 2021-2021. All rights reserved.
+ * Copyright (c) HiSilicon (Shanghai) Technologies Co., Ltd. 2021-2021. All rights reserved.
  * Description: UPG common functions header file
  */
 
@@ -72,6 +72,43 @@ typedef struct {
     uint8_t       reserved[ROOT_PUBLIC_KEY_RSV]; /* 32 bytes above */
     uint8_t       root_key_area[PUBLIC_KEY_LEN];
 } root_public_key;
+
+#ifndef CONFIG_MIDDLEWARE_SUPPORT_UPG_SAMPLE_VERIFY
+// 下列宏值、结构体定义需与boot中定义保持一致
+#define CODE_INFO_STRUCTURE_LENGTH      0x200
+#define CODE_INFO_RESERVED_LENGTH       248
+#define SIG_LEN                         64
+#define EXT_SIG_LEN                     64
+
+#define HASH_LEN                        32
+#define PROTECT_KEY_LEN                 16
+#define IV_LEN                          16
+
+/* Code area info, size is 0x200 */
+typedef struct {
+    uint32_t      image_id;
+    uint32_t      structure_version;
+    uint32_t      structure_length;
+    uint32_t      signature_length;
+    uint32_t      version_ext;
+    uint32_t      mask_version_ext;
+    uint32_t      msid_ext;
+    uint32_t      mask_msid_ext;
+    uint32_t      code_area_addr;
+    uint32_t      code_area_len;
+    uint8_t       code_area_hash[HASH_LEN];
+    uint32_t      code_enc_flag;
+    uint8_t       protection_key_l1[PROTECT_KEY_LEN];
+    uint8_t       protection_key_l2[PROTECT_KEY_LEN];
+    uint8_t       iv[IV_LEN];
+    uint32_t      code_compress_flag; /* 0x3C7896E1: is compressed */
+    uint32_t      code_uncompress_len;
+    uint32_t      text_segment_size;
+    uint8_t       reserved[CODE_INFO_RESERVED_LENGTH];  /* 136 bytes above */
+    uint8_t       sig_code_info[SIG_LEN];
+    uint8_t       sig_code_info_ext[EXT_SIG_LEN];
+} image_code_info_t;
+#endif
 
 /**
 * @ingroup  iot_update

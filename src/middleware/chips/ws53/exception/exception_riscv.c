@@ -854,7 +854,7 @@ void crashinfo_save(exc_context_t *exc_buf_addr)
     uint32_t rst_cause = 0;
     uapi_sfc_reg_read(flash_save_addr, (uint8_t *)&rst_cause, sizeof(uint32_t));
     if (uapi_sfc_reg_erase(flash_save_addr, flash_save_size) != ERRCODE_SUCC) {
-        PRINT("Erase Flash Failed\r\n");
+        PRINT("Erase Fail\r\n");
         return;
     }
     uapi_sfc_reg_write(flash_save_offset, (uint8_t *)(uintptr_t)&rst_cause, sizeof(uint32_t));
@@ -983,7 +983,7 @@ void do_hard_fault_handler(exc_context_t *exc_buf_addr)
     PRINT("exception:%x\r\n", exc_type);
     if (exc_type == NMI_INTERRUPT) {
         PRINT("Oops:NMI\n");
-        PRINT("nmi raw interrupt is 0x%x"NEWLINE, non_os_get_nmi_raw_status());
+        PRINT("nmi raw interrupt:0x%x"NEWLINE, non_os_get_nmi_raw_status());
 #ifdef WDT_INVOKE_USER_CALLBACK
         if (watchdog_port_check_nmi_intr(non_os_get_nmi_raw_status()) == ERRCODE_SUCC) {
             irq_wdt_handler();
@@ -1027,7 +1027,7 @@ static void ccore_wdt_irq_handler(void)
 #ifdef CONFIG_SUPPORT_RST_RSN_SAVE_TO_FLASH
     reset_cause_set(REBOOT_BY_CCORE_WDT);
 #endif
-    PRINT("exception: ccore wdt timeout, wait reboot.\r\n");
+    PRINT("ccore wdt reboot\r\n");
     uapi_tcxo_delay_ms(REBOOT_WAIT_TIME_MS);
     hal_reboot_chip();
 }

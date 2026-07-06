@@ -34,13 +34,15 @@
 #define PLL_MAX_RETRY_TIMES     10
 #define MAX_CHECK_LOCK_TIMES    250
 
-#define FAMA_REMAP_SRC0_ADDR                    0x5208F800
-#define FAMA_REMAP_LEN0_ADDR                    0x5208F820
-#define FAMA_REMAP_DST0_ADDR                    0x5208F840
+#define FAMA_REMAP_SRC_BASE_ADDR                0x5208F800
+#define FAMA_REMAP_LEN_BASE_ADDR                0x5208F820
+#define FAMA_REMAP_DST_BASE_ADDR                0x5208F840
+#define FAMA_REMAP_REGION_OFFSET                0x4
+#define FAMA_REMAP_REGION_USED_NUM              2
 
-static uint32_t g_fama_remap_src0 = 0;
-static uint32_t g_fama_remap_len0 = 0;
-static uint32_t g_fama_remap_dst0 = 0;
+static uint32_t g_fama_remap_src[FAMA_REMAP_REGION_USED_NUM] = {0};
+static uint32_t g_fama_remap_len[FAMA_REMAP_REGION_USED_NUM] = {0};
+static uint32_t g_fama_remap_dst[FAMA_REMAP_REGION_USED_NUM] = {0};
 
 fnpll_delay_func g_fnpll_delay_func = NULL;
 void cpu32m_udelay(uint32_t us_cnt)
@@ -174,24 +176,28 @@ void system_crg_cfg(void)
 }
 
 // 保存AB面升级地址映射配置
-static void dmmu_remap0_reg_save(void)
+static void dmmu_remap_reg_save(void)
 {
-    g_fama_remap_src0 = readl(FAMA_REMAP_SRC0_ADDR);
-    g_fama_remap_len0 = readl(FAMA_REMAP_LEN0_ADDR);
-    g_fama_remap_dst0 = readl(FAMA_REMAP_DST0_ADDR);
+    for (uint8_t i = 0; i < FAMA_REMAP_REGION_USED_NUM; i++) {
+        g_fama_remap_src[i] = readl(FAMA_REMAP_SRC_BASE_ADDR + i * FAMA_REMAP_REGION_OFFSET);
+        g_fama_remap_len[i] = readl(FAMA_REMAP_LEN_BASE_ADDR + i * FAMA_REMAP_REGION_OFFSET);
+        g_fama_remap_dst[i] = readl(FAMA_REMAP_DST_BASE_ADDR + i * FAMA_REMAP_REGION_OFFSET);
+    }
 }
 
-static void dmmu_remap0_reg_restore(void)
+void dmmu_remap_reg_restore(void)
 {
-    writel(FAMA_REMAP_SRC0_ADDR, g_fama_remap_src0);
-    writel(FAMA_REMAP_LEN0_ADDR, g_fama_remap_len0);
-    writel(FAMA_REMAP_DST0_ADDR, g_fama_remap_dst0);
+    for (uint8_t i = 0; i < FAMA_REMAP_REGION_USED_NUM; i++) {
+        writel(FAMA_REMAP_SRC_BASE_ADDR + i * FAMA_REMAP_REGION_OFFSET, g_fama_remap_src[i]);
+        writel(FAMA_REMAP_LEN_BASE_ADDR + i * FAMA_REMAP_REGION_OFFSET, g_fama_remap_len[i]);
+        writel(FAMA_REMAP_DST_BASE_ADDR + i * FAMA_REMAP_REGION_OFFSET, g_fama_remap_dst[i]);
+    }
 }
 
 void pm_gpio_cfg_suspend(clock_switch_core core_t)
 {
     while (readl(SEM2_STS_REG) != 0) {}
-    dmmu_remap0_reg_save();
+    dmmu_remap_reg_save();
     reg32_setbit(GPIO_CFG_STS, core_t);
     if (readl(GPIO_CFG_STS) != 0x3) {
         writel(SEM2_STS_REG, 0x1);
@@ -212,7 +218,6 @@ uint8_t pm_peripheral_resume(clock_switch_core core_t)
         return false;
     }
 
-    dmmu_remap0_reg_restore();
     writel(ULP_GPIO_CLK_CFG, 0x1); // GPIO切PLL时钟
     reg32_clrbit(GPIO_CFG_STS, core_t);
     system_close_peripheral_crg();

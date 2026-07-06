@@ -199,61 +199,8 @@ void sfc_flash_suspend(void)
     sfc_suspend_regs[0x5] = readl(SFC_BUS_BASE_ADDR_CS1_REG);
 }
 
-static void sfc_wait_config(void)
-{
-    uint32_t result = readl(SFC_CMD_CONFIG_REG);
-    while ((result & 1) != 0) {
-        result = readl(SFC_CMD_CONFIG_REG);
-    }
-}
-
-static void spi_read_sts(uint8_t opt, uint32_t *buffer, uint8_t length)
-{
-    uint32_t cmd_config = ((length - 1) << DATA_CNT_POS) | (1 << RW_POS) | 0x83;
-    writel(SFC_CMD_INS_REG, opt);
-    writel(SFC_CMD_CONFIG_REG, cmd_config);
-    sfc_wait_config();
-    uint32_t sts = readl(SFC_CMD_DATABUF_BASE_ADDR);
-    *buffer = sts;
-}
-
-static void spi_set_attr(uint8_t opt, uint32_t data, uint8_t length)
-{
-    uint32_t cmd_config = ((length - 1) << DATA_CNT_POS) | 0x3;
-    writel(SFC_CMD_INS_REG, opt);
-    writel(SFC_CMD_DATABUF_BASE_ADDR, data);
-    writel(SFC_CMD_CONFIG_REG, cmd_config);
-    sfc_wait_config();
-}
-
-static void spi_wait_flash_ready(void)
-{
-    uint32_t flash_sts = 0;
-    spi_read_sts(WB_GET_STS1, &flash_sts, 1);
-    while ((flash_sts & 1) != 0) {
-        spi_read_sts(WB_GET_STS1, &flash_sts, 1);
-    }
-}
-
-/* WS53 use Windbond Flash. The procedure for enabling QSPI is the same. */
-static void spi_enable_qspi(void)
-{
-    /* Write enable. */
-    writel(SFC_CMD_INS_REG, WB_WRITE_ENABLE);
-    writel(SFC_CMD_CONFIG_REG, 0x3);
-    sfc_wait_config();
-    if (readl(FLASH_QSPI_MODE) == FLASH_RECOVER_TYPE_GD) {
-        spi_set_attr(FLASH_SET_STS1, GD_SET_STS_VAL, 0x2);
-    } else {
-        spi_set_attr(WB_SET_STS2, WB_SET_STS2_VAL, 1);
-    }
-    spi_wait_flash_ready();
-}
-
 void sfc_flash_resume(void)
 {
-    /* Flash enable QSPI */
-    spi_enable_qspi();
     /* recover SFC register */
     writel(SFC_TIMING_REG, sfc_suspend_regs[0x0]);
     writel(SFC_BUS_CONFIG1_REG, sfc_suspend_regs[0x1]);

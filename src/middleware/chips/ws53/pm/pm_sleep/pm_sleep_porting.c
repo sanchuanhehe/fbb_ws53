@@ -670,6 +670,7 @@ static void sfc_ipc_resume(void)
         return ;
     }
 
+    dmmu_remap_reg_restore();
     /* sfc recover */
     sfc_flash_resume();
     /* recover IPC wakeup event and irq */

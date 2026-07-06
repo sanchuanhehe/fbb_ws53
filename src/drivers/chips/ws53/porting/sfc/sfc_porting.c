@@ -115,6 +115,7 @@ void sfc_port_lock_init(void)
         g_sfc_mutex_inited = true;
     }
 #endif
+    sfc_port_fix_protect_cfg();
 }
 
 uint32_t sfc_port_lock(void)

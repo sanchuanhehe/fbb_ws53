@@ -29,8 +29,8 @@
 #endif
 #include "sfc_protect.h"
 
-#define SR1_BPX_MASK 0x7C
-#define SR2_CMP_MASK 0x40
+#define SR1_BPX_MASK 0xFC
+#define SR2_CMP_MASK 0x43
 
 #define FLASH_PROTECT_NONE_MASK         0x00
 #define FLASH_PROTECT_ALL_MASK          0x1C
@@ -45,6 +45,9 @@
 
 #define READ_MODE                0x1
 #define WRITE_MODE               0x0
+
+#define DELAY_CNT                5
+#define DELAY_TIME_MS            10
 
 typedef struct {
     uint8_t sr2; // value of sr2
@@ -78,19 +81,19 @@ typedef struct {
  * 配置必须按照放开写区间的大小，从小到大手动排序
  */
 #if defined FLASH_REGION_CFG_LOADERBOOT
-static const sfc_protect_cfg_t g_sfc_protect_cfg[] = {
+static sfc_protect_cfg_t g_sfc_protect_cfg[] = {
     {0x02, 0x28, FLASH_CHIP_PROTECT_128K, FLASH_CHIP_PROTECT_END}, // 保护前两个Block 0&1
     {0x02, 0x78, FLASH_CHIP_PROTECT_32K, FLASH_CHIP_PROTECT_END}, // 保护前32K
     {0x02, 0x00, 0x0, FLASH_CHIP_PROTECT_END}, // 全片放开, 烧录时需要写前32K
 };
 
 #elif defined FLASH_REGION_CFG_FLASHBOOT
-static const sfc_protect_cfg_t g_sfc_protect_cfg[] = {
+static sfc_protect_cfg_t g_sfc_protect_cfg[] = {
     {0x02, 0x28, FLASH_CHIP_PROTECT_128K, FLASH_CHIP_PROTECT_END}, // 保护前两个Block 0&1
 };
 
 #else // APP
-static const sfc_protect_cfg_t g_sfc_protect_cfg[] = {
+static sfc_protect_cfg_t g_sfc_protect_cfg[] = {
 #ifdef _PRE_WLAN_FEATURE_MFG_TEST
     {0x02, 0x28, FLASH_CHIP_PROTECT_128K, FLASH_CHIP_PROTECT_END}, // 保护前两个Block 0&1
     {0x02, 0x78, FLASH_CHIP_PROTECT_32K, FLASH_CHIP_PROTECT_END}, // 保护前32K
@@ -117,6 +120,24 @@ static sfc_protect_cfg_t const *sfc_port_find_addr_protect_cfg(uint32_t start_ad
         }
     }
     return NULL;
+}
+
+void sfc_port_fix_protect_cfg(void)
+{
+    uint32_t flash_id = 0;
+    if (hal_sfc_get_flash_id(&flash_id) != ERRCODE_SUCC) {
+        return;
+    }
+    if (flash_id != FLASH_GD25LE32E) {
+        for (uint32_t i = 0; i < SFC_PROTECT_CFG_NUMS; i++) {
+            if ((g_sfc_protect_cfg[i].sr2 == 0x02) && (g_sfc_protect_cfg[i].sr1 == 0x78)) {
+                g_sfc_protect_cfg[i].sr1 = 0x70;
+            }
+            if ((g_sfc_protect_cfg[i].sr2 == 0x42) && (g_sfc_protect_cfg[i].sr1 == 0x58)) {
+                g_sfc_protect_cfg[i].sr1 = 0x50;
+            }
+        }
+    }
 }
 
 static void sfc_port_sr_enable_write(bool is_volatile)
@@ -183,6 +204,7 @@ void sfc_port_write_sr(bool is_volatile, uint8_t sr1, uint8_t sr2)
     hal_sfc_regs_wait_ready(0x0);
     sfc_port_sr_enable_write(is_volatile);
     sfc_port_do_write_sr(sr1, sr2);
+    hal_sfc_regs_wait_ready(0x0);
 }
 
 /**
@@ -212,15 +234,29 @@ uint32_t sfc_port_read_sr(uint32_t cmd)
 
 static void sfc_port_block_protect_disable(uint32_t start_addr, uint32_t end_addr)
 {
+    uint32_t loop_cnt = 0;
     sfc_protect_cfg_t const *cfg = sfc_port_find_addr_protect_cfg(start_addr, end_addr);
     if (cfg != NULL) {
         sfc_port_write_sr(true, cfg->sr1, cfg->sr2);
+        while ((loop_cnt++ < DELAY_CNT) &&  // 状态寄存器异常时延时50ms
+            (((sfc_port_read_sr(SPI_CMD_RDSR_1) & SR1_BPX_MASK) != cfg->sr1) ||
+            ((sfc_port_read_sr(SPI_CMD_RDSR_2) & SR2_CMP_MASK) != cfg->sr2))) {
+            uapi_tcxo_delay_ms(DELAY_TIME_MS);
+            sfc_port_write_sr(true, cfg->sr1, cfg->sr2);
+        }
     }
 }
 
 static void sfc_port_block_protect_enable(void)
 {
+    uint32_t loop_cnt = 0;
     sfc_port_write_sr(true, SR1_VALID_VAL, SR2_VALID_VAL);
+    while ((loop_cnt++ < DELAY_CNT) &&   // 状态寄存器异常时延时50ms
+        (((sfc_port_read_sr(SPI_CMD_RDSR_1) & SR1_BPX_MASK) != SR1_VALID_VAL) ||
+        ((sfc_port_read_sr(SPI_CMD_RDSR_2) & SR2_CMP_MASK) != SR2_VALID_VAL))) {
+        uapi_tcxo_delay_ms(DELAY_TIME_MS);
+        sfc_port_write_sr(true, SR1_VALID_VAL, SR2_VALID_VAL);
+    }
 }
 
 #ifndef BUILD_NOOSAL
@@ -240,7 +276,7 @@ static void sfc_port_ccore_lock(void)
     while (readw(SFC_LOCK_CCORE_STS) == 0) {
         cur_us = uapi_tcxo_get_us();
         if (cur_us > end_us) {
-            print_str("sfc_port_ccore_lock fail\r\n");
+            print_str("ccore lock fail\r\n");
             break;
         }
     }

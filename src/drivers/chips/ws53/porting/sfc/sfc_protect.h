@@ -76,6 +76,15 @@ uint32_t sfc_port_write_lock(uint32_t start_addr, uint32_t end_addr);
  */
 void sfc_port_write_unlock(uint32_t lock_sts);
 
+/**
+ * @if Eng
+ * @brief  fix sfc write protection configuration.
+ * @else
+ * @brief  修复sfc写保护配置。
+ * @endif
+ */
+void sfc_port_fix_protect_cfg(void);
+
 #ifdef __cplusplus
 #if __cplusplus
 }
