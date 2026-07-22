@@ -202,7 +202,29 @@ class CMakeBuilder(BuildEnvironment):
         self.pre_sdk(output_path, env)
         if env.get('libstd_option'):
             self.add_cmake_def(env, 'std_libs')
-        self.cmake_cmd.append(root_path)
+        # Project-as-entry: FBB_PROJECT_DIR (set by hs-fbb-cli when an
+        # fbb-project.toml is detected) flips cmake's source dir to the
+        # user's project. SDK is still passed via -DROOT_DIR.
+        #
+        # FBB_PROJECT_TARGET scopes the override to one target. SDK build.py
+        # spawns auxiliary targets (ws53-flashboot, ws53-loaderboot) as child
+        # processes that inherit the env. Those keep building in-tree because
+        # only the project's declared target matches.
+        project_dir = os.environ.get('FBB_PROJECT_DIR')
+        project_target = os.environ.get('FBB_PROJECT_TARGET')
+        # target_name from compile_target's parameter (dash form, e.g.
+        # ws53-liteos-app). Compare both forms in case manifests use either.
+        if project_dir and project_target and (
+                target_name == project_target
+                or target_name.replace('-', '_') == project_target.replace('-', '_')):
+            if not os.path.isdir(project_dir):
+                raise RuntimeError(
+                    f"FBB_PROJECT_DIR={project_dir!r} does not exist or is not a directory."
+                )
+            self.cmake_cmd.append(project_dir)
+            self.cmake_cmd.append(f'-DROOT_DIR={root_path}')
+        else:
+            self.cmake_cmd.append(root_path)
 
         if env.get('product_type'):
             self.cmake_cmd.append('-DPRODUCT_TYPE={0}'.format(env.get('product_type')))

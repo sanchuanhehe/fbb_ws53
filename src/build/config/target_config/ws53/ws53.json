@@ -2,6 +2,12 @@
 	"chipName": "ws53",
 	"seriesName": "cfbb",
 	"board": "ws53",
+	"requires": {
+		"min_cli_version": "0.1.0",
+		"toolchains": [
+			{ "name": "hcc", "version": "7.3.0-20240618" }
+		]
+	},
 	"compile": {
 		"custom_build_command": "ws53_liteos_app",
 		"tool_chain": [
@@ -96,6 +102,32 @@
 		"baud": "115200",
 		"stop_bit": "0",
 		"parity": "N"
+	},
+	"monitor": {
+		"default_baud": 115200,
+		"reset_method": "at_rst",
+		"reset_command": "AT+RST\r\n",
+		"boot_marker_examples": [
+			"boot.",
+			"APP|dbg uart init ok.",
+			"device_module_init:: succ!",
+			"cpu 0 entering scheduler"
+		]
+	},
+	"flash": {
+		"backend": "hsflash",
+		"chiptype": "ws53",
+		"signalbaud": 115200,
+		"expected_sections": 7
+	},
+	"examples": {
+		"roots": [
+			"application/samples/peripheral",
+			"application/samples/bt/ble",
+			"application/samples/bt/sle",
+			"application/samples/bt/sle_chba",
+			"application/samples/wifi"
+		]
 	},
 	"need_sdk": true,
 	"need_project_path": true,
