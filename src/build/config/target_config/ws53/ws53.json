@@ -117,7 +117,7 @@
 	"flash": {
 		"backend": "hsflash",
 		"chiptype": "ws53",
-		"signalbaud": 115200,
+		"signalbaud": 921600,
 		"expected_sections": 7
 	},
 	"examples": {
