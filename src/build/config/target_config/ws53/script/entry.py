@@ -146,7 +146,7 @@ def do_cmd(target_name: str, hook_name: str, env: Dict[str, Any])->bool:
             print(f"Verify bin ERROR! :{bin1} is not same with {bin2}")
             return False
     nv_handle = os.path.join(SCRIPT_DIR, 'nv_handle.py')
-    exec_shell(['python3', nv_handle], None, True)
+    exec_shell([python_path, nv_handle], None, True)
     return True
 
 
