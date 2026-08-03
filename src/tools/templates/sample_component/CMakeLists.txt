@@ -39,5 +39,7 @@ set(APP_TARGETS
 
 set(MAIN_COMPONENT
 true
+set(MAIN_COMPONENT
+false
 )
 build_component()
