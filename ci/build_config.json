@@ -1,0 +1,11 @@
+[
+  {
+    "buildTarget": "ws53_liteos_app",
+    "relativePath": "sdk/full",
+    "chip": "WS53",
+    "buildDef": "",
+    "needSmoke": "false",
+    "name": "full_sdk",
+    "description": "Full SDK build, triggered when build-relevant files under src/ or ci/ change"
+  }
+]
