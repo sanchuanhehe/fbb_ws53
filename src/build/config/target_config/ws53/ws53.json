@@ -3,7 +3,7 @@
 	"seriesName": "cfbb",
 	"board": "ws53",
 	"requires": {
-		"min_cli_version": "0.1.0",
+		"min_cli_version": "1.1.0",
 		"toolchains": [
 			{ "name": "hcc", "version": "7.3.0-20240618" }
 		]
@@ -110,15 +110,18 @@
 		"boot_marker_examples": [
 			"boot.",
 			"APP|dbg uart init ok.",
-			"device_module_init:: succ!",
+			"device_module_init::succ!",
 			"cpu 0 entering scheduler"
 		]
 	},
 	"flash": {
 		"backend": "hsflash",
+		"transport": "serial",
 		"chiptype": "ws53",
 		"signalbaud": 921600,
-		"expected_sections": 7
+		"switch_after_loader": true,
+		"before_reset": true,
+		"after_reset": true
 	},
 	"examples": {
 		"roots": [

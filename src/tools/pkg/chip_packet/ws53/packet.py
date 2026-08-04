@@ -5,6 +5,7 @@
 # ============================================================================
 
 import os
+import shutil
 import sys
 import tarfile
 
@@ -19,6 +20,13 @@ from packet_create import packet_bin
 TOOLS_DIR = os.path.dirname(PKG_DIR)
 SDK_DIR = os.path.dirname(TOOLS_DIR)
 sys.path.append(os.path.join(SDK_DIR, "build", "script"))
+
+
+def copy_fbb_package(package_path, target, suffix):
+    """Keep the legacy package and publish the layout expected by hs-fbb-cli."""
+    fbb_dir = os.path.join(SDK_DIR, "output", "ws53", "fwpkg", target)
+    os.makedirs(fbb_dir, exist_ok=True)
+    shutil.copyfile(package_path, os.path.join(fbb_dir, f"{target}_{suffix}.fwpkg"))
 
 # ws53
 def make_all_in_one_packet(pack_style_str, extr_defines):
@@ -70,6 +78,7 @@ def make_all_in_one_packet(pack_style_str, extr_defines):
             packet_post_agvs.append(mfg_bx)
             fpga_fwpkg_all = os.path.join(SDK_DIR, "output", "ws53", "fwpkg", "pack_all_core", pack_style_str, f"{pack_style_str}_all_in_one.fwpkg")
             packet_bin(fpga_fwpkg_all, packet_post_agvs)
+            copy_fbb_package(fpga_fwpkg_all, pack_style_str, "all")
             return
         if "PACKET_MFG_BIN" in extr_defines:
             mfg_sign_bin = os.path.join(SDK_DIR, "application", "ws53", "ws53_liteos_mfg", "ws53_liteos_mfg_sign.bin")
@@ -100,12 +109,14 @@ def make_all_in_one_packet(pack_style_str, extr_defines):
             packet_post_agvs.append(efuse_bx)
         fpga_fwpkg_all = os.path.join(SDK_DIR, "output", "ws53", "fwpkg", "pack_all_core", pack_style_str, f"{pack_style_str}_all_in_one.fwpkg")
         packet_bin(fpga_fwpkg_all, packet_post_agvs)
+        copy_fbb_package(fpga_fwpkg_all, pack_style_str, "all")
 
         packet_post_agvs = list()
         packet_post_agvs.append(loadboot_bx)
         packet_post_agvs.append(app_bx)
         fpga_loadapp_only_fwpkg = os.path.join(SDK_DIR, "output", "ws53", "fwpkg", "pack_all_core", pack_style_str, f"{pack_style_str}_load_only.fwpkg")
         packet_bin(fpga_loadapp_only_fwpkg, packet_post_agvs)
+        copy_fbb_package(fpga_loadapp_only_fwpkg, pack_style_str, "load_only")
 
 
 def is_packing_files_exist(soc, pack_style_str):
