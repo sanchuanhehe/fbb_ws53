@@ -11,11 +11,12 @@ root_dir=sys.argv[1]
 bin_name=sys.argv[2]
 target_name=sys.argv[3]
 core=sys.argv[4]
+output_root=os.path.abspath(sys.argv[5]) if len(sys.argv) > 5 else os.path.join(root_dir, 'output')
 
-out_dir='../../../../../output/ws53/' + core + '/' +target_name
-rom_ver_dir='../../../../../output/ws53/rom_ver'
-romboot_bin='../../../../../output/ws53/acore/ws53-romboot/romboot.bin'
-create_hex_py='../../../../../build/script/utils/create_hex.py'
+out_dir=os.path.join(output_root, 'ws53', core, target_name)
+rom_ver_dir=os.path.join(output_root, 'ws53', 'rom_ver')
+romboot_bin=os.path.join(output_root, 'ws53', 'acore', 'ws53-romboot', 'romboot.bin')
+create_hex_py=os.path.join(root_dir, 'build', 'script', 'utils', 'create_hex.py')
 
 python_path = sys.executable
 current_path = os.getcwd()

@@ -4,4 +4,4 @@
 [project]
 name   = "sample_project"
 chip   = "ws53"
-target = "ws53-liteos-app"
+target = "ws53_liteos_app"

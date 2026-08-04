@@ -193,6 +193,7 @@ class CMakeBuilder(BuildEnvironment):
         if self.build_as_lib:
             env.add("GEN_ONLY_LIB_PATH")
         self.cmake_cmd = ['cmake', '-G', self.generator, '-Wno-dev', '--no-warn-unused-cli', '-DCMAKE_C_COMPILER_WORKS=TRUE', '-DCMAKE_CXX_COMPILER_WORKS=TRUE']
+        self.cmake_cmd.append(f'-DOUTPUT_ROOT={output_root}')
         if env.get('fp_enable'):
             env.append('defines', 'SUPPORT_CALLSTACK')
             env.append('ccflags', '-fno-omit-frame-pointer')
@@ -202,9 +203,10 @@ class CMakeBuilder(BuildEnvironment):
         self.pre_sdk(output_path, env)
         if env.get('libstd_option'):
             self.add_cmake_def(env, 'std_libs')
-        # Project-as-entry: FBB_PROJECT_DIR (set by hs-fbb-cli when an
-        # fbb-project.toml is detected) flips cmake's source dir to the
-        # user's project. SDK is still passed via -DROOT_DIR.
+        # Out-of-tree projects keep the SDK as cmake's top-level source so
+        # existing SDK-relative include paths retain their original meaning.
+        # The user's main/components are injected separately via
+        # FBB_PROJECT_DIR.
         #
         # FBB_PROJECT_TARGET scopes the override to one target. SDK build.py
         # spawns auxiliary targets (ws53-flashboot, ws53-loaderboot) as child
@@ -221,8 +223,9 @@ class CMakeBuilder(BuildEnvironment):
                 raise RuntimeError(
                     f"FBB_PROJECT_DIR={project_dir!r} does not exist or is not a directory."
                 )
-            self.cmake_cmd.append(project_dir)
-            self.cmake_cmd.append(f'-DROOT_DIR={root_path}')
+            self.cmake_cmd.append(root_path)
+            self.cmake_cmd.append('-DFBB_OUT_OF_TREE=TRUE')
+            self.cmake_cmd.append(f'-DFBB_PROJECT_DIR={project_dir}')
         else:
             self.cmake_cmd.append(root_path)
 

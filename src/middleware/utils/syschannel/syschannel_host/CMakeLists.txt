@@ -67,7 +67,7 @@ set(KO_NAME syschannel.ko)
 if(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
 
 else()
-    set(OUTPUT_DIR ${ROOT_DIR}/output/${CHIP}/${CORE}/${BUILD_TARGET_NAME})
+    set(OUTPUT_DIR ${OUTPUT_ROOT}/${CHIP}/${CORE}/${BUILD_TARGET_NAME})
     add_custom_command(
         OUTPUT install_${COMPONENT_NAME}
         COMMENT "Install ${COMPONENT_NAME} ..."

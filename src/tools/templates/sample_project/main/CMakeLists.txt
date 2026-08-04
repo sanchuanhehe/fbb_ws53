@@ -30,7 +30,7 @@ true
 )
 
 set(APP_TARGETS
-"ws53-liteos-app"
+"ws53_liteos_app"
 )
 
 set(BUILD_AS_OBJ

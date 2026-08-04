@@ -74,15 +74,16 @@ class NvPageHead(Structure):
 
 
 class BuildNv:
-    def __init__(self, alias, root=None, targets=None, backup=False, use_crc16=False):
+    def __init__(self, alias, root=None, targets=None, backup=False, use_crc16=False, source_root=None):
         self.alias = alias
         self.root = root if root is not None else g_root
+        self.source_root = source_root if source_root is not None else self.root
         self.targets = targets
         self.is_backup = backup
         self.use_crc16 = use_crc16
         self.tmp_path = os.path.join(self.root, json_conf["BUILD_TEMP_PATH"])
         self.nv_relative_path = os.path.join(self.root, json_conf["NV_RELATIVE_PATH"])
-        self.nv_root = os.path.join(self.root, json_conf["NV_DEFAULT_CFG_DIR"])
+        self.nv_root = os.path.join(self.source_root, json_conf["NV_DEFAULT_CFG_DIR"])
         self.nv_output_dir = os.path.join(self.root, json_conf["OUT_BIN_DIR"])
         if not backup:
             self.nv_output_name = json_conf["OUT_BIN_NAME"]
@@ -464,7 +465,7 @@ class BuildNv:
     def _load_nv_flash_cfg(self):
         self.nv_flash_cfg = dict()
         for chip in self.nv_ver_dict:
-            cfg_file = os.path.join(self.root, json_conf["NV_TARGET_JSON_PATH"])
+            cfg_file = os.path.join(self.source_root, json_conf["NV_TARGET_JSON_PATH"])
             self.nv_flash_cfg[chip] = BuildConfParser(cfg_file).get_conf_data()
 
     def _add_nv_ver(self, chip, target, core, ver, common_cfg, ver_cfg, prod_type=None):
@@ -639,24 +640,25 @@ def check_key(json_conf):
             msg = "[error] [nv_binary] need add ConfigMap (%s) in json_conf!" % (check_key)
             raise ParserError(msg)
 
-def test(targets, flag, backup, use_crc16):
-    root = g_root
-    nv_target_json_path = os.path.join(root, json_conf["NV_TARGET_JSON_PATH"])
+def test(targets, flag, backup, use_crc16, root=None, source_root=None):
+    root = root if root is not None else g_root
+    source_root = source_root if source_root is not None else root
+    nv_target_json_path = os.path.join(source_root, json_conf["NV_TARGET_JSON_PATH"])
     alias_conf = BuildConfParser(nv_target_json_path).get_conf_data()
-    worker = BuildNv(alias_conf, root, targets, backup, use_crc16)
+    worker = BuildNv(alias_conf, root, targets, backup, use_crc16, source_root)
     if flag:
         worker.set_nv_output_dir(os.path.join(root, json_conf["OUT_BIN_DIR"]))
     worker.start_work()
 
-def nv_begin(in_path, targets, flag, gen_backup=False, use_crc16=False):
+def nv_begin(in_path, targets, flag, gen_backup=False, use_crc16=False, root=None, source_root=None):
     global json_conf
     with open(in_path, 'r') as i:
         json_conf = json.load(i)
 
     check_key(json_conf)
-    test(targets, flag, False, use_crc16)
+    test(targets, flag, False, use_crc16, root, source_root)
     if gen_backup:
-        test(targets, flag, True, use_crc16)
+        test(targets, flag, True, use_crc16, root, source_root)
     print("build nv bin success!!")
 
 if __name__ == "__main__":

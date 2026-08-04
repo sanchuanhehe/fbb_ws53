@@ -34,7 +34,7 @@ false
 )
 
 set(APP_TARGETS
-"ws53-liteos-app"
+"ws53_liteos_app"
 )
 
 set(MAIN_COMPONENT

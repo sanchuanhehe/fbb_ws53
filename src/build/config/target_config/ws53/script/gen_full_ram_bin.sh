@@ -3,18 +3,19 @@
 set -e
 
 root_dir=$1
+output_root=${2:-${root_dir}/output}
 objcopy=${root_dir}/tools/bin/compiler/riscv/cc_riscv32_musl_b090/cc_riscv32_musl/bin/riscv32-linux-musl-objcopy
-acore_part1_bin=${root_dir}/output/ws53/acore/ws53_liteos_for_sw21/acore_dtcm.bin
-acore_part2_bin=${root_dir}/output/ws53/acore/ws53_liteos_for_sw21/acore_itcm.bin
-ccore_part1_bin=${root_dir}/output/ws53/control_core/ws53_control_for_sw21/ccore_rambin_part1.bin
-ccore_part2_bin=${root_dir}/output/ws53/control_core/ws53_control_for_sw21/ccore_rambin_part2.bin
-acore_elf=${root_dir}/output/ws53/acore/ws53_liteos_for_sw21/application.elf
-ccore_elf=${root_dir}/output/ws53/control_core/ws53_control_for_sw21/control_ws53.elf
+acore_part1_bin=${output_root}/ws53/acore/ws53_liteos_for_sw21/acore_dtcm.bin
+acore_part2_bin=${output_root}/ws53/acore/ws53_liteos_for_sw21/acore_itcm.bin
+ccore_part1_bin=${output_root}/ws53/control_core/ws53_control_for_sw21/ccore_rambin_part1.bin
+ccore_part2_bin=${output_root}/ws53/control_core/ws53_control_for_sw21/ccore_rambin_part2.bin
+acore_elf=${output_root}/ws53/acore/ws53_liteos_for_sw21/application.elf
+ccore_elf=${output_root}/ws53/control_core/ws53_control_for_sw21/control_ws53.elf
 
 py3=/usr/bin/python3
 gen_patch_py=${root_dir}/build/script/patch/patch_riscv.py
-acore_bin_dir=${root_dir}/output/ws53/acore/ws53_liteos_for_sw21
-ccore_bin_dir=${root_dir}/output/ws53/control_core/ws53_control_for_sw21
+acore_bin_dir=${output_root}/ws53/acore/ws53_liteos_for_sw21
+ccore_bin_dir=${output_root}/ws53/control_core/ws53_control_for_sw21
 acore_patch_config_dir=${root_dir}/build/config/target_config/ws53/patch_config
 ccore_patch_config_dir=${ccore_bin_dir}/patch_config
 

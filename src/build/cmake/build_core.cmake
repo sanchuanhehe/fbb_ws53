@@ -38,6 +38,10 @@ macro(cfbb_build_prologue)
     endif()
     # Windows shells may pass backslashes; CMake parses them as escape
     file(TO_CMAKE_PATH "${ROOT_DIR}" ROOT_DIR)
+    if(NOT DEFINED OUTPUT_ROOT)
+        set(OUTPUT_ROOT "${ROOT_DIR}/output")
+    endif()
+    file(TO_CMAKE_PATH "${OUTPUT_ROOT}" OUTPUT_ROOT)
 
     set(Python3_EXECUTABLE ${PY_PATH})
     find_program(CCACHE_FOUND ccache)
@@ -127,18 +131,25 @@ macro(cfbb_build_epilogue)
     # main/ component and any components/ subdirs, and register the main
     # component name in RAM_COMPONENT so build_component() actually emits it.
     if(FBB_OUT_OF_TREE)
-        if(EXISTS "${CMAKE_SOURCE_DIR}/main/CMakeLists.txt")
+        if(NOT DEFINED FBB_PROJECT_DIR)
+            message(FATAL_ERROR "FBB_PROJECT_DIR is required for an out-of-tree build")
+        endif()
+        if(NOT DEFINED FBB_PROJECT_COMPONENT_NAME)
+            set(FBB_PROJECT_COMPONENT_NAME "main")
+        endif()
+        file(TO_CMAKE_PATH "${FBB_PROJECT_DIR}" FBB_PROJECT_DIR)
+        if(EXISTS "${FBB_PROJECT_DIR}/main/CMakeLists.txt")
             list(APPEND RAM_COMPONENT "${FBB_PROJECT_COMPONENT_NAME}")
-            add_subdirectory("${CMAKE_SOURCE_DIR}/main"
+            add_subdirectory("${FBB_PROJECT_DIR}/main"
                              "${CMAKE_BINARY_DIR}/_fbb_project_main")
         endif()
-        if(EXISTS "${CMAKE_SOURCE_DIR}/components")
-            file(GLOB _proj_comps RELATIVE "${CMAKE_SOURCE_DIR}/components"
-                 "${CMAKE_SOURCE_DIR}/components/*")
+        if(EXISTS "${FBB_PROJECT_DIR}/components")
+            file(GLOB _proj_comps RELATIVE "${FBB_PROJECT_DIR}/components"
+                 "${FBB_PROJECT_DIR}/components/*")
             foreach(_pc ${_proj_comps})
-                if(EXISTS "${CMAKE_SOURCE_DIR}/components/${_pc}/CMakeLists.txt")
+                if(EXISTS "${FBB_PROJECT_DIR}/components/${_pc}/CMakeLists.txt")
                     list(APPEND RAM_COMPONENT "${_pc}")
-                    add_subdirectory("${CMAKE_SOURCE_DIR}/components/${_pc}"
+                    add_subdirectory("${FBB_PROJECT_DIR}/components/${_pc}"
                                      "${CMAKE_BINARY_DIR}/_fbb_project_${_pc}")
                 endif()
             endforeach()

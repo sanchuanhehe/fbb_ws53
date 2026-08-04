@@ -32,6 +32,9 @@ set(FBB_SDK_DIR "${ROOT_DIR}")
 # 2. Mark mode so build_core can branch on it. Out-of-tree means the cmake
 #    source dir is the user's project, not the SDK.
 set(FBB_OUT_OF_TREE TRUE)
+if(NOT DEFINED FBB_PROJECT_DIR)
+    set(FBB_PROJECT_DIR "${CMAKE_SOURCE_DIR}")
+endif()
 
 # 3. Default project component name. Override before project() if your main
 #    component is called something other than "main".

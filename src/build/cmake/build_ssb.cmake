@@ -20,7 +20,7 @@ if (NOT EXISTS ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR})
     file(MAKE_DIRECTORY ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR})
 endif()
 add_custom_target(COPY_SSB_BIN ALL
-    COMMAND ${CP} ${ROOT_DIR}/output/${CHIP}/acore/${TARGET_DIR}/ssb.bin ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR}/ssb.bin
+    COMMAND ${CP} ${OUTPUT_ROOT}/${CHIP}/acore/${TARGET_DIR}/ssb.bin ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR}/ssb.bin
     COMMENT "copy bin file"
     WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
     DEPENDS ADD_SHA_TO_SSB

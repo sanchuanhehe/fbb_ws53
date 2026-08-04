@@ -11,7 +11,7 @@ set(COMPONENT_NAME nv_config_ws53)
 set(BUILD_TARGETS nv_config_ws53)
 set(TARGET ${CORE})
 set(GEN_TARGET_DIR
-        ${ROOT_DIR}/output/${CHIP}/${CORE})
+        ${OUTPUT_ROOT}/${CHIP}/${CORE})
 set(TARGET_INCLUDE
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${ROOT_DIR}/middleware/utils/common_headers/native)

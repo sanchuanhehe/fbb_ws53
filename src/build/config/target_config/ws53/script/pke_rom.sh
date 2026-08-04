@@ -3,8 +3,10 @@
 set -e
 
 root_dir=$1
-out_dir=${root_dir}/output/ws53/acore/pke_rom
-rom_ver_dir=${root_dir}/output/ws53/rom_ver
+output_root=${2:-${root_dir}/output}
+python_path=${3:-python3}
+out_dir=${output_root}/ws53/acore/pke_rom
+rom_ver_dir=${output_root}/ws53/rom_ver
 create_hex_py=${root_dir}/build/script/utils/create_hex.py
 objcopy_tool=${root_dir}/tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl/bin/riscv32-linux-musl-objcopy
 gcc_tool=${root_dir}/tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl/bin/riscv32-linux-musl-gcc
@@ -23,7 +25,7 @@ if [ -f ${rom_lib_file_path} ]; then
     dd if=${out_dir}/pke_rom_raw.bin of=${out_dir}/pke_rom.bin seek=0 conv=sync bs=3k count=1
 
     # generate hex
-    python3 ${create_hex_py} ${out_dir}/pke_rom.bin ${out_dir}/S40ULPROM768X32_0SVTX8B1PD.hex
+    ${python_path} ${create_hex_py} ${out_dir}/pke_rom.bin ${out_dir}/S40ULPROM768X32_0SVTX8B1PD.hex
 
     # archive
     mkdir -p ${rom_ver_dir}/pke

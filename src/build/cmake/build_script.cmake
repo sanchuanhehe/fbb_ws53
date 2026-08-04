@@ -23,7 +23,7 @@ set(HSO_XML_DB_CREATE ${HDB_SCRIPT_DIR}/database_create.py)
 set(HSO_XML_PRE_PROCESS ${HDB_SCRIPT_DIR}/process_pregenerated_xml.py)
 
 # PARSE script
-set(OUTPUT_DIR "${ROOT_DIR}/output")
+set(OUTPUT_DIR "${OUTPUT_ROOT}")
 set(HSO_PARSE_DIR ${SCRIPT_DIR}/parse_tool)
 set(HSO_PARSE_MAIN ${HSO_PARSE_DIR}/parse_main_phase1.py)
 
