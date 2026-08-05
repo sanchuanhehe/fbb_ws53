@@ -6,9 +6,10 @@ root_dir=$1
 bin_name=$2
 target_name=$3
 core=$4
-out_dir=${root_dir}/output/ws53/${core}/${target_name}
-rom_ver_dir=${root_dir}/output/ws53/rom_ver
-romboot_bin=${root_dir}/output/ws53/acore/ws53-romboot/romboot.bin
+output_root=${5:-${root_dir}/output}
+out_dir=${output_root}/ws53/${core}/${target_name}
+rom_ver_dir=${output_root}/ws53/rom_ver
+romboot_bin=${output_root}/ws53/acore/ws53-romboot/romboot.bin
 create_hex_py=${root_dir}/build/script/utils/create_hex.py
 
 if [ "${core}" = "acore" -a "${target_name}" = "liteos_ws53" ];then

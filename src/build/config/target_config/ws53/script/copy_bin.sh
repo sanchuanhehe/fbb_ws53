@@ -4,21 +4,22 @@ set -e
 
 root_dir=$1
 target_name=$2
-ssb=${root_dir}/output/ws53/acore/ws53-ssb/ssb_sign.bin
-ssb_bin=${root_dir}/output/ws53/acore/ws53-ssb/ssb.bin
-flashboot_a=${root_dir}/output/ws53/acore/ws53-flashboot/flashboot_sign.bin
-flashboot_bin=${root_dir}/output/ws53/acore/ws53-flashboot/flashboot.bin
-flashboot_b=${root_dir}/output/ws53/acore/ws53-flashboot/flashboot_backup_sign.bin
-loaderboot=${root_dir}/output/ws53/acore/ws53-loaderboot/loaderboot_sign.bin
-loaderboot_bin=${root_dir}/output/ws53/acore/ws53-loaderboot/loaderboot.bin
-param_bin=${root_dir}/output/ws53/acore/param_bin/root_params_sign.bin
-pke_rom=${root_dir}/output/ws53/acore/pke_rom/pke_rom.bin
-romboot=${root_dir}/output/ws53/acore/ws53-romboot/romboot.bin
-sdk_ccore_app=${root_dir}/output/ws53/control_core/ws53_control_app/control_ws53.bin
-sdk_ccore_app_lite=${root_dir}/output/ws53/control_core/ws53_control_app_lite/control_ws53_lite.bin
-efuse_bin=${root_dir}/output/ws53/acore/ws53_liteos_app/efuse_cfg.bin
+output_root=${3:-${root_dir}/output}
+ssb=${output_root}/ws53/acore/ws53-ssb/ssb_sign.bin
+ssb_bin=${output_root}/ws53/acore/ws53-ssb/ssb.bin
+flashboot_a=${output_root}/ws53/acore/ws53-flashboot/flashboot_sign.bin
+flashboot_bin=${output_root}/ws53/acore/ws53-flashboot/flashboot.bin
+flashboot_b=${output_root}/ws53/acore/ws53-flashboot/flashboot_backup_sign.bin
+loaderboot=${output_root}/ws53/acore/ws53-loaderboot/loaderboot_sign.bin
+loaderboot_bin=${output_root}/ws53/acore/ws53-loaderboot/loaderboot.bin
+param_bin=${output_root}/ws53/acore/param_bin/root_params_sign.bin
+pke_rom=${output_root}/ws53/acore/pke_rom/pke_rom.bin
+romboot=${output_root}/ws53/acore/ws53-romboot/romboot.bin
+sdk_ccore_app=${output_root}/ws53/control_core/ws53_control_app/control_ws53.bin
+sdk_ccore_app_lite=${output_root}/ws53/control_core/ws53_control_app_lite/control_ws53_lite.bin
+efuse_bin=${output_root}/ws53/acore/ws53_liteos_app/efuse_cfg.bin
 bootbin=${root_dir}/interim_binary/ws53/bin/boot_bin
-ccore_src_hdb=${root_dir}/output/ws53/build_hso_cfg/hso_database/xml/base/control_core
+ccore_src_hdb=${output_root}/ws53/build_hso_cfg/hso_database/xml/base/control_core
 ccore_dst_hdb=${root_dir}/interim_binary/ws53/ccore/build_hso_cfg/hso_database/xml/base
 
 if [ ! -d ${bootbin} ]; then

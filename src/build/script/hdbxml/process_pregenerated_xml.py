@@ -37,6 +37,7 @@ def xml_ignore(path, names):
 def process_pre_generated_db_xml():
     global G_PARAMS
     root = sys.argv[1]
+    build_root = os.path.abspath(os.environ.get("FBB_BUILD_ROOT_PATH", root))
     chip = sys.argv[2]
     in_path = XML_PATH
     in_path = in_path.replace('<chip>', chip)
@@ -51,7 +52,7 @@ def process_pre_generated_db_xml():
         return
 
     G_PARAMS = {}
-    G_PARAMS['BUILD_TEMP_PATH'] = os.path.join(root, db_conf["BUILD_TEMP_PATH"])
+    G_PARAMS['BUILD_TEMP_PATH'] = os.path.join(build_root, db_conf["BUILD_TEMP_PATH"])
     G_PARAMS['HDB_XML_PRE_GENERATED_DIR'] = db_conf["HDB_XML_PRE_GENERATED_DIR"]
 
     src_dir = []

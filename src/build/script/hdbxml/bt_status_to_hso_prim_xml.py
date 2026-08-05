@@ -276,6 +276,7 @@ def generate_db_file():
 def generate_db():
     global G_PARAMS
     root = sys.argv[1]
+    build_root = os.path.abspath(os.environ.get("FBB_BUILD_ROOT_PATH", root))
     chip = sys.argv[2]
     in_path = XML_PATH
     in_path = in_path.replace('<chip>', chip)
@@ -286,8 +287,8 @@ def generate_db():
         db_conf = json.load(f)
 
     G_PARAMS = {}
-    G_PARAMS['HDB_XML_TEMP_BASE_DIR'] = os.path.join(root, db_conf["HDB_XML_TEMP_BASE_DIR"])
-    G_PARAMS["HDB_TXT_DST_DIR"] = os.path.join(root, db_conf["HDB_TXT_DST_DIR"])
+    G_PARAMS['HDB_XML_TEMP_BASE_DIR'] = os.path.join(build_root, db_conf["HDB_XML_TEMP_BASE_DIR"])
+    G_PARAMS["HDB_TXT_DST_DIR"] = os.path.join(build_root, db_conf["HDB_TXT_DST_DIR"])
     G_PARAMS["HDB_TXT_BASE_DATATYPE"] = os.path.join(root, db_conf["HDB_TXT_BASE_DATATYPE"])
     G_PARAMS["HDB_TXT_SRC_DIR"] = os.path.join(root, db_conf["HDB_TXT_SRC_DIR"])
     G_PARAMS["BT_STATUS_DIR"] = os.path.join(root, db_conf["BT_STATUS_DIR"])

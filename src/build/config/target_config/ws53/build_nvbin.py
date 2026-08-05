@@ -17,10 +17,11 @@ if __name__ == '__main__':
     #配置文件路径
     nv_config_json = os.path.join(g_root, "build", "config", "target_config", "ws53", "nv_bin_cfg", "mk_nv_bin_cfg.json")
     #输出路径
-    nv_output_path = os.path.join(g_root, "output", "ws53", "acore", "nv_bin")
+    build_root = os.path.abspath(os.environ.get("FBB_BUILD_ROOT_PATH", g_root))
+    nv_output_path = os.path.join(build_root, "output", "ws53", "acore", "nv_bin")
 
     if not os.path.exists(nv_output_path):
         os.makedirs(nv_output_path)
 
     targets = ["acore"]
-    nv_begin(nv_config_json, targets, 1, True)
+    nv_begin(nv_config_json, targets, 1, True, root=build_root, source_root=g_root)

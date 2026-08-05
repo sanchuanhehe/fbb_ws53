@@ -421,6 +421,13 @@ class BuildEnvironment:
             if temp_name in all_group or temp_name in all_target:
                 self.add_target_names(temp_name)
                 return
+            # Keep accepting the historical dash spelling used by early
+            # out-of-tree project templates, but expose and use the registered
+            # SDK target name as the canonical value.
+            canonical_name = temp_name.replace('-', '_')
+            if canonical_name in all_group or canonical_name in all_target:
+                self.add_target_names(canonical_name)
+                return
 
         normal_match_list = []
         group_match_list = []

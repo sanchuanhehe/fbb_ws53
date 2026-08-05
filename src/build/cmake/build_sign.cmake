@@ -32,8 +32,8 @@ if (EXISTS ${ROOT_DIR}/build/config/target_config/${CHIP}/sign_config/${BUILD_TA
             file(MAKE_DIRECTORY ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR})
         endif()
         add_custom_target(COPY_SIGNBIN ALL
-            COMMAND ${CP} ${ROOT_DIR}/output/${CHIP}/acore/${TARGET_DIR}/flashboot_sign_a.bin ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR}/flashboot_sign_a.bin  &&
-                    ${CP} ${ROOT_DIR}/output/${CHIP}/acore/${TARGET_DIR}/flashboot_sign_a.bin ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR}/flashboot_sign_b.bin
+            COMMAND ${CP} ${OUTPUT_ROOT}/${CHIP}/acore/${TARGET_DIR}/flashboot_sign_a.bin ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR}/flashboot_sign_a.bin  &&
+                    ${CP} ${OUTPUT_ROOT}/${CHIP}/acore/${TARGET_DIR}/flashboot_sign_a.bin ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR}/flashboot_sign_b.bin
             COMMENT "copy bin file"
             WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
             DEPENDS GENERAT_SIGNBIN
@@ -57,7 +57,7 @@ if (EXISTS ${ROOT_DIR}/build/config/target_config/${CHIP}/sign_config/${BUILD_TA
             file(MAKE_DIRECTORY ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR})
         endif()
         add_custom_target(COPY_SIGNBIN ALL
-            COMMAND ${CP} ${ROOT_DIR}/output/${CHIP}/acore/${TARGET_DIR}/loaderboot_sign.bin ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR}/loaderboot_sign.bin
+            COMMAND ${CP} ${OUTPUT_ROOT}/${CHIP}/acore/${TARGET_DIR}/loaderboot_sign.bin ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR}/loaderboot_sign.bin
             COMMENT "copy bin file"
             WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
             DEPENDS GENERAT_SIGNBIN
@@ -123,7 +123,7 @@ if (${TARGET_NAME} STREQUAL "sec_boot")
             file(MAKE_DIRECTORY ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR})
         endif()
         add_custom_target(COPY_SEC_BOOTBIN ALL
-            COMMAND ${CP} ${ROOT_DIR}/output/${CHIP}/acore/${TARGET_DIR}/sec_boot.bin ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR}/sec_boot.bin
+            COMMAND ${CP} ${OUTPUT_ROOT}/${CHIP}/acore/${TARGET_DIR}/sec_boot.bin ${ROOT_DIR}/interim_binary/${CHIP}/bin/boot_bin/${TARGET_DIR}/sec_boot.bin
             COMMENT "copy bin file"
             WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
             DEPENDS GENERAT_BIN

@@ -570,6 +570,7 @@ def modify_newline_on_linux(srcfile, destfile):
 #mkdir ${target} ${root} ${chip} ${core}
 def generate_db_temp_dir(sys_argv):
     root = sys_argv[2]
+    build_root = os.path.abspath(os.environ.get("FBB_BUILD_ROOT_PATH", root))
     chip = sys_argv[3]
     group_name = sys_argv[4]
     in_path = XML_PATH
@@ -581,7 +582,7 @@ def generate_db_temp_dir(sys_argv):
     with open(conf, 'r') as f:
         db_conf = json.load(f)
 
-    base_file_dir = os.path.join(os.path.join(root, db_conf["HDB_XML_TEMP_BASE_DIR"]), group_name)
+    base_file_dir = os.path.join(os.path.join(build_root, db_conf["HDB_XML_TEMP_BASE_DIR"]), group_name)
     if not os.path.exists(base_file_dir):
         os.makedirs(base_file_dir)
 
@@ -603,7 +604,8 @@ def generate_db_xml(root, group_name, auto_def, module_name, src_file):
 
     _, filename = os.path.split(src_file)
     filename = filename + ".xml"
-    base_file_dir = os.path.join(os.path.join(root, db_conf["HDB_XML_TEMP_BASE_DIR"]), group_name)
+    build_root = os.path.abspath(os.environ.get("FBB_BUILD_ROOT_PATH", root))
+    base_file_dir = os.path.join(os.path.join(build_root, db_conf["HDB_XML_TEMP_BASE_DIR"]), group_name)
 
     if not os.path.exists(base_file_dir):
         os.makedirs(base_file_dir)

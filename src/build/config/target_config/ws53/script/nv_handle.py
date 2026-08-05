@@ -2,13 +2,15 @@ import json
 from xml.dom.minidom import Document
 import re
 import os
+import sys
 
 
-NV_JSON_FILE_DIR = ["./output/ws53/acore/nv_bin/temp/cfg/acore_nv.json"]
-NV_TXT_FILE_DIR = ["./output/ws53/acore/nv_bin/temp/acore.etypes"]
+OUTPUT_ROOT = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else os.path.abspath("./output")
+NV_JSON_FILE_DIR = [os.path.join(OUTPUT_ROOT, "ws53", "acore", "nv_bin", "temp", "cfg", "acore_nv.json")]
+NV_TXT_FILE_DIR = [os.path.join(OUTPUT_ROOT, "ws53", "acore", "nv_bin", "temp", "acore.etypes")]
 
-NV_XML_PATH = "./output/ws53/database/cco/system/hdbcfg/mss_nvi_db.xml"
-TXT_PATH = "./output/ws53/database/cco/system/nv/nv_struct_def.txt"
+NV_XML_PATH = os.path.join(OUTPUT_ROOT, "ws53", "database", "cco", "system", "hdbcfg", "mss_nvi_db.xml")
+TXT_PATH = os.path.join(OUTPUT_ROOT, "ws53", "database", "cco", "system", "nv", "nv_struct_def.txt")
 
 
 def nv_json_handle():

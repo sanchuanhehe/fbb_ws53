@@ -86,6 +86,7 @@ if __name__ == "__main__":
     global G_PARAMS
 
     root = sys.argv[1]
+    build_root = os.path.abspath(os.environ.get("FBB_BUILD_ROOT_PATH", root))
     chip = sys.argv[2]
 
     in_path = XML_PATH
@@ -97,8 +98,8 @@ if __name__ == "__main__":
         db_conf = json.load(f)
 
     G_PARAMS = {}
-    G_PARAMS['HDB_XML_TEMP_BASE_DIR'] = os.path.join(root, db_conf["HDB_XML_TEMP_BASE_DIR"])
-    G_PARAMS['HDB_PRIM_XML_DST_FILE'] = os.path.join(root, db_conf["HDB_PRIM_XML_DST_FILE"])
+    G_PARAMS['HDB_XML_TEMP_BASE_DIR'] = os.path.join(build_root, db_conf["HDB_XML_TEMP_BASE_DIR"])
+    G_PARAMS['HDB_PRIM_XML_DST_FILE'] = os.path.join(build_root, db_conf["HDB_PRIM_XML_DST_FILE"])
     G_PARAMS['HDB_PRIM_XML_SRC_FILE'] = os.path.join(root, db_conf["HDB_PRIM_XML_SRC_FILE"])
 
     merge_db_xml(root, chip)

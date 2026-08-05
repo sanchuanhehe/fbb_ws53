@@ -6,6 +6,7 @@ import struct
 import hashlib
 import os
 import re
+import sys
 from sys import version_info
 
 def str_to_hex(s):
@@ -24,7 +25,9 @@ value_len = 0
 buf = b''
 csv_dir = os.path.split(os.path.realpath(__file__))[0]
 csv_path = os.path.join(csv_dir, 'efuse.csv')
-bin_path = os.path.join(csv_dir + "/../../../../../output/ws53/acore/ws53_liteos_app/", 'efuse_cfg.bin')
+sdk_root = os.path.abspath(os.path.join(csv_dir, "..", "..", "..", "..", ".."))
+output_root = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else os.path.join(sdk_root, "output")
+bin_path = os.path.join(output_root, "ws53", "acore", "ws53_liteos_app", "efuse_cfg.bin")
 
 def get_flash_key_param():
     cfg_file = os.path.join(csv_dir + "/../", 'sign_config', 'encry_config.cfg')

@@ -15,7 +15,7 @@ set(LDS_HEADER
     ${ROOT_DIR}/drivers/chips/${CHIP}/include
     ${ROOT_DIR}/drivers/chips/${CHIP}/include/${CORE}
     ${ROOT_DIR}/middleware/utils/common_headers
-    ${ROOT_DIR}/output/${ChIP}/${CORE}/${target_name}
+    ${OUTPUT_ROOT}/${CHIP}/${CORE}/${BUILD_TARGET_NAME}
     CACHE INTERNAL "" FORCE
 )
 

@@ -5,6 +5,7 @@
 # ============================================================================
 
 import os
+import shutil
 import sys
 import tarfile
 
@@ -20,10 +21,22 @@ TOOLS_DIR = os.path.dirname(PKG_DIR)
 SDK_DIR = os.path.dirname(TOOLS_DIR)
 sys.path.append(os.path.join(SDK_DIR, "build", "script"))
 
+from utils.build_utils import output_root
+
+
+WS53_OUTPUT_DIR = os.path.join(output_root, "ws53")
+
+
+def copy_fbb_package(package_path, target, suffix):
+    """Keep the legacy package and publish the layout expected by hs-fbb-cli."""
+    fbb_dir = os.path.join(WS53_OUTPUT_DIR, "fwpkg", target)
+    os.makedirs(fbb_dir, exist_ok=True)
+    shutil.copyfile(package_path, os.path.join(fbb_dir, f"{target}_{suffix}.fwpkg"))
+
 # ws53
 def make_all_in_one_packet(pack_style_str, extr_defines):
     # make all in one packet
-    bin_dir = os.path.join(SDK_DIR, "output", "ws53", "acore", "boot_bin")
+    bin_dir = os.path.join(WS53_OUTPUT_DIR, "acore", "boot_bin")
     loadboot = os.path.join(bin_dir, "loaderboot_sign.bin")
     loadboot_bx = loadboot + "|0x0|0x0|0"
     params = os.path.join(bin_dir, "root_params_sign.bin")
@@ -34,15 +47,15 @@ def make_all_in_one_packet(pack_style_str, extr_defines):
     flashboot_bx = flashboot + "|0x420000|0x10000|1"
     flashboot_bak = os.path.join(bin_dir, "flashboot_backup_sign.bin")
     flashboot_bak_bx = flashboot_bak + "|0x410000|0x10000|1"
-    nv = os.path.join(SDK_DIR, "output", "ws53", "acore", "nv_bin", "ws53_all_nv.bin")
+    nv = os.path.join(WS53_OUTPUT_DIR, "acore", "nv_bin", "ws53_all_nv.bin")
     nv_bx = nv + "|0x7FC000|0x4000|1"
-    nv_bak = os.path.join(SDK_DIR, "output", "ws53", "acore", "nv_bin", "ws53_all_nv_factory.bin")
+    nv_bak = os.path.join(WS53_OUTPUT_DIR, "acore", "nv_bin", "ws53_all_nv_factory.bin")
     nv_bak_bx = nv_bak + "|0x40C000|0x4000|1"
     # efuse bin
     efuse_bin = os.path.join(bin_dir, "efuse_cfg.bin")
     efuse_bx = efuse_bin + "|0x0|0x200000|3"
 
-    app_bin = os.path.join(SDK_DIR, "output", "ws53", "acore", pack_style_str, f"{pack_style_str}_sign.bin")
+    app_bin = os.path.join(WS53_OUTPUT_DIR, "acore", pack_style_str, f"{pack_style_str}_sign.bin")
     app_bx = app_bin + "|0x430000|0x240000|1"
 
     build_extr_defines = " ".join(sys.argv[3].split(","))
@@ -60,7 +73,7 @@ def make_all_in_one_packet(pack_style_str, extr_defines):
             packet_post_agvs.append(nv_bak_bx)
 
         if pack_style_str == 'ws53_liteos_mfg':
-            output_bin_dir = os.path.join(SDK_DIR, "output", "ws53", "acore")
+            output_bin_dir = os.path.join(WS53_OUTPUT_DIR, "acore")
             app_bin = os.path.join(output_bin_dir, "ws53_liteos_app", "ws53_liteos_app_sign.bin")
             app_bx = app_bin + f"|0x430000|0x240000|1"
 
@@ -68,8 +81,9 @@ def make_all_in_one_packet(pack_style_str, extr_defines):
             mfg_bx = mfg_bin + f"|0x670000|{hex(0x183000)}|1" # 0x183000为产测分区B区大小
             packet_post_agvs.append(app_bx)
             packet_post_agvs.append(mfg_bx)
-            fpga_fwpkg_all = os.path.join(SDK_DIR, "output", "ws53", "fwpkg", "pack_all_core", pack_style_str, f"{pack_style_str}_all_in_one.fwpkg")
+            fpga_fwpkg_all = os.path.join(WS53_OUTPUT_DIR, "fwpkg", "pack_all_core", pack_style_str, f"{pack_style_str}_all_in_one.fwpkg")
             packet_bin(fpga_fwpkg_all, packet_post_agvs)
+            copy_fbb_package(fpga_fwpkg_all, pack_style_str, "all")
             return
         if "PACKET_MFG_BIN" in extr_defines:
             mfg_sign_bin = os.path.join(SDK_DIR, "application", "ws53", "ws53_liteos_mfg", "ws53_liteos_mfg_sign.bin")
@@ -80,11 +94,11 @@ def make_all_in_one_packet(pack_style_str, extr_defines):
                 print("error: don't find ws53-liteos-mfg-sign.bin...")
                 exit(-1)
         else:
-            application_mfg_bin = os.path.join(SDK_DIR, "output", "ws53", "pktbin", "ws53_liteos_mfg.bin")
+            application_mfg_bin = os.path.join(WS53_OUTPUT_DIR, "pktbin", "ws53_liteos_mfg.bin")
             if os.path.exists(application_mfg_bin):
                 os.remove(application_mfg_bin)
             cur_dir = os.getcwd()
-            os.chdir(os.path.join(SDK_DIR, "output", "ws53"))
+            os.chdir(WS53_OUTPUT_DIR)
             if os.path.isfile('pktbin.zip'):
                 os.remove('pktbin.zip')
             with tarfile.open('pktbin.zip', "w") as tar:
@@ -98,14 +112,16 @@ def make_all_in_one_packet(pack_style_str, extr_defines):
         if "SUPPORT_EFUSE" in build_extr_defines or "PACKET_MFG_BIN" in build_extr_defines:
             print("efuse pack")
             packet_post_agvs.append(efuse_bx)
-        fpga_fwpkg_all = os.path.join(SDK_DIR, "output", "ws53", "fwpkg", "pack_all_core", pack_style_str, f"{pack_style_str}_all_in_one.fwpkg")
+        fpga_fwpkg_all = os.path.join(WS53_OUTPUT_DIR, "fwpkg", "pack_all_core", pack_style_str, f"{pack_style_str}_all_in_one.fwpkg")
         packet_bin(fpga_fwpkg_all, packet_post_agvs)
+        copy_fbb_package(fpga_fwpkg_all, pack_style_str, "all")
 
         packet_post_agvs = list()
         packet_post_agvs.append(loadboot_bx)
         packet_post_agvs.append(app_bx)
-        fpga_loadapp_only_fwpkg = os.path.join(SDK_DIR, "output", "ws53", "fwpkg", "pack_all_core", pack_style_str, f"{pack_style_str}_load_only.fwpkg")
+        fpga_loadapp_only_fwpkg = os.path.join(WS53_OUTPUT_DIR, "fwpkg", "pack_all_core", pack_style_str, f"{pack_style_str}_load_only.fwpkg")
         packet_bin(fpga_loadapp_only_fwpkg, packet_post_agvs)
+        copy_fbb_package(fpga_loadapp_only_fwpkg, pack_style_str, "load_only")
 
 
 def is_packing_files_exist(soc, pack_style_str):

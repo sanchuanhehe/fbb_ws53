@@ -193,6 +193,7 @@ class CMakeBuilder(BuildEnvironment):
         if self.build_as_lib:
             env.add("GEN_ONLY_LIB_PATH")
         self.cmake_cmd = ['cmake', '-G', self.generator, '-Wno-dev', '--no-warn-unused-cli', '-DCMAKE_C_COMPILER_WORKS=TRUE', '-DCMAKE_CXX_COMPILER_WORKS=TRUE']
+        self.cmake_cmd.append(f'-DOUTPUT_ROOT={output_root}')
         if env.get('fp_enable'):
             env.append('defines', 'SUPPORT_CALLSTACK')
             env.append('ccflags', '-fno-omit-frame-pointer')
@@ -202,7 +203,31 @@ class CMakeBuilder(BuildEnvironment):
         self.pre_sdk(output_path, env)
         if env.get('libstd_option'):
             self.add_cmake_def(env, 'std_libs')
-        self.cmake_cmd.append(root_path)
+        # Out-of-tree projects keep the SDK as cmake's top-level source so
+        # existing SDK-relative include paths retain their original meaning.
+        # The user's main/components are injected separately via
+        # FBB_PROJECT_DIR.
+        #
+        # FBB_PROJECT_TARGET scopes the override to one target. SDK build.py
+        # spawns auxiliary targets (ws53-flashboot, ws53-loaderboot) as child
+        # processes that inherit the env. Those keep building in-tree because
+        # only the project's declared target matches.
+        project_dir = os.environ.get('FBB_PROJECT_DIR')
+        project_target = os.environ.get('FBB_PROJECT_TARGET')
+        # target_name from compile_target's parameter (dash form, e.g.
+        # ws53-liteos-app). Compare both forms in case manifests use either.
+        if project_dir and project_target and (
+                target_name == project_target
+                or target_name.replace('-', '_') == project_target.replace('-', '_')):
+            if not os.path.isdir(project_dir):
+                raise RuntimeError(
+                    f"FBB_PROJECT_DIR={project_dir!r} does not exist or is not a directory."
+                )
+            self.cmake_cmd.append(root_path)
+            self.cmake_cmd.append('-DFBB_OUT_OF_TREE=TRUE')
+            self.cmake_cmd.append(f'-DFBB_PROJECT_DIR={project_dir}')
+        else:
+            self.cmake_cmd.append(root_path)
 
         if env.get('product_type'):
             self.cmake_cmd.append('-DPRODUCT_TYPE={0}'.format(env.get('product_type')))

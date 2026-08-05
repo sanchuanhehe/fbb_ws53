@@ -11,6 +11,7 @@ g_root = os.path.realpath(os.path.join(file_dir, "..", "..", "..", "..", ".."))
 sys.path.append(os.path.join(g_root, 'build', 'script'))
 sys.path.append(os.path.join(g_root, "build", "config"))
 from enviroment import TargetEnvironment
+from utils.build_utils import output_root
 import param_packet
 
 target = sys.argv[1]
@@ -22,17 +23,56 @@ current_path = os.getcwd()
 cwd_path = os.path.split(os.path.realpath(__file__))[0]
 os.chdir(cwd_path)
 if "windows" in platform.platform().lower():
-    sign_tool = "../../../../../tools/bin/sign_tool/sign_tool_pltuni.exe"
+    sign_tool = os.path.join(g_root, "tools", "bin", "sign_tool", "sign_tool_pltuni.exe")
 else:
-    sign_tool = "../../../../../tools/bin/sign_tool/sign_tool_pltuni"
+    sign_tool = os.path.join(g_root, "tools", "bin", "sign_tool", "sign_tool_pltuni")
 
-out_put = "../../../../../output/ws53/acore"
-ccore_out = "../../../../../output/ws53/control_core"
-inter_dir = "../../../../../interim_binary/ws53/bin/boot_bin"
-boot_bin = "../../../../../output/ws53/acore/boot_bin"
-pktbin = "../../../../../output/ws53/pktbin"
-out_put_ws53_path = "../../../../../output/ws53/"
-efuse_csv = "../script/efuse.csv"
+sdk_output_root = os.path.join(g_root, "output")
+out_put_ws53_path = os.path.join(output_root, "ws53")
+out_put = os.path.join(out_put_ws53_path, "acore")
+ccore_out = os.path.join(out_put_ws53_path, "control_core")
+inter_dir = os.path.join(g_root, "interim_binary", "ws53", "bin", "boot_bin")
+boot_bin = os.path.join(out_put, "boot_bin")
+pktbin = os.path.join(out_put_ws53_path, "pktbin")
+efuse_csv = os.path.join(cwd_path, "..", "script", "efuse.csv")
+
+
+def sign_config_path(config_name):
+    """Return a config whose output paths follow the active build root.
+
+    Signing key paths intentionally remain relative to cwd_path. Only SrcFile
+    and DstFile values that resolve below the SDK's legacy output directory are
+    redirected for an out-of-tree build.
+    """
+    source_path = os.path.join(cwd_path, config_name)
+    if os.path.normcase(os.path.abspath(output_root)) == os.path.normcase(os.path.abspath(sdk_output_root)):
+        return source_path
+
+    config_dir = os.path.join(out_put_ws53_path, ".sign_config")
+    os.makedirs(config_dir, exist_ok=True)
+    dest_path = os.path.join(config_dir, config_name)
+    with open(source_path, "r", encoding="utf-8") as source:
+        lines = source.readlines()
+
+    redirected = []
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith(("SrcFile=", "DstFile=")):
+            key, value = line.split("=", 1)
+            candidate = os.path.abspath(os.path.join(cwd_path, value.strip()))
+            try:
+                inside_sdk_output = os.path.commonpath([candidate, sdk_output_root]) == os.path.abspath(sdk_output_root)
+            except ValueError:
+                inside_sdk_output = False
+            if inside_sdk_output:
+                relative_path = os.path.relpath(candidate, sdk_output_root)
+                mapped_path = os.path.join(output_root, relative_path)
+                line = f"{key}={mapped_path.replace(os.sep, '/')}\n"
+        redirected.append(line)
+
+    with open(dest_path, "w", encoding="utf-8", newline="") as dest:
+        dest.writelines(redirected)
+    return dest_path
 
 
 def merge(file_first, file_second, file_out):
@@ -65,7 +105,7 @@ def sign_app(file_path, type, cfg_name):
     if os.path.isfile(file_path):
         print("sign name: ", file_path)
         dd64c(file_path)
-        ret = subprocess.run([sign_tool, type, cfg_name])
+        ret = subprocess.run([sign_tool, type, sign_config_path(cfg_name)])
         if ret.returncode == 0:
             print(file_path, " generated successfully!!!")
         else:
@@ -126,7 +166,7 @@ if os.path.isfile("params.bin"):
     print("params.bin generate successfully!!!")
 
     # generate params_sign.bin
-    param_bin_ecc_cmd = [sign_tool, "0", "param_bin_ecc.cfg"]
+    param_bin_ecc_cmd = [sign_tool, "0", sign_config_path("param_bin_ecc.cfg")]
     ret = subprocess.run(param_bin_ecc_cmd, cwd=cwd_path, stdout=subprocess.DEVNULL)
 
     if ret.returncode == 0:
@@ -135,7 +175,7 @@ if os.path.isfile("params.bin"):
         print("params_sign.bin generate failed!!!")
 
     # generate root public key
-    root_pubk_cmd = [sign_tool, "1", "root_pubk.cfg"]
+    root_pubk_cmd = [sign_tool, "1", sign_config_path("root_pubk.cfg")]
     ret = subprocess.run(root_pubk_cmd, cwd=cwd_path, stdout=subprocess.DEVNULL)
 
     if ret.returncode == 0:
@@ -157,7 +197,7 @@ if not os.path.isdir(boot_bin) and os.path.isdir(inter_dir):
 # sign ssb
 if os.path.isfile(os.path.join(out_put, "ws53-ssb/ssb.bin")):
     dd64c(os.path.join(out_put, "ws53-ssb/ssb.bin"))
-    ret1 = subprocess.run([sign_tool, "0", "ssb_ws53_ecc.cfg"], stdout=subprocess.DEVNULL)
+    ret1 = subprocess.run([sign_tool, "0", sign_config_path("ssb_ws53_ecc.cfg")], stdout=subprocess.DEVNULL)
     if ret1.returncode == 0:
         print("ssb_sign.bin generated successfully!!!")
         shutil.copy(os.path.join(out_put, "ws53-ssb/ssb_sign.bin"), boot_bin)
@@ -172,16 +212,16 @@ os.path.isfile(os.path.join(inter_dir, 'ssb.bin'))):
     shutil.copy(os.path.join(inter_dir, 'ssb.bin'), os.path.join(out_put, "ws53-ssb"))
     print("ssb_sign.bin generated successfully!!!")
     dd64c(os.path.join(out_put, "ws53-ssb/ssb.bin"))
-    ret_ssb = subprocess.run([sign_tool, "0", "ssb_ws53_ecc.cfg"], stdout=subprocess.DEVNULL)
+    ret_ssb = subprocess.run([sign_tool, "0", sign_config_path("ssb_ws53_ecc.cfg")], stdout=subprocess.DEVNULL)
     shutil.copy(os.path.join(out_put, "ws53-ssb/ssb_sign.bin"), boot_bin)
     shutil.rmtree(os.path.join(out_put, "ws53-ssb"))
 
 # sign flash boot
 if os.path.isfile(os.path.join(out_put, "ws53-flashboot/flashboot.bin")):
     dd64c(os.path.join(out_put, "ws53-flashboot/flashboot.bin"))
-    ret_flash_bin_ecc = subprocess.run([sign_tool, "0", "flashboot_ws53_ecc.cfg"],
+    ret_flash_bin_ecc = subprocess.run([sign_tool, "0", sign_config_path("flashboot_ws53_ecc.cfg")],
                                         stdout=subprocess.DEVNULL)
-    ret_flash_backup_bin_ecc = subprocess.run([sign_tool, "0", "flashboot_ws53_bak_ecc.cfg"],
+    ret_flash_backup_bin_ecc = subprocess.run([sign_tool, "0", sign_config_path("flashboot_ws53_bak_ecc.cfg")],
                                                stdout=subprocess.DEVNULL)
     print(ret_flash_bin_ecc)
     print(ret_flash_backup_bin_ecc)
@@ -195,7 +235,7 @@ if os.path.isfile(os.path.join(out_put, "ws53-flashboot/flashboot.bin")):
 # sign ws53_flash_aging_test
 if os.path.isfile(os.path.join(out_put, "ws53-flash-aging-test/ws53_flash_aging_test.bin")):
     dd64c(os.path.join(out_put, "ws53-flash-aging-test/ws53_flash_aging_test.bin"))
-    ret1 = subprocess.run([sign_tool, "0", "flash_againe_test_ecc.cfg"],
+    ret1 = subprocess.run([sign_tool, "0", sign_config_path("flash_againe_test_ecc.cfg")],
                            stdout=subprocess.DEVNULL)
     print("ws53_flash_aging_test_sign.bin generated successfully!!!")
 
@@ -205,7 +245,7 @@ if os.path.isfile(os.path.join(out_put, "ws53-loaderboot", "loaderboot.bin")):
                       os.path.join(out_put, "ws53-loaderboot", "loaderboot.28k.bin"), 1024 * 28)
     shutil.move(os.path.join(out_put, "ws53-loaderboot", "loaderboot.28k.bin"),
                 os.path.join(out_put, "ws53-loaderboot", "loaderboot.bin"))
-    ret1 = subprocess.run([sign_tool, "0", "loaderboot_ws53_ecc.cfg"],
+    ret1 = subprocess.run([sign_tool, "0", sign_config_path("loaderboot_ws53_ecc.cfg")],
                            stdout=subprocess.DEVNULL)
 
     if ret1.returncode == 0:
@@ -231,7 +271,7 @@ if (not os.path.isfile(os.path.join(out_put, "ws53-loaderboot", 'loaderboot.bin'
                       os.path.join(out_put, "ws53-loaderboot", "loaderboot.28k.bin"), 1024 * 28)
     shutil.move(os.path.join(out_put, "ws53-loaderboot", "loaderboot.28k.bin"),
                 os.path.join(out_put, "ws53-loaderboot", "loaderboot.bin"))
-    ret1 = subprocess.run([sign_tool, "0", "loaderboot_ws53_ecc.cfg"],
+    ret1 = subprocess.run([sign_tool, "0", sign_config_path("loaderboot_ws53_ecc.cfg")],
                            stdout=subprocess.DEVNULL)
     if ret1.returncode == 0:
         print("loaderboot_sign.bin generated successfully!!!")
@@ -253,7 +293,7 @@ not os.path.isfile(os.path.join(ccore_out, 'ws53_control_app', 'control_ws53.bin
     print("copy control_ws53.bin generate succed!!!")
     dd64c(os.path.join(ccore_out, "ws53_control_app", 'control_ws53.bin'))
     #    $sign_tool 0 ws53_control_ecc_app.cfg
-    ret1 = subprocess.run([sign_tool, "0", "ws53_control_ecc_app.cfg"],
+    ret1 = subprocess.run([sign_tool, "0", sign_config_path("ws53_control_ecc_app.cfg")],
                            stdout=subprocess.DEVNULL)
     shutil.copy(os.path.join(ccore_out, "ws53_control_app", 'control_ws53_sign.bin'), boot_bin)
     shutil.rmtree(os.path.join(ccore_out, "ws53_control_app"))
@@ -264,7 +304,7 @@ application_mfg_bin = os.path.join(out_put, '../../../application/ws53/ws53_lite
 if (os.path.isfile(application_mfg_bin)):
     dd64c(application_mfg_bin)
     shutil.copy(application_mfg_bin, pktbin)
-    subprocess.run([sign_tool, "0", "liteos_mfg_bin_factory_ecc.cfg"],
+    subprocess.run([sign_tool, "0", sign_config_path("liteos_mfg_bin_factory_ecc.cfg")],
                     stdout=subprocess.DEVNULL)
     print("liteos_mfg_bin_factory_ecc.bin generated successfully!!!")
 
@@ -277,7 +317,7 @@ def merge_and_sign(ccore_image_path, acore_image_path, merge_image_path):
     merge(ccore_image_path, acore_image_path, merge_image_path)
     dd64c(merge_image_path)
     shutil.copy(merge_image_path, pktbin)
-    subprocess.run([sign_tool, "0", target + "_ecc.cfg"],
+    subprocess.run([sign_tool, "0", sign_config_path(target + "_ecc.cfg")],
                     stdout=subprocess.DEVNULL)
 
 
