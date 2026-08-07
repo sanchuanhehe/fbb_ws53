@@ -57,6 +57,12 @@ typedef struct {
 
 /* Client data callbacks. / 客户端数据回调。 */
 
+static uint32_t sensor_temperature_magnitude(int16_t temperature)
+{
+    int32_t temperature_x100 = (int32_t)temperature;
+    return (uint32_t)((temperature_x100 < 0) ? -temperature_x100 : temperature_x100);
+}
+
 /**
  * @if Eng
  * @brief Handles a notification received from the SLE server.
@@ -78,11 +84,13 @@ static void sle_sensor_report_notification_cb(uint8_t client_id,
     }
 
     sensor_data_frame_t *frame = (sensor_data_frame_t *)data->data;
-    osal_printk("%s [T=%ums] temp=%d.%02dC, hum=%u%%, light=%ulux, type=0x%02x\r\n", SENSOR_CLIENT_LOG,
-                frame->timestamp, frame->temperature / SENSOR_TEMP_SCALE,
-                (frame->temperature >= 0) ? (frame->temperature % SENSOR_TEMP_SCALE)
-                                          : (-frame->temperature % SENSOR_TEMP_SCALE),
-                frame->humidity, frame->light, frame->frame_type);
+    uint32_t temperature_magnitude = sensor_temperature_magnitude(frame->temperature);
+    const char *temperature_sign = (frame->temperature < 0) ? "-" : "";
+    osal_printk("%s [T=%ums] temp=%s%u.%02uC, hum=%u%%, light=N/A, type=0x%02x\r\n", SENSOR_CLIENT_LOG,
+                frame->timestamp, temperature_sign,
+                (unsigned int)(temperature_magnitude / SENSOR_TEMP_SCALE),
+                (unsigned int)(temperature_magnitude % SENSOR_TEMP_SCALE),
+                frame->humidity, frame->frame_type);
 }
 
 /**
@@ -101,15 +109,16 @@ static void sle_sensor_report_indication_cb(uint8_t client_id,
     unused(conn_id);
     unused(status);
 
-    if (data == NULL || data->data == NULL) {
+    if (data == NULL || data->data == NULL || data->data_len != sizeof(sensor_data_frame_t)) {
         return;
     }
 
     sensor_data_frame_t *frame = (sensor_data_frame_t *)data->data;
-    osal_printk("%s ** ALARM ** temp=%d.%02dC exceeds threshold! type=0x%02x\r\n", SENSOR_CLIENT_LOG,
-                frame->temperature / SENSOR_TEMP_SCALE,
-                (frame->temperature >= 0) ? (frame->temperature % SENSOR_TEMP_SCALE)
-                                          : (-frame->temperature % SENSOR_TEMP_SCALE),
+    uint32_t temperature_magnitude = sensor_temperature_magnitude(frame->temperature);
+    const char *temperature_sign = (frame->temperature < 0) ? "-" : "";
+    osal_printk("%s ** ALARM ** temp=%s%u.%02uC exceeds threshold! type=0x%02x\r\n", SENSOR_CLIENT_LOG,
+                temperature_sign, (unsigned int)(temperature_magnitude / SENSOR_TEMP_SCALE),
+                (unsigned int)(temperature_magnitude % SENSOR_TEMP_SCALE),
                 frame->frame_type);
 }
 
@@ -145,7 +154,14 @@ static void *sle_sensor_report_client_task(const char *arg)
 static void *sle_sensor_report_server_task(const char *arg)
 {
     unused(arg);
-    (void)sle_sensor_report_server_init();
+    if (sle_sensor_report_server_init() != ERRCODE_SLE_SUCCESS) {
+        return NULL;
+    }
+
+    while (1) {
+        (void)osal_msleep(SENSOR_REPORT_INTERVAL_MS);
+        sle_sensor_report_server_process();
+    }
     return NULL;
 }
 

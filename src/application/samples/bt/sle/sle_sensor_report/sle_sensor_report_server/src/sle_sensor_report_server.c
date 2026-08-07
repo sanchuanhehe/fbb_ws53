@@ -23,7 +23,7 @@
 #include "sle_errcode.h"
 #include "sle_sensor_report_server.h"
 #include "sle_sensor_report_server_adv.h"
-#include "stdlib.h"
+#include "sensor_aht20.h"
 
 #define SENSOR_SERVER_LOG "[sensor server]"
 
@@ -38,15 +38,7 @@ static uint8_t g_sensor_base_uuid[] = {0x37, 0xBE, 0xA8, 0x80, 0xFC, 0x70, 0x11,
 #define UUID_128BIT_LEN 16
 #define UUID_INDEX 14
 #define SENSOR_TEMP_SCALE 100
-#define SENSOR_TEMP_BASE 2500
-#define SENSOR_TEMP_MAX 8500
-#define SENSOR_TEMP_MIN 2000
-#define SENSOR_DRIFT_RESET_COUNT 40
-#define SENSOR_HUMIDITY_MIN 45
-#define SENSOR_HUMIDITY_MAX 75
-#define SENSOR_LIGHT_MIN 500
-#define SENSOR_LIGHT_MAX 2000
-#define SENSOR_COUNT 3
+#define SENSOR_COUNT 2
 #define USEC_PER_MSEC 1000
 
 /* UUID helpers based on hello and UART samples. / 参考 hello 和 UART 案例的 UUID 辅助函数。 */
@@ -101,108 +93,34 @@ static uint8_t g_server_id = 0;
 static uint16_t g_service_handle = 0;
 static uint16_t g_data_property_handle = 0;  /* Periodic data property. / 常规数据属性。 */
 static uint16_t g_alarm_property_handle = 0; /* Alarm data property. / 告警数据属性。 */
-static uint16_t g_sle_conn_hdl = 0;
-static bool g_connected = false;
+static volatile uint16_t g_sle_conn_hdl = 0;
+static volatile bool g_connected = false;
+static volatile bool g_reporting_enabled = false;
 
-/* Reporting timer. / 上报定时器。 */
-static osal_timer g_sensor_report_timer = {0};
-
-/* Counter used to generate simulated data. / 用于生成模拟数据的调用计数。 */
-static uint32_t g_sensor_call_count = 0;
-
-/* Simulated data generation. / 模拟数据生成。 */
-
-/* A 16-point sine approximation scaled by 100. / 放大 100 倍的 16 点正弦近似表。 */
-static const int16_t SINE_TABLE[16] = {0, 195, 383, 500, 500, 383, 195, 0, 0, -195, -383, -500, -500, -383, -195, 0};
-
-/**
- * @if Eng
- * @brief Generates the simulated value used by \c get_simulated_temperature.
- * @else
- * @brief 生成 \c get_simulated_temperature 所需的模拟数值。
- * @endif
- */
-static int16_t get_simulated_temperature(void)
+static uint32_t sensor_temperature_magnitude(int16_t temperature)
 {
-    g_sensor_call_count++;
-    /* Combine baseline, drift, and sine components. / 组合温度基准、漂移和简谐波分量。 */
-    int16_t drift = (int16_t)(g_sensor_call_count * SENSOR_TEMP_SCALE);
-    int16_t sine = SINE_TABLE[g_sensor_call_count & 0xF];
-    int16_t noise = (int16_t)(rand() % 31 - 15); /* +/-0.15 C jitter. / 正负 0.15 摄氏度抖动。 */
-    int16_t temp = SENSOR_TEMP_BASE + drift + sine + noise;
-    /* Reset drift at the upper limit to repeat alarm cycles. / 达到上限后重置漂移，以重复告警周期。 */
-    if (temp > SENSOR_TEMP_MAX) {
-        g_sensor_call_count = SENSOR_DRIFT_RESET_COUNT;
-        temp = SENSOR_TEMP_MAX;
-    }
-    if (temp < SENSOR_TEMP_MIN) {
-        temp = SENSOR_TEMP_MIN;
-    }
-    return temp;
+    int32_t temperature_x100 = (int32_t)temperature;
+    return (uint32_t)((temperature_x100 < 0) ? -temperature_x100 : temperature_x100);
 }
 
 /**
  * @if Eng
- * @brief Generates the simulated value used by \c get_simulated_humidity.
+ * @brief Reads and reports one hardware sensor data frame from the worker task.
  * @else
- * @brief 生成 \c get_simulated_humidity 所需的模拟数值。
+ * @brief 从工作任务读取并上报一帧硬件传感器数据。
  * @endif
  */
-static uint8_t get_simulated_humidity(void)
+void sle_sensor_report_server_process(void)
 {
-    int16_t val = 60 + (rand() % 11 - 5); /* Simulate 60% +/- 5%. / 模拟 60% 上下浮动 5%。 */
-    if (val < SENSOR_HUMIDITY_MIN) {
-        val = SENSOR_HUMIDITY_MIN;
-    }
-    if (val > SENSOR_HUMIDITY_MAX) {
-        val = SENSOR_HUMIDITY_MAX;
-    }
-    return (uint8_t)val;
-}
-
-/**
- * @if Eng
- * @brief Generates the simulated value used by \c get_simulated_light.
- * @else
- * @brief 生成 \c get_simulated_light 所需的模拟数值。
- * @endif
- */
-static uint16_t get_simulated_light(void)
-{
-    int32_t val = 1200 + (rand() % 401 - 200); /* Simulate 1200 +/- 200 lux. / 模拟 1200 上下浮动 200 lux。 */
-    if (val < SENSOR_LIGHT_MIN) {
-        val = SENSOR_LIGHT_MIN;
-    }
-    if (val > SENSOR_LIGHT_MAX) {
-        val = SENSOR_LIGHT_MAX;
-    }
-    return (uint16_t)val;
-}
-
-/* Timer callback for packing and sending data. / 打包并发送数据的定时器回调。 */
-
-/**
- * @if Eng
- * @brief Generates and reports one periodic sensor data frame.
- * @else
- * @brief 生成并上报一帧周期性传感器数据。
- * @endif
- */
-static void sensor_report_timer_cb(unsigned long arg)
-{
-    unused(arg);
-
-    if (!g_connected) {
-        return;
-    }
-
     sensor_data_frame_t frame;
     (void)memset_s(&frame, sizeof(frame), 0, sizeof(frame));
 
-    /* Generate simulated measurements. / 生成模拟测量数据。 */
-    frame.temperature = get_simulated_temperature();
-    frame.humidity = get_simulated_humidity();
-    frame.light = get_simulated_light();
+    errcode_t ret = sensor_aht20_read(&frame.temperature, &frame.humidity);
+    if (ret != ERRCODE_SUCC) {
+        return;
+    }
+    /* This module has no light sensor; keep the legacy field as an explicit unavailable value. */
+    frame.light = 0;
     frame.sensor_count = SENSOR_COUNT;
 
     /* Capture the timestamp. / 获取时间戳。 */
@@ -213,17 +131,31 @@ static void sensor_report_timer_cb(unsigned long arg)
     /* Select a property according to the alarm threshold. / 根据告警阈值选择属性通道。 */
     uint16_t prop_handle;
     bool is_alarm = (frame.temperature > TEMP_ALARM_HIGH || frame.temperature < TEMP_ALARM_LOW);
+    uint32_t temperature_magnitude = sensor_temperature_magnitude(frame.temperature);
+    const char *temperature_sign = (frame.temperature < 0) ? "-" : "";
 
     if (is_alarm) {
         frame.frame_type = SENSOR_FRAME_TYPE_ALARM;
         prop_handle = g_alarm_property_handle;
-        osal_printk("%s ** ALARM ** temp=%d.%02dC, using IND Indicate\r\n", SENSOR_SERVER_LOG,
-                    frame.temperature / SENSOR_TEMP_SCALE,
-                    (frame.temperature >= 0) ? (frame.temperature % SENSOR_TEMP_SCALE)
-                                             : (-frame.temperature % SENSOR_TEMP_SCALE));
     } else {
         frame.frame_type = SENSOR_FRAME_TYPE_PERIODIC;
         prop_handle = g_data_property_handle;
+    }
+
+    osal_printk("%s source=hardware temp=%s%u.%02uC hum=%u%% light=N/A\r\n", SENSOR_SERVER_LOG,
+                temperature_sign, (unsigned int)(temperature_magnitude / SENSOR_TEMP_SCALE),
+                (unsigned int)(temperature_magnitude % SENSOR_TEMP_SCALE),
+                frame.humidity);
+
+    /* Hardware sampling is independent of SLE. Only read a handle after both link gates are open. */
+    if (!g_connected || !g_reporting_enabled) {
+        return;
+    }
+    uint16_t conn_handle = g_sle_conn_hdl;
+    if (is_alarm) {
+        osal_printk("%s ** ALARM ** temp=%s%u.%02uC, using IND Indicate\r\n", SENSOR_SERVER_LOG,
+                    temperature_sign, (unsigned int)(temperature_magnitude / SENSOR_TEMP_SCALE),
+                    (unsigned int)(temperature_magnitude % SENSOR_TEMP_SCALE));
     }
 
     uint8_t send_buf[sizeof(sensor_data_frame_t)];
@@ -235,10 +167,14 @@ static void sensor_report_timer_cb(unsigned long arg)
     param.value = send_buf;
     param.value_len = sizeof(send_buf);
 
-    (void)ssaps_notify_indicate(g_server_id, g_sle_conn_hdl, &param);
-
-    /* Restart the one-shot timer for periodic reporting. / 重启单次定时器以实现周期上报。 */
-    (void)osal_timer_start(&g_sensor_report_timer);
+    /* The connection callback may have invalidated the snapshot while the frame was being packed. */
+    if (!g_connected || !g_reporting_enabled || (g_sle_conn_hdl != conn_handle)) {
+        return;
+    }
+    ret = ssaps_notify_indicate(g_server_id, conn_handle, &param);
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s notify/indicate fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+    }
 }
 
 /* SSAPS callbacks. / SSAPS 回调。 */
@@ -603,16 +539,17 @@ static void sle_sensor_report_connect_state_changed_cbk(uint16_t conn_id,
     switch (conn_state) {
         case SLE_ACB_STATE_CONNECTED:
             g_sle_conn_hdl = conn_id;
+            g_reporting_enabled = false;
             g_connected = true;
             osal_printk("%s connected, conn_id: 0x%x\r\n", SENSOR_SERVER_LOG, conn_id);
             break;
 
         case SLE_ACB_STATE_DISCONNECTED:
             osal_printk("%s disconnected, conn_id: 0x%x\r\n", SENSOR_SERVER_LOG, conn_id);
-            /* Stop reporting. / 停止上报。 */
-            (void)osal_timer_stop(&g_sensor_report_timer);
-            g_sle_conn_hdl = 0;
+            /* Publish the stop flag before invalidating the connection handle. / 先发布停止标志，再清除连接句柄。 */
+            g_reporting_enabled = false;
             g_connected = false;
+            g_sle_conn_hdl = 0;
             /* Restart advertising. / 重新启动广播。 */
             (void)sle_start_announce(1);
             break;
@@ -637,6 +574,10 @@ static void sle_sensor_report_pair_complete_cbk(uint16_t conn_id, const sle_addr
         osal_printk("%s pair failed, conn_id: 0x%x, status: 0x%x\r\n", SENSOR_SERVER_LOG, conn_id, status);
         return;
     }
+    if (!g_connected || (g_sle_conn_hdl != conn_id)) {
+        osal_printk("%s ignore stale pair complete, conn_id: 0x%x\r\n", SENSOR_SERVER_LOG, conn_id);
+        return;
+    }
 
     osal_printk("%s pair complete, conn_id: 0x%x\r\n", SENSOR_SERVER_LOG, conn_id);
 
@@ -644,23 +585,8 @@ static void sle_sensor_report_pair_complete_cbk(uint16_t conn_id, const sle_addr
     ssap_exchange_info_t info = {.mtu_size = 520, .version = 1};
     (void)ssaps_set_info(g_server_id, &info);
 
-    /* Start the one-second timer. / 启动 1 秒定时器。 */
-    if (g_sensor_report_timer.timer == NULL) {
-        g_sensor_report_timer.handler = sensor_report_timer_cb;
-        g_sensor_report_timer.data = 0;
-        g_sensor_report_timer.interval = SENSOR_REPORT_INTERVAL_MS;
-        int timer_ret = osal_timer_init(&g_sensor_report_timer);
-        if (timer_ret != 0) {
-            osal_printk("%s osal_timer_init fail: %d\r\n", SENSOR_SERVER_LOG, timer_ret);
-            return;
-        }
-    }
-    int timer_ret = osal_timer_start(&g_sensor_report_timer);
-    if (timer_ret != 0) {
-        osal_printk("%s osal_timer_start fail: %d\r\n", SENSOR_SERVER_LOG, timer_ret);
-        return;
-    }
-    osal_printk("%s 1s periodic timer started.\r\n", SENSOR_SERVER_LOG);
+    g_reporting_enabled = true;
+    osal_printk("%s 1s hardware report loop enabled.\r\n", SENSOR_SERVER_LOG);
 }
 
 /**
@@ -711,6 +637,11 @@ static errcode_t sle_sensor_report_conn_register_cbks(void)
 errcode_t sle_sensor_report_server_init(void)
 {
     errcode_t ret;
+
+    ret = sensor_aht20_init();
+    if (ret != ERRCODE_SUCC) {
+        osal_printk("%s sensor unavailable at startup; SLE will continue, err: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+    }
 
     ret = enable_sle();
     if (ret != ERRCODE_SLE_SUCCESS) {

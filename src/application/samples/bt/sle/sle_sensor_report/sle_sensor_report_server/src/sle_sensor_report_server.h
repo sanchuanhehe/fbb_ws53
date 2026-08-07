@@ -79,6 +79,14 @@ typedef struct {
 errcode_t sle_sensor_report_server_init(void);
 /**
  * @if Eng
+ * @brief Reads and reports one hardware sensor sample when the paired link is ready.
+ * @else
+ * @brief 在已配对链路就绪时读取并上报一帧硬件传感器数据。
+ * @endif
+ */
+void sle_sensor_report_server_process(void);
+/**
+ * @if Eng
  * @brief Reports whether the SLE link is connected.
  * @else
  * @brief 返回 SLE 链路是否已连接。
