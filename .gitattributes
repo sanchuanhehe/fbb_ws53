@@ -5,3 +5,6 @@ src/tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl/libexec/gcc/ri
 src/tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl_win/libexec/gcc/riscv32-linux-musl/7.3.0/cc1.exe filter=lfs diff=lfs merge=lfs -text
 src/tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl_win/libexec/gcc/riscv32-linux-musl/7.3.0/cc1plus.exe filter=lfs diff=lfs merge=lfs -text
 src/tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl_win/libexec/gcc/riscv32-linux-musl/7.3.0/lto1.exe filter=lfs diff=lfs merge=lfs -text
+
+# Static archives are binary. Prevent CRLF conversion from corrupting archive headers on Windows.
+*.a -text
