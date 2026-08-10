@@ -90,7 +90,7 @@ Server 通过 **SSAP Notification** 向 Client 发送数据：
 ```c
 // Service UUID
 #define SLE_HELLO_SERVICE_UUID      0x3333
-// Property UUID  
+// Property UUID
 #define SLE_HELLO_NTF_REPORT_UUID   0x3434
 
 // 广播名称
@@ -282,7 +282,7 @@ void sle_hello_notification_cb(uint8_t client_id, uint16_t conn_id,
     // 直接通过调试串口(osal_printk)打印
 }
 
-// indication_cb — Server 通过 indicate 发送数据时触发  
+// indication_cb — Server 通过 indicate 发送数据时触发
 void sle_hello_indication_cb(uint8_t client_id, uint16_t conn_id,
                               ssapc_handle_value_t *data, errcode_t status)
 {
