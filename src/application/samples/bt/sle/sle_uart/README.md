@@ -1,190 +1,172 @@
-# SLE UART Bridge — 无线串口透传
+# SLE UART 双向透明传输
 
-基于 WS53 SLE 的 UART 双向透传示例。两块 WS53 分别接在串口设备两端，通过 SLE 无线链路透明传输数据——对两侧设备来说，这就是一根"无线串口延长线"。
+## 1. 一句话说明
 
-> 前置知识：广播/连接、通知推送(sle_hello)、读写交互(sle_speed)。本篇将三者与 UART 驱动组合，构建完整的双向数据通道。
+本示例把两块 WS53 的 UART1 通过 SLE 无线链路桥接，实现 UART 数据在 Server 与 Client 之间的双向透明转发。
 
-## 功能规格
+## 2. 适用场景
 
-| 规格项 | Server 端 | Client 端 |
-|--------|----------|----------|
-| 广播/扫描 | 上电后持续广播 | 上电后扫描并连接 Server |
-| 配对 | 被动等待配对 | 连接成功后主动发起配对 |
-| MTU | 配对完成后设置 520 字节 | 配对完成后发起 MTU 交换 |
-| 服务发现 | — | 遍历 Server 的 Service / Property / Descriptor |
-| 链路 A (Server→Client) | UART RX → Notification 推送 | notification_cb → UART TX 吐出 |
-| 链路 B (Client→Server) | write_request_cb → UART TX 吐出 | UART RX → Write Request 发送 |
-| 连接管理 | 断开后自动重新广播 | 断开后自动重新扫描 |
+- 无线延长 MCU 调试口或设备数据串口。
+- 学习 UART 中断接收、消息队列和 SLE 数据发送的组合方式。
+- 验证 Server Notification 与 Client Write Request 两条反向数据通道。
 
-## 典型应用场景
+## 3. 支持能力
 
-- **工业传感器网关**: RS485 传感器数据通过 SLE 无线汇聚到网关
-- **无线调试器**: 远程 MCU 的调试串口通过 SLE 映射到本地 PC
-- **数传模块替代**: 用 SLE 替代传统 433MHz/2.4GHz 数传模块
-- **智能设备配网/配置**: 手机通过 SLE 串口透传向设备发送配置指令
+- Server UART RX → SLE Notification → Client UART TX。
+- Client UART RX → SLE Write Request → Server UART TX。
+- UART RX 回调只入消息队列，任务上下文负责调用 SLE API。
+- 默认 UART1、115200 bps、8N1、MIO17 TX、MIO18 RX。
+- 断链后自动恢复广播或扫描，并清理待发送队列。
+- USB-TTL 双向端到端实测 11/11 字节原样通过。
 
-## 通信流程与数据流
+## 4. 不支持/限制
 
-下图展示从两块板子上电到双向透传的完整流程，包含建链过程和两条数据链路：
+- 透明层不定义包头、长度、CRC 或重传；长数据可能按 UART 回调节奏拆成多段。
+- 未连接时收到的 UART 数据会丢弃；消息队列满时也会丢弃并打印计数。
+- 单个队列项和 SLE MTU 默认最大 520 字节，上层协议应自行处理组帧。
+- 启用 `CONFIG_UART_SUPPORT_LPM` 时会占用 `PM_USER0_VETO_ID` 阻止深睡，以保证持续接收，功耗会增加。
+- 完整实体验证需要 USB-TTL；USB-TTL 的 VCC 不得连接开发板。
 
-```mermaid
-sequenceDiagram
-    participant SA as PC_A (Server 串口)
-    participant S as WS53 Server
-    participant C as WS53 Client
-    participant SB as PC_B (Client 串口)
+## 5. 关键词
 
-    Note over S: UART 初始化, 注册服务, 启动广播
-    Note over C: UART 初始化, 扫描/连接/配对/MTU/服务发现
+### 中文关键词
 
-    S->>C: 广播
-    C->>S: 连接
-    Note over S,C: 配对 → MTU → 服务发现 → 透传就绪
+WS53、星闪、SLE、UART、USB-TTL、透明传输、串口桥、Notification、Write Request
 
-    SA->>S: 发送 "Hello"
-    Note right of S: UART RX ISR → 消息队列 → ssaps_notify_indicate
-    S->>C: 链路 A: Notification
-    Note right of C: notification_cb → uapi_uart_write
-    C->>SB: 串口输出 "Hello"
+### English Keywords
 
-    SB->>C: 发送 "World"
-    Note right of C: UART RX ISR → 消息队列 → ssapc_write_req
-    C->>S: 链路 B: Write Request
-    Note right of S: write_request_cb → uapi_uart_write
-    S->>SA: 串口输出 "World"
-```
+WS53, SLE, UART, USB-TTL, transparent bridge, notification, write request
 
-两条链路独立运行，互不阻塞：
+## 6. 目录结构
 
-| 链路 | 方向 | 数据路径 | SLE API |
-|------|------|---------|---------|
-| **A** | Server → Client | UART RX ISR → 消息队列 → `ssaps_notify_indicate()` → `notification_cb` → UART TX | Notification |
-| **B** | Client → Server | UART RX ISR → 消息队列 → `ssapc_write_req()` → `write_request_cb` → UART TX | Write Request |
-
-**为什么用消息队列？** UART RX 回调在 ISR 上下文中执行，不能直接调用 SLE 发送 API（内部可能阻塞、加锁或触发调度）。消息队列将数据从 ISR 安全传递到任务上下文——ISR 只负责校验和写入队列，任务从队列读数据后调用 SLE API。两端采用完全对称的 ISR→消息队列→任务架构。
-
-## 硬件连接
-
-```
-PC_A ←→ USB-TTL ←→ WS53_A (Server) ~~~~ SLE 无线 ~~~~ WS53_B (Client) ←→ USB-TTL ←→ PC_B
-```
-
-| 信号 | GPIO | 用途 |
-|------|------|------|
-| UART1 TX | 17 | 数据发送 |
-| UART1 RX | 18 | 数据接收 |
-
-> USB-TTL 的 RX 接 WS53 的 TX，TX 接 WS53 的 RX，GND 接 GND。引脚可通过 Kconfig 修改。
-
-## 工程结构
-
-```
+```text
 sle_uart/
 ├── CMakeLists.txt
 ├── Kconfig
-├── sle_uart.c                  # 入口: 创建任务, Server/Client 通用逻辑
+├── README.md
+├── DESIGN.md
+├── sle_uart.c
 ├── sle_uart_server/
-│   ├── CMakeLists.txt
-│   ├── sle_uart_server.c       # Server: 服务注册, 通知发送, 连接管理
-│   ├── sle_uart_server.h
-│   ├── sle_uart_server_adv.c   # Server: 广播配置
-│   └── sle_uart_server_adv.h
+│   └── src/
+│       ├── sle_uart_server.c
+│       ├── sle_uart_server.h
+│       ├── sle_uart_server_adv.c
+│       └── sle_uart_server_adv.h
 └── sle_uart_client/
-    ├── CMakeLists.txt
-    ├── sle_uart_client.c       # Client: 扫描, 连接, 写请求, 服务发现
-    └── sle_uart_client.h
+    └── src/
+        ├── sle_uart_client.c
+        └── sle_uart_client.h
 ```
 
-> `sle_uart.c` 通过 `CONFIG_SAMPLE_SUPPORT_SLE_UART_SERVER_SAMPLE` / `CLIENT_SAMPLE` 条件编译，选择 Server 或 Client 逻辑。
+## 7. 入口文件
 
-## Kconfig 配置
+- 主入口：`sle_uart.c`
+- 初始化入口：`sle_uart_entry()`
+- UART 初始化与转发任务：`sle_uart.c`
+- Server 业务：`sle_uart_server/src/sle_uart_server.c`
+- Client 业务：`sle_uart_client/src/sle_uart_client.c`
+- 配置入口：`Kconfig`
 
-| 选项 | 默认值 | 说明 |
-|------|--------|------|
-| `UART_BUS_ID` | 1 | 数据 UART 总线 ID |
-| `UART_TXD_PIN` / `UART_RXD_PIN` | 17 / 18 | UART 收发引脚 |
-| `UART_TXD_PIN_MODE` / `UART_RXD_PIN_MODE` | 2 | 引脚复用模式 |
-| `SLE_UART_BAUDRATE` | 115200 | UART 波特率 |
-| `SLE_UART_RX_BUF_SIZE` | 512 | UART 接收缓冲区 (字节) |
-| `SLE_UART_MSGQ_LEN` | 16 | 消息队列深度 |
-| `SLE_UART_MSGQ_ITEM_SIZE` | 520 | 消息队列每项最大字节数 |
-| `SLE_UART_MTU_SIZE` | 520 | SLE MTU 大小 |
-| `SLE_UART_CONN_INTERVAL` | 12 | 连接间隔 (x1.25ms, 范围 6~32) |
+## 8. 整体流程
 
-## 构建与烧录
+1. 两端初始化 UART1、RX 缓冲区和消息队列。
+2. Server 以 `uart_server` 广播，Client 扫描并建立 SLE 连接。
+3. 双方配对、交换 520 字节 MTU 并完成服务发现。
+4. Server UART RX 回调把数据写入队列，Server 任务用 Notification 发送，Client 回调写入 UART TX。
+5. Client UART RX 回调把数据写入队列，Client 任务用 Write Request 发送，Server 写回调写入 UART TX。
+6. 断链时停止转发并重启广播/扫描，重连后继续工作。
 
-**编译 Server 固件:**
+## 9. 核心文件说明
 
-在 `ws53_liteos_app.config` 中设置:
+| 文件 | 作用 |
+| --- | --- |
+| `sle_uart.c` | 初始化 UART、创建消息队列、实现两种角色的数据转发任务。 |
+| `sle_uart_server.c` | 注册 SSAP 服务、管理连接并发送 Notification。 |
+| `sle_uart_server_adv.c` | 配置 `uart_server` 广播。 |
+| `sle_uart_client.c` | 扫描建链、服务发现，并提供 Write Request 通道。 |
+| `Kconfig` | 配置 UART 总线、引脚、波特率、缓冲区、MTU 和连接间隔。 |
 
-```
-CONFIG_SAMPLE_SUPPORT_SLE_SAMPLE=y
-CONFIG_SAMPLE_SUPPORT_SLE_UART_SERVER_SAMPLE=y
-# CONFIG_SAMPLE_SUPPORT_SLE_UART_CLIENT_SAMPLE is not set
-```
+## 10. 核心函数/类说明
 
-```bash
+| 函数 | 功能与调用关系 |
+| --- | --- |
+| `sle_uart_entry()` | 根据 Kconfig 创建 Server 或 Client 任务。 |
+| `sle_uart_initialize_uart()` | Server 侧初始化 UART1、引脚和低功耗 veto。 |
+| `sle_uart_server_rx_handler()` | ISR 上下文接收 UART 数据并写入 Server 消息队列。 |
+| `sle_uart_server_send_notification()` | Server 转发任务调用，将队列数据发给 Client。 |
+| `sle_uart_client_rx_handler()` | ISR 上下文接收 UART 数据并写入 Client 消息队列。 |
+| `sle_uart_client_forward()` | 读取队列并调用 `ssapc_write_req()` 发给 Server。 |
+| `sle_uart_client_notification_cb()` | 接收 Server Notification 并写入本地 UART TX。 |
+
+## 11. 配置项说明
+
+| 配置项 | 默认值与说明 |
+| --- | --- |
+| Server / Client Kconfig | `CONFIG_SAMPLE_SUPPORT_SLE_UART_SERVER_SAMPLE` / `..._CLIENT_SAMPLE`。 |
+| `CONFIG_UART_BUS_ID` | `1`。 |
+| `CONFIG_UART_TXD_PIN` / `RXD_PIN` | `17` / `18`。 |
+| `CONFIG_UART_TXD_PIN_MODE` / `RXD_PIN_MODE` | `2` / `2`。 |
+| `CONFIG_SLE_UART_BAUDRATE` | `115200` bps。 |
+| `CONFIG_SLE_UART_RX_BUF_SIZE` | 512 字节。 |
+| `CONFIG_SLE_UART_MSGQ_LEN` / `ITEM_SIZE` | 16 项 / 520 字节。 |
+| `CONFIG_SLE_UART_MTU_SIZE` | 520 字节。 |
+| `CONFIG_SLE_UART_CONN_INTERVAL` | `12`，单位 1.25 ms，即 15 ms；范围 6～32。 |
+
+## 12. 使用方法
+
+### 环境准备
+
+每个 UART 端点按交叉方式接 USB-TTL：
+
+| USB-TTL | WS53 |
+| --- | --- |
+| TXD | MIO18 / UART1 RX |
+| RXD | MIO17 / UART1 TX |
+| GND | GND |
+| VCC | 不连接 |
+
+推荐两块板各接一个 USB-TTL。只有一个 USB-TTL 时，也可把 TXD 接发送源板 MIO18、RXD 接接收目标板 MIO17，分方向验证；两板和 USB-TTL 必须可靠共地。
+
+### 编译
+
+```powershell
+fbb config set CONFIG_SAMPLE_SUPPORT_SLE_UART_SERVER_SAMPLE=y --target ws53_liteos_app
 fbb build ws53_liteos_app --clean
-```
+fbb flash ws53_liteos_app --port <SERVER_COM> --json-summary
 
-**编译 Client 固件:**
-
-改为启用 Client（其余参数保持不变）:
-
-```
-# CONFIG_SAMPLE_SUPPORT_SLE_UART_SERVER_SAMPLE is not set
-CONFIG_SAMPLE_SUPPORT_SLE_UART_CLIENT_SAMPLE=y
-```
-
-```bash
+fbb config set CONFIG_SAMPLE_SUPPORT_SLE_UART_CLIENT_SAMPLE=y --target ws53_liteos_app
 fbb build ws53_liteos_app --clean
+fbb flash ws53_liteos_app --port <CLIENT_COM> --json-summary
 ```
 
-固件路径: `output/ws53/fwpkg/ws53_liteos_app/ws53_liteos_app_all.fwpkg`
+先烧录 Server，再切换 Client。固件位于 `output/ws53/fwpkg/ws53_liteos_app/ws53_liteos_app_all.fwpkg`。
 
-## 验证透传
+### 运行
 
-1. **先给 Server 上电**，串口输出:
+等待两端均打印 `=== bridge ready ===`。在一端 USB-TTL 串口工具以 115200/8N1 发送短测试串，并在另一端检查原样接收；随后交换方向复测。
 
+### 运行结果
+
+两个方向均收到相同字节数和内容即通过。本次 11 字节短串实测约 58～88 ms，该数值仅作当时环境参考。
+
+## 13. 输入输出示例
+
+### 输入
+
+```text
+Server -> Client: S2C_OK_B4Y5
+Client -> Server: C2S_OK_F3U4
 ```
-[sle uart server] uart init ok, baud=115200
-[sle uart server] service added, ready for connection
-[sle uart server] waiting for connection...
-[sle uart server] connected, conn_id=0x00
-[sle uart server] pair complete
+
+### 输出
+
+```text
 [sle uart server] === bridge ready ===
-```
-
-2. **再给 Client 上电**，串口输出:
-
-```
-[sle uart client] uart init ok, baud=115200
-[sle uart client] scanning for uart_server...
-[sle uart client] found uart_server, connecting...
-[sle uart client] connected, conn_id=0x00
-[sle uart client] pair complete
-[sle uart client] service discovery complete
 [sle uart client] === bridge ready ===
+[sle uart server] send notify 11 bytes: S2C_OK_B4Y5
+[sle uart client] recv 11 bytes from server: S2C_OK_B4Y5
+[sle uart client] send 11 bytes: C2S_OK_F3U4
+[sle uart server] recv 11 bytes from client: C2S_OK_F3U4
 ```
 
-3. PC_A 串口助手发 "Hello" → PC_B 串口助手收到 "Hello"
-4. PC_B 串口助手发 "World" → PC_A 串口助手收到 "World"
-
-双向收发正常即为成功。
-
-## 性能参考
-
-> 以下基于 115200bps、连接间隔 12.5ms、1M PHY、MTU 520 字节。
-
-| 指标 | 典型值 | 说明 |
-|------|--------|------|
-| 单向吞吐 | ~10 KB/s | 受限于串口波特率，SLE 不构成瓶颈 |
-| 单包延迟 | 15~30 ms | 连接间隔为主要延迟来源 |
-| 丢包 | 仅队列满时发生 | 增大 `MSGQ_LEN` 可缓解 |
-
-## 注意事项
-
-- 连接断开后 Server 自动恢复广播；Client 需复位重连
-- 未连接时收到的 UART 数据会被丢弃
-- UART RX 每次回调的数据量取决于发送端写入节奏，透传层按原样转发不做组帧——需要完整帧协议的应用应在上层自行处理
-- 消息队列满时丢包，日志输出 drop 计数 (前 3 次 + 每 100 次汇总)
+验证结论：USB-TTL 经 SLE 的两个方向均已完成 11/11 字节端到端验证。

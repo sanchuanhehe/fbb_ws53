@@ -20,11 +20,11 @@ extern "C" {
 
 /**
  * @if Eng
- * @brief Initialize GPIO13, the SK6805 indicator, the NV record and the button task.
+ * @brief Initialize the onboard S1 button on MIO06, the SK6805 indicator, the NV record and the button task.
  * @retval ERRCODE_SUCC Success.
  * @retval Other Failure. For details, see @ref errcode_t.
  * @else
- * @brief 初始化 GPIO13、SK6805 状态灯、NV 校准记录和按键任务。
+ * @brief 初始化 MIO06 上的板载 S1 按键、SK6805 状态灯、NV 校准记录和按键任务。
  * @retval ERRCODE_SUCC 成功。
  * @retval Other 失败，参考 @ref errcode_t。
  * @endif

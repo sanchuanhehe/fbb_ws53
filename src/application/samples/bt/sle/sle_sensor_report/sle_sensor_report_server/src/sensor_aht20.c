@@ -49,6 +49,7 @@
 #define BMP280_ADDRESS_HIGH                   0x77U
 #define BMP280_CHIP_ID_REGISTER               0xD0U
 #define BMP280_CHIP_ID                        0x58U
+#define BMP280_PROBE_DELAY_MS                 500U
 
 #define SENSOR_FAILURE_LOG_PERIOD             10U
 
@@ -264,6 +265,8 @@ errcode_t sensor_aht20_init(void)
         }
     }
     if (!g_bmp280_probe_done) {
+        /* Keep the one-shot probe log clear of concurrent RF calibration output. */
+        (void)osal_msleep(BMP280_PROBE_DELAY_MS);
         sensor_probe_bmp280();
     }
 

@@ -14,6 +14,7 @@
 #include "soc_osal.h"
 #include "app_init.h"
 #include "pinctrl.h"
+#include "pm_veto.h"
 #include "uart.h"
 
 #if defined(CONFIG_SAMPLE_SUPPORT_SLE_UART_SERVER_SAMPLE)
@@ -31,6 +32,21 @@
 
 /* UART receive buffer shared with the driver. / 与串口驱动共享的接收缓冲区。 */
 static uint8_t g_uart_rx_buffer[CONFIG_SLE_UART_RX_BUF_SIZE];
+
+static errcode_t sle_uart_keep_uart_awake(const char *role)
+{
+#if defined(CONFIG_UART_SUPPORT_LPM)
+    errcode_t ret = uapi_pm_add_sleep_veto(PM_USER0_VETO_ID);
+    if (ret != ERRCODE_SUCC) {
+        osal_printk("[sle uart %s] add sleep veto fail: 0x%x\r\n", role, ret);
+        return ret;
+    }
+    osal_printk("[sle uart %s] sleep veto added for continuous uart rx\r\n", role);
+#else
+    unused(role);
+#endif
+    return ERRCODE_SUCC;
+}
 
 #if defined(CONFIG_SAMPLE_SUPPORT_SLE_UART_SERVER_SAMPLE)
 /* SLE server role. / SLE 服务端。 */
@@ -146,11 +162,12 @@ static errcode_t sle_uart_initialize_uart(const char *role)
 
     uapi_uart_deinit(CONFIG_UART_BUS_ID);
     ret = uapi_uart_init(CONFIG_UART_BUS_ID, &pin_config, &uart_attr, NULL, &buffer_config);
-    if (ret == ERRCODE_SUCC) {
-        osal_printk("[sle uart %s] uart init ok, bus=%d, tx=%d, rx=%d, baud=%d\r\n", role, CONFIG_UART_BUS_ID,
-                    CONFIG_UART_TXD_PIN, CONFIG_UART_RXD_PIN, CONFIG_SLE_UART_BAUDRATE);
+    if (ret != ERRCODE_SUCC) {
+        return ret;
     }
-    return ret;
+    osal_printk("[sle uart %s] uart init ok, bus=%d, tx=%d, rx=%d, baud=%d\r\n", role, CONFIG_UART_BUS_ID,
+                CONFIG_UART_TXD_PIN, CONFIG_UART_RXD_PIN, CONFIG_SLE_UART_BAUDRATE);
+    return sle_uart_keep_uart_awake(role);
 }
 
 static void sle_uart_server_forward(void)
@@ -323,11 +340,12 @@ static errcode_t sle_uart_client_initialize_uart(void)
 
     uapi_uart_deinit(CONFIG_UART_BUS_ID);
     ret = uapi_uart_init(CONFIG_UART_BUS_ID, &pin_config, &uart_attr, NULL, &buffer_config);
-    if (ret == ERRCODE_SUCC) {
-        osal_printk("[sle uart client] uart init ok, bus=%d, tx=%d, rx=%d, baud=%d\r\n", CONFIG_UART_BUS_ID,
-                    CONFIG_UART_TXD_PIN, CONFIG_UART_RXD_PIN, CONFIG_SLE_UART_BAUDRATE);
+    if (ret != ERRCODE_SUCC) {
+        return ret;
     }
-    return ret;
+    osal_printk("[sle uart client] uart init ok, bus=%d, tx=%d, rx=%d, baud=%d\r\n", CONFIG_UART_BUS_ID,
+                CONFIG_UART_TXD_PIN, CONFIG_UART_RXD_PIN, CONFIG_SLE_UART_BAUDRATE);
+    return sle_uart_keep_uart_awake("client");
 }
 
 static void sle_uart_client_forward(void)

@@ -1,234 +1,156 @@
-# SLE Hello — 星闪低功耗连接 Hello World
+# SLE Hello 基础通信
 
-WS53 SLE 基础示例，分 Server / Client 两个可切换构建目标，展示从广播/扫描、连接、配对、服务发现到通知推送与读写交互的完整建链与数据通信过程。本示例是理解其余 SLE 示例的前置教程。
+## 1. 一句话说明
 
+本示例在 WS53 上演示 SLE Server 与 Client 从广播、扫描、连接、配对、服务发现到通知及属性读写的完整基础链路。
 
-## 功能规格
+## 2. 适用场景
 
-| 规格项 | Server 端 | Client 端 |
-|--------|----------|----------|
-| 广播/扫描 | 上电后以 "hello_server" 名称持续广播 | 上电后扫描并匹配 "hello_server" |
-| 配对 | 被动等待配对 | 连接成功后主动发起配对 (Just Works) |
-| MTU | 配对完成后设置 520 字节 | 配对完成后发起 MTU 交换 |
-| 服务发现 | — | 遍历 Server 的 Service / Property / Descriptor |
-| 通知推送 | 配对完成后主动发送 "hello world" 通知 | notification_cb 接收并打印 |
-| 读取交互 | read_request_cb 返回当前属性值 | 服务发现完成后发起读请求 |
-| 写入交互 | write_request_cb 更新属性值 | 读确认后发起写请求 ( "new_config_value" ) |
-| 连接管理 | 断开后自动重新广播 | 断开后自动重新扫描 |
+- 初次验证两块开发板的 SLE 通信能力。
+- 学习 SSAP Service、Property、Notification、Read 和 Write 的基本用法。
+- 作为其他双板 SLE Sample 的最小参考工程。
 
-## 通信流程
+## 3. 支持能力
 
-下图展示从两块板子上电到通知、读写交互完成的完整流程：
+- Server 以 `hello_server` 名称广播，Client 自动扫描并连接。
+- 使用 Just Works 配对并交换 520 字节 MTU。
+- Server 推送 `hello world` 通知。
+- Client 自动读取属性，再写入 `new_config_value`。
+- 断链后 Server 恢复广播，Client 恢复扫描。
 
-```mermaid
-sequenceDiagram
-    participant S as WS53 Server
-    participant C as WS53 Client
+## 4. 不支持/限制
 
-    Note over S: sle_hello_server_init()<br/>注册服务/属性/广播
+- Server 与 Client 属于同一个 Kconfig `choice`，同一份固件只能选择一个角色。
+- Just Works 不提供 MITM 防护，生产产品应按安全要求调整配对方式。
+- 本示例用于功能演示，不包含吞吐量、功耗或异常链路压力测试。
+- 主链路已在 WS53 双板及 WS53/WS63 跨芯片场景验证，无需外接外设。
 
-    S->>C: 广播 ("hello_server")
-    Note over C: 扫描匹配 "hello_server"
-    C->>S: 连接
-    Note over S,C: 配对 (Just Works)
-    Note over S,C: MTU 交换 → 520 字节
-    Note over C: 服务发现: Service 0x3333<br/>Property 0x3434
+## 5. 关键词
 
-    S->>C: Notification: "hello world"
-    Note right of C: notification_cb<br/>打印接收数据
+### 中文关键词
 
-    C->>S: Read Request
-    Note right of S: read_request_cb<br/>ssaps_send_response
+WS53、星闪、SLE、SSAP、广播、扫描、配对、通知、属性读写
 
-    C->>S: Write Request: "new_config_value"
-    Note right of S: write_request_cb<br/>更新属性值
-```
+### English Keywords
 
-## SSAP 服务定义
+WS53, SLE, SSAP, announce, seek, pairing, notification, read, write
 
-Server 端注册一个服务，包含一个可读、可写、可通知的属性：
+## 6. 目录结构
 
-| 项目 | 值 | 说明 |
-|------|----|------|
-| Service UUID | 0x3333 | 16-bit UUID |
-| Property UUID | 0x3434 | 16-bit UUID |
-| Property 权限 | READ \| WRITE | 可读可写 |
-| Operation Indication | READ \| WRITE \| NOTIFY | 支持的交互类型 |
-| Descriptor 类型 | USER_DESCRIPTION | 用户描述符 |
-| Descriptor 权限 | READ | 仅可读 |
-
-UUID 使用 16-bit 格式，基于标准 128-bit base UUID `{0x37, 0xBE, 0xA8, 0x80, 0xFC, 0x70, 0x11, 0xEA, 0xB7, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}`，16-bit UUID 置于高字节位置（index 14）。
-
-## 广播参数
-
-| 参数 | 值 | 说明 |
-|------|----|------|
-| 设备名称 | "hello_server" | 广播/扫描响应中携带 |
-| 连接间隔 | 12.5ms (0x64) | 1.25ms 为单位 |
-| 广播间隔 | 25ms (0xC8) | 0.625ms 为单位 |
-| 监控超时 | 5000ms (0x1F4) | 10ms 为单位 |
-| 最大延迟 | 624ms (0x1F3) | 连接事件数 |
-| 发射功率 | 18 dBm | — |
-| 广播模式 | CONNECTABLE_SCANABLE | 可连接可扫描 |
-| G/T 角色 | T_CAN_NEGO | 终端可协商 |
-| 广播 PHY | 1M | — |
-| 扫描参数 | 间隔 100, 窗口 100 | 1.25ms 为单位 (12.5ms) |
-| 扫描类型 | Active | 主动扫描 |
-
-## 工程结构
-
-```
+```text
 sle_hello/
-├── CMakeLists.txt                  # 顶层构建: 条件包含 server/client 子目录
-├── Kconfig                         # 自动配置 SUPPORT_SLE_PERIPHERAL / CENTRAL
-├── sle_hello.c                     # 入口: 定义回调, 创建任务, 分支到 server/client
-├── DESIGN.md                       # 详细设计文档
+├── CMakeLists.txt
+├── Kconfig
+├── README.md
+├── DESIGN.md
+├── sle_hello.c
 ├── sle_hello_server/
-│   ├── CMakeLists.txt
-│   ├── src/
-│   │   ├── sle_hello_server.h      # 服务 UUID / 属性 / 权限定义
-│   │   ├── sle_hello_server.c      # Server 核心: 服务注册, 读写回调, 通知发送
-│   │   ├── sle_hello_server_adv.h  # 广播数据类型定义
-│   │   └── sle_hello_server_adv.c  # 广播参数配置: 名称, 间隔, 功率
+│   └── src/
+│       ├── sle_hello_server.c
+│       ├── sle_hello_server.h
+│       ├── sle_hello_server_adv.c
+│       └── sle_hello_server_adv.h
 └── sle_hello_client/
-    ├── CMakeLists.txt
     └── src/
-        ├── sle_hello_client.h      # Client API: init, write_req, start_scan
-        └── sle_hello_client.c      # Client 核心: 扫描匹配, 连接配对, 服务发现, 读写
+        ├── sle_hello_client.c
+        └── sle_hello_client.h
 ```
 
-> `sle_hello.c` 通过 `CONFIG_SAMPLE_SUPPORT_SLE_HELLO_SERVER_SAMPLE` / `CLIENT_SAMPLE` 条件编译，选择 Server 或 Client 逻辑。
+## 7. 入口文件
 
-## 回调流程
+- 主入口：`sle_hello.c`
+- 初始化入口：`sle_hello_entry()`
+- Server 业务：`sle_hello_server/src/sle_hello_server.c`
+- Client 业务：`sle_hello_client/src/sle_hello_client.c`
+- 配置入口：顶层 SLE Sample `choice` 与本目录 `Kconfig`
 
-Server 和 Client 各自注册了多组回调，在协议栈的不同阶段被依次触发。理解这个调用顺序是写出正确异步代码的关键。
+## 8. 整体流程
 
-```mermaid
-sequenceDiagram
-    participant Server
-    participant Client
+1. Server 注册连接、SSAP 和广播回调，创建服务后开始广播。
+2. Client 启动扫描，匹配 `hello_server` 后停止扫描并发起连接。
+3. Client 发起配对和 MTU 交换，然后发现 Service 与 Property。
+4. Server 发送 `hello world` Notification。
+5. Client 发起 Read Request，收到确认后发送 `new_config_value` Write Request。
+6. 任一端断链后恢复广播或扫描，等待重新连接。
 
-    Note over Server,Client: ═══ 协议栈初始化阶段 ═══
-    Server->>Server: enable_sle()
-    Client->>Client: enable_sle()
-    Note right of Server: sle_enable_cb
-    Note right of Client: sle_enable_cb (重新注册回调)
-    Server->>Server: 注册 Server → 添加 Service → 添加 Property
-    Note right of Server: add_service_cb
-    Note right of Server: add_property_cb
-    Note right of Server: start_service_cb
-    Server->>Server: 配置广播参数 → 启动广播
-    Note right of Server: announce_enable_cb
-    Client->>Client: 配置扫描参数 → 启动扫描
-    Note right of Client: seek_enable_cb
+## 9. 核心文件说明
 
-    Note over Server,Client: ═══ 设备发现阶段 ═══
-    Server-->>Client: 广播包（循环广播）
-    Note right of Client: seek_result_cb (匹配 "hello_server")
-    Client->>Client: 停止扫描
-    Note right of Client: seek_disable_cb
+| 文件 | 作用 |
+| --- | --- |
+| `sle_hello.c` | 创建 Sample 任务，选择 Server 或 Client，并处理 Client 侧通知及读写确认。 |
+| `sle_hello_server.c` | 注册 SSAP 服务、处理读写请求并发送通知。 |
+| `sle_hello_server_adv.c` | 配置 `hello_server` 广播数据与广播参数。 |
+| `sle_hello_client.c` | 完成扫描、连接、配对、服务发现和属性读写。 |
 
-    Note over Server,Client: ═══ 连接建立阶段 ═══
-    Client->>Server: 发起连接请求
-    Note right of Server: connect_state_changed_cb<br/>→ SLE_ACB_STATE_CONNECTED
-    Note right of Client: connect_state_changed_cb<br/>→ SLE_ACB_STATE_CONNECTED
+## 10. 核心函数/类说明
 
-    Note over Server,Client: ═══ 配对与数据交互阶段 ═══
-    Client->>Server: 配对
-    Note right of Server: pair_complete_cb → ssaps_set_info(mtu=520)
-    Note right of Client: pair_complete_cb → ssapc_exchange_info_req(mtu=520)
-    Note right of Server: mtu_changed_cb
-    Note right of Client: exchange_info_cb → 服务发现
-    Note right of Client: find_structure_cb
-    Note right of Client: find_structure_cmp_cb
-    Server->>Client: Notification: "hello world"
-    Note right of Client: notification_cb
+| 函数 | 功能与调用关系 |
+| --- | --- |
+| `sle_hello_entry()` | 系统启动入口，根据 Kconfig 创建对应角色任务。 |
+| `sle_hello_server_init()` | Server 任务调用，初始化 SLE 服务并开始广播。 |
+| `sle_hello_server_send_data()` | Server 在连接完成后通过 Notification 发送数据。 |
+| `sle_hello_client_init()` | Client 任务调用，注册扫描、连接和 SSAP Client 回调。 |
+| `sle_hello_client_send_write_req()` | Client 在读取确认后发送属性写请求。 |
+| `sle_hello_client_start_scan()` | Client 初始化完成或断链后启动扫描。 |
 
-    Client->>Server: Read Request
-    Note right of Server: read_request_cb → ssaps_send_response()
-    Server-->>Client: Read Response
-    Note right of Client: read_cfm_cb
+## 11. 配置项说明
 
-    Client->>Server: Write Request: "new_config_value"
-    Note right of Server: write_request_cb → 校验 → send_response()
-    Server-->>Client: Write Response
-    Note right of Client: write_cfm_cb
+| 配置项 | 说明 |
+| --- | --- |
+| `CONFIG_SAMPLE_SUPPORT_SLE_HELLO_SERVER_SAMPLE` | 构建 Server 固件。 |
+| `CONFIG_SAMPLE_SUPPORT_SLE_HELLO_CLIENT_SAMPLE` | 构建 Client 固件。 |
+| 广播名 | `hello_server`。 |
+| Service / Property UUID | `0x3333` / `0x3434`。 |
+| MTU | 520 字节。 |
 
-    Note over Server,Client: ═══ 断开与恢复阶段 ═══
-    Client--xServer: 断开连接
-    Note right of Server: connect_state_changed_cb<br/>→ SLE_ACB_STATE_DISCONNECTED
-    Note right of Client: connect_state_changed_cb<br/>→ SLE_ACB_STATE_DISCONNECTED
-    Server->>Server: 重新广播
-    Note right of Server: announce_enable_cb
-    Client->>Client: 重新扫描
-    Note right of Client: seek_enable_cb
+## 12. 使用方法
+
+### 环境准备
+
+- 两块 WS53 开发板、两根 USB 数据线及两个可用串口。
+- 在 SDK 根目录执行命令，端口以系统实际枚举结果为准。
+
+### 编译
+
+先构建并烧录 Server，再切换到 Client；两种角色共享同一固件输出路径。
+
+```powershell
+fbb config set CONFIG_SAMPLE_SUPPORT_SLE_HELLO_SERVER_SAMPLE=y --target ws53_liteos_app
+fbb build ws53_liteos_app --clean
+fbb flash ws53_liteos_app --port <SERVER_COM> --json-summary
+
+fbb config set CONFIG_SAMPLE_SUPPORT_SLE_HELLO_CLIENT_SAMPLE=y --target ws53_liteos_app
+fbb build ws53_liteos_app --clean
+fbb flash ws53_liteos_app --port <CLIENT_COM> --json-summary
 ```
 
-## 构建与烧录
+固件输出：`output/ws53/fwpkg/ws53_liteos_app/ws53_liteos_app_all.fwpkg`。
 
-通过 menuconfig 选择 Server 或 Client 构建目标：
+### 运行
 
-```
-Top → Application → Samples → BT → SLE → SLE Hello
-  → [*] SLE Hello Server Sample    (编译 Server)
-  → [*] SLE Hello Client Sample    (编译 Client)
-```
+两块板上电后会自动建立连接，无固定上电顺序。分别监视两个调试串口即可。
 
-> Kconfig 中的 `choice` 组是互斥的——Server 和 Client 不能同时设为 y。如需两块板通信，需分别编译两次。
-
-```bash
-fbb build ws53_liteos_app -p menuconfig
-fbb build ws53_liteos_app
+```powershell
+fbb monitor --port <CLIENT_COM> --until "hello world" --timeout 30 --json-summary
 ```
 
-固件路径: `output/ws53/fwpkg/ws53_liteos_app/ws53_liteos_app_all.fwpkg`
+### 运行结果
 
-## 验证
+Client 收到 `hello world`，Read Confirmation 成功且 Write Confirmation 返回成功即通过。
 
-两块板子上电后，Server 自动广播、Client 自动扫描连接，无需区分上电顺序。
+## 13. 输入输出示例
 
-**Server 端串口输出:**
+### 输入
 
-```
-[SLE Hello Server] Init OK
-[SLE Hello Server] Starting announce...
-[SLE Hello Server] Pair complete
-[SLE Hello Server] Send hello world notification
-```
+无需人工输入；Client 自动读取属性并写入字符串 `new_config_value`。
 
-> "hello world" 通知由 `g_hello_string = "hello world"` 通过 `ssaps_notify_indicate()` 在配对完成后自动发出。
+### 输出
 
-**Client 端串口输出:**
-
-```
-[SLE Hello Client] Init OK
-[SLE Hello Client] Start scan
-[SLE Hello Client] Found hello_server, stop scan
-[SLE Hello Client] Connected
-[SLE Hello Client] Pair complete
-[SLE Hello Client] Find service complete
-[SLE Hello Client] Read cfm:
-[SLE Hello Client] Received notification: hello world
-[SLE Hello Client] Write cfm: success
+```text
+[sle hello client] connected, conn_id=0x00
+[sle hello client] pair complete conn_id:0, status:0
+[SLE Hello Client] Received: hello world
+[SLE Hello Client] Write cfm: success, handle=0x11
 ```
 
-Client 完成服务发现后自动发起读请求，打印属性当前值；读确认后自动发起写请求，写入 `"new_config_value"`。两块板串口输出与上述一致即为成功。
-
-## API 参考
-
-详细 API 文档参见：
-
-| 文档 | 内容 | 路径 |
-|------|------|------|
-| Hello SLE — 广播与连接 | 广播/扫描概念、G/T 角色、回调模式、9 个核心 API | `docs/zh-CN/api-reference/sle/basics/hello-connect.md` |
-| Hello Notify — 通知推送 | SSAP 模型、UUID、配对、MTU、通知与指示、属性权限、12 个 API | `docs/zh-CN/api-reference/sle/basics/hello-notify.md` |
-| Hello ReadWrite — 读写交互 | 权限与 operate_indication、读写请求-响应模式、3 个 API | `docs/zh-CN/api-reference/sle/basics/hello-readwrite.md` |
-
-## 注意事项
-
-- 两块板子均可先上电，Server 持续广播、Client 持续扫描，无需固定上电顺序
-- 连接断开后 Server 自动恢复广播，Client 自动重新扫描
-- 本示例使用 Just Works 配对（无 MITM 保护），生产环境建议启用安全配对
-- Server 的 read_request_cb 每次读取当前属性值（不改变状态）；write_request_cb 将接收到的数据直接复制到属性（最多 6 字节）
-- `sle_hello_send_data()` 通知接口可主动发送任意数据给已连接的 Client
-
+验证结论：SLE 建链、通知、读取与写入均已通过上板验证。

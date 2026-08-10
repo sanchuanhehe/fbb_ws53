@@ -31,7 +31,7 @@
  * GPIO 和任务参数已映射到本案例使用的 WS53 目标板。
  */
 #define SLE_RSSI_CAL_LOG "[sle rssi cal]"
-#define SLE_RSSI_CAL_BUTTON_PIN 13
+#define SLE_RSSI_CAL_BUTTON_PIN S_MGPIO6
 #define SLE_RSSI_CAL_LED_PIN 5
 #define SLE_RSSI_CAL_BUTTON_POLL_MS 50
 #define SLE_RSSI_CAL_BUTTON_DEBOUNCE 3
@@ -467,11 +467,11 @@ static void sle_rssi_calibration_start(void)
 
 /**
  * @if Eng
- * @brief Poll GPIO13, detect a debounced long press and service the indicator.
+ * @brief Poll the onboard S1 button on MIO06, detect a debounced long press and service the indicator.
  * @param [in] arg Reserved task argument.
  * @return The task does not normally return.
  * @else
- * @brief 轮询 GPIO13、检测消抖后的长按并驱动状态灯。
+ * @brief 轮询 MIO06 上的板载 S1 按键、检测消抖后的长按并驱动状态灯。
  * @param [in] arg 预留的任务参数。
  * @return 任务正常情况下不会返回。
  * @endif
@@ -486,7 +486,7 @@ static void *sle_rssi_calibration_button_task(const char *arg)
 
     unused(arg);
     while (1) {
-        bool raw_pressed = (uapi_gpio_get_val(SLE_RSSI_CAL_BUTTON_PIN) == GPIO_LEVEL_LOW);
+        bool raw_pressed = (uapi_gpio_get_val(SLE_RSSI_CAL_BUTTON_PIN) == GPIO_LEVEL_HIGH);
         /*
          * Accept a new level only after three identical samples (150 ms debounce).
          * 连续获得 3 次相同采样值后才接受新电平，实现 150 ms 按键消抖。
@@ -530,11 +530,11 @@ errcode_t sle_rssi_calibration_init(void)
     osal_task *task_handle;
 
     /*
-     * GPIO13 is active-low; the internal pull-up also defines the released state.
-     * GPIO13 为低电平有效，内部上拉同时确定按键释放时的稳定电平。
+     * The onboard S1 button on MIO06 is active-high and its board circuit defines the released low level.
+     * MIO06 上的板载 S1 按键为高电平有效，板载电路将释放状态确定为低电平。
      */
     (void)uapi_pin_set_mode(SLE_RSSI_CAL_BUTTON_PIN, HAL_PIO_FUNC_GPIO);
-    (void)uapi_pin_set_pull(SLE_RSSI_CAL_BUTTON_PIN, PIN_PULL_UP);
+    (void)uapi_pin_set_pull(SLE_RSSI_CAL_BUTTON_PIN, PIN_PULL_NONE);
     (void)uapi_gpio_set_dir(SLE_RSSI_CAL_BUTTON_PIN, GPIO_DIRECTION_INPUT);
     /*
      * GPIO5 drives the SK6805 DIN pin directly.
@@ -561,7 +561,9 @@ errcode_t sle_rssi_calibration_init(void)
     if (task_handle == NULL) {
         return ERRCODE_MALLOC;
     }
-    osal_printk("%s ready: hold GPIO13 for 2000 ms at 100 cm; LED GPIO5 blue=recording, green=saved\r\n",
+    osal_printk("%s ready: hold onboard S1 (MIO06, active high) for 2000 ms near 100 cm; "
+                "LED GPIO5 blue=recording, "
+                "green=saved\r\n",
                 SLE_RSSI_CAL_LOG);
     return ERRCODE_SUCC;
 }
