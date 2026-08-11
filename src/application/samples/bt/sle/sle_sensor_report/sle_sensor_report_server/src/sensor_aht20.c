@@ -99,6 +99,19 @@ static errcode_t sensor_record_failure(const char *stage, errcode_t ret)
     return ret;
 }
 
+static void sensor_record_success(void)
+{
+    if (!g_sensor_was_ready) {
+        osal_printk("%s aht20 compatible device ready\r\n", SENSOR_HW_LOG);
+        g_sensor_was_ready = true;
+    }
+    if (g_failure_pending) {
+        osal_printk("%s sensor recovered\r\n", SENSOR_HW_LOG);
+        g_failure_pending = false;
+    }
+    g_consecutive_failures = 0;
+}
+
 static errcode_t sensor_i2c_init(void)
 {
     errcode_t ret;
@@ -252,6 +265,40 @@ static errcode_t aht20_read_response(uint8_t response[AHT20_RESPONSE_LENGTH])
     return ERRCODE_I2C_TIMEOUT;
 }
 
+static errcode_t aht20_parse_response(const uint8_t response[AHT20_RESPONSE_LENGTH],
+                                      int16_t *temperature_x100, uint8_t *humidity_percent)
+{
+    if ((response[0] & AHT20_STATUS_CALIBRATED_MASK) == 0U) {
+        return sensor_record_failure("calibration-lost", ERRCODE_FAIL);
+    }
+    if (aht20_crc8(response, AHT20_CRC_INDEX) != response[AHT20_CRC_INDEX]) {
+        return sensor_record_failure("crc", ERRCODE_FAIL);
+    }
+
+    uint32_t humidity_raw = ((uint32_t)response[1] << 12U) |
+                            ((uint32_t)response[2] << 4U) |
+                            ((uint32_t)response[3] >> 4U);
+    uint32_t temperature_raw = (((uint32_t)response[3] & 0x0FU) << 16U) |
+                               ((uint32_t)response[4] << 8U) |
+                               (uint32_t)response[5];
+    uint64_t humidity_scaled = ((uint64_t)humidity_raw * 100ULL + (AHT20_RAW_DENOMINATOR / 2ULL)) /
+                               AHT20_RAW_DENOMINATOR;
+    if (humidity_scaled > 100ULL) {
+        humidity_scaled = 100ULL;
+    }
+    int32_t temperature_scaled = (int32_t)(((uint64_t)temperature_raw * 20000ULL +
+                                            (AHT20_RAW_DENOMINATOR / 2ULL)) /
+                                           AHT20_RAW_DENOMINATOR) - 5000;
+    if ((temperature_scaled < AHT20_TEMPERATURE_MIN_X100) ||
+        (temperature_scaled > AHT20_TEMPERATURE_MAX_X100)) {
+        return sensor_record_failure("range", ERRCODE_FAIL);
+    }
+
+    *temperature_x100 = (int16_t)temperature_scaled;
+    *humidity_percent = (uint8_t)humidity_scaled;
+    return ERRCODE_SUCC;
+}
+
 errcode_t sensor_aht20_init(void)
 {
     if (g_sensor_ready) {
@@ -302,44 +349,12 @@ errcode_t sensor_aht20_read(int16_t *temperature_x100, uint8_t *humidity_percent
     if (ret != ERRCODE_SUCC) {
         return sensor_record_failure("measurement-read", ret);
     }
-    if ((response[0] & AHT20_STATUS_CALIBRATED_MASK) == 0U) {
-        return sensor_record_failure("calibration-lost", ERRCODE_FAIL);
-    }
-    if (aht20_crc8(response, AHT20_CRC_INDEX) != response[AHT20_CRC_INDEX]) {
-        return sensor_record_failure("crc", ERRCODE_FAIL);
+
+    ret = aht20_parse_response(response, temperature_x100, humidity_percent);
+    if (ret != ERRCODE_SUCC) {
+        return ret;
     }
 
-    uint32_t humidity_raw = ((uint32_t)response[1] << 12U) |
-                            ((uint32_t)response[2] << 4U) |
-                            ((uint32_t)response[3] >> 4U);
-    uint32_t temperature_raw = (((uint32_t)response[3] & 0x0FU) << 16U) |
-                               ((uint32_t)response[4] << 8U) |
-                               (uint32_t)response[5];
-
-    uint64_t humidity_scaled = ((uint64_t)humidity_raw * 100ULL + (AHT20_RAW_DENOMINATOR / 2ULL)) /
-                               AHT20_RAW_DENOMINATOR;
-    if (humidity_scaled > 100ULL) {
-        humidity_scaled = 100ULL;
-    }
-    int32_t temperature_scaled = (int32_t)(((uint64_t)temperature_raw * 20000ULL +
-                                            (AHT20_RAW_DENOMINATOR / 2ULL)) /
-                                           AHT20_RAW_DENOMINATOR) - 5000;
-    if ((temperature_scaled < AHT20_TEMPERATURE_MIN_X100) ||
-        (temperature_scaled > AHT20_TEMPERATURE_MAX_X100)) {
-        return sensor_record_failure("range", ERRCODE_FAIL);
-    }
-
-    *temperature_x100 = (int16_t)temperature_scaled;
-    *humidity_percent = (uint8_t)humidity_scaled;
-
-    if (!g_sensor_was_ready) {
-        osal_printk("%s aht20 compatible device ready\r\n", SENSOR_HW_LOG);
-        g_sensor_was_ready = true;
-    }
-    if (g_failure_pending) {
-        osal_printk("%s sensor recovered\r\n", SENSOR_HW_LOG);
-        g_failure_pending = false;
-    }
-    g_consecutive_failures = 0;
+    sensor_record_success();
     return ERRCODE_SUCC;
 }
