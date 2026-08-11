@@ -1,0 +1,52 @@
+site_name: WS53 开发者中心
+site_url: https://docs.hisilicon.com/projects/fbb_ws53/master/
+site_description: WS53 SDK 开发文档
+site_author: HiSpark
+docs_dir: docs
+use_directory_urls: true
+
+theme:
+  name: mkdocs
+  language: zh
+
+plugins:
+  - search:
+      lang: zh
+
+nav:
+  - 概览: zh-CN/index.md
+  - 整体架构:
+      - 整体架构: zh-CN/overall-architecture/index.md
+      - 源码结构: zh-CN/overall-architecture/source-tree/index.md
+      - 构建系统: zh-CN/overall-architecture/build-system/index.md
+  - 快速入门:
+      - 快速入门: zh-CN/get-started/index.md
+      - 环境搭建: zh-CN/get-started/environment-setup.md
+      - 快速开始: zh-CN/get-started/quick-start.md
+      - 创建应用: zh-CN/get-started/create-application.md
+      - 烧录与运行: zh-CN/get-started/flash-and-run.md
+  - 开发指南:
+      - 开发指南: zh-CN/guides/index.md
+      - SDK 开发: zh-CN/guides/sdk-development/index.md
+      - 无线连接: zh-CN/guides/connectivity/index.md
+      - 网络协议: zh-CN/guides/network/index.md
+      - 外设驱动: zh-CN/guides/peripherals/index.md
+      - 安全: zh-CN/guides/security/index.md
+      - 系统服务: zh-CN/guides/system/index.md
+      - AT 命令: zh-CN/guides/commands/index.md
+      - Boot: zh-CN/guides/boot/index.md
+      - 第三方软件移植: zh-CN/guides/open-source/index.md
+      - 测试与验证: zh-CN/guides/test/index.md
+      - 认证: zh-CN/guides/certification/index.md
+      - 产线与制造: zh-CN/guides/manufacturing/index.md
+      - 故障排查: zh-CN/guides/troubleshooting/index.md
+  - 参考案例: zh-CN/samples/index.md
+  - API 参考:
+      - API 参考: zh-CN/api-reference/index.md
+      - 驱动: zh-CN/api-reference/driver/index.md
+      - 中间件: zh-CN/api-reference/middleware/index.md
+      - OS 抽象层: zh-CN/api-reference/osal/index.md
+  - 硬件资料: zh-CN/hardware/index.md
+  - FAQ:
+      - 常见问题: zh-CN/FAQ/index.md
+      - 产测 FAQ: zh-CN/FAQ/manufacturing/index.md

@@ -73,7 +73,7 @@ errcode_t ssaps_register_server(sle_uuid_t *app_uuid, uint8_t *server_id)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 注册成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 注册失败 |
+| Other | 其他错误码，参考`errcode_t` | 注册失败 |
 
 **参考案例**
 
@@ -116,7 +116,7 @@ errcode_t ssaps_unregister_server(uint8_t server_id)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 注销成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 注销失败 |
+| Other | 其他错误码，参考`errcode_t` | 注销失败 |
 
 **参考案例**
 
@@ -161,7 +161,7 @@ errcode_t ssaps_add_service(uint8_t server_id, sle_uuid_t *service_uuid, bool is
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | errcode_t | 执行结果错误码 | 服务句柄将在 [ssaps_add_service_callback](#typedef_ssaps_add_service_callback) 中返回 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 请求失败 |
+| Other | 其他错误码，参考`errcode_t` | 请求失败 |
 
 ### ssaps_add_property <a id="ssaps_add_property"></a>
 
@@ -202,7 +202,7 @@ errcode_t ssaps_add_property(uint8_t server_id, uint16_t service_handle, ssaps_p
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | errcode_t | 执行结果错误码 | 特征句柄将在 [ssaps_add_property_callback](#typedef_ssaps_add_property_callback) 中返回 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 请求失败 |
+| Other | 其他错误码，参考`errcode_t` | 请求失败 |
 
 ### ssaps_add_descriptor <a id="ssaps_add_descriptor"></a>
 
@@ -245,7 +245,7 @@ errcode_t ssaps_add_descriptor(uint8_t server_id, uint16_t service_handle, uint1
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | errcode_t | 执行结果错误码 | 描述符句柄将在 [ssaps_add_descriptor_callback](#typedef_ssaps_add_descriptor_callback) 中返回 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 请求失败 |
+| Other | 其他错误码，参考`errcode_t` | 请求失败 |
 
 ### ssaps_add_service_sync <a id="ssaps_add_service_sync"></a>
 
@@ -292,7 +292,7 @@ errcode_t ssaps_add_service_sync(uint8_t server_id, sle_uuid_t *service_uuid, bo
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 服务添加成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 服务添加失败 |
+| Other | 其他错误码，参考`errcode_t` | 服务添加失败 |
 
 **参考案例**
 
@@ -344,7 +344,7 @@ errcode_t ssaps_add_property_sync(uint8_t server_id, uint16_t service_handle, ss
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 特征添加成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 特征添加失败 |
+| Other | 其他错误码，参考`errcode_t` | 特征添加失败 |
 
 **参考案例**
 
@@ -391,7 +391,7 @@ errcode_t ssaps_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 描述符添加成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 描述符添加失败 |
+| Other | 其他错误码，参考`errcode_t` | 描述符添加失败 |
 
 **参考案例**
 
@@ -435,7 +435,7 @@ errcode_t ssaps_start_service(uint8_t server_id, uint16_t service_handle)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | errcode_t | 执行结果错误码 | 服务启动结果将在 [ssaps_start_service_callback](#typedef_ssaps_start_service_callback) 中返回 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 请求失败 |
+| Other | 其他错误码，参考`errcode_t` | 请求失败 |
 
 **参考案例**
 
@@ -478,7 +478,7 @@ errcode_t ssaps_delete_all_services(uint8_t server_id)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 删除请求成功发起 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 删除请求失败 |
+| Other | 其他错误码，参考`errcode_t` | 删除请求失败 |
 
 ### ssaps_send_response <a id="ssaps_send_response"></a>
 
@@ -519,7 +519,7 @@ errcode_t ssaps_send_response(uint8_t server_id, uint16_t conn_id, ssaps_send_rs
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 响应发送成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 响应发送失败 |
+| Other | 其他错误码，参考`errcode_t` | 响应发送失败 |
 
 ### ssaps_notify_indicate <a id="ssaps_notify_indicate"></a>
 
@@ -560,7 +560,7 @@ errcode_t ssaps_notify_indicate(uint8_t server_id, uint16_t conn_id, ssaps_ntf_i
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 通知或指示发送成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 通知或指示发送失败 |
+| Other | 其他错误码，参考`errcode_t` | 通知或指示发送失败 |
 
 **参考案例**
 
@@ -605,7 +605,7 @@ errcode_t ssaps_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, ssa
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 通知或指示发送成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 通知或指示发送失败 |
+| Other | 其他错误码，参考`errcode_t` | 通知或指示发送失败 |
 
 ### ssaps_set_info <a id="ssaps_set_info"></a>
 
@@ -645,7 +645,7 @@ errcode_t ssaps_set_info(uint8_t server_id, ssap_exchange_info_t *info)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 设置成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 设置失败 |
+| Other | 其他错误码，参考`errcode_t` | 设置失败 |
 
 **参考案例**
 
@@ -688,7 +688,7 @@ errcode_t ssaps_register_callbacks(ssaps_callbacks_t *func)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 注册成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 注册失败 |
+| Other | 其他错误码，参考`errcode_t` | 注册失败 |
 
 **参考案例**
 

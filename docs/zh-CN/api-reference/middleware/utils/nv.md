@@ -94,7 +94,7 @@ errcode_t uapi_nv_write(uint16_t key, const uint8_t *kvalue, uint16_t kvalue_len
 | ERRCODE_SUCC:0 | 执行成功 | NV 数据项写入成功 |
 | ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | kvalue 为 NULL 或 kvalue_length 为 0 |
 | ERRCODE_NV_ILLEGAL_OPERATION:0x80003088 | 非法操作 | 当前未支持加密但配置了加密属性 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
 
@@ -145,7 +145,7 @@ errcode_t uapi_nv_write_with_attr(uint16_t key, const uint8_t *kvalue, uint16_t 
 | ERRCODE_SUCC:0 | 执行成功 | NV 数据项写入成功 |
 | ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | kvalue 为 NULL 或 kvalue_length 为 0 |
 | ERRCODE_NV_ILLEGAL_OPERATION:0x80003088 | 非法操作 | 当前未支持加密但配置了加密属性 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
 
@@ -197,7 +197,7 @@ errcode_t uapi_nv_read(uint16_t key, uint16_t kvalue_max_length, uint16_t *kvalu
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 执行成功 | NV 数据项读取成功 |
 | ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | kvalue_length、kvalue 或 attr 指针为 NULL |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
 
@@ -251,7 +251,7 @@ errcode_t uapi_nv_read_with_attr(uint16_t key, uint16_t kvalue_max_length, uint1
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 执行成功 | NV 数据项读取成功 |
 | ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | kvalue_length、kvalue 或 attr 指针为 NULL |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
 
@@ -295,7 +295,7 @@ errcode_t uapi_nv_get_store_status(nv_store_status_t *status)
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 执行成功 | NV 存储状态查询成功 |
 | ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | status 指针为 NULL |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### uapi_nv_backup <a id="uapi_nv_backup"></a>
 
@@ -336,7 +336,7 @@ errcode_t uapi_nv_backup(const nv_backup_mode_t *backup_mode)
 | ERRCODE_SUCC:0 | 执行成功 | NV 备份成功 |
 | ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | backup_mode 指针为 NULL |
 | ERRCODE_NOT_SUPPORT:0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 特性 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
 
@@ -373,7 +373,7 @@ errcode_t uapi_nv_set_restore_mode_all(void)
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 执行成功 | 全量恢复标志设置成功 |
 | ERRCODE_NOT_SUPPORT:0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 特性 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### uapi_nv_set_restore_mode_partitial <a id="uapi_nv_set_restore_mode_partitial"></a>
 
@@ -413,7 +413,7 @@ errcode_t uapi_nv_set_restore_mode_partitial(const nv_restore_mode_t *restore_mo
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 执行成功 | 部分区域恢复标志设置成功 |
 | ERRCODE_NOT_SUPPORT:0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 特性 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### uapi_nv_flush <a id="uapi_nv_flush"></a>
 
@@ -447,7 +447,7 @@ errcode_t uapi_nv_flush(void)
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 执行成功 | RAM 中 NV 数据成功刷写到 flash |
 | ERRCODE_NOT_SUPPORT:0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_ASYNCHRONOUS_STORE` 特性 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### uapi_nv_register_change_notify_proc <a id="uapi_nv_register_change_notify_proc"></a>
 
@@ -490,7 +490,7 @@ errcode_t uapi_nv_register_change_notify_proc(uint16_t min_key, uint16_t max_key
 | ERRCODE_SUCC:0 | 执行成功 | 回调函数注册成功 |
 | ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | min_key 大于 max_key、func 为 NULL 或通知注册槽位数为 0 |
 | ERRCODE_NOT_SUPPORT:0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_CHANGE_NOTIFY` 特性 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ## Type definitions
 

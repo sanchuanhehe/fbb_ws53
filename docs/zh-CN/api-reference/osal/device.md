@@ -279,7 +279,7 @@ void osal_poll_wait(osal_poll *table, osal_wait *wait)
 | 名称 | 参数类型 | 详细说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | table | [osal_poll](#typedef_osal_poll) * | poll 表指针 | 非 NULL |
-| wait | [osal_wait](../schedule/wait/wait.md#struct_osal_wait) * | 等待队列指针 | 非 NULL |
+| wait | [osal_wait](schedule/wait.md#osal_wait) * | 等待队列指针 | 非 NULL |
 
 ### osal_remap_pfn_range <a id="osal_remap_pfn_range"></a>
 

@@ -61,7 +61,7 @@ errcode_t wifi_p2p_enable(void)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 功能开启成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### wifi_p2p_disable <a id="wifi_p2p_disable"></a>
 
@@ -93,7 +93,7 @@ errcode_t wifi_p2p_disable(void)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 功能关闭成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### wifi_p2p_is_enabled <a id="wifi_p2p_is_enabled"></a>
 
@@ -163,7 +163,7 @@ errcode_t wifi_p2p_find(int32_t sec)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 设备扫描启动成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### wifi_p2p_stop_find <a id="wifi_p2p_stop_find"></a>
 
@@ -195,7 +195,7 @@ errcode_t wifi_p2p_stop_find(void)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 扫描停止成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### wifi_p2p_connect_cancel <a id="wifi_p2p_connect_cancel"></a>
 
@@ -227,7 +227,7 @@ errcode_t wifi_p2p_connect_cancel(void)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 连接取消成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### wifi_p2p_listen <a id="wifi_p2p_listen"></a>
 
@@ -266,7 +266,7 @@ errcode_t wifi_p2p_listen(uint32_t period, uint32_t interval)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 监听设置成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### wifi_p2p_get_peers_info <a id="wifi_p2p_get_peers_info"></a>
 
@@ -312,7 +312,7 @@ errcode_t wifi_p2p_get_peers_info(p2p_device_stru *dev_list, uint32_t *dev_num)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 设备信息获取成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### wifi_p2p_connect <a id="wifi_p2p_connect"></a>
 
@@ -350,7 +350,7 @@ errcode_t wifi_p2p_connect(const p2p_config_stru *p2p_config)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 连接请求发起成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### wifi_p2p_connect_accept <a id="wifi_p2p_connect_accept"></a>
 
@@ -389,7 +389,7 @@ errcode_t wifi_p2p_connect_accept(const p2p_config_stru *p2p_config, int assoc)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 连接响应设置成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### wifi_p2p_disconnect <a id="wifi_p2p_disconnect"></a>
 
@@ -421,7 +421,7 @@ errcode_t wifi_p2p_disconnect(void)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 断连成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### wifi_p2p_go_get_gc_info <a id="wifi_p2p_go_get_gc_info"></a>
 
@@ -467,7 +467,7 @@ errcode_t wifi_p2p_go_get_gc_info(p2p_client_info_stru *client_list, uint32_t *c
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | GC 信息获取成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### wifi_p2p_set_device_config <a id="wifi_p2p_set_device_config"></a>
 
@@ -505,7 +505,7 @@ errcode_t wifi_p2p_set_device_config(const p2p_device_config_stru *p2p_dev_set_i
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 设备信息设置成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### wifi_p2p_get_device_config <a id="wifi_p2p_get_device_config"></a>
 
@@ -549,7 +549,7 @@ errcode_t wifi_p2p_get_device_config(p2p_device_config_stru *p2p_dev_set_info)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 设备信息获取成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### wifi_p2p_get_connect_info <a id="wifi_p2p_get_connect_info"></a>
 
@@ -593,7 +593,7 @@ errcode_t wifi_p2p_get_connect_info(p2p_status_info_stru *status)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 连接状态信息获取成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ## Enumerations
 

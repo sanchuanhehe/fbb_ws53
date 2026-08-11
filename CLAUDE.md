@@ -102,7 +102,7 @@ WS53 使用固定 ROM + 动态 RAM 架构。ROM 中固化不变代码，应用�
 
 ## 软件文档
 
-离线文档位于 `docs/zh-CN/software/`，涵盖：SDK 开发指南、设备驱动、AT 命令、MQTT/HTTP/CoAP/CJSON、FOTA、低功耗、文件系统、安全模块、Syschannel 等。
+离线文档以 `docs/zh-CN/index.md` 为入口，按 `get-started/`、`guides/`、`samples/`、`api-reference/`、`hardware/` 和 `FAQ/` 分类。文档站配置位于仓库根目录 `mkdocs.yml`。
 
 ## 参与贡献
 
