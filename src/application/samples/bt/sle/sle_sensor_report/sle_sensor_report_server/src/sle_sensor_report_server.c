@@ -1,0 +1,696 @@
+/**
+ * Copyright (c) HiSilicon (Shanghai) Technologies Co., Ltd. 2023-2024. All rights reserved.
+ *
+ * @if Eng
+ * @brief Implements data generation and reporting for the SLE sensor report server.
+ * @else
+ * @brief 实现 SLE 传感器上报服务端的数据生成与上报流程。
+ * @endif
+ *
+ * History: \n
+ * 2024-06-01, Create file. \n
+ */
+
+#include "common_def.h"
+#include "securec.h"
+#include "errcode.h"
+#include "soc_osal.h"
+#include "sle_common.h"
+#include "sle_device_manager.h"
+#include "sle_device_discovery.h"
+#include "sle_connection_manager.h"
+#include "sle_ssap_server.h"
+#include "sle_errcode.h"
+#include "sle_sensor_report_server.h"
+#include "sle_sensor_report_server_adv.h"
+#include "sensor_aht20.h"
+
+#define SENSOR_SERVER_LOG "[sensor server]"
+
+/* Application UUID (16-bit). / 应用 UUID（16 位）。 */
+static char g_sensor_app_uuid[2] = {0x12, 0x34};
+
+/* SLE 128-bit base UUID. / SLE 128 位基础 UUID。 */
+static uint8_t g_sensor_base_uuid[] = {0x37, 0xBE, 0xA8, 0x80, 0xFC, 0x70, 0x11, 0xEA,
+                                       0xB7, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+#define UUID_16BIT_LEN 2
+#define UUID_128BIT_LEN 16
+#define UUID_INDEX 14
+#define SENSOR_TEMP_SCALE 100
+#define SENSOR_COUNT 2
+#define USEC_PER_MSEC 1000
+
+/* UUID helpers based on hello and UART samples. / 参考 hello 和 UART 案例的 UUID 辅助函数。 */
+
+/**
+ * @if Eng
+ * @brief Encodes a 16-bit value in little-endian order.
+ * @else
+ * @brief 按小端序编码 16 位数值。
+ * @endif
+ */
+static void encode2byte_little(uint8_t *ptr, uint16_t data)
+{
+    *(uint8_t *)(ptr + 1) = (uint8_t)(data >> 0x8);
+    *(uint8_t *)ptr = (uint8_t)data;
+}
+
+/**
+ * @if Eng
+ * @brief Initializes an SLE UUID with the sample base UUID.
+ * @else
+ * @brief 使用案例基础 UUID 初始化 SLE UUID。
+ * @endif
+ */
+static void sle_uuid_set_base(sle_uuid_t *out)
+{
+    errcode_t ret;
+    ret = memcpy_s(out->uuid, SLE_UUID_LEN, g_sensor_base_uuid, SLE_UUID_LEN);
+    if (ret != EOK) {
+        out->len = 0;
+        return;
+    }
+    out->len = UUID_16BIT_LEN;
+}
+
+/**
+ * @if Eng
+ * @brief Builds a 16-bit service UUID from the sample base UUID.
+ * @else
+ * @brief 基于案例基础 UUID 构造 16 位服务 UUID。
+ * @endif
+ */
+static void sle_uuid_setu2(uint16_t u2, sle_uuid_t *out)
+{
+    sle_uuid_set_base(out);
+    out->len = UUID_16BIT_LEN;
+    encode2byte_little(&out->uuid[UUID_INDEX], u2);
+}
+
+/* Global SSAP server state. / SSAP 服务端全局状态。 */
+static uint8_t g_server_id = 0;
+static uint16_t g_service_handle = 0;
+static uint16_t g_data_property_handle = 0;  /* Periodic data property. / 常规数据属性。 */
+static uint16_t g_alarm_property_handle = 0; /* Alarm data property. / 告警数据属性。 */
+static volatile uint16_t g_sle_conn_hdl = 0;
+static volatile bool g_connected = false;
+static volatile bool g_reporting_enabled = false;
+
+static uint32_t sensor_temperature_magnitude(int16_t temperature)
+{
+    int32_t temperature_x100 = (int32_t)temperature;
+    return (uint32_t)((temperature_x100 < 0) ? -temperature_x100 : temperature_x100);
+}
+
+/**
+ * @if Eng
+ * @brief Reads and reports one hardware sensor data frame from the worker task.
+ * @else
+ * @brief 从工作任务读取并上报一帧硬件传感器数据。
+ * @endif
+ */
+void sle_sensor_report_server_process(void)
+{
+    sensor_data_frame_t frame;
+    (void)memset_s(&frame, sizeof(frame), 0, sizeof(frame));
+
+    errcode_t ret = sensor_aht20_read(&frame.temperature, &frame.humidity);
+    if (ret != ERRCODE_SUCC) {
+        return;
+    }
+    /* This module has no light sensor; keep the legacy field as an explicit unavailable value. */
+    frame.light = 0;
+    frame.sensor_count = SENSOR_COUNT;
+
+    /* Capture the timestamp. / 获取时间戳。 */
+    osal_timeval tv;
+    osal_gettimeofday(&tv);
+    frame.timestamp = (uint32_t)(tv.tv_sec * USEC_PER_MSEC + tv.tv_usec / USEC_PER_MSEC);
+
+    /* Select a property according to the alarm threshold. / 根据告警阈值选择属性通道。 */
+    uint16_t prop_handle;
+    bool is_alarm = (frame.temperature > TEMP_ALARM_HIGH || frame.temperature < TEMP_ALARM_LOW);
+    uint32_t temperature_magnitude = sensor_temperature_magnitude(frame.temperature);
+    const char *temperature_sign = (frame.temperature < 0) ? "-" : "";
+
+    if (is_alarm) {
+        frame.frame_type = SENSOR_FRAME_TYPE_ALARM;
+        prop_handle = g_alarm_property_handle;
+    } else {
+        frame.frame_type = SENSOR_FRAME_TYPE_PERIODIC;
+        prop_handle = g_data_property_handle;
+    }
+
+    osal_printk("%s source=hardware temp=%s%u.%02uC hum=%u%% light=N/A\r\n", SENSOR_SERVER_LOG,
+                temperature_sign, (unsigned int)(temperature_magnitude / SENSOR_TEMP_SCALE),
+                (unsigned int)(temperature_magnitude % SENSOR_TEMP_SCALE),
+                frame.humidity);
+
+    /* Hardware sampling is independent of SLE. Only read a handle after both link gates are open. */
+    if (!g_connected || !g_reporting_enabled) {
+        return;
+    }
+    uint16_t conn_handle = g_sle_conn_hdl;
+    if (is_alarm) {
+        osal_printk("%s ** ALARM ** temp=%s%u.%02uC, using IND Indicate\r\n", SENSOR_SERVER_LOG,
+                    temperature_sign, (unsigned int)(temperature_magnitude / SENSOR_TEMP_SCALE),
+                    (unsigned int)(temperature_magnitude % SENSOR_TEMP_SCALE));
+    }
+
+    uint8_t send_buf[sizeof(sensor_data_frame_t)];
+    (void)memcpy_s(send_buf, sizeof(send_buf), &frame, sizeof(frame));
+
+    ssaps_ntf_ind_t param = {0};
+    param.handle = prop_handle;
+    param.type = SSAP_PROPERTY_TYPE_VALUE;
+    param.value = send_buf;
+    param.value_len = sizeof(send_buf);
+
+    /* The connection callback may have invalidated the snapshot while the frame was being packed. */
+    if (!g_connected || !g_reporting_enabled || (g_sle_conn_hdl != conn_handle)) {
+        return;
+    }
+    ret = ssaps_notify_indicate(g_server_id, conn_handle, &param);
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s notify/indicate fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+    }
+}
+
+/* SSAPS callbacks. / SSAPS 回调。 */
+
+/**
+ * @if Eng
+ * @brief Handles the asynchronous event delivered to \c ssaps_add_service_cbk.
+ * @else
+ * @brief 处理分发给 \c ssaps_add_service_cbk 的异步事件。
+ * @endif
+ */
+static void ssaps_add_service_cbk(uint8_t server_id, sle_uuid_t *uuid, uint16_t handle, errcode_t status)
+{
+    unused(server_id);
+    unused(uuid);
+    unused(handle);
+    osal_printk("%s add service cbk, status: 0x%x\r\n", SENSOR_SERVER_LOG, status);
+}
+
+/**
+ * @if Eng
+ * @brief Handles the asynchronous event delivered to \c ssaps_add_property_cbk.
+ * @else
+ * @brief 处理分发给 \c ssaps_add_property_cbk 的异步事件。
+ * @endif
+ */
+static void ssaps_add_property_cbk(uint8_t server_id,
+                                   sle_uuid_t *uuid,
+                                   uint16_t service_handle,
+                                   uint16_t handle,
+                                   errcode_t status)
+{
+    unused(server_id);
+    unused(uuid);
+    unused(service_handle);
+    osal_printk("%s add property cbk, handle: 0x%x, status: 0x%x\r\n", SENSOR_SERVER_LOG, handle, status);
+}
+
+/**
+ * @if Eng
+ * @brief Handles the asynchronous event delivered to \c ssaps_add_descriptor_cbk.
+ * @else
+ * @brief 处理分发给 \c ssaps_add_descriptor_cbk 的异步事件。
+ * @endif
+ */
+static void ssaps_add_descriptor_cbk(uint8_t server_id,
+                                     sle_uuid_t *uuid,
+                                     uint16_t service_handle,
+                                     uint16_t property_handle,
+                                     errcode_t status)
+{
+    unused(server_id);
+    unused(uuid);
+    unused(service_handle);
+    osal_printk("%s add descriptor cbk, property_handle: 0x%x, status: 0x%x\r\n", SENSOR_SERVER_LOG, property_handle,
+                status);
+}
+
+/**
+ * @if Eng
+ * @brief Handles the asynchronous event delivered to \c ssaps_start_service_cbk.
+ * @else
+ * @brief 处理分发给 \c ssaps_start_service_cbk 的异步事件。
+ * @endif
+ */
+static void ssaps_start_service_cbk(uint8_t server_id, uint16_t handle, errcode_t status)
+{
+    unused(server_id);
+    osal_printk("%s start service cbk, handle: 0x%x, status: 0x%x\r\n", SENSOR_SERVER_LOG, handle, status);
+}
+
+/**
+ * @if Eng
+ * @brief Handles the asynchronous event delivered to \c ssaps_delete_all_service_cbk.
+ * @else
+ * @brief 处理分发给 \c ssaps_delete_all_service_cbk 的异步事件。
+ * @endif
+ */
+static void ssaps_delete_all_service_cbk(uint8_t server_id, errcode_t status)
+{
+    osal_printk("%s delete all service cbk, server_id: %u, status: 0x%x\r\n", SENSOR_SERVER_LOG, server_id, status);
+}
+
+/**
+ * @if Eng
+ * @brief Handles the asynchronous event delivered to \c ssaps_mtu_changed_cbk.
+ * @else
+ * @brief 处理分发给 \c ssaps_mtu_changed_cbk 的异步事件。
+ * @endif
+ */
+static void ssaps_mtu_changed_cbk(uint8_t server_id, uint16_t conn_id, ssap_exchange_info_t *info, errcode_t status)
+{
+    unused(server_id);
+    unused(conn_id);
+    osal_printk("%s mtu changed cbk, mtu: %u, status: 0x%x\r\n", SENSOR_SERVER_LOG, (info != NULL) ? info->mtu_size : 0,
+                status);
+}
+
+/**
+ * @if Eng
+ * @brief Handles the asynchronous event delivered to \c ssaps_read_request_cb.
+ * @else
+ * @brief 处理分发给 \c ssaps_read_request_cb 的异步事件。
+ * @endif
+ */
+static void ssaps_read_request_cb(uint8_t server_id,
+                                  uint16_t conn_id,
+                                  ssaps_req_read_cb_t *read_cb_para,
+                                  errcode_t status)
+{
+    unused(server_id);
+    unused(conn_id);
+    unused(read_cb_para);
+    unused(status);
+    /* Client reads are unused in this scenario. / 本场景不处理客户端读请求。 */
+}
+
+/**
+ * @if Eng
+ * @brief Handles the asynchronous event delivered to \c ssaps_write_request_cb.
+ * @else
+ * @brief 处理分发给 \c ssaps_write_request_cb 的异步事件。
+ * @endif
+ */
+static void ssaps_write_request_cb(uint8_t server_id,
+                                   uint16_t conn_id,
+                                   ssaps_req_write_cb_t *write_cb_para,
+                                   errcode_t status)
+{
+    unused(conn_id);
+    unused(status);
+
+    /* The stack handles CCCD writes. / 协议栈负责处理 CCCD 写入。 */
+    if (write_cb_para != NULL && write_cb_para->need_rsp &&
+        write_cb_para->type != SSAP_DESCRIPTOR_CLIENT_CONFIGURATION) {
+        ssaps_send_rsp_t rsp = {0};
+        rsp.request_id = write_cb_para->request_id;
+        rsp.status = ERRCODE_SLE_SUCCESS;
+        (void)ssaps_send_response(server_id, conn_id, &rsp);
+    }
+}
+
+/**
+ * @if Eng
+ * @brief Handles the asynchronous event delivered to \c ssaps_indicate_cfm_cb.
+ * @else
+ * @brief 处理分发给 \c ssaps_indicate_cfm_cb 的异步事件。
+ * @endif
+ */
+static void ssaps_indicate_cfm_cb(uint8_t server_id,
+                                  uint16_t conn_id,
+                                  sle_indication_cfm_result_t cfm_result,
+                                  errcode_t status)
+{
+    unused(server_id);
+    osal_printk("%s indicate cfm cbk, conn_id: %u, result: %u, status: 0x%x\r\n", SENSOR_SERVER_LOG, conn_id,
+                cfm_result, status);
+}
+
+/**
+ * @if Eng
+ * @brief Registers the callbacks required by \c sle_sensor_report_ssaps_register_cbks.
+ * @else
+ * @brief 注册 \c sle_sensor_report_ssaps_register_cbks 所需的回调函数。
+ * @endif
+ */
+static errcode_t sle_sensor_report_ssaps_register_cbks(void)
+{
+    ssaps_callbacks_t ssaps_cbk = {0};
+    ssaps_cbk.add_service_cb = ssaps_add_service_cbk;
+    ssaps_cbk.add_property_cb = ssaps_add_property_cbk;
+    ssaps_cbk.add_descriptor_cb = ssaps_add_descriptor_cbk;
+    ssaps_cbk.start_service_cb = ssaps_start_service_cbk;
+    ssaps_cbk.delete_all_service_cb = ssaps_delete_all_service_cbk;
+    ssaps_cbk.mtu_changed_cb = ssaps_mtu_changed_cbk;
+    ssaps_cbk.read_request_cb = ssaps_read_request_cb;
+    ssaps_cbk.write_request_cb = ssaps_write_request_cb;
+    ssaps_cbk.indicate_cfm_cb = ssaps_indicate_cfm_cb;
+
+    errcode_t ret = ssaps_register_callbacks(&ssaps_cbk);
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s register ssaps callbacks fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+        return ret;
+    }
+    return ERRCODE_SLE_SUCCESS;
+}
+
+/* SSAP service registration. / SSAP 服务注册。 */
+
+/**
+ * @if Eng
+ * @brief Adds the service object configured by \c sle_sensor_report_add_service.
+ * @else
+ * @brief 添加 \c sle_sensor_report_add_service 配置的服务对象。
+ * @endif
+ */
+static errcode_t sle_sensor_report_add_service(void)
+{
+    sle_uuid_t service_uuid = {0};
+    sle_uuid_setu2(SENSOR_SERVICE_UUID, &service_uuid);
+    errcode_t ret = ssaps_add_service_sync(g_server_id, &service_uuid, true, &g_service_handle);
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s add service fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+        return ERRCODE_SLE_FAIL;
+    }
+    return ERRCODE_SLE_SUCCESS;
+}
+
+/**
+ * @if Eng
+ * @brief Adds the service object configured by \c sle_sensor_report_add_data_property.
+ * @else
+ * @brief 添加 \c sle_sensor_report_add_data_property 配置的服务对象。
+ * @endif
+ */
+static errcode_t sle_sensor_report_add_data_property(void)
+{
+    errcode_t ret;
+    ssaps_property_info_t property = {0};
+    ssaps_desc_info_t descriptor = {0};
+    uint8_t ntf_value[] = {0x01, 0x0};
+
+    property.permissions = SENSOR_DATA_PROPERTY_PERMISSIONS;
+    property.operate_indication = SENSOR_DATA_PROPERTY_OP_INDICATION;
+    sle_uuid_setu2(SENSOR_DATA_PROPERTY_UUID, &property.uuid);
+    property.value = (uint8_t *)osal_vmalloc(sizeof(sensor_data_frame_t));
+    if (property.value == NULL) {
+        return ERRCODE_SLE_FAIL;
+    }
+    property.value_len = sizeof(sensor_data_frame_t);
+
+    ret = ssaps_add_property_sync(g_server_id, g_service_handle, &property, &g_data_property_handle);
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s add data property fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+        osal_vfree(property.value);
+        return ERRCODE_SLE_FAIL;
+    }
+
+    descriptor.permissions = SSAP_PERMISSION_READ;
+    descriptor.type = SSAP_DESCRIPTOR_USER_DESCRIPTION;
+    descriptor.operate_indication = SSAP_OPERATE_INDICATION_BIT_READ;
+    descriptor.value = ntf_value;
+    descriptor.value_len = sizeof(ntf_value);
+    ret = ssaps_add_descriptor_sync(g_server_id, g_service_handle, g_data_property_handle, &descriptor);
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s add data descriptor fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+        osal_vfree(property.value);
+        return ERRCODE_SLE_FAIL;
+    }
+    osal_vfree(property.value);
+    return ERRCODE_SLE_SUCCESS;
+}
+
+/**
+ * @if Eng
+ * @brief Adds the service object configured by \c sle_sensor_report_add_alarm_property.
+ * @else
+ * @brief 添加 \c sle_sensor_report_add_alarm_property 配置的服务对象。
+ * @endif
+ */
+static errcode_t sle_sensor_report_add_alarm_property(void)
+{
+    errcode_t ret;
+    ssaps_property_info_t property = {0};
+    ssaps_desc_info_t descriptor = {0};
+
+    property.permissions = SENSOR_PROPERTY_PERMISSIONS;
+    property.operate_indication = SENSOR_ALARM_PROPERTY_OP_INDICATION;
+    sle_uuid_setu2(SENSOR_ALARM_PROPERTY_UUID, &property.uuid);
+    property.value = (uint8_t *)osal_vmalloc(sizeof(sensor_data_frame_t));
+    if (property.value == NULL) {
+        return ERRCODE_SLE_FAIL;
+    }
+    property.value_len = sizeof(sensor_data_frame_t);
+
+    ret = ssaps_add_property_sync(g_server_id, g_service_handle, &property, &g_alarm_property_handle);
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s add alarm property fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+        osal_vfree(property.value);
+        return ERRCODE_SLE_FAIL;
+    }
+
+    /* Initialize the CCCD to 0x0002 to enable indications. / 将 CCCD 初值设为 0x0002 以使能指示。 */
+    uint8_t ind_value[] = {0x02, 0x00};
+    descriptor.permissions = SSAP_PERMISSION_READ | SSAP_PERMISSION_WRITE;
+    descriptor.type = SSAP_DESCRIPTOR_CLIENT_CONFIGURATION;
+    descriptor.operate_indication = SSAP_OPERATE_INDICATION_BIT_READ | SSAP_OPERATE_INDICATION_BIT_WRITE;
+    descriptor.value = ind_value;
+    descriptor.value_len = sizeof(ind_value);
+
+    ret = ssaps_add_descriptor_sync(g_server_id, g_service_handle, g_alarm_property_handle, &descriptor);
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s add alarm CCCD fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+        osal_vfree(property.value);
+        return ERRCODE_SLE_FAIL;
+    }
+    osal_vfree(property.value);
+    return ERRCODE_SLE_SUCCESS;
+}
+
+/**
+ * @if Eng
+ * @brief Adds the service object configured by \c sle_sensor_report_server_add.
+ * @else
+ * @brief 添加 \c sle_sensor_report_server_add 配置的服务对象。
+ * @endif
+ */
+static errcode_t sle_sensor_report_server_add(void)
+{
+    errcode_t ret;
+    sle_uuid_t app_uuid = {0};
+
+    app_uuid.len = sizeof(g_sensor_app_uuid);
+    if (memcpy_s(app_uuid.uuid, app_uuid.len, g_sensor_app_uuid, sizeof(g_sensor_app_uuid)) != EOK) {
+        return ERRCODE_SLE_FAIL;
+    }
+    ssaps_register_server(&app_uuid, &g_server_id);
+
+    if (sle_sensor_report_add_service() != ERRCODE_SLE_SUCCESS) {
+        ssaps_unregister_server(g_server_id);
+        return ERRCODE_SLE_FAIL;
+    }
+    if (sle_sensor_report_add_data_property() != ERRCODE_SLE_SUCCESS) {
+        ssaps_unregister_server(g_server_id);
+        return ERRCODE_SLE_FAIL;
+    }
+    if (sle_sensor_report_add_alarm_property() != ERRCODE_SLE_SUCCESS) {
+        ssaps_unregister_server(g_server_id);
+        return ERRCODE_SLE_FAIL;
+    }
+    osal_printk("%s add service ok, server_id:%x, svc_hdl:%x, data_hdl:%x, alarm_hdl:%x\r\n", SENSOR_SERVER_LOG,
+                g_server_id, g_service_handle, g_data_property_handle, g_alarm_property_handle);
+
+    ret = ssaps_start_service(g_server_id, g_service_handle);
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s start service fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+        return ERRCODE_SLE_FAIL;
+    }
+    osal_printk("%s service added successfully.\r\n", SENSOR_SERVER_LOG);
+    return ERRCODE_SLE_SUCCESS;
+}
+
+/* Connection callbacks. / 连接回调。 */
+
+/**
+ * @if Eng
+ * @brief Handles the asynchronous event delivered to \c sle_sensor_report_connect_state_changed_cbk.
+ * @else
+ * @brief 处理分发给 \c sle_sensor_report_connect_state_changed_cbk 的异步事件。
+ * @endif
+ */
+static void sle_sensor_report_connect_state_changed_cbk(uint16_t conn_id,
+                                                        const sle_addr_t *addr,
+                                                        sle_acb_state_t conn_state,
+                                                        sle_pair_state_t pair_state,
+                                                        sle_disc_reason_t disc_reason)
+{
+    unused(addr);
+    unused(pair_state);
+    unused(disc_reason);
+
+    switch (conn_state) {
+        case SLE_ACB_STATE_CONNECTED:
+            g_sle_conn_hdl = conn_id;
+            g_reporting_enabled = false;
+            g_connected = true;
+            osal_printk("%s connected, conn_id: 0x%x\r\n", SENSOR_SERVER_LOG, conn_id);
+            break;
+
+        case SLE_ACB_STATE_DISCONNECTED:
+            osal_printk("%s disconnected, conn_id: 0x%x\r\n", SENSOR_SERVER_LOG, conn_id);
+            /* Publish the stop flag before invalidating the connection handle. / 先发布停止标志，再清除连接句柄。 */
+            g_reporting_enabled = false;
+            g_connected = false;
+            g_sle_conn_hdl = 0;
+            /* Restart advertising. / 重新启动广播。 */
+            (void)sle_start_announce(1);
+            break;
+
+        default:
+            break;
+    }
+}
+
+/**
+ * @if Eng
+ * @brief Handles the asynchronous event delivered to \c sle_sensor_report_pair_complete_cbk.
+ * @else
+ * @brief 处理分发给 \c sle_sensor_report_pair_complete_cbk 的异步事件。
+ * @endif
+ */
+static void sle_sensor_report_pair_complete_cbk(uint16_t conn_id, const sle_addr_t *addr, errcode_t status)
+{
+    unused(addr);
+
+    if (status != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s pair failed, conn_id: 0x%x, status: 0x%x\r\n", SENSOR_SERVER_LOG, conn_id, status);
+        return;
+    }
+    if (!g_connected || (g_sle_conn_hdl != conn_id)) {
+        osal_printk("%s ignore stale pair complete, conn_id: 0x%x\r\n", SENSOR_SERVER_LOG, conn_id);
+        return;
+    }
+
+    osal_printk("%s pair complete, conn_id: 0x%x\r\n", SENSOR_SERVER_LOG, conn_id);
+
+    /* Configure an MTU of 520 bytes. / 配置 520 字节 MTU。 */
+    ssap_exchange_info_t info = {.mtu_size = 520, .version = 1};
+    (void)ssaps_set_info(g_server_id, &info);
+
+    g_reporting_enabled = true;
+    osal_printk("%s 1s hardware report loop enabled.\r\n", SENSOR_SERVER_LOG);
+}
+
+/**
+ * @if Eng
+ * @brief Handles the asynchronous event delivered to \c sle_sensor_report_read_rssi_cb.
+ * @else
+ * @brief 处理分发给 \c sle_sensor_report_read_rssi_cb 的异步事件。
+ * @endif
+ */
+static void sle_sensor_report_read_rssi_cb(uint16_t conn_id, int8_t rssi, errcode_t status)
+{
+    unused(conn_id);
+    unused(rssi);
+    unused(status);
+}
+
+/**
+ * @if Eng
+ * @brief Registers the callbacks required by \c sle_sensor_report_conn_register_cbks.
+ * @else
+ * @brief 注册 \c sle_sensor_report_conn_register_cbks 所需的回调函数。
+ * @endif
+ */
+static errcode_t sle_sensor_report_conn_register_cbks(void)
+{
+    sle_connection_callbacks_t conn_cbks = {0};
+    conn_cbks.connect_state_changed_cb = sle_sensor_report_connect_state_changed_cbk;
+    conn_cbks.pair_complete_cb = sle_sensor_report_pair_complete_cbk;
+    conn_cbks.read_rssi_cb = sle_sensor_report_read_rssi_cb;
+
+    errcode_t ret = sle_connection_register_callbacks(&conn_cbks);
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s register connection callbacks fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+        return ret;
+    }
+    return ERRCODE_SLE_SUCCESS;
+}
+
+/* Public APIs. / 公共接口。 */
+
+/**
+ * @if Eng
+ * @brief Initializes the feature implemented by \c sle_sensor_report_server_init.
+ * @else
+ * @brief 初始化 \c sle_sensor_report_server_init 对应的功能。
+ * @endif
+ */
+errcode_t sle_sensor_report_server_init(void)
+{
+    errcode_t ret;
+
+    ret = sensor_aht20_init();
+    if (ret != ERRCODE_SUCC) {
+        osal_printk("%s sensor unavailable at startup; SLE will continue, err: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+    }
+
+    ret = enable_sle();
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s enable_sle fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+        return ret;
+    }
+
+    ret = sle_sensor_report_announce_register_cbks();
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s register announce cbks fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+        return ret;
+    }
+
+    ret = sle_sensor_report_conn_register_cbks();
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s register conn cbks fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+        return ret;
+    }
+
+    ret = sle_sensor_report_ssaps_register_cbks();
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s register ssaps cbks fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+        return ret;
+    }
+
+    ret = sle_sensor_report_server_add();
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s server add fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+        return ret;
+    }
+
+    ret = sle_sensor_report_server_adv_init();
+    if (ret != ERRCODE_SLE_SUCCESS) {
+        osal_printk("%s adv init fail: 0x%x\r\n", SENSOR_SERVER_LOG, ret);
+        return ret;
+    }
+
+    osal_printk("%s init complete.\r\n", SENSOR_SERVER_LOG);
+    return ERRCODE_SLE_SUCCESS;
+}
+
+/**
+ * @if Eng
+ * @brief Reports whether the SLE link is connected.
+ * @else
+ * @brief 返回 SLE 链路是否已连接。
+ * @endif
+ */
+uint16_t sle_sensor_report_server_is_connected(void)
+{
+    return (uint16_t)g_connected;
+}
