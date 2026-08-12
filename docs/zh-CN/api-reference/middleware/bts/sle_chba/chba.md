@@ -1,4 +1,4 @@
-# chba
+# SLE CHBA
 
 SLE (Star Flash Low Energy) CHBA manager 提供 SLE CHBA 网络设备管理能力，支持基于 SLE 链路的网络设备创建、销毁、链路维护与数据收发，并通过回调机制向上层通知发送队列状态、链路状态及上行数据。
 

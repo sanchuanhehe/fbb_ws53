@@ -1,5 +1,6 @@
 # AT 命令
 
-本专题介绍 AT 命令格式、配置和使用方法。
+WS53 AT 命令专题提供命令格式、配置方法和接口参考。
 
-- [阅读完整指南](manual/index.md)
+- [AT 命令使用指南](manual/index.md)
+- [AT 模块 API](../../api-reference/middleware/utils/at.md)

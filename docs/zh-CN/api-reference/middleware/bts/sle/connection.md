@@ -1,4 +1,4 @@
-# connection
+# Connection
 
 connection 提供 SLE (Star Flash Low Energy) 连接管理、设备发现与传输管理能力，覆盖连接/断开、配对、连接参数更新、PHY/MCS 设置、设备公开（announce）、扫描（seek）以及传输繁忙回调等接口。
 

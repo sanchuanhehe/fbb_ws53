@@ -1,4 +1,4 @@
-# device
+# Device
 
 WiFi (Wireless Fidelity) Device 提供STA模式的初始化、扫描、连接、断连等基础能力，支持协议模式配置、PMF (Protected Management Frames) 设置、CSI (Channel State Information) 数据采集、管理帧收包回调注册、混杂模式报文接收、WoW (Wake on Wireless) 模式配置、MAC地址管理、国家码设置、PSD (Power Spectral Density) 数据采集以及WPS (Wi-Fi Protected Setup) 连接等功能。
 

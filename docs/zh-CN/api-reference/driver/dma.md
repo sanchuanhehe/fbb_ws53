@@ -1,4 +1,4 @@
-# dma
+# DMA
 
 DMA (Direct Memory Access) 在无需 CPU 干预的情况下实现外设与内存之间的数据传输，支持内存到内存、内存到外设以及外设到内存的单次传输与链表 (Linked List Item, LLI) 传输模式。模块同时提供低功耗 (Low Power Mode, LPM) 场景下的挂起与恢复能力，并通过回调机制在传输完成或发生错误时通知调用方。
 

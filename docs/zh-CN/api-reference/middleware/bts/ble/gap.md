@@ -1,4 +1,4 @@
-# gap
+# GAP
 
 GAP (Generic Access Profile) 提供 BLE (Bluetooth Low Energy) LE 广播、扫描、连接、配对、白名单、PHY (Physical Layer) 与数据长度等通用访问控制能力，支持本端设备信息设置与查询、安全参数配置、回调注册以及 SMP (Security Manager Protocol) 密钥存储等操作。
 

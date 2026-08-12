@@ -1,4 +1,4 @@
-# cache
+# Cache
 
 cache 模块提供 DCache (Data Cache) 维护接口，作为 OSAL (OS Abstract Layer) 的组成部分，支持按内存区域执行 DCache 回写、失效与清理操作，覆盖 linux、liteos、seliteos 系统。
 

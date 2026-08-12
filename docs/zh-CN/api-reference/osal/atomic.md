@@ -1,4 +1,4 @@
-# atomic
+# Atomic
 
 atomic 提供 OSAL (OS Abstract Layer) 原子操作接口，对 osal_atomic 原子变量执行读取、设置、自增、自减、加法、减法及结果测试等不可分割的整数运算，支持 linux、liteos、freertos 等多种操作系统后端。
 

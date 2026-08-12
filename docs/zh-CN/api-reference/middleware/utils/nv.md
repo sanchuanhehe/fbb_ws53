@@ -1,4 +1,4 @@
-# nv
+# NV
 
 NV (Non-Volatile storage) 提供基于 key-value 的非易失性数据存储能力，支持按 key ID 写入、读取、备份与恢复 NV 数据项，可配置加密、永久、不可升级等属性，并支持 NV 键值变更通知回调。模块源自 `include/middleware/utils/nv.h`。
 

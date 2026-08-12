@@ -1,4 +1,4 @@
-﻿# barrier
+# Barrier
 
 barrier 提供 CPU (Central Processing Unit) 内存屏障操作，包括通用内存屏障、读内存屏障、写内存屏障以及 SMP (Symmetric Multiprocessing) 条件下的内存屏障，同时提供指令同步屏障、数据同步屏障与数据内存屏障操作。
 

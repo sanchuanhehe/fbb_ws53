@@ -1,4 +1,4 @@
-# server
+# GATT Server
 
 GATT (Generic Attribute Profile) Server 提供蓝牙低功耗 (Bluetooth Low Energy) 服务端的属性服务管理能力，支持服务、特征与描述符的注册与同步注册，服务的启动、停止、删除，以及对客户端读写请求的响应、通知 (Notification) 与指示 (Indication) 的发送，并通过回调机制向应用层上报服务注册、特征注册、读写请求、MTU (Maximum Transmission Unit) 变化与指示确认等事件。
 

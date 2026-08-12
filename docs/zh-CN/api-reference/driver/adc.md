@@ -1,4 +1,4 @@
-# adc
+# ADC
 
 ADC (Analog-to-Digital Converter) 提供模拟信号到数字信号的转换能力，支持通道配置、差分采样、自动扫描与手动采样等多种工作模式。ADC 一次采样需要 16 个时钟周期，采样速率 = ADC 时钟 / 16，ADC 源时钟为 2MHz。
 

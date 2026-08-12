@@ -1,4 +1,4 @@
-# sle ssap client
+# SSAP Client
 
 SSAP (Service Access Protocol) client 提供 SLE (Star Flash Low Energy) 协议中服务接入协议客户端侧的能力，支持注册与注销客户端、注册回调函数、发起服务/属性/描述符查找、按句柄或 UUID (Universally Unique Identifier) 读取、发起写请求与写命令以及交换信息请求。
 

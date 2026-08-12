@@ -5,6 +5,10 @@ site_author: HiSpark
 docs_dir: docs
 use_directory_urls: true
 
+repo_name: 前往GitCode编辑
+repo_url: https://gitcode.com/HiSpark/fbb_ws53/tree/master/docs/zh-CN/
+edit_uri: edit/master/docs
+
 theme:
   name: mkdocs
   language: zh
@@ -12,6 +16,16 @@ theme:
 plugins:
   - search:
       lang: zh
+
+extra:
+  feedback_url: https://gitcode.com/HiSpark/fbb_ws53/issues
+  version_selector:
+    repo_path: fbb_ws53
+    version: master
+  header_link:
+    name: 返回旧版
+    link: https://docs.hisilicon.com/repos/fbb_ws53/zh-CN/master/
+    external: true
 
 nav:
   - 概览: zh-CN/index.md
@@ -22,31 +36,157 @@ nav:
   - 快速入门:
       - 快速入门: zh-CN/get-started/index.md
       - 环境搭建: zh-CN/get-started/environment-setup.md
+      - 开发环境搭建详解: zh-CN/get-started/environment-setup/manual/index.md
       - 快速开始: zh-CN/get-started/quick-start.md
       - 创建应用: zh-CN/get-started/create-application.md
       - 烧录与运行: zh-CN/get-started/flash-and-run.md
   - 开发指南:
       - 开发指南: zh-CN/guides/index.md
-      - SDK 开发: zh-CN/guides/sdk-development/index.md
-      - 无线连接: zh-CN/guides/connectivity/index.md
-      - 网络协议: zh-CN/guides/network/index.md
+      - SDK 开发:
+          - SDK 开发: zh-CN/guides/sdk-development/index.md
+          - SDK 开发指南: zh-CN/guides/sdk-development/sdk/manual/index.md
+          - 软件开发指南: zh-CN/guides/sdk-development/software-development/manual/index.md
+          - 特性开发说明: zh-CN/guides/sdk-development/feature-development/manual/index.md
+      - 无线连接:
+          - 无线连接: zh-CN/guides/connectivity/index.md
+          - Syschannel: zh-CN/guides/connectivity/syschannel/index.md
+      - 网络协议:
+          - 网络协议: zh-CN/guides/network/index.md
+          - lwIP: zh-CN/guides/network/lwip/index.md
+          - MQTT: zh-CN/guides/network/mqtt/index.md
+          - CoAP: zh-CN/guides/network/coap/index.md
+          - HTTP: zh-CN/guides/network/http/index.md
       - 外设驱动: zh-CN/guides/peripherals/index.md
-      - 安全: zh-CN/guides/security/index.md
-      - 系统服务: zh-CN/guides/system/index.md
+      - 安全:
+          - 安全: zh-CN/guides/security/index.md
+          - 安全模块: zh-CN/guides/security/crypto/index.md
+          - eFuse: zh-CN/guides/security/efuse/index.md
+          - TLS/DTLS: zh-CN/guides/security/tls/index.md
+      - 系统服务:
+          - 系统服务: zh-CN/guides/system/index.md
+          - CJSON: zh-CN/guides/system/cjson/index.md
+          - 文件系统: zh-CN/guides/system/filesystem/index.md
+          - FOTA: zh-CN/guides/system/fota/index.md
+          - NV: zh-CN/guides/system/nv/index.md
+          - 低功耗: zh-CN/guides/system/power-management/index.md
       - AT 命令: zh-CN/guides/commands/index.md
-      - Boot: zh-CN/guides/boot/index.md
+      - Boot:
+          - Boot: zh-CN/guides/boot/index.md
+          - Boot 移植: zh-CN/guides/boot/porting/index.md
+          - Boot 接口: zh-CN/guides/boot/api-reference/index.md
       - 第三方软件移植: zh-CN/guides/open-source/index.md
-      - 测试与验证: zh-CN/guides/test/index.md
-      - 认证: zh-CN/guides/certification/index.md
-      - 产线与制造: zh-CN/guides/manufacturing/index.md
-      - 故障排查: zh-CN/guides/troubleshooting/index.md
-  - 参考案例: zh-CN/samples/index.md
+      - 测试与验证:
+          - 测试与验证: zh-CN/guides/test/index.md
+          - 单板冒烟测试: zh-CN/guides/test/board-smoke/index.md
+      - 认证:
+          - 认证: zh-CN/guides/certification/index.md
+          - BLE BQB 认证: zh-CN/guides/certification/ble-bqb/index.md
+          - OpenHarmony XTS 认证: zh-CN/guides/certification/openharmony-xts/index.md
+          - SLE 认证: zh-CN/guides/certification/sle/index.md
+          - WLAN WFA 认证: zh-CN/guides/certification/wfa/index.md
+      - 产线与制造:
+          - 产线与制造: zh-CN/guides/manufacturing/index.md
+          - 产测工具: zh-CN/guides/manufacturing/production-tooling/index.md
+      - 故障排查:
+          - 故障排查: zh-CN/guides/troubleshooting/index.md
+          - 操作与维护: zh-CN/guides/troubleshooting/operations/index.md
+  - 参考案例:
+      - 参考案例: zh-CN/samples/index.md
+      - SAMPLE 用例: zh-CN/samples/manual/index.md
   - API 参考:
       - API 参考: zh-CN/api-reference/index.md
-      - 驱动: zh-CN/api-reference/driver/index.md
-      - 中间件: zh-CN/api-reference/middleware/index.md
-      - OS 抽象层: zh-CN/api-reference/osal/index.md
-  - 硬件资料: zh-CN/hardware/index.md
+      - 驱动:
+          - 驱动 API: zh-CN/api-reference/driver/index.md
+          - ADC: zh-CN/api-reference/driver/adc.md
+          - DMA: zh-CN/api-reference/driver/dma.md
+          - eFuse:
+              - eFuse Core: zh-CN/api-reference/driver/efuse/core.md
+              - eFuse User: zh-CN/api-reference/driver/efuse/user.md
+          - GPIO: zh-CN/api-reference/driver/gpio.md
+          - I2C: zh-CN/api-reference/driver/i2c.md
+          - I2S: zh-CN/api-reference/driver/i2s.md
+          - Pinctrl: zh-CN/api-reference/driver/pinctrl.md
+          - PWM: zh-CN/api-reference/driver/pwm.md
+          - SDIO: zh-CN/api-reference/driver/sdio.md
+          - Security:
+              - Security: zh-CN/api-reference/driver/security/index.md
+              - cipher: zh-CN/api-reference/driver/security/cipher.md
+              - hash: zh-CN/api-reference/driver/security/hash.md
+              - security_init: zh-CN/api-reference/driver/security/hw_security_init.md
+              - km: zh-CN/api-reference/driver/security/km.md
+              - pke: zh-CN/api-reference/driver/security/pke.md
+              - trng: zh-CN/api-reference/driver/security/trng.md
+          - SPI: zh-CN/api-reference/driver/spi.md
+          - Timer: zh-CN/api-reference/driver/timer.md
+          - Tsensor: zh-CN/api-reference/driver/tsensor.md
+          - UART: zh-CN/api-reference/driver/uart.md
+          - Watchdog: zh-CN/api-reference/driver/watchdog.md
+      - 中间件:
+          - 中间件 API: zh-CN/api-reference/middleware/index.md
+          - BLE:
+              - Factory: zh-CN/api-reference/middleware/bts/ble/factory.md
+              - GAP: zh-CN/api-reference/middleware/bts/ble/gap.md
+              - GATT Client: zh-CN/api-reference/middleware/bts/ble/gatt/client.md
+              - GATT Server: zh-CN/api-reference/middleware/bts/ble/gatt/server.md
+          - BTS Common: zh-CN/api-reference/middleware/bts/common/common.md
+          - SLE:
+              - Connection: zh-CN/api-reference/middleware/bts/sle/connection.md
+              - Device: zh-CN/api-reference/middleware/bts/sle/device.md
+              - Service Factory: zh-CN/api-reference/middleware/bts/sle/service/factory.md
+              - Service OTA: zh-CN/api-reference/middleware/bts/sle/service/ota.md
+              - SSAP Client: zh-CN/api-reference/middleware/bts/sle/ssap/client.md
+              - SSAP Server: zh-CN/api-reference/middleware/bts/sle/ssap/server.md
+          - SLE CHBA: zh-CN/api-reference/middleware/bts/sle_chba/chba.md
+          - Wi-Fi:
+              - Algorithm: zh-CN/api-reference/middleware/services/wifi/alg.md
+              - Device: zh-CN/api-reference/middleware/services/wifi/device.md
+              - Hotspot: zh-CN/api-reference/middleware/services/wifi/hotspot.md
+              - P2P: zh-CN/api-reference/middleware/services/wifi/p2p.md
+              - Platform: zh-CN/api-reference/middleware/services/wifi/platform.md
+          - Utils:
+              - AT: zh-CN/api-reference/middleware/utils/at.md
+              - CRC: zh-CN/api-reference/middleware/utils/crc.md
+              - DFX: zh-CN/api-reference/middleware/utils/dfx.md
+              - NV: zh-CN/api-reference/middleware/utils/nv.md
+              - Partition: zh-CN/api-reference/middleware/utils/partition.md
+              - Update: zh-CN/api-reference/middleware/utils/update.md
+      - OS 抽象层:
+          - OS 抽象层 API: zh-CN/api-reference/osal/index.md
+          - Atomic: zh-CN/api-reference/osal/atomic.md
+          - Debug: zh-CN/api-reference/osal/debug.md
+          - Device: zh-CN/api-reference/osal/device.md
+          - Drvbox: zh-CN/api-reference/osal/drvbox.md
+          - Event: zh-CN/api-reference/osal/event.md
+          - File Operations: zh-CN/api-reference/osal/fileops.md
+          - Interrupt: zh-CN/api-reference/osal/interrupt.md
+          - Lock:
+              - Mutex: zh-CN/api-reference/osal/lock/mutex.md
+              - RWLock: zh-CN/api-reference/osal/lock/rwlock.md
+              - Spinlock: zh-CN/api-reference/osal/lock/spinlock.md
+          - Math:
+              - Arithmetic: zh-CN/api-reference/osal/math/arithmetic.md
+              - Bitmap: zh-CN/api-reference/osal/math/bitmap.md
+          - Memory:
+              - Address: zh-CN/api-reference/osal/memory/address.md
+              - Barrier: zh-CN/api-reference/osal/memory/barrier.md
+              - Cache: zh-CN/api-reference/osal/memory/cache.md
+          - Message Queue: zh-CN/api-reference/osal/msgqueue.md
+          - Others: zh-CN/api-reference/osal/others.md
+          - Proc: zh-CN/api-reference/osal/proc.md
+          - Schedule:
+              - Completion: zh-CN/api-reference/osal/schedule/completion.md
+              - Delayed Work: zh-CN/api-reference/osal/schedule/delaywork.md
+              - Task: zh-CN/api-reference/osal/schedule/task.md
+              - Wait: zh-CN/api-reference/osal/schedule/wait.md
+              - Work Queue: zh-CN/api-reference/osal/schedule/workqueue.md
+          - Semaphore: zh-CN/api-reference/osal/semaphore.md
+          - String: zh-CN/api-reference/osal/string.md
+          - Time: zh-CN/api-reference/osal/time.md
+  - 硬件资料:
+      - 硬件资料: zh-CN/hardware/index.md
+      - SoC Wi-Fi、BLE 和 SLE Combo 芯片硬件用户指南: zh-CN/hardware/SoC Wi-Fi、BLE和SLE Combo芯片 硬件用户指南/SoC Wi-Fi、BLE和SLE Combo芯片 硬件用户指南.md
+      - 单板硬件关键器件选型指导: zh-CN/hardware/单板硬件关键器件选型指导/单板硬件关键器件选型指导.md
+      - 射频测试用户指南: zh-CN/hardware/射频测试 用户指南/射频测试 用户指南.md
   - FAQ:
       - 常见问题: zh-CN/FAQ/index.md
       - 产测 FAQ: zh-CN/FAQ/manufacturing/index.md

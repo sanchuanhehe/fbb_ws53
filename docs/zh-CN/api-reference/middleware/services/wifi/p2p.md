@@ -1,4 +1,4 @@
-# p2p
+# P2P
 
 P2P (Wi-Fi Peer-to-Peer) 提供 Wi-Fi 直连功能，支持设备扫描、连接、断连及 GO (Group Owner) / GC (Group Client) 角色协商，实现无需接入点的点对点 Wi-Fi 通信。
 

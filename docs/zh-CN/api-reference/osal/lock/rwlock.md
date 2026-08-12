@@ -1,4 +1,4 @@
-# osal_rwlock
+# RWLock
 
 osal_rwlock 提供 OSAL (Operating System Abstraction Layer) 读写锁功能，用于多读单写场景下共享资源的并发访问保护，支持读端并发持有与写端独占访问。
 

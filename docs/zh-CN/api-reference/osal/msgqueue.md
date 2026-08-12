@@ -1,4 +1,4 @@
-﻿# msgqueue
+# MsgQueue
 
 msgqueue 提供操作系统抽象层 (OSAL, Operating System Abstract Layer) 的消息队列功能，支持消息队列的创建、删除、读写与状态查询操作，适用于 LiteOS 与 FreeRTOS 系统。
 

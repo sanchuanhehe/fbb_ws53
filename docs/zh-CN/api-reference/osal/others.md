@@ -1,4 +1,4 @@
-# others
+# Others
 
 others 模块提供 OSAL (OS Abstract Layer) 通用基础设施，核心为双向链表 (doubly linked list) 与哈希链表 (hash list) 的内联操作接口，涵盖链表节点的初始化、插入、删除、替换、移动、拼接、判空、切割与旋转等操作。所有接口以 static inline 函数形式实现于头文件中，无独立编译单元，不依赖 Kconfig 配置，可在任意包含该头文件的上下文中直接使用。模块还包含 OSAL 通用定义、错误码与 ioctl 辅助宏等头文件，为其他 OSAL 子模块提供基础类型与宏定义支撑。
 

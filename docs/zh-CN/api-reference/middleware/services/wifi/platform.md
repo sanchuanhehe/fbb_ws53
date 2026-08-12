@@ -1,4 +1,4 @@
-# platform
+# Platform
 
 platform 提供平台设备控制接口，支持平台低功耗模式开关设置与单板复位功能。
 

@@ -1,4 +1,4 @@
-# bts_gatt_client
+# GATT Client
 
 GATT (Generic Attribute Profile) client 提供 BLE (Bluetooth Low Energy) 通用属性规范客户端能力，支持向远端服务端发起服务发现、特征发现、特征描述符发现，以及按照句柄或 UUID (Universally Unique Identifier) 读取与写入属性值，并支持通过回调向应用上报发现结果、读写响应、MTU (Maximum Transmission Unit) 协商结果、Notification 与 Indication 等事件。
 

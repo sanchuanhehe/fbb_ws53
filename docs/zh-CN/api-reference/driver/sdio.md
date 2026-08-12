@@ -1,4 +1,4 @@
-# sdio
+# SDIO
 
 SDIO (Secure Digital Input Output) Slave 接口提供 SDIO 从设备侧的初始化、去初始化、软复位、消息收发与状态查询能力，支持中断回调注册、ADMA (ADMA Descriptor Table) 描述符配置与扩展信息读写，用于 DEVICE 与 HOST 之间的数据传输与消息交互。
 

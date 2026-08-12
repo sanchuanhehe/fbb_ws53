@@ -1,4 +1,4 @@
-# sle ssap server
+# SSAP Server
 
 SSAP (Service Access Protocol) server 提供 SLE (Star Flash Low Energy) 协议中服务接入协议服务端侧的能力，支持注册与注销服务端、注册回调函数、异步与同步添加服务/特征/描述符、启动与删除服务、回复读写响应以及按句柄或 UUID (Universally Unique Identifier) 向对端发送通知或指示。
 

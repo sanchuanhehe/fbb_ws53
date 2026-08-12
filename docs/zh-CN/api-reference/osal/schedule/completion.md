@@ -1,4 +1,4 @@
-# osal_completion
+# Completion
 
 osal_completion 提供完成量同步原语，用于线程间基于完成事件的阻塞等待与唤醒。该模块属于 OSAL (Operating System Abstraction Layer)，对 linux、liteos、freertos 等多操作系统的完成量接口进行统一封装，向上提供一致的同步 API (Application Programming Interface)。
 

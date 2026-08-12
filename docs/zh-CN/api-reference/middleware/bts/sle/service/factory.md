@@ -1,4 +1,4 @@
-# factory
+# Service Factory
 
 SLE (Star Flash Low Energy) factory manager 提供射频长发、长收、收发关闭与复位等工厂测试能力，并支持注册工厂管理回调函数以异步接收射频收发执行结果。
 

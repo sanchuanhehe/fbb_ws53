@@ -1,4 +1,4 @@
-# device
+# Device
 
 SLE (Star Flash Low Energy) device_manager 模块提供 SLE 协议栈的使能、去使能以及设备管理回调注册功能，用于在 SLE 设备上电后驱动协议栈进入工作状态并通过回调向应用层上报上电与协议栈使能/去使能结果。
 

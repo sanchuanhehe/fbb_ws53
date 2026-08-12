@@ -1,4 +1,4 @@
-# uart
+# UART
 
 UART (Universal Asynchronous Receiver/Transmitter) 提供串口的初始化、去初始化、属性配置与查询、收发数据（轮询、中断、DMA (Direct Memory Access)）、接收回调注册、错误回调注册、FIFO (First In First Out) 状态查询及低功耗挂起与恢复能力。
 

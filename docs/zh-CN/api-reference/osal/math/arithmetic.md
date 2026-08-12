@@ -1,4 +1,4 @@
-# arithmetic
+# Arithmetic
 
 arithmetic 提供 OSAL (Operating System Abstraction Layer) 数学运算功能，包括 64 位整数除法与取余运算、随机数生成，以及最大值、最小值、绝对值等常用数学计算宏。
 

@@ -1,4 +1,4 @@
-# osal_semaphore
+# Semaphore
 
 osal_semaphore 提供信号量功能，用于任务间同步与互斥，支持计数信号量与二值信号量的创建、获取、释放、超时获取、尝试获取及销毁操作。
 

@@ -1,4 +1,4 @@
-# spinlock
+# Spinlock
 
 spinlock 提供 OSAL (OS Abstract Layer) 自旋锁的初始化、加锁、解锁、尝试加锁与销毁功能，支持普通加锁、禁用软中断加锁、保存并禁用 IRQ (Interrupt Request) 状态加锁等多种中断处理模式。
 

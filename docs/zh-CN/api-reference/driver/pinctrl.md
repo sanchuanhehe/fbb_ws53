@@ -1,4 +1,4 @@
-# pinctrl
+# Pinctrl
 
 Pinctrl (Pin Multiplexing Control) 提供引脚复用与引脚配置功能，支持引脚复用模式、驱动能力、上下拉、输入使能与施密特触发状态的设置与获取，并支持低功耗场景下的挂起与恢复。
 

@@ -1,4 +1,4 @@
-# spi
+# SPI
 
 SPI (Serial Peripheral Interface) 提供串行外设接口的主机与从机模式数据收发能力，支持轮询、DMA (Direct Memory Access)、中断三种传输模式以及轮询与 DMA 自动切换模式，并支持 QSPI (Quad SPI) 帧格式、CRC (Cyclic Redundancy Check) 校验、环回测试与低功耗挂起恢复等配置。
 

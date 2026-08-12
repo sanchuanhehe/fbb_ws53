@@ -1,4 +1,4 @@
-# hotspot
+# Hotspot
 
 hotspot 提供 WiFi SoftAP (Software Access Point) 功能，支持开启/关闭热点、配置基本与扩展参数、查询已连接 STA (Station) 信息以及断开指定 STA 连接。
 

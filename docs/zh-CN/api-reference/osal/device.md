@@ -1,4 +1,4 @@
-# osal_device
+# Device
 
 osal_device 提供 OSAL (OS Abstract Layer) 的设备抽象层接口，封装设备创建、注册、注销与文件操作回调注册能力。提供轮询等待、内存映射页保护属性设置、SMC (Secure Monitor Call) 调用及电源管理回调等内核态设备操作接口。同时提供用户态设备打开、读写、控制与初始化接口。
 

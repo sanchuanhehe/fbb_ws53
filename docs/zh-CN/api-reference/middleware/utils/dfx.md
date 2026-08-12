@@ -1,4 +1,4 @@
-# dfx
+# DFX
 
 dfx (Design For eXcellence) 提供 DIAG (Diagnosis) 诊断通道的命令注册、报文上报、消息上报与统计量注册能力，并通过 diag_log 子模块提供 Error / Warning / Info / Debug 四个级别的日志打印接口。
 
