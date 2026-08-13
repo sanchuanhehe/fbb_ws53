@@ -2,7 +2,7 @@
 
 osal_rwlock 提供 OSAL (Operating System Abstraction Layer) 读写锁功能，用于多读单写场景下共享资源的并发访问保护，支持读端并发持有与写端独占访问。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/lock/osal_rwlock.h"
@@ -27,7 +27,7 @@ osal_rwlock 提供 OSAL (Operating System Abstraction Layer) 读写锁功能，�
 int osal_rwlock_init(osal_rwlock *rw_lock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/lock/osal_rwlock.h"
@@ -65,7 +65,7 @@ int osal_rwlock_init(osal_rwlock *rw_lock)
 void osal_rwlock_read_lock(osal_rwlock *rw_lock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/lock/osal_rwlock.h"
@@ -94,7 +94,7 @@ void osal_rwlock_read_lock(osal_rwlock *rw_lock)
 void osal_rwlock_read_unlock(osal_rwlock *rw_lock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/lock/osal_rwlock.h"
@@ -123,7 +123,7 @@ void osal_rwlock_read_unlock(osal_rwlock *rw_lock)
 void osal_rwlock_write_lock(osal_rwlock *rw_lock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/lock/osal_rwlock.h"
@@ -152,7 +152,7 @@ void osal_rwlock_write_lock(osal_rwlock *rw_lock)
 void osal_rwlock_write_unlock(osal_rwlock *rw_lock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/lock/osal_rwlock.h"
@@ -181,7 +181,7 @@ void osal_rwlock_write_unlock(osal_rwlock *rw_lock)
 void osal_rwlock_destory(osal_rwlock *rw_lock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/lock/osal_rwlock.h"

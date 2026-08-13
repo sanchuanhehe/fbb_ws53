@@ -2,7 +2,7 @@
 
 osal_device 提供 OSAL (OS Abstract Layer) 的设备抽象层接口，封装设备创建、注册、注销与文件操作回调注册能力。提供轮询等待、内存映射页保护属性设置、SMC (Secure Monitor Call) 调用及电源管理回调等内核态设备操作接口。同时提供用户态设备打开、读写、控制与初始化接口。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "device/osal_device.h"
@@ -46,7 +46,7 @@ osal_device 提供 OSAL (OS Abstract Layer) 的设备抽象层接口，封装设
 void osal_pm_lowpower_enter(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -69,7 +69,7 @@ void osal_pm_lowpower_enter(void)
 void osal_pm_lowpower_exit(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -92,7 +92,7 @@ void osal_pm_lowpower_exit(void)
 osal_dev * osal_dev_create(const char *name)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -125,7 +125,7 @@ osal_dev * osal_dev_create(const char *name)
 int osal_dev_destroy(osal_dev *dev)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -163,7 +163,7 @@ int osal_dev_destroy(osal_dev *dev)
 int osal_dev_register(osal_dev *dev)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -201,7 +201,7 @@ int osal_dev_register(osal_dev *dev)
 void osal_dev_unregister(osal_dev *dev)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -229,7 +229,7 @@ void osal_dev_unregister(osal_dev *dev)
 void osal_device_set_async(unsigned int minor)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -257,7 +257,7 @@ void osal_device_set_async(unsigned int minor)
 void osal_poll_wait(osal_poll *table, osal_wait *wait)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -287,7 +287,7 @@ void osal_poll_wait(osal_poll *table, osal_wait *wait)
 int osal_remap_pfn_range(osal_vm *vm, unsigned long addr, unsigned long pfn, unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -328,7 +328,7 @@ int osal_remap_pfn_range(osal_vm *vm, unsigned long addr, unsigned long pfn, uns
 int osal_try_to_freeze(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -355,7 +355,7 @@ int osal_try_to_freeze(void)
 int osal_set_freezable(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -382,7 +382,7 @@ int osal_set_freezable(void)
 int osal_kobject_uevent_env(osal_dev *dev, osal_kobject_action action, char *envp[])
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -421,7 +421,7 @@ int osal_kobject_uevent_env(osal_dev *dev, osal_kobject_action action, char *env
 int osal_fasync_helper(int fd, void *filp, int mode, void **fapp)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -463,7 +463,7 @@ int osal_fasync_helper(int fd, void *filp, int mode, void **fapp)
 void osal_fasync_notify(void **fapp, int sig, int band)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -494,7 +494,7 @@ void osal_fasync_notify(void **fapp, int sig, int band)
 void osal_pgprot_noncached(osal_vm *vm)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -523,7 +523,7 @@ void osal_pgprot_noncached(osal_vm *vm)
 void osal_pgprot_cached(osal_vm *vm)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -552,7 +552,7 @@ void osal_pgprot_cached(osal_vm *vm)
 void osal_pgprot_writecombine(osal_vm *vm)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -581,7 +581,7 @@ void osal_pgprot_writecombine(osal_vm *vm)
 void osal_smccc_smc(const osal_smccc_info *info, osal_smccc_res *res)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -611,7 +611,7 @@ void osal_smccc_smc(const osal_smccc_info *info, osal_smccc_res *res)
 int osal_opendev(const char *path, int flag, ...)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -650,7 +650,7 @@ int osal_opendev(const char *path, int flag, ...)
 int osal_closedev(int fd)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -687,7 +687,7 @@ int osal_closedev(int fd)
 int osal_readdev(int fd, void *buf, unsigned long count)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -727,7 +727,7 @@ int osal_readdev(int fd, void *buf, unsigned long count)
 int osal_writedev(int fd, const void *buf, unsigned long count)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -767,7 +767,7 @@ int osal_writedev(int fd, const void *buf, unsigned long count)
 int osal_ioctldev(int fd, unsigned int cmd, ...)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -806,7 +806,7 @@ int osal_ioctldev(int fd, unsigned int cmd, ...)
 int osal_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"
@@ -838,7 +838,7 @@ int osal_init(void)
 void osal_exit(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/device/osal_device.h"

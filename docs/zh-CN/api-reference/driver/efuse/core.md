@@ -2,7 +2,7 @@
 
 eFuse (One-Time-Programmable Electrically Erasable Fuse) 提供一次性可编程电可擦熔丝的读写访问能力，支持按位与按字节的数据读取和烧写，并可用于获取 Die-ID、Chip-ID、SoC-ID (System on Chip ID) 等芯片标识。本子模块为 efuse 核心接口集，来源头文件 include/driver/efuse.h。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/efuse.h"
@@ -33,7 +33,7 @@ eFuse (One-Time-Programmable Electrically Erasable Fuse) 提供一次性可编�
 errcode_t uapi_efuse_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse.h"
@@ -70,7 +70,7 @@ errcode_t uapi_efuse_init(void)
 errcode_t uapi_efuse_deinit(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse.h"
@@ -101,7 +101,7 @@ errcode_t uapi_efuse_deinit(void)
 errcode_t uapi_efuse_read_bit(uint8_t *value, uint32_t byte_number, uint8_t bit_pos)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse.h"
@@ -158,7 +158,7 @@ errcode_t uapi_efuse_read_bit(uint8_t *value, uint32_t byte_number, uint8_t bit_
 errcode_t uapi_efuse_read_buffer(uint8_t *buffer, uint32_t byte_number, uint16_t length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse.h"
@@ -210,7 +210,7 @@ errcode_t uapi_efuse_read_buffer(uint8_t *buffer, uint32_t byte_number, uint16_t
 errcode_t uapi_efuse_write_bit(uint32_t byte_number, uint8_t bit_pos)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse.h"
@@ -261,7 +261,7 @@ errcode_t uapi_efuse_write_bit(uint32_t byte_number, uint8_t bit_pos)
 errcode_t uapi_efuse_write_bit_with_flag(uint32_t byte_number, uint8_t bit_pos, uint32_t flag)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse.h"
@@ -310,7 +310,7 @@ errcode_t uapi_efuse_write_bit_with_flag(uint32_t byte_number, uint8_t bit_pos, 
 errcode_t uapi_efuse_write_buffer(uint32_t byte_number, const uint8_t *buffer, uint16_t length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse.h"
@@ -356,7 +356,7 @@ errcode_t uapi_efuse_write_buffer(uint32_t byte_number, const uint8_t *buffer, u
 errcode_t uapi_efuse_write_buffer_with_flag(uint32_t byte_number, const uint8_t *buffer, uint16_t length, uint32_t flag)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse.h"
@@ -399,7 +399,7 @@ errcode_t uapi_efuse_write_buffer_with_flag(uint32_t byte_number, const uint8_t 
 errcode_t uapi_efuse_get_die_id(uint8_t *buffer, uint16_t length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse.h"
@@ -449,7 +449,7 @@ errcode_t uapi_efuse_get_die_id(uint8_t *buffer, uint16_t length)
 errcode_t uapi_efuse_get_chip_id(uint8_t *buffer, uint16_t length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse.h"
@@ -495,7 +495,7 @@ errcode_t uapi_efuse_get_chip_id(uint8_t *buffer, uint16_t length)
 errcode_t uapi_efuse_calc_crc(const uint8_t *buffer, uint8_t length, uint8_t *crc)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse.h"
@@ -541,7 +541,7 @@ errcode_t uapi_efuse_calc_crc(const uint8_t *buffer, uint8_t length, uint8_t *cr
 errcode_t uapi_soc_read_id(uint8_t *id, uint16_t id_length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse.h"

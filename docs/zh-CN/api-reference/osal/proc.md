@@ -2,7 +2,7 @@
 
 proc 提供 /proc 文件系统的目录与文件管理能力，支持创建、删除 proc 目录与文件，并通过顺序写接口向 proc 文件输出内容，供用户空间读取模块的调试与状态信息。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "proc/osal_proc.h"
@@ -26,7 +26,7 @@ proc 提供 /proc 文件系统的目录与文件管理能力，支持创建、�
 void osal_proc_init(const char *name)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "proc/osal_proc.h"
@@ -61,7 +61,7 @@ void osal_proc_init(const char *name)
 void osal_proc_exit(const char *name)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "proc/osal_proc.h"
@@ -96,7 +96,7 @@ void osal_proc_exit(const char *name)
 void osal_remove_proc_entry(const char *name, osal_proc_entry *parent)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "proc/osal_proc.h"
@@ -132,7 +132,7 @@ void osal_remove_proc_entry(const char *name, osal_proc_entry *parent)
 osal_proc_entry *osal_create_proc_entry(const char *name, osal_proc_entry *parent)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "proc/osal_proc.h"
@@ -177,7 +177,7 @@ osal_proc_entry *osal_create_proc_entry(const char *name, osal_proc_entry *paren
 void osal_seq_printf(void *seqfile, const char *fmt, ...)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "proc/osal_proc.h"

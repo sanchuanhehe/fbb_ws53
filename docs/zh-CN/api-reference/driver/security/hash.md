@@ -2,7 +2,7 @@
 
 security_hash 提供 SHA-256 (Secure Hash Algorithm 256-bit) 哈希计算接口，基于安全硬件加速器对外提供单次计算与流式（start/update/finish）分块计算两种使用方式，输出 256 位（32 字节）摘要。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/security_unified/security_sha256.h"
@@ -25,7 +25,7 @@ security_hash 提供 SHA-256 (Secure Hash Algorithm 256-bit) 哈希计算接口�
 errcode_t uapi_drv_cipher_sha256_start(uint32_t *hash_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/security_sha256.h"
@@ -74,7 +74,7 @@ errcode_t uapi_drv_cipher_sha256_start(uint32_t *hash_handle)
 errcode_t uapi_drv_cipher_sha256_update(uint32_t hash_handle, const uint8_t *buf, uint32_t len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/security_sha256.h"
@@ -125,7 +125,7 @@ errcode_t uapi_drv_cipher_sha256_update(uint32_t hash_handle, const uint8_t *buf
 errcode_t uapi_drv_cipher_sha256_finish(uint32_t hash_handle, uint8_t *out, uint32_t *out_len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/security_sha256.h"
@@ -181,7 +181,7 @@ errcode_t uapi_drv_cipher_sha256_finish(uint32_t hash_handle, uint8_t *out, uint
 errcode_t uapi_drv_cipher_sha256(const uint8_t *buf, uint32_t len, uint8_t *out, uint32_t out_len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/security_sha256.h"

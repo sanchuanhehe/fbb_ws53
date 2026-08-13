@@ -2,7 +2,7 @@
 
 msgqueue 提供操作系统抽象层 (OSAL, Operating System Abstract Layer) 的消息队列功能，支持消息队列的创建、删除、读写与状态查询操作，适用于 LiteOS 与 FreeRTOS 系统。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "msgqueue/osal_msgqueue.h"
@@ -28,7 +28,7 @@ msgqueue 提供操作系统抽象层 (OSAL, Operating System Abstract Layer) 的
 int osal_msg_queue_create(const char *name, unsigned short queue_len, unsigned long *queue_id, unsigned int flags, unsigned short max_msgsize)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "msgqueue/osal_msgqueue.h"
@@ -89,7 +89,7 @@ int osal_msg_queue_create(const char *name, unsigned short queue_len, unsigned l
 int osal_msg_queue_write_copy(unsigned long queue_id, void *buffer_addr, unsigned int buffer_size, unsigned int timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "msgqueue/osal_msgqueue.h"
@@ -137,7 +137,7 @@ int osal_msg_queue_write_copy(unsigned long queue_id, void *buffer_addr, unsigne
 int osal_msg_queue_read_copy(unsigned long queue_id, void *buffer_addr, unsigned int *buffer_size, unsigned int timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "msgqueue/osal_msgqueue.h"
@@ -192,7 +192,7 @@ int osal_msg_queue_read_copy(unsigned long queue_id, void *buffer_addr, unsigned
 int osal_msg_queue_write_head_copy(unsigned long queue_id, void *buffer_addr, unsigned int buffer_size, unsigned int timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "msgqueue/osal_msgqueue.h"
@@ -233,7 +233,7 @@ int osal_msg_queue_write_head_copy(unsigned long queue_id, void *buffer_addr, un
 void osal_msg_queue_delete(unsigned long queue_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "msgqueue/osal_msgqueue.h"
@@ -266,7 +266,7 @@ void osal_msg_queue_delete(unsigned long queue_id)
 int osal_msg_queue_is_full(unsigned long queue_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "msgqueue/osal_msgqueue.h"
@@ -305,7 +305,7 @@ int osal_msg_queue_is_full(unsigned long queue_id)
 unsigned int osal_msg_queue_get_msg_num(unsigned long queue_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "msgqueue/osal_msgqueue.h"

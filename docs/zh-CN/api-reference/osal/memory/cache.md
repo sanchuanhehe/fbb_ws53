@@ -2,7 +2,7 @@
 
 cache 模块提供 DCache (Data Cache) 维护接口，作为 OSAL (OS Abstract Layer) 的组成部分，支持按内存区域执行 DCache 回写、失效与清理操作，覆盖 linux、liteos、seliteos 系统。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "kernel/osal/include/memory/osal_cache.h"
@@ -24,7 +24,7 @@ cache 模块提供 DCache (Data Cache) 维护接口，作为 OSAL (OS Abstract L
 void osal_dcache_region_wb(void *kvirt, unsigned long phys_addr, unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/memory/osal_cache.h"
@@ -54,7 +54,7 @@ void osal_dcache_region_wb(void *kvirt, unsigned long phys_addr, unsigned long s
 void osal_dcache_region_inv(void *addr, unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/memory/osal_cache.h"
@@ -83,7 +83,7 @@ void osal_dcache_region_inv(void *addr, unsigned long size)
 void osal_dcache_region_clean(void *addr, unsigned int size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/memory/osal_cache.h"

@@ -2,7 +2,7 @@
 
 atomic 提供 OSAL (OS Abstract Layer) 原子操作接口，对 osal_atomic 原子变量执行读取、设置、自增、自减、加法、减法及结果测试等不可分割的整数运算，支持 linux、liteos、freertos 等多种操作系统后端。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "atomic/osal_atomic.h"
@@ -33,7 +33,7 @@ atomic 提供 OSAL (OS Abstract Layer) 原子操作接口，对 osal_atomic 原�
 int osal_atomic_read(osal_atomic *atomic)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "atomic/osal_atomic.h"
@@ -70,7 +70,7 @@ int osal_atomic_read(osal_atomic *atomic)
 void osal_atomic_set(osal_atomic *atomic, int i)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "atomic/osal_atomic.h"
@@ -99,7 +99,7 @@ void osal_atomic_set(osal_atomic *atomic, int i)
 int osal_atomic_inc_return(osal_atomic *atomic)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "atomic/osal_atomic.h"
@@ -132,7 +132,7 @@ int osal_atomic_inc_return(osal_atomic *atomic)
 int osal_atomic_add_return(osal_atomic *atomic, int count)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "atomic/osal_atomic.h"
@@ -165,7 +165,7 @@ int osal_atomic_add_return(osal_atomic *atomic, int count)
 int osal_atomic_dec_return(osal_atomic *atomic)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "atomic/osal_atomic.h"
@@ -198,7 +198,7 @@ int osal_atomic_dec_return(osal_atomic *atomic)
 void osal_atomic_inc(osal_atomic *atomic)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "atomic/osal_atomic.h"
@@ -226,7 +226,7 @@ void osal_atomic_inc(osal_atomic *atomic)
 void osal_atomic_sub(osal_atomic *atomic, unsigned int count)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "atomic/osal_atomic.h"
@@ -251,7 +251,7 @@ void osal_atomic_sub(osal_atomic *atomic, unsigned int count)
 void osal_atomic_dec(osal_atomic *atomic)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "atomic/osal_atomic.h"
@@ -275,7 +275,7 @@ void osal_atomic_dec(osal_atomic *atomic)
 void osal_atomic_add(osal_atomic *atomic, int count)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "atomic/osal_atomic.h"
@@ -300,7 +300,7 @@ void osal_atomic_add(osal_atomic *atomic, int count)
 int osal_atomic_dec_and_test(osal_atomic *atomic)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "atomic/osal_atomic.h"
@@ -334,7 +334,7 @@ int osal_atomic_dec_and_test(osal_atomic *atomic)
 int osal_atomic_inc_and_test(osal_atomic *atomic)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "atomic/osal_atomic.h"
@@ -368,7 +368,7 @@ int osal_atomic_inc_and_test(osal_atomic *atomic)
 int osal_atomic_inc_not_zero(osal_atomic *atomic)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "atomic/osal_atomic.h"

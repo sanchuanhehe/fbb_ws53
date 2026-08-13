@@ -2,7 +2,7 @@
 
 fileops 提供内核态文件操作抽象接口，支持文件的打开、关闭、读写、同步、定位、删除及截断操作，屏蔽 Linux、LiteOS、FreeRTOS 等多操作系统底层差异。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "osal/fileops/osal_fileops.h"
@@ -27,7 +27,7 @@ fileops 提供内核态文件操作抽象接口，支持文件的打开、关闭
 void *osal_klib_fopen(const char *file, int flags, int mode)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/fileops/osal_fileops.h"
@@ -67,7 +67,7 @@ void *osal_klib_fopen(const char *file, int flags, int mode)
 void osal_klib_fclose(void *filp)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/fileops/osal_fileops.h"
@@ -95,7 +95,7 @@ void osal_klib_fclose(void *filp)
 int osal_klib_fwrite(const char *buf, unsigned long size, void *filp)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/fileops/osal_fileops.h"
@@ -135,7 +135,7 @@ int osal_klib_fwrite(const char *buf, unsigned long size, void *filp)
 int osal_klib_fread(char *buf, unsigned long size, void *filp)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/fileops/osal_fileops.h"
@@ -180,7 +180,7 @@ int osal_klib_fread(char *buf, unsigned long size, void *filp)
 void osal_klib_fsync(void *filp)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/fileops/osal_fileops.h"
@@ -209,7 +209,7 @@ void osal_klib_fsync(void *filp)
 int osal_klib_fseek(long long offset, int whence, void *filp)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/fileops/osal_fileops.h"

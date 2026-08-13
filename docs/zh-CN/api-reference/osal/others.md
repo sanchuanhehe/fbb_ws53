@@ -2,7 +2,7 @@
 
 others 模块提供 OSAL (OS Abstract Layer) 通用基础设施，核心为双向链表 (doubly linked list) 与哈希链表 (hash list) 的内联操作接口，涵盖链表节点的初始化、插入、删除、替换、移动、拼接、判空、切割与旋转等操作。所有接口以 static inline 函数形式实现于头文件中，无独立编译单元，不依赖 Kconfig 配置，可在任意包含该头文件的上下文中直接使用。模块还包含 OSAL 通用定义、错误码与 ioctl 辅助宏等头文件，为其他 OSAL 子模块提供基础类型与宏定义支撑。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "osal_list.h"
@@ -56,7 +56,7 @@ others 模块提供 OSAL (OS Abstract Layer) 通用基础设施，核心为双�
 void OSAL_INIT_LIST_HEAD(struct osal_list_head *list)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -89,7 +89,7 @@ void OSAL_INIT_LIST_HEAD(struct osal_list_head *list)
 void osal___list_add(struct osal_list_head *_new, struct osal_list_head *prev, struct osal_list_head *next)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -120,7 +120,7 @@ void osal___list_add(struct osal_list_head *_new, struct osal_list_head *prev, s
 void osal_list_add(struct osal_list_head *cur, struct osal_list_head *head)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -155,7 +155,7 @@ void osal_list_add(struct osal_list_head *cur, struct osal_list_head *head)
 void osal_list_add_tail(struct osal_list_head *cur, struct osal_list_head *head)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -191,7 +191,7 @@ void osal_list_add_tail(struct osal_list_head *cur, struct osal_list_head *head)
 void osal___list_del(struct osal_list_head *prev, struct osal_list_head *next)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -221,7 +221,7 @@ void osal___list_del(struct osal_list_head *prev, struct osal_list_head *next)
 void osal___list_del_entry(struct osal_list_head *entry)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -250,7 +250,7 @@ void osal___list_del_entry(struct osal_list_head *entry)
 void osal_list_del(struct osal_list_head *entry)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -285,7 +285,7 @@ void osal_list_del(struct osal_list_head *entry)
 void osal_list_replace(struct osal_list_head *old, struct osal_list_head *_new)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -315,7 +315,7 @@ void osal_list_replace(struct osal_list_head *old, struct osal_list_head *_new)
 void osal_list_replace_init(struct osal_list_head *old, struct osal_list_head *_new)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -344,7 +344,7 @@ void osal_list_replace_init(struct osal_list_head *old, struct osal_list_head *_
 void osal_list_del_init(struct osal_list_head *entry)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -377,7 +377,7 @@ void osal_list_del_init(struct osal_list_head *entry)
 void osal_list_move(struct osal_list_head *list, struct osal_list_head *head)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -410,7 +410,7 @@ void osal_list_move(struct osal_list_head *list, struct osal_list_head *head)
 void osal_list_move_tail(struct osal_list_head *list, struct osal_list_head *head)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -439,7 +439,7 @@ void osal_list_move_tail(struct osal_list_head *list, struct osal_list_head *hea
 int osal_list_is_last(const struct osal_list_head *list, const struct osal_list_head *head)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -478,7 +478,7 @@ int osal_list_is_last(const struct osal_list_head *list, const struct osal_list_
 int osal_list_empty(const struct osal_list_head *head)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -520,7 +520,7 @@ int osal_list_empty(const struct osal_list_head *head)
 int osal_list_empty_careful(const struct osal_list_head *head)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -559,7 +559,7 @@ int osal_list_empty_careful(const struct osal_list_head *head)
 void osal_list_rotate_left(struct osal_list_head *head)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -586,7 +586,7 @@ void osal_list_rotate_left(struct osal_list_head *head)
 int osal_list_is_singular(const struct osal_list_head *head)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -622,7 +622,7 @@ int osal_list_is_singular(const struct osal_list_head *head)
 void osal___list_cut_position(struct osal_list_head *list, struct osal_list_head *head, struct osal_list_head *entry)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -652,7 +652,7 @@ void osal___list_cut_position(struct osal_list_head *list, struct osal_list_head
 void osal_list_cut_position(struct osal_list_head *list, struct osal_list_head *head, struct osal_list_head *entry)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -684,7 +684,7 @@ void osal_list_cut_position(struct osal_list_head *list, struct osal_list_head *
 void osal___list_splice(const struct osal_list_head *list, struct osal_list_head *prev, struct osal_list_head *next)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -714,7 +714,7 @@ void osal___list_splice(const struct osal_list_head *list, struct osal_list_head
 void osal_list_splice(const struct osal_list_head *list, struct osal_list_head *head)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -744,7 +744,7 @@ void osal_list_splice(const struct osal_list_head *list, struct osal_list_head *
 void osal_list_splice_tail(struct osal_list_head *list, struct osal_list_head *head)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -774,7 +774,7 @@ void osal_list_splice_tail(struct osal_list_head *list, struct osal_list_head *h
 void osal_list_splice_init(struct osal_list_head *list, struct osal_list_head *head)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -804,7 +804,7 @@ void osal_list_splice_init(struct osal_list_head *list, struct osal_list_head *h
 void osal_list_splice_tail_init(struct osal_list_head *list, struct osal_list_head *head)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -834,7 +834,7 @@ void osal_list_splice_tail_init(struct osal_list_head *list, struct osal_list_he
 void INIT_OSAL_HLIST_NODE(struct osal_hlist_node *h)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -861,7 +861,7 @@ void INIT_OSAL_HLIST_NODE(struct osal_hlist_node *h)
 int osal_hlist_unhashed(const struct osal_hlist_node *h)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -897,7 +897,7 @@ int osal_hlist_unhashed(const struct osal_hlist_node *h)
 int osal_hlist_empty(const struct osal_hlist_head *h)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -933,7 +933,7 @@ int osal_hlist_empty(const struct osal_hlist_head *h)
 void osal___hlist_del(struct osal_hlist_node *n)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -961,7 +961,7 @@ void osal___hlist_del(struct osal_hlist_node *n)
 void osal_hlist_del(struct osal_hlist_node *n)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -989,7 +989,7 @@ void osal_hlist_del(struct osal_hlist_node *n)
 void osal_hlist_del_init(struct osal_hlist_node *n)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -1017,7 +1017,7 @@ void osal_hlist_del_init(struct osal_hlist_node *n)
 void osal_hlist_add_head(struct osal_hlist_node *n, struct osal_hlist_head *h)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -1046,7 +1046,7 @@ void osal_hlist_add_head(struct osal_hlist_node *n, struct osal_hlist_head *h)
 void osal_hlist_add_before(struct osal_hlist_node *n, struct osal_hlist_node *next)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -1075,7 +1075,7 @@ void osal_hlist_add_before(struct osal_hlist_node *n, struct osal_hlist_node *ne
 void osal_hlist_add_after(struct osal_hlist_node *n, struct osal_hlist_node *next)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -1105,7 +1105,7 @@ void osal_hlist_add_after(struct osal_hlist_node *n, struct osal_hlist_node *nex
 void osal_hlist_add_fake(struct osal_hlist_node *n)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"
@@ -1132,7 +1132,7 @@ void osal_hlist_add_fake(struct osal_hlist_node *n)
 void osal_hlist_move_list(struct osal_hlist_head *old, struct osal_hlist_head *cur)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_list.h"

@@ -2,7 +2,7 @@
 
 SLE (Star Flash Low Energy) CHBA manager 提供 SLE CHBA 网络设备管理能力，支持基于 SLE 链路的网络设备创建、销毁、链路维护与数据收发，并通过回调机制向上层通知发送队列状态、链路状态及上行数据。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/services/bts/sle_chba/sle_chba_manager.h"
@@ -28,7 +28,7 @@ SLE (Star Flash Low Energy) CHBA manager 提供 SLE CHBA 网络设备管理能�
 errcode_t sle_chba_netdev_create(uint8_t chba_role, uint8_t chba_mode)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle_chba/sle_chba_manager.h"
@@ -70,7 +70,7 @@ errcode_t sle_chba_netdev_create(uint8_t chba_role, uint8_t chba_mode)
 errcode_t sle_chba_netdev_destroy(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle_chba/sle_chba_manager.h"
@@ -101,7 +101,7 @@ errcode_t sle_chba_netdev_destroy(void)
 errcode_t sle_chba_netdev_add_link(uint16_t conn_id, const sle_addr_t *remote_addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle_chba/sle_chba_manager.h"
@@ -143,7 +143,7 @@ errcode_t sle_chba_netdev_add_link(uint16_t conn_id, const sle_addr_t *remote_ad
 errcode_t sle_chba_netdev_del_link(uint16_t conn_id, const sle_addr_t *remote_addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle_chba/sle_chba_manager.h"
@@ -185,7 +185,7 @@ errcode_t sle_chba_netdev_del_link(uint16_t conn_id, const sle_addr_t *remote_ad
 errcode_t sle_chba_netdev_get_linkinfo(uint16_t conn_id, sle_ip_link_info *link)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle_chba/sle_chba_manager.h"
@@ -228,7 +228,7 @@ errcode_t sle_chba_netdev_get_linkinfo(uint16_t conn_id, sle_ip_link_info *link)
 errcode_t sle_chba_netdev_driver_send(uint8_t *data, uint16_t len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle_chba/sle_chba_manager.h"
@@ -271,7 +271,7 @@ errcode_t sle_chba_netdev_driver_send(uint8_t *data, uint16_t len)
 errcode_t sle_chba_netdev_register_callbacks(sle_chba_netdev_callbacks_t *func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle_chba/sle_chba_manager.h"

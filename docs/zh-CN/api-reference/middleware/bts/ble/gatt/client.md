@@ -2,7 +2,7 @@
 
 GATT (Generic Attribute Profile) client 提供 BLE (Bluetooth Low Energy) 通用属性规范客户端能力，支持向远端服务端发起服务发现、特征发现、特征描述符发现，以及按照句柄或 UUID (Universally Unique Identifier) 读取与写入属性值，并支持通过回调向应用上报发现结果、读写响应、MTU (Maximum Transmission Unit) 协商结果、Notification 与 Indication 等事件。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_client.h"
@@ -32,7 +32,7 @@ GATT (Generic Attribute Profile) client 提供 BLE (Bluetooth Low Energy) 通用
 errcode_t gattc_register_client(bt_uuid_t *app_uuid, uint8_t *client_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_client.h"
@@ -76,7 +76,7 @@ errcode_t gattc_register_client(bt_uuid_t *app_uuid, uint8_t *client_id)
 errcode_t gattc_unregister_client(uint8_t client_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_client.h"
@@ -113,7 +113,7 @@ errcode_t gattc_unregister_client(uint8_t client_id)
 errcode_t gattc_discovery_service(uint8_t client_id, uint16_t conn_id, bt_uuid_t *uuid)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_client.h"
@@ -153,7 +153,7 @@ errcode_t gattc_discovery_service(uint8_t client_id, uint16_t conn_id, bt_uuid_t
 errcode_t gattc_discovery_character(uint8_t client_id, uint16_t conn_id, gattc_discovery_character_param_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_client.h"
@@ -193,7 +193,7 @@ errcode_t gattc_discovery_character(uint8_t client_id, uint16_t conn_id, gattc_d
 errcode_t gattc_discovery_descriptor(uint8_t client_id, uint16_t conn_id, uint16_t character_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_client.h"
@@ -232,7 +232,7 @@ errcode_t gattc_discovery_descriptor(uint8_t client_id, uint16_t conn_id, uint16
 errcode_t gattc_read_req_by_handle(uint8_t client_id, uint16_t conn_id, uint16_t handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_client.h"
@@ -271,7 +271,7 @@ errcode_t gattc_read_req_by_handle(uint8_t client_id, uint16_t conn_id, uint16_t
 errcode_t gattc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, gattc_read_req_by_uuid_param_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_client.h"
@@ -310,7 +310,7 @@ errcode_t gattc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, gattc_read
 errcode_t gattc_write_req(uint8_t client_id, uint16_t conn_id, gattc_handle_value_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_client.h"
@@ -349,7 +349,7 @@ errcode_t gattc_write_req(uint8_t client_id, uint16_t conn_id, gattc_handle_valu
 errcode_t gattc_write_cmd(uint8_t client_id, uint16_t conn_id, gattc_handle_value_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_client.h"
@@ -388,7 +388,7 @@ errcode_t gattc_write_cmd(uint8_t client_id, uint16_t conn_id, gattc_handle_valu
 errcode_t gattc_exchange_mtu_req(uint8_t client_id, uint16_t conn_id, uint16_t mtu_size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_client.h"
@@ -427,7 +427,7 @@ errcode_t gattc_exchange_mtu_req(uint8_t client_id, uint16_t conn_id, uint16_t m
 errcode_t gattc_register_callbacks(gattc_callbacks_t *func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_client.h"

@@ -2,7 +2,7 @@
 
 PWM (Pulse Width Modulation) 提供脉冲宽度调制信号的生成与管理功能，支持多通道配置、占空比与周期设置、通道分组以及完成中断回调。模块支持 V150 与 V151 两套 HAL 实现，V151 额外提供通道分组、配置更新与预加载能力，并支持低功耗场景下的挂起与恢复。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -40,7 +40,7 @@ PWM (Pulse Width Modulation) 提供脉冲宽度调制信号的生成与管理功
 errcode_t uapi_pwm_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -76,7 +76,7 @@ errcode_t uapi_pwm_init(void)
 void uapi_pwm_deinit(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -103,7 +103,7 @@ void uapi_pwm_deinit(void)
 errcode_t uapi_pwm_open(uint8_t channel, const pwm_config_t *cfg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -148,7 +148,7 @@ errcode_t uapi_pwm_open(uint8_t channel, const pwm_config_t *cfg)
 errcode_t uapi_pwm_close(uint8_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -193,7 +193,7 @@ errcode_t uapi_pwm_close(uint8_t channel)
 errcode_t uapi_pwm_start(uint8_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -238,7 +238,7 @@ errcode_t uapi_pwm_start(uint8_t channel)
 uint32_t uapi_pwm_get_frequency(uint8_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -275,7 +275,7 @@ uint32_t uapi_pwm_get_frequency(uint8_t channel)
 errcode_t uapi_pwm_stop(uint8_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -322,7 +322,7 @@ errcode_t uapi_pwm_stop(uint8_t channel)
 errcode_t uapi_pwm_update_duty_ratio(uint8_t channel, uint32_t low_time, uint32_t high_time)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -371,7 +371,7 @@ errcode_t uapi_pwm_update_duty_ratio(uint8_t channel, uint32_t low_time, uint32_
 errcode_t uapi_pwm_isr(uint8_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -409,7 +409,7 @@ errcode_t uapi_pwm_isr(uint8_t channel)
 errcode_t uapi_pwm_register_interrupt(uint8_t channel, pwm_callback_t callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -455,7 +455,7 @@ errcode_t uapi_pwm_register_interrupt(uint8_t channel, pwm_callback_t callback)
 errcode_t uapi_pwm_unregister_interrupt(uint8_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -496,7 +496,7 @@ errcode_t uapi_pwm_unregister_interrupt(uint8_t channel)
 errcode_t uapi_pwm_set_group(uint8_t group, const uint8_t *channel_set, uint32_t channel_set_len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -547,7 +547,7 @@ errcode_t uapi_pwm_set_group(uint8_t group, const uint8_t *channel_set, uint32_t
 errcode_t uapi_pwm_clear_group(uint8_t group)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -592,7 +592,7 @@ errcode_t uapi_pwm_clear_group(uint8_t group)
 errcode_t uapi_pwm_start_group(uint8_t group)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -641,7 +641,7 @@ errcode_t uapi_pwm_start_group(uint8_t group)
 errcode_t uapi_pwm_stop_group(uint8_t group)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -690,7 +690,7 @@ errcode_t uapi_pwm_stop_group(uint8_t group)
 errcode_t uapi_pwm_update_cfg(uint8_t channel, const pwm_config_t *cfg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -742,7 +742,7 @@ errcode_t uapi_pwm_update_cfg(uint8_t channel, const pwm_config_t *cfg)
 errcode_t uapi_pwm_config_preload(uint8_t group, uint8_t channel, const pwm_config_t *cfg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -791,7 +791,7 @@ errcode_t uapi_pwm_config_preload(uint8_t group, uint8_t channel, const pwm_conf
 errcode_t uapi_pwm_suspend(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"
@@ -838,7 +838,7 @@ errcode_t uapi_pwm_suspend(uintptr_t arg)
 errcode_t uapi_pwm_resume(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pwm.h"

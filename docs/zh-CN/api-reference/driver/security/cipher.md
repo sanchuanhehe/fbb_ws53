@@ -2,7 +2,7 @@
 
 cipher 提供 security_unified 模块下对称加解密、AEAD (Authenticated Encryption with Associated Data)、消息认证码、哈希与 KDF (Key Derivation Function) 的统一密码服务接口。支持 AES (Advanced Encryption Standard)/SM4/TDES (Triple Data Encryption Standard) 等对称算法的 ECB/CBC/CTR/CCM/GCM 等工作模式，以及 SHA (Secure Hash Algorithm)/SM3 哈希与 PBKDF2/HKDF 密钥派生。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "driver/security_unified/cipher.h"
@@ -50,7 +50,7 @@ cipher 提供 security_unified 模块下对称加解密、AEAD (Authenticated En
 errcode_t uapi_drv_cipher_symc_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -87,7 +87,7 @@ errcode_t uapi_drv_cipher_symc_init(void)
 errcode_t uapi_drv_cipher_symc_deinit(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -123,7 +123,7 @@ errcode_t uapi_drv_cipher_symc_deinit(void)
 errcode_t uapi_drv_cipher_symc_create(uint32_t *symc_handle, const uapi_drv_cipher_symc_attr_t *symc_attr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -140,11 +140,16 @@ errcode_t uapi_drv_cipher_symc_create(uint32_t *symc_handle, const uapi_drv_ciph
 - 已通过uapi_drv_cipher_symc_init()完成初始化，返回成功状态
 - symc_attr指针不为NULL，且指向合法的属性结构体
 
-**入参**
+**出参**
 
 | 名称 | 参数类型 | 详细说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | symc_handle | uint32_t * | 指向创建的symc通道句柄的指针 | 不为NULL，用于输出通道句柄 |
+
+**入参**
+
+| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| ---- | ---- | ---- | ---- |
 | symc_attr | const [uapi_drv_cipher_symc_attr_t](#struct_uapi_drv_cipher_symc_attr_t) * | 指向symc通道属性结构体的指针 | 不为NULL |
 
 **返回值**
@@ -168,7 +173,7 @@ errcode_t uapi_drv_cipher_symc_create(uint32_t *symc_handle, const uapi_drv_ciph
 errcode_t uapi_drv_cipher_symc_destroy(uint32_t symc_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -211,7 +216,7 @@ errcode_t uapi_drv_cipher_symc_destroy(uint32_t symc_handle)
 errcode_t uapi_drv_cipher_symc_set_config(uint32_t symc_handle, const uapi_drv_cipher_symc_ctrl_t *symc_ctrl)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -256,7 +261,7 @@ errcode_t uapi_drv_cipher_symc_set_config(uint32_t symc_handle, const uapi_drv_c
 errcode_t uapi_drv_cipher_symc_get_config(uint32_t symc_handle, const uapi_drv_cipher_symc_ctrl_t *symc_ctrl)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -306,7 +311,7 @@ errcode_t uapi_drv_cipher_symc_get_config(uint32_t symc_handle, const uapi_drv_c
 errcode_t uapi_drv_cipher_symc_attach(uint32_t symc_handle, uint32_t keyslot_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -351,7 +356,7 @@ errcode_t uapi_drv_cipher_symc_attach(uint32_t symc_handle, uint32_t keyslot_han
 errcode_t uapi_drv_cipher_symc_detach(uint32_t symc_handle, uint32_t keyslot_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -396,7 +401,7 @@ errcode_t uapi_drv_cipher_symc_detach(uint32_t symc_handle, uint32_t keyslot_han
 errcode_t uapi_drv_cipher_symc_encrypt(uint32_t symc_handle, const uapi_drv_cipher_buf_attr_t *src_buf, const uapi_drv_cipher_buf_attr_t *dst_buf, uint32_t length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -449,7 +454,7 @@ errcode_t uapi_drv_cipher_symc_encrypt(uint32_t symc_handle, const uapi_drv_ciph
 errcode_t uapi_drv_cipher_symc_decrypt(uint32_t symc_handle, const uapi_drv_cipher_buf_attr_t *src_buf, const uapi_drv_cipher_buf_attr_t *dst_buf, uint32_t length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -502,7 +507,7 @@ errcode_t uapi_drv_cipher_symc_decrypt(uint32_t symc_handle, const uapi_drv_ciph
 errcode_t uapi_drv_cipher_symc_get_tag(uint32_t symc_handle, uint8_t *tag, uint32_t tag_length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -554,7 +559,7 @@ errcode_t uapi_drv_cipher_symc_get_tag(uint32_t symc_handle, uint8_t *tag, uint3
 errcode_t uapi_drv_cipher_mac_start(uint32_t *symc_handle, const uapi_drv_cipher_symc_mac_attr_t *mac_attr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -599,7 +604,7 @@ errcode_t uapi_drv_cipher_mac_start(uint32_t *symc_handle, const uapi_drv_cipher
 errcode_t uapi_drv_cipher_mac_update(uint32_t symc_handle, const uapi_drv_cipher_buf_attr_t *src_buf, uint32_t length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -644,7 +649,7 @@ errcode_t uapi_drv_cipher_mac_update(uint32_t symc_handle, const uapi_drv_cipher
 errcode_t uapi_drv_cipher_mac_finish(uint32_t symc_handle, uint8_t *mac, uint32_t *mac_length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -696,7 +701,7 @@ errcode_t uapi_drv_cipher_mac_finish(uint32_t symc_handle, uint8_t *mac, uint32_
 errcode_t uapi_drv_cipher_hash_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -733,7 +738,7 @@ errcode_t uapi_drv_cipher_hash_init(void)
 errcode_t uapi_drv_cipher_hash_deinit(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -769,7 +774,7 @@ errcode_t uapi_drv_cipher_hash_deinit(void)
 errcode_t uapi_drv_cipher_hash_start(uint32_t *hash_handle, const uapi_drv_cipher_hash_attr_t *hash_attr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -814,7 +819,7 @@ errcode_t uapi_drv_cipher_hash_start(uint32_t *hash_handle, const uapi_drv_ciphe
 errcode_t uapi_drv_cipher_hash_update(uint32_t hash_handle, const uapi_drv_cipher_buf_attr_t *src_buf, const uint32_t len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -859,7 +864,7 @@ errcode_t uapi_drv_cipher_hash_update(uint32_t hash_handle, const uapi_drv_ciphe
 errcode_t uapi_drv_cipher_hash_finish(uint32_t hash_handle, uint8_t *out, uint32_t *out_len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -911,7 +916,7 @@ errcode_t uapi_drv_cipher_hash_finish(uint32_t hash_handle, uint8_t *out, uint32
 errcode_t uapi_drv_cipher_hash_get(uint32_t hash_handle, uapi_drv_cipher_hash_clone_ctx_t *hash_clone_ctx)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -960,7 +965,7 @@ errcode_t uapi_drv_cipher_hash_get(uint32_t hash_handle, uapi_drv_cipher_hash_cl
 errcode_t uapi_drv_cipher_hash_set(uint32_t hash_handle, const uapi_drv_cipher_hash_clone_ctx_t *hash_clone_ctx)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -1004,7 +1009,7 @@ errcode_t uapi_drv_cipher_hash_set(uint32_t hash_handle, const uapi_drv_cipher_h
 errcode_t uapi_drv_cipher_hash_destroy(uint32_t hash_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -1046,7 +1051,7 @@ errcode_t uapi_drv_cipher_hash_destroy(uint32_t hash_handle)
 errcode_t uapi_drv_cipher_pbkdf2(const uapi_drv_cipher_kdf_pbkdf2_param_t *param, uint8_t *out, const uint32_t out_len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -1097,7 +1102,7 @@ errcode_t uapi_drv_cipher_pbkdf2(const uapi_drv_cipher_kdf_pbkdf2_param_t *param
 errcode_t uapi_drv_cipher_hkdf_extract(uapi_drv_cipher_hkdf_extract_t *extract_param, uint8_t *prk, uint32_t *prk_length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -1149,7 +1154,7 @@ errcode_t uapi_drv_cipher_hkdf_extract(uapi_drv_cipher_hkdf_extract_t *extract_p
 errcode_t uapi_drv_cipher_hkdf_expand(const uapi_drv_cipher_hkdf_expand_t *expand_param, uint8_t *okm, uint32_t okm_length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -1201,7 +1206,7 @@ errcode_t uapi_drv_cipher_hkdf_expand(const uapi_drv_cipher_hkdf_expand_t *expan
 errcode_t uapi_drv_cipher_hkdf(uapi_drv_cipher_hkdf_t *hkdf_param, uint8_t *okm, uint32_t okm_length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -1257,7 +1262,7 @@ errcode_t uapi_drv_cipher_symc_crypt(uapi_drv_cipher_symc_alg_t alg, uapi_drv_ci
 )
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/cipher.h"
@@ -1266,6 +1271,35 @@ errcode_t uapi_drv_cipher_symc_crypt(uapi_drv_cipher_symc_alg_t alg, uapi_drv_ci
 **功能说明**
 
 - 一步式对称加解密，支持多种算法与工作模式
+
+**入参**
+
+| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| ---- | ---- | ---- | ---- |
+| alg | [uapi_drv_cipher_symc_alg_t](#enum_uapi_drv_cipher_symc_alg_t) | 对称加密算法 | 有效枚举值 |
+| work_mode | [uapi_drv_cipher_symc_work_mode_t](#enum_uapi_drv_cipher_symc_work_mode_t) | 对称加密工作模式 | 有效枚举值 |
+| bit_width | [uapi_drv_cipher_symc_bit_width_t](#enum_uapi_drv_cipher_symc_bit_width_t) | 加密位宽 | 有效枚举值 |
+| src | const uint8_t * | 输入数据缓冲区 | 不为NULL |
+| data_len | uint32_t | 输入数据长度 | 大于0 |
+| iv | uint8_t[16] | 初始向量 | 长度为16字节 |
+| key | const uint8_t * | 明文密钥；为NULL时使用keyslot_handle指定的密钥槽 | 明文密钥或有效密钥槽二选一 |
+| key_len | uint32_t | 明文密钥长度 | 与算法要求一致 |
+| keyslot_handle | uint32_t | 密钥槽句柄 | key为NULL时必须有效 |
+| is_encrypt | bool | 加解密选择 | true：加密；false：解密 |
+
+**出参**
+
+| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| ---- | ---- | ---- | ---- |
+| dst | uint8_t * | 输出数据缓冲区 | 不为NULL，空间不小于data_len |
+
+**返回值**
+
+| 返回值 | 文字含义 | 触发场景 |
+| ---- | ---- | ---- |
+| ERRCODE_SUCC(0x0) | 成功 | 加解密完成 |
+| ERRCODE_INVALID_PARAM(0x80000001) | 参数无效 | 输入参数不满足约束 |
+| Other | 其他错误码，参考errcode_t | 执行失败 |
 
 ## Enumerations
 

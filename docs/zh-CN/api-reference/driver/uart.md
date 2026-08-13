@@ -2,7 +2,7 @@
 
 UART (Universal Asynchronous Receiver/Transmitter) 提供串口的初始化、去初始化、属性配置与查询、收发数据（轮询、中断、DMA (Direct Memory Access)）、接收回调注册、错误回调注册、FIFO (First In First Out) 状态查询及低功耗挂起与恢复能力。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "driver/uart.h"
@@ -47,7 +47,7 @@ UART (Universal Asynchronous Receiver/Transmitter) 提供串口的初始化、�
 errcode_t uapi_uart_init(uart_bus_t bus, const uart_pin_config_t *pins, const uart_attr_t *attr, const uart_extra_attr_t *extra_attr, uart_buffer_config_t *uart_buffer_config)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -93,7 +93,7 @@ errcode_t uapi_uart_init(uart_bus_t bus, const uart_pin_config_t *pins, const ua
 errcode_t uapi_uart_deinit(uart_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -139,7 +139,7 @@ errcode_t uapi_uart_deinit(uart_bus_t bus)
 errcode_t uapi_uart_set_attr(uart_bus_t bus, const uart_attr_t *attr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -178,7 +178,7 @@ errcode_t uapi_uart_set_attr(uart_bus_t bus, const uart_attr_t *attr)
 errcode_t uapi_uart_get_attr(uart_bus_t bus, const uart_attr_t *attr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -214,7 +214,7 @@ errcode_t uapi_uart_get_attr(uart_bus_t bus, const uart_attr_t *attr)
 bool uapi_uart_has_pending_transmissions(uart_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -249,7 +249,7 @@ bool uapi_uart_has_pending_transmissions(uart_bus_t bus)
 bool uapi_uart_rx_fifo_is_empty(uart_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -284,7 +284,7 @@ bool uapi_uart_rx_fifo_is_empty(uart_bus_t bus)
 bool uapi_uart_tx_fifo_is_empty(uart_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -319,7 +319,7 @@ bool uapi_uart_tx_fifo_is_empty(uart_bus_t bus)
 errcode_t uapi_uart_register_rx_callback(uart_bus_t bus, uart_rx_condition_t condition, uint32_t size, uart_rx_callback_t callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -367,7 +367,7 @@ errcode_t uapi_uart_register_rx_callback(uart_bus_t bus, uart_rx_condition_t con
 void uapi_uart_unregister_rx_callback(uart_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -399,7 +399,7 @@ void uapi_uart_unregister_rx_callback(uart_bus_t bus)
 errcode_t uapi_uart_register_parity_error_callback(uart_bus_t bus, uart_error_callback_t callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -442,7 +442,7 @@ errcode_t uapi_uart_register_parity_error_callback(uart_bus_t bus, uart_error_ca
 errcode_t uapi_uart_register_frame_error_callback(uart_bus_t bus, uart_error_callback_t callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -484,7 +484,7 @@ errcode_t uapi_uart_register_frame_error_callback(uart_bus_t bus, uart_error_cal
 errcode_t uapi_uart_register_overrun_error_callback(uart_bus_t bus, uart_error_callback_t callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -526,7 +526,7 @@ errcode_t uapi_uart_register_overrun_error_callback(uart_bus_t bus, uart_error_c
 int32_t uapi_uart_write(uart_bus_t bus, const uint8_t *buffer, uint32_t length, uint32_t timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -573,7 +573,7 @@ int32_t uapi_uart_write(uart_bus_t bus, const uint8_t *buffer, uint32_t length, 
 int32_t uapi_uart_write_nolock(uart_bus_t bus, const uint8_t *buffer, uint32_t length, uint32_t timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -617,7 +617,7 @@ int32_t uapi_uart_write_nolock(uart_bus_t bus, const uint8_t *buffer, uint32_t l
 errcode_t uapi_uart_write_int(uart_bus_t bus, const uint8_t *buffer, uint32_t length, void *params, uart_tx_callback_t finished_with_buffer_func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -667,7 +667,7 @@ errcode_t uapi_uart_write_int(uart_bus_t bus, const uint8_t *buffer, uint32_t le
 int32_t uapi_uart_write_by_dma(uart_bus_t bus, const void *buffer, uint32_t length, uart_write_dma_config_t *dma_cfg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -716,7 +716,7 @@ int32_t uapi_uart_write_by_dma(uart_bus_t bus, const void *buffer, uint32_t leng
 int32_t uapi_uart_read_by_dma(uart_bus_t bus, const void *buffer, uint32_t length, uart_write_dma_config_t *dma_cfg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -765,7 +765,7 @@ int32_t uapi_uart_read_by_dma(uart_bus_t bus, const void *buffer, uint32_t lengt
 errcode_t uapi_uart_register_read_by_dma_callback(uart_bus_t bus, uart_write_dma_config_t *dma_cfg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -775,13 +775,27 @@ errcode_t uapi_uart_register_read_by_dma_callback(uart_bus_t bus, uart_write_dma
 
 - 注册接收中断触发 DMA 搬运数据的回调配置
 
+**入参**
+
+| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| ---- | ---- | ---- | ---- |
+| bus | [uart_bus_t](#uart_bus_t) | 串口号 | 有效UART总线 |
+| dma_cfg | [uart_write_dma_config_t](#uart_write_dma_config_t) * | 接收数据时使用的DMA配置 | 不为NULL |
+
+**返回值**
+
+| 返回值 | 文字含义 | 触发场景 |
+| ---- | ---- | ---- |
+| ERRCODE_SUCC(0x0) | 成功 | 注册成功 |
+| Other | 其他错误码，参考errcode_t | 注册失败 |
+
 ### uapi_uart_unregister_read_by_dma_callback <a id="uapi_uart_unregister_read_by_dma_callback"></a>
 
 ```c
 void uapi_uart_unregister_read_by_dma_callback(uart_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -791,13 +805,23 @@ void uapi_uart_unregister_read_by_dma_callback(uart_bus_t bus)
 
 - 注销接收中断触发 DMA 搬运数据的回调配置
 
+**入参**
+
+| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| ---- | ---- | ---- | ---- |
+| bus | [uart_bus_t](#uart_bus_t) | 串口号 | 有效UART总线 |
+
+**返回值**
+
+无（void）
+
 ### uapi_uart_recv_raw_data_end_transfer <a id="uapi_uart_recv_raw_data_end_transfer"></a>
 
 ```c
 errcode_t uapi_uart_recv_raw_data_end_transfer(uart_bus_t uart_bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -813,7 +837,7 @@ errcode_t uapi_uart_recv_raw_data_end_transfer(uart_bus_t uart_bus)
 errcode_t uapi_uart_dma_recv_raw_data(uart_bus_t uart_bus, uart_idle_int_receive_cb_t callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -829,7 +853,7 @@ errcode_t uapi_uart_dma_recv_raw_data(uart_bus_t uart_bus, uart_idle_int_receive
 int32_t uapi_uart_read(uart_bus_t bus, const uint8_t *buffer, uint32_t length, uint32_t timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -876,7 +900,7 @@ int32_t uapi_uart_read(uart_bus_t bus, const uint8_t *buffer, uint32_t length, u
 errcode_t uapi_uart_update_rx_buff(uart_bus_t bus, uint8_t *rx_buffer, uint16_t rx_buffer_size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -919,7 +943,7 @@ errcode_t uapi_uart_update_rx_buff(uart_bus_t bus, uint8_t *rx_buffer, uint16_t 
 errcode_t uapi_uart_suspend(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -960,7 +984,7 @@ errcode_t uapi_uart_suspend(uintptr_t arg)
 errcode_t uapi_uart_resume(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -1001,7 +1025,7 @@ errcode_t uapi_uart_resume(uintptr_t arg)
 errcode_t uapi_uart_register_write_by_dma_callback(uart_bus_t bus, uart_tx_by_dma_callback_t tx_dma_cb)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/uart.h"
@@ -1010,6 +1034,20 @@ errcode_t uapi_uart_register_write_by_dma_callback(uart_bus_t bus, uart_tx_by_dm
 **功能说明**
 
 - 注册在 UART DMA 发送完成中断中直接进行 DMA 写的回调
+
+**入参**
+
+| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| ---- | ---- | ---- | ---- |
+| bus | [uart_bus_t](#uart_bus_t) | 串口号 | 有效UART总线 |
+| tx_dma_cb | uart_tx_by_dma_callback_t | DMA发送完成回调 | 不为NULL |
+
+**返回值**
+
+| 返回值 | 文字含义 | 触发场景 |
+| ---- | ---- | ---- |
+| ERRCODE_SUCC(0x0) | 成功 | 注册成功 |
+| Other | 其他错误码，参考errcode_t | 注册失败 |
 
 ## Type definitions
 
@@ -1373,9 +1411,6 @@ typedef struct uart_extra_attr {
     uint8_t tx_int_threshold;
     bool rx_dma_enable;
     uint8_t rx_int_threshold;
-#if defined(CONFIG_UART_SUPPORT_RX_THREAD)
-    bool rx_thread_enable;
-#endif
 } hal_uart_extra_attr_t;
 ```
 
@@ -1391,7 +1426,6 @@ typedef struct uart_extra_attr {
 | tx_int_threshold | uint8_t | 触发中断的TX FIFO水线 |
 | rx_dma_enable | bool | RX是否使用DMA。false: 使用uapi_uart_read接收; true: 使用uapi_uart_read_by_dma接收 |
 | rx_int_threshold | uint8_t | 触发中断的RX FIFO水线 |
-| rx_thread_enable | bool | RX是否允许通过线程处理（仅在 CONFIG_UART_SUPPORT_RX_THREAD 使能时存在） |
 
 ### uart_buffer_config_t <a id="uart_buffer_config_t"></a>
 

@@ -2,7 +2,7 @@
 
 I2C (Inter-Integrated Circuit) 提供集成电路间串行总线的初始化、去初始化、波特率配置与主从机数据收发能力，支持轮询、中断和 DMA 三种传输模式以及低功耗挂起/恢复。来源 `include/driver/i2c.h`。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -36,7 +36,7 @@ I2C (Inter-Integrated Circuit) 提供集成电路间串行总线的初始化、�
 errcode_t uapi_i2c_master_init(i2c_bus_t bus, uint32_t baudrate, uint8_t hscode)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -87,7 +87,7 @@ errcode_t uapi_i2c_master_init(i2c_bus_t bus, uint32_t baudrate, uint8_t hscode)
 errcode_t uapi_i2c_master_write(i2c_bus_t bus, uint16_t dev_addr, i2c_data_t *data)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -141,7 +141,7 @@ errcode_t uapi_i2c_master_write(i2c_bus_t bus, uint16_t dev_addr, i2c_data_t *da
 errcode_t uapi_i2c_master_read(i2c_bus_t bus, uint16_t dev_addr, i2c_data_t *data)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -195,7 +195,7 @@ errcode_t uapi_i2c_master_read(i2c_bus_t bus, uint16_t dev_addr, i2c_data_t *dat
 errcode_t uapi_i2c_master_writeread(i2c_bus_t bus, uint16_t dev_addr, i2c_data_t *data)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -248,7 +248,7 @@ errcode_t uapi_i2c_master_writeread(i2c_bus_t bus, uint16_t dev_addr, i2c_data_t
 errcode_t uapi_i2c_slave_init(i2c_bus_t bus, uint32_t baudrate, uint16_t addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -299,7 +299,7 @@ errcode_t uapi_i2c_slave_init(i2c_bus_t bus, uint32_t baudrate, uint16_t addr)
 errcode_t uapi_i2c_slave_write(i2c_bus_t bus, i2c_data_t *data)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -352,7 +352,7 @@ errcode_t uapi_i2c_slave_write(i2c_bus_t bus, i2c_data_t *data)
 errcode_t uapi_i2c_slave_read(i2c_bus_t bus, i2c_data_t *data)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -405,7 +405,7 @@ errcode_t uapi_i2c_slave_read(i2c_bus_t bus, i2c_data_t *data)
 errcode_t uapi_i2c_set_irq_mode(i2c_bus_t bus, bool irq_en)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -456,7 +456,7 @@ errcode_t uapi_i2c_set_irq_mode(i2c_bus_t bus, bool irq_en)
 errcode_t uapi_i2c_register_irq_callback(i2c_bus_t bus, i2c_irq_callback_t callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -502,7 +502,7 @@ errcode_t uapi_i2c_register_irq_callback(i2c_bus_t bus, i2c_irq_callback_t callb
 errcode_t uapi_i2c_unregister_irq_callback(i2c_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -547,7 +547,7 @@ errcode_t uapi_i2c_unregister_irq_callback(i2c_bus_t bus)
 errcode_t uapi_i2c_set_dma_mode(i2c_bus_t bus, bool en)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -598,7 +598,7 @@ errcode_t uapi_i2c_set_dma_mode(i2c_bus_t bus, bool en)
 errcode_t uapi_i2c_deinit(i2c_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -637,7 +637,7 @@ errcode_t uapi_i2c_deinit(i2c_bus_t bus)
 errcode_t uapi_i2c_set_baudrate(i2c_bus_t bus, uint32_t baudrate)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -677,7 +677,7 @@ errcode_t uapi_i2c_set_baudrate(i2c_bus_t bus, uint32_t baudrate)
 errcode_t uapi_i2c_suspend(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"
@@ -726,7 +726,7 @@ errcode_t uapi_i2c_suspend(uintptr_t arg)
 errcode_t uapi_i2c_resume(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2c.h"

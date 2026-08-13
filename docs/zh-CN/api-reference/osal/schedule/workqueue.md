@@ -2,7 +2,7 @@
 
 workqueue 提供工作队列功能，用于在系统全局工作队列中异步调度执行工作任务，支持工作队列的初始化、调度、销毁与刷新操作。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "schedule/osal_workqueue.h"
@@ -25,7 +25,7 @@ workqueue 提供工作队列功能，用于在系统全局工作队列中异步�
 int osal_workqueue_init(osal_workqueue *work, osal_workqueue_handler handler)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "schedule/osal_workqueue.h"
@@ -70,7 +70,7 @@ int osal_workqueue_init(osal_workqueue *work, osal_workqueue_handler handler)
 int osal_workqueue_schedule(osal_workqueue *work)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "schedule/osal_workqueue.h"
@@ -108,7 +108,7 @@ int osal_workqueue_schedule(osal_workqueue *work)
 void osal_workqueue_destroy(osal_workqueue *work)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "schedule/osal_workqueue.h"
@@ -143,7 +143,7 @@ void osal_workqueue_destroy(osal_workqueue *work)
 int osal_workqueue_flush(osal_workqueue *work)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "schedule/osal_workqueue.h"

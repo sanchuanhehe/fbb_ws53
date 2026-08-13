@@ -2,7 +2,7 @@
 
 I2S (Inter-IC Sound) 提供集成电路间数字音频总线的数据收发能力，支持主从模式、多种数据位宽与通道数的配置，可工作在轮询、中断以及 DMA (Direct Memory Access) 传输模式下。本模块对外接口以 SIO (Serial Input/Output) 总线编号为索引对硬件 I2S 控制器进行操作。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/i2s.h"
@@ -34,7 +34,7 @@ I2S (Inter-IC Sound) 提供集成电路间数字音频总线的数据收发能�
 errcode_t uapi_i2s_init(sio_bus_t bus, i2s_callback_t callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2s.h"
@@ -80,7 +80,7 @@ errcode_t uapi_i2s_init(sio_bus_t bus, i2s_callback_t callback)
 errcode_t uapi_i2s_deinit(sio_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2s.h"
@@ -119,7 +119,7 @@ errcode_t uapi_i2s_deinit(sio_bus_t bus)
 errcode_t uapi_i2s_set_config(sio_bus_t bus, const i2s_config_t *config)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2s.h"
@@ -158,7 +158,7 @@ errcode_t uapi_i2s_set_config(sio_bus_t bus, const i2s_config_t *config)
 errcode_t uapi_i2s_get_config(sio_bus_t bus, i2s_config_t *config)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2s.h"
@@ -202,7 +202,7 @@ errcode_t uapi_i2s_get_config(sio_bus_t bus, i2s_config_t *config)
 errcode_t uapi_i2s_write_data(sio_bus_t bus, i2s_tx_data_t *data)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2s.h"
@@ -245,7 +245,7 @@ errcode_t uapi_i2s_write_data(sio_bus_t bus, i2s_tx_data_t *data)
 errcode_t uapi_i2s_read_start(sio_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2s.h"
@@ -287,7 +287,7 @@ errcode_t uapi_i2s_read_start(sio_bus_t bus)
 void uapi_i2s_set_crg_clock_enable(sio_bus_t bus, bool enable)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2s.h"
@@ -316,7 +316,7 @@ void uapi_i2s_set_crg_clock_enable(sio_bus_t bus, bool enable)
 errcode_t uapi_i2s_loop_trans(sio_bus_t bus, i2s_tx_data_t *data)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2s.h"
@@ -355,7 +355,7 @@ errcode_t uapi_i2s_loop_trans(sio_bus_t bus, i2s_tx_data_t *data)
 errcode_t uapi_i2s_get_data(sio_bus_t bus, i2s_rx_data_t *data)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2s.h"
@@ -399,7 +399,7 @@ errcode_t uapi_i2s_get_data(sio_bus_t bus, i2s_rx_data_t *data)
 errcode_t uapi_i2s_loopback(sio_bus_t bus, bool en)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2s.h"
@@ -444,7 +444,7 @@ errcode_t uapi_i2s_loopback(sio_bus_t bus, bool en)
 int32_t uapi_i2s_dma_config(sio_bus_t bus, i2s_dma_attr_t *i2s_dma_cfg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2s.h"
@@ -489,7 +489,7 @@ int32_t uapi_i2s_dma_config(sio_bus_t bus, i2s_dma_attr_t *i2s_dma_cfg)
 int32_t uapi_i2s_merge_write_by_dma(sio_bus_t bus, const void *buffer, uint32_t length, i2s_dma_config_t *dma_cfg, uintptr_t arg, bool block)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2s.h"
@@ -540,7 +540,7 @@ int32_t uapi_i2s_merge_write_by_dma(sio_bus_t bus, const void *buffer, uint32_t 
 int32_t uapi_i2s_merge_read_by_dma(sio_bus_t bus, const void *buffer, uint32_t length, i2s_dma_config_t *dma_cfg, uintptr_t arg, bool block)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/i2s.h"

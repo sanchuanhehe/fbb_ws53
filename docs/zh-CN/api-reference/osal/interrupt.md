@@ -2,7 +2,7 @@
 
 interrupt 提供中断管理功能，支持中断请求的申请与释放、中断的使能与禁能、全局中断的锁定与恢复、中断亲和性设置与优先级配置，以及 tasklet 机制的初始化、调度与销毁。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -37,7 +37,7 @@ interrupt 提供中断管理功能，支持中断请求的申请与释放、中�
 void *osal_irq_get_private_dev(void *param_dev)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -75,7 +75,7 @@ void *osal_irq_get_private_dev(void *param_dev)
 int osal_irq_request(unsigned int irq, osal_irq_handler handler, osal_irq_handler thread_fn, const char *name, void *dev)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -126,7 +126,7 @@ int osal_irq_request(unsigned int irq, osal_irq_handler handler, osal_irq_handle
 void osal_irq_free(unsigned int irq, void *dev)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -162,7 +162,7 @@ void osal_irq_free(unsigned int irq, void *dev)
 int osal_irq_set_priority(unsigned int irq, unsigned short priority)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -206,7 +206,7 @@ int osal_irq_set_priority(unsigned int irq, unsigned short priority)
 int osal_irq_set_affinity(unsigned int irq, const char *name, int cpu_mask)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -246,7 +246,7 @@ int osal_irq_set_affinity(unsigned int irq, const char *name, int cpu_mask)
 void osal_irq_enable(unsigned int irq)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -282,7 +282,7 @@ void osal_irq_enable(unsigned int irq)
 void osal_irq_disable(unsigned int irq)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -317,7 +317,7 @@ void osal_irq_disable(unsigned int irq)
 unsigned int osal_irq_lock(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -355,7 +355,7 @@ unsigned int osal_irq_lock(void)
 unsigned int osal_irq_unlock(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -385,7 +385,7 @@ unsigned int osal_irq_unlock(void)
 void osal_irq_restore(unsigned int irq_status)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -422,7 +422,7 @@ void osal_irq_restore(unsigned int irq_status)
 unsigned int osal_irq_clear(unsigned int vector)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -465,7 +465,7 @@ unsigned int osal_irq_clear(unsigned int vector)
 int osal_in_interrupt(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -496,7 +496,7 @@ int osal_in_interrupt(void)
 int osal_tasklet_init(osal_tasklet *tasklet)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -534,7 +534,7 @@ int osal_tasklet_init(osal_tasklet *tasklet)
 int osal_tasklet_schedule(osal_tasklet *tasklet)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -572,7 +572,7 @@ int osal_tasklet_schedule(osal_tasklet *tasklet)
 int osal_tasklet_kill(osal_tasklet *tasklet)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"
@@ -610,7 +610,7 @@ int osal_tasklet_kill(osal_tasklet *tasklet)
 int osal_tasklet_update(osal_tasklet *tasklet)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_interrupt.h"

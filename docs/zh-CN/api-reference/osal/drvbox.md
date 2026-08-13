@@ -2,7 +2,7 @@
 
 drvbox 提供驱动盒子（Driver Box）与用户盒子（User Box）之间的运行区域切换功能，支持在安全核心（Secure Core）场景下切换 PMP (Physical Memory Protection) / MPU (Memory Protection Unit) 配置。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "drvbox/osal_drvbox.h"
@@ -23,7 +23,7 @@ drvbox 提供驱动盒子（Driver Box）与用户盒子（User Box）之间的�
 unsigned int osal_drvmgr_switch_to_drvbox(unsigned int drv_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "drvbox/osal_drvbox.h"
@@ -61,7 +61,7 @@ unsigned int osal_drvmgr_switch_to_drvbox(unsigned int drv_id)
 void osal_drvmgr_switch_to_usrbox(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "drvbox/osal_drvbox.h"

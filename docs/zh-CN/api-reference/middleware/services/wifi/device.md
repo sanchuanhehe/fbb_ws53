@@ -2,7 +2,7 @@
 
 WiFi (Wireless Fidelity) Device 提供STA模式的初始化、扫描、连接、断连等基础能力，支持协议模式配置、PMF (Protected Management Frames) 设置、CSI (Channel State Information) 数据采集、管理帧收包回调注册、混杂模式报文接收、WoW (Wake on Wireless) 模式配置、MAC地址管理、国家码设置、PSD (Power Spectral Density) 数据采集以及WPS (Wi-Fi Protected Setup) 连接等功能。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_device.h"
@@ -80,7 +80,7 @@ WiFi (Wireless Fidelity) Device 提供STA模式的初始化、扫描、连接、
 errcode_t wifi_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -110,7 +110,7 @@ errcode_t wifi_init(void)
 errcode_t wifi_deinit(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -140,7 +140,7 @@ errcode_t wifi_deinit(void)
 int32_t wifi_is_wifi_inited(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -167,7 +167,7 @@ int32_t wifi_is_wifi_inited(void)
 errcode_t wifi_sta_enable(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -200,7 +200,7 @@ errcode_t wifi_sta_enable(void)
 errcode_t wifi_sta_disable(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -233,7 +233,7 @@ errcode_t wifi_sta_disable(void)
 int32_t wifi_is_sta_enabled(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -260,7 +260,7 @@ int32_t wifi_is_sta_enabled(void)
 wifi_dev_t *wifi_get_dev(wifi_iftype_t iftype)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -295,7 +295,7 @@ wifi_dev_t *wifi_get_dev(wifi_iftype_t iftype)
 errcode_t wifi_sta_set_protocol_mode(protocol_mode_enum mode)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -331,7 +331,7 @@ errcode_t wifi_sta_set_protocol_mode(protocol_mode_enum mode)
 protocol_mode_enum wifi_sta_get_protocol_mode(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -347,12 +347,6 @@ protocol_mode_enum wifi_sta_get_protocol_mode(void)
 - WiFi已通过wifi_init()初始化完成
 - STA已使能
 
-**出参**
-
-| 名称 | 数据类型 | 输出说明 |
-| ---- | ---- | ---- |
-| mode | [protocol_mode_enum](#enum_protocol_mode_enum) | 当前STA协议模式 |
-
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
@@ -365,7 +359,7 @@ protocol_mode_enum wifi_sta_get_protocol_mode(void)
 errcode_t wifi_sta_scan(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -398,7 +392,7 @@ errcode_t wifi_sta_scan(void)
 errcode_t wifi_sta_scan_advance(const wifi_scan_params_stru *scan_param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -437,7 +431,7 @@ errcode_t wifi_sta_scan_advance(const wifi_scan_params_stru *scan_param)
 errcode_t wifi_sta_set_scan_policy(wifi_if_type_enum iftype, wifi_scan_strategy_stru *scan_strategy)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -476,7 +470,7 @@ errcode_t wifi_sta_set_scan_policy(wifi_if_type_enum iftype, wifi_scan_strategy_
 errcode_t wifi_raw_scan(wifi_scan_params_stru *scan_param, wifi_scan_no_save_cb cb)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -513,7 +507,7 @@ errcode_t wifi_raw_scan(wifi_scan_params_stru *scan_param, wifi_scan_no_save_cb 
 errcode_t wifi_sta_scan_stop(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -543,7 +537,7 @@ errcode_t wifi_sta_scan_stop(void)
 errcode_t wifi_sta_get_scan_info(wifi_scan_info_stru *result, uint32_t *size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -590,7 +584,7 @@ errcode_t wifi_sta_get_scan_info(wifi_scan_info_stru *result, uint32_t *size)
 errcode_t wifi_sta_scan_result_clear(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -619,7 +613,7 @@ errcode_t wifi_sta_scan_result_clear(void)
 errcode_t wifi_set_channel(wifi_if_type_enum iftype, int32_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -654,7 +648,7 @@ errcode_t wifi_set_channel(wifi_if_type_enum iftype, int32_t channel)
 errcode_t wifi_get_channel(wifi_if_type_enum iftype, int32_t *channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -695,7 +689,7 @@ errcode_t wifi_get_channel(wifi_if_type_enum iftype, int32_t *channel)
 errcode_t wifi_sta_wnm_bss_query(int32_t reason_code, int32_t candidate_list)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -737,7 +731,7 @@ errcode_t wifi_sta_wnm_bss_query(int32_t reason_code, int32_t candidate_list)
 errcode_t wifi_sta_wnm_notify(const char *param, uint32_t len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -779,7 +773,7 @@ errcode_t wifi_sta_wnm_notify(const char *param, uint32_t len)
 errcode_t wifi_sta_connect(const wifi_sta_config_stru *config)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -819,7 +813,7 @@ errcode_t wifi_sta_connect(const wifi_sta_config_stru *config)
 errcode_t wifi_sta_disconnect(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -851,7 +845,7 @@ errcode_t wifi_sta_disconnect(void)
 errcode_t wifi_sta_get_ap_info(wifi_linked_info_stru *result)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -895,7 +889,7 @@ errcode_t wifi_sta_get_ap_info(wifi_linked_info_stru *result)
 errcode_t wifi_sta_set_reconnect_policy(int32_t enable, uint32_t seconds, uint32_t period, uint32_t max_try_count)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -937,7 +931,7 @@ errcode_t wifi_sta_set_reconnect_policy(int32_t enable, uint32_t seconds, uint32
 errcode_t wifi_sta_set_pmf_mode(wifi_pmf_option_enum pmf)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -972,7 +966,7 @@ errcode_t wifi_sta_set_pmf_mode(wifi_pmf_option_enum pmf)
 wifi_pmf_option_enum wifi_sta_get_pmf_mode(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -988,12 +982,6 @@ wifi_pmf_option_enum wifi_sta_get_pmf_mode(void)
 - WiFi已通过wifi_init()初始化完成
 - STA已使能
 
-**出参**
-
-| 名称 | 数据类型 | 输出说明 |
-| ---- | ---- | ---- |
-| pmf_mode | [wifi_pmf_option_enum](#enum_wifi_pmf_option_enum) | 当前PMF管理帧保护模式 |
-
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
@@ -1007,7 +995,7 @@ wifi_pmf_option_enum wifi_sta_get_pmf_mode(void)
 int16_t wifi_sta_get_connect_status_code(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1023,12 +1011,6 @@ int16_t wifi_sta_get_connect_status_code(void)
 - WiFi已通过wifi_init()初始化完成
 - STA已使能
 
-**出参**
-
-| 名称 | 数据类型 | 输出说明 |
-| ---- | ---- | ---- |
-| status_code | int16_t | STA连接状态码 |
-
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
@@ -1042,7 +1024,7 @@ int16_t wifi_sta_get_connect_status_code(void)
 errcode_t wifi_set_mgmt_frame_rx_cb(wifi_rx_mgmt_cb data_cb, uint8_t mode)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1079,7 +1061,7 @@ errcode_t wifi_set_mgmt_frame_rx_cb(wifi_rx_mgmt_cb data_cb, uint8_t mode)
 errcode_t wifi_set_promis_mode(wifi_if_type_enum iftype, int32_t enable, const wifi_ptype_filter_stru *filter)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1117,7 +1099,7 @@ errcode_t wifi_set_promis_mode(wifi_if_type_enum iftype, int32_t enable, const w
 errcode_t wifi_set_promis_rx_pkt_cb(wifi_promis_cb data_cb)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1152,7 +1134,7 @@ errcode_t wifi_set_promis_rx_pkt_cb(wifi_promis_cb data_cb)
 errcode_t wifi_sta_fast_connect(const wifi_fast_connect_stru *fast_request)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1189,7 +1171,7 @@ errcode_t wifi_sta_fast_connect(const wifi_fast_connect_stru *fast_request)
 errcode_t wifi_register_event_cb(const wifi_event_stru *event)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1227,7 +1209,7 @@ errcode_t wifi_register_event_cb(const wifi_event_stru *event)
 errcode_t wifi_unregister_event_cb(const wifi_event_stru *event)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1262,7 +1244,7 @@ errcode_t wifi_unregister_event_cb(const wifi_event_stru *event)
 errcode_t wifi_set_app_ie(wifi_if_type_enum iftype, ie_index_enmu ie_index, uint8_t frame_type_bitmap, const uint8_t *ie, uint16_t ie_len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1301,7 +1283,7 @@ errcode_t wifi_set_app_ie(wifi_if_type_enum iftype, ie_index_enmu ie_index, uint
 errcode_t wifi_del_app_ie(wifi_if_type_enum iftype, ie_index_enmu ie_index, uint8_t frame_type_bitmap)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1338,7 +1320,7 @@ errcode_t wifi_del_app_ie(wifi_if_type_enum iftype, ie_index_enmu ie_index, uint
 errcode_t wifi_set_wow_pattern(int32_t type, uint8_t index, int8_t *pattern)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1382,7 +1364,7 @@ errcode_t wifi_set_wow_pattern(int32_t type, uint8_t index, int8_t *pattern)
 errcode_t wifi_set_wow_sleep_mode(uint8_t en)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1424,7 +1406,7 @@ errcode_t wifi_set_wow_sleep_mode(uint8_t en)
 errcode_t wifi_csi_start(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1455,7 +1437,7 @@ errcode_t wifi_csi_start(void)
 errcode_t wifi_csi_stop(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1484,7 +1466,7 @@ errcode_t wifi_csi_stop(void)
 errcode_t wifi_set_csi_config(const int8_t *ifname, const csi_config_stru *config)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1520,7 +1502,7 @@ errcode_t wifi_set_csi_config(const int8_t *ifname, const csi_config_stru *confi
 errcode_t wifi_register_csi_report_cb(wifi_csi_data_cb data_cb)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1555,7 +1537,7 @@ errcode_t wifi_register_csi_report_cb(wifi_csi_data_cb data_cb)
 errcode_t wifi_send_custom_pkt(const wifi_if_type_enum iftype, const uint8_t *data, uint32_t len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1590,7 +1572,7 @@ errcode_t wifi_send_custom_pkt(const wifi_if_type_enum iftype, const uint8_t *da
 errcode_t wifi_set_pkt_retry_policy(uint8_t type, uint8_t limit)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1624,7 +1606,7 @@ errcode_t wifi_set_pkt_retry_policy(uint8_t type, uint8_t limit)
 errcode_t wifi_reset_mac_phy(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1651,7 +1633,7 @@ errcode_t wifi_reset_mac_phy(void)
 errcode_t wifi_set_linkloss_config(linkloss_paras_stru *linkloss_paras)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1685,7 +1667,7 @@ errcode_t wifi_set_linkloss_config(linkloss_paras_stru *linkloss_paras)
 errcode_t wifi_set_base_mac_addr(const int8_t *mac_addr, uint8_t mac_len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1719,7 +1701,7 @@ errcode_t wifi_set_base_mac_addr(const int8_t *mac_addr, uint8_t mac_len)
 errcode_t wifi_get_base_mac_addr(int8_t *mac_addr, uint8_t mac_len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1753,7 +1735,7 @@ errcode_t wifi_get_base_mac_addr(int8_t *mac_addr, uint8_t mac_len)
 errcode_t wifi_softap_set_mac_addr(const int8_t *mac_addr, uint8_t mac_len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1787,7 +1769,7 @@ errcode_t wifi_softap_set_mac_addr(const int8_t *mac_addr, uint8_t mac_len)
 errcode_t wifi_softap_get_mac_addr(int8_t *mac_addr, uint8_t mac_len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1821,7 +1803,7 @@ errcode_t wifi_softap_get_mac_addr(int8_t *mac_addr, uint8_t mac_len)
 errcode_t wifi_set_mac_derivation_ptr(wifi_mac_derivation_ptr ptr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1854,7 +1836,7 @@ errcode_t wifi_set_mac_derivation_ptr(wifi_mac_derivation_ptr ptr)
 errcode_t wifi_set_low_current_boot_mode(uint8_t flag)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1887,7 +1869,7 @@ errcode_t wifi_set_low_current_boot_mode(uint8_t flag)
 errcode_t wifi_get_country_code(int8_t *country_code, uint8_t *len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1921,7 +1903,7 @@ errcode_t wifi_get_country_code(int8_t *country_code, uint8_t *len)
 errcode_t wifi_set_country_code(const int8_t* country_code, uint8_t len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1955,7 +1937,7 @@ errcode_t wifi_set_country_code(const int8_t* country_code, uint8_t len)
 errcode_t wifi_sta_set_pm(uint8_t ps_switch)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -1989,7 +1971,7 @@ errcode_t wifi_sta_set_pm(uint8_t ps_switch)
 errcode_t wifi_set_sdp_mode(wifi_if_type_enum iftype, int32_t enable, int32_t ratio)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -2024,7 +2006,7 @@ errcode_t wifi_set_sdp_mode(wifi_if_type_enum iftype, int32_t enable, int32_t ra
 errcode_t wifi_set_sdp_subscribe(wifi_if_type_enum iftype, char *sdp_subscribe, int32_t local_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -2059,7 +2041,7 @@ errcode_t wifi_set_sdp_subscribe(wifi_if_type_enum iftype, char *sdp_subscribe, 
 errcode_t wifi_set_psd_mode(ext_psd_option_param *psd_option)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -2092,7 +2074,7 @@ errcode_t wifi_set_psd_mode(ext_psd_option_param *psd_option)
 errcode_t wifi_set_psd_cb(wifi_psd_cb data_cb)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -2125,7 +2107,7 @@ errcode_t wifi_set_psd_cb(wifi_psd_cb data_cb)
 errcode_t wifi_sta_config_probe_req_max_times(uint8_t max_times)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -2135,6 +2117,19 @@ errcode_t wifi_sta_config_probe_req_max_times(uint8_t max_times)
 
 - 配置STA beacon miss后probe request最大发送次数
 
+**入参**
+
+| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| ---- | ---- | ---- | ---- |
+| max_times | uint8_t | beacon miss后probe request的最大发送次数 | 1～5 |
+
+**返回值**
+
+| 返回值 | 文字含义 | 触发场景 |
+| ---- | ---- | ---- |
+| ERRCODE_SUCC(0x0) | 成功 | 配置成功 |
+| Other | 其他错误码，参考errcode_t | 配置失败 |
+
 ## Type definitions
 
 ### wifi_csi_data_cb <a id="typedef_wifi_csi_data_cb"></a>
@@ -2143,7 +2138,7 @@ errcode_t wifi_sta_config_probe_req_max_times(uint8_t max_times)
 typedef void (*wifi_csi_data_cb)(uint8_t *csi_data, int32_t len);
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2170,7 +2165,7 @@ typedef void (*wifi_csi_data_cb)(uint8_t *csi_data, int32_t len);
 typedef int32_t (*wifi_promis_cb)(void* recv_buf, int32_t frame_len, int8_t rssi);
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2201,7 +2196,7 @@ typedef int32_t (*wifi_promis_cb)(void* recv_buf, int32_t frame_len, int8_t rssi
 typedef int32_t (*wifi_rx_mgmt_cb)(void* recv_buf, int32_t frame_len, int8_t rssi);
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2232,7 +2227,7 @@ typedef int32_t (*wifi_rx_mgmt_cb)(void* recv_buf, int32_t frame_len, int8_t rss
 typedef int32_t (*wifi_psd_cb)(void *recv_buf, uint32_t data_len);
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2262,7 +2257,7 @@ typedef int32_t (*wifi_psd_cb)(void *recv_buf, uint32_t data_len);
 typedef void (*wifi_scan_no_save_cb)(wifi_scan_info_stru *scan_result);
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_scan_info.h"
@@ -2288,7 +2283,7 @@ typedef void (*wifi_scan_no_save_cb)(wifi_scan_info_stru *scan_result);
 typedef unsigned int(*wifi_mac_derivation_ptr)(unsigned char *origin_mac, unsigned char num, unsigned char type, unsigned char *output_mac, unsigned char out_put_num);
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device.h"
@@ -2321,7 +2316,7 @@ typedef unsigned int(*wifi_mac_derivation_ptr)(unsigned char *origin_mac, unsign
 typedef uint32_t errcode_t;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/errcode.h"
@@ -2344,7 +2339,7 @@ typedef enum {
 } wifi_pmf_option_enum;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2376,7 +2371,7 @@ typedef enum {
 } wifi_if_type_enum;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2409,7 +2404,7 @@ typedef enum ie_index_enmu {
 } ie_index_enmu;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2453,7 +2448,7 @@ typedef enum wifi_security_enum {
 } wifi_security_enum;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2485,82 +2480,6 @@ typedef enum wifi_security_enum {
 | WIFI_SEC_TYPE_WEP_OPEN | 14 | WEP-OPEN |
 | WIFI_SEC_TYPE_UNKNOWN | 15 | 其它认证类型 |
 
-### wifi_disconn_state_enum <a id="enum_wifi_disconn_state_enum"></a>
-
-```c
-typedef enum {
-    WIFI_DISCONN_STATE_AUTH_TIMEOUT = 1,
-    WIFI_DISCONN_STATE_AUTH_RCV_DEAUTH,
-    WIFI_DISCONN_STATE_AUTH_RCV_RSP_ERR,
-    WIFI_DISCONN_STATE_AUTH_SAE_COMMIT_TIMEOUT,
-    WIFI_DISCONN_STATE_AUTH_SAE_COMMIT_RCV_DEAUTH,
-    WIFI_DISCONN_STATE_AUTH_SAE_COMMIT_CHECK_ERR,
-    WIFI_DISCONN_STATE_AUTH_SAE_CONFIRM_TIMEOUT,
-    WIFI_DISCONN_STATE_AUTH_SAE_CONFIRM_RCV_DEAUTH,
-    WIFI_DISCONN_STATE_AUTH_SAE_CONFIRM_CHECK_ERR,
-    WIFI_DISCONN_STATE_ASSOC_TIMEOUT,
-    WIFI_DISCONN_STATE_ASSOC_RCV_DEAUTH,
-    WIFI_DISCONN_STATE_ASSOC_RCV_DISASSOC,
-    WIFI_DISCONN_STATE_ASSOC_RCV_RSP_ERR,
-    WIFI_DISCONN_STATE_EAPOL_KEY1_TIMEOUT,
-    WIFI_DISCONN_STATE_EAPOL_KEY1_RCV_DEAUTH,
-    WIFI_DISCONN_STATE_EAPOL_KEY1_RCV_DISASSOC,
-    WIFI_DISCONN_STATE_EAPOL_KEY1_RCV_ERR,
-    WIFI_DISCONN_STATE_EAPOL_KEY3_TIMEOUT,
-    WIFI_DISCONN_STATE_EAPOL_KEY3_RCV_DEAUTH,
-    WIFI_DISCONN_STATE_EAPOL_KEY3_RCV_DISASSOC,
-    WIFI_DISCONN_STATE_EAPOL_KEY3_RCV_ERR,
-    WIFI_DISCONN_STATE_CONNECTED_RCV_DEAUTH,
-    WIFI_DISCONN_STATE_CONNECTED_RCV_DISASSOC,
-    WIFI_DISCONN_STATE_LINKLOSS,
-    WIFI_DISCONN_STATE_APP_ACTIVE_DISCONN,
-    WIFI_DISCONN_STATE_CANNOT_FIND_AP,
-    WIFI_DISCONN_STATE_UNKNOWN
-} wifi_disconn_state_enum;
-```
-
-**头文件清单**
-
-```c
-#include "include/middleware/services/wifi/wifi_device_config.h"
-```
-
-**功能说明**
-
-- WiFi断连状态枚举
-
-**枚举值说明**
-
-| 枚举值 | 数值 | 说明 |
-| ---- | ---- | ---- |
-| WIFI_DISCONN_STATE_AUTH_TIMEOUT | 1 | 非SAE auth阶段超时 |
-| WIFI_DISCONN_STATE_AUTH_RCV_DEAUTH | 2 | 非SAE auth阶段收到deauth |
-| WIFI_DISCONN_STATE_AUTH_RCV_RSP_ERR | 3 | 非SAE auth阶段收到错误回复 |
-| WIFI_DISCONN_STATE_AUTH_SAE_COMMIT_TIMEOUT | 4 | SAE auth阶段接收commit超时 |
-| WIFI_DISCONN_STATE_AUTH_SAE_COMMIT_RCV_DEAUTH | 5 | SAE auth commit阶段收到deauth |
-| WIFI_DISCONN_STATE_AUTH_SAE_COMMIT_CHECK_ERR | 6 | 校验SAE commit失败 |
-| WIFI_DISCONN_STATE_AUTH_SAE_CONFIRM_TIMEOUT | 7 | SAE auth阶段接收confirm超时 |
-| WIFI_DISCONN_STATE_AUTH_SAE_CONFIRM_RCV_DEAUTH | 8 | SAE auth confirm阶段收到deauth |
-| WIFI_DISCONN_STATE_AUTH_SAE_CONFIRM_CHECK_ERR | 9 | 校验SAE confirm失败 |
-| WIFI_DISCONN_STATE_ASSOC_TIMEOUT | 10 | assoc超时 |
-| WIFI_DISCONN_STATE_ASSOC_RCV_DEAUTH | 11 | assoc阶段收到deauth |
-| WIFI_DISCONN_STATE_ASSOC_RCV_DISASSOC | 12 | assoc阶段收到disassoc |
-| WIFI_DISCONN_STATE_ASSOC_RCV_RSP_ERR | 13 | assoc阶段收到错误回复 |
-| WIFI_DISCONN_STATE_EAPOL_KEY1_TIMEOUT | 14 | 接收eapol1超时 |
-| WIFI_DISCONN_STATE_EAPOL_KEY1_RCV_DEAUTH | 15 | 等待eapol1阶段收到deauth |
-| WIFI_DISCONN_STATE_EAPOL_KEY1_RCV_DISASSOC | 16 | 等待eapol1阶段收到disassoc |
-| WIFI_DISCONN_STATE_EAPOL_KEY1_RCV_ERR | 17 | eapol1校验失败 |
-| WIFI_DISCONN_STATE_EAPOL_KEY3_TIMEOUT | 18 | 接收eapol3超时 |
-| WIFI_DISCONN_STATE_EAPOL_KEY3_RCV_DEAUTH | 19 | 等待eapol3阶段收到deauth |
-| WIFI_DISCONN_STATE_EAPOL_KEY3_RCV_DISASSOC | 20 | 等待eapol3阶段收到disassoc |
-| WIFI_DISCONN_STATE_EAPOL_KEY3_RCV_ERR | 21 | eapol3校验失败 |
-| WIFI_DISCONN_STATE_CONNECTED_RCV_DEAUTH | 22 | 连接成功后收到deauth |
-| WIFI_DISCONN_STATE_CONNECTED_RCV_DISASSOC | 23 | 连接成功后收到disassoc |
-| WIFI_DISCONN_STATE_LINKLOSS | 24 | 驱动主动断连 |
-| WIFI_DISCONN_STATE_APP_ACTIVE_DISCONN | 25 | 应用层主动断连 |
-| WIFI_DISCONN_STATE_CANNOT_FIND_AP | 26 | 扫描不到AP |
-| WIFI_DISCONN_STATE_UNKNOWN | 27 | 其它断连状态 |
-
 ### wifi_iftype_t <a id="enum_wifi_iftype_t"></a>
 
 ```c
@@ -2580,7 +2499,7 @@ typedef enum {
 } wifi_iftype_t;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2618,7 +2537,7 @@ typedef enum {
 } wifi_conn_state_enum;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_linked_info.h"
@@ -2646,7 +2565,7 @@ typedef enum {
 } wifi_event_state_enum;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_event.h"
@@ -2672,12 +2591,11 @@ typedef enum {
     WIFI_SSID_SCAN,
     WIFI_SSID_PREFIX_SCAN,
     WIFI_BSSID_SCAN,
-    WIFI_SSID_SCAN_WITH_CHANNEL,
     STA_SCAN_BUTT
 } wifi_scan_type_enum;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2696,8 +2614,7 @@ typedef enum {
 | WIFI_SSID_SCAN | 2 | 基于指定SSID的扫描 |
 | WIFI_SSID_PREFIX_SCAN | 3 | 基于指定前缀SSID的扫描 |
 | WIFI_BSSID_SCAN | 4 | 基于指定BSSID的扫描 |
-| WIFI_SSID_SCAN_WITH_CHANNEL | 5 | 基于指定SSID与信道的扫描 |
-| STA_SCAN_BUTT | 6 | 枚举边界值，不可使用 |
+| STA_SCAN_BUTT | 5 | 枚举边界值，不可使用 |
 
 ### protocol_mode_enum <a id="enum_protocol_mode_enum"></a>
 
@@ -2711,7 +2628,7 @@ typedef enum {
 } protocol_mode_enum;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2741,7 +2658,7 @@ typedef enum {
 } ip_type_stru_enum;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2759,44 +2676,6 @@ typedef enum {
 | DHCP (Dynamic Host Configuration Protocol) | 1 | 由DHCP动态分配的IP地址 |
 | UNKNOWN | 2 | 未知的IP地址类型 |
 
-### wifi_sta_connect_paras_enum <a id="enum_wifi_sta_connect_paras_enum"></a>
-
-```c
-typedef enum {
-    CONFIG_AUTH_MAX_RETRY,
-    CONFIG_AUTH_RECV_TIMEOUT,
-    CONFIG_ASSOC_MAX_RETRY,
-    CONFIG_ASSOC_RECV_TIMEOUT,
-    CONFIG_EAPOL1_RECV_TIMEOUT,
-    CONFIG_EAPOL2_MAX_RETRY,
-    CONFIG_EAPOL3_RECV_TIMEOUT,
-    CONFIG_CONNECT_PARA_MAX,
-} wifi_sta_connect_paras_enum;
-```
-
-**头文件清单**
-
-```c
-#include "include/middleware/services/wifi/wifi_device_config.h"
-```
-
-**功能说明**
-
-- WiFi STA各连接阶段参数配置枚举类型
-
-**枚举值说明**
-
-| 枚举值 | 数值 | 说明 |
-| ---- | ---- | ---- |
-| CONFIG_AUTH_MAX_RETRY | 0 | AUTH最大重试次数 |
-| CONFIG_AUTH_RECV_TIMEOUT | 1 | AUTH接收超时时间 |
-| CONFIG_ASSOC_MAX_RETRY | 2 | ASSOC最大重试次数 |
-| CONFIG_ASSOC_RECV_TIMEOUT | 3 | ASSOC接收超时时间 |
-| CONFIG_EAPOL1_RECV_TIMEOUT | 4 | EAPOL1接收超时时间 |
-| CONFIG_EAPOL2_MAX_RETRY | 5 | EAPOL2最大重试次数 |
-| CONFIG_EAPOL3_RECV_TIMEOUT | 6 | EAPOL3接收超时时间 |
-| CONFIG_CONNECT_PARA_MAX | 7 | 枚举边界值，不可使用 |
-
 ### wifi_wpa_psk_type_enum <a id="enum_wifi_wpa_psk_type_enum"></a>
 
 ```c
@@ -2805,7 +2684,7 @@ typedef enum {
 } wifi_wpa_psk_type_enum;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2836,7 +2715,7 @@ typedef struct {
 } wifi_dev_t;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2868,7 +2747,7 @@ typedef struct {
 } ip_config_stru;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2896,7 +2775,7 @@ typedef struct {
 } ipv6_config_stru;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2931,7 +2810,7 @@ typedef struct wifi_sta_config_stru {
 } wifi_sta_config_stru;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -2969,7 +2848,7 @@ typedef struct {
 } wifi_scan_params_stru;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -3000,7 +2879,7 @@ typedef struct {
 } wifi_scan_strategy_stru;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -3036,7 +2915,7 @@ typedef struct {
 } csi_config_stru;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -3072,7 +2951,7 @@ typedef struct wifi_fast_connect_stru {
 } wifi_fast_connect_stru;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -3104,7 +2983,7 @@ typedef struct {
 } wifi_ptype_filter_stru;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -3135,7 +3014,7 @@ typedef struct {
 } linkloss_paras_stru;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -3162,7 +3041,7 @@ typedef struct {
 } wifi_conn_sec_stru;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -3179,34 +3058,6 @@ typedef struct {
 | sec_type | [wifi_security_enum](#enum_wifi_security_enum) | 安全类型 |
 | pairwise | int32_t | 加密方式，AES/TKIP/MIX |
 
-### wifi_sta_conn_paras <a id="struct_wifi_sta_conn_paras"></a>
-
-```c
-typedef struct {
-    uint8_t bitmap;
-    uint8_t resv;
-    uint16_t conn_paras[CONFIG_CONNECT_PARA_MAX];
-} wifi_sta_conn_paras;
-```
-
-**头文件清单**
-
-```c
-#include "include/middleware/services/wifi/wifi_device_config.h"
-```
-
-**功能说明**
-
-- STA连接参数配置结构体
-
-**成员说明**
-
-| 成员名称 | 数据类型 | 描述 |
-| ------- | ------- | ---- |
-| bitmap | uint8_t | 参数配置比特位图：bit0-auth max retry / bit1-auth recv timeout / bit2-assoc max retry / bit3-assoc recv timeout / bit4-eapol1 recv timeout / bit5-eapol2 max retry / bit6-eapol3 recv timeout / bit7-resv |
-| resv | uint8_t | 保留字段 |
-| conn_paras | uint16_t[CONFIG_CONNECT_PARA_MAX] | 参数值，超时单位：毫秒 |
-
 ### ext_psd_option_param <a id="struct_ext_psd_option_param"></a>
 
 ```c
@@ -3218,7 +3069,7 @@ typedef struct {
 } ext_psd_option_param;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_device_config.h"
@@ -3245,14 +3096,13 @@ typedef struct {
     uint8_t bssid[WIFI_MAC_LEN];
     int8_t wpa_state;
     int32_t rssi;
-    int16_t disconn_state;
-    int16_t channel_num;
+    int32_t channel_num;
     int32_t snr;
     wifi_conn_state_enum conn_state;
 } wifi_linked_info_stru;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_linked_info.h"
@@ -3270,8 +3120,7 @@ typedef struct {
 | bssid | uint8_t[WIFI_MAC_LEN] | BSSID |
 | wpa_state | int8_t | 断连时WPA (Wi-Fi Protected Access) 状态 |
 | rssi | int32_t | RSSI |
-| disconn_state | int16_t | STA断连时的状态 |
-| channel_num | int16_t | AP的WiFi信道信息 |
+| channel_num | int32_t | AP的WiFi信道信息 |
 | snr | int32_t | AP的WiFi信噪比信息 |
 | conn_state | [wifi_conn_state_enum](#enum_wifi_conn_state_enum) | WiFi的连接状态 |
 
@@ -3281,7 +3130,7 @@ typedef struct {
 typedef struct {
     char ssid[WIFI_MAX_SSID_LEN];
     uint8_t bssid[WIFI_MAC_LEN];
-    int8_t pairwise;
+    int8_t reserved;
     wifi_security_enum security_type;
     int32_t rssi;
     int32_t band;
@@ -3289,7 +3138,7 @@ typedef struct {
 } wifi_scan_info_stru;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_scan_info.h"
@@ -3305,7 +3154,7 @@ typedef struct {
 | ------- | ------- | ---- |
 | ssid | char[WIFI_MAX_SSID_LEN] | SSID |
 | bssid | uint8_t[WIFI_MAC_LEN] | BSSID |
-| pairwise | int8_t | 加密类型 |
+| reserved | int8_t | 保留字段 |
 | security_type | [wifi_security_enum](#enum_wifi_security_enum) | 安全类型 |
 | rssi | int32_t | 信号强度 |
 | band | int32_t | 频带 |
@@ -3330,7 +3179,7 @@ typedef struct {
 } wifi_event_stru;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_event.h"
@@ -3368,7 +3217,7 @@ typedef struct {
 } wifi_sta_info_stru;
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/station_info.h"

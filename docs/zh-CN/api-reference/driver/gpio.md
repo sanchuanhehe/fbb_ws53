@@ -2,7 +2,7 @@
 
 GPIO (General-Purpose Input/Output) 提供通用输入输出引脚的配置与控制功能，支持引脚方向设置、电平读写、电平翻转，以及上升沿、下降沿、双边沿、高/低电平等多种触发模式的中断注册与使能控制。支持低功耗挂起/恢复与多核选择特性。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -38,7 +38,7 @@ GPIO (General-Purpose Input/Output) 提供通用输入输出引脚的配置与�
 void uapi_gpio_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -65,7 +65,7 @@ void uapi_gpio_init(void)
 void uapi_gpio_deinit(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -87,7 +87,7 @@ void uapi_gpio_deinit(void)
 errcode_t uapi_gpio_set_dir(pin_t pin, gpio_direction_t dir)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -143,7 +143,7 @@ errcode_t uapi_gpio_set_dir(pin_t pin, gpio_direction_t dir)
 gpio_direction_t uapi_gpio_get_dir(pin_t pin)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -189,7 +189,7 @@ gpio_direction_t uapi_gpio_get_dir(pin_t pin)
 errcode_t uapi_gpio_set_val(pin_t pin, gpio_level_t level)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -240,7 +240,7 @@ errcode_t uapi_gpio_set_val(pin_t pin, gpio_level_t level)
 gpio_level_t uapi_gpio_get_output_val(pin_t pin)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -282,7 +282,7 @@ gpio_level_t uapi_gpio_get_output_val(pin_t pin)
 gpio_level_t uapi_gpio_get_val(pin_t pin)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -328,7 +328,7 @@ gpio_level_t uapi_gpio_get_val(pin_t pin)
 errcode_t uapi_gpio_toggle(pin_t pin)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -377,7 +377,7 @@ errcode_t uapi_gpio_toggle(pin_t pin)
 errcode_t uapi_gpio_set_isr_mode(pin_t pin, uint32_t trigger)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -428,7 +428,7 @@ errcode_t uapi_gpio_set_isr_mode(pin_t pin, uint32_t trigger)
 errcode_t uapi_gpio_register_isr_func(pin_t pin, uint32_t trigger, gpio_callback_t callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -479,7 +479,7 @@ errcode_t uapi_gpio_register_isr_func(pin_t pin, uint32_t trigger, gpio_callback
 errcode_t uapi_gpio_unregister_isr_func(pin_t pin)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -524,7 +524,7 @@ errcode_t uapi_gpio_unregister_isr_func(pin_t pin)
 errcode_t uapi_gpio_enable_interrupt(pin_t pin)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -573,7 +573,7 @@ errcode_t uapi_gpio_enable_interrupt(pin_t pin)
 errcode_t uapi_gpio_disable_interrupt(pin_t pin)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -622,7 +622,7 @@ errcode_t uapi_gpio_disable_interrupt(pin_t pin)
 errcode_t uapi_gpio_clear_interrupt(pin_t pin)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -667,7 +667,7 @@ errcode_t uapi_gpio_clear_interrupt(pin_t pin)
 errcode_t uapi_gpio_suspend(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -709,7 +709,7 @@ errcode_t uapi_gpio_suspend(uintptr_t arg)
 errcode_t uapi_gpio_resume(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"
@@ -751,7 +751,7 @@ errcode_t uapi_gpio_resume(uintptr_t arg)
 void uapi_gpio_select_core(pin_t pin, cores_t core)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/gpio.h"

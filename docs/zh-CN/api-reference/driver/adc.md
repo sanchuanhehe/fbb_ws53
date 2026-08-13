@@ -2,7 +2,7 @@
 
 ADC (Analog-to-Digital Converter) 提供模拟信号到数字信号的转换能力，支持通道配置、差分采样、自动扫描与手动采样等多种工作模式。ADC 一次采样需要 16 个时钟周期，采样速率 = ADC 时钟 / 16，ADC 源时钟为 2MHz。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/adc.h"
@@ -35,7 +35,7 @@ ADC (Analog-to-Digital Converter) 提供模拟信号到数字信号的转换能�
 errcode_t uapi_adc_init(adc_clock_t clock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/adc.h"
@@ -79,7 +79,7 @@ errcode_t uapi_adc_init(adc_clock_t clock)
 errcode_t uapi_adc_deinit(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/adc.h"
@@ -116,7 +116,7 @@ errcode_t uapi_adc_deinit(void)
 void uapi_adc_power_en(afe_scan_mode_t afe_scan_mode, bool en)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/adc.h"
@@ -151,7 +151,7 @@ void uapi_adc_power_en(afe_scan_mode_t afe_scan_mode, bool en)
 bool uapi_adc_is_using(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/adc.h"
@@ -184,7 +184,7 @@ bool uapi_adc_is_using(void)
 errcode_t uapi_adc_open_channel(uint8_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/adc.h"
@@ -225,7 +225,7 @@ errcode_t uapi_adc_open_channel(uint8_t channel)
 errcode_t uapi_adc_close_channel(uint8_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/adc.h"
@@ -266,7 +266,7 @@ errcode_t uapi_adc_close_channel(uint8_t channel)
 errcode_t uapi_adc_open_differential_channel(uint8_t postive_ch, uint8_t negative_ch)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/adc.h"
@@ -313,7 +313,7 @@ errcode_t uapi_adc_open_differential_channel(uint8_t postive_ch, uint8_t negativ
 errcode_t uapi_adc_close_differential_channel(uint8_t postive_ch, uint8_t negative_ch)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/adc.h"
@@ -361,7 +361,7 @@ errcode_t uapi_adc_close_differential_channel(uint8_t postive_ch, uint8_t negati
 errcode_t uapi_adc_auto_scan_ch_enable(uint8_t channel, adc_scan_config_t config, adc_callback_t callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/adc.h"
@@ -411,7 +411,7 @@ errcode_t uapi_adc_auto_scan_ch_enable(uint8_t channel, adc_scan_config_t config
 errcode_t uapi_adc_auto_scan_ch_disable(uint8_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/adc.h"
@@ -456,7 +456,7 @@ errcode_t uapi_adc_auto_scan_ch_disable(uint8_t channel)
 void uapi_adc_auto_scan_disable(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/adc.h"
@@ -486,7 +486,7 @@ void uapi_adc_auto_scan_disable(void)
 bool uapi_adc_auto_scan_is_enabled(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/adc.h"
@@ -524,7 +524,7 @@ bool uapi_adc_auto_scan_is_enabled(void)
 int32_t uapi_adc_manual_sample(uint8_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/adc.h"
@@ -563,7 +563,7 @@ int32_t uapi_adc_manual_sample(uint8_t channel)
 int32_t uapi_adc_auto_sample(uint8_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/adc.h"

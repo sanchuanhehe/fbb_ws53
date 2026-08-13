@@ -2,7 +2,7 @@
 
 NV (Non-Volatile storage) 提供基于 key-value 的非易失性数据存储能力，支持按 key ID 写入、读取、备份与恢复 NV 数据项，可配置加密、永久、不可升级等属性，并支持 NV 键值变更通知回调。模块源自 `include/middleware/utils/nv.h`。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/utils/nv.h"
@@ -32,7 +32,7 @@ NV (Non-Volatile storage) 提供基于 key-value 的非易失性数据存储能�
 void uapi_nv_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/nv.h"
@@ -59,7 +59,7 @@ void uapi_nv_init(void)
 errcode_t uapi_nv_write(uint16_t key, const uint8_t *kvalue, uint16_t kvalue_length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/nv.h"
@@ -108,7 +108,7 @@ errcode_t uapi_nv_write_with_attr(uint16_t key, const uint8_t *kvalue, uint16_t 
                                   nv_storage_completed_callback func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/nv.h"
@@ -157,7 +157,7 @@ errcode_t uapi_nv_write_with_attr(uint16_t key, const uint8_t *kvalue, uint16_t 
 errcode_t uapi_nv_read(uint16_t key, uint16_t kvalue_max_length, uint16_t *kvalue_length, uint8_t *kvalue)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/nv.h"
@@ -211,7 +211,7 @@ errcode_t uapi_nv_read_with_attr(uint16_t key, uint16_t kvalue_max_length, uint1
                                  nv_key_attr_t *attr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/nv.h"
@@ -263,7 +263,7 @@ errcode_t uapi_nv_read_with_attr(uint16_t key, uint16_t kvalue_max_length, uint1
 errcode_t uapi_nv_get_store_status(nv_store_status_t *status)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/nv.h"
@@ -303,7 +303,7 @@ errcode_t uapi_nv_get_store_status(nv_store_status_t *status)
 errcode_t uapi_nv_backup(const nv_backup_mode_t *backup_mode)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/nv.h"
@@ -348,7 +348,7 @@ errcode_t uapi_nv_backup(const nv_backup_mode_t *backup_mode)
 errcode_t uapi_nv_set_restore_mode_all(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/nv.h"
@@ -381,7 +381,7 @@ errcode_t uapi_nv_set_restore_mode_all(void)
 errcode_t uapi_nv_set_restore_mode_partitial(const nv_restore_mode_t *restore_mode)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/nv.h"
@@ -421,7 +421,7 @@ errcode_t uapi_nv_set_restore_mode_partitial(const nv_restore_mode_t *restore_mo
 errcode_t uapi_nv_flush(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/nv.h"
@@ -455,7 +455,7 @@ errcode_t uapi_nv_flush(void)
 errcode_t uapi_nv_register_change_notify_proc(uint16_t min_key, uint16_t max_key, nv_changed_notify_func func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/nv.h"

@@ -2,7 +2,7 @@
 
 GATT (Generic Attribute Profile) Server 提供蓝牙低功耗 (Bluetooth Low Energy) 服务端的属性服务管理能力，支持服务、特征与描述符的注册与同步注册，服务的启动、停止、删除，以及对客户端读写请求的响应、通知 (Notification) 与指示 (Indication) 的发送，并通过回调机制向应用层上报服务注册、特征注册、读写请求、MTU (Maximum Transmission Unit) 变化与指示确认等事件。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -39,7 +39,7 @@ GATT (Generic Attribute Profile) Server 提供蓝牙低功耗 (Bluetooth Low Ene
 errcode_t gatts_register_server(bt_uuid_t *app_uuid, uint8_t *server_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -66,7 +66,7 @@ errcode_t gatts_register_server(bt_uuid_t *app_uuid, uint8_t *server_id)
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| server_id | uint8_t * | 注册成功后分配的服务端 ID，由调用方分配内存、函数填充 | 不为NULL |
+| server_id | uint8_t * | 注册成功后分配的服务端 ID，由调用方分配内存、函数填充 |
 
 **返回值**
 
@@ -88,7 +88,7 @@ errcode_t gatts_register_server(bt_uuid_t *app_uuid, uint8_t *server_id)
 errcode_t gatts_unregister_server(uint8_t server_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -126,7 +126,7 @@ errcode_t gatts_unregister_server(uint8_t server_id)
 errcode_t gatts_add_service(uint8_t server_id, bt_uuid_t *service_uuid, bool is_primary)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -166,7 +166,7 @@ errcode_t gatts_add_service(uint8_t server_id, bt_uuid_t *service_uuid, bool is_
 errcode_t gatts_add_characteristic(uint8_t server_id, uint16_t service_handle, gatts_add_chara_info_t *character)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -206,7 +206,7 @@ errcode_t gatts_add_characteristic(uint8_t server_id, uint16_t service_handle, g
 errcode_t gatts_add_descriptor(uint8_t server_id, uint16_t service_handle, gatts_add_desc_info_t *descriptor)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -246,7 +246,7 @@ errcode_t gatts_add_descriptor(uint8_t server_id, uint16_t service_handle, gatts
 errcode_t gatts_add_service_sync(uint8_t server_id, bt_uuid_t *service_uuid, bool is_primary, uint16_t *handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -275,7 +275,7 @@ errcode_t gatts_add_service_sync(uint8_t server_id, bt_uuid_t *service_uuid, boo
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| handle | uint16_t * | 添加成功后的服务属性句柄，由调用方分配内存、函数填充 | 不为NULL |
+| handle | uint16_t * | 添加成功后的服务属性句柄，由调用方分配内存、函数填充 |
 
 **返回值**
 
@@ -297,7 +297,7 @@ errcode_t gatts_add_service_sync(uint8_t server_id, bt_uuid_t *service_uuid, boo
 errcode_t gatts_add_characteristic_sync(uint8_t server_id, uint16_t service_handle, gatts_add_chara_info_t *character, gatts_add_character_result_t *result)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -326,7 +326,7 @@ errcode_t gatts_add_characteristic_sync(uint8_t server_id, uint16_t service_hand
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| result | [gatts_add_character_result_t](#struct_gatts_add_character_result_t) * | 特征句柄信息，包含特征声明句柄与特征值句柄，由调用方分配内存、函数填充 | 不为NULL |
+| result | [gatts_add_character_result_t](#struct_gatts_add_character_result_t) * | 特征句柄信息，包含特征声明句柄与特征值句柄，由调用方分配内存、函数填充 |
 
 **返回值**
 
@@ -348,7 +348,7 @@ errcode_t gatts_add_characteristic_sync(uint8_t server_id, uint16_t service_hand
 errcode_t gatts_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, gatts_add_desc_info_t *descriptor, uint16_t *handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -377,7 +377,7 @@ errcode_t gatts_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| handle | uint16_t * | 添加成功后的描述符属性句柄，由调用方分配内存、函数填充 | 不为NULL |
+| handle | uint16_t * | 添加成功后的描述符属性句柄，由调用方分配内存、函数填充 |
 
 **返回值**
 
@@ -399,7 +399,7 @@ errcode_t gatts_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 errcode_t gatts_start_service(uint8_t server_id, uint16_t service_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -443,7 +443,7 @@ errcode_t gatts_start_service(uint8_t server_id, uint16_t service_handle)
 errcode_t gatts_stop_service(uint8_t server_id, uint16_t service_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -482,7 +482,7 @@ errcode_t gatts_stop_service(uint8_t server_id, uint16_t service_handle)
 errcode_t gatts_delete_service(uint8_t server_id, uint16_t service_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -521,7 +521,7 @@ errcode_t gatts_delete_service(uint8_t server_id, uint16_t service_handle)
 errcode_t gatts_delete_all_services(uint8_t server_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -559,7 +559,7 @@ errcode_t gatts_delete_all_services(uint8_t server_id)
 errcode_t gatts_send_response(uint8_t server_id, uint16_t conn_id, gatts_send_rsp_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -599,7 +599,7 @@ errcode_t gatts_send_response(uint8_t server_id, uint16_t conn_id, gatts_send_rs
 errcode_t gatts_notify_indicate(uint8_t server_id, uint16_t conn_id, gatts_ntf_ind_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -644,7 +644,7 @@ errcode_t gatts_notify_indicate(uint8_t server_id, uint16_t conn_id, gatts_ntf_i
 errcode_t gatts_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, gatts_ntf_ind_by_uuid_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -689,7 +689,7 @@ errcode_t gatts_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, gat
 errcode_t gatts_set_mtu_size(uint8_t server_id, uint16_t mtu_size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -728,7 +728,7 @@ errcode_t gatts_set_mtu_size(uint8_t server_id, uint16_t mtu_size)
 errcode_t gatts_register_callbacks(gatts_callbacks_t *func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"
@@ -771,7 +771,7 @@ errcode_t gatts_register_callbacks(gatts_callbacks_t *func)
 errcode_t gatts_exchange_mtu_req(uint16_t conn_id, uint16_t mtu_size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_gatt_server.h"

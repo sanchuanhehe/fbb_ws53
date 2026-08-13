@@ -2,7 +2,7 @@
 
 SSAP (Service Access Protocol) client 提供 SLE (Star Flash Low Energy) 协议中服务接入协议客户端侧的能力，支持注册与注销客户端、注册回调函数、发起服务/属性/描述符查找、按句柄或 UUID (Universally Unique Identifier) 读取、发起写请求与写命令以及交换信息请求。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_client.h"
@@ -30,7 +30,7 @@ SSAP (Service Access Protocol) client 提供 SLE (Star Flash Low Energy) 协议�
 errcode_t ssapc_register_client(sle_uuid_t *app_uuid, uint8_t *client_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_client.h"
@@ -80,7 +80,7 @@ errcode_t ssapc_register_client(sle_uuid_t *app_uuid, uint8_t *client_id)
 errcode_t ssapc_unregister_client(uint8_t client_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_client.h"
@@ -119,7 +119,7 @@ errcode_t ssapc_unregister_client(uint8_t client_id)
 errcode_t ssapc_find_structure(uint8_t client_id, uint16_t conn_id, ssapc_find_structure_param_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_client.h"
@@ -164,7 +164,7 @@ errcode_t ssapc_find_structure(uint8_t client_id, uint16_t conn_id, ssapc_find_s
 errcode_t ssapc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, ssapc_read_req_by_uuid_param_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_client.h"
@@ -205,7 +205,7 @@ errcode_t ssapc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, ssapc_read
 errcode_t ssapc_read_req(uint8_t client_id, uint16_t conn_id, uint16_t handle, uint8_t type)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_client.h"
@@ -251,7 +251,7 @@ errcode_t ssapc_read_req(uint8_t client_id, uint16_t conn_id, uint16_t handle, u
 errcode_t ssapc_write_req(uint8_t client_id, uint16_t conn_id, ssapc_write_param_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_client.h"
@@ -292,7 +292,7 @@ errcode_t ssapc_write_req(uint8_t client_id, uint16_t conn_id, ssapc_write_param
 errcode_t ssapc_write_cmd(uint8_t client_id, uint16_t conn_id, ssapc_write_param_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_client.h"
@@ -333,7 +333,7 @@ errcode_t ssapc_write_cmd(uint8_t client_id, uint16_t conn_id, ssapc_write_param
 errcode_t ssapc_exchange_info_req(uint8_t client_id, uint16_t conn_id, ssap_exchange_info_t* param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_client.h"
@@ -378,7 +378,7 @@ errcode_t ssapc_exchange_info_req(uint8_t client_id, uint16_t conn_id, ssap_exch
 errcode_t ssapc_register_callbacks(ssapc_callbacks_t *func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_client.h"

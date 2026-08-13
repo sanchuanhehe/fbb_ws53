@@ -2,7 +2,7 @@
 
 delaywork 提供延迟工作队列功能，支持在指定超时时间后将任务提交到内核全局工作队列执行，并支持延迟工作的初始化、销毁、调度与同步取消。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_delaywork.h"
@@ -25,7 +25,7 @@ delaywork 提供延迟工作队列功能，支持在指定超时时间后将任�
 int osal_delayedwork_init(osal_delayedwork *work, osal_delayedwork_handler handler)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_delaywork.h"
@@ -64,7 +64,7 @@ int osal_delayedwork_init(osal_delayedwork *work, osal_delayedwork_handler handl
 void osal_delayedwork_destroy(osal_delayedwork *work)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_delaywork.h"
@@ -93,7 +93,7 @@ void osal_delayedwork_destroy(osal_delayedwork *work)
 int osal_delayedwork_schedule(osal_delayedwork *work, int timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_delaywork.h"
@@ -132,7 +132,7 @@ int osal_delayedwork_schedule(osal_delayedwork *work, int timeout)
 int osal_delayedwork_cancel_sync(osal_delayedwork *work)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_delaywork.h"

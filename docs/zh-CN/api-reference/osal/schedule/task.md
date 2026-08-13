@@ -2,7 +2,7 @@
 
 task 提供操作系统抽象层（OSAL，Operating System Abstraction Layer）的任务调度与管理功能，支持线程创建与销毁、优先级设置、CPU (Central Processing Unit) 亲和性绑定、调度锁定与解锁、线程状态控制、延时等待以及内核初始化与状态查询。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -53,7 +53,7 @@ task 提供操作系统抽象层（OSAL，Operating System Abstraction Layer）�
 osal_task *osal_kthread_create(osal_kthread_handler handler, void *data, const char *name, unsigned int stack_size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -100,7 +100,7 @@ osal_task *osal_kthread_create(osal_kthread_handler handler, void *data, const c
 osal_task *osal_kthread_create_static_ext(osal_kthread_init *init_handle, void *topStack)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -139,7 +139,7 @@ osal_task *osal_kthread_create_static_ext(osal_kthread_init *init_handle, void *
 osal_task *osal_kthread_create_ext(osal_kthread_init *init_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -177,7 +177,7 @@ osal_task *osal_kthread_create_ext(osal_kthread_init *init_handle)
 int osal_kthread_set_priority(osal_task *task, unsigned int priority)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -221,7 +221,7 @@ int osal_kthread_set_priority(osal_task *task, unsigned int priority)
 void osal_kthread_set_affinity(osal_task *task, int cpu_mask)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -255,7 +255,7 @@ void osal_kthread_set_affinity(osal_task *task, int cpu_mask)
 int osal_kthread_should_stop(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -291,7 +291,7 @@ int osal_kthread_should_stop(void)
 int osal_kthread_wakeup_process(osal_task *task)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -329,7 +329,7 @@ int osal_kthread_wakeup_process(osal_task *task)
 void osal_kthread_bind(osal_task *task, unsigned int cpu)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -359,7 +359,7 @@ void osal_kthread_bind(osal_task *task, unsigned int cpu)
 void osal_kthread_lock(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -386,7 +386,7 @@ void osal_kthread_lock(void)
 void osal_kthread_unlock(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -413,7 +413,7 @@ void osal_kthread_unlock(void)
 void osal_kthread_destroy(osal_task *task, unsigned int stop_flag)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -448,7 +448,7 @@ void osal_kthread_destroy(osal_task *task, unsigned int stop_flag)
 void osal_kthread_schedule(unsigned int sleep_ns)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -477,7 +477,7 @@ void osal_kthread_schedule(unsigned int sleep_ns)
 void osal_kthread_set_uninterrupt(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -500,7 +500,7 @@ void osal_kthread_set_uninterrupt(void)
 void osal_kthread_set_running(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -523,7 +523,7 @@ void osal_kthread_set_running(void)
 void osal_cond_resched(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -546,7 +546,7 @@ void osal_cond_resched(void)
 void osal_schedule(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -569,7 +569,7 @@ void osal_schedule(void)
 void osal_kneon_begin(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -598,7 +598,7 @@ void osal_kneon_begin(void)
 void osal_kneon_end(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -628,7 +628,7 @@ void osal_kneon_end(void)
 void osal_yield(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -655,7 +655,7 @@ void osal_yield(void)
 long osal_get_current_pid(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -681,7 +681,7 @@ long osal_get_current_pid(void)
 long osal_get_current_tid(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -712,7 +712,7 @@ long osal_get_current_tid(void)
 int osal_get_current_tgid(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -738,7 +738,7 @@ int osal_get_current_tgid(void)
 char *osal_get_current_taskname(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -764,7 +764,7 @@ char *osal_get_current_taskname(void)
 unsigned long osal_msleep(unsigned int msecs)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -806,7 +806,7 @@ unsigned long osal_msleep(unsigned int msecs)
 void osal_msleep_uninterruptible(unsigned int msecs)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -839,7 +839,7 @@ void osal_msleep_uninterruptible(unsigned int msecs)
 void osal_udelay(unsigned int usecs)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -872,7 +872,7 @@ void osal_udelay(unsigned int usecs)
 void osal_mdelay(unsigned int msecs)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -905,7 +905,7 @@ void osal_mdelay(unsigned int msecs)
 void osal_kthread_suspend(osal_task *task)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -934,7 +934,7 @@ void osal_kthread_suspend(osal_task *task)
 void osal_kthread_resume(osal_task *task)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -963,7 +963,7 @@ void osal_kthread_resume(osal_task *task)
 unsigned int osal_kernel_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -995,7 +995,7 @@ unsigned int osal_kernel_init(void)
 unsigned int osal_kernel_start(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"
@@ -1027,7 +1027,7 @@ unsigned int osal_kernel_start(void)
 osal_kernel_status osal_kernel_get_state(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_task.h"

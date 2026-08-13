@@ -2,7 +2,7 @@
 
 watchdog 提供看门狗定时器功能，用于系统运行监控和异常恢复，支持复位与中断两种触发模式以及超时回调注册。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/watchdog.h"
@@ -31,7 +31,7 @@ watchdog 提供看门狗定时器功能，用于系统运行监控和异常恢�
 errcode_t uapi_watchdog_init(uint32_t timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/watchdog.h"
@@ -81,7 +81,7 @@ errcode_t uapi_watchdog_init(uint32_t timeout)
 errcode_t uapi_watchdog_deinit(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/watchdog.h"
@@ -117,7 +117,7 @@ errcode_t uapi_watchdog_deinit(void)
 errcode_t uapi_watchdog_enable(wdt_mode_t mode)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/watchdog.h"
@@ -167,7 +167,7 @@ errcode_t uapi_watchdog_enable(wdt_mode_t mode)
 errcode_t uapi_watchdog_disable(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/watchdog.h"
@@ -200,7 +200,7 @@ errcode_t uapi_watchdog_disable(void)
 errcode_t uapi_watchdog_kick(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/watchdog.h"
@@ -243,7 +243,7 @@ errcode_t uapi_watchdog_kick(void)
 errcode_t uapi_watchdog_set_time(uint32_t timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/watchdog.h"
@@ -288,7 +288,7 @@ errcode_t uapi_watchdog_set_time(uint32_t timeout)
 errcode_t uapi_watchdog_get_left_time(uint32_t *timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/watchdog.h"
@@ -327,7 +327,7 @@ errcode_t uapi_watchdog_get_left_time(uint32_t *timeout)
 errcode_t uapi_register_watchdog_callback(watchdog_callback_t callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/watchdog.h"
@@ -370,7 +370,7 @@ errcode_t uapi_register_watchdog_callback(watchdog_callback_t callback)
 errcode_t uapi_watchdog_resume(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/watchdog.h"
@@ -415,7 +415,7 @@ errcode_t uapi_watchdog_resume(uintptr_t arg)
 errcode_t uapi_watchdog_suspend(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/watchdog.h"

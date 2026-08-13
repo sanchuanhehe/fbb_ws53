@@ -2,7 +2,7 @@
 
 ALG (Algorithm) 提供 Wi-Fi 算法配置能力，包括固定速率设置、协商速率查询、TPC (Transmit Power Control) 模式配置、RTS (Request To Send) 模式配置、CCA (Clear Channel Assessment) 门限设置及抗干扰模式配置。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_alg.h"
@@ -27,7 +27,7 @@ ALG (Algorithm) 提供 Wi-Fi 算法配置能力，包括固定速率设置、协
 errcode_t wifi_set_fixed_tx_rate(unsigned char auto_rate, alg_param_stru *alg_param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_alg.h"
@@ -67,7 +67,7 @@ errcode_t wifi_set_fixed_tx_rate(unsigned char auto_rate, alg_param_stru *alg_pa
 errcode_t wifi_get_negotiated_rate(const uint8_t *mac, int32_t mac_len, uint32_t *tx_best_rate)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_alg.h"
@@ -114,7 +114,7 @@ errcode_t wifi_get_negotiated_rate(const uint8_t *mac, int32_t mac_len, uint32_t
 errcode_t wifi_set_tpc_mode(uint32_t tpc_value)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_alg.h"
@@ -152,7 +152,7 @@ errcode_t wifi_set_tpc_mode(uint32_t tpc_value)
 errcode_t wifi_set_rts_mode(uint8_t mode, uint16_t pkt_length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_alg.h"
@@ -191,7 +191,7 @@ errcode_t wifi_set_rts_mode(uint8_t mode, uint16_t pkt_length)
 errcode_t wifi_set_cca_threshold(uint8_t mode, int8_t threshold)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_alg.h"
@@ -230,7 +230,7 @@ errcode_t wifi_set_cca_threshold(uint8_t mode, int8_t threshold)
 errcode_t wifi_set_intrf_mode(const char *ifname, uint8_t enable, uint16_t flag)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/wifi_alg.h"

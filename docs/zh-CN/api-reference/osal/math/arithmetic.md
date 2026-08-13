@@ -2,7 +2,7 @@
 
 arithmetic 提供 OSAL (Operating System Abstraction Layer) 数学运算功能，包括 64 位整数除法与取余运算、随机数生成，以及最大值、最小值、绝对值等常用数学计算宏。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "src/kernel/osal/include/math/osal_math.h"
@@ -29,7 +29,7 @@ arithmetic 提供 OSAL (Operating System Abstraction Layer) 数学运算功能�
 unsigned long long osal_div_u64(unsigned long long dividend, unsigned int divisor)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "src/kernel/osal/include/math/osal_math.h"
@@ -67,7 +67,7 @@ unsigned long long osal_div_u64(unsigned long long dividend, unsigned int diviso
 long long osal_div_s64(long long dividend, int divisor)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "src/kernel/osal/include/math/osal_math.h"
@@ -105,7 +105,7 @@ long long osal_div_s64(long long dividend, int divisor)
 unsigned long long osal_div64_u64(unsigned long long dividend, unsigned long long divisor)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "src/kernel/osal/include/math/osal_math.h"
@@ -143,7 +143,7 @@ unsigned long long osal_div64_u64(unsigned long long dividend, unsigned long lon
 long long osal_div64_s64(long long dividend, long long divisor)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "src/kernel/osal/include/math/osal_math.h"
@@ -181,7 +181,7 @@ long long osal_div64_s64(long long dividend, long long divisor)
 unsigned long long osal_div_u64_rem(unsigned long long dividend, unsigned int divisor)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "src/kernel/osal/include/math/osal_math.h"
@@ -219,7 +219,7 @@ unsigned long long osal_div_u64_rem(unsigned long long dividend, unsigned int di
 long long osal_div_s64_rem(long long dividend, int divisor)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "src/kernel/osal/include/math/osal_math.h"
@@ -257,7 +257,7 @@ long long osal_div_s64_rem(long long dividend, int divisor)
 unsigned long long osal_div64_u64_rem(unsigned long long dividend, unsigned long long divisor)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "src/kernel/osal/include/math/osal_math.h"
@@ -295,7 +295,7 @@ unsigned long long osal_div64_u64_rem(unsigned long long dividend, unsigned long
 unsigned int osal_get_random_int(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "src/kernel/osal/include/math/osal_math.h"

@@ -2,7 +2,7 @@
 
 mutex 提供互斥锁功能，用于保护临界区资源，确保同一时刻仅有一个任务访问共享资源，支持永久等待、限时等待、可中断等待与不等待等多种加锁方式。该模块封装底层操作系统互斥锁服务，向上提供统一的初始化、加锁、解锁、查询与销毁接口。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "lock/osal_mutex.h"
@@ -29,7 +29,7 @@ mutex 提供互斥锁功能，用于保护临界区资源，确保同一时刻�
 int osal_mutex_init(osal_mutex *mutex)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_mutex.h"
@@ -73,7 +73,7 @@ int osal_mutex_init(osal_mutex *mutex)
 int osal_mutex_lock(osal_mutex *mutex)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_mutex.h"
@@ -117,7 +117,7 @@ int osal_mutex_lock(osal_mutex *mutex)
 int osal_mutex_lock_timeout(osal_mutex *mutex, unsigned int timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_mutex.h"
@@ -161,7 +161,7 @@ int osal_mutex_lock_timeout(osal_mutex *mutex, unsigned int timeout)
 int osal_mutex_lock_interruptible(osal_mutex *mutex)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_mutex.h"
@@ -200,7 +200,7 @@ int osal_mutex_lock_interruptible(osal_mutex *mutex)
 int osal_mutex_trylock(osal_mutex *mutex)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_mutex.h"
@@ -238,7 +238,7 @@ int osal_mutex_trylock(osal_mutex *mutex)
 void osal_mutex_unlock(osal_mutex *mutex)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_mutex.h"
@@ -273,7 +273,7 @@ void osal_mutex_unlock(osal_mutex *mutex)
 int osal_mutex_is_locked(osal_mutex *mutex)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_mutex.h"
@@ -312,7 +312,7 @@ int osal_mutex_is_locked(osal_mutex *mutex)
 void osal_mutex_destroy(osal_mutex *mutex)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_mutex.h"

@@ -2,7 +2,7 @@
 
 OTA (Over-The-Air) 基于 SLE (Star Flash Low Energy) 通信提供设备固件升级数据的服务端接收与确认能力。本模块对外提供 OTA 服务器初始化、升级数据确认发送以及接收数据回调注册三类接口。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ota.h"
@@ -24,7 +24,7 @@ OTA (Over-The-Air) 基于 SLE (Star Flash Low Energy) 通信提供设备固件�
 errcode_t sle_ota_service_init(uint8_t server_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ota.h"
@@ -57,7 +57,7 @@ errcode_t sle_ota_service_init(uint8_t server_id)
 errcode_t sle_ota_data_ack(uint16_t value_len, uint8_t *value)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ota.h"
@@ -91,7 +91,7 @@ errcode_t sle_ota_data_ack(uint16_t value_len, uint8_t *value)
 void sle_ota_reg_chan_data_report_cbk(sle_ota_chan_data_report data_report)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ota.h"

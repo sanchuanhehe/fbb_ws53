@@ -2,7 +2,7 @@
 
 string 提供操作系统抽象层的字符串与内存操作接口，包括字符串比较、字符查找、子串定位、字符串长度计算、字符串分割、内存比较、内存字符查找以及字符串到整数的转换功能。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -45,7 +45,7 @@ string 提供操作系统抽象层的字符串与内存操作接口，包括字�
 int osal_memncmp(const void *buf1, const void *buf2, unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -80,7 +80,7 @@ int osal_memncmp(const void *buf1, const void *buf2, unsigned long size)
 int osal_strcmp(const char *s1, const char *s2)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -120,7 +120,7 @@ int osal_strcmp(const char *s1, const char *s2)
 int osal_strncmp(const char *s1, const char *s2, unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -155,7 +155,7 @@ int osal_strncmp(const char *s1, const char *s2, unsigned long size)
 int osal_strcasecmp(const char *s1, const char *s2)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -189,7 +189,7 @@ int osal_strcasecmp(const char *s1, const char *s2)
 int osal_strncasecmp(const char *s1, const char *s2, unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -224,7 +224,7 @@ int osal_strncasecmp(const char *s1, const char *s2, unsigned long size)
 char *osal_strchr(const char *s, int n)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -257,7 +257,7 @@ char *osal_strchr(const char *s, int n)
 char *osal_strnchr(const char *s, int count, int c)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -291,7 +291,7 @@ char *osal_strnchr(const char *s, int count, int c)
 char *osal_strrchr(const char *s, int c)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -324,7 +324,7 @@ char *osal_strrchr(const char *s, int c)
 char *osal_strstr(const char *s1, const char *s2)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -361,7 +361,7 @@ char *osal_strstr(const char *s1, const char *s2)
 char *osal_strnstr(const char *s1, const char *s2, int n)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -395,7 +395,7 @@ char *osal_strnstr(const char *s1, const char *s2, int n)
 unsigned int osal_strlen(const char *s)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -431,7 +431,7 @@ unsigned int osal_strlen(const char *s)
 unsigned int osal_strnlen(const char *s, unsigned int size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -463,7 +463,7 @@ unsigned int osal_strnlen(const char *s, unsigned int size)
 char *osal_strpbrk(const char *s1, const char *s2)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -496,7 +496,7 @@ char *osal_strpbrk(const char *s1, const char *s2)
 char *osal_strsep(char **s, const char *ct)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -535,7 +535,7 @@ char *osal_strsep(char **s, const char *ct)
 unsigned int osal_strspn(const char *s, const char *accept)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -566,7 +566,7 @@ unsigned int osal_strspn(const char *s, const char *accept)
 unsigned int osal_strcspn(const char *s, const char *reject)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -597,7 +597,7 @@ unsigned int osal_strcspn(const char *s, const char *reject)
 void *osal_memscan(void *addr, int c, int size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -630,7 +630,7 @@ void *osal_memscan(void *addr, int c, int size)
 int osal_memcmp(const void *cs, const void *ct, int count)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -671,7 +671,7 @@ int osal_memcmp(const void *cs, const void *ct, int count)
 void *osal_memchr(const void *s, int c, int n)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -705,7 +705,7 @@ void *osal_memchr(const void *s, int c, int n)
 void *osal_memchr_inv(const void *s, int c, int n)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -739,7 +739,7 @@ void *osal_memchr_inv(const void *s, int c, int n)
 unsigned long long osal_strtoull(const char *cp, char **endp, unsigned int base)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -780,7 +780,7 @@ unsigned long long osal_strtoull(const char *cp, char **endp, unsigned int base)
 unsigned long osal_strtoul(const char *cp, char **endp, unsigned int base)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -825,7 +825,7 @@ unsigned long osal_strtoul(const char *cp, char **endp, unsigned int base)
 long osal_strtol(const char *cp, char **endp, unsigned int base)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"
@@ -874,7 +874,7 @@ long osal_strtol(const char *cp, char **endp, unsigned int base)
 long long osal_strtoll(const char *cp, char **endp, unsigned int base)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "string/osal_string.h"

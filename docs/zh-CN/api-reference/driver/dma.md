@@ -2,7 +2,7 @@
 
 DMA (Direct Memory Access) 在无需 CPU 干预的情况下实现外设与内存之间的数据传输，支持内存到内存、内存到外设以及外设到内存的单次传输与链表 (Linked List Item, LLI) 传输模式。模块同时提供低功耗 (Low Power Mode, LPM) 场景下的挂起与恢复能力，并通过回调机制在传输完成或发生错误时通知调用方。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "driver/dma.h"
@@ -36,7 +36,7 @@ DMA (Direct Memory Access) 在无需 CPU 干预的情况下实现外设与内存
 errcode_t uapi_dma_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"
@@ -73,7 +73,7 @@ errcode_t uapi_dma_init(void)
 void uapi_dma_deinit(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"
@@ -100,7 +100,7 @@ void uapi_dma_deinit(void)
 errcode_t uapi_dma_open(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"
@@ -137,7 +137,7 @@ errcode_t uapi_dma_open(void)
 void uapi_dma_close(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"
@@ -160,7 +160,7 @@ void uapi_dma_close(void)
 errcode_t uapi_dma_start_transfer(uint8_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"
@@ -198,7 +198,7 @@ errcode_t uapi_dma_start_transfer(uint8_t channel)
 errcode_t uapi_dma_end_transfer(uint8_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"
@@ -240,7 +240,7 @@ errcode_t uapi_dma_end_transfer(uint8_t channel)
 uint32_t uapi_dma_get_block_ts(uint8_t channel)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"
@@ -277,7 +277,7 @@ uint32_t uapi_dma_get_block_ts(uint8_t channel)
 errcode_t uapi_dma_transfer_memory_single(const dma_ch_user_memory_config_t *user_cfg, dma_transfer_cb_t callback, uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"
@@ -321,7 +321,7 @@ errcode_t uapi_dma_transfer_memory_single(const dma_ch_user_memory_config_t *use
 errcode_t uapi_dma_configure_peripheral_transfer_single(const dma_ch_user_peripheral_config_t *user_cfg, uint8_t *channel, dma_transfer_cb_t callback, uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"
@@ -371,7 +371,7 @@ errcode_t uapi_dma_configure_peripheral_transfer_single(const dma_ch_user_periph
 uint8_t uapi_dma_get_lli_channel(uint8_t burst_length, uint8_t handshaking)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"
@@ -416,7 +416,7 @@ uint8_t uapi_dma_get_lli_channel(uint8_t burst_length, uint8_t handshaking)
 errcode_t uapi_dma_transfer_memory_lli(uint8_t channel, const dma_ch_user_memory_config_t *user_cfg, dma_transfer_cb_t callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"
@@ -466,7 +466,7 @@ errcode_t uapi_dma_transfer_memory_lli(uint8_t channel, const dma_ch_user_memory
 errcode_t uapi_dma_configure_peripheral_transfer_lli(uint8_t channel, const dma_ch_user_peripheral_config_t *user_cfg, dma_transfer_cb_t callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"
@@ -514,7 +514,7 @@ errcode_t uapi_dma_configure_peripheral_transfer_lli(uint8_t channel, const dma_
 errcode_t uapi_dma_enable_lli(uint8_t channel, dma_transfer_cb_t callback, uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"
@@ -564,7 +564,7 @@ errcode_t uapi_dma_enable_lli(uint8_t channel, dma_transfer_cb_t callback, uintp
 errcode_t uapi_dma_resume(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"
@@ -609,7 +609,7 @@ errcode_t uapi_dma_resume(uintptr_t arg)
 errcode_t uapi_dma_suspend(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "driver/dma.h"

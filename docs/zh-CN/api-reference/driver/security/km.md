@@ -2,7 +2,7 @@
 
 security_unified KM (Key Manager) 子模块提供 Keyslot、KLAD (Key Ladder)、KDF (Key Derivation Function) 三类密钥管理能力，包括密钥槽句柄的创建与销毁、Key Ladder 通道的创建、属性配置与密钥派生下发、根密钥更新等接口。该模块通过统一的对外句柄抽象，由应用层发起调用，完成对称密钥与 HMAC (Hash-based Message Authentication Code) 密钥的安全派生与下发。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/security_unified/km.h"
@@ -34,7 +34,7 @@ security_unified KM (Key Manager) 子模块提供 Keyslot、KLAD (Key Ladder)、
 errcode_t uapi_drv_km_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/km.h"
@@ -70,7 +70,7 @@ errcode_t uapi_drv_km_init(void)
 errcode_t uapi_drv_km_deinit(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/km.h"
@@ -106,7 +106,7 @@ errcode_t uapi_drv_km_deinit(void)
 errcode_t uapi_drv_keyslot_create(uint32_t *keyslot_handle, uapi_drv_keyslot_type_t keyslot_type)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/km.h"
@@ -155,7 +155,7 @@ errcode_t uapi_drv_keyslot_create(uint32_t *keyslot_handle, uapi_drv_keyslot_typ
 errcode_t uapi_drv_keyslot_destroy(uint32_t keyslot_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/km.h"
@@ -198,7 +198,7 @@ errcode_t uapi_drv_keyslot_destroy(uint32_t keyslot_handle)
 errcode_t uapi_drv_klad_create(uint32_t *klad_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/km.h"
@@ -241,7 +241,7 @@ errcode_t uapi_drv_klad_create(uint32_t *klad_handle)
 errcode_t uapi_drv_klad_destroy(uint32_t klad_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/km.h"
@@ -284,7 +284,7 @@ errcode_t uapi_drv_klad_destroy(uint32_t klad_handle)
 errcode_t uapi_drv_klad_attach(uint32_t klad_handle, uapi_drv_klad_dest_t klad_type, uint32_t keyslot_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/km.h"
@@ -329,7 +329,7 @@ errcode_t uapi_drv_klad_attach(uint32_t klad_handle, uapi_drv_klad_dest_t klad_t
 errcode_t uapi_drv_klad_detach(uint32_t klad_handle, uapi_drv_klad_dest_t klad_type, uint32_t keyslot_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/km.h"
@@ -373,7 +373,7 @@ errcode_t uapi_drv_klad_detach(uint32_t klad_handle, uapi_drv_klad_dest_t klad_t
 errcode_t uapi_drv_klad_set_attr(uint32_t klad_handle, const uapi_drv_klad_attr_t *attr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/km.h"
@@ -418,7 +418,7 @@ errcode_t uapi_drv_klad_set_attr(uint32_t klad_handle, const uapi_drv_klad_attr_
 errcode_t uapi_drv_klad_get_attr(uint32_t klad_handle, uapi_drv_klad_attr_t *attr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/km.h"
@@ -463,7 +463,7 @@ errcode_t uapi_drv_klad_get_attr(uint32_t klad_handle, uapi_drv_klad_attr_t *att
 errcode_t uapi_drv_klad_set_effective_key(uint32_t klad_handle, const uapi_drv_klad_effective_key_t *key)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/km.h"
@@ -508,7 +508,7 @@ errcode_t uapi_drv_klad_set_effective_key(uint32_t klad_handle, const uapi_drv_k
 errcode_t uapi_drv_klad_set_clear_key(uint32_t klad_handle, const uapi_drv_klad_clear_key_t *key)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/km.h"
@@ -553,7 +553,7 @@ errcode_t uapi_drv_klad_set_clear_key(uint32_t klad_handle, const uapi_drv_klad_
 errcode_t uapi_drv_kdf_update(uapi_drv_kdf_otp_key_t otp_key, uapi_drv_kdf_update_alg_t alg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/km.h"

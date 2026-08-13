@@ -2,7 +2,7 @@
 
 bts common 提供蓝牙基础设备管理能力，包括 BLE (Bluetooth Low Energy) 协议栈的使能与去使能，以及设备上电、BLE 使能/去使能结果的回调通知注册。该模块基于 errcode_t 统一错误码返回执行结果，并通过回调机制异步上报协议栈运行状态。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/services/bts/common/bts_device_manager.h"
@@ -24,7 +24,7 @@ bts common 提供蓝牙基础设备管理能力，包括 BLE (Bluetooth Low Ener
 errcode_t enable_ble(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/common/bts_device_manager.h"
@@ -61,7 +61,7 @@ errcode_t enable_ble(void)
 errcode_t disable_ble(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/common/bts_device_manager.h"
@@ -93,7 +93,7 @@ errcode_t disable_ble(void)
 errcode_t bts_dev_manager_register_callbacks(bts_dev_manager_callbacks_t *func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/common/bts_device_manager.h"

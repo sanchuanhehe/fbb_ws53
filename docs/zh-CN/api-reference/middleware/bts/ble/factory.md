@@ -2,7 +2,7 @@
 
 factory 提供 BLE (Bluetooth Low Energy) 产测 RF (Radio Frequency) 收发测试、单音模式与产线校准能力。该模块支持射频长发/长收的启停与复位、NV (Non-Volatile) 校准，以及 XO (Crystal Oscillator) 频偏校准、芯片温度获取、功率校准及其补偿值的 EFUSE 读写等产线校准命令。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_factory.h"
@@ -29,7 +29,7 @@ factory 提供 BLE (Bluetooth Low Energy) 产测 RF (Radio Frequency) 收发测�
 errcode_t ble_factory_register_callbacks(ble_factory_callbacks_t *func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_factory.h"
@@ -67,7 +67,7 @@ errcode_t ble_factory_register_callbacks(ble_factory_callbacks_t *func)
 errcode_t ble_factory_rf_tx_start(ble_rf_tx_start_t* param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_factory.h"
@@ -105,7 +105,7 @@ errcode_t ble_factory_rf_tx_start(ble_rf_tx_start_t* param)
 errcode_t ble_factory_rf_rx_start(ble_rf_rx_start_t* param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_factory.h"
@@ -143,7 +143,7 @@ errcode_t ble_factory_rf_rx_start(ble_rf_rx_start_t* param)
 errcode_t ble_factory_rf_trx_end(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_factory.h"
@@ -175,7 +175,7 @@ errcode_t ble_factory_rf_trx_end(void)
 errcode_t ble_factory_rf_reset(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_factory.h"
@@ -207,7 +207,7 @@ errcode_t ble_factory_rf_reset(void)
 errcode_t ble_factory_rf_cali_nv(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_factory.h"
@@ -239,7 +239,7 @@ errcode_t ble_factory_rf_cali_nv(void)
 errcode_t ble_factory_rf_single_tone(ble_rf_single_tone_t* param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_factory.h"
@@ -277,7 +277,7 @@ errcode_t ble_factory_rf_single_tone(ble_rf_single_tone_t* param)
 errcode_t ble_factory_vendor_productline_cmd(ble_vendor_productline_cmd_t* param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_factory.h"

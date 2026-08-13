@@ -2,7 +2,7 @@
 
 timer 提供通用硬件定时器功能，支持创建与管理软件定时器、设置单次或周期性定时超时回调、获取硬件定时器最大可设置的延时时间，并可选支持高精度专用定时与低功耗挂起/恢复特性。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/timer.h"
@@ -35,7 +35,7 @@ timer 提供通用硬件定时器功能，支持创建与管理软件定时器�
 errcode_t uapi_timer_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/timer.h"
@@ -79,7 +79,7 @@ errcode_t uapi_timer_init(void)
 errcode_t uapi_timer_adapter(timer_index_t index, uint32_t int_id, uint16_t int_priority)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/timer.h"
@@ -133,7 +133,7 @@ errcode_t uapi_timer_adapter(timer_index_t index, uint32_t int_id, uint16_t int_
 errcode_t uapi_timer_deinit(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/timer.h"
@@ -175,7 +175,7 @@ errcode_t uapi_timer_deinit(void)
 errcode_t uapi_timer_create(timer_index_t index, timer_handle_t *timer)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/timer.h"
@@ -225,7 +225,7 @@ errcode_t uapi_timer_create(timer_index_t index, timer_handle_t *timer)
 errcode_t uapi_timer_delete(timer_handle_t timer)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/timer.h"
@@ -267,7 +267,7 @@ errcode_t uapi_timer_delete(timer_handle_t timer)
 uint32_t uapi_timer_get_max_us(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/timer.h"
@@ -298,7 +298,7 @@ uint32_t uapi_timer_get_max_us(void)
 errcode_t uapi_timer_start(timer_handle_t timer, uint32_t time_us, timer_callback_t callback, uintptr_t data)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/timer.h"
@@ -351,7 +351,7 @@ errcode_t uapi_timer_start(timer_handle_t timer, uint32_t time_us, timer_callbac
 errcode_t uapi_timer_stop(timer_handle_t timer)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/timer.h"
@@ -401,7 +401,7 @@ errcode_t uapi_timer_stop(timer_handle_t timer)
 errcode_t uapi_timer_get_current_time_us(timer_index_t index, uint32_t *current_time_us)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/timer.h"
@@ -445,7 +445,7 @@ errcode_t uapi_timer_start_high_precision(timer_index_t index, timer_trigger_mod
                                           timer_irq_info_t* irq_info, high_precision_timer_callback_t callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/timer.h"
@@ -497,7 +497,7 @@ errcode_t uapi_timer_start_high_precision(timer_index_t index, timer_trigger_mod
 errcode_t uapi_timer_reset_high_precision(timer_index_t index, timer_trigger_mode_t mode, uint32_t time_us)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/timer.h"
@@ -544,7 +544,7 @@ errcode_t uapi_timer_reset_high_precision(timer_index_t index, timer_trigger_mod
 errcode_t uapi_timer_stop_high_precision(timer_index_t index)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/timer.h"
@@ -590,7 +590,7 @@ errcode_t uapi_timer_stop_high_precision(timer_index_t index)
 errcode_t uapi_timer_suspend(uintptr_t val)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/timer.h"
@@ -633,7 +633,7 @@ errcode_t uapi_timer_suspend(uintptr_t val)
 errcode_t uapi_timer_resume(uintptr_t val)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/timer.h"

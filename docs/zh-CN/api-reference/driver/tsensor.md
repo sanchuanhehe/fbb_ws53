@@ -2,7 +2,7 @@
 
 Tsensor (Temperature Sensor) 提供芯片内部温度采集功能，支持多种采样模式与温度阈值中断（过温/超限/采集完成），并提供单点与两点温度补偿校准、多级温度阈值中断配置以及当前温度值查询能力。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/tsensor.h"
@@ -23,7 +23,7 @@ Tsensor (Temperature Sensor) 提供芯片内部温度采集功能，支持多种
 errcode_t uapi_tsensor_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/tsensor.h"
@@ -53,7 +53,6 @@ errcode_t uapi_tsensor_init(void)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_TSENSOR_USING_V150 | 特性宏 | 支持Tsensor V150电源与时钟分频配置特性 | y |
 
 ### uapi_tsensor_get_current_temp <a id="uapi_tsensor_get_current_temp"></a>
 
@@ -61,7 +60,7 @@ errcode_t uapi_tsensor_init(void)
 errcode_t uapi_tsensor_get_current_temp(int8_t *temp)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/tsensor.h"

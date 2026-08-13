@@ -2,7 +2,7 @@
 
 P2P (Wi-Fi Peer-to-Peer) 提供 Wi-Fi 直连功能，支持设备扫描、连接、断连及 GO (Group Owner) / GC (Group Client) 角色协商，实现无需接入点的点对点 Wi-Fi 通信。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -37,7 +37,7 @@ P2P (Wi-Fi Peer-to-Peer) 提供 Wi-Fi 直连功能，支持设备扫描、连接
 errcode_t wifi_p2p_enable(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -69,7 +69,7 @@ errcode_t wifi_p2p_enable(void)
 errcode_t wifi_p2p_disable(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -101,7 +101,7 @@ errcode_t wifi_p2p_disable(void)
 int32_t wifi_p2p_is_enabled(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -133,7 +133,7 @@ int32_t wifi_p2p_is_enabled(void)
 errcode_t wifi_p2p_find(int32_t sec)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -171,7 +171,7 @@ errcode_t wifi_p2p_find(int32_t sec)
 errcode_t wifi_p2p_stop_find(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -203,7 +203,7 @@ errcode_t wifi_p2p_stop_find(void)
 errcode_t wifi_p2p_connect_cancel(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -235,7 +235,7 @@ errcode_t wifi_p2p_connect_cancel(void)
 errcode_t wifi_p2p_listen(uint32_t period, uint32_t interval)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -274,7 +274,7 @@ errcode_t wifi_p2p_listen(uint32_t period, uint32_t interval)
 errcode_t wifi_p2p_get_peers_info(p2p_device_stru *dev_list, uint32_t *dev_num)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -320,7 +320,7 @@ errcode_t wifi_p2p_get_peers_info(p2p_device_stru *dev_list, uint32_t *dev_num)
 errcode_t wifi_p2p_connect(const p2p_config_stru *p2p_config)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -358,7 +358,7 @@ errcode_t wifi_p2p_connect(const p2p_config_stru *p2p_config)
 errcode_t wifi_p2p_connect_accept(const p2p_config_stru *p2p_config, int assoc)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -397,7 +397,7 @@ errcode_t wifi_p2p_connect_accept(const p2p_config_stru *p2p_config, int assoc)
 errcode_t wifi_p2p_disconnect(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -429,7 +429,7 @@ errcode_t wifi_p2p_disconnect(void)
 errcode_t wifi_p2p_go_get_gc_info(p2p_client_info_stru *client_list, uint32_t *client_num)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -475,7 +475,7 @@ errcode_t wifi_p2p_go_get_gc_info(p2p_client_info_stru *client_list, uint32_t *c
 errcode_t wifi_p2p_set_device_config(const p2p_device_config_stru *p2p_dev_set_info)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -513,7 +513,7 @@ errcode_t wifi_p2p_set_device_config(const p2p_device_config_stru *p2p_dev_set_i
 errcode_t wifi_p2p_get_device_config(p2p_device_config_stru *p2p_dev_set_info)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -557,7 +557,7 @@ errcode_t wifi_p2p_get_device_config(p2p_device_config_stru *p2p_dev_set_info)
 errcode_t wifi_p2p_get_connect_info(p2p_status_info_stru *status)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"

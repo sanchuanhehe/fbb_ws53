@@ -2,7 +2,7 @@
 
 SPI (Serial Peripheral Interface) 提供串行外设接口的主机与从机模式数据收发能力，支持轮询、DMA (Direct Memory Access)、中断三种传输模式以及轮询与 DMA 自动切换模式，并支持 QSPI (Quad SPI) 帧格式、CRC (Cyclic Redundancy Check) 校验、环回测试与低功耗挂起恢复等配置。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -41,7 +41,7 @@ SPI (Serial Peripheral Interface) 提供串行外设接口的主机与从机模�
 errcode_t uapi_spi_init(spi_bus_t bus, spi_attr_t *attr, spi_extra_attr_t *extra_attr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -88,7 +88,7 @@ errcode_t uapi_spi_init(spi_bus_t bus, spi_attr_t *attr, spi_extra_attr_t *extra
 errcode_t uapi_spi_deinit(spi_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -128,7 +128,7 @@ errcode_t uapi_spi_deinit(spi_bus_t bus)
 errcode_t uapi_spi_set_tmod(spi_bus_t bus, hal_spi_trans_mode_t tmod, uint8_t data_frame_num)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -170,7 +170,7 @@ errcode_t uapi_spi_set_tmod(spi_bus_t bus, hal_spi_trans_mode_t tmod, uint8_t da
 errcode_t uapi_spi_set_attr(spi_bus_t bus, spi_attr_t *attr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -211,7 +211,7 @@ errcode_t uapi_spi_set_attr(spi_bus_t bus, spi_attr_t *attr)
 errcode_t uapi_spi_get_attr(spi_bus_t bus, spi_attr_t *attr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -258,7 +258,7 @@ errcode_t uapi_spi_get_attr(spi_bus_t bus, spi_attr_t *attr)
 errcode_t uapi_spi_set_extra_attr(spi_bus_t bus, spi_extra_attr_t *extra_attr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -299,7 +299,7 @@ errcode_t uapi_spi_set_extra_attr(spi_bus_t bus, spi_extra_attr_t *extra_attr)
 errcode_t uapi_spi_get_extra_attr(spi_bus_t bus, spi_extra_attr_t *extra_attr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -346,7 +346,7 @@ errcode_t uapi_spi_get_extra_attr(spi_bus_t bus, spi_extra_attr_t *extra_attr)
 errcode_t uapi_spi_select_slave(spi_bus_t bus, spi_slave_t cs)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -388,7 +388,7 @@ errcode_t uapi_spi_select_slave(spi_bus_t bus, spi_slave_t cs)
 errcode_t uapi_spi_master_write(spi_bus_t bus, const spi_xfer_data_t *data, uint32_t timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -440,7 +440,7 @@ errcode_t uapi_spi_master_write(spi_bus_t bus, const spi_xfer_data_t *data, uint
 errcode_t uapi_spi_master_read(spi_bus_t bus, const spi_xfer_data_t *data, uint32_t timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -492,7 +492,7 @@ errcode_t uapi_spi_master_read(spi_bus_t bus, const spi_xfer_data_t *data, uint3
 errcode_t uapi_spi_master_writeread(spi_bus_t bus, const spi_xfer_data_t *data, uint32_t timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -543,7 +543,7 @@ errcode_t uapi_spi_master_writeread(spi_bus_t bus, const spi_xfer_data_t *data, 
 errcode_t uapi_spi_slave_write(spi_bus_t bus, const spi_xfer_data_t *data, uint32_t timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -595,7 +595,7 @@ errcode_t uapi_spi_slave_write(spi_bus_t bus, const spi_xfer_data_t *data, uint3
 errcode_t uapi_spi_slave_read(spi_bus_t bus, const spi_xfer_data_t *data, uint32_t timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -646,7 +646,7 @@ errcode_t uapi_spi_slave_read(spi_bus_t bus, const spi_xfer_data_t *data, uint32
 errcode_t uapi_spi_slave_writeread(spi_bus_t bus, const spi_xfer_data_t *data, uint32_t timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -697,7 +697,7 @@ errcode_t uapi_spi_slave_writeread(spi_bus_t bus, const spi_xfer_data_t *data, u
 errcode_t uapi_spi_set_dma_mode(spi_bus_t bus, bool en, const spi_dma_config_t *dma_cfg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -744,7 +744,7 @@ errcode_t uapi_spi_set_dma_mode(spi_bus_t bus, bool en, const spi_dma_config_t *
 errcode_t uapi_spi_set_irq_mode(spi_bus_t bus, bool irq_en, spi_rx_callback_t rx_callback, spi_tx_callback_t tx_callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -792,7 +792,7 @@ errcode_t uapi_spi_set_irq_mode(spi_bus_t bus, bool irq_en, spi_rx_callback_t rx
 errcode_t uapi_spi_set_loop_back_mode(spi_bus_t bus, bool loopback_en)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -837,7 +837,7 @@ errcode_t uapi_spi_set_loop_back_mode(spi_bus_t bus, bool loopback_en)
 errcode_t uapi_spi_set_crc_mode(spi_bus_t bus, const spi_crc_config_t *crc_config, spi_crc_err_callback_t cb)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -883,7 +883,7 @@ errcode_t uapi_spi_set_crc_mode(spi_bus_t bus, const spi_crc_config_t *crc_confi
 errcode_t uapi_spi_suspend(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"
@@ -928,7 +928,7 @@ errcode_t uapi_spi_suspend(uintptr_t arg)
 errcode_t uapi_spi_resume(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/spi.h"

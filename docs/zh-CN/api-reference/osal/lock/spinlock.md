@@ -2,7 +2,7 @@
 
 spinlock 提供 OSAL (OS Abstract Layer) 自旋锁的初始化、加锁、解锁、尝试加锁与销毁功能，支持普通加锁、禁用软中断加锁、保存并禁用 IRQ (Interrupt Request) 状态加锁等多种中断处理模式。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "lock/osal_spinlock.h"
@@ -32,7 +32,7 @@ spinlock 提供 OSAL (OS Abstract Layer) 自旋锁的初始化、加锁、解锁
 int osal_spin_lock_init(osal_spinlock *lock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_spinlock.h"
@@ -75,7 +75,7 @@ int osal_spin_lock_init(osal_spinlock *lock)
 void osal_spin_lock(osal_spinlock *lock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_spinlock.h"
@@ -109,7 +109,7 @@ void osal_spin_lock(osal_spinlock *lock)
 void osal_spin_lock_bh(osal_spinlock *lock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_spinlock.h"
@@ -142,7 +142,7 @@ void osal_spin_lock_bh(osal_spinlock *lock)
 int osal_spin_trylock(osal_spinlock *lock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_spinlock.h"
@@ -180,7 +180,7 @@ int osal_spin_trylock(osal_spinlock *lock)
 int osal_spin_trylock_irq(osal_spinlock *lock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_spinlock.h"
@@ -219,7 +219,7 @@ int osal_spin_trylock_irq(osal_spinlock *lock)
 void osal_spin_trylock_irqsave(osal_spinlock *lock, unsigned long *flags)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_spinlock.h"
@@ -254,7 +254,7 @@ void osal_spin_trylock_irqsave(osal_spinlock *lock, unsigned long *flags)
 void osal_spin_unlock(osal_spinlock *lock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_spinlock.h"
@@ -288,7 +288,7 @@ void osal_spin_unlock(osal_spinlock *lock)
 void osal_spin_unlock_bh(osal_spinlock *lock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_spinlock.h"
@@ -321,7 +321,7 @@ void osal_spin_unlock_bh(osal_spinlock *lock)
 void osal_spin_lock_irqsave(osal_spinlock *lock, unsigned long *flags)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_spinlock.h"
@@ -361,7 +361,7 @@ void osal_spin_lock_irqsave(osal_spinlock *lock, unsigned long *flags)
 void osal_spin_unlock_irqrestore(osal_spinlock *lock, unsigned long *flags)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_spinlock.h"
@@ -395,7 +395,7 @@ void osal_spin_unlock_irqrestore(osal_spinlock *lock, unsigned long *flags)
 void osal_spin_lock_destroy(osal_spinlock *lock)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "lock/osal_spinlock.h"

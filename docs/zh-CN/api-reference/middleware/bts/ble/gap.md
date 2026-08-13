@@ -2,7 +2,7 @@
 
 GAP (Generic Access Profile) 提供 BLE (Bluetooth Low Energy) LE 广播、扫描、连接、配对、白名单、PHY (Physical Layer) 与数据长度等通用访问控制能力，支持本端设备信息设置与查询、安全参数配置、回调注册以及 SMP (Security Manager Protocol) 密钥存储等操作。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -57,7 +57,7 @@ GAP (Generic Access Profile) 提供 BLE (Bluetooth Low Energy) LE 广播、扫�
 errcode_t gap_ble_set_local_addr(const bd_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -100,7 +100,7 @@ errcode_t gap_ble_set_local_addr(const bd_addr_t *addr)
 errcode_t gap_ble_get_local_addr(bd_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -139,7 +139,7 @@ errcode_t gap_ble_get_local_addr(bd_addr_t *addr)
 errcode_t gap_ble_set_local_appearance(uint16_t appearance)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -178,7 +178,7 @@ errcode_t gap_ble_set_local_appearance(uint16_t appearance)
 errcode_t gap_ble_set_local_name(const uint8_t *name, const uint8_t len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -218,7 +218,7 @@ errcode_t gap_ble_set_local_name(const uint8_t *name, const uint8_t len)
 errcode_t gap_ble_get_local_name(uint8_t *name, uint8_t *len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -265,7 +265,7 @@ errcode_t gap_ble_get_local_name(uint8_t *name, uint8_t *len)
 errcode_t gap_ble_set_adv_data(uint8_t adv_id, const gap_ble_config_adv_data_t *data)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -310,7 +310,7 @@ errcode_t gap_ble_set_adv_data(uint8_t adv_id, const gap_ble_config_adv_data_t *
 errcode_t gap_ble_set_adv_param(uint8_t adv_id, const gap_ble_adv_params_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -355,7 +355,7 @@ errcode_t gap_ble_set_adv_param(uint8_t adv_id, const gap_ble_adv_params_t *para
 errcode_t gap_ble_start_adv(uint8_t adv_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -400,7 +400,7 @@ errcode_t gap_ble_start_adv(uint8_t adv_id)
 errcode_t gap_ble_stop_adv(uint8_t adv_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -439,7 +439,7 @@ errcode_t gap_ble_stop_adv(uint8_t adv_id)
 errcode_t gap_ble_set_scan_parameters(const gap_ble_scan_params_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -478,7 +478,7 @@ errcode_t gap_ble_set_scan_parameters(const gap_ble_scan_params_t *param)
 errcode_t gap_ble_set_scan_extern_parameters(const gap_ble_extern_scan_params_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -517,7 +517,7 @@ errcode_t gap_ble_set_scan_extern_parameters(const gap_ble_extern_scan_params_t 
 errcode_t gap_ble_start_scan(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -550,7 +550,7 @@ errcode_t gap_ble_start_scan(void)
 errcode_t gap_ble_stop_scan(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -582,7 +582,7 @@ errcode_t gap_ble_stop_scan(void)
 errcode_t gap_ble_set_phy(gap_le_set_phy_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -625,7 +625,7 @@ errcode_t gap_ble_set_phy(gap_le_set_phy_t *param)
 errcode_t gap_ble_set_data_length(gap_le_set_data_length_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -668,7 +668,7 @@ errcode_t gap_ble_set_data_length(gap_le_set_data_length_t *param)
 errcode_t gap_ble_pair_remote_device(const bd_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -707,7 +707,7 @@ errcode_t gap_ble_pair_remote_device(const bd_addr_t *addr)
 errcode_t gap_ble_get_paired_devices_num(uint16_t *number)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -746,7 +746,7 @@ errcode_t gap_ble_get_paired_devices_num(uint16_t *number)
 errcode_t gap_ble_get_paired_devices(bd_addr_t *addr, uint16_t *number)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -793,7 +793,7 @@ errcode_t gap_ble_get_paired_devices(bd_addr_t *addr, uint16_t *number)
 errcode_t gap_ble_get_pair_state(const bd_addr_t *addr, gap_ble_pair_state_t *status)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -839,7 +839,7 @@ errcode_t gap_ble_get_pair_state(const bd_addr_t *addr, gap_ble_pair_state_t *st
 errcode_t gap_ble_remove_pair(const bd_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -878,7 +878,7 @@ errcode_t gap_ble_remove_pair(const bd_addr_t *addr)
 errcode_t gap_ble_add_white_list(const bd_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -917,7 +917,7 @@ errcode_t gap_ble_add_white_list(const bd_addr_t *addr)
 errcode_t gap_ble_remove_white_list(const bd_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -956,7 +956,7 @@ errcode_t gap_ble_remove_white_list(const bd_addr_t *addr)
 errcode_t gap_ble_get_white_list(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -989,7 +989,7 @@ errcode_t gap_ble_get_white_list(void)
 errcode_t gap_ble_remove_all_pairs(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -1022,7 +1022,7 @@ errcode_t gap_ble_remove_all_pairs(void)
 errcode_t gap_ble_get_bonded_devices(bd_addr_t *addr, uint16_t *number)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -1069,7 +1069,7 @@ errcode_t gap_ble_get_bonded_devices(bd_addr_t *addr, uint16_t *number)
 errcode_t gap_ble_connect_param_update(gap_conn_param_update_t *params)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -1112,7 +1112,7 @@ errcode_t gap_ble_connect_param_update(gap_conn_param_update_t *params)
 errcode_t gap_ble_connect_remote_device(const bd_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -1151,7 +1151,7 @@ errcode_t gap_ble_connect_remote_device(const bd_addr_t *addr)
 errcode_t gap_ble_disconnect_remote_device(const bd_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -1190,7 +1190,7 @@ errcode_t gap_ble_disconnect_remote_device(const bd_addr_t *addr)
 errcode_t gap_ble_set_sec_param(gap_ble_sec_params_t *params)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -1229,7 +1229,7 @@ errcode_t gap_ble_set_sec_param(gap_ble_sec_params_t *params)
 errcode_t gap_ble_read_remote_device_rssi(uint16_t conn_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -1268,7 +1268,7 @@ errcode_t gap_ble_read_remote_device_rssi(uint16_t conn_id)
 errcode_t gap_ble_register_callbacks(gap_ble_callbacks_t *func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -1312,7 +1312,7 @@ errcode_t gap_ble_register_callbacks(gap_ble_callbacks_t *func)
 errcode_t bth_ota_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -1345,7 +1345,7 @@ errcode_t bth_ota_init(void)
 errcode_t ble_customize_max_pwr(int8_t ble_pwr, int8_t sle_pwr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -1385,7 +1385,7 @@ errcode_t ble_customize_max_pwr(int8_t ble_pwr, int8_t sle_pwr)
 errcode_t ble_set_nv_pair_keys(ble_auth_info_evt_t *key, bd_addr_t *own_addr, bd_addr_t *peer_addr, uint8_t index)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -1427,7 +1427,7 @@ errcode_t ble_set_nv_pair_keys(ble_auth_info_evt_t *key, bd_addr_t *own_addr, bd
 errcode_t gap_ble_set_save_smp_keys_mode(uint8_t is_available)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -1466,7 +1466,7 @@ errcode_t gap_ble_set_save_smp_keys_mode(uint8_t is_available)
 errcode_t gap_ble_set_pair_info_available(uint8_t is_available)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/ble/bts_le_gap.h"
@@ -2259,7 +2259,7 @@ typedef struct {
 ```c
 typedef struct {
     uint8_t filter_duplicate; /*!< Scan filter duplicates { @ref gap_ble_filter_duplicates_t } */
-    uint16_t limited;          /*!< Reserved field */
+    uint8_t limited;           /*!< Reserved field */
     uint16_t duration;        /*!< Indicates the scanning duration. The value 0 indicates
                                            continuous scanning. The default value is 0. Unit: 10 ms. */
     uint16_t period;          /*!< Indicates the scanning period. When the value is 0,
@@ -2273,7 +2273,7 @@ typedef struct {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | filter_duplicate | uint8_t | 扫描的过滤配置，参考 [gap_ble_filter_duplicates_t](#enum_gap_ble_filter_duplicates_t) |
-| limited | uint16_t | 保留字段 |
+| limited | uint8_t | 保留字段 |
 | duration | uint16_t | 扫描持续时间，0 表示持续扫描，默认值为 0，单位 10 ms |
 | period | uint16_t | 扫描周期，取 0 时扫描执行 duration 时间后超时结束，默认值为 0，单位 1.28 s |
 

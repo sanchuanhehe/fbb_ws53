@@ -2,7 +2,7 @@
 
 osal_semaphore 提供信号量功能，用于任务间同步与互斥，支持计数信号量与二值信号量的创建、获取、释放、超时获取、尝试获取及销毁操作。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "semaphore/osal_semaphore.h"
@@ -29,7 +29,7 @@ osal_semaphore 提供信号量功能，用于任务间同步与互斥，支持�
 int osal_sem_init(osal_semaphore *sem, int val)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "semaphore/osal_semaphore.h"
@@ -73,7 +73,7 @@ int osal_sem_init(osal_semaphore *sem, int val)
 int osal_sem_binary_sem_init(osal_semaphore *sem, int val)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "semaphore/osal_semaphore.h"
@@ -117,7 +117,7 @@ int osal_sem_binary_sem_init(osal_semaphore *sem, int val)
 int osal_sem_down(osal_semaphore *sem)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "semaphore/osal_semaphore.h"
@@ -160,7 +160,7 @@ int osal_sem_down(osal_semaphore *sem)
 int osal_sem_down_timeout(osal_semaphore *sem, unsigned int timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "semaphore/osal_semaphore.h"
@@ -204,7 +204,7 @@ int osal_sem_down_timeout(osal_semaphore *sem, unsigned int timeout)
 int osal_sem_down_interruptible(osal_semaphore *sem)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "semaphore/osal_semaphore.h"
@@ -243,7 +243,7 @@ int osal_sem_down_interruptible(osal_semaphore *sem)
 int osal_sem_trydown(osal_semaphore *sem)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "semaphore/osal_semaphore.h"
@@ -281,7 +281,7 @@ int osal_sem_trydown(osal_semaphore *sem)
 void osal_sem_up(osal_semaphore *sem)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "semaphore/osal_semaphore.h"
@@ -315,7 +315,7 @@ void osal_sem_up(osal_semaphore *sem)
 void osal_sem_destroy(osal_semaphore *sem)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "semaphore/osal_semaphore.h"

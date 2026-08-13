@@ -2,7 +2,7 @@
 
 TRNG (True Random Number Generator) 提供硬件真随机数生成能力，支持获取单个 uint32_t 随机数和指定字节长度的随机数据，供加密运算、密钥派生等安全场景使用。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/security_unified/trng.h"
@@ -23,7 +23,7 @@ TRNG (True Random Number Generator) 提供硬件真随机数生成能力，支�
 errcode_t uapi_drv_cipher_trng_get_random(uint32_t *randnum)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/trng.h"
@@ -60,7 +60,7 @@ errcode_t uapi_drv_cipher_trng_get_random(uint32_t *randnum)
 errcode_t uapi_drv_cipher_trng_get_random_bytes(uint8_t *randnum, uint32_t size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/trng.h"

@@ -2,7 +2,7 @@
 
 at (Attention) 提供 Hayes AT 命令集解析与处理服务，支持注册自定义 AT 命令表、命令执行/设置/读取/测试/查询回调、异步命令结果上报、命令交互处理以及向默认或指定通道输出 AT 响应信息与 URC (Unsolicited Result Code) 主动上报。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/utils/at.h"
@@ -30,7 +30,7 @@ errcode_t uapi_at_cmd_table_register(const at_cmd_entry_t *table, uint32_t len,
                                      uint32_t struct_max_size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/at.h"
@@ -79,7 +79,7 @@ errcode_t uapi_at_cmd_table_register(const at_cmd_entry_t *table, uint32_t len,
 errcode_t uapi_at_cmd_abort_register(at_abort_func_t func, void *arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/at.h"
@@ -125,7 +125,7 @@ errcode_t uapi_at_cmd_abort_register(at_abort_func_t func, void *arg)
 errcode_t uapi_at_send_async_result(uint16_t err)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/at.h"
@@ -170,7 +170,7 @@ errcode_t uapi_at_send_async_result(uint16_t err)
 errcode_t uapi_at_interactivity_func_register(at_interactivity_func_t func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/at.h"
@@ -215,7 +215,7 @@ errcode_t uapi_at_interactivity_func_register(at_interactivity_func_t func)
 void uapi_at_report(const char *str)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/at.h"
@@ -246,7 +246,7 @@ void uapi_at_report(const char *str)
 void uapi_at_print(const char* str, ...)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/at.h"
@@ -277,7 +277,7 @@ void uapi_at_print(const char* str, ...)
 void uapi_at_report_to_single_channel(at_channel_id_t channel_id, const char *str)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/at.h"
@@ -313,7 +313,7 @@ void uapi_at_report_to_single_channel(at_channel_id_t channel_id, const char *st
 errcode_t uapi_at_urc_to_channel(at_channel_id_t channel_id, const char *msg, uint32_t msg_len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/at.h"

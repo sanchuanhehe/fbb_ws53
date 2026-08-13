@@ -2,7 +2,7 @@
 
 time 模块提供 RTC (Real-Time Clock) 时间转换与定时器管理功能，支持时间戳与 rtc_time 的相互转换及有效性校验，提供普通定时器与高精度定时器的生命周期管理，以及系统时间获取与毫秒/Ticks 单位转换能力。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_rtc.h"
@@ -42,7 +42,7 @@ time 模块提供 RTC (Real-Time Clock) 时间转换与定时器管理功能，�
 void osal_rtc_time_to_tm(unsigned long time, osal_rtc_time *tm)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_rtc.h"
@@ -72,7 +72,7 @@ void osal_rtc_time_to_tm(unsigned long time, osal_rtc_time *tm)
 void osal_rtc_tm_to_time(const osal_rtc_time *tm, unsigned long *time)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_rtc.h"
@@ -102,7 +102,7 @@ void osal_rtc_tm_to_time(const osal_rtc_time *tm, unsigned long *time)
 int osal_rtc_valid_tm(const osal_rtc_time *tm)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_rtc.h"
@@ -135,7 +135,7 @@ int osal_rtc_valid_tm(const osal_rtc_time *tm)
 int osal_timer_init(osal_timer *timer)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -179,7 +179,7 @@ int osal_timer_init(osal_timer *timer)
 int osal_timer_start(osal_timer *timer)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -223,7 +223,7 @@ int osal_timer_start(osal_timer *timer)
 int osal_timer_mod(osal_timer *timer, unsigned int interval)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -261,7 +261,7 @@ int osal_timer_mod(osal_timer *timer, unsigned int interval)
 int osal_timer_start_on(osal_timer *timer, unsigned long delay, int cpu)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -295,7 +295,7 @@ int osal_timer_start_on(osal_timer *timer, unsigned long delay, int cpu)
 int osal_timer_stop(osal_timer *timer)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -333,7 +333,7 @@ int osal_timer_stop(osal_timer *timer)
 int osal_timer_destroy(osal_timer *timer)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -369,7 +369,7 @@ int osal_timer_destroy(osal_timer *timer)
 unsigned long osal_timer_get_private_data(const void *sys_data)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -402,7 +402,7 @@ unsigned long osal_timer_get_private_data(const void *sys_data)
 int osal_timer_destroy_sync(osal_timer *timer)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -441,7 +441,7 @@ int osal_timer_destroy_sync(osal_timer *timer)
 unsigned long long osal_sched_clock(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -466,7 +466,7 @@ unsigned long long osal_sched_clock(void)
 unsigned long long osal_get_jiffies(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -495,7 +495,7 @@ unsigned long long osal_get_jiffies(void)
 unsigned long osal_msecs_to_jiffies(const unsigned int m)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -526,7 +526,7 @@ unsigned long osal_msecs_to_jiffies(const unsigned int m)
 unsigned int osal_jiffies_to_msecs(const unsigned int n)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -558,7 +558,7 @@ unsigned int osal_jiffies_to_msecs(const unsigned int n)
 unsigned int osal_get_cycle_per_tick(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -583,7 +583,7 @@ unsigned int osal_get_cycle_per_tick(void)
 void osal_gettimeofday(osal_timeval *tv)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -612,7 +612,7 @@ void osal_gettimeofday(osal_timeval *tv)
 int osal_hrtimer_create(osal_hrtimer *hrtimer)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -649,7 +649,7 @@ int osal_hrtimer_create(osal_hrtimer *hrtimer)
 int osal_hrtimer_start(osal_hrtimer *hrtimer)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"
@@ -682,7 +682,7 @@ int osal_hrtimer_start(osal_hrtimer *hrtimer)
 int osal_hrtimer_destroy(osal_hrtimer *hrtimer)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/time/osal_timer.h"

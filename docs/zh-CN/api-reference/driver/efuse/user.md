@@ -2,7 +2,7 @@
 
 efuse_user 提供 eFuse (Electrically Programmable Read-Only Memory) 用户预留区域的读写访问接口，支持按字节缓冲区的批量读取与写入，以及按位读取与按位写 1 操作。位操作接口的可用性受构建系统注入宏 EFUSE_BIT_OPERATION 控制。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/efuse_user.h"
@@ -25,7 +25,7 @@ efuse_user 提供 eFuse (Electrically Programmable Read-Only Memory) 用户预�
 errcode_t uapi_efuse_user_read_buffer(uint32_t offset, uint8_t *buffer, uint16_t length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse_user.h"
@@ -72,7 +72,7 @@ errcode_t uapi_efuse_user_read_buffer(uint32_t offset, uint8_t *buffer, uint16_t
 errcode_t uapi_efuse_user_write_buffer(uint32_t offset, const uint8_t *buffer, uint16_t length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse_user.h"
@@ -113,7 +113,7 @@ errcode_t uapi_efuse_user_write_buffer(uint32_t offset, const uint8_t *buffer, u
 errcode_t uapi_efuse_user_write_bit(uint32_t byte_offset, uint8_t bit_pos)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse_user.h"
@@ -159,7 +159,7 @@ errcode_t uapi_efuse_user_write_bit(uint32_t byte_offset, uint8_t bit_pos)
 errcode_t uapi_efuse_user_read_bit(uint32_t byte_offset, uint8_t bit_pos, uint8_t *value)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/efuse_user.h"

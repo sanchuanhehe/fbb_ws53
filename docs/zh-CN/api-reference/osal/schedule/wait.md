@@ -2,7 +2,7 @@
 
 wait 提供 OSAL (Operating System Abstraction Layer) 的等待队列机制，支持线程在指定条件满足前阻塞睡眠、超时自动唤醒以及主动唤醒等待队列上的线程，用于线程间同步与事件等待。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_wait.h"
@@ -29,7 +29,7 @@ wait 提供 OSAL (Operating System Abstraction Layer) 的等待队列机制，�
 int osal_wait_init(osal_wait *wait)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_wait.h"
@@ -71,7 +71,7 @@ int osal_wait_init(osal_wait *wait)
 int osal_wait_interruptible(osal_wait *wait, osal_wait_condition_func func, const void *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_wait.h"
@@ -117,7 +117,7 @@ int osal_wait_interruptible(osal_wait *wait, osal_wait_condition_func func, cons
 int osal_wait_uninterruptible(osal_wait *wait, osal_wait_condition_func func, const void *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_wait.h"
@@ -157,7 +157,7 @@ int osal_wait_uninterruptible(osal_wait *wait, osal_wait_condition_func func, co
 int osal_wait_timeout_interruptible(osal_wait *wait, osal_wait_condition_func func, const void *param, unsigned long ms)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_wait.h"
@@ -204,7 +204,7 @@ int osal_wait_timeout_interruptible(osal_wait *wait, osal_wait_condition_func fu
 int osal_wait_timeout_uninterruptible(osal_wait *wait, osal_wait_condition_func func, const void *param, unsigned long ms)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_wait.h"
@@ -246,7 +246,7 @@ int osal_wait_timeout_uninterruptible(osal_wait *wait, osal_wait_condition_func 
 void osal_wait_wakeup(osal_wait *wait)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_wait.h"
@@ -279,7 +279,7 @@ void osal_wait_wakeup(osal_wait *wait)
 void osal_wait_wakeup_interruptible(osal_wait *wait)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_wait.h"
@@ -309,7 +309,7 @@ void osal_wait_wakeup_interruptible(osal_wait *wait)
 void osal_wait_destroy(osal_wait *wait)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_wait.h"

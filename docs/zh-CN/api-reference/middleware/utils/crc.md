@@ -2,7 +2,7 @@
 
 CRC (Cyclic Redundancy Check) 提供 16 位与 32 位 CRC 校验值计算能力，用于对数据缓冲区进行完整性校验。模块基于固定多项式（CRC-16 采用 x16 + x12 + x5 + 1，即 0x1021；CRC-32 符合 IEEE 802.3 标准，即 0x04C11DB7）实现逐段计算，前一段计算结果可作为后一段计算的初始值传入，支持分段连续校验。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/utils/uapi_crc.h"
@@ -24,7 +24,7 @@ CRC (Cyclic Redundancy Check) 提供 16 位与 32 位 CRC 校验值计算能力�
 uint16_t uapi_crc16(uint16_t crc_start, const uint8_t *buf, uint32_t length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/uapi_crc.h"
@@ -69,7 +69,7 @@ uint16_t uapi_crc16(uint16_t crc_start, const uint8_t *buf, uint32_t length)
 uint32_t uapi_crc32(uint32_t crc_start, const uint8_t *buf, uint32_t length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/uapi_crc.h"
@@ -114,7 +114,7 @@ uint32_t uapi_crc32(uint32_t crc_start, const uint8_t *buf, uint32_t length)
 uint32_t uapi_crc32_no_comp(uint32_t crc_start, const uint8_t *buf, uint32_t length)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/uapi_crc.h"

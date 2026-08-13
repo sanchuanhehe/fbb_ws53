@@ -2,7 +2,7 @@
 
 platform 提供平台设备控制接口，支持平台低功耗模式开关设置与单板复位功能。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/services/wifi/plat_device.h"
@@ -23,7 +23,7 @@ platform 提供平台设备控制接口，支持平台低功耗模式开关设�
 errcode_t plat_set_pm_mode(int32_t pm_switch)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/plat_device.h"
@@ -67,7 +67,7 @@ errcode_t plat_set_pm_mode(int32_t pm_switch)
 errcode_t plat_reset_board(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/wifi/plat_device.h"

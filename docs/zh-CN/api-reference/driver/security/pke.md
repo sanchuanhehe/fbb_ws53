@@ -2,7 +2,7 @@
 
 PKE (Public Key Engine) 提供公钥密码运算能力，覆盖 ECC (Elliptic Curve Cryptography) 密钥生成、ECDSA (Elliptic Curve Digital Signature Algorithm) / EdDSA (Edwards-curve Digital Signature Algorithm) 签名与验签、ECDH (Elliptic Curve Diffie-Hellman) 密钥协商、SM2 签名/加密与解密、RSA (Rivest-Shamir-Adleman) 签名/验签/加解密、DH (Diffie-Hellman) 密钥生成与协商，以及大数模加、模减、模乘、模逆、取模、大数乘和模幂运算。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -47,7 +47,7 @@ errcode_t uapi_drv_cipher_pke_ecc_gen_key(uapi_drv_cipher_pke_ecc_curve_type_t c
     const uapi_drv_cipher_pke_ecc_point_t *output_pub_key)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -103,7 +103,7 @@ errcode_t uapi_drv_cipher_pke_ecdsa_sign(uapi_drv_cipher_pke_ecc_curve_type_t cu
     const uapi_drv_cipher_pke_ecc_sig_t *sig)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -153,7 +153,7 @@ errcode_t uapi_drv_cipher_pke_ecdsa_verify(uapi_drv_cipher_pke_ecc_curve_type_t 
     const uapi_drv_cipher_pke_ecc_sig_t *sig)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -202,7 +202,7 @@ errcode_t uapi_drv_cipher_pke_eddsa_sign(uapi_drv_cipher_pke_ecc_curve_type_t cu
     const uapi_drv_cipher_pke_ecc_sig_t *sig)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -258,7 +258,7 @@ errcode_t uapi_drv_cipher_pke_eddsa_verify(uapi_drv_cipher_pke_ecc_curve_type_t 
     const uapi_drv_cipher_pke_ecc_sig_t *sig)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -309,7 +309,7 @@ errcode_t uapi_drv_cipher_pke_ecc_gen_ecdh_key(uapi_drv_cipher_pke_ecc_curve_typ
     const uapi_drv_cipher_pke_data_t *output_shared_key)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -363,7 +363,7 @@ errcode_t uapi_drv_cipher_pke_check_dot_on_curve(uapi_drv_cipher_pke_ecc_curve_t
     const uapi_drv_cipher_pke_ecc_point_t *pub_key, bool *is_on_curve)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -418,7 +418,7 @@ errcode_t uapi_drv_cipher_pke_sm2_dsa_hash(const uapi_drv_cipher_pke_data_t *sm2
     uapi_drv_cipher_pke_data_t *hash)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -478,7 +478,7 @@ errcode_t uapi_drv_cipher_pke_sm2_public_encrypt(const uapi_drv_cipher_pke_ecc_p
     const uapi_drv_cipher_pke_data_t *cipher_text)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -532,7 +532,7 @@ errcode_t uapi_drv_cipher_pke_sm2_private_decrypt(const uapi_drv_cipher_pke_data
     const uapi_drv_cipher_pke_data_t *plain_text)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -588,7 +588,7 @@ errcode_t uapi_drv_cipher_pke_rsa_sign(const uapi_drv_cipher_pke_rsa_priv_key_t 
     uapi_drv_cipher_pke_data_t *sign)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -646,7 +646,7 @@ errcode_t uapi_drv_cipher_pke_rsa_verify(const uapi_drv_cipher_pke_rsa_pub_key_t
     const uapi_drv_cipher_pke_data_t *sig)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -704,7 +704,7 @@ errcode_t uapi_drv_cipher_pke_rsa_public_encrypt(uapi_drv_cipher_pke_rsa_scheme_
     uapi_drv_cipher_pke_data_t *output)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -764,7 +764,7 @@ errcode_t uapi_drv_cipher_pke_rsa_private_decrypt(uapi_drv_cipher_pke_rsa_scheme
     const uapi_drv_cipher_pke_data_t *output)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -821,7 +821,7 @@ errcode_t uapi_drv_cipher_pke_dh_gen_key(const uapi_drv_cipher_pke_data_t *g_dat
     const uapi_drv_cipher_pke_data_t *output_priv_key, const uapi_drv_cipher_pke_data_t *output_pub_key)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -877,7 +877,7 @@ errcode_t uapi_drv_cipher_pke_dh_compute_key(const uapi_drv_cipher_pke_data_t *m
     const uapi_drv_cipher_pke_data_t  *output_shared_key)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -931,7 +931,7 @@ errcode_t uapi_drv_cipher_pke_add_mod(const uapi_drv_cipher_pke_data_t *a, const
     const uapi_drv_cipher_pke_data_t *p, const uapi_drv_cipher_pke_data_t *c)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -985,7 +985,7 @@ errcode_t uapi_drv_cipher_pke_sub_mod(const uapi_drv_cipher_pke_data_t *a, const
     const uapi_drv_cipher_pke_data_t *p, const uapi_drv_cipher_pke_data_t *c)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -1039,7 +1039,7 @@ errcode_t uapi_drv_cipher_pke_mul_mod(const uapi_drv_cipher_pke_data_t *a, const
     const uapi_drv_cipher_pke_data_t *p, const uapi_drv_cipher_pke_data_t *c)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -1093,7 +1093,7 @@ errcode_t uapi_drv_cipher_pke_inv_mod(const uapi_drv_cipher_pke_data_t *a, const
     const uapi_drv_cipher_pke_data_t *c)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -1146,7 +1146,7 @@ errcode_t uapi_drv_cipher_pke_mod(const uapi_drv_cipher_pke_data_t *a, const uap
     const uapi_drv_cipher_pke_data_t *c)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -1199,7 +1199,7 @@ errcode_t uapi_drv_cipher_pke_mul(const uapi_drv_cipher_pke_data_t *a, const uap
     const uapi_drv_cipher_pke_data_t *c)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"
@@ -1252,7 +1252,7 @@ errcode_t uapi_drv_cipher_pke_exp_mod(const uapi_drv_cipher_pke_data_t *n, const
     const uapi_drv_cipher_pke_data_t *in, const uapi_drv_cipher_pke_data_t *out)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/security_unified/unified_cipher_pke.h"

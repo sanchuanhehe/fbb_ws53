@@ -2,7 +2,7 @@
 
 hotspot 提供 WiFi SoftAP (Software Access Point) 功能，支持开启/关闭热点、配置基本与扩展参数、查询已连接 STA (Station) 信息以及断开指定 STA 连接。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_hotspot.h"
@@ -30,7 +30,7 @@ hotspot 提供 WiFi SoftAP (Software Access Point) 功能，支持开启/关闭�
 errcode_t wifi_softap_enable(const softap_config_stru *config)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_hotspot.h"
@@ -73,7 +73,7 @@ errcode_t wifi_softap_enable(const softap_config_stru *config)
 errcode_t wifi_softap_disable(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_hotspot.h"
@@ -109,7 +109,7 @@ errcode_t wifi_softap_disable(void)
 int32_t wifi_is_softap_enabled(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_hotspot.h"
@@ -136,7 +136,7 @@ int32_t wifi_is_softap_enabled(void)
 errcode_t wifi_set_softap_config_advance(const softap_config_advance_stru *config)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_hotspot.h"
@@ -178,7 +178,7 @@ errcode_t wifi_set_softap_config_advance(const softap_config_advance_stru *confi
 errcode_t wifi_get_softap_config(softap_config_stru *result)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_hotspot.h"
@@ -220,7 +220,7 @@ errcode_t wifi_get_softap_config(softap_config_stru *result)
 errcode_t wifi_get_softap_config_advance(softap_config_advance_stru *result)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_hotspot.h"
@@ -262,7 +262,7 @@ errcode_t wifi_get_softap_config_advance(softap_config_advance_stru *result)
 errcode_t wifi_softap_get_sta_list(wifi_sta_info_stru *result, uint32_t *size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_hotspot.h"
@@ -312,7 +312,7 @@ errcode_t wifi_softap_get_sta_list(wifi_sta_info_stru *result, uint32_t *size)
 errcode_t wifi_softap_deauth_sta(const uint8_t *mac, int32_t mac_len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_hotspot.h"

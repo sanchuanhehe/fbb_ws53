@@ -2,7 +2,7 @@
 
 SLE (Star Flash Low Energy) factory manager 提供射频长发、长收、收发关闭与复位等工厂测试能力，并支持注册工厂管理回调函数以异步接收射频收发执行结果。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_factory_manager.h"
@@ -26,7 +26,7 @@ SLE (Star Flash Low Energy) factory manager 提供射频长发、长收、收发
 errcode_t sle_rf_tx_start(sle_rf_tx_start_t* rf_tx_start)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_factory_manager.h"
@@ -64,7 +64,7 @@ errcode_t sle_rf_tx_start(sle_rf_tx_start_t* rf_tx_start)
 errcode_t sle_rf_rx_start(sle_rf_rx_start_t* rf_rx_start)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_factory_manager.h"
@@ -102,7 +102,7 @@ errcode_t sle_rf_rx_start(sle_rf_rx_start_t* rf_rx_start)
 errcode_t sle_rf_trx_end(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_factory_manager.h"
@@ -134,7 +134,7 @@ errcode_t sle_rf_trx_end(void)
 errcode_t sle_rf_reset(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_factory_manager.h"
@@ -166,7 +166,7 @@ errcode_t sle_rf_reset(void)
 errcode_t sle_factory_register_callbacks(sle_factory_callbacks_t *func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_factory_manager.h"

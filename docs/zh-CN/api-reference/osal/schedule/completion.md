@@ -2,7 +2,7 @@
 
 osal_completion 提供完成量同步原语，用于线程间基于完成事件的阻塞等待与唤醒。该模块属于 OSAL (Operating System Abstraction Layer)，对 linux、liteos、freertos 等多操作系统的完成量接口进行统一封装，向上提供一致的同步 API (Application Programming Interface)。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_completion.h"
@@ -28,7 +28,7 @@ osal_completion 提供完成量同步原语，用于线程间基于完成事件�
 int osal_completion_init(osal_completion *com)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_completion.h"
@@ -66,7 +66,7 @@ int osal_completion_init(osal_completion *com)
 void osal_completion_reinit(osal_completion *com)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_completion.h"
@@ -95,7 +95,7 @@ void osal_completion_reinit(osal_completion *com)
 void osal_complete(osal_completion *com)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_completion.h"
@@ -124,7 +124,7 @@ void osal_complete(osal_completion *com)
 void osal_wait_for_completion(osal_completion *com)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_completion.h"
@@ -153,7 +153,7 @@ void osal_wait_for_completion(osal_completion *com)
 unsigned long osal_wait_for_completion_timeout(osal_completion *com, unsigned long timeout)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_completion.h"
@@ -194,7 +194,7 @@ unsigned long osal_wait_for_completion_timeout(osal_completion *com, unsigned lo
 void osal_complete_all(osal_completion *com)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_completion.h"
@@ -223,7 +223,7 @@ void osal_complete_all(osal_completion *com)
 void osal_complete_destory(osal_completion *com)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/schedule/osal_completion.h"

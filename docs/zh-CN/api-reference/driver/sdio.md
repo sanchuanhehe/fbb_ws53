@@ -2,7 +2,7 @@
 
 SDIO (Secure Digital Input Output) Slave 接口提供 SDIO 从设备侧的初始化、去初始化、软复位、消息收发与状态查询能力，支持中断回调注册、ADMA (ADMA Descriptor Table) 描述符配置与扩展信息读写，用于 DEVICE 与 HOST 之间的数据传输与消息交互。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -48,7 +48,7 @@ SDIO (Secure Digital Input Output) Slave 接口提供 SDIO 从设备侧的初始
 errcode_t uapi_sdio_slave_init(sdio_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -90,7 +90,7 @@ errcode_t uapi_sdio_slave_init(sdio_bus_t bus)
 void uapi_sdio_slave_deinit(sdio_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -121,7 +121,7 @@ void uapi_sdio_slave_deinit(sdio_bus_t bus)
 errcode_t uapi_sdio_slave_reinit(sdio_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -163,7 +163,7 @@ errcode_t uapi_sdio_slave_reinit(sdio_bus_t bus)
 void uapi_sdio_slave_soft_reset(sdio_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -194,7 +194,7 @@ void uapi_sdio_slave_soft_reset(sdio_bus_t bus)
 errcode_t uapi_sdio_slave_register_callback(sdio_bus_t bus, const sdio_callback_func_t *fun)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -238,7 +238,7 @@ errcode_t uapi_sdio_slave_register_callback(sdio_bus_t bus, const sdio_callback_
 errcode_t uapi_sdio_slave_complete_send(uint8_t *adma_tab, uint32_t adma_index)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -276,7 +276,7 @@ errcode_t uapi_sdio_slave_complete_send(uint8_t *adma_tab, uint32_t adma_index)
 errcode_t uapi_sdio_slave_set_pad_admatab(uint8_t *adma_tab, uint32_t adma_index, uint32_t padlen)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -315,7 +315,7 @@ errcode_t uapi_sdio_slave_set_pad_admatab(uint8_t *adma_tab, uint32_t adma_index
 errcode_t uapi_sdio_slave_write_extend_info(sdio_bus_t bus, sdio_extendfunc_t* extfunc)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -359,7 +359,7 @@ errcode_t uapi_sdio_slave_write_extend_info(sdio_bus_t bus, sdio_extendfunc_t* e
 sdio_extendfunc_t* uapi_sdio_slave_get_extend_info(sdio_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -402,7 +402,7 @@ sdio_extendfunc_t* uapi_sdio_slave_get_extend_info(sdio_bus_t bus)
 errcode_t uapi_sdio_slave_prepare_send_data(sdio_bus_t bus, uint32_t data_len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -441,7 +441,7 @@ errcode_t uapi_sdio_slave_prepare_send_data(sdio_bus_t bus, uint32_t data_len)
 errcode_t uapi_sdio_slave_set_admatab(uint8_t *adma_tab, uint32_t adma_index, const uint32_t *data_addr, uint32_t data_len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -481,7 +481,7 @@ errcode_t uapi_sdio_slave_set_admatab(uint8_t *adma_tab, uint32_t adma_index, co
 errcode_t uapi_sdio_slave_sched_msg(sdio_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -520,7 +520,7 @@ errcode_t uapi_sdio_slave_sched_msg(sdio_bus_t bus)
 errcode_t uapi_sdio_slave_sync_msg(sdio_bus_t bus, uint32_t msg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -559,7 +559,7 @@ errcode_t uapi_sdio_slave_sync_msg(sdio_bus_t bus, uint32_t msg)
 errcode_t uapi_sdio_slave_send_msg_ack(sdio_bus_t bus, uint32_t msg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -598,7 +598,7 @@ errcode_t uapi_sdio_slave_send_msg_ack(sdio_bus_t bus, uint32_t msg)
 errcode_t uapi_sdio_slave_process_msg(sdio_bus_t bus, uint32_t send_msg, uint32_t clear_msg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -638,7 +638,7 @@ errcode_t uapi_sdio_slave_process_msg(sdio_bus_t bus, uint32_t send_msg, uint32_
 bool uapi_sdio_slave_is_pending_msg(sdio_bus_t bus, uint32_t msg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -676,7 +676,7 @@ bool uapi_sdio_slave_is_pending_msg(sdio_bus_t bus, uint32_t msg)
 bool uapi_sdio_slave_is_sending_msg(sdio_bus_t bus, uint32_t msg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -714,7 +714,7 @@ bool uapi_sdio_slave_is_sending_msg(sdio_bus_t bus, uint32_t msg)
 void uapi_sdio_slave_register_notify_message_callback(notify_host_event_t event_callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -742,7 +742,7 @@ void uapi_sdio_slave_register_notify_message_callback(notify_host_event_t event_
 void uapi_sdio_slave_read_retry_when_read_err(sdio_bus_t bus, uint32_t read_bytes)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -771,7 +771,7 @@ void uapi_sdio_slave_read_retry_when_read_err(sdio_bus_t bus, uint32_t read_byte
 void uapi_sdio_slave_init_no_wait(sdio_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -799,7 +799,7 @@ void uapi_sdio_slave_init_no_wait(sdio_bus_t bus)
 bool uapi_sdio_slave_host_clk_ready(sdio_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -836,7 +836,7 @@ bool uapi_sdio_slave_host_clk_ready(sdio_bus_t bus)
 errcode_t uapi_sdio_slave_get_status(sdio_bus_t bus, sdio_status_info_t* satus_info)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -884,7 +884,7 @@ errcode_t uapi_sdio_slave_get_status(sdio_bus_t bus, sdio_status_info_t* satus_i
 errcode_t uapi_sdio_slave_set_status(sdio_bus_t bus, const sdio_status_info_t* satus_info)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -927,7 +927,7 @@ errcode_t uapi_sdio_slave_set_status(sdio_bus_t bus, const sdio_status_info_t* s
 void uapi_sdio_slave_memory_init(sdio_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -958,7 +958,7 @@ void uapi_sdio_slave_memory_init(sdio_bus_t bus)
 sdio_info_t* uapi_sdio_slave_get_info(sdio_bus_t bus)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -995,7 +995,7 @@ sdio_info_t* uapi_sdio_slave_get_info(sdio_bus_t bus)
 void uapi_sdio_slave_set_extend_val_info(sdio_bus_t bus, uint32_t offset, uint32_t val)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"
@@ -1030,7 +1030,7 @@ void uapi_sdio_slave_set_extend_val_info(sdio_bus_t bus, uint32_t offset, uint32
 uint32_t uapi_sdio_slave_get_extend_val_info(sdio_bus_t bus, uint32_t offset)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/sdio/sdio_slave.h"

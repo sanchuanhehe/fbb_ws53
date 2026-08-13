@@ -2,7 +2,7 @@
 
 event 提供事件标志组的创建、写入、读取、清除与销毁功能，支持任务间基于事件标志的同步机制。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "event/osal_event.h"
@@ -26,7 +26,7 @@ event 提供事件标志组的创建、写入、读取、清除与销毁功能�
 int osal_event_init(osal_event *event_obj)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "event/osal_event.h"
@@ -68,7 +68,7 @@ int osal_event_init(osal_event *event_obj)
 int osal_event_write(osal_event *event_obj, unsigned int mask)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "event/osal_event.h"
@@ -111,7 +111,7 @@ int osal_event_write(osal_event *event_obj, unsigned int mask)
 int osal_event_read(osal_event *event_obj, unsigned int mask, unsigned int timeout_ms, unsigned int mode)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "event/osal_event.h"
@@ -156,7 +156,7 @@ int osal_event_read(osal_event *event_obj, unsigned int mask, unsigned int timeo
 int osal_event_clear(osal_event *event_obj, unsigned int mask)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "event/osal_event.h"
@@ -199,7 +199,7 @@ int osal_event_clear(osal_event *event_obj, unsigned int mask)
 int osal_event_destroy(osal_event *event_obj)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "event/osal_event.h"

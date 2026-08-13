@@ -2,7 +2,7 @@
 
 UPG (Upgrade) 提供固件升级（FOTA）功能，支持升级包存储、校验、解密、解压和差分更新，覆盖升级全流程管理。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -37,7 +37,7 @@ UPG (Upgrade) 提供固件升级（FOTA）功能，支持升级包存储、校�
 errcode_t uapi_upg_init(const upg_func_t *func_list)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -88,7 +88,7 @@ errcode_t uapi_upg_init(const upg_func_t *func_list)
 errcode_t uapi_upg_start(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -134,7 +134,7 @@ errcode_t uapi_upg_start(void)
 errcode_t uapi_upg_register_progress_callback(uapi_upg_progress_cb func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -183,7 +183,7 @@ errcode_t uapi_upg_register_progress_callback(uapi_upg_progress_cb func)
 errcode_t uapi_upg_get_result(upg_result_t *result, uint32_t *last_image_index)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -229,7 +229,7 @@ errcode_t uapi_upg_get_result(upg_result_t *result, uint32_t *last_image_index)
 upg_status_t uapi_upg_get_status(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -268,7 +268,7 @@ upg_status_t uapi_upg_get_status(void)
 errcode_t uapi_upg_prepare(upg_prepare_info_t *prepare_info)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -316,7 +316,7 @@ errcode_t uapi_upg_prepare(upg_prepare_info_t *prepare_info)
 errcode_t uapi_upg_reset_upgrade_flag(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -360,7 +360,7 @@ errcode_t uapi_upg_reset_upgrade_flag(void)
 errcode_t uapi_upg_write_package_async(uint32_t offset, const uint8_t *buff, uint16_t len, uapi_upg_write_done_cb callback)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -413,7 +413,7 @@ errcode_t uapi_upg_write_package_async(uint32_t offset, const uint8_t *buff, uin
 errcode_t uapi_upg_write_package_sync(uint32_t offset, const uint8_t *buff, uint16_t len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -463,7 +463,7 @@ errcode_t uapi_upg_write_package_sync(uint32_t offset, const uint8_t *buff, uint
 errcode_t uapi_upg_read_package(uint32_t offset, uint8_t *buff, uint32_t len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -512,7 +512,7 @@ errcode_t uapi_upg_read_package(uint32_t offset, uint8_t *buff, uint32_t len)
 uint32_t uapi_upg_get_storage_size(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -549,7 +549,7 @@ uint32_t uapi_upg_get_storage_size(void)
 errcode_t uapi_upg_request_upgrade(bool reset)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -598,7 +598,7 @@ errcode_t uapi_upg_request_upgrade(bool reset)
 errcode_t uapi_upg_verify_file_head(const upg_package_header_t *pkg_header)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -645,7 +645,7 @@ errcode_t uapi_upg_verify_file_head(const upg_package_header_t *pkg_header)
 errcode_t uapi_upg_verify_file_image(const upg_image_header_t *img_header, const uint8_t *hash, uint32_t hash_len, bool verify_old)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -694,7 +694,7 @@ errcode_t uapi_upg_verify_file_image(const upg_image_header_t *img_header, const
 errcode_t uapi_upg_verify_file(const upg_package_header_t *pkg_header)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"
@@ -744,7 +744,7 @@ errcode_t uapi_upg_verify_file(const upg_package_header_t *pkg_header)
 void uapi_upg_register_user_defined_verify_func(uapi_upg_user_defined_check func, uintptr_t param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "middleware/utils/upg.h"

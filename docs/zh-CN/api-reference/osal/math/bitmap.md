@@ -2,7 +2,7 @@
 
 bitmap 提供位数组的位操作功能，支持对 unsigned long 类型数组按位进行置位、清零、翻转与测试操作。该模块还支持在位数组中查找首个或下一个置位位与清零位的位置，基于 linux 内核位操作接口实现，仅在 linux 系统下可用。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "math/osal_bitmap.h"
@@ -32,7 +32,7 @@ bitmap 提供位数组的位操作功能，支持对 unsigned long 类型数组�
 void osal_bitmap_set_bit(int nr, unsigned long *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "math/osal_bitmap.h"
@@ -68,7 +68,7 @@ void osal_bitmap_set_bit(int nr, unsigned long *addr)
 void osal_bitmap_clear_bit(int nr, unsigned long *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "math/osal_bitmap.h"
@@ -104,7 +104,7 @@ void osal_bitmap_clear_bit(int nr, unsigned long *addr)
 void osal_bitmap_change_bit(int nr, unsigned long *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "math/osal_bitmap.h"
@@ -140,7 +140,7 @@ void osal_bitmap_change_bit(int nr, unsigned long *addr)
 int osal_bitmap_test_bit(int nr, unsigned long *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "math/osal_bitmap.h"
@@ -180,7 +180,7 @@ int osal_bitmap_test_bit(int nr, unsigned long *addr)
 int osal_bitmap_test_and_set_bit(int nr, unsigned long *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "math/osal_bitmap.h"
@@ -226,7 +226,7 @@ int osal_bitmap_test_and_set_bit(int nr, unsigned long *addr)
 int osal_bitmap_test_and_clear_bit(int nr, unsigned long *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "math/osal_bitmap.h"
@@ -272,7 +272,7 @@ int osal_bitmap_test_and_clear_bit(int nr, unsigned long *addr)
 int osal_bitmap_test_and_change_bit(int nr, unsigned long *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "math/osal_bitmap.h"
@@ -318,7 +318,7 @@ int osal_bitmap_test_and_change_bit(int nr, unsigned long *addr)
 int osal_bitmap_find_first_zero_bit(const unsigned long *name, unsigned size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "math/osal_bitmap.h"
@@ -357,7 +357,7 @@ int osal_bitmap_find_first_zero_bit(const unsigned long *name, unsigned size)
 int osal_bitmap_find_first_bit(const unsigned long *name, unsigned size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "math/osal_bitmap.h"
@@ -396,7 +396,7 @@ int osal_bitmap_find_first_bit(const unsigned long *name, unsigned size)
 int osal_bitmap_find_next_zero_bit(const unsigned long *name, int size, int offset)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "math/osal_bitmap.h"
@@ -436,7 +436,7 @@ int osal_bitmap_find_next_zero_bit(const unsigned long *name, int size, int offs
 int osal_bitmap_find_next_bit(const unsigned long *name, unsigned size, int offset)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "math/osal_bitmap.h"

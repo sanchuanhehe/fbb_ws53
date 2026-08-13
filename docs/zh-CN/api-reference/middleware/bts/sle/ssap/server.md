@@ -2,7 +2,7 @@
 
 SSAP (Service Access Protocol) server 提供 SLE (Star Flash Low Energy) 协议中服务接入协议服务端侧的能力，支持注册与注销服务端、注册回调函数、异步与同步添加服务/特征/描述符、启动与删除服务、回复读写响应以及按句柄或 UUID (Universally Unique Identifier) 向对端发送通知或指示。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -36,7 +36,7 @@ SSAP (Service Access Protocol) server 提供 SLE (Star Flash Low Energy) 协议�
 errcode_t ssaps_register_server(sle_uuid_t *app_uuid, uint8_t *server_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -85,7 +85,7 @@ errcode_t ssaps_register_server(sle_uuid_t *app_uuid, uint8_t *server_id)
 errcode_t ssaps_unregister_server(uint8_t server_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -128,7 +128,7 @@ errcode_t ssaps_unregister_server(uint8_t server_id)
 errcode_t ssaps_add_service(uint8_t server_id, sle_uuid_t *service_uuid, bool is_primary)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -169,7 +169,7 @@ errcode_t ssaps_add_service(uint8_t server_id, sle_uuid_t *service_uuid, bool is
 errcode_t ssaps_add_property(uint8_t server_id, uint16_t service_handle, ssaps_property_info_t *property)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -211,7 +211,7 @@ errcode_t ssaps_add_descriptor(uint8_t server_id, uint16_t service_handle, uint1
     ssaps_desc_info_t *descriptor)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -253,7 +253,7 @@ errcode_t ssaps_add_descriptor(uint8_t server_id, uint16_t service_handle, uint1
 errcode_t ssaps_add_service_sync(uint8_t server_id, sle_uuid_t *service_uuid, bool is_primary, uint16_t *handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -305,7 +305,7 @@ errcode_t ssaps_add_property_sync(uint8_t server_id, uint16_t service_handle, ss
     uint16_t *handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -357,7 +357,7 @@ errcode_t ssaps_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
     ssaps_desc_info_t *descriptor)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -403,7 +403,7 @@ errcode_t ssaps_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 errcode_t ssaps_start_service(uint8_t server_id, uint16_t service_handle)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -447,7 +447,7 @@ errcode_t ssaps_start_service(uint8_t server_id, uint16_t service_handle)
 errcode_t ssaps_delete_all_services(uint8_t server_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -486,7 +486,7 @@ errcode_t ssaps_delete_all_services(uint8_t server_id)
 errcode_t ssaps_send_response(uint8_t server_id, uint16_t conn_id, ssaps_send_rsp_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -527,7 +527,7 @@ errcode_t ssaps_send_response(uint8_t server_id, uint16_t conn_id, ssaps_send_rs
 errcode_t ssaps_notify_indicate(uint8_t server_id, uint16_t conn_id, ssaps_ntf_ind_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -572,7 +572,7 @@ errcode_t ssaps_notify_indicate(uint8_t server_id, uint16_t conn_id, ssaps_ntf_i
 errcode_t ssaps_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, ssaps_ntf_ind_by_uuid_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -613,7 +613,7 @@ errcode_t ssaps_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, ssa
 errcode_t ssaps_set_info(uint8_t server_id, ssap_exchange_info_t *info)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"
@@ -657,7 +657,7 @@ errcode_t ssaps_set_info(uint8_t server_id, ssap_exchange_info_t *info)
 errcode_t ssaps_register_callbacks(ssaps_callbacks_t *func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_ssap_server.h"

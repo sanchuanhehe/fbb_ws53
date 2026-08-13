@@ -2,7 +2,7 @@
 
 Pinctrl (Pin Multiplexing Control) 提供引脚复用与引脚配置功能，支持引脚复用模式、驱动能力、上下拉、输入使能与施密特触发状态的设置与获取，并支持低功耗场景下的挂起与恢复。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/driver/pinctrl.h"
@@ -35,7 +35,7 @@ Pinctrl (Pin Multiplexing Control) 提供引脚复用与引脚配置功能，支
 void uapi_pin_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pinctrl.h"
@@ -62,7 +62,7 @@ void uapi_pin_init(void)
 void uapi_pin_deinit(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pinctrl.h"
@@ -89,7 +89,7 @@ void uapi_pin_deinit(void)
 errcode_t uapi_pin_set_mode(pin_t pin, pin_mode_t mode)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pinctrl.h"
@@ -134,7 +134,7 @@ errcode_t uapi_pin_set_mode(pin_t pin, pin_mode_t mode)
 pin_mode_t uapi_pin_get_mode(pin_t pin)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pinctrl.h"
@@ -176,7 +176,7 @@ pin_mode_t uapi_pin_get_mode(pin_t pin)
 errcode_t uapi_pin_set_ds(pin_t pin, pin_drive_strength_t ds)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pinctrl.h"
@@ -220,7 +220,7 @@ errcode_t uapi_pin_set_ds(pin_t pin, pin_drive_strength_t ds)
 pin_drive_strength_t uapi_pin_get_ds(pin_t pin)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pinctrl.h"
@@ -262,7 +262,7 @@ pin_drive_strength_t uapi_pin_get_ds(pin_t pin)
 errcode_t uapi_pin_set_pull(pin_t pin, pin_pull_t pull_type)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pinctrl.h"
@@ -306,7 +306,7 @@ errcode_t uapi_pin_set_pull(pin_t pin, pin_pull_t pull_type)
 pin_pull_t uapi_pin_get_pull(pin_t pin)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pinctrl.h"
@@ -348,7 +348,7 @@ pin_pull_t uapi_pin_get_pull(pin_t pin)
 errcode_t uapi_pin_set_ie(pin_t pin, pin_input_enable_t ie)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pinctrl.h"
@@ -400,7 +400,7 @@ errcode_t uapi_pin_set_ie(pin_t pin, pin_input_enable_t ie)
 pin_input_enable_t uapi_pin_get_ie(pin_t pin)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pinctrl.h"
@@ -444,7 +444,7 @@ pin_input_enable_t uapi_pin_get_ie(pin_t pin)
 errcode_t uapi_pin_set_st(pin_t pin, pin_schmitt_trigger_t st)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pinctrl.h"
@@ -494,7 +494,7 @@ errcode_t uapi_pin_set_st(pin_t pin, pin_schmitt_trigger_t st)
 pin_schmitt_trigger_t uapi_pin_get_st(pin_t pin)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pinctrl.h"
@@ -538,7 +538,7 @@ pin_schmitt_trigger_t uapi_pin_get_st(pin_t pin)
 errcode_t uapi_pin_suspend(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pinctrl.h"
@@ -586,7 +586,7 @@ errcode_t uapi_pin_suspend(uintptr_t arg)
 errcode_t uapi_pin_resume(uintptr_t arg)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/driver/pinctrl.h"

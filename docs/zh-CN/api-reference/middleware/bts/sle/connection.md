@@ -2,7 +2,7 @@
 
 connection 提供 SLE (Star Flash Low Energy) 连接管理、设备发现与传输管理能力，覆盖连接/断开、配对、连接参数更新、PHY/MCS 设置、设备公开（announce）、扫描（seek）以及传输繁忙回调等接口。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -66,7 +66,7 @@ connection 提供 SLE (Star Flash Low Energy) 连接管理、设备发现与传�
 errcode_t sle_connect_remote_device(const sle_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -109,7 +109,7 @@ errcode_t sle_connect_remote_device(const sle_addr_t *addr)
 errcode_t sle_create_connection_cancel(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -142,7 +142,7 @@ errcode_t sle_create_connection_cancel(void)
 errcode_t sle_set_connect_rssi(int8_t rssi)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -180,7 +180,7 @@ errcode_t sle_set_connect_rssi(int8_t rssi)
 errcode_t sle_disconnect_remote_device(const sle_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -219,7 +219,7 @@ errcode_t sle_disconnect_remote_device(const sle_addr_t *addr)
 errcode_t sle_disconnect_all_remote_device(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -252,7 +252,7 @@ errcode_t sle_disconnect_all_remote_device(void)
 errcode_t sle_update_connect_param(sle_connection_param_update_t *params)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -295,7 +295,7 @@ errcode_t sle_update_connect_param(sle_connection_param_update_t *params)
 errcode_t sle_pair_remote_device(const sle_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -338,7 +338,7 @@ errcode_t sle_pair_remote_device(const sle_addr_t *addr)
 errcode_t sle_remove_paired_remote_device(const sle_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -377,7 +377,7 @@ errcode_t sle_remove_paired_remote_device(const sle_addr_t *addr)
 errcode_t sle_remove_all_pairs(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -408,7 +408,7 @@ errcode_t sle_remove_all_pairs(void)
 errcode_t sle_get_paired_devices_num(uint16_t *number)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -446,7 +446,7 @@ errcode_t sle_get_paired_devices_num(uint16_t *number)
 errcode_t sle_get_connect_role(uint16_t conn_id, uint8_t *role)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -491,7 +491,7 @@ errcode_t sle_get_connect_role(uint16_t conn_id, uint8_t *role)
 errcode_t sle_get_paired_devices(sle_addr_t *addr, uint16_t *number)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -530,7 +530,7 @@ errcode_t sle_get_paired_devices(sle_addr_t *addr, uint16_t *number)
 errcode_t sle_get_bonded_devices(sle_addr_t *addr, uint16_t *number)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -569,7 +569,7 @@ errcode_t sle_get_bonded_devices(sle_addr_t *addr, uint16_t *number)
 errcode_t sle_set_nv_smp_keys(sle_auth_info_evt_t *keys, sle_addr_t *own_addr, sle_addr_t *peer_addr, uint8_t index)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -611,7 +611,7 @@ errcode_t sle_set_nv_smp_keys(sle_auth_info_evt_t *keys, sle_addr_t *own_addr, s
 errcode_t sle_get_pair_state(const sle_addr_t *addr, uint8_t *state)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -655,7 +655,7 @@ errcode_t sle_get_pair_state(const sle_addr_t *addr, uint8_t *state)
 errcode_t sle_read_remote_device_rssi(uint16_t conn_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -698,7 +698,7 @@ errcode_t sle_read_remote_device_rssi(uint16_t conn_id)
 errcode_t sle_set_acb_evt_param(uint16_t conn_id, uint16_t evt_intv, uint8_t evt_num)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -738,7 +738,7 @@ errcode_t sle_set_acb_evt_param(uint16_t conn_id, uint16_t evt_intv, uint8_t evt
 errcode_t sle_read_access_filter_list_size(uint8_t *size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -776,7 +776,7 @@ errcode_t sle_read_access_filter_list_size(uint8_t *size)
 errcode_t sle_clear_access_filter_list(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -807,7 +807,7 @@ errcode_t sle_clear_access_filter_list(void)
 errcode_t sle_add_device_to_access_filter_list(sle_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -844,7 +844,7 @@ errcode_t sle_add_device_to_access_filter_list(sle_addr_t *addr)
 errcode_t sle_remove_device_from_access_filter_list(sle_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -881,7 +881,7 @@ errcode_t sle_remove_device_from_access_filter_list(sle_addr_t *addr)
 errcode_t sle_set_phy_param(uint16_t conn_id, sle_set_phy_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -925,7 +925,7 @@ errcode_t sle_set_phy_param(uint16_t conn_id, sle_set_phy_t *param)
 errcode_t sle_set_save_pair_keys_mode(uint8_t is_available)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -962,7 +962,7 @@ errcode_t sle_set_save_pair_keys_mode(uint8_t is_available)
 errcode_t sle_set_mcs(uint16_t conn_id, uint8_t mcs)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -1005,7 +1005,7 @@ errcode_t sle_set_mcs(uint16_t conn_id, uint8_t mcs)
 errcode_t sle_set_data_len(uint16_t conn_id, uint16_t tx_octets)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -1048,7 +1048,7 @@ errcode_t sle_set_data_len(uint16_t conn_id, uint16_t tx_octets)
 errcode_t sle_default_connection_param_set(sle_default_connect_param_t *set_param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -1091,7 +1091,7 @@ errcode_t sle_default_connection_param_set(sle_default_connect_param_t *set_para
 errcode_t sle_connection_register_callbacks(sle_connection_callbacks_t *func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -1135,7 +1135,7 @@ errcode_t sle_connection_register_callbacks(sle_connection_callbacks_t *func)
 errcode_t sle_customize_max_pwr(int8_t ble_pwr, int8_t sle_pwr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_connection_manager.h"
@@ -1173,7 +1173,7 @@ errcode_t sle_customize_max_pwr(int8_t ble_pwr, int8_t sle_pwr)
 errcode_t sle_set_local_addr(sle_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_device_discovery.h"
@@ -1216,7 +1216,7 @@ errcode_t sle_set_local_addr(sle_addr_t *addr)
 errcode_t sle_get_local_addr(sle_addr_t *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_device_discovery.h"
@@ -1254,7 +1254,7 @@ errcode_t sle_get_local_addr(sle_addr_t *addr)
 errcode_t sle_set_local_name(const uint8_t *name, uint8_t len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_device_discovery.h"
@@ -1293,7 +1293,7 @@ errcode_t sle_set_local_name(const uint8_t *name, uint8_t len)
 errcode_t sle_get_local_name(uint8_t *name, uint8_t *len)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_device_discovery.h"
@@ -1332,7 +1332,7 @@ errcode_t sle_get_local_name(uint8_t *name, uint8_t *len)
 errcode_t sle_set_announce_data(uint8_t announce_id, const sle_announce_data_t *data)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_device_discovery.h"
@@ -1375,7 +1375,7 @@ errcode_t sle_set_announce_data(uint8_t announce_id, const sle_announce_data_t *
 errcode_t sle_remove_announce(uint8_t announce_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_device_discovery.h"
@@ -1413,7 +1413,7 @@ errcode_t sle_remove_announce(uint8_t announce_id)
 errcode_t sle_set_announce_param(uint8_t announce_id, const sle_announce_param_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_device_discovery.h"
@@ -1456,7 +1456,7 @@ errcode_t sle_set_announce_param(uint8_t announce_id, const sle_announce_param_t
 errcode_t sle_start_announce(uint8_t announce_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_device_discovery.h"
@@ -1500,7 +1500,7 @@ errcode_t sle_start_announce(uint8_t announce_id)
 errcode_t sle_stop_announce(uint8_t announce_id)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_device_discovery.h"
@@ -1539,7 +1539,7 @@ errcode_t sle_stop_announce(uint8_t announce_id)
 errcode_t sle_set_seek_param(sle_seek_param_t *param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_device_discovery.h"
@@ -1583,7 +1583,7 @@ errcode_t sle_set_seek_param(sle_seek_param_t *param)
 errcode_t sle_start_seek(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_device_discovery.h"
@@ -1620,7 +1620,7 @@ errcode_t sle_start_seek(void)
 errcode_t sle_stop_seek(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_device_discovery.h"
@@ -1656,7 +1656,7 @@ errcode_t sle_stop_seek(void)
 errcode_t sle_announce_seek_register_callbacks(sle_announce_seek_callbacks_t *func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_device_discovery.h"
@@ -1700,7 +1700,7 @@ errcode_t sle_announce_seek_register_callbacks(sle_announce_seek_callbacks_t *fu
 errcode_t sle_transmission_signal_capability_req(uint16_t conn_id, sle_transmission_signal_capability_bit_t* param)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_transmition_manager.h"
@@ -1740,7 +1740,7 @@ errcode_t sle_transmission_signal_capability_req(uint16_t conn_id, sle_transmiss
 errcode_t sle_transmission_register_callbacks(sle_transmission_callbacks_t *func)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/services/bts/sle/sle_transmition_manager.h"

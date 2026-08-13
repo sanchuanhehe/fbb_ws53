@@ -2,7 +2,7 @@
 
 address 提供动态内存分配与释放、虚拟内存管理、内存池管理、I/O 地址映射与地址转换功能，支持 linux、LiteOS 和 FreeRTOS 多系统适配。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "osal_addr.h"
@@ -48,7 +48,7 @@ address 提供动态内存分配与释放、虚拟内存管理、内存池管理
 void *osal_kmalloc(unsigned long size, unsigned int osal_gfp_flag)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -87,7 +87,7 @@ void *osal_kmalloc(unsigned long size, unsigned int osal_gfp_flag)
 void *osal_kzalloc(unsigned long size, unsigned int osal_gfp_flag)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -126,7 +126,7 @@ void *osal_kzalloc(unsigned long size, unsigned int osal_gfp_flag)
 void *osal_kmalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned int boundary)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -166,7 +166,7 @@ void *osal_kmalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 void *osal_kzalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned int boundary)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -206,7 +206,7 @@ void *osal_kzalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 void osal_kfree(void *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -235,7 +235,7 @@ void osal_kfree(void *addr)
 void *osal_vmalloc(unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -268,7 +268,7 @@ void *osal_vmalloc(unsigned long size)
 void *osal_vzalloc(unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -301,7 +301,7 @@ void *osal_vzalloc(unsigned long size)
 void osal_vfree(void *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -329,7 +329,7 @@ void osal_vfree(void *addr)
 int osal_pool_mem_init(void *pool, unsigned int size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -368,7 +368,7 @@ int osal_pool_mem_init(void *pool, unsigned int size)
 void *osal_pool_mem_alloc(void *pool, unsigned int size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -407,7 +407,7 @@ void *osal_pool_mem_alloc(void *pool, unsigned int size)
 void *osal_pool_mem_alloc_align(void *pool, unsigned int size, unsigned int boundary)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -447,7 +447,7 @@ void *osal_pool_mem_alloc_align(void *pool, unsigned int size, unsigned int boun
 void osal_pool_mem_free(void *pool, const void *addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -476,7 +476,7 @@ void osal_pool_mem_free(void *pool, const void *addr)
 int osal_pool_mem_deinit(void *pool)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -514,7 +514,7 @@ int osal_pool_mem_deinit(void *pool)
 osal_blockmem_status osal_blockmem_get_status(unsigned long phyaddr, unsigned int size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -548,7 +548,7 @@ osal_blockmem_status osal_blockmem_get_status(unsigned long phyaddr, unsigned in
 void *osal_ioremap(unsigned long phys_addr, unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -582,7 +582,7 @@ void *osal_ioremap(unsigned long phys_addr, unsigned long size)
 void *osal_ioremap_nocache(unsigned long phys_addr, unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -620,7 +620,7 @@ void *osal_ioremap_nocache(unsigned long phys_addr, unsigned long size)
 void *osal_ioremap_cached(unsigned long phys_addr, unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -654,7 +654,7 @@ void *osal_ioremap_cached(unsigned long phys_addr, unsigned long size)
 void osal_iounmap(void *addr, unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -683,7 +683,7 @@ void osal_iounmap(void *addr, unsigned long size)
 void *osal_ioremap_wc(unsigned long phys_addr, unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -721,7 +721,7 @@ void *osal_ioremap_wc(unsigned long phys_addr, unsigned long size)
 void *osal_phys_to_virt(unsigned long addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -752,7 +752,7 @@ void *osal_phys_to_virt(unsigned long addr)
 unsigned long osal_virt_to_phys(const void *virt_addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -783,7 +783,7 @@ unsigned long osal_virt_to_phys(const void *virt_addr)
 void *osal_blockmem_vmap(unsigned long phys_addr, unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -822,7 +822,7 @@ void *osal_blockmem_vmap(unsigned long phys_addr, unsigned long size)
 void osal_blockmem_vunmap(const void *virt_addr)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -850,7 +850,7 @@ void osal_blockmem_vunmap(const void *virt_addr)
 void osal_blockmem_free(unsigned long phys_addr, unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -878,7 +878,7 @@ void osal_blockmem_free(unsigned long phys_addr, unsigned long size)
 unsigned long osal_copy_from_user(void *to, const void *from, unsigned long n)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -913,7 +913,7 @@ unsigned long osal_copy_from_user(void *to, const void *from, unsigned long n)
 unsigned long osal_copy_to_user(void *to, const void *from, unsigned long n)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"
@@ -948,7 +948,7 @@ unsigned long osal_copy_to_user(void *to, const void *from, unsigned long n)
 int osal_access_ok(int type, const void *addr, unsigned long size)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "osal_addr.h"

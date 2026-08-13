@@ -2,7 +2,7 @@
 
 dfx (Design For eXcellence) 提供 DIAG (Diagnosis) 诊断通道的命令注册、报文上报、消息上报与统计量注册能力，并通过 diag_log 子模块提供 Error / Warning / Info / Debug 四个级别的日志打印接口。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/utils/diag.h"
@@ -31,7 +31,7 @@ dfx (Design For eXcellence) 提供 DIAG (Diagnosis) 诊断通道的命令注册�
 errcode_t uapi_diag_register_cmd(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t cmd_num)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/diag.h"
@@ -76,7 +76,7 @@ errcode_t uapi_diag_register_cmd(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t cmd
 errcode_t uapi_diag_unregister_cmd(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t cmd_num)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/diag.h"
@@ -116,7 +116,7 @@ errcode_t uapi_diag_unregister_cmd(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t c
 errcode_t uapi_diag_report_packet(uint16_t cmd_id, diag_option_t *option, const uint8_t *packet, uint16_t packet_size, bool sync)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/diag.h"
@@ -167,7 +167,7 @@ errcode_t uapi_diag_report_packet(uint16_t cmd_id, diag_option_t *option, const 
 errcode_t uapi_diag_report_packets_critical(uint16_t cmd_id, diag_option_t *option, uint8_t **packet, uint16_t *packet_size, uint8_t pkt_cnt)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/diag.h"
@@ -215,7 +215,7 @@ errcode_t uapi_diag_report_packets_critical(uint16_t cmd_id, diag_option_t *opti
 errcode_t uapi_diag_report_packets_normal(uint16_t cmd_id, diag_option_t *option, uint8_t **packet, uint16_t *packet_size, uint8_t pkt_cnt)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/diag.h"
@@ -262,7 +262,7 @@ errcode_t uapi_diag_report_packets_normal(uint16_t cmd_id, diag_option_t *option
 errcode_t uapi_diag_report_sys_msg(uint32_t module_id, uint32_t msg_id, const uint8_t *buf, uint16_t buf_size, uint8_t level)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/diag.h"
@@ -313,7 +313,7 @@ errcode_t uapi_diag_report_sys_msg(uint32_t module_id, uint32_t msg_id, const ui
 errcode_t uapi_diag_register_ind(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t cmd_num)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/diag.h"
@@ -353,7 +353,7 @@ errcode_t uapi_diag_register_ind(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t cmd
 errcode_t uapi_diag_run_cmd(uint16_t cmd_id, uint8_t *data, uint16_t data_size, diag_option_t *option)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/diag.h"
@@ -395,7 +395,7 @@ errcode_t uapi_diag_run_cmd(uint16_t cmd_id, uint8_t *data, uint16_t data_size, 
 errcode_t uapi_diag_register_stat_obj(const diag_sys_stat_obj_t *stat_obj_tbl, uint16_t obj_num)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/diag.h"

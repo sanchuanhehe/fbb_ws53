@@ -2,7 +2,7 @@
 
 barrier 提供 CPU (Central Processing Unit) 内存屏障操作，包括通用内存屏障、读内存屏障、写内存屏障以及 SMP (Symmetric Multiprocessing) 条件下的内存屏障，同时提供指令同步屏障、数据同步屏障与数据内存屏障操作。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "kernel/osal/include/memory/osal_barrier.h"
@@ -30,7 +30,7 @@ barrier 提供 CPU (Central Processing Unit) 内存屏障操作，包括通用�
 void osal_mb(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/memory/osal_barrier.h"
@@ -59,7 +59,7 @@ void osal_mb(void)
 void osal_rmb(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/memory/osal_barrier.h"
@@ -88,7 +88,7 @@ void osal_rmb(void)
 void osal_wmb(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/memory/osal_barrier.h"
@@ -111,7 +111,7 @@ void osal_wmb(void)
 void osal_smp_mb(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/memory/osal_barrier.h"
@@ -134,7 +134,7 @@ void osal_smp_mb(void)
 void osal_smp_rmb(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/memory/osal_barrier.h"
@@ -163,7 +163,7 @@ void osal_smp_rmb(void)
 void osal_smp_wmb(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/memory/osal_barrier.h"
@@ -186,7 +186,7 @@ void osal_smp_wmb(void)
 void osal_isb(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/memory/osal_barrier.h"
@@ -216,7 +216,7 @@ void osal_isb(void)
 void osal_dsb(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/memory/osal_barrier.h"
@@ -248,7 +248,7 @@ void osal_dsb(void)
 void osal_dmb(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "kernel/osal/include/memory/osal_barrier.h"

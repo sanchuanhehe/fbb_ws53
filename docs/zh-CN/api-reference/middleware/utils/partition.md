@@ -2,7 +2,7 @@
 
 partition 提供分区管理功能，支持分区管理模块的初始化与分区信息查询。分区信息支持按内存地址和文件系统路径两种存储方式进行获取。
 
-**头文件清单**
+**模块公共头文件**
 
 ```c
 #include "include/middleware/utils/partition.h"
@@ -23,7 +23,7 @@ partition 提供分区管理功能，支持分区管理模块的初始化与分�
 errcode_t uapi_partition_init(void)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/partition.h"
@@ -60,7 +60,7 @@ errcode_t uapi_partition_init(void)
 errcode_t uapi_partition_get_info(partition_ids_t partition_id, partition_information_t *info)
 ```
 
-**头文件清单**
+**声明头文件**
 
 ```c
 #include "include/middleware/utils/partition.h"
