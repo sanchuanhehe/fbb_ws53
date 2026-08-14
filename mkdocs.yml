@@ -1,21 +1,29 @@
+INHERIT: mkdocs_base.yml
 site_name: WS53 开发者中心
 site_url: https://docs.hisilicon.com/projects/fbb_ws53/master/
 site_description: WS53 SDK 开发文档
 site_author: HiSpark
-docs_dir: docs
 use_directory_urls: true
 
 repo_name: 前往GitCode编辑
 repo_url: https://gitcode.com/HiSpark/fbb_ws53/tree/master/docs/zh-CN/
-edit_uri: edit/master/docs
 
-theme:
-  name: mkdocs
-  language: zh
 
+# 语言配置
 plugins:
+  - i18n:
+      docs_structure: folder
+      languages:
+        - locale: zh-CN
+          name: 中文
+          default: true
+          link: /
+          site_name: WS53 开发者中心
+          theme:
+            language: zh
   - search:
-      lang: zh
+      lang:
+        - zh
 
 extra:
   feedback_url: https://gitcode.com/HiSpark/fbb_ws53/issues
