@@ -141,21 +141,10 @@ HiSpark Studio 插件编译工程需要依赖工具链、Python 和 pip 依赖�
 
 2. 下载完成后，将 SDK 压缩包解压到本地目录。目录层级不要过深且不要包含中文字符。
 
-## 验证环境
+## 快速开始
 
-打开终端，进入 SDK 的 `src` 目录，执行 WS53 构建命令：
+环境已搭建完成，快速开始第一个程序：[快速开始](quick-start.md)
 
-```cmd
-cd src
-python build.py ws53_liteos_app
-```
-
-构建成功后生成以下主要产物：
-
-- ELF：`src/output/ws53/acore/ws53-liteos-app/ws53-liteos-app.elf`
-- 固件包：`src/output/ws53/fwpkg/ws53-liteos-app/ws53-liteos-app_all.fwpkg`
-
-环境搭建完成后，可继续阅读[快速开始](quick-start.md)。
 
 ## 常见问题
 

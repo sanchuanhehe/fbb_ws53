@@ -1,7 +1,31 @@
+---
+hide:
+  - toc
+---
+
 # 参考案例
 
-WS53 示例源码位于 `src/application/samples/`，按 `peripheral/`、`bt/` 和 `wifi/` 分类。案例是否可用应以当前源码、Kconfig、构建结果和开发板运行日志共同确认。
+## 快速导航
 
-原 SAMPLE 用例资料已保存在[完整手册](manual/index.md)中。该手册仍有历史缺图，作为资料承接，不作为已验证案例清单。
+### 无线连接
 
-可从 `src/application/samples/` 选择案例，并按[快速开始](../get-started/quick-start.md)完成构建。
+- [无线连接](connectivity/index.md)
+    - [SLE](connectivity/sle/index.md)
+    - [BLE](connectivity/ble/index.md)
+    - [Wi-Fi](connectivity/wifi/index.md)
+
+### 外设驱动
+
+- [外设驱动](peripherals/index.md)：ADC、DMA、GPIO、I2C、I2S、LPC、PWM、SPI、UART、RTC 等 16 个案例。
+
+### 网络协议
+
+- [网络协议](network/index.md)
+    - [TCP](network/tcp/tcp.md)
+    - [MQTT](network/mqtt/mqtt.md)
+
+## 使用说明
+
+1. 根据案例页确认源码目录和 Kconfig 选项。
+2. 仅启用当前需要验证的案例及对应角色，避免多个案例同时占用相同外设或任务资源。
+3. 按[快速入门](../get-started/quick-start.md)完成配置、构建、烧录和串口验证。

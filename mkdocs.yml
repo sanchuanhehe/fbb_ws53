@@ -100,7 +100,70 @@ nav:
           - 操作与维护: zh-CN/guides/troubleshooting/operations/index.md
   - 参考案例:
       - 参考案例: zh-CN/samples/index.md
-      - SAMPLE 用例: zh-CN/samples/manual/index.md
+      - 无线连接:
+          - 无线连接: zh-CN/samples/connectivity/index.md
+          - SLE:
+              - SLE: zh-CN/samples/connectivity/sle/index.md
+              - 概述: zh-CN/samples/connectivity/sle/overview/index.md
+              - 基础入门:
+                  - 基础入门: zh-CN/samples/connectivity/sle/basics/index.md
+                  - Hello SLE: zh-CN/samples/connectivity/sle/basics/hello-connect.md
+                  - 通知推送（Notify）: zh-CN/samples/connectivity/sle/basics/hello-notify.md
+                  - 属性读写（Read/Write）: zh-CN/samples/connectivity/sle/basics/hello-readwrite.md
+              - 连接管理:
+                  - 连接管理: zh-CN/samples/connectivity/sle/link-mgmt/index.md
+                  - 连接参数动态更新: zh-CN/samples/connectivity/sle/link-mgmt/conn-param-tuning.md
+                  - 无线链路自适应（PHY/MCS）: zh-CN/samples/connectivity/sle/link-mgmt/phy-mcs-switch.md
+                  - RSSI 测距: zh-CN/samples/connectivity/sle/link-mgmt/rssi-ranging.md
+              - 数据通信:
+                  - 数据通信: zh-CN/samples/connectivity/sle/data-comm/index.md
+                  - 参数配置与持久化: zh-CN/samples/connectivity/sle/data-comm/device-config.md
+                  - 分片传输: zh-CN/samples/connectivity/sle/data-comm/fragmentation.md
+                  - 高吞吐传输: zh-CN/samples/connectivity/sle/data-comm/high-throughput.md
+                  - 传感器上报: zh-CN/samples/connectivity/sle/data-comm/sensor-report.md
+                  - UART 透传: zh-CN/samples/connectivity/sle/data-comm/uart-bridge.md
+              - 行业方案:
+                  - 行业方案: zh-CN/samples/connectivity/sle/verticals/index.md
+                  - CHBA: zh-CN/samples/connectivity/sle/verticals/chba.md
+          - BLE:
+              - BLE: zh-CN/samples/connectivity/ble/index.md
+              - 高吞吐传输: zh-CN/samples/connectivity/ble/high-throughput.md
+              - 行业方案:
+                  - Wi-Fi 配网: zh-CN/samples/connectivity/ble/verticals/wifi-config.md
+          - Wi-Fi:
+              - Wi-Fi: zh-CN/samples/connectivity/wifi/index.md
+              - STA 连接: zh-CN/samples/connectivity/wifi/sta/sta-connect.md
+              - SoftAP: zh-CN/samples/connectivity/wifi/softap/softap.md
+              - 扫描: zh-CN/samples/connectivity/wifi/scan/scan.md
+              - 省电模式: zh-CN/samples/connectivity/wifi/power-save/power-save.md
+              - P2P: zh-CN/samples/connectivity/wifi/p2p.md
+              - 监听模式: zh-CN/samples/connectivity/wifi/monitor.md
+              - 中继设计: zh-CN/samples/connectivity/wifi/repeater.md
+              - SysChannel: zh-CN/samples/connectivity/wifi/syschannel.md
+              - HiLink 独立升级: zh-CN/samples/connectivity/wifi/hilink-indie-upgrade.md
+      - 外设驱动:
+          - 外设驱动: zh-CN/samples/peripherals/index.md
+          - ADC: zh-CN/samples/peripherals/adc/adc.md
+          - DMA: zh-CN/samples/peripherals/dma/dma.md
+          - GPIO: zh-CN/samples/peripherals/gpio/gpio-output.md
+          - I2C: zh-CN/samples/peripherals/i2c/i2c.md
+          - I2S: zh-CN/samples/peripherals/i2s/i2s.md
+          - Pinctrl: zh-CN/samples/peripherals/pinctrl/pinctrl.md
+          - PMP: zh-CN/samples/peripherals/pmp/pmp.md
+          - PWM: zh-CN/samples/peripherals/pwm/pwm.md
+          - RTC: zh-CN/samples/peripherals/rtc/rtc.md
+          - SFC: zh-CN/samples/peripherals/sfc/sfc.md
+          - SPI / QSPI: zh-CN/samples/peripherals/spi/spi.md
+          - SysTick: zh-CN/samples/peripherals/systick/systick.md
+          - TCXO: zh-CN/samples/peripherals/tcxo/tcxo.md
+          - Timer: zh-CN/samples/peripherals/timer-hw/timer-hw.md
+          - UART: zh-CN/samples/peripherals/uart/uart.md
+          - Watchdog: zh-CN/samples/peripherals/watchdog/watchdog.md
+          - LPC: zh-CN/samples/peripherals/lpc/lpc.md
+      - 网络协议:
+          - 网络协议: zh-CN/samples/network/index.md
+          - TCP: zh-CN/samples/network/tcp/tcp.md
+          - MQTT: zh-CN/samples/network/mqtt/mqtt.md
   - API 参考:
       - API 参考: zh-CN/api-reference/index.md
       - 驱动:
