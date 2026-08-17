@@ -1,10 +1,24 @@
+---
+hide:
+  - toc
+---
+
 # 快速入门
 
-按以下顺序完成首次开发：
+欢迎使用 WS53 系列芯片快速入门指南。本指南旨在帮助开发者快速上手 WS53 系列芯片的开发，包含快速开始、环境搭建、开发板等内容。
 
-1. [环境搭建](environment-setup.md)
-2. [快速开始](quick-start.md)
-3. [创建应用](create-application.md)
-4. [烧录与运行](flash-and-run.md)
+WS53 系列是集成 Wi-Fi 6、BLE (Bluetooth Low Energy) 5.4 和 SLE (SparkLink Low Energy) 1.0 的 Combo 芯片，支持丰富的网络协议和安全特性。
 
-原环境搭建手册作为补充资料保存在[完整手册](environment-setup/manual/index.md)中。
+## 快速导航
+
+---
+
+- [环境搭建](environment-setup.md)
+
+    完成开发环境配置，安装工具、下载插件、安装工具链、下载 SDK等。
+
+---
+
+- [快速开始](quick-start.md)
+
+    使用 HiSpark Studio 插件新建工程开始，完成工程的创建、配置、编译、烧录，验证运行结果。
