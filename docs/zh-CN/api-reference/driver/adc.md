@@ -1,6 +1,6 @@
 # ADC
 
-ADC (Analog-to-Digital Converter) 提供模拟信号到数字信号的转换能力，支持通道配置、差分采样、自动扫描与手动采样等多种工作模式。ADC 一次采样需要 16 个时钟周期，采样速率 = ADC 时钟 / 16，ADC 源时钟为 2MHz。
+ADC (Analog-to-Digital Converter) 提供模拟信号到数字信号的转换能力，支持通道配置、自动扫描与手动采样等多种工作模式。ADC 一次采样需要 16 个时钟周期，采样速率 = ADC 时钟 / 16，ADC 源时钟为 2MHz。
 
 **模块公共头文件**
 
@@ -18,14 +18,11 @@ ADC (Analog-to-Digital Converter) 提供模拟信号到数字信号的转换能�
 | [uapi_adc_is_using](#uapi_adc_is_using) | 查询 ADC 是否正在使用 |
 | [uapi_adc_open_channel](#uapi_adc_open_channel) | 打开一个 ADC 通道 |
 | [uapi_adc_close_channel](#uapi_adc_close_channel) | 关闭一个 ADC 通道 |
-| [uapi_adc_open_differential_channel](#uapi_adc_open_differential_channel) | 打开 ADC 差分通道 |
-| [uapi_adc_close_differential_channel](#uapi_adc_close_differential_channel) | 关闭 ADC 差分通道 |
 | [uapi_adc_auto_scan_ch_enable](#uapi_adc_auto_scan_ch_enable) | 启用单通道自动扫描 |
 | [uapi_adc_auto_scan_ch_disable](#uapi_adc_auto_scan_ch_disable) | 禁用单通道自动扫描 |
 | [uapi_adc_auto_scan_disable](#uapi_adc_auto_scan_disable) | 禁用全部自动扫描并下电 ADC |
 | [uapi_adc_auto_scan_is_enabled](#uapi_adc_auto_scan_is_enabled) | 查询自动扫描是否已使能 |
 | [uapi_adc_manual_sample](#uapi_adc_manual_sample) | 触发 ADC 手动采样 |
-| [uapi_adc_auto_sample](#uapi_adc_auto_sample) | 触发 ADC 自动采样 |
 
 ## Functions
 
@@ -43,9 +40,9 @@ errcode_t uapi_adc_init(adc_clock_t clock)
 
 **功能说明**
 
-- 配置 ADC 采样时钟并初始化 ADC 硬件
-- 注册 ADC HAL 函数指针表
-- 在启用自动扫描（CONFIG_ADC_SUPPORT_AUTO_SCAN）时注册 ADC 中断
+- 配置 ADC 采样时钟并初始化 ADC
+- 支持四档采样时钟（500KHZ/250KHZ/125KHZ/015KHZ）配置
+- ADC 已完成初始化时再次调用直接返回成功
 
 **前置条件**
 
@@ -57,7 +54,7 @@ errcode_t uapi_adc_init(adc_clock_t clock)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| clock | [adc_clock_t](#enum_adc_clock) | ADC 采样时钟，ADC 源时钟为 2MHz | [ADC_CLOCK_500KHZ](#enum_adc_clock)(0) / [ADC_CLOCK_250KHZ](#enum_adc_clock)(1) / [ADC_CLOCK_125KHZ](#enum_adc_clock)(2) / [ADC_CLOCK_015KHZ](#enum_adc_clock)(3) / [ADC_CLOCK_NONE](#enum_adc_clock)(4) |
+| clock | [adc_clock_t](#enum_adc_clock) | ADC 采样时钟，ADC 源时钟为 2MHz | [ADC_CLOCK_500KHZ](#enum_adc_clock)(0) / [ADC_CLOCK_250KHZ](#enum_adc_clock)(1) / [ADC_CLOCK_125KHZ](#enum_adc_clock)(2) / [ADC_CLOCK_015KHZ](#enum_adc_clock)(3) / [ADC_CLOCK_MAX](#enum_adc_clock)(4) / [ADC_CLOCK_NONE](#enum_adc_clock)(4) |
 
 **返回值**
 
@@ -87,9 +84,9 @@ errcode_t uapi_adc_deinit(void)
 
 **功能说明**
 
-- 去初始化 ADC 硬件
-- 注销 ADC HAL 函数指针表
-- 关闭 ADC 时钟，在启用自动扫描（CONFIG_ADC_SUPPORT_AUTO_SCAN）时注销 ADC 中断
+- 去初始化 ADC
+- 关闭 ADC 时钟
+- ADC 尚未初始化时直接返回成功
 
 **前置条件**
 
@@ -259,101 +256,6 @@ errcode_t uapi_adc_close_channel(uint8_t channel)
 | [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER):0x80001141 | 参数无效 | channel 与当前工作通道不一致 |
 | [ERRCODE_ADC_SCAN_NOT_DISABLE](#ERRCODE_ADC_SCAN_NOT_DISABLE):0x80001142 | 自动扫描未禁用 | 自动扫描已使能时调用（CONFIG_ADC_SUPPORT_AUTO_SCAN 启用时） |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 通道设置失败 |
-
-### uapi_adc_open_differential_channel <a id="uapi_adc_open_differential_channel"></a>
-
-```c
-errcode_t uapi_adc_open_differential_channel(uint8_t postive_ch, uint8_t negative_ch)
-```
-
-**声明头文件**
-
-```c
-#include "include/driver/adc.h"
-```
-
-**功能说明**
-
-- 打开 ADC 差分通道（正极通道与负极通道配对）
-- 校验正负通道号有效性
-- 记录当前差分工作通道对
-
-**前置条件**
-
-- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 与 [uapi_adc_power_en](#uapi_adc_power_en) 成功返回后调用
-- 依赖关系：当前接口依赖 ADC 已上电、CONFIG_ADC_SUPPORT_DIFFERENTIAL 已启用
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
-
-**入参**
-
-| 名称 | 参数类型 | 说明 | 约束取值范围 |
-| ---- | ---- | ---- | ---- |
-| postive_ch | uint8_t | 差分正极通道号 | 0 ~ 7（实现中以 ADC_CHANNEL_MAX_NUM(8) 为上界校验，postive_ch < 8） |
-| negative_ch | uint8_t | 差分负极通道号 | 0 ~ 7（实现中以 ADC_CHANNEL_MAX_NUM(8) 为上界校验，negative_ch < 8） |
-
-**返回值**
-
-- 返回类型：errcode_t
-
-| 返回值 | 文字含义 | 触发场景 |
-| -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 差分通道打开成功 |
-| [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER):0x80001141 | 参数无效 | postive_ch 或 negative_ch 大于等于 ADC_CHANNEL_MAX_NUM |
-| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 差分通道设置失败 |
-
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_ADC_SUPPORT_DIFFERENTIAL | 特性宏 | 支持差分采样接口功能（接口级，头文件中包裹函数声明） | y（依赖 ADC_USING_V153） |
-
-### uapi_adc_close_differential_channel <a id="uapi_adc_close_differential_channel"></a>
-
-```c
-errcode_t uapi_adc_close_differential_channel(uint8_t postive_ch, uint8_t negative_ch)
-```
-
-**声明头文件**
-
-```c
-#include "include/driver/adc.h"
-```
-
-**功能说明**
-
-- 关闭 ADC 差分通道（正极通道与负极通道配对）
-- 校验入参通道对与当前工作通道对一致性
-- 在自动扫描已使能时拒绝关闭差分通道
-
-**前置条件**
-
-- 调用时序约束：当前接口必须在 [uapi_adc_open_differential_channel](#uapi_adc_open_differential_channel) 成功打开差分通道后调用
-- 依赖关系：当前接口依赖 ADC 已上电、CONFIG_ADC_SUPPORT_DIFFERENTIAL 已启用、自动扫描未使能、入参通道对与当前工作通道对一致
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
-
-**入参**
-
-| 名称 | 参数类型 | 说明 | 约束取值范围 |
-| ---- | ---- | ---- | ---- |
-| postive_ch | uint8_t | 差分正极通道号，须与当前工作正极通道一致 | 0 ~ 7（须等于已打开的工作正极通道） |
-| negative_ch | uint8_t | 差分负极通道号，须与当前工作负极通道一致 | 0 ~ 7（须等于已打开的工作负极通道） |
-
-**返回值**
-
-- 返回类型：errcode_t
-
-| 返回值 | 文字含义 | 触发场景 |
-| -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 差分通道关闭成功 |
-| [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER):0x80001141 | 参数无效 | postive_ch 或 negative_ch 与当前工作通道对不一致 |
-| [ERRCODE_ADC_SCAN_NOT_DISABLE](#ERRCODE_ADC_SCAN_NOT_DISABLE):0x80001142 | 自动扫描未禁用 | 自动扫描已使能时调用（CONFIG_ADC_SUPPORT_AUTO_SCAN 启用时） |
-| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 差分通道设置失败 |
-
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_ADC_SUPPORT_DIFFERENTIAL | 特性宏 | 支持差分采样接口功能（接口级，头文件中包裹函数声明） | y（依赖 ADC_USING_V153） |
 
 ### uapi_adc_auto_scan_ch_enable <a id="uapi_adc_auto_scan_ch_enable"></a>
 
@@ -557,55 +459,6 @@ int32_t uapi_adc_manual_sample(uint8_t channel)
 | 采样值 | ADC 采样值 | 通道号有效，采样成功 |
 | 0 | 采样失败 | channel 大于等于 ADC_CHANNEL_MAX_NUM |
 
-### uapi_adc_auto_sample <a id="uapi_adc_auto_sample"></a>
-
-```c
-int32_t uapi_adc_auto_sample(uint8_t channel)
-```
-
-**声明头文件**
-
-```c
-#include "include/driver/adc.h"
-```
-
-**功能说明**
-
-- 触发 ADC 自动采样
-- 在启用高精度模式（CONFIG_ADC_SUPPORT_AFE 且 CONFIG_ADC_SUPPORT_HAFE）时按通道号自动选择 GADC 或 HADC 模式
-- 返回 ADC 采样值
-
-**前置条件**
-
-- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 与 [uapi_adc_power_en](#uapi_adc_power_en) 成功返回后调用，且对应 AFE 模式已上电
-- 依赖关系：当前接口依赖 ADC 已上电、CONFIG_ADC_SUPPORT_AFE 已启用
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
-
-**入参**
-
-| 名称 | 参数类型 | 说明 | 约束取值范围 |
-| ---- | ---- | ---- | ---- |
-| channel | uint8_t | ADC 通道号 | 0 ~ 7（实现中以 ADC_CHANNEL_MAX_NUM(8) 为上界校验，channel < 8） |
-
-**返回值**
-
-- 返回类型：int32_t
-
-| 返回值 | 文字含义 | 触发场景 |
-| -------- | -------- | -------- |
-| 采样值 | ADC 采样值 | 通道号有效且对应 AFE 模式已上电，采样成功 |
-| 0 | 采样失败 | channel 大于等于 ADC_CHANNEL_MAX_NUM，或对应 AFE 模式未上电 |
-
-**参考案例**
-
-- `src/application/samples/peripheral/adc/adc_demo.c`
-
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_ADC_SUPPORT_AFE | 特性宏 | 支持自动采样接口功能（接口级，头文件中包裹函数声明） | y（依赖 ADC_USING_V152 或 ADC_USING_V153） |
-
 ## Type definitions
 
 ### typedef_adc_callback_t <a id="typedef_adc_callback_t"></a>
@@ -631,7 +484,7 @@ typedef uint32_t errcode_t;
 
 **使用说明**
 
-- 本模块全部 `errcode_t` 返回值接口（[uapi_adc_init](#uapi_adc_init)、[uapi_adc_deinit](#uapi_adc_deinit)、[uapi_adc_open_channel](#uapi_adc_open_channel)、[uapi_adc_close_channel](#uapi_adc_close_channel)、[uapi_adc_open_differential_channel](#uapi_adc_open_differential_channel)、[uapi_adc_close_differential_channel](#uapi_adc_close_differential_channel)、[uapi_adc_auto_scan_ch_enable](#uapi_adc_auto_scan_ch_enable)、[uapi_adc_auto_scan_ch_disable](#uapi_adc_auto_scan_ch_disable)）的返回值类型 
+- 本模块返回类型为 errcode_t 的对外接口的返回值类型
 ## Enumerations
 
 ### enum_adc_clock <a id="enum_adc_clock"></a>
@@ -713,26 +566,26 @@ typedef struct adc_scan_config {
 
 ## Macros
 
-### ERRCODE_ADC_INVALID_PARAMETER <a id="ERRCODE_ADC_INVALID_PARAMETER"></a> [SDK公共共享宏]
+### ERRCODE_ADC_INVALID_PARAMETER <a id="ERRCODE_ADC_INVALID_PARAMETER"></a>
 
 ```c
-#define ERRCODE_ADC_INVALID_PARAMETER                                0x80001141
+#define ERRCODE_ADC_INVALID_PARAMETER                       0x80001141
 ```
 
-### ERRCODE_ADC_SCAN_NOT_DISABLE <a id="ERRCODE_ADC_SCAN_NOT_DISABLE"></a> [SDK公共共享宏]
+### ERRCODE_ADC_SCAN_NOT_DISABLE <a id="ERRCODE_ADC_SCAN_NOT_DISABLE"></a>
 
 ```c
-#define ERRCODE_ADC_SCAN_NOT_DISABLE                                 0x80001142
+#define ERRCODE_ADC_SCAN_NOT_DISABLE                        0x80001142
 ```
 
-### ERRCODE_PWM_NOT_POWER_ON <a id="ERRCODE_PWM_NOT_POWER_ON"></a> [SDK公共共享宏]
+### ERRCODE_PWM_NOT_POWER_ON <a id="ERRCODE_PWM_NOT_POWER_ON"></a>
 
 ```c
-#define ERRCODE_PWM_NOT_POWER_ON                                     0x80001084
+#define ERRCODE_PWM_NOT_POWER_ON                            0x80001084
 ```
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
-#define ERRCODE_SUCC                                                 0UL
+#define ERRCODE_SUCC                                        0UL
 ```

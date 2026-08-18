@@ -43,7 +43,7 @@ errcode_t uapi_drv_km_init(void)
 **功能说明**
 
 - 初始化 KM (Key Manager) 模块运行所需的内部资源与状态
-- 完成模块底层初始化，使后续 Keyslot、KLAD (Key Ladder)、KDF (Key Derivation Function) 接口可被调用
+- 初始化成功后本模块 Keyslot、KLAD (Key Ladder)、KDF (Key Derivation Function) 接口方可使用
 - 返回执行结果状态码
 
 **前置条件**
@@ -78,8 +78,8 @@ errcode_t uapi_drv_km_deinit(void)
 
 **功能说明**
 
-- 去初始化 KM 模块，释放初始化阶段占用的内部资源
-- 与 uapi_drv_km_init 配对使用，恢复模块至未初始化状态
+- 去初始化 KM 模块，释放初始化阶段占用的资源
+- 恢复模块至未初始化状态（与 uapi_drv_km_init 配对使用）
 - 返回执行结果状态码
 
 **前置条件**
@@ -306,7 +306,7 @@ errcode_t uapi_drv_klad_attach(uint32_t klad_handle, uapi_drv_klad_dest_t klad_t
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | klad_handle | uint32_t | 要关联的 Key Ladder 通道句柄 | 由 uapi_drv_klad_create 返回的有效句柄 |
-| klad_type | [uapi_drv_klad_dest_t](#enum_uapi_drv_klad_dest_t) | klad 目标模块类型 | UAPI_DRV_KLAD_DEST_MCIPHER(0) / UAPI_DRV_KLAD_DEST_HMAC(1) / UAPI_DRV_KLAD_DEST_FLASH(2) / UAPI_DRV_KLAD_DEST_NPU(3) / UAPI_DRV_KLAD_DEST_AIDSP(4) |
+| klad_type | [uapi_drv_klad_dest_t](#enum_uapi_drv_klad_dest_t) | klad 目标模块类型 | [UAPI_DRV_KLAD_DEST_MCIPHER](#enum_uapi_drv_klad_dest_t):0 / [UAPI_DRV_KLAD_DEST_HMAC](#enum_uapi_drv_klad_dest_t):1 / [UAPI_DRV_KLAD_DEST_FLASH](#enum_uapi_drv_klad_dest_t):2 / [UAPI_DRV_KLAD_DEST_NPU](#enum_uapi_drv_klad_dest_t):3 / [UAPI_DRV_KLAD_DEST_AIDSP](#enum_uapi_drv_klad_dest_t):4 / [UAPI_DRV_KLAD_DEST_MAX](#enum_uapi_drv_klad_dest_t):5 |
 | keyslot_handle | uint32_t | 要关联的 keyslot 通道句柄 | 由 uapi_drv_keyslot_create 返回的有效句柄 |
 
 **返回值**
@@ -351,7 +351,7 @@ errcode_t uapi_drv_klad_detach(uint32_t klad_handle, uapi_drv_klad_dest_t klad_t
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | klad_handle | uint32_t | 要解关联的 Key Ladder 通道句柄 | 由 uapi_drv_klad_create 返回的有效句柄 |
-| klad_type | [uapi_drv_klad_dest_t](#enum_uapi_drv_klad_dest_t) | klad 目标模块类型 | UAPI_DRV_KLAD_DEST_MCIPHER(0) / UAPI_DRV_KLAD_DEST_HMAC(1) / UAPI_DRV_KLAD_DEST_FLASH(2) / UAPI_DRV_KLAD_DEST_NPU(3) / UAPI_DRV_KLAD_DEST_AIDSP(4) |
+| klad_type | [uapi_drv_klad_dest_t](#enum_uapi_drv_klad_dest_t) | klad 目标模块类型 | [UAPI_DRV_KLAD_DEST_MCIPHER](#enum_uapi_drv_klad_dest_t):0 / [UAPI_DRV_KLAD_DEST_HMAC](#enum_uapi_drv_klad_dest_t):1 / [UAPI_DRV_KLAD_DEST_FLASH](#enum_uapi_drv_klad_dest_t):2 / [UAPI_DRV_KLAD_DEST_NPU](#enum_uapi_drv_klad_dest_t):3 / [UAPI_DRV_KLAD_DEST_AIDSP](#enum_uapi_drv_klad_dest_t):4 / [UAPI_DRV_KLAD_DEST_MAX](#enum_uapi_drv_klad_dest_t):5 |
 | keyslot_handle | uint32_t | 要解关联的 keyslot 通道句柄 | 由 uapi_drv_keyslot_create 返回的有效句柄 |
 
 **返回值**
@@ -404,7 +404,7 @@ errcode_t uapi_drv_klad_set_attr(uint32_t klad_handle, const uapi_drv_klad_attr_
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | 属性设置成功 |
-| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | attr 为 NULL |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | attr 为 NULL |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设置失败 |
 
 **参考案例**
@@ -454,7 +454,7 @@ errcode_t uapi_drv_klad_get_attr(uint32_t klad_handle, uapi_drv_klad_attr_t *att
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | 属性获取成功 |
-| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | attr 为 NULL |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | attr 为 NULL |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 获取失败 |
 
 ### uapi_drv_klad_set_effective_key <a id="uapi_drv_klad_set_effective_key"></a>
@@ -494,8 +494,8 @@ errcode_t uapi_drv_klad_set_effective_key(uint32_t klad_handle, const uapi_drv_k
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | 硬件派生密钥设置成功 |
-| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | key 为 NULL |
-| ERRCODE_FAIL:0xFFFFFFFF | 执行失败 | salt 拷贝失败 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | key 为 NULL |
+| [ERRCODE_FAIL](#ERRCODE_FAIL):0xFFFFFFFF | 执行失败 | salt 拷贝失败 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设置失败 |
 
 **参考案例**
@@ -539,8 +539,8 @@ errcode_t uapi_drv_klad_set_clear_key(uint32_t klad_handle, const uapi_drv_klad_
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | 明文密钥设置成功 |
-| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | key 为 NULL |
-| ERRCODE_FAIL:0xFFFFFFFF | 执行失败 | 明文密钥拷贝失败 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | key 为 NULL |
+| [ERRCODE_FAIL](#ERRCODE_FAIL):0xFFFFFFFF | 执行失败 | 明文密钥拷贝失败 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设置失败 |
 
 **参考案例**
@@ -648,7 +648,7 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| UAPI_DRV_KDF_UPDATE_ALG_AES | 0 | KDF 密钥派生使用 AES 对称算法 |
+| UAPI_DRV_KDF_UPDATE_ALG_AES | 0 | KDF 密钥派生使用 AES (Advanced Encryption Standard) 对称算法 |
 | UAPI_DRV_KDF_UPDATE_ALG_SM4 | 1 | KDF 密钥派生使用 SM4 对称算法 |
 
 ### enum_uapi_drv_kdf_hard_key_type_t <a id="enum_uapi_drv_kdf_hard_key_type_t"></a>
@@ -693,7 +693,7 @@ typedef enum {
 | UAPI_DRV_KDF_HARD_KEY_TYPE_ABRK2 | 0x03000005 | 动态启动根密钥 2 |
 | UAPI_DRV_KDF_HARD_KEY_TYPE_DRK0 | 0x03000006 | 设备根密钥 0 |
 | UAPI_DRV_KDF_HARD_KEY_TYPE_DRK1 | 0x03000007 | 设备根密钥 1 |
-| UAPI_DRV_KDF_HARD_KEY_TYPE_RDRK0 | 0x03000008 | REE 设备根密钥 0 |
+| UAPI_DRV_KDF_HARD_KEY_TYPE_RDRK0 | 0x03000008 | REE (Rich Execution Environment) 设备根密钥 0 |
 | UAPI_DRV_KDF_HARD_KEY_TYPE_RDRK1 | 0x03000009 | REE 设备根密钥 1 |
 | UAPI_DRV_KDF_HARD_KEY_TYPE_PSK | 0x0300000A | 预共享密钥 |
 | UAPI_DRV_KDF_HARD_KEY_TYPE_FDRK0 | 0x0300000B | Flash 设备根密钥 0 |
@@ -723,7 +723,7 @@ typedef enum {
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
 | UAPI_DRV_KDF_HARD_ALG_SHA256 | 0 | 硬件 PBKDF2 算法使用 SHA256 |
-| UAPI_DRV_KDF_HARD_ALG_SM3 | 1 | 硬件 PBKDF2 算法使用 SM3 |
+| UAPI_DRV_KDF_HARD_ALG_SM3 | 1 | 硬件 PBKDF2 (Password-Based Key Derivation Function 2) 算法使用 SM3 哈希算法 |
 | UAPI_DRV_KDF_HARD_ALG_MAX | 2 | 算法类型上限，无效值 |
 
 ### enum_uapi_drv_kdf_master_key_type <a id="enum_uapi_drv_kdf_master_key_type"></a>
@@ -787,28 +787,9 @@ typedef enum {
 | UAPI_DRV_KLAD_DEST_MCIPHER | 0 | 目标为对称加解密模块 |
 | UAPI_DRV_KLAD_DEST_HMAC | 1 | 目标为 HMAC 模块 |
 | UAPI_DRV_KLAD_DEST_FLASH | 2 | 目标为 Flash 在线解密模块 |
-| UAPI_DRV_KLAD_DEST_NPU | 3 | 目标为 NPU 模块 |
+| UAPI_DRV_KLAD_DEST_NPU | 3 | 目标为 NPU (Neural Processing Unit) 模块 |
 | UAPI_DRV_KLAD_DEST_AIDSP | 4 | 目标为 AIDSP 模块 |
 | UAPI_DRV_KLAD_DEST_MAX | 5 | 目标模块类型上限，无效值 |
-
-### enum_uapi_drv_klad_flash_key_type_t <a id="enum_uapi_drv_klad_flash_key_type_t"></a>
-
-```c
-// 源码原始定义，无修改、无补充
-typedef enum {
-    UAPI_DRV_KLAD_FLASH_KEY_TYPE_REE_DEC = 0x00,  /* REE flash online decryption key */
-    UAPI_DRV_KLAD_FLASH_KEY_TYPE_TEE_DEC,         /* TEE flash online decryption key */
-    UAPI_DRV_KLAD_FLASH_KEY_TYPE_TEE_AUT,         /* TEE flash online authentication key */
-    UAPI_DRV_KLAD_FLASH_KEY_TYPE_INVALID,
-} uapi_drv_klad_flash_key_type_t;
-```
-
-| 枚举成员 | 取值 | 描述 |
-| ------- | ---- | ---- |
-| UAPI_DRV_KLAD_FLASH_KEY_TYPE_REE_DEC | 0x00 | REE Flash 在线解密密钥 |
-| UAPI_DRV_KLAD_FLASH_KEY_TYPE_TEE_DEC | 0x01 | TEE Flash 在线解密密钥 |
-| UAPI_DRV_KLAD_FLASH_KEY_TYPE_TEE_AUT | 0x02 | TEE Flash 在线鉴权密钥 |
-| UAPI_DRV_KLAD_FLASH_KEY_TYPE_INVALID | 0x03 | 无效 Flash 密钥类型 |
 
 ### enum_uapi_drv_klad_key_size_t <a id="enum_uapi_drv_klad_key_size_t"></a>
 
@@ -991,8 +972,20 @@ typedef struct {
 
 ## Macros
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC                                        0UL
+```
+
+### ERRCODE_FAIL <a id="ERRCODE_FAIL"></a>
+
+```c
+#define ERRCODE_FAIL                                        0xFFFFFFFF
+```
+
+### ERRCODE_INVALID_PARAM <a id="ERRCODE_INVALID_PARAM"></a>
+
+```c
+#define ERRCODE_INVALID_PARAM                               0x80000001
 ```
