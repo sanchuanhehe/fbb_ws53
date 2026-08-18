@@ -1,6 +1,6 @@
 ---
-name: "文档问题"
-about: "反馈文档中的错误、缺失或改进建议"
+name: 文档问题
+about: 反馈文档中的错误、缺失或改进建议
 title: "[DOC] "
 labels: ["documentation"]
 ---
