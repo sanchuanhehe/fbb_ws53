@@ -39,8 +39,15 @@ nav:
   - 概览: zh-CN/index.md
   - 整体架构:
       - 整体架构: zh-CN/overall-architecture/index.md
-      - 源码结构: zh-CN/overall-architecture/source-tree/index.md
+      - 软件架构介绍: zh-CN/overall-architecture/software-introduction.md
+      - 目录结构: zh-CN/overall-architecture/source-tree/index.md
       - 构建系统: zh-CN/overall-architecture/build-system/index.md
+      - 内核与 OSAL:
+          - OSAL 抽象层: zh-CN/overall-architecture/kernel/os-abstract.md
+          - LiteOS: zh-CN/overall-architecture/kernel/liteos.md
+      - 启动流程: zh-CN/overall-architecture/boot-flow/index.md
+      - 运行时架构: zh-CN/overall-architecture/runtime-architecture/index.md
+      - 内存布局: zh-CN/overall-architecture/memory-layout/index.md
   - 快速入门:
       - 快速入门: zh-CN/get-started/index.md
       - 环境搭建: zh-CN/get-started/environment-setup.md
