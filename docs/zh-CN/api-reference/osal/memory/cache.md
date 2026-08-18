@@ -1,4 +1,4 @@
-# Cache
+# cache
 
 cache 模块提供 DCache (Data Cache) 维护接口，作为 OSAL (OS Abstract Layer) 的组成部分，支持按内存区域执行 DCache 回写、失效与清理操作，覆盖 linux、liteos、seliteos 系统。
 
@@ -42,11 +42,22 @@ void osal_dcache_region_wb(void *kvirt, unsigned long phys_addr, unsigned long s
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | kvirt | void * | 内核虚拟地址指针 | 非NULL指针，指向有效内存区域 |
 | phys_addr | unsigned long | 需要回写的起始物理地址 | 有效物理地址；当MMU不存在时需确保有效，若为0则使用kvirt的地址值 |
 | size | unsigned long | 需要回写的内存大小（字节） | 大于0 |
+
+**参考案例**
+
+- `src/middleware/utils/update/common/upg_verify.c`
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| OSAL_API_SUPPORT_DCACHE | 特性宏 | linux 实现体由 #ifdef 包裹，无前缀注入宏（接口级） | 由构建目标决定 |
+| LOSCFG_ARCH_ARM_CORTEX_A | 特性宏 | liteos 实现内部分支宏（分支级） | 由构建目标决定 |
 
 ### osal_dcache_region_inv <a id="osal_dcache_region_inv"></a>
 
@@ -72,10 +83,17 @@ void osal_dcache_region_inv(void *addr, unsigned long size)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | addr | void * | 需要无效的起始地址 | 非NULL指针，指向有效内存区域 |
 | size | unsigned long | 需要无效的内存大小（字节） | 大于0 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| OSAL_API_SUPPORT_DCACHE | 特性宏 | linux 实现体由 #ifdef 包裹，无前缀注入宏（接口级） | 由构建目标决定 |
+| LOSCFG_ARCH_ARM_CORTEX_A | 特性宏 | liteos 实现内部分支宏（分支级） | 由构建目标决定 |
 
 ### osal_dcache_region_clean <a id="osal_dcache_region_clean"></a>
 
@@ -101,7 +119,13 @@ void osal_dcache_region_clean(void *addr, unsigned int size)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | addr | void * | 需要清除的起始地址 | 非NULL指针，指向有效内存区域 |
 | size | unsigned int | 需要清除的内存大小（字节） | 大于0 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| LOSCFG_ARCH_ARM_CORTEX_A | 特性宏 | liteos 实现内部分支宏（分支级） | 由构建目标决定 |

@@ -57,6 +57,7 @@ int osal_event_init(osal_event *event_obj)
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 事件控制块初始化成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 执行失败 | event_obj 为 NULL、event 成员非 NULL 或内存分配失败 |
+| Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
 
 **参考案例**
 
@@ -100,6 +101,7 @@ int osal_event_write(osal_event *event_obj, unsigned int mask)
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 事件写入成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 执行失败 | event_obj 为 NULL 或 mask 使用了 bit 31 |
+| Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
 
 **参考案例**
 
@@ -145,6 +147,7 @@ int osal_event_read(osal_event *event_obj, unsigned int mask, unsigned int timeo
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 事件读取成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 执行失败 | event_obj 为 NULL 或 mask 使用了 bit 31 |
+| Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
 
 **参考案例**
 
@@ -188,6 +191,7 @@ int osal_event_clear(osal_event *event_obj, unsigned int mask)
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 事件清除成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 执行失败 | event_obj 为 NULL |
+| Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
 
 **参考案例**
 
@@ -230,6 +234,7 @@ int osal_event_destroy(osal_event *event_obj)
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 事件控制块销毁成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 执行失败 | event_obj 为 NULL |
+| Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
 
 **参考案例**
 
@@ -277,13 +282,13 @@ typedef struct {
 #define OSAL_WAITMODE_CLR 1U
 ```
 
-### OSAL_SUCCESS <a id="OSAL_SUCCESS"></a> [SDK公共共享宏]
+### OSAL_SUCCESS <a id="OSAL_SUCCESS"></a>
 
 ```c
 #define OSAL_SUCCESS 0
 ```
 
-### OSAL_FAILURE <a id="OSAL_FAILURE"></a> [SDK公共共享宏]
+### OSAL_FAILURE <a id="OSAL_FAILURE"></a>
 
 ```c
 #define OSAL_FAILURE (-1)

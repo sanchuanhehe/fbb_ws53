@@ -49,7 +49,7 @@ errcode_t enable_sle(void)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 使能请求成功发起 |
-| Other | 失败。参考 errcode_t | 使能请求发起失败 |
+| Other | 失败，参考 [errcode_t](#typedef_errcode_t) | 使能请求发起失败 |
 
 **参考案例**
 
@@ -88,7 +88,7 @@ errcode_t disable_sle(void)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 去使能请求成功发起 |
-| Other | 失败。参考 errcode_t | 去使能请求发起失败 |
+| Other | 失败，参考 [errcode_t](#typedef_errcode_t) | 去使能请求发起失败 |
 
 ### sle_dev_manager_register_callbacks <a id="sle_dev_manager_register_callbacks"></a>
 
@@ -179,6 +179,26 @@ SLE 协议栈去使能完成事件触发的回调函数指针类型，回调在 
 - 调用时机：SLE 协议栈去使能流程完成时由 SLE service 调用
 - 参数语义：`status` 为去使能状态，取值参考 `sle_enable_disable_status_t`
 - 返回值处理：返回类型为 void，无返回值；回调中不应阻塞或长时间等待
+
+## Type definitions
+
+### typedef_errcode_t <a id="typedef_errcode_t"></a>
+
+```c
+typedef uint32_t errcode_t;
+```
+
+**使用说明**
+
+本模块返回类型为 errcode_t 的对外接口的返回值类型。
+
+## Macros
+
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
+
+```c
+#define ERRCODE_SUCC                                        0UL
+```
 
 ## Structures
 

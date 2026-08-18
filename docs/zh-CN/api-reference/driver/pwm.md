@@ -1,6 +1,6 @@
 # PWM
 
-PWM (Pulse Width Modulation) 提供脉冲宽度调制信号的生成与管理功能，支持多通道配置、占空比与周期设置、通道分组以及完成中断回调。模块支持 V150 与 V151 两套 HAL 实现，V151 额外提供通道分组、配置更新与预加载能力，并支持低功耗场景下的挂起与恢复。
+PWM (Pulse Width Modulation) 提供脉冲宽度调制信号的生成与管理功能，支持多通道配置、占空比与周期设置、通道分组以及完成中断回调，并支持低功耗场景下的挂起与恢复。
 
 **模块公共头文件**
 
@@ -12,7 +12,7 @@ PWM (Pulse Width Modulation) 提供脉冲宽度调制信号的生成与管理功
 
 | 接口名称 | 功能简述 |
 | -------- | -------- |
-| [uapi_pwm_init](#uapi_pwm_init) | 初始化 PWM 驱动，注册 HAL 函数表并使能时钟 |
+| [uapi_pwm_init](#uapi_pwm_init) | 初始化 PWM 驱动，注册 HAL (Hardware Abstraction Layer) 函数表并使能时钟 |
 | [uapi_pwm_deinit](#uapi_pwm_deinit) | 反初始化 PWM 驱动，关闭已打开通道并注销 HAL 函数表 |
 | [uapi_pwm_open](#uapi_pwm_open) | 以指定配置打开一个 PWM 通道 |
 | [uapi_pwm_close](#uapi_pwm_close) | 关闭指定 PWM 通道并注销其中断回调 |
@@ -48,9 +48,9 @@ errcode_t uapi_pwm_init(void)
 
 **功能说明**
 
-- 初始化 PWM 驱动模块，注册底层 HAL 函数表
-- 使能 PWM 外设时钟并执行底层硬件初始化
+- 初始化 PWM 驱动模块
 - 已初始化时重复调用直接返回成功，不重复执行初始化动作
+- 初始化成功后本模块其他接口方可使用
 
 **前置条件**
 
@@ -158,7 +158,7 @@ errcode_t uapi_pwm_close(uint8_t channel)
 
 - 关闭指定 PWM 通道，停止其信号输出
 - 注销该通道的完成中断回调并标记通道为未打开状态
-- 在 V151 实现下，按通道所属分组执行停止动作以避免影响同组其他通道
+- 按通道所属分组执行停止动作，避免影响同组其他通道（仅 V151）
 
 **前置条件**
 
@@ -314,7 +314,7 @@ errcode_t uapi_pwm_stop(uint8_t channel)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_PWM_USING_V150 | 特性宏 | 支持 PWM V150 停止通道功能（接口级） | n |
+| CONFIG_PWM_USING_V150 | 特性宏 | 支持 PWM V150 停止通道功能（接口级） | y |
 
 ### uapi_pwm_update_duty_ratio <a id="uapi_pwm_update_duty_ratio"></a>
 
@@ -363,7 +363,7 @@ errcode_t uapi_pwm_update_duty_ratio(uint8_t channel, uint32_t low_time, uint32_
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_PWM_USING_V150 | 特性宏 | 支持 PWM V150 占空比更新功能（接口级） | n |
+| CONFIG_PWM_USING_V150 | 特性宏 | 支持 PWM V150 占空比更新功能（接口级） | y |
 
 ### uapi_pwm_isr <a id="uapi_pwm_isr"></a>
 
@@ -601,7 +601,7 @@ errcode_t uapi_pwm_start_group(uint8_t group)
 **功能说明**
 
 - 启动指定分组中全部 PWM 通道的信号输出
-- 仅触发启动动作，要求分组内通道已通过 `uapi_pwm_open` 配置并通过 `uapi_pwm_set_group` 归入该分组
+- 通过通道所属分组下发启动动作，保证分组内通道同步控制
 - 仅对 V151 HAL 实现可用
 
 **前置条件**
@@ -847,8 +847,8 @@ errcode_t uapi_pwm_resume(uintptr_t arg)
 **功能说明**
 
 - 恢复 PWM 驱动，作为低功耗管理框架的恢复钩子
-- 内部重新执行 `uapi_pwm_init` 并按挂起前记录的配置重新打开已打开的通道
-- 同步恢复中断注册状态与 V151 分组配置（若启用）
+- 按挂起前记录的配置恢复已打开的通道
+- 恢复中断注册状态与通道分组配置
 - 仅在启用 PWM 低功耗支持特性时可用
 
 **前置条件**
@@ -902,7 +902,8 @@ typedef uint32_t errcode_t;
 
 **使用说明**
 
-- 作为本模块全部对外接口（除 `uapi_pwm_deinit` 返回 void、`uapi_pwm_get_frequency` 返回 uint32_t 外）的返回类型，表示接口执行结果 
+本模块返回类型为 errcode_t 的对外接口的返回值类型。
+
 ## Structures
 
 ### struct_pwm_config <a id="struct_pwm_config"></a>
@@ -957,19 +958,13 @@ typedef struct pwm_config {
 #define ERRCODE_PWM_REG_ADDR_INVALID                        0x80001083
 ```
 
-### ERRCODE_PWM_NOT_POWER_ON <a id="ERRCODE_PWM_NOT_POWER_ON"></a>
-
-```c
-#define ERRCODE_PWM_NOT_POWER_ON                            0x80001084
-```
-
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC                                        0UL
 ```
 
-### ERRCODE_FAIL <a id="ERRCODE_FAIL"></a> [SDK公共共享宏]
+### ERRCODE_FAIL <a id="ERRCODE_FAIL"></a>
 
 ```c
 #define ERRCODE_FAIL                                        0xFFFFFFFF

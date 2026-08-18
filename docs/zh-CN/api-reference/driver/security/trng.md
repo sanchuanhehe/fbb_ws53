@@ -33,7 +33,11 @@ errcode_t uapi_drv_cipher_trng_get_random(uint32_t *randnum)
 
 - 获取单个 uint32_t（4 字节）大小的硬件随机数
 - 将生成的随机数写入调用方提供的缓冲区
-- 用于需要单个随机数的场景；如需其他大小可循环调用本接口
+- 用于需要单个随机数的场景
+
+**前置条件**
+
+- 调用时序约束：TRNG 驱动完成初始化后调用，未初始化时接口返回错误
 
 **出参**
 
@@ -72,6 +76,10 @@ errcode_t uapi_drv_cipher_trng_get_random_bytes(uint8_t *randnum, uint32_t size)
 - 将生成的随机字节序列写入调用方提供的缓冲区
 - 用于需要任意长度随机数据的场景
 
+**前置条件**
+
+- 调用时序约束：TRNG 驱动完成初始化后调用，未初始化时接口返回错误
+
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
@@ -100,7 +108,8 @@ errcode_t uapi_drv_cipher_trng_get_random_bytes(uint8_t *randnum, uint32_t size)
 
 ## Type definitions
 
-### errcode_t <a id="typedef_errcode_t"></a> 
+### errcode_t <a id="typedef_errcode_t"></a>
+
 ```c
 typedef uint32_t errcode_t;
 ```
@@ -108,9 +117,10 @@ typedef uint32_t errcode_t;
 **使用说明**
 
 本模块两个接口的返回值类型，用于表示接口执行结果。
+
 ## Macros
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC                                        0UL

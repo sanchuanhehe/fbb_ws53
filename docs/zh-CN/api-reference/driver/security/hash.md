@@ -66,7 +66,7 @@ errcode_t uapi_drv_cipher_sha256_start(uint32_t *hash_handle)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 编译参与宏 | 控制 security_unified 模块参与编译 | n |
+| CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持哈希计算接口功能（宏在构建系统中无引用，按特性宏归类） | n |
 
 ### uapi_drv_cipher_sha256_update <a id="uapi_drv_cipher_sha256_update"></a>
 
@@ -117,7 +117,7 @@ errcode_t uapi_drv_cipher_sha256_update(uint32_t hash_handle, const uint8_t *buf
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 编译参与宏 | 控制 security_unified 模块参与编译 | n |
+| CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持哈希计算接口功能（宏在构建系统中无引用，按特性宏归类） | n |
 
 ### uapi_drv_cipher_sha256_finish <a id="uapi_drv_cipher_sha256_finish"></a>
 
@@ -173,7 +173,7 @@ errcode_t uapi_drv_cipher_sha256_finish(uint32_t hash_handle, uint8_t *out, uint
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 编译参与宏 | 控制 security_unified 模块参与编译 | n |
+| CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持哈希计算接口功能（宏在构建系统中无引用，按特性宏归类） | n |
 
 ### uapi_drv_cipher_sha256 <a id="uapi_drv_cipher_sha256"></a>
 
@@ -190,7 +190,7 @@ errcode_t uapi_drv_cipher_sha256(const uint8_t *buf, uint32_t len, uint8_t *out,
 **功能说明**
 
 - 对一段完整数据一次性完成 SHA-256 计算并输出摘要。
-- 内部封装 start/update/finish 流程，调用方无需自行管理通道句柄。
+- 调用方无需自行管理通道句柄。
 - 摘要固定写入 32 字节。
 
 **前置条件**
@@ -205,8 +205,13 @@ errcode_t uapi_drv_cipher_sha256(const uint8_t *buf, uint32_t len, uint8_t *out,
 | ---- | ---- | ---- | ---- |
 | buf | const uint8_t * | 待计算摘要的源数据缓冲区指针 | 不为NULL |
 | len | uint32_t | 待计算摘要的源数据缓冲区大小，单位字节 | 0 ~ 0xFFFFFFFF |
-| out | uint8_t * | 由调用方分配的摘要缓冲区地址指针，用于存储计算得到的摘要 | 不为NULL |
-| out_len | uint32_t | 存储摘要的缓冲区容量，单位字节；实际写入固定为 32 字节摘要 | [SHA256_HASH_SIZE](#SHA256_HASH_SIZE)(32) |
+| out_len | uint32_t | 存储摘要的缓冲区容量，单位字节；实际写入固定为 32 字节摘要 | [SHA256_HASH_SIZE](#SHA256_HASH_SIZE):32 |
+
+**出参**
+
+| 名称 | 数据类型 | 输出说明 |
+| ---- | ---- | ---- |
+| out | uint8_t * | 计算得到的 32 字节摘要，由函数写入调用方分配的缓冲区 |
 
 **返回值**
 
@@ -222,20 +227,20 @@ errcode_t uapi_drv_cipher_sha256(const uint8_t *buf, uint32_t len, uint8_t *out,
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 编译参与宏 | 控制 security_unified 模块参与编译 | n |
+| CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持哈希计算接口功能（宏在构建系统中无引用，按特性宏归类） | n |
 
 ## Type definitions
 
 ### typedef_errcode_t <a id="typedef_errcode_t"></a>
 
 ```c
-// SDK公共基础类型定义
 typedef uint32_t errcode_t;
 ```
 
 **使用说明**
 
-被本模块全部对外接口（uapi_drv_cipher_sha256_start、uapi_drv_cipher_sha256_update、uapi_drv_cipher_sha256_finish、uapi_drv_cipher_sha256）的返回值类型直接使用。
+本模块返回类型为 errcode_t 的对外接口的返回值类型。
+
 ## Macros
 
 ### SHA256_HASH_SIZE <a id="SHA256_HASH_SIZE"></a>

@@ -945,7 +945,7 @@ errcode_t sle_set_save_pair_keys_mode(uint8_t is_available)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| is_available | uint8_t | 配对密钥保存模式 | [SLE_SAVE_SMP_KEYS_AUTO](#enum_sle_save_smp_keys_mode_switch_t)(0x00) / [SLE_SAVE_SMP_KEYS_MANU](#enum_sle_save_smp_keys_mode_switch_t)(0x01) |
+| is_available | uint8_t | 配对密钥保存模式 | [SLE_SAVE_SMP_KEYS_AUTO](#enum_sle_save_smp_keys_mode_switch_t):0x00 / [SLE_SAVE_SMP_KEYS_MANU](#enum_sle_save_smp_keys_mode_switch_t):0x01 |
 
 **返回值**
 
@@ -1353,7 +1353,7 @@ errcode_t sle_set_announce_data(uint8_t announce_id, const sle_announce_data_t *
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX)(16) |
+| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX):16 |
 | data | [sle_announce_data_t](#struct_sle_announce_data_t) * | 设备公开数据 | 不为NULL |
 
 **返回值**
@@ -1396,7 +1396,7 @@ errcode_t sle_remove_announce(uint8_t announce_id)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX)(16) |
+| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX):16 |
 
 **返回值**
 
@@ -1434,7 +1434,7 @@ errcode_t sle_set_announce_param(uint8_t announce_id, const sle_announce_param_t
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX)(16) |
+| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX):16 |
 | param | [sle_announce_param_t](#struct_sle_announce_param_t) * | 设备公开参数 | 不为NULL |
 
 **返回值**
@@ -1478,7 +1478,7 @@ errcode_t sle_start_announce(uint8_t announce_id)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX)(16) |
+| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX):16 |
 
 **返回值**
 
@@ -1522,7 +1522,7 @@ errcode_t sle_stop_announce(uint8_t announce_id)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX)(16) |
+| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX):16 |
 
 **返回值**
 
@@ -1574,7 +1574,6 @@ errcode_t sle_set_seek_param(sle_seek_param_t *param)
 **参考案例**
 
 - `application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
-
 
 
 ### sle_start_seek <a id="sle_start_seek"></a>
@@ -2057,7 +2056,7 @@ typedef uint32_t errcode_t;
 
 **使用说明**
 
-本模块对外接口的返回值类型，表示接口执行结果错误码。[SDK公共基础类型]
+本模块对外接口的返回值类型，表示接口执行结果错误码。
 
 ## Enumerations
 
@@ -2379,62 +2378,6 @@ typedef enum {
 | SLE_SEEK_FILTER_ALLOW_ALL | 0x00 | 允许来自任何人的设备发现数据包 |
 | SLE_SEEK_FILTER_ALLOW_WLST | 0x01 | 允许来自白名单设备的设备发现数据包，预留 |
 
-### sle_mcs_t <a id="enum_sle_mcs_t"></a>
-
-```c
-typedef enum {
-    SLE_MCS_00 = 0,
-    SLE_MCS_01,
-    SLE_MCS_02,
-    SLE_MCS_03,
-    SLE_MCS_04,
-    SLE_MCS_05,
-    SLE_MCS_06,
-    SLE_MCS_07,
-    SLE_MCS_08,
-    SLE_MCS_09,
-    SLE_MCS_10,
-    SLE_MCS_11,
-    SLE_MCS_12,
-    SLE_MCS_MAX,
-} sle_mcs_t;
-```
-
-| 枚举成员 | 取值 | 描述 |
-| ------- | ---- | ---- |
-| SLE_MCS_00 | 0 | MCS0: BPSK1/4 |
-| SLE_MCS_01 | 1 | MCS1: BPSK3/8 |
-| SLE_MCS_02 | 2 | MCS2: QPSK1/4 |
-| SLE_MCS_03 | 3 | MCS3: QPSK3/8 |
-| SLE_MCS_04 | 4 | MCS4: QPSK1/2 |
-| SLE_MCS_05 | 5 | MCS5: QPSK5/8 |
-| SLE_MCS_06 | 6 | MCS6: QPSK3/4 |
-| SLE_MCS_07 | 7 | MCS7: QPSK7/8 |
-| SLE_MCS_08 | 8 | MCS8: QPSK 1 |
-| SLE_MCS_09 | 9 | MCS9: 8PSK5/8 |
-| SLE_MCS_10 | 10 | MCS10: 8PSK3/4 |
-| SLE_MCS_11 | 11 | MCS11: 8PSK7/8 |
-| SLE_MCS_12 | 12 | MCS12: 8PSK 1 |
-| SLE_MCS_MAX | 13 | MCS 最大值 |
-
-### sle_filter_policy_t <a id="enum_sle_filter_policy_t"></a>
-
-```c
-typedef enum {
-    SLE_ANNOUNCE_FLT_ANY_SEEK_ANY_CONNECT,
-    SLE_ANNOUNCE_FLT_WHITE_SEEK_ANY_CONNECT,
-    SLE_ANNOUNCE_FLT_ANY_SEEK_WHITE_CONNECT,
-    SLE_ANNOUNCE_FLT_WHITE_SEEK_WHITE_CONNECT
-} sle_filter_policy_t;
-```
-
-| 枚举成员 | 取值 | 描述 |
-| ------- | ---- | ---- |
-| SLE_ANNOUNCE_FLT_ANY_SEEK_ANY_CONNECT | 0 | 接受所有 seek_req/conn_req |
-| SLE_ANNOUNCE_FLT_WHITE_SEEK_ANY_CONNECT | 1 | 只接受符合过滤器的 seek_req |
-| SLE_ANNOUNCE_FLT_ANY_SEEK_WHITE_CONNECT | 2 | 只接受符合过滤器的 conn_req |
-| SLE_ANNOUNCE_FLT_WHITE_SEEK_WHITE_CONNECT | 3 | 接受符合过滤器的 seek_req/conn_req |
-
 ### sle_link_qos_state_t <a id="enum_sle_link_qos_state_t"></a>
 
 ```c
@@ -2467,7 +2410,7 @@ typedef enum {
 
 **使用说明**
 
-SLE 设备地址类型，作为 [sle_addr_t](#struct_sle_addr_t) 成员 type 的取值。[SDK公共基础类型]
+SLE 设备地址类型，作为 [sle_addr_t](#struct_sle_addr_t) 成员 type 的取值。
 
 ## Structures
 
@@ -2547,7 +2490,7 @@ typedef struct {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| link_key | uint8_t[] | 链路密钥，长度为 [SLE_LINK_KEY_LEN](#SLE_LINK_KEY_LEN)(16) |
+| link_key | uint8_t[] | 链路密钥，长度为 [SLE_LINK_KEY_LEN](#SLE_LINK_KEY_LEN):16 |
 | crypto_algo | uint8_t | 加密算法类型，参考 [sle_crypto_algo_t](#enum_sle_crypto_algo_t) |
 | key_deriv_algo | uint8_t | 秘钥分发算法类型，参考 [sle_key_deriv_algo_t](#enum_sle_key_deriv_algo_t) |
 | integr_chk_ind | uint8_t | 完整性校验指示，参考 [sle_integr_chk_ind_t](#enum_sle_integr_chk_ind_t) |
@@ -2639,30 +2582,6 @@ typedef struct {
 | set_phy_cb | [sle_set_phy_callback](#sle_set_phy_callback) | 设置 PHY 回调函数 |
 | pair_remove_cb | [sle_pair_remove_callback](#sle_pair_remove_callback) | 取消配对完成回调函数 |
 
-### sle_conn_param_t <a id="struct_sle_conn_param_t"></a>
-
-```c
-typedef struct sle_conn_param {
-    uint16_t interval_min;
-    uint16_t interval_max;
-    uint16_t max_latency;
-    uint16_t supervision_timeout;
-    uint16_t min_ce_length;
-    uint16_t max_ce_length;
-} sle_conn_param_t;
-```
-
-**成员说明**
-
-| 成员名称 | 数据类型 | 描述 |
-| ------- | ------- | ---- |
-| interval_min | uint16_t | 连接间隔最小取值，取值范围 [0x001E,0x3E80]，时间 = N * 0.25ms，范围 [7.5ms,4s] |
-| interval_max | uint16_t | 连接间隔最大取值，取值范围 [0x001E,0x3E80]，时间 = N * 0.25ms，范围 [7.5ms,4s] |
-| max_latency | uint16_t | 最大休眠连接间隔，取值范围 [0x0000,0x01F3]，默认 0x0000 |
-| supervision_timeout | uint16_t | 最大超时时间，取值范围 [0x000A,0x0C80]，时间 = N * 10ms，范围 [100ms,32s] |
-| min_ce_length | uint16_t | 推荐的连接事件最小取值，取值范围 [0x0000,0xFFFF]，时间 = N * 0.125ms |
-| max_ce_length | uint16_t | 推荐的连接事件最大取值，取值范围 [0x0000,0xFFFF]，时间 = N * 0.125ms |
-
 ### sle_announce_param_t <a id="struct_sle_announce_param_t"></a>
 
 ```c
@@ -2725,26 +2644,6 @@ typedef struct sle_announce_data {
 | announce_data | uint8_t * | 设备公开数据 |
 | seek_rsp_data | uint8_t * | 扫描响应数据 |
 
-### sle_announce_enable_t <a id="struct_sle_announce_enable_t"></a>
-
-```c
-typedef struct sle_announce_enable {
-    uint8_t enable;
-    uint8_t announce_handle;
-    uint16_t duration;
-    uint8_t max_announce_events;
-} sle_announce_enable_t;
-```
-
-**成员说明**
-
-| 成员名称 | 数据类型 | 描述 |
-| ------- | ------- | ---- |
-| enable | uint8_t | 0x0 表示关闭设备公开，0x1 表示使能设备公开 |
-| announce_handle | uint8_t | 设备公开句柄 |
-| duration | uint16_t | 0x0 表示设备公开时间无限制，0x1~0xFFFF 表示设备公开时间 = N * 10ms |
-| max_announce_events | uint8_t | 0x0 表示设备公开事件个数无限制，0x1~0xFF 表示设备公开事件个数限制 |
-
 ### sle_seek_param_t <a id="struct_sle_seek_param_t"></a>
 
 ```c
@@ -2767,9 +2666,9 @@ typedef struct sle_seek_params {
 | filter_duplicates | uint8_t | 重复过滤开关，0 表示关闭，1 表示开启 |
 | seek_filter_policy | uint8_t | 扫描设备使用的过滤类型，参考 [sle_seek_filter_t](#enum_sle_seek_filter_t) |
 | seek_phys | uint8_t | 扫描设备所使用的 PHY，参考 [sle_seek_phy_t](#enum_sle_seek_phy_t) |
-| seek_type | uint8_t[] | 扫描类型，参考 [sle_seek_type_t](#enum_sle_seek_type_t)，数组大小 [SLE_SEEK_PHY_NUM_MAX](#SLE_SEEK_PHY_NUM_MAX)(3) |
-| seek_interval | uint16_t[] | 扫描间隔，取值范围 [0x0014, 0xFFFF]，时间 = N * 0.125ms，数组大小 [SLE_SEEK_PHY_NUM_MAX](#SLE_SEEK_PHY_NUM_MAX)(3) |
-| seek_window | uint16_t[] | 扫描窗口，取值范围 [0x0014, 0xFFFF]，时间 = N * 0.125ms，数组大小 [SLE_SEEK_PHY_NUM_MAX](#SLE_SEEK_PHY_NUM_MAX)(3) |
+| seek_type | uint8_t[] | 扫描类型，参考 [sle_seek_type_t](#enum_sle_seek_type_t)，数组大小 [SLE_SEEK_PHY_NUM_MAX](#SLE_SEEK_PHY_NUM_MAX):3 |
+| seek_interval | uint16_t[] | 扫描间隔，取值范围 [0x0014, 0xFFFF]，时间 = N * 0.125ms，数组大小 [SLE_SEEK_PHY_NUM_MAX](#SLE_SEEK_PHY_NUM_MAX):3 |
+| seek_window | uint16_t[] | 扫描窗口，取值范围 [0x0014, 0xFFFF]，时间 = N * 0.125ms，数组大小 [SLE_SEEK_PHY_NUM_MAX](#SLE_SEEK_PHY_NUM_MAX):3 |
 
 ### sle_seek_result_info_t <a id="struct_sle_seek_result_info_t"></a>
 
@@ -2881,11 +2780,11 @@ typedef struct {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | type | uint8_t | SLE 设备地址类型，参考 [sle_addr_type_t](#enum_sle_addr_type_t) |
-| addr | unsigned char[] | SLE 设备地址，长度为 [SLE_ADDR_LEN](#SLE_ADDR_LEN)(6) |
+| addr | unsigned char[] | SLE 设备地址，长度为 [SLE_ADDR_LEN](#SLE_ADDR_LEN):6 |
 
 **使用说明**
 
-SLE 设备地址结构，作为本模块多个对外接口的入参/出参载体。[SDK公共基础类型]
+SLE 设备地址结构，作为本模块多个对外接口的入参/出参载体。
 
 ## Macros
 

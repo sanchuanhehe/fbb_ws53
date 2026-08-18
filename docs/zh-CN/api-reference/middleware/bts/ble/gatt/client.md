@@ -46,7 +46,7 @@ errcode_t gattc_register_client(bt_uuid_t *app_uuid, uint8_t *client_id)
 
 **前置条件**
 
-- 调用时序约束：需在 BTS 协议栈初始化完成、BLE 功能就绪后调用
+- 调用时序约束：需在 BTS (Bluetooth Stack) 协议栈初始化完成、BLE 功能就绪后调用
 - 依赖关系：入参 app_uuid 指向由调用方填充的应用 UUID 结构
 
 **入参**
@@ -59,7 +59,7 @@ errcode_t gattc_register_client(bt_uuid_t *app_uuid, uint8_t *client_id)
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| client_id | uint8_t * | 注册成功后由 BTS 填充的客户端 ID |
+| client_id | uint8_t * | 注册成功后由 BTS (Bluetooth Stack) 填充的客户端 ID |
 
 **返回值**
 
@@ -650,7 +650,7 @@ typedef void (*gattc_indication_callback)(uint8_t client_id, uint16_t conn_id, g
 - 参数语义：client_id 为接收指示的客户端 ID；conn_id 为连接 ID；data 指向指示数据（内存由 BTS 申请并在内部释放，回调中不应释放）；status 为执行结果错误码。
 - 返回值处理：回调无返回值。
 
-### errcode_t <a id="typedef_errcode_t"></a> [SDK公共基础类型]
+### errcode_t <a id="typedef_errcode_t"></a>
 
 ```c
 typedef uint32_t errcode_t;
@@ -658,7 +658,7 @@ typedef uint32_t errcode_t;
 
 **使用说明**
 
-本模块所有对外接口的返回值类型，表示接口执行结果的错误码。本类型定义位于 SDK 公共头文件 `errcode.h`，被本模块全部对外接口的返回值直接使用。 [SDK公共基础类型]
+本模块所有对外接口的返回值类型，表示接口执行结果的错误码。本类型定义位于 SDK 公共头文件 `errcode.h`，被本模块全部对外接口的返回值直接使用。
 
 ## Structures
 

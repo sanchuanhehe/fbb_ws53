@@ -34,7 +34,10 @@ errcode_t sle_ota_service_init(uint8_t server_id)
 
 - 初始化 SLE OTA 服务器端，建立升级数据传输所需的服务端运行环境
 - 以入参指定的 server_id 标识本次初始化的 OTA 服务实例
-- 返回执行结果，成功返回 ERRCODE_SUCC，失败返回相应错误码
+
+**前置条件**
+
+- 依赖关系：依赖 sle_ssap_server.h 提供的 SSAP 服务端能力（头文件注释 @par 依赖）
 
 **入参**
 
@@ -49,7 +52,7 @@ errcode_t sle_ota_service_init(uint8_t server_id)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 成功 | 服务器初始化成功 |
-| Other | 其他错误码，参考 errcode_t | 执行失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### sle_ota_data_ack <a id="sle_ota_data_ack"></a>
 
@@ -67,7 +70,10 @@ errcode_t sle_ota_data_ack(uint16_t value_len, uint8_t *value)
 
 - 服务端向对端发送 OTA 数据确认信息
 - 通过入参指定待发送数据的长度与内容
-- 返回执行结果，成功返回 ERRCODE_SUCC，失败返回相应错误码
+
+**前置条件**
+
+- 依赖关系：依赖 sle_ssap_server.h 提供的 SSAP 服务端能力（头文件注释 @par 依赖）
 
 **入参**
 
@@ -83,7 +89,7 @@ errcode_t sle_ota_data_ack(uint16_t value_len, uint8_t *value)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 成功 | 数据确认发送成功 |
-| Other | 其他错误码，参考 errcode_t | 执行失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### sle_ota_reg_chan_data_report_cbk <a id="sle_ota_reg_chan_data_report_cbk"></a>
 
@@ -101,7 +107,7 @@ void sle_ota_reg_chan_data_report_cbk(sle_ota_chan_data_report data_report)
 
 - 注册服务端接收 OTA 升级数据的回调函数
 - 当服务端接收到 OTA 升级数据时，通过已注册的回调向应用层上报数据
-- 回调函数的注册状态由本模块内部维护，应用层通过本接口完成回调设置
+- 应用层通过本接口设置数据上报回调
 
 **入参**
 
@@ -127,3 +133,21 @@ typedef void (*sle_ota_chan_data_report) (const uint8_t *data_ptr,  const uint16
 - 参数 `data_ptr`：指向接收到的 OTA 升级数据的指针，数据内容只读
 - 参数 `data_len`：接收到的 OTA 升级数据的字节长度
 - 返回值处理：回调返回类型为 void，无返回值
+
+### typedef_errcode_t <a id="typedef_errcode_t"></a>
+
+```c
+typedef uint32_t errcode_t;
+```
+
+**使用说明**
+
+本模块返回类型为 errcode_t 的对外接口的返回值类型。
+
+## Macros
+
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
+
+```c
+#define ERRCODE_SUCC                                        0UL
+```

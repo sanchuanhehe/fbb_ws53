@@ -50,7 +50,7 @@ errcode_t wifi_set_fixed_tx_rate(unsigned char auto_rate, alg_param_stru *alg_pa
 
 **返回值**
 
-| 返回值 | 数值 | 说明 |
+| 返回值 | 文字含义 | 触发场景 |
 | ------ | ---- | ---- |
 | ERRCODE_SUCC | 0 | 成功 |
 | ERROR_WIFI_NOT_STARTED | -7 | Wi-Fi未初始化或未启动 |
@@ -97,7 +97,7 @@ errcode_t wifi_get_negotiated_rate(const uint8_t *mac, int32_t mac_len, uint32_t
 
 **返回值**
 
-| 返回值 | 数值 | 说明 |
+| 返回值 | 文字含义 | 触发场景 |
 | ------ | ---- | ---- |
 | ERRCODE_SUCC | 0 | 成功 |
 | ERROR_WIFI_NOT_STARTED | -7 | Wi-Fi未初始化或未启动 |
@@ -136,7 +136,7 @@ errcode_t wifi_set_tpc_mode(uint32_t tpc_value)
 
 **返回值**
 
-| 返回值 | 数值 | 说明 |
+| 返回值 | 文字含义 | 触发场景 |
 | ------ | ---- | ---- |
 | ERRCODE_SUCC | 0 | 成功 |
 | ERROR_WIFI_NOT_STARTED | -7 | Wi-Fi未初始化或未启动 |
@@ -175,7 +175,7 @@ errcode_t wifi_set_rts_mode(uint8_t mode, uint16_t pkt_length)
 
 **返回值**
 
-| 返回值 | 数值 | 说明 |
+| 返回值 | 文字含义 | 触发场景 |
 | ------ | ---- | ---- |
 | ERRCODE_SUCC | 0 | 成功 |
 | ERROR_WIFI_NOT_STARTED | -7 | Wi-Fi未初始化或未启动 |
@@ -214,7 +214,7 @@ errcode_t wifi_set_cca_threshold(uint8_t mode, int8_t threshold)
 
 **返回值**
 
-| 返回值 | 数值 | 说明 |
+| 返回值 | 文字含义 | 触发场景 |
 | ------ | ---- | ---- |
 | ERRCODE_SUCC | 0 | 成功 |
 | ERROR_WIFI_NOT_STARTED | -7 | Wi-Fi未初始化或未启动 |
@@ -255,7 +255,7 @@ errcode_t wifi_set_intrf_mode(const char *ifname, uint8_t enable, uint16_t flag)
 
 **返回值**
 
-| 返回值 | 数值 | 说明 |
+| 返回值 | 文字含义 | 触发场景 |
 | ------ | ---- | ---- |
 | ERRCODE_SUCC | 0 | 成功 |
 | ERROR_WIFI_NOT_STARTED | -7 | Wi-Fi未初始化或未启动 |
@@ -284,6 +284,6 @@ typedef struct {
 
 **成员说明**
 
-| 成员名 | 类型 | 说明 |
+| 成员名称 | 数据类型 | 描述 |
 | ------ | ---- | ---- |
 | rate_value | uint32_t | 固定速率值 |

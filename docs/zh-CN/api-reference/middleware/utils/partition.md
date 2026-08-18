@@ -1,4 +1,4 @@
-# Partition
+# partition
 
 partition 提供分区管理功能，支持分区管理模块的初始化与分区信息查询。分区信息支持按内存地址和文件系统路径两种存储方式进行获取。
 
@@ -81,7 +81,7 @@ errcode_t uapi_partition_get_info(partition_ids_t partition_id, partition_inform
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| partition_id | [partition_ids_t](#enum_partition_ids_t) | 指定的分区的ID | [PARTITION_SSB](#enum_partition_ids_t)(0x0) / [PARTITION_FLASH_BOOT_IMAGE](#enum_partition_ids_t)(0x1) / [PARTITION_FLASH_BOOT_IMAGE_BACKUP](#enum_partition_ids_t)(0x2) / [PARTITION_FLASH_ROOT_PUBLIC_KEYS_AREA](#enum_partition_ids_t)(0x3) / [PARTITION_CUSTOMER_FACTORY](#enum_partition_ids_t)(0x8) / [PARTITION_NV_DATA_BACKUP](#enum_partition_ids_t)(0x9) / [PARTITION_NV_DATA](#enum_partition_ids_t)(0x10) / [PARTITION_CRASH_INFO](#enum_partition_ids_t)(0x11) / [PARTITION_CCPU_IMAGE](#enum_partition_ids_t)(0x20) / [PARTITION_APP_IMAGE](#enum_partition_ids_t)(0x21) / [PARTITION_FOTA_DATA](#enum_partition_ids_t)(0x22) / [PARTITION_CCPU_IMAGE_BACKUP](#enum_partition_ids_t)(0x23) / [PARTITION_RESERVE2](#enum_partition_ids_t)(0x30) / [PARTITION_RESERVE3](#enum_partition_ids_t)(0x31) / [PARTITION_RESERVE4](#enum_partition_ids_t)(0x32) / [PARTITION_RESERVE5](#enum_partition_ids_t)(0x33) / [PARTITION_MAX_CNT](#enum_partition_ids_t)(16) |
+| partition_id | [partition_ids_t](#enum_partition_ids_t) | 指定的分区的ID | [PARTITION_SSB](#enum_partition_ids_t):0x0 / [PARTITION_FLASH_BOOT_IMAGE](#enum_partition_ids_t):0x1 / [PARTITION_FLASH_BOOT_IMAGE_BACKUP](#enum_partition_ids_t):0x2 / [PARTITION_FLASH_ROOT_PUBLIC_KEYS_AREA](#enum_partition_ids_t):0x3 / [PARTITION_CUSTOMER_FACTORY](#enum_partition_ids_t):0x8 / [PARTITION_NV_DATA_BACKUP](#enum_partition_ids_t):0x9 / [PARTITION_NV_DATA](#enum_partition_ids_t):0x10 / [PARTITION_CRASH_INFO](#enum_partition_ids_t):0x11 / [PARTITION_CCPU_IMAGE](#enum_partition_ids_t):0x20 / [PARTITION_APP_IMAGE](#enum_partition_ids_t):0x21 / [PARTITION_FOTA_DATA](#enum_partition_ids_t):0x22 / [PARTITION_CCPU_IMAGE_BACKUP](#enum_partition_ids_t):0x23 / [PARTITION_RESERVE2](#enum_partition_ids_t):0x30 / [PARTITION_RESERVE3](#enum_partition_ids_t):0x31 / [PARTITION_RESERVE4](#enum_partition_ids_t):0x32 / [PARTITION_RESERVE5](#enum_partition_ids_t):0x33 / [PARTITION_MAX_CNT](#enum_partition_ids_t):16 |
 
 **出参**
 
@@ -115,7 +115,7 @@ typedef uint32_t errcode_t;
 
 **使用说明**
 
-本模块对外接口的返回值类型。[SDK公共基础类型]
+本模块对外接口的返回值类型。
 
 ## Associations
 
@@ -243,7 +243,7 @@ typedef struct partition_information {
 
 ## Macros
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC                                        0UL

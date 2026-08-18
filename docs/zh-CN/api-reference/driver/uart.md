@@ -5,7 +5,7 @@ UART (Universal Asynchronous Receiver/Transmitter) 提供串口的初始化、�
 **模块公共头文件**
 
 ```c
-#include "driver/uart.h"
+#include "include/driver/uart.h"
 ```
 
 ## 接口清单
@@ -59,7 +59,7 @@ errcode_t uapi_uart_init(uart_bus_t bus, const uart_pin_config_t *pins, const ua
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 | pins | const [uart_pin_config_t](#uart_pin_config_t) * | UART的引脚配置（TX/RX/RTS/CTS） | 不为NULL |
@@ -73,11 +73,13 @@ errcode_t uapi_uart_init(uart_bus_t bus, const uart_pin_config_t *pins, const ua
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 初始化成功 |
+| ERRCODE_SUCC:0 | 成功 | 初始化成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 初始化失败 |
 
 **参考案例**
 
+- `src/application/samples/peripheral/uart/uart_demo.c`
+- `src/application/samples/bt/sle/sle_uart/sle_uart.c`
 
 **Kconfig配置**
 
@@ -109,7 +111,7 @@ errcode_t uapi_uart_deinit(uart_bus_t bus)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 
@@ -119,11 +121,13 @@ errcode_t uapi_uart_deinit(uart_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 去初始化成功 |
+| ERRCODE_SUCC:0 | 成功 | 去初始化成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 去初始化失败 |
 
 **参考案例**
 
+- `src/application/samples/peripheral/uart/uart_demo.c`
+- `src/application/samples/bt/sle/sle_uart/sle_uart.c`
 
 **Kconfig配置**
 
@@ -132,44 +136,6 @@ errcode_t uapi_uart_deinit(uart_bus_t bus)
 | CONFIG_UART_SUPPORT_RX | 特性宏 | 启用UART接收支持 | y |
 | CONFIG_UART_SUPPORT_TX | 特性宏 | 启用UART发送支持 | y |
 | CONFIG_UART_SUPPORT_DMA | 特性宏 | 启用UART DMA支持 | y |
-
-### uapi_uart_set_attr <a id="uapi_uart_set_attr"></a>
-
-```c
-errcode_t uapi_uart_set_attr(uart_bus_t bus, const uart_attr_t *attr)
-```
-
-**声明头文件**
-
-```c
-#include "include/driver/uart.h"
-```
-
-**功能说明**
-
-- 设置UART基础配置参数，包括波特率、数据位、校验位、停止位等
-
-**前置条件**
-
-- 已调用 `uapi_uart_init` 完成初始化
-
-**入参**
-
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
-| ---- | ---- | ---- | ---- |
-| bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
-| attr | const [uart_attr_t](#uart_attr_t) * | 基础属性配置结构体指针 | 不为NULL |
-
-**返回值**
-
-- 返回类型：errcode_t
-
-| 返回值 | 文字含义 | 触发场景 |
-| -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 设置成功 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | 设置失败 |
-
-**参考案例**
 
 
 ### uapi_uart_get_attr <a id="uapi_uart_get_attr"></a>
@@ -194,7 +160,7 @@ errcode_t uapi_uart_get_attr(uart_bus_t bus, const uart_attr_t *attr)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 | attr | const [uart_attr_t](#uart_attr_t) * | 用于接收当前基础配置的结构体指针（注意：源码签名使用const限定，实际无法通过该参数返回配置数据） | 不为NULL |
@@ -205,7 +171,7 @@ errcode_t uapi_uart_get_attr(uart_bus_t bus, const uart_attr_t *attr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 获取成功 |
+| ERRCODE_SUCC:0 | 成功 | 获取成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 获取失败 |
 
 ### uapi_uart_has_pending_transmissions <a id="uapi_uart_has_pending_transmissions"></a>
@@ -230,7 +196,7 @@ bool uapi_uart_has_pending_transmissions(uart_bus_t bus)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 
@@ -265,7 +231,7 @@ bool uapi_uart_rx_fifo_is_empty(uart_bus_t bus)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 
@@ -300,7 +266,7 @@ bool uapi_uart_tx_fifo_is_empty(uart_bus_t bus)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 
@@ -312,6 +278,42 @@ bool uapi_uart_tx_fifo_is_empty(uart_bus_t bus)
 | -------- | -------- | -------- |
 | true | TX FIFO为空 | 发送FIFO为空 |
 | false | TX FIFO非空 | 发送FIFO非空 |
+
+### uapi_uart_set_attr <a id="uapi_uart_set_attr"></a>
+
+```c
+errcode_t uapi_uart_set_attr(uart_bus_t bus, const uart_attr_t *attr)
+```
+
+**声明头文件**
+
+```c
+#include "include/driver/uart.h"
+```
+
+**功能说明**
+
+- 设置UART基础配置参数，包括波特率、数据位、校验位、停止位等
+
+**前置条件**
+
+- 已调用 `uapi_uart_init` 完成初始化
+
+**入参**
+
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
+| ---- | ---- | ---- | ---- |
+| bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
+| attr | const [uart_attr_t](#uart_attr_t) * | 基础属性配置结构体指针 | 不为NULL |
+
+**返回值**
+
+- 返回类型：errcode_t
+
+| 返回值 | 文字含义 | 触发场景 |
+| -------- | -------- | -------- |
+| ERRCODE_SUCC(0x0) | 成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#errcode_t) | 设置失败 |
 
 ### uapi_uart_register_rx_callback <a id="uapi_uart_register_rx_callback"></a>
 
@@ -336,7 +338,7 @@ errcode_t uapi_uart_register_rx_callback(uart_bus_t bus, uart_rx_condition_t con
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 | condition | [uart_rx_condition_t](#uart_rx_condition_t) | 回调触发的条件 | 见枚举定义 |
@@ -349,11 +351,13 @@ errcode_t uapi_uart_register_rx_callback(uart_bus_t bus, uart_rx_condition_t con
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 注册成功 |
+| ERRCODE_SUCC:0 | 成功 | 注册成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 注册失败 |
 
 **参考案例**
 
+- `src/application/samples/peripheral/uart/uart_demo.c`
+- `src/application/samples/bt/sle/sle_uart/sle_uart.c`
 
 **Kconfig配置**
 
@@ -383,7 +387,7 @@ void uapi_uart_unregister_rx_callback(uart_bus_t bus)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 
@@ -416,7 +420,7 @@ errcode_t uapi_uart_register_parity_error_callback(uart_bus_t bus, uart_error_ca
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 | callback | [uart_error_callback_t](#uart_error_callback_t) | 奇偶校验错误处理回调函数 | 不为NULL |
@@ -427,7 +431,7 @@ errcode_t uapi_uart_register_parity_error_callback(uart_bus_t bus, uart_error_ca
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 注册成功 |
+| ERRCODE_SUCC:0 | 成功 | 注册成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 注册失败 |
 
 **Kconfig配置**
@@ -458,7 +462,7 @@ errcode_t uapi_uart_register_frame_error_callback(uart_bus_t bus, uart_error_cal
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 | callback | [uart_error_callback_t](#uart_error_callback_t) | 帧错误处理回调函数 | 不为NULL |
@@ -469,7 +473,7 @@ errcode_t uapi_uart_register_frame_error_callback(uart_bus_t bus, uart_error_cal
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 注册成功 |
+| ERRCODE_SUCC:0 | 成功 | 注册成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 注册失败 |
 
 **Kconfig配置**
@@ -500,7 +504,7 @@ errcode_t uapi_uart_register_overrun_error_callback(uart_bus_t bus, uart_error_c
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 | callback | [uart_error_callback_t](#uart_error_callback_t) | 溢出错误处理回调函数 | 不为NULL |
@@ -511,7 +515,7 @@ errcode_t uapi_uart_register_overrun_error_callback(uart_bus_t bus, uart_error_c
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 注册成功 |
+| ERRCODE_SUCC:0 | 成功 | 注册成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 注册失败 |
 
 **Kconfig配置**
@@ -542,7 +546,7 @@ int32_t uapi_uart_write(uart_bus_t bus, const uint8_t *buffer, uint32_t length, 
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 | buffer | const uint8_t * | 要发送的数据Buffer | 不为NULL |
@@ -560,6 +564,8 @@ int32_t uapi_uart_write(uart_bus_t bus, const uint8_t *buffer, uint32_t length, 
 
 **参考案例**
 
+- `src/application/samples/peripheral/uart/uart_demo.c`
+- `src/application/samples/bt/sle/sle_uart/sle_uart.c`
 
 **Kconfig配置**
 
@@ -589,7 +595,7 @@ int32_t uapi_uart_write_nolock(uart_bus_t bus, const uint8_t *buffer, uint32_t l
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 | buffer | const uint8_t * | 要发送的数据Buffer | 不为NULL |
@@ -634,7 +640,7 @@ errcode_t uapi_uart_write_int(uart_bus_t bus, const uint8_t *buffer, uint32_t le
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 | buffer | const uint8_t * | 要发送的数据Buffer | 不为NULL |
@@ -648,11 +654,12 @@ errcode_t uapi_uart_write_int(uart_bus_t bus, const uint8_t *buffer, uint32_t le
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 发送成功 |
+| ERRCODE_SUCC:0 | 成功 | 发送成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 发送失败 |
 
 **参考案例**
 
+- `src/application/samples/peripheral/uart/uart_demo.c`
 
 **Kconfig配置**
 
@@ -684,7 +691,7 @@ int32_t uapi_uart_write_by_dma(uart_bus_t bus, const void *buffer, uint32_t leng
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 | buffer | const void * | 要发送的数据Buffer | 不为NULL |
@@ -702,6 +709,7 @@ int32_t uapi_uart_write_by_dma(uart_bus_t bus, const void *buffer, uint32_t leng
 
 **参考案例**
 
+- `src/application/samples/peripheral/uart/uart_demo.c`
 
 **Kconfig配置**
 
@@ -733,7 +741,7 @@ int32_t uapi_uart_read_by_dma(uart_bus_t bus, const void *buffer, uint32_t lengt
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 | buffer | const void * | 存储接收数据的Buffer | 不为NULL |
@@ -751,6 +759,7 @@ int32_t uapi_uart_read_by_dma(uart_bus_t bus, const void *buffer, uint32_t lengt
 
 **参考案例**
 
+- `src/application/samples/peripheral/uart/uart_demo.c`
 
 **Kconfig配置**
 
@@ -777,17 +786,27 @@ errcode_t uapi_uart_register_read_by_dma_callback(uart_bus_t bus, uart_write_dma
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | 串口号 | 有效UART总线 |
 | dma_cfg | [uart_write_dma_config_t](#uart_write_dma_config_t) * | 接收数据时使用的DMA配置 | 不为NULL |
 
 **返回值**
 
+- 返回类型：errcode_t
+
 | 返回值 | 文字含义 | 触发场景 |
 | ---- | ---- | ---- |
-| ERRCODE_SUCC(0x0) | 成功 | 注册成功 |
-| Other | 其他错误码，参考errcode_t | 注册失败 |
+| ERRCODE_SUCC:0 | 成功 | 注册成功 |
+| Other | 其他错误码，参考[errcode_t](#errcode_t) | 注册失败 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_UART_SUPPORT_TX | 特性宏 | 支持 UART 发送功能（接口级，嵌套包裹接口声明） | y |
+| CONFIG_UART_SUPPORT_DMA | 特性宏 | 支持 UART DMA 传输功能（接口级，嵌套包裹接口声明） | y |
+| CONFIG_UART_SUPPORT_INT_TRIGGER_DMA | 特性宏 | 支持中断触发 DMA 功能（接口级，嵌套包裹接口声明） | y |
 
 ### uapi_uart_unregister_read_by_dma_callback <a id="uapi_uart_unregister_read_by_dma_callback"></a>
 
@@ -807,13 +826,17 @@ void uapi_uart_unregister_read_by_dma_callback(uart_bus_t bus)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | 串口号 | 有效UART总线 |
 
-**返回值**
+**Kconfig配置**
 
-无（void）
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_UART_SUPPORT_TX | 特性宏 | 支持 UART 发送功能（接口级，嵌套包裹接口声明） | y |
+| CONFIG_UART_SUPPORT_DMA | 特性宏 | 支持 UART DMA 传输功能（接口级，嵌套包裹接口声明） | y |
+| CONFIG_UART_SUPPORT_INT_TRIGGER_DMA | 特性宏 | 支持中断触发 DMA 功能（接口级，嵌套包裹接口声明） | y |
 
 ### uapi_uart_recv_raw_data_end_transfer <a id="uapi_uart_recv_raw_data_end_transfer"></a>
 
@@ -831,6 +854,31 @@ errcode_t uapi_uart_recv_raw_data_end_transfer(uart_bus_t uart_bus)
 
 - 结束 UART 的不定长数据 DMA 接收
 
+**入参**
+
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
+| ---- | ---- | ---- | ---- |
+| uart_bus | [uart_bus_t](#uart_bus_t) | 串口号 | 有效 UART 总线，小于 UART_BUS_MAX_NUM |
+
+**返回值**
+
+- 返回类型：errcode_t
+
+| 返回值 | 文字含义 | 触发场景 |
+| -------- | -------- | -------- |
+| ERRCODE_SUCC:0 | 执行成功 | 成功结束 DMA 不定长接收 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | uart_bus 越界 |
+| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_UART_SUPPORT_TX | 特性宏 | 支持 UART 发送功能（接口级，嵌套包裹接口声明） | y |
+| CONFIG_UART_SUPPORT_DMA | 特性宏 | 支持 UART DMA 传输功能（接口级，嵌套包裹接口声明） | y |
+| CONFIG_UART_SUPPORT_DMA_LLI | 特性宏 | 支持 DMA 链表传输功能（接口级，嵌套包裹接口声明） | n |
+| CONFIG_UART_SUPPORT_RECV_RAW_DATA | 特性宏 | 支持不定长数据接收功能（接口级，嵌套包裹接口声明） | n |
+
 ### uapi_uart_dma_recv_raw_data <a id="uapi_uart_dma_recv_raw_data"></a>
 
 ```c
@@ -846,6 +894,32 @@ errcode_t uapi_uart_dma_recv_raw_data(uart_bus_t uart_bus, uart_idle_int_receive
 **功能说明**
 
 - 启动 UART DMA 不定长数据接收，并在接收完成时触发回调
+
+**入参**
+
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
+| ---- | ---- | ---- | ---- |
+| uart_bus | [uart_bus_t](#uart_bus_t) | 串口号 | 有效 UART 总线，小于 UART_BUS_MAX_NUM |
+| callback | [uart_idle_int_receive_cb_t](#uart_idle_int_receive_cb_t) | 接收完成后触发的 IDLE 回调 | 不为NULL |
+
+**返回值**
+
+- 返回类型：errcode_t
+
+| 返回值 | 文字含义 | 触发场景 |
+| -------- | -------- | -------- |
+| ERRCODE_SUCC:0 | 执行成功 | DMA 不定长接收启动成功 |
+| [ERRCODE_FAIL](#ERRCODE_FAIL):0xFFFFFFFF | 执行失败 | 配置或启动 DMA 接收失败 |
+| Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_UART_SUPPORT_TX | 特性宏 | 支持 UART 发送功能（接口级，嵌套包裹接口声明） | y |
+| CONFIG_UART_SUPPORT_DMA | 特性宏 | 支持 UART DMA 传输功能（接口级，嵌套包裹接口声明） | y |
+| CONFIG_UART_SUPPORT_DMA_LLI | 特性宏 | 支持 DMA 链表传输功能（接口级，嵌套包裹接口声明） | n |
+| CONFIG_UART_SUPPORT_RECV_RAW_DATA | 特性宏 | 支持不定长数据接收功能（接口级，嵌套包裹接口声明） | n |
 
 ### uapi_uart_read <a id="uapi_uart_read"></a>
 
@@ -869,7 +943,7 @@ int32_t uapi_uart_read(uart_bus_t bus, const uint8_t *buffer, uint32_t length, u
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 | buffer | const uint8_t * | 存储接收数据的Buffer | 不为NULL |
@@ -887,6 +961,7 @@ int32_t uapi_uart_read(uart_bus_t bus, const uint8_t *buffer, uint32_t length, u
 
 **参考案例**
 
+- `src/application/samples/peripheral/uart/uart_demo.c`
 
 **Kconfig配置**
 
@@ -916,7 +991,7 @@ errcode_t uapi_uart_update_rx_buff(uart_bus_t bus, uint8_t *rx_buffer, uint16_t 
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | UART总线号 | UART_BUS_0 ~ UART_BUS_2 |
 | rx_buffer | uint8_t * | 新的接收Buffer地址 | 不为NULL |
@@ -928,7 +1003,7 @@ errcode_t uapi_uart_update_rx_buff(uart_bus_t bus, uint8_t *rx_buffer, uint16_t 
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 更新成功 |
+| ERRCODE_SUCC:0 | 成功 | 更新成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 更新失败 |
 
 **Kconfig配置**
@@ -959,7 +1034,7 @@ errcode_t uapi_uart_suspend(uintptr_t arg)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | arg | uintptr_t | 挂起所需要的参数 | - |
 
@@ -969,7 +1044,7 @@ errcode_t uapi_uart_suspend(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 挂起成功 |
+| ERRCODE_SUCC:0 | 成功 | 挂起成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 挂起失败 |
 
 **Kconfig配置**
@@ -1000,7 +1075,7 @@ errcode_t uapi_uart_resume(uintptr_t arg)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | arg | uintptr_t | 恢复所需要的参数 | - |
 
@@ -1010,7 +1085,7 @@ errcode_t uapi_uart_resume(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 恢复成功 |
+| ERRCODE_SUCC:0 | 成功 | 恢复成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 恢复失败 |
 
 **Kconfig配置**
@@ -1037,17 +1112,25 @@ errcode_t uapi_uart_register_write_by_dma_callback(uart_bus_t bus, uart_tx_by_dm
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [uart_bus_t](#uart_bus_t) | 串口号 | 有效UART总线 |
 | tx_dma_cb | uart_tx_by_dma_callback_t | DMA发送完成回调 | 不为NULL |
 
 **返回值**
 
+- 返回类型：errcode_t
+
 | 返回值 | 文字含义 | 触发场景 |
 | ---- | ---- | ---- |
-| ERRCODE_SUCC(0x0) | 成功 | 注册成功 |
-| Other | 其他错误码，参考errcode_t | 注册失败 |
+| ERRCODE_SUCC:0 | 成功 | 注册成功 |
+| Other | 其他错误码，参考[errcode_t](#errcode_t) | 注册失败 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_UART_SUPPORT_SEND_IN_DMA_ISR | 特性宏 | 支持在 DMA 发送中断中回调功能（接口级，包裹接口声明） | n |
 
 ## Type definitions
 
@@ -1060,36 +1143,6 @@ typedef hal_uart_pin_config_t uart_pin_config_t;
 **使用说明**
 
 - UART引脚配置类型，等价于 [hal_uart_pin_config_t](#hal_uart_pin_config_t)
-
-### uart_data_bit_t <a id="uart_data_bit_t"></a>
-
-```c
-typedef hal_uart_data_bit_t uart_data_bit_t;
-```
-
-**使用说明**
-
-- UART数据位定义类型，等价于 [hal_uart_data_bit_t](#hal_uart_data_bit_t)
-
-### uart_parity_t <a id="uart_parity_t"></a>
-
-```c
-typedef hal_uart_parity_t uart_parity_t;
-```
-
-**使用说明**
-
-- UART奇偶校验位定义类型，等价于 [hal_uart_parity_t](#hal_uart_parity_t)
-
-### uart_stop_bit_t <a id="uart_stop_bit_t"></a>
-
-```c
-typedef hal_uart_stop_bit_t uart_stop_bit_t;
-```
-
-**使用说明**
-
-- UART停止位定义类型，等价于 [hal_uart_stop_bit_t](#hal_uart_stop_bit_t)
 
 ### uart_attr_t <a id="uart_attr_t"></a>
 
@@ -1111,16 +1164,6 @@ typedef hal_uart_extra_attr_t uart_extra_attr_t;
 
 - UART扩展属性定义类型，等价于 [hal_uart_extra_attr_t](#hal_uart_extra_attr_t)
 
-### uart_flow_ctrl_t <a id="uart_flow_ctrl_t"></a>
-
-```c
-typedef hal_uart_flow_ctrl_t uart_flow_ctrl_t;
-```
-
-**使用说明**
-
-- UART流控类型定义，等价于 [hal_uart_flow_ctrl_t](#hal_uart_flow_ctrl_t)
-
 ### uart_rx_callback_t <a id="uart_rx_callback_t"></a>
 
 ```c
@@ -1131,40 +1174,11 @@ typedef void (*uart_rx_callback_t)(const void *buffer, uint16_t length, bool err
 
 - UART接收数据回调函数类型。在中断上下文中执行，接收缓冲区在回调返回后会被释放
 
-**参数**
 
-| 参数名 | 类型 | 说明 |
-| ------ | ---- | ---- |
-| buffer | const void * | 读取数据时用于存储数据的Buffer |
-| length | uint16_t | Buffer的长度 |
-| error | bool | true表示接收数据时产生了错误，false表示正常 |
-
-### uart_rx_by_dma_callback_t <a id="uart_rx_by_dma_callback_t"></a>
-
-```c
-typedef void (*uart_rx_by_dma_callback_t)(uart_bus_t bus, const void *buffer, uint32_t length, uart_write_dma_config_t *dma_cfg);
-```
-
-**使用说明**
-
-- UART RX中断触发DMA搬运回调函数类型。在中断上下文中执行
-
-**参数**
-
-| 参数名 | 类型 | 说明 |
-| ------ | ---- | ---- |
-| bus | uart_bus_t | UART总线号 |
-| buffer | const void * | DMA搬运的目的地址 |
-| length | uint32_t | DMA搬运的数据长度 |
-| dma_cfg | uart_write_dma_config_t * | DMA配置结构体指针 |
-
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_UART_SUPPORT_RX | 特性宏 | 启用UART接收支持 | y |
-| CONFIG_UART_SUPPORT_DMA | 特性宏 | 启用UART DMA支持 | y |
-| CONFIG_UART_SUPPORT_INT_TRIGGER_DMA | 特性宏 | 支持中断触发DMA | 由构建目标决定 |
+- 参数 参数名：说明
+- 参数 buffer：读取数据时用于存储数据的Buffer
+- 参数 length：Buffer的长度
+- 参数 error：true表示接收数据时产生了错误，false表示正常
 
 ### uart_tx_callback_t <a id="uart_tx_callback_t"></a>
 
@@ -1176,13 +1190,11 @@ typedef void (*uart_tx_callback_t)(const void *buffer, uint32_t length, const vo
 
 - UART发送数据回调函数类型，在中断上下文中执行
 
-**参数**
 
-| 参数名 | 类型 | 说明 |
-| ------ | ---- | ---- |
-| buffer | const void * | 发送时的数据缓存 |
-| length | uint32_t | 发送时的数据长度 |
-| params | const void * | 传递的参数 |
+- 参数 参数名：说明
+- 参数 buffer：发送时的数据缓存
+- 参数 length：发送时的数据长度
+- 参数 params：传递的参数
 
 **Kconfig配置**
 
@@ -1200,12 +1212,33 @@ typedef void (*uart_error_callback_t)(uint32_t *err_info, uint32_t len);
 
 - UART错误处理回调函数类型，在中断上下文中执行，执行完成后会自动释放内存。用于奇偶校验、帧、溢出错误回调注册
 
-**参数**
 
-| 参数名 | 类型 | 说明 |
-| ------ | ---- | ---- |
-| err_info | uint32_t * | 错误信息，每一个成员都是32-bit |
-| len | uint32_t | 错误信息的长度 |
+- 参数 参数名：说明
+- 参数 err_info：错误信息，每一个成员都是32-bit
+- 参数 len：错误信息的长度
+
+### uart_tx_by_dma_callback_t <a id="uart_tx_by_dma_callback_t"></a>
+
+```c
+typedef errcode_t (*uart_tx_by_dma_callback_t)(void);
+```
+
+**使用说明**
+
+- UART DMA 发送完成回调函数类型，作为 [uapi_uart_register_write_by_dma_callback](#uapi_uart_register_write_by_dma_callback) 的入参类型
+- 回调在中断上下文中执行，返回 errcode_t
+
+### uart_idle_int_receive_cb_t <a id="uart_idle_int_receive_cb_t"></a>
+
+```c
+typedef bool (*uart_idle_int_receive_cb_t)(uint8_t *receive_buff, uint32_t receive_length, bool error);
+```
+
+**使用说明**
+
+- UART DMA 不定长接收完成后的 IDLE 回调函数类型，作为 [uapi_uart_dma_recv_raw_data](#uapi_uart_dma_recv_raw_data) 的入参类型
+- 参数 receive_buff：接收数据缓冲区；参数 receive_length：接收数据长度；参数 error：接收是否出错
+- 返回 true 表示继续接收数据，false 表示停止接收数据
 
 ### errcode_t <a id="errcode_t"></a>
 
@@ -1223,10 +1256,14 @@ typedef uint32_t errcode_t;
 
 ```c
 typedef enum {
-    UART_BUS_0 = 0,
-    UART_BUS_1 = 1,
-    UART_BUS_2 = 2,
-    UART_BUS_NONE = UART_BUS_MAX_NUMBER
+    UART_BUS_0 = 0,  // !< UART L | UART H1
+#if UART_BUS_MAX_NUMBER > 1
+    UART_BUS_1 = 1,  // !< UART H | UART H0
+#endif
+#if UART_BUS_MAX_NUMBER > 2
+    UART_BUS_2 = 2,  // !< M UART | UART L0
+#endif
+    UART_BUS_NONE = UART_BUS_MAX_NUMBER  // !< Value used as invalid/unused UART number
 } uart_bus_t;
 ```
 
@@ -1240,90 +1277,6 @@ typedef enum {
 | UART_BUS_1 | 1 | UART总线1 |
 | UART_BUS_2 | 2 | UART总线2 |
 | UART_BUS_NONE | 3 | 无效总线号（UART_BUS_MAX_NUMBER） |
-
-### hal_uart_data_bit_t <a id="hal_uart_data_bit_t"></a>
-
-```c
-typedef enum hal_uart_data_bit {
-    UART_DATA_BIT_5,
-    UART_DATA_BIT_6,
-    UART_DATA_BIT_7,
-    UART_DATA_BIT_8
-} hal_uart_data_bit_t;
-```
-
-**使用说明**
-
-- UART数据位枚举，定义于 `hal_uart.h`
-
-| 枚举成员 | 取值 | 描述 |
-| ------ | ---- | ---- |
-| UART_DATA_BIT_5 | 0 | 5位数据位 |
-| UART_DATA_BIT_6 | 1 | 6位数据位 |
-| UART_DATA_BIT_7 | 2 | 7位数据位 |
-| UART_DATA_BIT_8 | 3 | 8位数据位 |
-
-### hal_uart_parity_t <a id="hal_uart_parity_t"></a>
-
-```c
-typedef enum hal_uart_parity {
-    UART_PARITY_NONE,
-    UART_PARITY_ODD,
-    UART_PARITY_EVEN
-} hal_uart_parity_t;
-```
-
-**使用说明**
-
-- UART奇偶校验位枚举，定义于 `hal_uart.h`
-
-| 枚举成员 | 取值 | 描述 |
-| ------ | ---- | ---- |
-| UART_PARITY_NONE | 0 | 无校验 |
-| UART_PARITY_ODD | 1 | 奇校验 |
-| UART_PARITY_EVEN | 2 | 偶校验 |
-
-### hal_uart_stop_bit_t <a id="hal_uart_stop_bit_t"></a>
-
-```c
-typedef enum hal_uart_stop_bit {
-    UART_STOP_BIT_1,
-    UART_STOP_BIT_2
-} hal_uart_stop_bit_t;
-```
-
-**使用说明**
-
-- UART停止位枚举，定义于 `hal_uart.h`
-
-| 枚举成员 | 取值 | 描述 |
-| ------ | ---- | ---- |
-| UART_STOP_BIT_1 | 0 | 1位停止位 |
-| UART_STOP_BIT_2 | 1 | 2位停止位 |
-
-### hal_uart_flow_ctrl_t <a id="hal_uart_flow_ctrl_t"></a>
-
-```c
-typedef enum {
-    UART_FLOW_CTRL_NONE = 0x0,
-    UART_FLOW_CTS = 0x1,
-    UART_FLOW_RTS = 0x2,
-    UART_FLOW_CTRL_RTS_CTS = UART_FLOW_CTS | UART_FLOW_RTS,
-    UART_FLOW_CTRL_SOFT = 0x4
-} hal_uart_flow_ctrl_t;
-```
-
-**使用说明**
-
-- UART流控类型枚举，定义于 `hal_uart.h`
-
-| 枚举成员 | 取值 | 描述 |
-| ------ | ---- | ---- |
-| UART_FLOW_CTRL_NONE | 0x0 | 无流控 |
-| UART_FLOW_CTS | 0x1 | 仅CTS (Clear To Send) 流控 |
-| UART_FLOW_RTS | 0x2 | 仅RTS (Request To Send) 流控 |
-| UART_FLOW_CTRL_RTS_CTS | 0x3 | RTS/CTS硬件流控 |
-| UART_FLOW_CTRL_SOFT | 0x4 | 软件流控 |
 
 ### uart_rx_condition_t <a id="uart_rx_condition_t"></a>
 
@@ -1341,15 +1294,9 @@ typedef enum uart_rx_condition {
 
 | 枚举成员 | 取值 | 描述 |
 | ------ | ---- | ---- |
-| UART_RX_CONDITION_FULL_OR_IDLE | - | 接收缓存已满或接收暂停时触发回调 |
-| UART_RX_CONDITION_FULL_OR_SUFFICIENT_DATA | - | 接收缓存已满或接收数据量达到指定长度时触发回调 |
-| UART_RX_CONDITION_FULL_OR_SUFFICIENT_DATA_OR_IDLE | - | 接收缓存已满、接收数据量达到指定长度或接收暂停时触发回调 |
-
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_UART_SUPPORT_RX | 特性宏 | 启用UART接收支持 | y |
+| UART_RX_CONDITION_FULL_OR_IDLE | 5 | 接收缓存已满或接收暂停时触发回调 |
+| UART_RX_CONDITION_FULL_OR_SUFFICIENT_DATA | 6 | 接收缓存已满或接收数据量达到指定长度时触发回调 |
+| UART_RX_CONDITION_FULL_OR_SUFFICIENT_DATA_OR_IDLE | 7 | 接收缓存已满、接收数据量达到指定长度或接收暂停时触发回调 |
 
 ## Structures
 
@@ -1398,10 +1345,10 @@ typedef struct uart_attr {
 | 成员名称 | 数据类型 | 描述 |
 | ---- | ---- | ---- |
 | baud_rate | uint32_t | 波特率 |
-| data_bits | uint8_t | 数据位，参考 [uart_data_bit_t](#uart_data_bit_t) |
-| stop_bits | uint8_t | 停止位，参考 [uart_stop_bit_t](#uart_stop_bit_t) |
-| parity | uint8_t | 校验位，参考 [uart_parity_t](#uart_parity_t) |
-| flow_ctrl | uint8_t | 流控类型，参考 [uart_flow_ctrl_t](#uart_flow_ctrl_t) |
+| data_bits | uint8_t | 数据位，参考 uart_data_bit_t |
+| stop_bits | uint8_t | 停止位，参考 uart_stop_bit_t |
+| parity | uint8_t | 校验位，参考 uart_parity_t |
+| flow_ctrl | uint8_t | 流控类型，参考 uart_flow_ctrl_t |
 
 ### hal_uart_extra_attr_t <a id="hal_uart_extra_attr_t"></a>
 
@@ -1477,3 +1424,23 @@ typedef struct uart_write_dma_config {
 | -------- | -------- | -------- | -------- |
 | CONFIG_UART_SUPPORT_TX | 特性宏 | 启用UART发送支持 | y |
 | CONFIG_UART_SUPPORT_DMA | 特性宏 | 启用UART DMA支持 | y |
+
+## Macros
+
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
+
+```c
+#define ERRCODE_SUCC                                        0UL
+```
+
+### ERRCODE_FAIL <a id="ERRCODE_FAIL"></a>
+
+```c
+#define ERRCODE_FAIL                                        0xFFFFFFFF
+```
+
+### ERRCODE_INVALID_PARAM <a id="ERRCODE_INVALID_PARAM"></a>
+
+```c
+#define ERRCODE_INVALID_PARAM                               0x80000001
+```

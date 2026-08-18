@@ -52,7 +52,6 @@ errcode_t ssaps_register_server(sle_uuid_t *app_uuid, uint8_t *server_id)
 
 - 调用时序约束：当前接口必须在 SLE 协议栈初始化完成后调用
 - 依赖关系：当前接口依赖 SLE service 已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -73,7 +72,7 @@ errcode_t ssaps_register_server(sle_uuid_t *app_uuid, uint8_t *server_id)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 注册成功 |
-| Other | 其他错误码，参考`errcode_t` | 注册失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 注册失败 |
 
 **参考案例**
 
@@ -101,7 +100,6 @@ errcode_t ssaps_unregister_server(uint8_t server_id)
 
 - 调用时序约束：当前接口必须在 [ssaps_register_server](#ssaps_register_server) 成功返回后调用
 - 依赖关系：当前接口依赖传入的服务端 ID 已通过注册获得
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -116,7 +114,7 @@ errcode_t ssaps_unregister_server(uint8_t server_id)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 注销成功 |
-| Other | 其他错误码，参考`errcode_t` | 注销失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 注销失败 |
 
 **参考案例**
 
@@ -144,7 +142,6 @@ errcode_t ssaps_add_service(uint8_t server_id, sle_uuid_t *service_uuid, bool is
 
 - 调用时序约束：当前接口必须在 [ssaps_register_server](#ssaps_register_server) 成功返回后调用
 - 依赖关系：当前接口依赖已通过 [ssaps_register_callbacks](#ssaps_register_callbacks) 注册回调函数以接收服务添加结果
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -160,8 +157,9 @@ errcode_t ssaps_add_service(uint8_t server_id, sle_uuid_t *service_uuid, bool is
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| errcode_t | 执行结果错误码 | 服务句柄将在 [ssaps_add_service_callback](#typedef_ssaps_add_service_callback) 中返回 |
-| Other | 其他错误码，参考`errcode_t` | 请求失败 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；服务句柄将在 [ssaps_add_service_callback](#typedef_ssaps_add_service_callback) 中返回 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求失败 |
 
 ### ssaps_add_property <a id="ssaps_add_property"></a>
 
@@ -185,7 +183,6 @@ errcode_t ssaps_add_property(uint8_t server_id, uint16_t service_handle, ssaps_p
 
 - 调用时序约束：当前接口必须在 [ssaps_add_service](#ssaps_add_service) 或 [ssaps_add_service_sync](#ssaps_add_service_sync) 成功并获得 service_handle 后调用
 - 依赖关系：当前接口依赖已通过 [ssaps_register_callbacks](#ssaps_register_callbacks) 注册回调函数以接收特征添加结果
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -201,8 +198,9 @@ errcode_t ssaps_add_property(uint8_t server_id, uint16_t service_handle, ssaps_p
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| errcode_t | 执行结果错误码 | 特征句柄将在 [ssaps_add_property_callback](#typedef_ssaps_add_property_callback) 中返回 |
-| Other | 其他错误码，参考`errcode_t` | 请求失败 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；特征句柄将在 [ssaps_add_property_callback](#typedef_ssaps_add_property_callback) 中返回 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求失败 |
 
 ### ssaps_add_descriptor <a id="ssaps_add_descriptor"></a>
 
@@ -227,7 +225,6 @@ errcode_t ssaps_add_descriptor(uint8_t server_id, uint16_t service_handle, uint1
 
 - 调用时序约束：当前接口必须在 [ssaps_add_property](#ssaps_add_property) 或 [ssaps_add_property_sync](#ssaps_add_property_sync) 成功并获得 property_handle 后调用
 - 依赖关系：当前接口依赖已通过 [ssaps_register_callbacks](#ssaps_register_callbacks) 注册回调函数以接收描述符添加结果
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -244,8 +241,9 @@ errcode_t ssaps_add_descriptor(uint8_t server_id, uint16_t service_handle, uint1
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| errcode_t | 执行结果错误码 | 描述符句柄将在 [ssaps_add_descriptor_callback](#typedef_ssaps_add_descriptor_callback) 中返回 |
-| Other | 其他错误码，参考`errcode_t` | 请求失败 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；描述符句柄将在 [ssaps_add_descriptor_callback](#typedef_ssaps_add_descriptor_callback) 中返回 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求失败 |
 
 ### ssaps_add_service_sync <a id="ssaps_add_service_sync"></a>
 
@@ -263,13 +261,12 @@ errcode_t ssaps_add_service_sync(uint8_t server_id, sle_uuid_t *service_uuid, bo
 
 - 同步添加一个 SSAP 服务
 - 服务句柄由出参 handle 返回
-- 调用返回即表示添加操作已完成，无需依赖回调获取句柄
+- 调用返回即表示添加操作已完成，无需经回调获取句柄
 
 **前置条件**
 
 - 调用时序约束：当前接口必须在 [ssaps_register_server](#ssaps_register_server) 成功返回后调用
 - 依赖关系：当前接口依赖 SLE service 已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -292,7 +289,7 @@ errcode_t ssaps_add_service_sync(uint8_t server_id, sle_uuid_t *service_uuid, bo
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 服务添加成功 |
-| Other | 其他错误码，参考`errcode_t` | 服务添加失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 服务添加失败 |
 
 **参考案例**
 
@@ -315,13 +312,12 @@ errcode_t ssaps_add_property_sync(uint8_t server_id, uint16_t service_handle, ss
 
 - 同步添加一个 SSAP 特征
 - 特征句柄由出参 handle 返回
-- 调用返回即表示添加操作已完成，无需依赖回调获取句柄
+- 调用返回即表示添加操作已完成，无需经回调获取句柄
 
 **前置条件**
 
 - 调用时序约束：当前接口必须在 [ssaps_add_service_sync](#ssaps_add_service_sync) 或 [ssaps_add_service](#ssaps_add_service) 成功并获得 service_handle 后调用
 - 依赖关系：当前接口依赖 SLE service 已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -344,7 +340,7 @@ errcode_t ssaps_add_property_sync(uint8_t server_id, uint16_t service_handle, ss
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 特征添加成功 |
-| Other | 其他错误码，参考`errcode_t` | 特征添加失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 特征添加失败 |
 
 **参考案例**
 
@@ -373,7 +369,6 @@ errcode_t ssaps_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 
 - 调用时序约束：当前接口必须在 [ssaps_add_property_sync](#ssaps_add_property_sync) 或 [ssaps_add_property](#ssaps_add_property) 成功并获得 property_handle 后调用
 - 依赖关系：当前接口依赖 SLE service 已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -391,7 +386,7 @@ errcode_t ssaps_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 描述符添加成功 |
-| Other | 其他错误码，参考`errcode_t` | 描述符添加失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 描述符添加失败 |
 
 **参考案例**
 
@@ -419,7 +414,6 @@ errcode_t ssaps_start_service(uint8_t server_id, uint16_t service_handle)
 
 - 调用时序约束：当前接口必须在服务及其特征/描述符添加完成（[ssaps_add_service](#ssaps_add_service) / [ssaps_add_service_sync](#ssaps_add_service_sync) 及对应特征、描述符接口）后调用
 - 依赖关系：当前接口依赖已通过 [ssaps_register_callbacks](#ssaps_register_callbacks) 注册回调函数以接收服务启动结果
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -434,8 +428,9 @@ errcode_t ssaps_start_service(uint8_t server_id, uint16_t service_handle)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| errcode_t | 执行结果错误码 | 服务启动结果将在 [ssaps_start_service_callback](#typedef_ssaps_start_service_callback) 中返回 |
-| Other | 其他错误码，参考`errcode_t` | 请求失败 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；服务启动结果将在 [ssaps_start_service_callback](#typedef_ssaps_start_service_callback) 中返回 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求失败 |
 
 **参考案例**
 
@@ -463,7 +458,6 @@ errcode_t ssaps_delete_all_services(uint8_t server_id)
 
 - 调用时序约束：当前接口必须在 [ssaps_register_server](#ssaps_register_server) 成功返回后调用
 - 依赖关系：当前接口依赖已通过 [ssaps_register_callbacks](#ssaps_register_callbacks) 注册回调函数以接收删除结果
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -478,7 +472,7 @@ errcode_t ssaps_delete_all_services(uint8_t server_id)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 删除请求成功发起 |
-| Other | 其他错误码，参考`errcode_t` | 删除请求失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 删除请求失败 |
 
 ### ssaps_send_response <a id="ssaps_send_response"></a>
 
@@ -502,7 +496,6 @@ errcode_t ssaps_send_response(uint8_t server_id, uint16_t conn_id, ssaps_send_rs
 
 - 调用时序约束：当前接口必须在收到读/写请求回调（[ssaps_read_request_callback](#typedef_ssaps_read_request_callback) / [ssaps_write_request_callback](#typedef_ssaps_write_request_callback)）且 need_rsp 为 true 后调用
 - 依赖关系：当前接口依赖传入的 conn_id 对应的连接仍处于有效状态
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -512,6 +505,10 @@ errcode_t ssaps_send_response(uint8_t server_id, uint16_t conn_id, ssaps_send_rs
 | conn_id | uint16_t | 连接 ID | 有效的连接 ID |
 | param | [ssaps_send_rsp_t](#struct_ssaps_send_rsp_t) * | 响应参数 | 不为NULL |
 
+**参考案例**
+
+- `src/application/samples/bt/sle/sle_device_config/sle_device_config_server/src/sle_device_config_server.c`
+
 **返回值**
 
 - 返回类型：errcode_t
@@ -519,7 +516,7 @@ errcode_t ssaps_send_response(uint8_t server_id, uint16_t conn_id, ssaps_send_rs
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 响应发送成功 |
-| Other | 其他错误码，参考`errcode_t` | 响应发送失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 响应发送失败 |
 
 ### ssaps_notify_indicate <a id="ssaps_notify_indicate"></a>
 
@@ -543,7 +540,6 @@ errcode_t ssaps_notify_indicate(uint8_t server_id, uint16_t conn_id, ssaps_ntf_i
 
 - 调用时序约束：当前接口必须在服务启动（[ssaps_start_service](#ssaps_start_service)）成功后调用
 - 依赖关系：当前接口依赖特征已配置对应的通知或指示操作指示位，且对端已使能相应配置
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -560,7 +556,7 @@ errcode_t ssaps_notify_indicate(uint8_t server_id, uint16_t conn_id, ssaps_ntf_i
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 通知或指示发送成功 |
-| Other | 其他错误码，参考`errcode_t` | 通知或指示发送失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 通知或指示发送失败 |
 
 **参考案例**
 
@@ -588,7 +584,6 @@ errcode_t ssaps_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, ssa
 
 - 调用时序约束：当前接口必须在服务启动（[ssaps_start_service](#ssaps_start_service)）成功后调用
 - 依赖关系：当前接口依赖 UUID 对应特征已配置对应的通知或指示操作指示位，且对端已使能相应配置
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -605,7 +600,7 @@ errcode_t ssaps_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, ssa
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 通知或指示发送成功 |
-| Other | 其他错误码，参考`errcode_t` | 通知或指示发送失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 通知或指示发送失败 |
 
 ### ssaps_set_info <a id="ssaps_set_info"></a>
 
@@ -621,7 +616,7 @@ errcode_t ssaps_set_info(uint8_t server_id, ssap_exchange_info_t *info)
 
 **功能说明**
 
-- 在连接之前设置服务端交换信息（如 MTU 大小）
+- 在连接之前设置服务端交换信息（如 MTU (Maximum Transmission Unit) 大小）
 - 设置的信息在后续 SSAP 交换流程中生效
 - 通过该接口可在建立连接前预置服务端期望的交换参数
 
@@ -629,7 +624,6 @@ errcode_t ssaps_set_info(uint8_t server_id, ssap_exchange_info_t *info)
 
 - 调用时序约束：当前接口必须在 [ssaps_register_server](#ssaps_register_server) 成功返回后、建立 SLE 连接之前调用
 - 依赖关系：当前接口依赖 SLE service 已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -645,7 +639,7 @@ errcode_t ssaps_set_info(uint8_t server_id, ssap_exchange_info_t *info)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 设置成功 |
-| Other | 其他错误码，参考`errcode_t` | 设置失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设置失败 |
 
 **参考案例**
 
@@ -673,7 +667,6 @@ errcode_t ssaps_register_callbacks(ssaps_callbacks_t *func)
 
 - 调用时序约束：当前接口必须在 [ssaps_register_server](#ssaps_register_server) 成功返回后、发起添加服务/启动服务等异步操作之前调用
 - 依赖关系：当前接口依赖传入的回调函数集合各成员已正确初始化
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -688,13 +681,23 @@ errcode_t ssaps_register_callbacks(ssaps_callbacks_t *func)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 成功 | 注册成功 |
-| Other | 其他错误码，参考`errcode_t` | 注册失败 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 注册失败 |
 
 **参考案例**
 
 - `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
 
 ## Type definitions
+
+### typedef_errcode_t <a id="typedef_errcode_t"></a>
+
+```c
+typedef uint32_t errcode_t;
+```
+
+**使用说明**
+
+本模块返回类型为 errcode_t 的对外接口的返回值类型。
 
 ### ssaps_add_service_callback <a id="typedef_ssaps_add_service_callback"></a>
 
@@ -1070,6 +1073,12 @@ typedef struct {
 | indicate_cfm_cb | ssaps_indicate_cfm_callback | 指示确认回调函数 |
 
 ## Macros
+
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
+
+```c
+#define ERRCODE_SUCC                                        0UL
+```
 
 ### SLE_UUID_LEN <a id="SLE_UUID_LEN"></a>
 

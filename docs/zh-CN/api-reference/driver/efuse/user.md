@@ -39,16 +39,15 @@ errcode_t uapi_efuse_user_read_buffer(uint32_t offset, uint8_t *buffer, uint16_t
 
 **前置条件**
 
-- 调用时序约束：当前接口在内部依赖 eFuse 驱动已可用的状态下被调用
+- 调用时序约束：当前接口必须在 uapi_efuse_init 成功返回后调用
 - 依赖关系：当前接口依赖用户预留 eFuse 区域的起始位与位长度已在构建配置中定义（CUSTOMER_RSVD_EFUSE_START_BIT、CUSTOMER_RSVD_EFUSE_BIT_LEN）
-- 上下文限制：当前接口在内部实现中会对中断进行加锁保护，建议在任务上下文调用
+- 上下文限制：建议在任务上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | offset | uint32_t | 待读取区域在用户预留 eFuse 区域中的起始字节偏移地址 | offset 与 length 之和对应位宽不超出用户预留区域位长度，即 (offset + length) * 8 ≤ CUSTOMER_RSVD_EFUSE_BIT_LEN |
-| buffer | uint8_t * | 保存读取数据的缓冲区，由调用方分配并传入 | 不为NULL |
 | length | uint16_t | 待读取数据的长度，以字节为单位 | length ≥ 1 |
 
 **出参**
@@ -86,9 +85,9 @@ errcode_t uapi_efuse_user_write_buffer(uint32_t offset, const uint8_t *buffer, u
 
 **前置条件**
 
-- 调用时序约束：当前接口在内部依赖 eFuse 驱动已可用的状态下被调用
+- 调用时序约束：当前接口必须在 uapi_efuse_init 成功返回后调用
 - 依赖关系：当前接口依赖用户预留 eFuse 区域的起始位与位长度已在构建配置中定义（CUSTOMER_RSVD_EFUSE_START_BIT、CUSTOMER_RSVD_EFUSE_BIT_LEN）
-- 上下文限制：当前接口在内部实现中会对中断进行加锁保护，建议在任务上下文调用
+- 上下文限制：建议在任务上下文调用
 
 **入参**
 
@@ -127,9 +126,9 @@ errcode_t uapi_efuse_user_write_bit(uint32_t byte_offset, uint8_t bit_pos)
 
 **前置条件**
 
-- 调用时序约束：当前接口在内部依赖 eFuse 驱动已可用的状态下被调用
+- 调用时序约束：当前接口必须在 uapi_efuse_init 成功返回后调用
 - 依赖关系：当前接口依赖用户预留 eFuse 区域的起始位与位长度已在构建配置中定义（CUSTOMER_RSVD_EFUSE_START_BIT、CUSTOMER_RSVD_EFUSE_BIT_LEN）
-- 上下文限制：当前接口在内部实现中会对中断进行加锁保护，建议在任务上下文调用
+- 上下文限制：建议在任务上下文调用
 
 **入参**
 
@@ -151,7 +150,7 @@ errcode_t uapi_efuse_user_write_bit(uint32_t byte_offset, uint8_t bit_pos)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| EFUSE_BIT_OPERATION | 特性宏 | 支持 eFuse 位操作接口功能（接口级，包裹函数声明） | y |
+| EFUSE_BIT_OPERATION | 特性宏 | 支持 eFuse 位操作接口功能（接口级，无前缀注入宏，包裹函数声明） | 由构建目标决定 |
 
 ### uapi_efuse_user_read_bit <a id="uapi_efuse_user_read_bit"></a>
 
@@ -173,9 +172,9 @@ errcode_t uapi_efuse_user_read_bit(uint32_t byte_offset, uint8_t bit_pos, uint8_
 
 **前置条件**
 
-- 调用时序约束：当前接口在内部依赖 eFuse 驱动已可用的状态下被调用
+- 调用时序约束：当前接口必须在 uapi_efuse_init 成功返回后调用
 - 依赖关系：当前接口依赖用户预留 eFuse 区域的起始位与位长度已在构建配置中定义（CUSTOMER_RSVD_EFUSE_START_BIT、CUSTOMER_RSVD_EFUSE_BIT_LEN）
-- 上下文限制：当前接口在内部实现中会对中断进行加锁保护，建议在任务上下文调用
+- 上下文限制：建议在任务上下文调用
 
 **入参**
 
@@ -183,7 +182,6 @@ errcode_t uapi_efuse_user_read_bit(uint32_t byte_offset, uint8_t bit_pos, uint8_
 | ---- | ---- | ---- | ---- |
 | byte_offset | uint32_t | 待读取位所在字节在用户预留 eFuse 区域中的字节偏移地址 | byte_offset 与 bit_pos 对应位不超出用户预留区域位长度，即 byte_offset * 8 + bit_pos ≤ CUSTOMER_RSVD_EFUSE_BIT_LEN |
 | bit_pos | uint8_t | 待读取位在对应字节中的位位置 | 0 ~ 7 |
-| value | uint8_t * | 用于接收读取到的位值的输出指针，由调用方分配并传入 | 不为NULL |
 
 **出参**
 
@@ -204,21 +202,23 @@ errcode_t uapi_efuse_user_read_bit(uint32_t byte_offset, uint8_t bit_pos, uint8_
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| EFUSE_BIT_OPERATION | 特性宏 | 支持 eFuse 位操作接口功能（接口级，包裹函数声明） | y |
+| EFUSE_BIT_OPERATION | 特性宏 | 支持 eFuse 位操作接口功能（接口级，无前缀注入宏，包裹函数声明） | 由构建目标决定 |
 
 ## Type definitions
 
-### errcode_t <a id="typedef_errcode_t"></a> 
+### errcode_t <a id="typedef_errcode_t"></a>
+
 ```c
 typedef uint32_t errcode_t;
 ```
 
 **使用说明**
 
-本模块全部对外接口的返回值类型，表示接口执行结果。 
+本模块全部对外接口的返回值类型，表示接口执行结果。
+
 ## Macros
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC                                        0UL

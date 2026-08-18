@@ -1,4 +1,4 @@
-# DFX
+# dfx
 
 dfx (Design For eXcellence) 提供 DIAG (Diagnosis) 诊断通道的命令注册、报文上报、消息上报与统计量注册能力，并通过 diag_log 子模块提供 Error / Warning / Info / Debug 四个级别的日志打印接口。
 
@@ -46,7 +46,6 @@ errcode_t uapi_diag_register_cmd(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t cmd
 **前置条件**
 
 - 调用时序约束：DIAG 子系统已完成初始化（命令分发控制结构可用）
-- 依赖关系：传入的 cmd_tbl 必须指向有效的常量数组，cmd_num 不能为 0
 - 上下文限制：内部通过关中断保护命令表写入，调用方应避免在中断上下文中长时间持表注册
 
 **入参**
@@ -67,8 +66,8 @@ errcode_t uapi_diag_register_cmd(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t cmd
 
 **参考案例**
 
-- `middleware/chips/ws53/dfx/dfx_system_init.c`
-- `middleware/utils/dfx/zdiag/diag_system_cmd/diag_mocked_shell.c`
+- `src/middleware/chips/ws53/dfx/dfx_system_init.c`
+- `src/middleware/utils/dfx/zdiag/diag_system_cmd/diag_mocked_shell.c`
 
 ### uapi_diag_unregister_cmd <a id="uapi_diag_unregister_cmd"></a>
 
@@ -155,11 +154,11 @@ errcode_t uapi_diag_report_packet(uint16_t cmd_id, diag_option_t *option, const 
 
 **参考案例**
 
-- `middleware/chips/ws53/dfx/diag_sample_data.c`
-- `middleware/chips/ws53/dfx/sample_data_adapt.c`
-- `middleware/chips/ws53/nv/nv_zdiag/nv_adapt_zdiag.c`
-- `middleware/utils/at/at/src/at_zdiag.c`
-- `middleware/utils/dfx/zdiag/diag_system_cmd/diag_cmd_beat_heart.c`
+- `src/middleware/chips/ws53/dfx/diag_sample_data.c`
+- `src/middleware/chips/ws53/dfx/sample_data_adapt.c`
+- `src/middleware/chips/ws53/nv/nv_zdiag/nv_adapt_zdiag.c`
+- `src/middleware/utils/at/at/src/at_zdiag.c`
+- `src/middleware/utils/dfx/zdiag/diag_system_cmd/diag_cmd_beat_heart.c`
 
 ### uapi_diag_report_packets_critical <a id="uapi_diag_report_packets_critical"></a>
 
@@ -183,7 +182,7 @@ errcode_t uapi_diag_report_packets_critical(uint16_t cmd_id, diag_option_t *opti
 
 - 调用时序约束：DIAG 通道已连接（zdiag 已使能），否则直接返回失败
 - 依赖关系：packet 指针数组与 packet_size 数组的元素个数必须不小于 pkt_cnt，且各 packet[i] 缓冲区在投递完成前保持有效
-- 上下文限制：pkt_cnt 上限由 DIAG 数据 ID 容量决定（pkt_cnt 必须 < DIAG_PKT_DATA_ID_USR_MAX），超出时直接返回失败
+- 上下文限制：无特殊上下文限制
 
 **入参**
 
@@ -193,7 +192,7 @@ errcode_t uapi_diag_report_packets_critical(uint16_t cmd_id, diag_option_t *opti
 | option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址；为 NULL 时按本地默认地址处理 | 可为NULL |
 | packet | uint8_t ** | 指向数据包指针数组的指针，每个元素为一个数据包缓冲区地址 | 不为NULL |
 | packet_size | uint16_t * | 指向数据包大小数组的指针，每个元素与 packet 数组元素一一对应（单位：字节） | 不为NULL |
-| pkt_cnt | uint8_t | 数据包个数 | 1 ~ DIAG_PKT_DATA_ID_USR_MAX-1 |
+| pkt_cnt | uint8_t | 数据包个数 | 0 ~ DIAG_PKT_DATA_ID_USR_MAX-1（实现仅拒绝超出上界的值） |
 
 **返回值**
 
@@ -206,8 +205,8 @@ errcode_t uapi_diag_report_packets_critical(uint16_t cmd_id, diag_option_t *opti
 
 **参考案例**
 
-- `middleware/utils/dfx/zdiag/diag_system_cmd/diag_cmd_trace_info.c`
-- `middleware/utils/dfx/zdiag/diag_system_cmd/last_dump.c`
+- `src/middleware/utils/dfx/zdiag/diag_system_cmd/diag_cmd_trace_info.c`
+- `src/middleware/utils/dfx/zdiag/diag_system_cmd/last_dump.c`
 
 ### uapi_diag_report_packets_normal <a id="uapi_diag_report_packets_normal"></a>
 
@@ -231,7 +230,7 @@ errcode_t uapi_diag_report_packets_normal(uint16_t cmd_id, diag_option_t *option
 
 - 调用时序约束：DIAG 通道已连接（zdiag 已使能），否则直接返回失败
 - 依赖关系：packet 指针数组与 packet_size 数组的元素个数必须不小于 pkt_cnt，且各 packet[i] 缓冲区在投递完成前保持有效
-- 上下文限制：pkt_cnt 上限由 DIAG 数据 ID 容量决定（pkt_cnt 必须 < DIAG_PKT_DATA_ID_USR_MAX），超出时直接返回失败
+- 上下文限制：无特殊上下文限制
 
 **入参**
 
@@ -241,7 +240,7 @@ errcode_t uapi_diag_report_packets_normal(uint16_t cmd_id, diag_option_t *option
 | option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址；为 NULL 时按本地默认地址处理 | 可为NULL |
 | packet | uint8_t ** | 指向数据包指针数组的指针，每个元素为一个数据包缓冲区地址 | 不为NULL |
 | packet_size | uint16_t * | 指向数据包大小数组的指针，每个元素与 packet 数组元素一一对应（单位：字节） | 不为NULL |
-| pkt_cnt | uint8_t | 数据包个数 | 1 ~ DIAG_PKT_DATA_ID_USR_MAX-1 |
+| pkt_cnt | uint8_t | 数据包个数 | 0 ~ DIAG_PKT_DATA_ID_USR_MAX-1（实现仅拒绝超出上界的值） |
 
 **返回值**
 
@@ -254,7 +253,7 @@ errcode_t uapi_diag_report_packets_normal(uint16_t cmd_id, diag_option_t *option
 
 **参考案例**
 
-- `middleware/utils/dfx/zdiag/diag_system_cmd/diag_bt_sample_data.c`
+- `src/middleware/utils/dfx/zdiag/diag_system_cmd/diag_bt_sample_data.c`
 
 ### uapi_diag_report_sys_msg <a id="uapi_diag_report_sys_msg"></a>
 
@@ -288,7 +287,7 @@ errcode_t uapi_diag_report_sys_msg(uint32_t module_id, uint32_t msg_id, const ui
 | msg_id | uint32_t | 打印日志的消息 ID | 0 ~ 4294967295 |
 | buf | const uint8_t * | 打印内容缓冲区 | 不为NULL（buf_size 非 0 时） |
 | buf_size | uint16_t | 内容大小（单位：字节） | 0 ~ 65535 |
-| level | uint8_t | 日志级别 | 合法日志级别枚举值 |
+| level | uint8_t | 日志级别 | DIAG_LEVEL_DEBUG/DIAG_LEVEL_NOTICE/DIAG_LEVEL_WARNING/DIAG_LEVEL_ERROR/DIAG_LEVEL_FATAL 中有效值（由 diag 定义的日志级别枚举决定） |
 
 **返回值**
 
@@ -298,14 +297,21 @@ errcode_t uapi_diag_report_sys_msg(uint32_t module_id, uint32_t msg_id, const ui
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0 | 执行成功 | 消息成功通过过滤并投递 |
 | ERRCODE_FAIL:0xFFFFFFFF | 执行失败 | diag_rom_api 中 report_sys_msg 未注册，或消息未通过过滤判定 |
+| Other | 其他错误码，参考 errcode_t（定义于 errcode.h） | 含离线日志文件写入内存分配失败（ERRCODE_MALLOC）等 |
 
 **参考案例**
 
-- `middleware/chips/ws53/dfx/diag_adapt_sdt.c`
-- `middleware/chips/ws53/dfx/diag_sample_data.c`
-- `middleware/utils/dfx/log/log_printf.c`
-- `middleware/utils/dfx/zdiag/romable/diag_oam_log.c`
-- `middleware/utils/dfx/zdiag/zdiag_dfx.c`
+- `src/middleware/chips/ws53/dfx/diag_adapt_sdt.c`
+- `src/middleware/chips/ws53/dfx/diag_sample_data.c`
+- `src/middleware/utils/dfx/log/log_printf.c`
+- `src/middleware/utils/dfx/zdiag/romable/diag_oam_log.c`
+- `src/middleware/utils/dfx/zdiag/zdiag_dfx.c`
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_DFX_SUPPORT_OFFLINE_LOG_FILE | 特性宏 | 支持离线日志文件写入分支（分支级，DFX_FEATURE_CONFIG 宏，默认关闭） | n |
 
 ### uapi_diag_register_ind <a id="uapi_diag_register_ind"></a>
 
@@ -328,7 +334,6 @@ errcode_t uapi_diag_register_ind(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t cmd
 **前置条件**
 
 - 调用时序约束：DIAG 子系统已完成初始化（应答分发控制结构可用）
-- 依赖关系：传入的 cmd_tbl 必须指向有效的常量数组，cmd_num 不能为 0
 - 上下文限制：内部通过关中断保护应答表写入，调用方应避免在中断上下文中长时间持表注册
 
 **入参**
@@ -410,7 +415,7 @@ errcode_t uapi_diag_register_stat_obj(const diag_sys_stat_obj_t *stat_obj_tbl, u
 **前置条件**
 
 - 调用时序约束：DIAG 子系统已完成初始化（统计量控制结构可用）
-- 依赖关系：传入的 stat_obj_tbl 必须指向有效的常量数组，obj_num 不能为 0；统计量数据指针（stat_packet）需在统计量生命周期内保持有效
+- 依赖关系：统计量数据指针（stat_packet）需在统计量生命周期内保持有效
 - 上下文限制：内部通过关中断保护统计量表写入，调用方应避免在中断上下文中长时间持表注册
 
 **入参**

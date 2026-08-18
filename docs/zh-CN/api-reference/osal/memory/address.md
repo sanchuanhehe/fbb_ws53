@@ -62,7 +62,6 @@ void *osal_kmalloc(unsigned long size, unsigned int osal_gfp_flag)
 
 **前置条件**
 
-- 调用时序约束：无特殊时序要求
 - 上下文限制：在 linux 系统下，使用 OSAL_GFP_KERNEL 时不得在中断上下文调用
 
 **入参**
@@ -80,6 +79,11 @@ void *osal_kmalloc(unsigned long size, unsigned int osal_gfp_flag)
 | -------- | -------- | -------- |
 | 非NULL | 分配成功的内存块指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足 |
+
+**参考案例**
+
+- `src/application/samples/wifi/sta_sample/sta_sample.c`
+- `src/application/samples/wifi/ble_wifi_cfg_sample/ble_wifi_cfg_sample.c`
 
 ### osal_kzalloc <a id="osal_kzalloc"></a>
 
@@ -101,7 +105,6 @@ void *osal_kzalloc(unsigned long size, unsigned int osal_gfp_flag)
 
 **前置条件**
 
-- 调用时序约束：无特殊时序要求
 - 上下文限制：在 linux 系统下，使用 OSAL_GFP_KERNEL 时不得在中断上下文调用
 
 **入参**
@@ -138,11 +141,6 @@ void *osal_kmalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 - 在 linux 系统下通过 osal_gfp_flag 指定内存分配类型
 - 分配失败时返回 NULL
 
-**前置条件**
-
-- 调用时序约束：无特殊时序要求
-- 参数约束：boundary 必须为 2 的幂且最小值为 4
-
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
@@ -177,11 +175,6 @@ void *osal_kzalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 - 分配指定大小且起始地址按指定边界对齐的动态内存块并将内存内容清零
 - 在 linux 系统下通过 osal_gfp_flag 指定内存分配类型
 - 分配失败时返回 NULL
-
-**前置条件**
-
-- 调用时序约束：无特殊时序要求
-- 参数约束：boundary 必须为 2 的幂且最小值为 4
 
 **入参**
 
@@ -229,6 +222,10 @@ void osal_kfree(void *addr)
 | ---- | ---- | ---- | ---- |
 | addr | void * | 需要释放的内存块起始地址 | 由 osal_kmalloc 等分配的合法指针或 NULL |
 
+**参考案例**
+
+- `src/application/samples/wifi/sta_sample/sta_sample.c`
+
 ### osal_vmalloc <a id="osal_vmalloc"></a>
 
 ```c
@@ -261,6 +258,10 @@ void *osal_vmalloc(unsigned long size)
 | -------- | -------- | -------- |
 | 非NULL | 分配成功的虚拟内存指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足 |
+
+**参考案例**
+
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
 
 ### osal_vzalloc <a id="osal_vzalloc"></a>
 
@@ -323,6 +324,10 @@ void osal_vfree(void *addr)
 | ---- | ---- | ---- | ---- |
 | addr | void * | 需要释放的内存块起始地址 | 由 osal_vmalloc 或 osal_vzalloc 分配的合法指针或 NULL |
 
+**参考案例**
+
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+
 ### osal_pool_mem_init <a id="osal_pool_mem_init"></a>
 
 ```c
@@ -344,7 +349,6 @@ int osal_pool_mem_init(void *pool, unsigned int size)
 **前置条件**
 
 - 调用时序约束：在使用内存池分配接口之前必须先调用本接口初始化内存池
-- 参数约束：size 须小于等于内存池总大小且大于系统最小池大小；pool 地址需 4 或 8 字节对齐；初始化区域 [pool, pool + size] 不得与其他内存池冲突
 
 **入参**
 
@@ -383,7 +387,6 @@ void *osal_pool_mem_alloc(void *pool, unsigned int size)
 **前置条件**
 
 - 调用时序约束：pool 必须已通过 osal_pool_mem_init 成功初始化
-- 参数约束：size 不得超过 osal_pool_mem_init 时指定的内存池大小；size 必须 4 字节对齐
 
 **入参**
 
@@ -422,7 +425,6 @@ void *osal_pool_mem_alloc_align(void *pool, unsigned int size, unsigned int boun
 **前置条件**
 
 - 调用时序约束：pool 必须已通过 osal_pool_mem_init 成功初始化
-- 参数约束：size 不得超过 osal_pool_mem_init 时指定的内存池大小；boundary 必须为 2 的幂且最小值为 4
 
 **入参**
 
@@ -461,7 +463,6 @@ void osal_pool_mem_free(void *pool, const void *addr)
 **前置条件**
 
 - 调用时序约束：pool 必须已通过 osal_pool_mem_init 成功初始化
-- 参数约束：addr 必须由 osal_pool_mem_alloc 或 osal_pool_mem_alloc_align 从同一内存池分配
 
 **入参**
 
@@ -596,7 +597,7 @@ void *osal_ioremap_nocache(unsigned long phys_addr, unsigned long size)
 
 **前置条件**
 
-- 调用时序约束：映射后的虚拟地址须使用 osal_iounmap 释放
+- 依赖关系：映射得到的虚拟地址须在不再使用时通过 osal_iounmap 释放
 
 **入参**
 
@@ -697,7 +698,7 @@ void *osal_ioremap_wc(unsigned long phys_addr, unsigned long size)
 
 **前置条件**
 
-- 调用时序约束：映射后的虚拟地址须使用 osal_iounmap 释放
+- 依赖关系：映射得到的虚拟地址须在不再使用时通过 osal_iounmap 释放
 
 **入参**
 
@@ -797,14 +798,13 @@ void *osal_blockmem_vmap(unsigned long phys_addr, unsigned long size)
 
 **前置条件**
 
-- 参数约束：phys_addr 不得为 0，size 不得为 0 且不得超过 OSAL_ADDR_RESERVED_SIZE_MAX
 - 上下文限制：不得在中断上下文中调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| phys_addr | unsigned long | 物理地址 | 不为 0，不超过 OSAL_ADDR_RESERVED_SIZE_MAX |
+| phys_addr | unsigned long | 物理地址 | 不为 0（实现仅对 size 判上界） |
 | size | unsigned long | 需要映射的内存大小（单位：字节） | > 0，不超过 OSAL_ADDR_RESERVED_SIZE_MAX |
 
 **返回值**
@@ -861,10 +861,6 @@ void osal_blockmem_free(unsigned long phys_addr, unsigned long size)
 - 释放产品中已定义的预留内存
 - 逐页清除预留标记并释放页面
 
-**前置条件**
-
-- 参数约束：phys_addr 不得为 0，size 不得为 0
-
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
@@ -897,6 +893,12 @@ unsigned long osal_copy_from_user(void *to, const void *from, unsigned long n)
 | to | void * | 内核空间目标地址 | 不为NULL |
 | from | const void * | 用户空间源地址 | 不为NULL |
 | n | unsigned long | 需要拷贝的数据长度（单位：字节） | > 0 |
+
+**出参**
+
+| 名称 | 数据类型 | 输出说明 |
+| ---- | ---- | ---- |
+| to | void * | 从用户空间拷贝来的数据写入目标缓冲区 |
 
 **返回值**
 

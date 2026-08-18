@@ -41,8 +41,6 @@ void uapi_nv_init(void)
 **功能说明**
 
 - 初始化 NV 模块，为后续 NV 读写、备份、恢复等接口提供运行环境
-- 在使用 NV 模块的任何其它对外接口之前必须调用
-- 内部触发 NV 直接控制初始化，完成 NV 模块基础资源就绪
 
 **前置条件**
 
@@ -51,7 +49,7 @@ void uapi_nv_init(void)
 
 **参考案例**
 
-- `application/ws53/ws53_application/main.c`
+- `src/application/ws53/ws53_application/main.c`
 
 ### uapi_nv_write <a id="uapi_nv_write"></a>
 
@@ -98,8 +96,13 @@ errcode_t uapi_nv_write(uint16_t key, const uint8_t *kvalue, uint16_t kvalue_len
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
-- `application/ws53/ws53_application/bt_customize.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_ERRCODE_SUPPORT_REPORT | 特性宏 | 支持错误码上报分支（分支级，dfx Kconfig 声明） | n |
 
 ### uapi_nv_write_with_attr <a id="uapi_nv_write_with_attr"></a>
 
@@ -151,6 +154,12 @@ errcode_t uapi_nv_write_with_attr(uint16_t key, const uint8_t *kvalue, uint16_t 
 
 - `middleware/chips/ws53/factory/factory.c`
 
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_NV_SUPPORT_ENCRYPT | 特性宏 | 支持加密写分支（分支级，nv_config.h 宏，默认 NV_YES） | y |
+
 ### uapi_nv_read <a id="uapi_nv_read"></a>
 
 ```c
@@ -201,8 +210,14 @@ errcode_t uapi_nv_read(uint16_t key, uint16_t kvalue_max_length, uint16_t *kvalu
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
-- `application/ws53/ws53_application/bt_customize.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
+- `src/application/ws53/ws53_application/bt_customize.c`
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_ERRCODE_SUPPORT_REPORT | 特性宏 | 支持错误码上报分支（分支级，dfx Kconfig 声明） | n |
 
 ### uapi_nv_read_with_attr <a id="uapi_nv_read_with_attr"></a>
 
@@ -342,6 +357,12 @@ errcode_t uapi_nv_backup(const nv_backup_mode_t *backup_mode)
 
 - `middleware/chips/ws53/factory/factory.c`
 
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_NV_SUPPORT_BACKUP_RESTORE | 特性宏 | 支持备份/恢复功能（接口级，nv_config.h 宏，默认 NV_YES） | y |
+
 ### uapi_nv_set_restore_mode_all <a id="uapi_nv_set_restore_mode_all"></a>
 
 ```c
@@ -374,6 +395,12 @@ errcode_t uapi_nv_set_restore_mode_all(void)
 | ERRCODE_SUCC:0 | 执行成功 | 全量恢复标志设置成功 |
 | ERRCODE_NOT_SUPPORT:0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 特性 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_NV_SUPPORT_BACKUP_RESTORE | 特性宏 | 支持备份/恢复功能（接口级，nv_config.h 宏，默认 NV_YES） | y |
 
 ### uapi_nv_set_restore_mode_partitial <a id="uapi_nv_set_restore_mode_partitial"></a>
 
@@ -415,6 +442,12 @@ errcode_t uapi_nv_set_restore_mode_partitial(const nv_restore_mode_t *restore_mo
 | ERRCODE_NOT_SUPPORT:0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 特性 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_NV_SUPPORT_BACKUP_RESTORE | 特性宏 | 支持备份/恢复功能（接口级，nv_config.h 宏，默认 NV_YES） | y |
+
 ### uapi_nv_flush <a id="uapi_nv_flush"></a>
 
 ```c
@@ -448,6 +481,12 @@ errcode_t uapi_nv_flush(void)
 | ERRCODE_SUCC:0 | 执行成功 | RAM 中 NV 数据成功刷写到 flash |
 | ERRCODE_NOT_SUPPORT:0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_ASYNCHRONOUS_STORE` 特性 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_NV_SUPPORT_ASYNCHRONOUS_STORE | 特性宏 | 支持异步落盘功能（接口级，nv_config.h 宏，默认 NV_NO） | n |
 
 ### uapi_nv_register_change_notify_proc <a id="uapi_nv_register_change_notify_proc"></a>
 
@@ -491,6 +530,12 @@ errcode_t uapi_nv_register_change_notify_proc(uint16_t min_key, uint16_t max_key
 | ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | min_key 大于 max_key、func 为 NULL 或通知注册槽位数为 0 |
 | ERRCODE_NOT_SUPPORT:0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_CHANGE_NOTIFY` 特性 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_NV_SUPPORT_CHANGE_NOTIFY | 特性宏 | 支持变更通知功能（接口级，nv_config.h 宏，默认 NV_NO） | n |
 
 ## Type definitions
 
@@ -644,11 +689,11 @@ typedef struct {
 ### NV_NORMAL_KVALUE_MAX_LEN <a id="NV_NORMAL_KVALUE_MAX_LEN"></a>
 
 ```c
-#define NV_NORMAL_KVALUE_MAX_LEN     4060
+#define NV_NORMAL_KVALUE_MAX_LEN     4060           /* 普通NV的最大数据长度 */
 ```
 
 ### NV_ENCRYPTED_KVALUE_MAX_LEN <a id="NV_ENCRYPTED_KVALUE_MAX_LEN"></a>
 
 ```c
-#define NV_ENCRYPTED_KVALUE_MAX_LEN  4032
+#define NV_ENCRYPTED_KVALUE_MAX_LEN  4032           /* 加密NV的最大数据长度 */
 ```

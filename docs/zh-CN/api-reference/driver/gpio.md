@@ -47,8 +47,7 @@ void uapi_gpio_init(void)
 **功能说明**
 
 - 初始化 GPIO 模块，为后续引脚方向、电平、中断等操作建立基础运行环境
-- 通过内部初始化标志保证重复调用时的幂等性，已初始化时直接返回
-- 必须在模块内所有其他接口之前调用
+- 已初始化时重复调用直接返回成功
 
 **前置条件**
 
@@ -74,7 +73,7 @@ void uapi_gpio_deinit(void)
 **功能说明**
 
 - 去初始化 GPIO 模块，释放初始化状态
-- 通过内部初始化标志保证在未初始化时调用直接返回
+- 未初始化时调用直接返回
 - 与 uapi_gpio_init() 配对使用
 
 **前置条件**
@@ -96,13 +95,13 @@ errcode_t uapi_gpio_set_dir(pin_t pin, gpio_direction_t dir)
 **功能说明**
 
 - 设置指定 GPIO 引脚的输入或输出方向
-- 通过临界区保护保证方向配置操作的原子性
+- 方向配置操作具备原子性
 - 返回操作执行结果
 
 **前置条件**
 
 - 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
-- 上下文限制：内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
@@ -198,13 +197,13 @@ errcode_t uapi_gpio_set_val(pin_t pin, gpio_level_t level)
 **功能说明**
 
 - 设置指定 GPIO 引脚的输出电平（高或低）
-- 通过临界区保护保证输出电平写入操作的原子性
+- 输出电平写入操作具备原子性
 - 返回操作执行结果
 
 **前置条件**
 
 - 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用，且引脚应已配置为输出方向
-- 上下文限制：内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
@@ -337,13 +336,13 @@ errcode_t uapi_gpio_toggle(pin_t pin)
 **功能说明**
 
 - 翻转指定 GPIO 引脚的输出电平状态（高变低、低变高）
-- 通过临界区保护保证翻转操作的原子性
+- 翻转操作具备原子性
 - 返回操作执行结果
 
 **前置条件**
 
 - 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用，且引脚应已配置为输出方向
-- 上下文限制：内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
@@ -386,13 +385,13 @@ errcode_t uapi_gpio_set_isr_mode(pin_t pin, uint32_t trigger)
 **功能说明**
 
 - 设置指定 GPIO 引脚的中断触发模式（上升沿、下降沿、双边沿、高/低电平）
-- 通过临界区保护保证中断模式配置操作的原子性
+- 中断模式配置操作具备原子性
 - 返回操作执行结果
 
 **前置条件**
 
 - 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
-- 上下文限制：内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
@@ -437,13 +436,13 @@ errcode_t uapi_gpio_register_isr_func(pin_t pin, uint32_t trigger, gpio_callback
 **功能说明**
 
 - 为指定 GPIO 引脚注册中断回调函数，并设置中断触发模式
-- 注册后当中断触发时由底层中断处理流程调用注册的回调
-- 通过临界区保护保证注册操作的原子性
+- 中断触发时调用已注册的回调函数
+- 注册操作具备原子性
 
 **前置条件**
 
 - 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
-- 上下文限制：内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
@@ -488,13 +487,13 @@ errcode_t uapi_gpio_unregister_isr_func(pin_t pin)
 **功能说明**
 
 - 去注册指定 GPIO 引脚已注册的中断回调
-- 通过临界区保护保证去注册操作的原子性
+- 去注册操作具备原子性
 - 返回操作执行结果
 
 **前置条件**
 
 - 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
-- 上下文限制：内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
@@ -533,13 +532,13 @@ errcode_t uapi_gpio_enable_interrupt(pin_t pin)
 **功能说明**
 
 - 使能指定 GPIO 引脚的中断
-- 通过临界区保护保证使能操作的原子性
+- 使能操作具备原子性
 - 返回操作执行结果
 
 **前置条件**
 
 - 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用，且已通过 uapi_gpio_register_isr_func() 完成回调注册
-- 上下文限制：内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
@@ -582,13 +581,13 @@ errcode_t uapi_gpio_disable_interrupt(pin_t pin)
 **功能说明**
 
 - 去使能指定 GPIO 引脚的中断
-- 通过临界区保护保证去使能操作的原子性
+- 去使能操作具备原子性
 - 返回操作执行结果
 
 **前置条件**
 
 - 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
-- 上下文限制：内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
@@ -631,13 +630,13 @@ errcode_t uapi_gpio_clear_interrupt(pin_t pin)
 **功能说明**
 
 - 清除指定 GPIO 引脚已触发的中断
-- 通过临界区保护保证清除操作的原子性
+- 清除操作具备原子性
 - 返回操作执行结果
 
 **前置条件**
 
 - 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
-- 上下文限制：内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
@@ -760,7 +759,7 @@ void uapi_gpio_select_core(pin_t pin, cores_t core)
 **功能说明**
 
 - 选择指定 GPIO 引脚归属的核心
-- 将引脚的中断处理归属配置到指定核心
+- 当前芯片版本上此接口不产生实际配置效果
 
 **入参**
 
@@ -785,9 +784,49 @@ typedef void (*gpio_callback_t)(pin_t pin, uintptr_t param);
 
 **使用说明**
 
-用于 uapi_gpio_register_isr_func() 注册中断回调。当指定引脚的中断触发时被底层中断处理流程调用，回调参数 pin 为产生中断的引脚编号，param 为透传给回调的上下文参数。
+用于 uapi_gpio_register_isr_func() 注册中断回调。当指定引脚的中断触发时被调用，回调参数 pin 为产生中断的引脚编号，param 为透传给回调的上下文参数。
 
-### pin_t <a id="pin_t"></a>
+### errcode_t <a id="typedef_errcode_t"></a>
+
+```c
+typedef uint32_t errcode_t;
+```
+
+**使用说明**
+
+错误码类型，作为本模块多个 GPIO 接口的返回值类型。
+
+## Enumerations
+
+### enum gpio_direction <a id="enum_gpio_direction"></a>
+
+```c
+typedef enum gpio_direction {
+    GPIO_DIRECTION_INPUT,
+    GPIO_DIRECTION_OUTPUT
+} gpio_direction_t;
+```
+
+| 枚举成员 | 取值 | 描述 |
+| ------- | ---- | ---- |
+| GPIO_DIRECTION_INPUT | 0 | 输入方向 |
+| GPIO_DIRECTION_OUTPUT | 1 | 输出方向 |
+
+### enum gpio_level <a id="enum_gpio_level"></a>
+
+```c
+typedef enum gpio_level {
+    GPIO_LEVEL_LOW,
+    GPIO_LEVEL_HIGH
+} gpio_level_t;
+```
+
+| 枚举成员 | 取值 | 描述 |
+| ------- | ---- | ---- |
+| GPIO_LEVEL_LOW | 0 | 低电平 |
+| GPIO_LEVEL_HIGH | 1 | 高电平 |
+
+### enum pin_t <a id="pin_t"></a>
 
 ```c
 typedef enum {
@@ -846,10 +885,52 @@ typedef enum {
 } pin_t;
 ```
 
-**使用说明**
+| 枚举成员 | 取值 | 描述 |
+| ------- | ---- | ---- |
+| S_MGPIO0 | 0 | 主 GPIO 引脚 0 |
+| S_MGPIO1 | 38 | 主 GPIO 引脚 1，与 AGPIO6（AON 域）复用 |
+| S_MGPIO2 | 2 | 主 GPIO 引脚 2 |
+| S_MGPIO3 | 3 | 主 GPIO 引脚 3 |
+| S_MGPIO4 | 4 | 主 GPIO 引脚 4 |
+| S_MGPIO5 | 5 | 主 GPIO 引脚 5 |
+| S_MGPIO6 | 32 | 主 GPIO 引脚 6，与 AGPIO0（AON 域）复用 |
+| S_MGPIO7 | 41 | 主 GPIO 引脚 7，与 AGPIO9（AON 域）复用 |
+| S_MGPIO8 | 8 | 主 GPIO 引脚 8 |
+| S_MGPIO9 | 9 | 主 GPIO 引脚 9 |
+| S_MGPIO10 | 10 | 主 GPIO 引脚 10 |
+| S_MGPIO11 | 39 | 主 GPIO 引脚 11，与 AGPIO7（AON 域）复用 |
+| S_MGPIO12 | 12 | 主 GPIO 引脚 12 |
+| S_MGPIO13 | 13 | 主 GPIO 引脚 13 |
+| S_MGPIO14 | 45 | 主 GPIO 引脚 14，与 SGPIO0（安全 GPIO）同编号 |
+| S_MGPIO15 | 46 | 主 GPIO 引脚 15，与 SGPIO1（安全 GPIO）同编号 |
+| S_MGPIO16 | 40 | 主 GPIO 引脚 16，与 AGPIO8（AON 域）复用 |
+| S_MGPIO17 | 17 | 主 GPIO 引脚 17 |
+| S_MGPIO18 | 18 | 主 GPIO 引脚 18 |
+| S_MGPIO19 | 19 | 主 GPIO 引脚 19 |
+| S_MGPIO20 | 20 | 主 GPIO 引脚 20 |
+| S_MGPIO21 | 47 | 主 GPIO 引脚 21，与 SGPIO2（安全 GPIO）同编号 |
+| S_MGPIO22 | 22 | 主 GPIO 引脚 22（23~29 未引出） |
+| S_MGPIO30 | 30 | 主 GPIO 引脚 30 |
+| S_MGPIO31 | 31 | 主 GPIO 引脚 31 |
+| S_AGPIO0 | 32 | 常开域 GPIO 引脚 0，等同 S_MGPIO6 |
+| S_AGPIO1 | 33 | 常开域 GPIO 引脚 1 |
+| S_AGPIO2 | 34 | 常开域 GPIO 引脚 2 |
+| S_AGPIO3 | 35 | 常开域 GPIO 引脚 3 |
+| S_AGPIO4 | 36 | 常开域 GPIO 引脚 4 |
+| S_AGPIO5 | 37 | 常开域 GPIO 引脚 5 |
+| S_AGPIO6 | 38 | 常开域 GPIO 引脚 6，等同 S_MGPIO1 |
+| S_AGPIO7 | 39 | 常开域 GPIO 引脚 7，等同 S_MGPIO11 |
+| S_AGPIO8 | 40 | 常开域 GPIO 引脚 8，等同 S_MGPIO16 |
+| S_AGPIO9 | 41 | 常开域 GPIO 引脚 9，等同 S_MGPIO7 |
+| S_AGPIO10 | 42 | 常开域 GPIO 引脚 10（RTC_IN） |
+| S_AGPIO11 | 43 | 常开域 GPIO 引脚 11（RTC_OUT） |
+| S_AGPIO12 | 44 | 常开域 GPIO 引脚 12（RST_N，不能作为 GPIO、不能配置 pinmux，可配置 padctrl） |
+| S_SGPIO0 | 45 | 安全 GPIO 引脚 0，与 MGPIO14 同编号 |
+| S_SGPIO1 | 46 | 安全 GPIO 引脚 1，与 MGPIO15 同编号 |
+| S_SGPIO2 | 47 | 安全 GPIO 引脚 2，与 MGPIO21 同编号 |
+| PIN_NONE | 48 | 无效/未使用的引脚编号 |
 
-引脚编号枚举类型，作为本模块 GPIO 接口的引脚入参类型。各成员对应具体硬件引脚编号，PIN_NONE 表示无效/未使用的引脚编号。 
-### cores_t <a id="cores_t"></a>
+### enum cores_t <a id="cores_t"></a>
 
 ```c
 typedef enum {
@@ -879,68 +960,43 @@ typedef enum {
 } cores_t;
 ```
 
-**使用说明**
-
-核心选择枚举类型，用于 uapi_gpio_select_core() 指定引脚归属的核心。 
-### errcode_t <a id="typedef_errcode_t"></a> 
-```c
-typedef uint32_t errcode_t;
-```
-
-**使用说明**
-
-错误码类型，作为本模块多个 GPIO 接口的返回值类型。 
-## Enumerations
-
-### enum gpio_direction <a id="enum_gpio_direction"></a>
-
-```c
-typedef enum gpio_direction {
-    GPIO_DIRECTION_INPUT,
-    GPIO_DIRECTION_OUTPUT
-} gpio_direction_t;
-```
-
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| GPIO_DIRECTION_INPUT | 0 | 输入方向 |
-| GPIO_DIRECTION_OUTPUT | 1 | 输出方向 |
-
-### enum gpio_level <a id="enum_gpio_level"></a>
-
-```c
-typedef enum gpio_level {
-    GPIO_LEVEL_LOW,
-    GPIO_LEVEL_HIGH
-} gpio_level_t;
-```
-
-| 枚举成员 | 取值 | 描述 |
-| ------- | ---- | ---- |
-| GPIO_LEVEL_LOW | 0 | 低电平 |
-| GPIO_LEVEL_HIGH | 1 | 高电平 |
+| CORES_BT_CORE | 0 | BT 核心 |
+| CORES_PROTOCOL_CORE | 1 | 协议核心（Hifi） |
+| CORES_APPS_CORE | 2 | 应用核心 |
+| CORES_EXTERN0_CORE | 3 | 外部核心 0（Gnss 或 Hifi） |
+| CORES_GNSS_CORE | 3 | GNSS 核心（GNSS_EXIST 启用时，等同 CORES_EXTERN0_CORE） |
+| CORES_HIFI1_CORE | 3 | HIFI1 核心（GNSS_EXIST 未启用时，等同 CORES_EXTERN0_CORE） |
+| CORES_EXTERN1_CORE | 4 | 外部核心 1（Sec 或 Sensor） |
+| CORES_SEN_CORE | 4 | Sensor 核心（SENSOR_EXIST 启用时，等同 CORES_EXTERN1_CORE） |
+| CORES_SEC_CORE | 4 | 安全核心（SENSOR_EXIST 未启用时，等同 CORES_EXTERN1_CORE） |
+| CORES_MAX_NUMBER_PHYSICAL | 3（CORE_NUMS < 3 时）/ 5（否则） | 物理核心数量上限 |
+| CORES_NONE | 同 CORES_MAX_NUMBER_PHYSICAL | 无核心 |
+| CORES_ASSET_CORE | 同 CORES_MAX_NUMBER_PHYSICAL | 资产存储核心 |
+| CORES_UNKNOWN | 同 CORES_MAX_NUMBER_PHYSICAL + 1 | 未知核心 |
 
 ## Macros
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC                                        0UL
 ```
 
-### ERRCODE_FAIL <a id="ERRCODE_FAIL"></a> [SDK公共共享宏]
+### ERRCODE_FAIL <a id="ERRCODE_FAIL"></a>
 
 ```c
 #define ERRCODE_FAIL                                        0xFFFFFFFF
 ```
 
-### ERRCODE_GPIO_NOT_INIT <a id="ERRCODE_GPIO_NOT_INIT"></a> [SDK公共共享宏]
+### ERRCODE_GPIO_NOT_INIT <a id="ERRCODE_GPIO_NOT_INIT"></a>
 
 ```c
 #define ERRCODE_GPIO_NOT_INIT                               0x80001001
 ```
 
-### ERRCODE_GPIO_DIR_SET_FAIL <a id="ERRCODE_GPIO_DIR_SET_FAIL"></a> [SDK公共共享宏]
+### ERRCODE_GPIO_DIR_SET_FAIL <a id="ERRCODE_GPIO_DIR_SET_FAIL"></a>
 
 ```c
 #define ERRCODE_GPIO_DIR_SET_FAIL                           0x80001000

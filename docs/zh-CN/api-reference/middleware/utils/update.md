@@ -46,7 +46,7 @@ errcode_t uapi_upg_init(const upg_func_t *func_list)
 **功能说明**
 
 - 初始化升级模块，注册内存分配、释放和串口输出函数
-- 设置模块内部状态为已初始化
+- 标记升级模块为已初始化
 - 获取并保存当前升级状态
 
 **前置条件**
@@ -59,7 +59,7 @@ errcode_t uapi_upg_init(const upg_func_t *func_list)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func_list | [upg_func_t](#struct_upg_func)* | 升级模块使用的注册函数列表 | 非NULL |
+| func_list | [upg_func_t](#struct_upg_func)* | 升级模块使用的注册函数列表 | 允许为 NULL（实现接受 NULL，按默认函数表处理） |
 
 **返回值**
 
@@ -79,8 +79,8 @@ errcode_t uapi_upg_init(const upg_func_t *func_list)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_start <a id="uapi_upg_start"></a>
 
@@ -125,8 +125,8 @@ errcode_t uapi_upg_start(void)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_register_progress_callback <a id="uapi_upg_register_progress_callback"></a>
 
@@ -154,7 +154,7 @@ errcode_t uapi_upg_register_progress_callback(uapi_upg_progress_cb func)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [uapi_upg_progress_cb](#typedef_uapi_upg_progress_cb) | 进度通知回调函数指针；升级过程中按进度百分比调用 | 非NULL |
+| func | [uapi_upg_progress_cb](#typedef_uapi_upg_progress_cb) | 进度通知回调函数指针；升级过程中按进度百分比调用 | 允许为 NULL（实现接受 NULL，直接赋值） |
 
 **返回值**
 
@@ -174,8 +174,12 @@ errcode_t uapi_upg_register_progress_callback(uapi_upg_progress_cb func)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| UPG_CFG_PROCESS_NOTIFY_SUPPORT | 特性宏 | 支持升级进度通知功能（接口级，无前缀注入宏，包裹实现体，upg_config.h 默认 YES） | y |
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_get_result <a id="uapi_upg_get_result"></a>
 
@@ -220,8 +224,8 @@ errcode_t uapi_upg_get_result(upg_result_t *result, uint32_t *last_image_index)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_get_status <a id="uapi_upg_get_status"></a>
 
@@ -238,7 +242,7 @@ upg_status_t uapi_upg_get_status(void)
 **功能说明**
 
 - 获取当前升级状态，包括成功、失败、升级中或非升级状态
-- 返回初始化时从升级标记区读取并缓存的状态值
+- 返回从升级标记区读取并缓存的状态值
 
 **前置条件**
 
@@ -259,8 +263,8 @@ upg_status_t uapi_upg_get_status(void)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_prepare <a id="uapi_upg_prepare"></a>
 
@@ -307,8 +311,8 @@ errcode_t uapi_upg_prepare(upg_prepare_info_t *prepare_info)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_reset_upgrade_flag <a id="uapi_upg_reset_upgrade_flag"></a>
 
@@ -351,8 +355,8 @@ errcode_t uapi_upg_reset_upgrade_flag(void)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_write_package_async <a id="uapi_upg_write_package_async"></a>
 
@@ -370,7 +374,6 @@ errcode_t uapi_upg_write_package_async(uint32_t offset, const uint8_t *buff, uin
 
 - 将升级包数据异步写入本地存储，写入完成后调用回调函数通知结果
 - 写入位置由相对升级包起始的偏移量指定
-- 回调函数被调用且返回写成功才能继续写下一个数据包，在此之前禁止再次调用该接口
 
 **前置条件**
 
@@ -385,7 +388,7 @@ errcode_t uapi_upg_write_package_async(uint32_t offset, const uint8_t *buff, uin
 | offset | uint32_t | 相对升级包开头的偏移 | 0 ~ 升级包大小-1 |
 | buff | const uint8_t* | 存放升级包数据的缓冲区 | 非NULL |
 | len | uint16_t | 升级包数据缓冲区的长度 | > 0 |
-| callback | [uapi_upg_write_done_cb](#typedef_uapi_upg_write_done_cb) | 写入完成的回调函数 | 非NULL |
+| callback | [uapi_upg_write_done_cb](#typedef_uapi_upg_write_done_cb) | 写入完成的回调函数 | 允许为 NULL（实现接受 NULL，无回调时不通知） |
 
 **返回值**
 
@@ -404,8 +407,8 @@ errcode_t uapi_upg_write_package_async(uint32_t offset, const uint8_t *buff, uin
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_write_package_sync <a id="uapi_upg_write_package_sync"></a>
 
@@ -454,8 +457,8 @@ errcode_t uapi_upg_write_package_sync(uint32_t offset, const uint8_t *buff, uint
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_read_package <a id="uapi_upg_read_package"></a>
 
@@ -503,8 +506,8 @@ errcode_t uapi_upg_read_package(uint32_t offset, uint8_t *buff, uint32_t len)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_get_storage_size <a id="uapi_upg_get_storage_size"></a>
 
@@ -540,8 +543,8 @@ uint32_t uapi_upg_get_storage_size(void)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_request_upgrade <a id="uapi_upg_request_upgrade"></a>
 
@@ -589,8 +592,8 @@ errcode_t uapi_upg_request_upgrade(bool reset)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_verify_file_head <a id="uapi_upg_verify_file_head"></a>
 
@@ -636,8 +639,13 @@ errcode_t uapi_upg_verify_file_head(const upg_package_header_t *pkg_header)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| UPG_CFG_VERIFICATION_SUPPORT | 特性宏 | 支持升级包校验分支（分支级，upg_config.h 默认 YES） | y |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG_SAMPLE_VERIFY | 特性宏 | 样例自校验分支（分支级，构建系统注入） | n |
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_verify_file_image <a id="uapi_upg_verify_file_image"></a>
 
@@ -685,8 +693,13 @@ errcode_t uapi_upg_verify_file_image(const upg_image_header_t *img_header, const
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| UPG_CFG_VERIFICATION_SUPPORT | 特性宏 | 支持升级包校验分支（分支级，upg_config.h 默认 YES） | y |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG_SAMPLE_VERIFY | 特性宏 | 样例自校验分支（分支级，构建系统注入） | n |
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_verify_file <a id="uapi_upg_verify_file"></a>
 
@@ -735,8 +748,13 @@ errcode_t uapi_upg_verify_file(const upg_package_header_t *pkg_header)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | 控制 update 模块参与编译 | n |
-| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | 支持 FOTA 功能（接口级） | n |
+| UPG_CFG_VERIFICATION_SUPPORT | 特性宏 | 支持升级包校验分支（分支级，upg_config.h 默认 YES） | y |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG_SAMPLE_VERIFY | 特性宏 | 样例自校验分支（分支级，构建系统注入） | n |
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_MIDDLEWARE_SUPPORT_UPDATE | 编译参与宏 | update 组件纳入编译的组件集配置（ws53 组件集） | n |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 编译参与宏 | 支持 FOTA 功能（接口级） | n |
 
 ### uapi_upg_register_user_defined_verify_func <a id="uapi_upg_register_user_defined_verify_func"></a>
 
@@ -763,8 +781,15 @@ void uapi_upg_register_user_defined_verify_func(uapi_upg_user_defined_check func
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [uapi_upg_user_defined_check](#typedef_uapi_upg_user_defined_check) | 用于校验用户自定义字段的校验函数 | 非NULL |
+| func | [uapi_upg_user_defined_check](#typedef_uapi_upg_user_defined_check) | 用于校验用户自定义字段的校验函数 | 允许为 NULL（实现接受 NULL，直接赋值） |
 | param | uintptr_t | 注册参数，透传给校验函数 | 不限 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| UPG_CFG_VERIFICATION_SUPPORT | 特性宏 | 支持升级包校验分支（接口级，upg_config.h 默认 YES） | y |
+| CONFIG_MIDDLEWARE_SUPPORT_UPG | 特性宏 | update 组件纳入编译的组件集配置（编译参与宏） | y |
 
 ## Type definitions
 
@@ -992,26 +1017,6 @@ typedef struct upg_fota_info_data {
 | hardware_id | uint32_t | 硬件 ID |
 | user_defined | uint8_t[INFO_AREA_USER_LEN] | 预留字节供用户自定义使用 |
 | sign_fota_info | uint8_t[SIG_LEN] | FOTA 信息签名 |
-
-### upg_image_hash_node <a id="struct_upg_image_hash_node"></a>
-
-```c
-typedef struct upg_image_hash_node {
-    uint32_t image_id;
-    uint32_t image_addr;
-    uint32_t image_length;
-    uint8_t image_hash[SHA_256_LENGTH];
-} upg_image_hash_node_t;
-```
-
-**成员说明**
-
-| 成员名称 | 数据类型 | 描述 |
-| ------- | ------- | ---- |
-| image_id | uint32_t | FOTA 密钥区域的标识 |
-| image_addr | uint32_t | 镜像头偏移量 |
-| image_length | uint32_t | 镜像长度 |
-| image_hash | uint8_t[SHA_256_LENGTH] | 镜像头的哈希 |
 
 ### upg_package_header <a id="struct_upg_package_header"></a>
 

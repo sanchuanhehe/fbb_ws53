@@ -44,13 +44,13 @@ void uapi_pin_init(void)
 **功能说明**
 
 - 初始化 Pinctrl 模块
-- 注册底层 HAL 引脚操作接口实例
-- 本模块其他接口的调用前提
+- 作为本模块引脚配置接口的初始化入口
+- 返回初始化执行结果
 
 **前置条件**
 
 - 调用时序约束：当前接口必须在其他本模块函数被调用前执行
-- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已实现
+- 依赖关系：当前接口依赖底层 HAL (Hardware Abstraction Layer) 引脚操作接口已实现
 
 **参考案例**
 
@@ -71,8 +71,8 @@ void uapi_pin_deinit(void)
 **功能说明**
 
 - 去初始化 Pinctrl 模块
-- 注销底层 HAL 引脚操作接口实例
 - 释放本模块占用的引脚操作资源
+- 返回去初始化执行结果
 
 **前置条件**
 
@@ -99,7 +99,7 @@ errcode_t uapi_pin_set_mode(pin_t pin, pin_mode_t mode)
 
 - 设置指定引脚的复用模式
 - 支持对单个引脚配置其复用功能选择
-- 配置操作受中断保护，保证设置过程原子性
+- 配置操作具备原子性
 
 **前置条件**
 
@@ -120,9 +120,8 @@ errcode_t uapi_pin_set_mode(pin_t pin, pin_mode_t mode)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 设置引脚复用模式成功 |
-| [ERRCODE_PIN_INVALID_PARAMETER](#ERRCODE_PIN_INVALID_PARAMETER):0x80001190 | 参数无效 | pin 大于等于 PIN_MAX_NUMBER 或 mode 大于等于 PIN_MODE_MAX |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
 | [ERRCODE_PIN_MODE_NO_FUNC](#ERRCODE_PIN_MODE_NO_FUNC):0x80001191 | 模式无效 | 引脚不支持指定的复用模式 |
-| [ERRCODE_PIN_NOT_INIT](#ERRCODE_PIN_NOT_INIT):0x80001192 | 未初始化 | HAL 引脚操作接口未注册 |
 
 **参考案例**
 
@@ -144,7 +143,7 @@ pin_mode_t uapi_pin_get_mode(pin_t pin)
 
 - 获取指定引脚的复用模式
 - 返回值类型为 pin_mode_t，取值为引脚复用模式枚举
-- 读取操作受中断保护，保证读取过程原子性
+- 读取操作具备原子性
 
 **前置条件**
 
@@ -186,7 +185,7 @@ errcode_t uapi_pin_set_ds(pin_t pin, pin_drive_strength_t ds)
 
 - 设置指定引脚的驱动能力
 - 支持对单个引脚配置其驱动强度等级
-- 配置操作受中断保护，保证设置过程原子性
+- 配置操作具备原子性
 
 **前置条件**
 
@@ -207,8 +206,7 @@ errcode_t uapi_pin_set_ds(pin_t pin, pin_drive_strength_t ds)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 设置引脚驱动能力成功 |
-| [ERRCODE_PIN_INVALID_PARAMETER](#ERRCODE_PIN_INVALID_PARAMETER):0x80001190 | 参数无效 | pin 大于等于 PIN_MAX_NUMBER 或 ds 大于等于 PIN_DS_MAX |
-| [ERRCODE_PIN_NOT_INIT](#ERRCODE_PIN_NOT_INIT):0x80001192 | 未初始化 | HAL 引脚操作接口未注册 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
 
 **参考案例**
 
@@ -230,7 +228,7 @@ pin_drive_strength_t uapi_pin_get_ds(pin_t pin)
 
 - 获取指定引脚的驱动能力
 - 返回值类型为 pin_drive_strength_t，取值为驱动能力等级枚举
-- 读取操作受中断保护，保证读取过程原子性
+- 读取操作具备原子性
 
 **前置条件**
 
@@ -272,7 +270,7 @@ errcode_t uapi_pin_set_pull(pin_t pin, pin_pull_t pull_type)
 
 - 设置指定引脚的上下拉状态
 - 支持对单个引脚配置无上下拉、上拉或下拉
-- 配置操作受中断保护，保证设置过程原子性
+- 配置操作具备原子性
 
 **前置条件**
 
@@ -293,8 +291,7 @@ errcode_t uapi_pin_set_pull(pin_t pin, pin_pull_t pull_type)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 设置引脚上下拉状态成功 |
-| [ERRCODE_PIN_INVALID_PARAMETER](#ERRCODE_PIN_INVALID_PARAMETER):0x80001190 | 参数无效 | pin 大于等于 PIN_MAX_NUMBER 或 pull_type 大于等于 PIN_PULL_MAX |
-| [ERRCODE_PIN_NOT_INIT](#ERRCODE_PIN_NOT_INIT):0x80001192 | 未初始化 | HAL 引脚操作接口未注册 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
 
 **参考案例**
 
@@ -316,7 +313,7 @@ pin_pull_t uapi_pin_get_pull(pin_t pin)
 
 - 获取指定引脚的上下拉状态
 - 返回值类型为 pin_pull_t，取值为上下拉类型枚举
-- 读取操作受中断保护，保证读取过程原子性
+- 读取操作具备原子性
 
 **前置条件**
 
@@ -358,7 +355,7 @@ errcode_t uapi_pin_set_ie(pin_t pin, pin_input_enable_t ie)
 
 - 设置指定引脚的输入使能状态
 - 支持对单个引脚配置其输入缓冲使能开关
-- 配置操作受中断保护，保证设置过程原子性
+- 配置操作具备原子性
 
 **前置条件**
 
@@ -379,8 +376,7 @@ errcode_t uapi_pin_set_ie(pin_t pin, pin_input_enable_t ie)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 设置引脚输入使能状态成功 |
-| [ERRCODE_PIN_INVALID_PARAMETER](#ERRCODE_PIN_INVALID_PARAMETER):0x80001190 | 参数无效 | pin 大于等于 PIN_MAX_NUMBER 或 ie 大于等于 PIN_IE_MAX |
-| [ERRCODE_PIN_NOT_INIT](#ERRCODE_PIN_NOT_INIT):0x80001192 | 未初始化 | HAL 引脚操作接口未注册 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
 
 **参考案例**
 
@@ -410,7 +406,7 @@ pin_input_enable_t uapi_pin_get_ie(pin_t pin)
 
 - 获取指定引脚的输入使能状态
 - 返回值类型为 pin_input_enable_t，取值为输入使能状态枚举
-- 读取操作受中断保护，保证读取过程原子性
+- 读取操作具备原子性
 
 **前置条件**
 
@@ -454,7 +450,7 @@ errcode_t uapi_pin_set_st(pin_t pin, pin_schmitt_trigger_t st)
 
 - 设置指定引脚的施密特触发状态
 - 支持对单个引脚配置其施密特触发使能开关
-- 配置操作受中断保护，保证设置过程原子性
+- 配置操作具备原子性
 
 **前置条件**
 
@@ -475,8 +471,7 @@ errcode_t uapi_pin_set_st(pin_t pin, pin_schmitt_trigger_t st)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 设置引脚施密特触发状态成功 |
-| [ERRCODE_PIN_INVALID_PARAMETER](#ERRCODE_PIN_INVALID_PARAMETER):0x80001190 | 参数无效 | pin 大于等于 PIN_MAX_NUMBER 或 st 大于等于 PIN_ST_MAX |
-| [ERRCODE_PIN_NOT_INIT](#ERRCODE_PIN_NOT_INIT):0x80001192 | 未初始化 | HAL 引脚操作接口未注册 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
 
 **参考案例**
 
@@ -504,7 +499,7 @@ pin_schmitt_trigger_t uapi_pin_get_st(pin_t pin)
 
 - 获取指定引脚的施密特触发状态
 - 返回值类型为 pin_schmitt_trigger_t，取值为施密特触发状态枚举
-- 读取操作受中断保护，保证读取过程原子性
+- 读取操作具备原子性
 
 **前置条件**
 
@@ -547,7 +542,7 @@ errcode_t uapi_pin_suspend(uintptr_t arg)
 **功能说明**
 
 - 挂起 Pinctrl，用于低功耗进入前的引脚配置保存
-- 调用底层 HAL 挂起接口完成引脚配置保存
+- 挂起前保存引脚配置
 - 支持透传挂起所需参数
 
 **前置条件**
@@ -595,7 +590,7 @@ errcode_t uapi_pin_resume(uintptr_t arg)
 **功能说明**
 
 - 恢复 Pinctrl，用于低功耗退出后的引脚配置恢复
-- 调用底层 HAL 恢复接口完成引脚配置恢复
+- 恢复挂起前保存的引脚配置
 - 支持透传恢复所需参数
 
 **前置条件**
@@ -638,13 +633,13 @@ typedef uint32_t errcode_t;
 
 **使用说明**
 
-被本模块所有返回 errcode_t 的对外接口（uapi_pin_set_mode、uapi_pin_set_ds、uapi_pin_set_pull、uapi_pin_set_ie、uapi_pin_set_st、uapi_pin_suspend、uapi_pin_resume）作为返回值类型。 
+本模块返回类型为 errcode_t 的对外接口的返回值类型。
+
 ## Enumerations
 
 ### enum_pin_t <a id="enum_pin_t"></a>
 
 ```c
-// 源码原始定义，保留注释
 typedef enum {
     S_MGPIO0  = 0,
     S_MGPIO1  = 38, // MGPIO1 <=> AGPIO6 (AON)
@@ -669,6 +664,13 @@ typedef enum {
     S_MGPIO20 = 20,
     S_MGPIO21 = 47, // same as SGPIO2 (SEC GPIO)
     S_MGPIO22 = 22,
+    // 23
+    // 24 S_MGPIO24 not pin out
+    // 25 S_MGPIO25 not pin out
+    // 26 S_MGPIO26 not pin out
+    // 27 S_MGPIO27 not pin out
+    // 28 S_MGPIO28 not pin out
+    // 29 S_MGPIO29 not pin out
     S_MGPIO30 = 30,
     S_MGPIO31 = 31,
 
@@ -741,11 +743,11 @@ typedef enum {
 
 **使用说明**
 
-被本模块所有对外接口的 pin 入参作为引脚编号类型。 
+本模块对外接口的引脚编号入参类型。
+
 ### enum_pin_mode_t <a id="enum_pin_mode_t"></a>
 
 ```c
-// 源码原始定义
 typedef enum {
     PIN_MODE_0        = 0,
     PIN_MODE_1        = 1,
@@ -773,12 +775,11 @@ typedef enum {
 
 **使用说明**
 
-被 uapi_pin_set_mode 入参与 uapi_pin_get_mode 返回值使用。
+引脚复用模式类型，用于引脚模式配置与查询。
 
 ### enum_pin_drive_strength_t <a id="enum_pin_drive_strength_t"></a>
 
 ```c
-// 源码原始定义
 typedef enum {
     PIN_DS_0    = 0,
     PIN_DS_1    = 1,
@@ -822,12 +823,11 @@ typedef enum {
 
 **使用说明**
 
-被 uapi_pin_set_ds 入参与 uapi_pin_get_ds 返回值使用。
+引脚驱动强度类型，用于驱动强度配置与查询。
 
 ### enum_pin_pull_t <a id="enum_pin_pull_t"></a>
 
 ```c
-// 源码原始定义
 typedef enum {
     PIN_PULL_NONE = 0,
     PIN_PULL_UP   = 1,
@@ -845,12 +845,11 @@ typedef enum {
 
 **使用说明**
 
-被 uapi_pin_set_pull 入参与 uapi_pin_get_pull 返回值使用。
+引脚上下拉配置类型，用于上下拉配置与查询。
 
 ### enum_pin_schmitt_trigger_t <a id="enum_pin_schmitt_trigger_t"></a>
 
 ```c
-// 源码原始定义
 typedef enum {
     PIN_ST_DISABLE = 0,
     PIN_ST_ENABLE = 1,
@@ -866,29 +865,29 @@ typedef enum {
 
 **使用说明**
 
-被 uapi_pin_set_st 入参与 uapi_pin_get_st 返回值使用。
+引脚施密特触发配置类型，用于施密特触发配置与查询。
 
 ## Macros
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC                                        0UL
 ```
 
-### ERRCODE_PIN_INVALID_PARAMETER <a id="ERRCODE_PIN_INVALID_PARAMETER"></a> [SDK公共共享宏]
+### ERRCODE_PIN_INVALID_PARAMETER <a id="ERRCODE_PIN_INVALID_PARAMETER"></a>
 
 ```c
 #define ERRCODE_PIN_INVALID_PARAMETER                       0x80001190
 ```
 
-### ERRCODE_PIN_MODE_NO_FUNC <a id="ERRCODE_PIN_MODE_NO_FUNC"></a> [SDK公共共享宏]
+### ERRCODE_PIN_MODE_NO_FUNC <a id="ERRCODE_PIN_MODE_NO_FUNC"></a>
 
 ```c
 #define ERRCODE_PIN_MODE_NO_FUNC                            0x80001191
 ```
 
-### ERRCODE_PIN_NOT_INIT <a id="ERRCODE_PIN_NOT_INIT"></a> [SDK公共共享宏]
+### ERRCODE_PIN_NOT_INIT <a id="ERRCODE_PIN_NOT_INIT"></a>
 
 ```c
 #define ERRCODE_PIN_NOT_INIT                                0x80001192

@@ -44,7 +44,7 @@ errcode_t uapi_dma_init(void)
 
 **功能说明**
 
-- 初始化 DMA 模块，完成驱动层与 HAL 层接口的绑定。
+- 初始化 DMA 模块。
 - 为后续通道传输相关接口的调用建立可用前提。
 - 模块已初始化时再次调用直接返回成功，不重复执行初始化动作。
 
@@ -109,7 +109,7 @@ errcode_t uapi_dma_open(void)
 **功能说明**
 
 - 开启 DMA 模块，使能底层 DMA 设备。
-- 注册 DMA 中断处理，为通道传输提供中断回调通路。
+- 为通道传输提供中断回调通路。
 - 与 [uapi_dma_close](#uapi_dma_close) 配合使用，控制模块开启与关闭状态。
 
 **前置条件**
@@ -392,7 +392,7 @@ uint8_t uapi_dma_get_lli_channel(uint8_t burst_length, uint8_t handshaking)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| burst_length | uint8_t | DMA 的 burst 传输长度 | 0 ~ [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)(8) - 1 |
+| burst_length | uint8_t | DMA 的 burst 传输长度 | 0 ~ 7（实现以 HAL_DMA_BURST_TRANSACTION_LENGTH_256(7) 为上界校验，burst_length ≤ 7） |
 | handshaking | uint8_t | DMA 传输外设握手号，取值参考 [hal_dma_handshaking_source_t](#hal_dma_handshaking_source_t) | 0 ~ HAL_DMA_HANDSHAKING_MAX_NUM(33) - 1 |
 
 **返回值**
@@ -617,7 +617,7 @@ errcode_t uapi_dma_suspend(uintptr_t arg)
 
 **功能说明**
 
-- 挂起 DMA 模块，使其进入低功耗挂起状态。
+- 低功耗场景下的挂起入口，当前版本调用后直接返回成功，不改变 DMA 硬件状态。
 - 用于低功耗场景下，模块进入挂起状态时的处理。
 - 与 [uapi_dma_resume](#uapi_dma_resume) 配合使用，构成挂起与恢复的调用对。
 
@@ -649,7 +649,8 @@ errcode_t uapi_dma_suspend(uintptr_t arg)
 
 ## Type definitions
 
-### errcode_t <a id="typedef_errcode_t"></a> 
+### errcode_t <a id="typedef_errcode_t"></a>
+
 ```c
 // 源码原始定义
 typedef uint32_t errcode_t;
@@ -658,6 +659,7 @@ typedef uint32_t errcode_t;
 **使用说明**
 
 本模块对外接口的返回值类型，用于表示接口执行结果。
+
 ### dma_transfer_cb_t <a id="dma_transfer_cb_t"></a>
 
 ```c
@@ -980,30 +982,28 @@ typedef struct dma_ch_user_peripheral_config {
 ### DMA_CHANNEL_MAX_NUM <a id="DMA_CHANNEL_MAX_NUM"></a>
 
 ```c
-#define B_DMA_CHANNEL_MAX_NUM       8  /*!< Max number of M_DMA available. */
 #define DMA_CHANNEL_MAX_NUM         B_DMA_CHANNEL_MAX_NUM
 ```
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC                                        0UL
 ```
 
-
-### ERRCODE_DMA_NOT_INIT <a id="ERRCODE_DMA_NOT_INIT"></a> [SDK公共共享宏]
+### ERRCODE_DMA_NOT_INIT <a id="ERRCODE_DMA_NOT_INIT"></a>
 
 ```c
 #define ERRCODE_DMA_NOT_INIT                                0x80001100
 ```
 
-### ERRCODE_DMA_INVALID_PARAMETER <a id="ERRCODE_DMA_INVALID_PARAMETER"></a> [SDK公共共享宏]
+### ERRCODE_DMA_INVALID_PARAMETER <a id="ERRCODE_DMA_INVALID_PARAMETER"></a>
 
 ```c
 #define ERRCODE_DMA_INVALID_PARAMETER                       0x80001102
 ```
 
-### ERRCODE_DMA_RET_NO_AVAIL_CH <a id="ERRCODE_DMA_RET_NO_AVAIL_CH"></a> [SDK公共共享宏]
+### ERRCODE_DMA_RET_NO_AVAIL_CH <a id="ERRCODE_DMA_RET_NO_AVAIL_CH"></a>
 
 ```c
 #define ERRCODE_DMA_RET_NO_AVAIL_CH                         0x80001103
