@@ -89,7 +89,7 @@ void osal_pm_lowpower_exit(void)
 ### osal_dev_create <a id="osal_dev_create"></a>
 
 ```c
-osal_dev * osal_dev_create(const char *name)
+osal_dev *osal_dev_create(const char *name)
 ```
 
 **声明头文件**
@@ -101,23 +101,25 @@ osal_dev * osal_dev_create(const char *name)
 **功能说明**
 
 - 申请 osal_dev 类型内存并返回设备指针
-- 创建的设备必须通过 osal_dev_destroy 释放
 - 支持 Linux、LiteOS (Huawei LiteOS)、FreeRTOS (Free Real-Time Operating System) 系统
 
 **前置条件**
 
-- 入参 name 不为 NULL，且字符串长度不超过 OSAL_DEV_NAME_LEN(32)
+- 调用时序约束：须在设备注册（osal_dev_register）之前创建设备
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | name | const char * | 设备名称 | 非 NULL，长度 ≤ OSAL_DEV_NAME_LEN(32) |
 
 **返回值**
 
 - 返回类型：osal_dev *
-- 返回申请到的 [osal_dev](#struct_osal_dev_) 设备指针；申请失败返回 NULL
+| 返回值 | 文字含义 | 触发场景 |
+| -------- | -------- | -------- |
+| 非NULL | 设备指针 | 设备创建成功，返回申请到的 [osal_dev](#struct_osal_dev_) 结构体指针 |
+| NULL | 创建失败 | name 为 NULL、名称过长或内存分配失败 |
 
 ### osal_dev_destroy <a id="osal_dev_destroy"></a>
 
@@ -144,7 +146,7 @@ int osal_dev_destroy(osal_dev *dev)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | dev | osal_dev * | osal_dev_create 创建的设备指针 | 非 NULL，须为 osal_dev_create 返回值 |
 
@@ -154,8 +156,8 @@ int osal_dev_destroy(osal_dev *dev)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS(0) | 释放成功 | 设备内存释放成功 |
-| OSAL_FAILURE(-1) | 释放失败 | 设备内存释放失败 |
+| OSAL_SUCCESS:0 | 释放成功 | 设备内存释放成功 |
+| OSAL_FAILURE:-1 | 释放失败 | 设备内存释放失败 |
 
 ### osal_dev_register <a id="osal_dev_register"></a>
 
@@ -172,7 +174,6 @@ int osal_dev_register(osal_dev *dev)
 **功能说明**
 
 - 将设备注册到系统，使设备可被用户态程序访问
-- 注册前需通过 osal_dev_create 创建设备并设置 fops 和 pmops
 - 支持 Linux、LiteOS、FreeRTOS 系统
 
 **前置条件**
@@ -182,7 +183,7 @@ int osal_dev_register(osal_dev *dev)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | dev | osal_dev * | osal_dev_create 创建的设备指针 | 非 NULL，须为 osal_dev_create 返回值 |
 
@@ -192,8 +193,8 @@ int osal_dev_register(osal_dev *dev)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS(0) | 注册成功 | 设备注册到系统成功 |
-| OSAL_FAILURE(-1) | 注册失败 | 设备注册到系统失败 |
+| OSAL_SUCCESS:0 | 注册成功 | 设备注册到系统成功 |
+| OSAL_FAILURE:-1 | 注册失败 | 设备注册到系统失败 |
 
 ### osal_dev_unregister <a id="osal_dev_unregister"></a>
 
@@ -219,7 +220,7 @@ void osal_dev_unregister(osal_dev *dev)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | dev | osal_dev * | osal_dev_create 创建的设备指针 | 非 NULL，须为已注册设备 |
 
@@ -247,7 +248,7 @@ void osal_device_set_async(unsigned int minor)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | minor | unsigned int | 设备次设备号 | 已注册设备的有效次设备号 |
 
@@ -266,7 +267,7 @@ void osal_poll_wait(osal_poll *table, osal_wait *wait)
 **功能说明**
 
 - 将当前进程添加到 wait 参数指定的等待队列中
-- 用于设备驱动的 poll 接口实现，配合 osal_notify_poll 使用
+- 用于设备驱动的 poll 接口实现
 - 支持 Linux、LiteOS 系统
 
 **前置条件**
@@ -276,7 +277,7 @@ void osal_poll_wait(osal_poll *table, osal_wait *wait)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | table | [osal_poll](#typedef_osal_poll) * | poll 表指针 | 非 NULL |
 | wait | [osal_wait](schedule/wait.md#osal_wait) * | 等待队列指针 | 非 NULL |
@@ -306,7 +307,7 @@ int osal_remap_pfn_range(osal_vm *vm, unsigned long addr, unsigned long pfn, uns
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | vm | [osal_vm](#typedef_osal_vm) * | 虚拟内存管理结构指针 | 非 NULL |
 | addr | unsigned long | 用户空间虚拟地址 | 页对齐地址 |
@@ -400,7 +401,7 @@ int osal_kobject_uevent_env(osal_dev *dev, osal_kobject_action action, char *env
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | dev | [osal_dev](#struct_osal_dev_) * | 设备指针 | 非 NULL，已注册设备 |
 | action | [osal_kobject_action](#enum_osal_kobject_action_) | 事件动作类型 | [OSAL_KOBJ_ADD, OSAL_KOBJ_REMOVE, OSAL_KOBJ_CHANGE, OSAL_KOBJ_MOVE, OSAL_KOBJ_ONLINE, OSAL_KOBJ_OFFLINE, OSAL_KOBJ_BIND, OSAL_KOBJ_UNBIND] |
@@ -440,7 +441,7 @@ int osal_fasync_helper(int fd, void *filp, int mode, void **fapp)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | fd | int | 文件描述符 | 有效文件描述符 |
 | filp | void * | 文件指针 | 非 NULL |
@@ -482,7 +483,7 @@ void osal_fasync_notify(void **fapp, int sig, int band)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | fapp | void ** | fasync 队列指针地址 | 非 NULL，已初始化 |
 | sig | int | 信号编号 | SIGIO 等有效信号 |
@@ -513,7 +514,7 @@ void osal_pgprot_noncached(osal_vm *vm)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | vm | [osal_vm](#typedef_osal_vm) * | 虚拟内存管理结构指针 | 非 NULL |
 
@@ -542,7 +543,7 @@ void osal_pgprot_cached(osal_vm *vm)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | vm | [osal_vm](#typedef_osal_vm) * | 虚拟内存管理结构指针 | 非 NULL |
 
@@ -571,7 +572,7 @@ void osal_pgprot_writecombine(osal_vm *vm)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | vm | [osal_vm](#typedef_osal_vm) * | 虚拟内存管理结构指针 | 非 NULL |
 
@@ -600,7 +601,7 @@ void osal_smccc_smc(const osal_smccc_info *info, osal_smccc_res *res)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | info | const [osal_smccc_info](#struct_osal_smccc_info) * | SMC 调用输入参数 | 非 NULL |
 | res | [osal_smccc_res](#struct_osal_smccc_res) * | SMC 调用返回结果 | 非 NULL |
@@ -630,7 +631,7 @@ int osal_opendev(const char *path, int flag, ...)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | path | const char * | 设备路径 | 非 NULL，有效设备路径 |
 | flag | int | 打开标志 | O_RDONLY, O_WRONLY, O_RDWR 等 |
@@ -641,8 +642,8 @@ int osal_opendev(const char *path, int flag, ...)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS(0) | 打开成功 | 设备文件描述符 |
-| OSAL_FAILURE(-1) | 打开失败 | 设备打开失败 |
+| >= 0 | 设备文件描述符（(count << 8) \| minor 复合值） | 打开成功 |
+| -1（OSAL_FAILURE） | 打开失败 | 设备打开失败 |
 
 ### osal_closedev <a id="osal_closedev"></a>
 
@@ -668,7 +669,7 @@ int osal_closedev(int fd)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | fd | int | 设备文件描述符 | osal_opendev 返回的有效 fd |
 
@@ -678,8 +679,8 @@ int osal_closedev(int fd)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS(0) | 关闭成功 | 设备关闭成功 |
-| OSAL_FAILURE(-1) | 关闭失败 | 设备关闭失败 |
+| OSAL_SUCCESS:0 | 关闭成功 | 设备关闭成功 |
+| OSAL_FAILURE:-1 | 关闭失败 | 设备关闭失败 |
 
 ### osal_readdev <a id="osal_readdev"></a>
 
@@ -706,7 +707,7 @@ int osal_readdev(int fd, void *buf, unsigned long count)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | fd | int | 设备文件描述符 | osal_opendev 返回的有效 fd |
 | buf | void * | 读取数据缓冲区 | 非 NULL，空间 ≥ count |
@@ -746,7 +747,7 @@ int osal_writedev(int fd, const void *buf, unsigned long count)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | fd | int | 设备文件描述符 | osal_opendev 返回的有效 fd |
 | buf | const void * | 写入数据缓冲区 | 非 NULL，空间 ≥ count |
@@ -786,7 +787,7 @@ int osal_ioctldev(int fd, unsigned int cmd, ...)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | fd | int | 设备文件描述符 | osal_opendev 返回的有效 fd |
 | cmd | unsigned int | IOCTL 命令字 | 设备驱动支持的合法命令 |
@@ -829,8 +830,8 @@ int osal_init(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS(0) | 初始化成功 | OSAL 用户态初始化成功 |
-| OSAL_FAILURE(-1) | 初始化失败 | OSAL 用户态初始化失败 |
+| OSAL_SUCCESS:0 | 初始化成功 | OSAL 用户态初始化成功 |
+| OSAL_FAILURE:-1 | 初始化失败 | OSAL 用户态初始化失败 |
 
 ### osal_exit <a id="osal_exit"></a>
 

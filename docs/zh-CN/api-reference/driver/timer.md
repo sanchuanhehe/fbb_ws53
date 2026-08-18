@@ -51,7 +51,7 @@ errcode_t uapi_timer_init(void)
 
 - 调用时序约束：当前接口为模块入口，须在使用其他定时器接口之前调用
 - 依赖关系：当前接口依赖底层 HAL 定时器与定时器 porting 层资源可访问
-- 上下文限制：当前接口内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **返回值**
 
@@ -95,13 +95,13 @@ errcode_t uapi_timer_adapter(timer_index_t index, uint32_t int_id, uint16_t int_
 
 - 调用时序约束：当前接口必须在 [uapi_timer_init](#uapi_timer_init) 成功返回后调用
 - 依赖关系：当前接口依赖 HAL 定时器初始化接口与中断注册接口可用
-- 上下文限制：当前接口内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t)(0) / [TIMER_INDEX_1](#enum_timer_index_t)(1) / [TIMER_INDEX_2](#enum_timer_index_t)(2)（CONFIG_TIMER_MAX_NUM > 2 时存在） |
+| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t):0 / [TIMER_INDEX_1](#enum_timer_index_t):1 / [TIMER_INDEX_2](#enum_timer_index_t):2（CONFIG_TIMER_MAX_NUM > 2 时存在） |
 | int_id | uint32_t | 硬件定时器中断 ID | 有效中断号 |
 | int_priority | uint16_t | 硬件定时器中断优先级 | 有效中断优先级 |
 
@@ -149,7 +149,7 @@ errcode_t uapi_timer_deinit(void)
 
 - 调用时序约束：当前接口必须在 [uapi_timer_init](#uapi_timer_init) 之后调用，模块未初始化时直接返回成功
 - 依赖关系：当前接口依赖 HAL 定时器去初始化与中断注销接口可用
-- 上下文限制：当前接口内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **返回值**
 
@@ -191,13 +191,13 @@ errcode_t uapi_timer_create(timer_index_t index, timer_handle_t *timer)
 
 - 调用时序约束：当前接口必须在 [uapi_timer_init](#uapi_timer_init) 成功返回后调用
 - 依赖关系：当前接口依赖对应索引已完成适配（[uapi_timer_adapter](#uapi_timer_adapter)）
-- 上下文限制：当前接口内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t)(0) / [TIMER_INDEX_1](#enum_timer_index_t)(1) / [TIMER_INDEX_2](#enum_timer_index_t)(2)（CONFIG_TIMER_MAX_NUM > 2 时存在） |
+| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t):0 / [TIMER_INDEX_1](#enum_timer_index_t):1 / [TIMER_INDEX_2](#enum_timer_index_t):2（CONFIG_TIMER_MAX_NUM > 2 时存在） |
 
 **出参**
 
@@ -240,7 +240,7 @@ errcode_t uapi_timer_delete(timer_handle_t timer)
 
 - 调用时序约束：当前接口操作的句柄须由 [uapi_timer_create](#uapi_timer_create) 创建
 - 依赖关系：当前接口依赖传入句柄对应的软件定时器表项有效
-- 上下文限制：当前接口内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
@@ -280,8 +280,7 @@ uint32_t uapi_timer_get_max_us(void)
 
 **前置条件**
 
-- 调用时序约束：当前接口依赖底层定时器时钟配置（CONFIG_TIMER_CLOCK_VALUE）已确定
-- 依赖关系：当前接口依赖定时器 porting 层周期换算接口可用
+- 依赖关系：底层定时器时钟配置（CONFIG_TIMER_CLOCK_VALUE）已确定，定时器 porting 层周期换算接口可用
 - 上下文限制：无特殊上下文限制
 
 **返回值**
@@ -314,7 +313,7 @@ errcode_t uapi_timer_start(timer_handle_t timer, uint32_t time_us, timer_callbac
 
 - 调用时序约束：当前接口操作的句柄须由 [uapi_timer_create](#uapi_timer_create) 创建
 - 依赖关系：当前接口依赖对应索引已完成适配（[uapi_timer_adapter](#uapi_timer_adapter)）且硬件定时器可用
-- 上下文限制：当前接口内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
@@ -367,7 +366,7 @@ errcode_t uapi_timer_stop(timer_handle_t timer)
 
 - 调用时序约束：当前接口操作的句柄须由 [uapi_timer_create](#uapi_timer_create) 创建
 - 依赖关系：当前接口依赖传入句柄对应的软件定时器表项有效
-- 上下文限制：当前接口内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
@@ -415,13 +414,13 @@ errcode_t uapi_timer_get_current_time_us(timer_index_t index, uint32_t *current_
 
 - 调用时序约束：当前接口依赖对应索引的底层硬件定时器已初始化
 - 依赖关系：当前接口依赖 HAL 定时器取值接口与 porting 层周期换算接口可用
-- 上下文限制：当前接口内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t)(0) / [TIMER_INDEX_1](#enum_timer_index_t)(1) / [TIMER_INDEX_2](#enum_timer_index_t)(2)（CONFIG_TIMER_MAX_NUM > 2 时存在） |
+| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t):0 / [TIMER_INDEX_1](#enum_timer_index_t):1 / [TIMER_INDEX_2](#enum_timer_index_t):2（CONFIG_TIMER_MAX_NUM > 2 时存在） |
 
 **出参**
 
@@ -461,14 +460,14 @@ errcode_t uapi_timer_start_high_precision(timer_index_t index, timer_trigger_mod
 
 - 调用时序约束：当前接口必须在 [uapi_timer_init](#uapi_timer_init) 成功返回后调用
 - 依赖关系：当前接口依赖该索引未被标准定时器占用（g_timer_useing_flag 非 STANDARD_TIMER_MODE）
-- 上下文限制：当前接口内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t)(0) / [TIMER_INDEX_1](#enum_timer_index_t)(1) / [TIMER_INDEX_2](#enum_timer_index_t)(2)（CONFIG_TIMER_MAX_NUM > 2 时存在） |
-| mode | [timer_trigger_mode_t](#enum_timer_trigger_mode_t) | 定时器触发模式 | [TIMER_MODE_ONE_SHOT](#enum_timer_trigger_mode_t)(0) / [TIMER_MODE_PERIODIC](#enum_timer_trigger_mode_t)(1) |
+| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t):0 / [TIMER_INDEX_1](#enum_timer_index_t):1 / [TIMER_INDEX_2](#enum_timer_index_t):2（CONFIG_TIMER_MAX_NUM > 2 时存在） |
+| mode | [timer_trigger_mode_t](#enum_timer_trigger_mode_t) | 定时器触发模式 | [TIMER_MODE_ONE_SHOT](#enum_timer_trigger_mode_t):0 / [TIMER_MODE_PERIODIC](#enum_timer_trigger_mode_t):1 |
 | time_us | uint32_t | 定时器超时时间，单位 us | 大于 0 且不超过 [uapi_timer_get_max_us](#uapi_timer_get_max_us) 返回值 |
 | irq_info | [timer_irq_info_t](#struct_timer_irq_info_t) * | 中断信息结构体指针，包含中断号与优先级 | 不为NULL |
 | callback | [high_precision_timer_callback_t](#typedef_high_precision_timer_callback_t) | 高精度定时器超时回调函数指针；超时触发时在硬件定时器中断上下文中调用，index 为触发的硬件定时器索引 | 不为NULL |
@@ -512,14 +511,14 @@ errcode_t uapi_timer_reset_high_precision(timer_index_t index, timer_trigger_mod
 
 - 调用时序约束：当前接口必须在 [uapi_timer_start_high_precision](#uapi_timer_start_high_precision) 已将目标索引置为高精度模式后调用
 - 依赖关系：当前接口依赖该索引当前处于高精度定时模式
-- 上下文限制：当前接口内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t)(0) / [TIMER_INDEX_1](#enum_timer_index_t)(1) / [TIMER_INDEX_2](#enum_timer_index_t)(2)（CONFIG_TIMER_MAX_NUM > 2 时存在） |
-| mode | [timer_trigger_mode_t](#enum_timer_trigger_mode_t) | 定时器触发模式 | [TIMER_MODE_ONE_SHOT](#enum_timer_trigger_mode_t)(0) / [TIMER_MODE_PERIODIC](#enum_timer_trigger_mode_t)(1) |
+| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t):0 / [TIMER_INDEX_1](#enum_timer_index_t):1 / [TIMER_INDEX_2](#enum_timer_index_t):2（CONFIG_TIMER_MAX_NUM > 2 时存在） |
+| mode | [timer_trigger_mode_t](#enum_timer_trigger_mode_t) | 定时器触发模式 | [TIMER_MODE_ONE_SHOT](#enum_timer_trigger_mode_t):0 / [TIMER_MODE_PERIODIC](#enum_timer_trigger_mode_t):1 |
 | time_us | uint32_t | 定时器超时时间，单位 us | 大于 0 且不超过 [uapi_timer_get_max_us](#uapi_timer_get_max_us) 返回值 |
 
 **返回值**
@@ -559,13 +558,13 @@ errcode_t uapi_timer_stop_high_precision(timer_index_t index)
 
 - 调用时序约束：当前接口必须在 [uapi_timer_start_high_precision](#uapi_timer_start_high_precision) 已将目标索引置为高精度模式后调用
 - 依赖关系：当前接口依赖该索引当前处于高精度定时模式
-- 上下文限制：当前接口内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t)(0) / [TIMER_INDEX_1](#enum_timer_index_t)(1) / [TIMER_INDEX_2](#enum_timer_index_t)(2)（CONFIG_TIMER_MAX_NUM > 2 时存在） |
+| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t):0 / [TIMER_INDEX_1](#enum_timer_index_t):1 / [TIMER_INDEX_2](#enum_timer_index_t):2（CONFIG_TIMER_MAX_NUM > 2 时存在） |
 
 **返回值**
 
@@ -605,7 +604,7 @@ errcode_t uapi_timer_suspend(uintptr_t val)
 
 - 调用时序约束：当前接口必须在 [uapi_timer_init](#uapi_timer_init) 成功返回后调用
 - 依赖关系：当前接口依赖各索引已完成适配（[uapi_timer_adapter](#uapi_timer_adapter)）且底层 HAL 定时器可用
-- 上下文限制：当前接口内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
@@ -647,7 +646,7 @@ errcode_t uapi_timer_resume(uintptr_t val)
 
 - 调用时序约束：当前接口必须在 [uapi_timer_suspend](#uapi_timer_suspend) 之后调用
 - 依赖关系：当前接口依赖各索引已完成适配（[uapi_timer_adapter](#uapi_timer_adapter)）且底层 HAL 定时器可用
-- 上下文限制：当前接口内部通过关中断保护临界区，可在任务上下文调用
+- 上下文限制：可在任务上下文调用
 
 **入参**
 
@@ -758,10 +757,18 @@ typedef enum timer_trigger_mode {
 ### timer_irq_info_t <a id="struct_timer_irq_info_t"></a>
 
 ```c
+#if defined(CONFIG_TIMER_SUPPORT_HIGH_PRECISION)
 typedef struct timer_irq_info {
+    /** @if Eng  irq num.
+     *  @else    中断号。
+     *  @endif */
     uint32_t irq;
+    /** @if Eng  irq priority.
+     *  @else    中断优先级。
+     *  @endif */
     uint16_t priority;
 } timer_irq_info_t;
+#endif /* CONFIG_TIMER_SUPPORT_HIGH_PRECISION */
 ```
 
 **成员说明**
@@ -773,8 +780,44 @@ typedef struct timer_irq_info {
 
 ## Macros
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC                                        0UL
+```
+
+### ERRCODE_INVALID_PARAM <a id="ERRCODE_INVALID_PARAM"></a>
+
+```c
+#define ERRCODE_INVALID_PARAM                               0x80000001
+```
+
+### ERRCODE_MEMSET <a id="ERRCODE_MEMSET"></a>
+
+```c
+#define ERRCODE_MEMSET                                      0x80000003
+```
+
+### ERRCODE_TIMER_NO_ENOUGH <a id="ERRCODE_TIMER_NO_ENOUGH"></a>
+
+```c
+#define ERRCODE_TIMER_NO_ENOUGH                             0x80001320
+```
+
+### ERRCODE_TIEMR_NOT_CREATED <a id="ERRCODE_TIEMR_NOT_CREATED"></a>
+
+```c
+#define ERRCODE_TIEMR_NOT_CREATED                           0x80001321
+```
+
+### ERRCODE_TIMER_NOT_INIT <a id="ERRCODE_TIMER_NOT_INIT"></a>
+
+```c
+#define ERRCODE_TIMER_NOT_INIT                              0x80001324
+```
+
+### ERRCODE_TIMER_USING <a id="ERRCODE_TIMER_USING"></a>
+
+```c
+#define ERRCODE_TIMER_USING                                 0x80001325
 ```

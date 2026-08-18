@@ -1,11 +1,11 @@
-# Delaywork
+# delaywork
 
 delaywork 提供延迟工作队列功能，支持在指定超时时间后将任务提交到内核全局工作队列执行，并支持延迟工作的初始化、销毁、调度与同步取消。
 
 **模块公共头文件**
 
 ```c
-#include "kernel/osal/include/schedule/osal_delaywork.h"
+#include "src/kernel/osal/include/schedule/osal_delaywork.h"
 ```
 
 ## 接口清单
@@ -28,13 +28,13 @@ int osal_delayedwork_init(osal_delayedwork *work, osal_delayedwork_handler handl
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/schedule/osal_delaywork.h"
+#include "src/kernel/osal/include/schedule/osal_delaywork.h"
 ```
 
 **功能说明**
 
 - 初始化延迟工作对象，分配内核延迟工作资源并关联回调处理函数
-- 将延迟工作节点加入内部管理链表
+- 延迟工作节点纳入调度管理
 - 初始化完成后可通过 osal_delayedwork_schedule 调度执行
 
 **前置条件**
@@ -67,7 +67,7 @@ void osal_delayedwork_destroy(osal_delayedwork *work)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/schedule/osal_delaywork.h"
+#include "src/kernel/osal/include/schedule/osal_delaywork.h"
 ```
 
 **功能说明**
@@ -96,7 +96,7 @@ int osal_delayedwork_schedule(osal_delayedwork *work, int timeout)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/schedule/osal_delaywork.h"
+#include "src/kernel/osal/include/schedule/osal_delaywork.h"
 ```
 
 **功能说明**
@@ -135,7 +135,7 @@ int osal_delayedwork_cancel_sync(osal_delayedwork *work)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/schedule/osal_delaywork.h"
+#include "src/kernel/osal/include/schedule/osal_delaywork.h"
 ```
 
 **功能说明**
@@ -166,19 +166,6 @@ int osal_delayedwork_cancel_sync(osal_delayedwork *work)
 
 ## Type definitions
 
-### osal_delayedwork <a id="osal_delayedwork"></a>
-
-```c
-typedef struct osal_delayedwork_ {
-    void *work;
-    void (*handler)(struct osal_delayedwork_ *delayedwork);
-} osal_delayedwork;
-```
-
-**使用说明**
-
-延迟工作对象类型，封装内核延迟工作结构与回调处理函数指针，通过本模块对外接口进行初始化、调度与销毁操作。
-
 ### osal_delayedwork_handler <a id="osal_delayedwork_handler"></a>
 
 ```c
@@ -189,15 +176,33 @@ typedef void (*osal_delayedwork_handler)(osal_delayedwork *delayedwork);
 
 延迟工作超时回调函数指针类型，在延迟工作超时后由内核工作队列调用。回调说明：调用时机为延迟工作超时后由内核工作队列触发；参数 delayedwork 为触发超时的延迟工作对象；返回值为 void，回调返回值不被检查。
 
+## Structures
+
+### osal_delayedwork <a id="osal_delayedwork"></a>
+
+```c
+typedef struct osal_delayedwork_ {
+    void *work;
+    void (*handler)(struct osal_delayedwork_ *delayedwork);
+} osal_delayedwork;
+```
+
+**成员说明**
+
+| 成员名称 | 数据类型 | 描述 |
+| ------- | ------- | ---- |
+| work | void * | 内核延迟工作对象指针，由初始化接口填充 |
+| handler | void (*)(struct osal_delayedwork_ *) | 延迟工作超时回调处理函数指针 |
+
 ## Macros
 
-### OSAL_SUCCESS <a id="OSAL_SUCCESS"></a> [SDK公共共享宏]
+### OSAL_SUCCESS <a id="OSAL_SUCCESS"></a>
 
 ```c
 #define OSAL_SUCCESS 0
 ```
 
-### OSAL_FAILURE <a id="OSAL_FAILURE"></a> [SDK公共共享宏]
+### OSAL_FAILURE <a id="OSAL_FAILURE"></a>
 
 ```c
 #define OSAL_FAILURE (-1)

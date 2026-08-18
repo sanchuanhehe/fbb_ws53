@@ -43,7 +43,6 @@ unsigned long long osal_div_u64(unsigned long long dividend, unsigned int diviso
 
 **前置条件**
 
-- 依赖关系：调用者需确保除数（divisor）不为零，否则行为未定义
 - 上下文限制：当前接口支持 linux 和 liteos 系统下使用
 
 **入参**
@@ -81,7 +80,6 @@ long long osal_div_s64(long long dividend, int divisor)
 
 **前置条件**
 
-- 依赖关系：调用者需确保除数（divisor）不为零，否则行为未定义
 - 上下文限制：当前接口支持 linux 和 liteos 系统下使用
 
 **入参**
@@ -119,7 +117,6 @@ unsigned long long osal_div64_u64(unsigned long long dividend, unsigned long lon
 
 **前置条件**
 
-- 依赖关系：调用者需确保除数（divisor）不为零，否则行为未定义
 - 上下文限制：当前接口支持 linux 和 liteos 系统下使用
 
 **入参**
@@ -157,7 +154,6 @@ long long osal_div64_s64(long long dividend, long long divisor)
 
 **前置条件**
 
-- 依赖关系：调用者需确保除数（divisor）不为零，否则行为未定义
 - 上下文限制：当前接口支持 linux 和 liteos 系统下使用
 
 **入参**
@@ -195,7 +191,6 @@ unsigned long long osal_div_u64_rem(unsigned long long dividend, unsigned int di
 
 **前置条件**
 
-- 依赖关系：调用者需确保除数（divisor）不为零，否则行为未定义
 - 上下文限制：当前接口支持 linux 和 liteos 系统下使用
 
 **入参**
@@ -233,7 +228,6 @@ long long osal_div_s64_rem(long long dividend, int divisor)
 
 **前置条件**
 
-- 依赖关系：调用者需确保除数（divisor）不为零，否则行为未定义
 - 上下文限制：当前接口支持 linux 和 liteos 系统下使用
 
 **入参**
@@ -271,7 +265,6 @@ unsigned long long osal_div64_u64_rem(unsigned long long dividend, unsigned long
 
 **前置条件**
 
-- 依赖关系：调用者需确保除数（divisor）不为零，否则行为未定义
 - 上下文限制：当前接口支持 linux 和 liteos 系统下使用
 
 **入参**

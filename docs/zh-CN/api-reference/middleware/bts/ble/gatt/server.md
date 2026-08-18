@@ -54,7 +54,6 @@ errcode_t gatts_register_server(bt_uuid_t *app_uuid, uint8_t *server_id)
 **前置条件**
 
 - 调用时序约束：调用本模块服务端相关接口前必须先调用本接口完成服务端注册。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -103,7 +102,6 @@ errcode_t gatts_unregister_server(uint8_t server_id)
 **前置条件**
 
 - 调用时序约束：必须在 `gatts_register_server` 成功返回后再调用本接口。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -141,7 +139,6 @@ errcode_t gatts_add_service(uint8_t server_id, bt_uuid_t *service_uuid, bool is_
 **前置条件**
 
 - 调用时序约束：必须在 `gatts_register_server` 成功返回后调用，且需先通过 `gatts_register_callbacks` 注册服务添加回调以接收服务句柄。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -181,7 +178,6 @@ errcode_t gatts_add_characteristic(uint8_t server_id, uint16_t service_handle, g
 **前置条件**
 
 - 调用时序约束：必须在对应服务添加完成（`gatts_add_service` 回调返回服务句柄）后调用，且需先注册特征添加回调以接收特征句柄。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -221,7 +217,6 @@ errcode_t gatts_add_descriptor(uint8_t server_id, uint16_t service_handle, gatts
 **前置条件**
 
 - 调用时序约束：必须在对应服务添加完成后调用，且需先注册描述符添加回调以接收描述符句柄。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -261,7 +256,6 @@ errcode_t gatts_add_service_sync(uint8_t server_id, bt_uuid_t *service_uuid, boo
 **前置条件**
 
 - 调用时序约束：必须在 `gatts_register_server` 成功返回后调用。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -312,7 +306,6 @@ errcode_t gatts_add_characteristic_sync(uint8_t server_id, uint16_t service_hand
 **前置条件**
 
 - 调用时序约束：必须在对应服务添加完成（已获取服务句柄）后调用。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -363,7 +356,6 @@ errcode_t gatts_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 **前置条件**
 
 - 调用时序约束：必须在对应服务添加完成（已获取服务句柄）后调用。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -414,7 +406,6 @@ errcode_t gatts_start_service(uint8_t server_id, uint16_t service_handle)
 **前置条件**
 
 - 调用时序约束：必须在对应服务及其下的特征、描述符全部添加完成后调用，且需先注册启动服务回调以接收启动结果。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -458,7 +449,6 @@ errcode_t gatts_stop_service(uint8_t server_id, uint16_t service_handle)
 **前置条件**
 
 - 调用时序约束：必须在对应服务已通过 `gatts_start_service` 启动后调用，且需先注册停止服务回调以接收停止结果。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -497,7 +487,6 @@ errcode_t gatts_delete_service(uint8_t server_id, uint16_t service_handle)
 **前置条件**
 
 - 调用时序约束：建议在服务已停止后调用，且需先注册删除服务回调以接收删除结果。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -536,7 +525,6 @@ errcode_t gatts_delete_all_services(uint8_t server_id)
 **前置条件**
 
 - 调用时序约束：必须在 `gatts_register_server` 成功返回后调用，且需先注册删除服务回调以接收删除结果。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -574,7 +562,6 @@ errcode_t gatts_send_response(uint8_t server_id, uint16_t conn_id, gatts_send_rs
 **前置条件**
 
 - 调用时序约束：必须在收到读/写请求回调（且该回调中 `need_rsp` 为真）后调用，以响应对应请求。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -614,7 +601,6 @@ errcode_t gatts_notify_indicate(uint8_t server_id, uint16_t conn_id, gatts_ntf_i
 **前置条件**
 
 - 调用时序约束：必须在对应服务已启动、连接已建立后调用，且目标特征的客户端特征配置描述符已使能对应的通知或指示。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -659,7 +645,6 @@ errcode_t gatts_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, gat
 **前置条件**
 
 - 调用时序约束：必须在对应服务已启动、连接已建立后调用，且目标特征的客户端特征配置描述符已配置为允许对应的通知或指示。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -699,19 +684,17 @@ errcode_t gatts_set_mtu_size(uint8_t server_id, uint16_t mtu_size)
 
 - 在连接建立之前设置服务端接收 MTU 大小。
 - 设置的 MTU 大小影响后续连接建立后的数据收发最大长度。
-- 需在连接建立前完成设置，连接建立后设置不生效。
 
 **前置条件**
 
 - 调用时序约束：必须在 `gatts_register_server` 成功返回后、连接建立之前调用。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
-| mtu_size | uint16_t | 服务端接收 MTU 大小 | SDK_BLE_MTU_MIN(23) ~ SDK_BLE_MTU_MAX(517) |
+| mtu_size | uint16_t | 服务端接收 MTU 大小 | [SDK_BLE_MTU_MIN](#SDK_BLE_MTU_MIN):23 ~ [SDK_BLE_MTU_MAX](#SDK_BLE_MTU_MAX):517 |
 
 **返回值**
 
@@ -743,7 +726,6 @@ errcode_t gatts_register_callbacks(gatts_callbacks_t *func)
 **前置条件**
 
 - 调用时序约束：建议在 `gatts_register_server` 之前或之后、但在发起任何会产生回调的操作（如添加服务、启动服务）之前调用。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -781,19 +763,17 @@ errcode_t gatts_exchange_mtu_req(uint16_t conn_id, uint16_t mtu_size)
 
 - 向对端发送交换 MTU 请求，协商连接的 MTU 大小。
 - 协商结果通过 `gatts_mtu_changed_callback` 回调异步通知应用层。
-- 需在连接建立后发送。
 
 **前置条件**
 
 - 调用时序约束：必须在连接已建立后调用，且需先注册 MTU 变化回调以接收协商结果。
-- 上下文限制：本接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | conn_id | uint16_t | 连接 ID | 有效连接 ID |
-| mtu_size | uint16_t | 服务端接收 MTU | SDK_BLE_MTU_MIN(23) ~ SDK_BLE_MTU_MAX(517) |
+| mtu_size | uint16_t | 服务端接收 MTU | [SDK_BLE_MTU_MIN](#SDK_BLE_MTU_MIN):23 ~ [SDK_BLE_MTU_MAX](#SDK_BLE_MTU_MAX):517 |
 
 **返回值**
 
@@ -818,7 +798,7 @@ typedef uint32_t errcode_t;
 
 **使用说明**
 
-本模块全部对外接口的返回值类型，表示接口执行结果。`ERRCODE_SUCC` 表示成功，其余值表示失败，具体错误码见 SDK 公共 `errcode.h`。[SDK公共基础类型]
+本模块全部对外接口的返回值类型，表示接口执行结果。`ERRCODE_SUCC` 表示成功，其余值表示失败，具体错误码见 SDK 公共 `errcode.h`。
 
 ### gatts_add_service_callback <a id="gatts_add_service_callback"></a>
 
@@ -1132,7 +1112,20 @@ typedef struct {
 
 ## Macros
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### SDK_BLE_MTU_MIN <a id="SDK_BLE_MTU_MIN"></a>
+
+```c
+#define SDK_BLE_MTU_MIN 23
+```
+
+### SDK_BLE_MTU_MAX <a id="SDK_BLE_MTU_MAX"></a>
+
+```c
+#define SDK_BLE_MTU_MAX 517
+```
+
+
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC                                        0UL

@@ -1,13 +1,11 @@
 # cipher
 
-cipher 提供 security_unified 模块下对称加解密、AEAD (Authenticated Encryption with Associated Data)、消息认证码、哈希与 KDF (Key Derivation Function) 的统一密码服务接口。支持 AES (Advanced Encryption Standard)/SM4/TDES (Triple Data Encryption Standard) 等对称算法的 ECB/CBC/CTR/CCM/GCM 等工作模式，以及 SHA (Secure Hash Algorithm)/SM3 哈希与 PBKDF2/HKDF 密钥派生。
+cipher 提供 security_unified 模块下对称加解密、消息认证码、哈希与 KDF (Key Derivation Function) 的统一密码服务接口。支持 AES (Advanced Encryption Standard)/SM4/TDES (Triple Data Encryption Standard) 等对称算法的 ECB/CBC/CTR/CCM/GCM 等工作模式，以及 SHA (Secure Hash Algorithm)/SM3 哈希与 PBKDF2/HKDF 密钥派生。
 
 **模块公共头文件**
 
 ```c
 #include "driver/security_unified/cipher.h"
-#include "driver/security_unified/cipher_aead.h"
-#include "driver/security_unified/cipher_mac.h"
 ```
 
 ## 接口清单
@@ -58,27 +56,28 @@ errcode_t uapi_drv_cipher_symc_init(void)
 
 **功能说明**
 
-- 初始化对称加密（SYMC）模块，完成安全引擎通道资源分配与全局状态初始化
-- 必须在调用其他symc相关接口之前完成初始化，否则后续接口返回错误
-- 初始化后模块内部维护通道管理状态，支持后续创建加解密通道
+- 初始化对称加密（SYMC）模块，完成安全引擎通道资源分配
+- 初始化成功后本模块 symc 接口方可使用
+- 支持后续创建与管理加解密通道
 
 **前置条件**
 
-- 安全引擎硬件已上电就绪
-- 未重复调用本接口，重复调用可能导致ERROR_SECURITY_COUNT_OVERFLOW
+- 调用时序约束：作为 symc 模块入口，须在其他 symc 接口之前调用
+- 依赖关系：安全引擎硬件已上电就绪
+- 未重复调用本接口，重复调用可能导致 ERROR_SECURITY_COUNT_OVERFLOW
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 初始化成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 初始化成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
 
 ### uapi_drv_cipher_symc_deinit <a id="uapi_drv_cipher_symc_deinit"></a>
@@ -97,24 +96,25 @@ errcode_t uapi_drv_cipher_symc_deinit(void)
 
 - 对称加密模块去初始化，释放symc通道资源与全局状态
 - 调用本接口后，所有已创建的symc通道不再可用，需重新初始化后方可使用
-- 应确保所有symc通道已销毁后再调用去初始化
+- 返回去初始化执行结果
 
 **前置条件**
 
 - 已通过uapi_drv_cipher_symc_init()完成初始化
+- 调用时序约束：应确保所有 symc 通道已销毁后再调用本接口
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 去初始化成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 去初始化成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
 
 ### uapi_drv_cipher_symc_create <a id="uapi_drv_cipher_symc_create"></a>
@@ -140,31 +140,31 @@ errcode_t uapi_drv_cipher_symc_create(uint32_t *symc_handle, const uapi_drv_ciph
 - 已通过uapi_drv_cipher_symc_init()完成初始化，返回成功状态
 - symc_attr指针不为NULL，且指向合法的属性结构体
 
-**出参**
-
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
-| ---- | ---- | ---- | ---- |
-| symc_handle | uint32_t * | 指向创建的symc通道句柄的指针 | 不为NULL，用于输出通道句柄 |
-
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | symc_attr | const [uapi_drv_cipher_symc_attr_t](#struct_uapi_drv_cipher_symc_attr_t) * | 指向symc通道属性结构体的指针 | 不为NULL |
+
+**出参**
+
+| 名称 | 数据类型 | 输出说明 |
+| ---- | ---- | ---- |
+| symc_handle | uint32_t * | 创建的 symc 通道句柄，由函数填充 |
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 通道创建成功 |
-| ERRCODE_INVALID_PARAM(0x80000001) | 参数无效 | symc_attr为NULL |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 通道创建成功 |
+| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | symc_attr为NULL |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
 
 ### uapi_drv_cipher_symc_destroy <a id="uapi_drv_cipher_symc_destroy"></a>
@@ -192,7 +192,7 @@ errcode_t uapi_drv_cipher_symc_destroy(uint32_t symc_handle)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | symc_handle | uint32_t | 要销毁的symc通道号 | 有效的已创建通道句柄 |
 
@@ -200,14 +200,14 @@ errcode_t uapi_drv_cipher_symc_destroy(uint32_t symc_handle)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 通道销毁成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 通道销毁成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
 
 ### uapi_drv_cipher_symc_set_config <a id="uapi_drv_cipher_symc_set_config"></a>
@@ -225,8 +225,8 @@ errcode_t uapi_drv_cipher_symc_set_config(uint32_t symc_handle, const uapi_drv_c
 **功能说明**
 
 - 设置指定symc通道的算法参数，包括算法类型、工作模式、密钥长度、IV (Initialization Vector) 等
-- 在执行加密/解密操作前，必须调用本接口完成算法参数配置
 - 对于CCM/GCM工作模式，还需通过param字段配置附加参数
+- 配置成功后通道按所设参数执行加解密
 
 **前置条件**
 
@@ -236,7 +236,7 @@ errcode_t uapi_drv_cipher_symc_set_config(uint32_t symc_handle, const uapi_drv_c
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | symc_handle | uint32_t | 要设置的通道号 | 有效的已创建通道句柄 |
 | symc_ctrl | const [uapi_drv_cipher_symc_ctrl_t](#struct_uapi_drv_cipher_symc_ctrl_t) * | 对称加密算法的参数 | 不为NULL |
@@ -245,14 +245,14 @@ errcode_t uapi_drv_cipher_symc_set_config(uint32_t symc_handle, const uapi_drv_c
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
 
 ### uapi_drv_cipher_symc_get_config <a id="uapi_drv_cipher_symc_get_config"></a>
@@ -281,7 +281,7 @@ errcode_t uapi_drv_cipher_symc_get_config(uint32_t symc_handle, const uapi_drv_c
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | symc_handle | uint32_t | 要获取算法参数的通道号 | 有效的已创建通道句柄 |
 
@@ -295,14 +295,14 @@ errcode_t uapi_drv_cipher_symc_get_config(uint32_t symc_handle, const uapi_drv_c
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 获取成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 获取成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
 
 ### uapi_drv_cipher_symc_attach <a id="uapi_drv_cipher_symc_attach"></a>
@@ -321,17 +321,18 @@ errcode_t uapi_drv_cipher_symc_attach(uint32_t symc_handle, uint32_t keyslot_han
 
 - 将keyslot句柄关联到加解密句柄，使加解密操作使用指定keyslot中的密钥
 - 关联后，加解密操作使用keyslot中存储的密钥而非明文密钥
-- 执行加密/解密操作前，必须完成keyslot关联
+- 返回关联执行结果
 
 **前置条件**
 
 - 已通过uapi_drv_cipher_symc_init()完成初始化
+- 调用时序约束：加密/解密操作前须先完成 keyslot 关联
 - symc_handle为已创建且已配置算法参数的通道句柄
 - keyslot_handle为已创建的有效keyslot句柄
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | symc_handle | uint32_t | 加解密句柄 | 有效的已创建通道句柄 |
 | keyslot_handle | uint32_t | key的句柄 | 有效的keyslot句柄 |
@@ -340,14 +341,14 @@ errcode_t uapi_drv_cipher_symc_attach(uint32_t symc_handle, uint32_t keyslot_han
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 关联成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 关联成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
 
 ### uapi_drv_cipher_symc_detach <a id="uapi_drv_cipher_symc_detach"></a>
@@ -366,17 +367,18 @@ errcode_t uapi_drv_cipher_symc_detach(uint32_t symc_handle, uint32_t keyslot_han
 
 - 将keyslot句柄与加解密句柄解关联
 - 解关联后，加解密操作不再使用该keyslot中的密钥
-- 通常在加解密操作完成后调用
+- 返回解关联执行结果
 
 **前置条件**
 
 - 已通过uapi_drv_cipher_symc_init()完成初始化
+- 调用时序约束：通常在加解密操作完成后调用
 - symc_handle为已创建的有效通道句柄
 - keyslot_handle为已关联到该通道的有效keyslot句柄
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | symc_handle | uint32_t | 加解密句柄 | 有效的已创建通道句柄 |
 | keyslot_handle | uint32_t | key的句柄 | 有效的keyslot句柄 |
@@ -385,14 +387,14 @@ errcode_t uapi_drv_cipher_symc_detach(uint32_t symc_handle, uint32_t keyslot_han
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 解关联成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 解关联成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
 
 ### uapi_drv_cipher_symc_encrypt <a id="uapi_drv_cipher_symc_encrypt"></a>
@@ -421,7 +423,7 @@ errcode_t uapi_drv_cipher_symc_encrypt(uint32_t symc_handle, const uapi_drv_ciph
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | symc_handle | uint32_t | 加密句柄 | 有效的已创建且已配置通道句柄 |
 | src_buf | const [uapi_drv_cipher_buf_attr_t](#struct_uapi_drv_cipher_buf_attr_t) * | 源缓冲区属性 | 不为NULL |
@@ -438,14 +440,14 @@ errcode_t uapi_drv_cipher_symc_encrypt(uint32_t symc_handle, const uapi_drv_ciph
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 加密成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 加密成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
 
 ### uapi_drv_cipher_symc_decrypt <a id="uapi_drv_cipher_symc_decrypt"></a>
@@ -474,7 +476,7 @@ errcode_t uapi_drv_cipher_symc_decrypt(uint32_t symc_handle, const uapi_drv_ciph
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | symc_handle | uint32_t | 解密句柄 | 有效的已创建且已配置通道句柄 |
 | src_buf | const [uapi_drv_cipher_buf_attr_t](#struct_uapi_drv_cipher_buf_attr_t) * | 源缓冲区属性 | 不为NULL |
@@ -491,14 +493,14 @@ errcode_t uapi_drv_cipher_symc_decrypt(uint32_t symc_handle, const uapi_drv_ciph
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 解密成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 解密成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
 
 ### uapi_drv_cipher_symc_get_tag <a id="uapi_drv_cipher_symc_get_tag"></a>
@@ -516,7 +518,7 @@ errcode_t uapi_drv_cipher_symc_get_tag(uint32_t symc_handle, uint8_t *tag, uint3
 **功能说明**
 
 - 获取CCM或GCM模式的认证标签值
-- 在加密完成后调用本接口获取认证标签，用于完整性校验
+- 获取的认证标签用于数据完整性校验
 - 标签长度由算法配置决定，GCM模式典型标签长度为16字节
 
 **前置条件**
@@ -527,7 +529,7 @@ errcode_t uapi_drv_cipher_symc_get_tag(uint32_t symc_handle, uint8_t *tag, uint3
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | symc_handle | uint32_t | 加解密句柄 | 有效的CCM/GCM通道句柄 |
 | tag | uint8_t * | 标签值缓冲区 | 不为NULL |
@@ -543,14 +545,14 @@ errcode_t uapi_drv_cipher_symc_get_tag(uint32_t symc_handle, uint8_t *tag, uint3
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 获取标签成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 获取标签成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
 
 ### uapi_drv_cipher_mac_start <a id="uapi_drv_cipher_mac_start"></a>
@@ -578,7 +580,7 @@ errcode_t uapi_drv_cipher_mac_start(uint32_t *symc_handle, const uapi_drv_cipher
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | symc_handle | uint32_t * | 指向创建的symc通道句柄的指针 | 不为NULL，用于输出通道句柄 |
 | mac_attr | const [uapi_drv_cipher_symc_mac_attr_t](#struct_uapi_drv_cipher_symc_mac_attr_t) * | 指向MAC算法参数结构体的指针 | 不为NULL |
@@ -587,15 +589,15 @@ errcode_t uapi_drv_cipher_mac_start(uint32_t *symc_handle, const uapi_drv_cipher
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 通道创建成功 |
-| ERRCODE_INVALID_PARAM(0x80000001) | 参数无效 | mac_attr为NULL |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 通道创建成功 |
+| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | mac_attr为NULL |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
 
 ### uapi_drv_cipher_mac_update <a id="uapi_drv_cipher_mac_update"></a>
@@ -623,7 +625,7 @@ errcode_t uapi_drv_cipher_mac_update(uint32_t symc_handle, const uapi_drv_cipher
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | symc_handle | uint32_t | 计算MAC值的通道句柄 | 有效的MAC通道句柄 |
 | src_buf | const [uapi_drv_cipher_buf_attr_t](#struct_uapi_drv_cipher_buf_attr_t) * | 输入数据的缓冲区 | 不为NULL |
@@ -633,14 +635,14 @@ errcode_t uapi_drv_cipher_mac_update(uint32_t symc_handle, const uapi_drv_cipher
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | MAC计算更新成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | MAC计算更新成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
 
 ### uapi_drv_cipher_mac_finish <a id="uapi_drv_cipher_mac_finish"></a>
@@ -668,7 +670,7 @@ errcode_t uapi_drv_cipher_mac_finish(uint32_t symc_handle, uint8_t *mac, uint32_
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | symc_handle | uint32_t | 计算MAC值的通道句柄 | 有效的MAC通道句柄 |
 | mac | uint8_t * | 输出结果的缓冲区 | 不为NULL，空间不小于MAC长度 |
@@ -685,14 +687,14 @@ errcode_t uapi_drv_cipher_mac_finish(uint32_t symc_handle, uint8_t *mac, uint32_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 获取MAC结果成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 获取MAC结果成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
 
 ### uapi_drv_cipher_hash_init <a id="uapi_drv_cipher_hash_init"></a>
@@ -709,9 +711,9 @@ errcode_t uapi_drv_cipher_hash_init(void)
 
 **功能说明**
 
-- Hash计算模块初始化，完成Hash通道资源分配与全局状态初始化
-- 必须在调用其他Hash相关接口之前完成初始化
-- 初始化后模块内部维护Hash通道管理状态
+- Hash计算模块初始化，完成Hash通道资源分配
+- 初始化成功后本模块 Hash 接口方可使用
+- 支持后续创建与管理 Hash 通道
 
 **前置条件**
 
@@ -722,14 +724,14 @@ errcode_t uapi_drv_cipher_hash_init(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 初始化成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 初始化成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持Hash计算功能 | n |
 
 ### uapi_drv_cipher_hash_deinit <a id="uapi_drv_cipher_hash_deinit"></a>
@@ -748,24 +750,25 @@ errcode_t uapi_drv_cipher_hash_deinit(void)
 
 - Hash计算模块去初始化，释放Hash通道资源与全局状态
 - 调用后所有已创建的Hash通道不再可用
-- 应确保所有Hash通道已销毁后再调用去初始化
+- 返回去初始化执行结果
 
 **前置条件**
 
 - 已通过uapi_drv_cipher_hash_init()完成初始化
+- 调用时序约束：应确保所有 Hash 通道已销毁后再调用本接口
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 去初始化成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 去初始化成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持Hash计算功能 | n |
 
 ### uapi_drv_cipher_hash_start <a id="uapi_drv_cipher_hash_start"></a>
@@ -793,7 +796,7 @@ errcode_t uapi_drv_cipher_hash_start(uint32_t *hash_handle, const uapi_drv_ciphe
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | hash_handle | uint32_t * | 指向创建的Hash通道句柄的指针 | 不为NULL，用于输出通道句柄 |
 | hash_attr | const [uapi_drv_cipher_hash_attr_t](#struct_uapi_drv_cipher_hash_attr_t) * | 指向Hash算法参数结构体的指针 | 不为NULL |
@@ -802,15 +805,15 @@ errcode_t uapi_drv_cipher_hash_start(uint32_t *hash_handle, const uapi_drv_ciphe
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 通道创建成功 |
-| ERRCODE_INVALID_PARAM(0x80000001) | 参数无效 | hash_attr为NULL |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 通道创建成功 |
+| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | hash_attr为NULL |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持Hash计算功能 | n |
 
 ### uapi_drv_cipher_hash_update <a id="uapi_drv_cipher_hash_update"></a>
@@ -834,11 +837,12 @@ errcode_t uapi_drv_cipher_hash_update(uint32_t hash_handle, const uapi_drv_ciphe
 **前置条件**
 
 - 已通过uapi_drv_cipher_hash_start()成功创建Hash通道
+- 调用时序约束：已调用 uapi_drv_cipher_hash_finish 获取摘要后不可再调用本接口
 - src_buf指向的缓冲区有效
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | hash_handle | uint32_t | 已创建的Hash通道句柄 | 有效的Hash通道句柄 |
 | src_buf | const [uapi_drv_cipher_buf_attr_t](#struct_uapi_drv_cipher_buf_attr_t) * | 源缓冲区属性，包括缓冲区地址与缓冲区安全类型 | 不为NULL |
@@ -848,14 +852,14 @@ errcode_t uapi_drv_cipher_hash_update(uint32_t hash_handle, const uapi_drv_ciphe
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | Hash计算更新成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | Hash计算更新成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持Hash计算功能 | n |
 
 ### uapi_drv_cipher_hash_finish <a id="uapi_drv_cipher_hash_finish"></a>
@@ -883,7 +887,7 @@ errcode_t uapi_drv_cipher_hash_finish(uint32_t hash_handle, uint8_t *out, uint32
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | hash_handle | uint32_t | 已创建的Hash通道句柄 | 有效的Hash通道句柄 |
 | out | uint8_t * | 存储摘要信息的缓冲区地址指针 | 不为NULL |
@@ -900,14 +904,14 @@ errcode_t uapi_drv_cipher_hash_finish(uint32_t hash_handle, uint8_t *out, uint32
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 获取摘要成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 获取摘要成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持Hash计算功能 | n |
 
 ### uapi_drv_cipher_hash_get <a id="uapi_drv_cipher_hash_get"></a>
@@ -934,7 +938,7 @@ errcode_t uapi_drv_cipher_hash_get(uint32_t hash_handle, uapi_drv_cipher_hash_cl
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | hash_handle | uint32_t | 已创建的Hash通道句柄 | 有效的Hash通道句柄 |
 | hash_clone_ctx | [uapi_drv_cipher_hash_clone_ctx_t](#struct_uapi_drv_cipher_hash_clone_ctx_t) * | 指向Hash计算中间结果结构体的指针 | 不为NULL |
@@ -949,14 +953,14 @@ errcode_t uapi_drv_cipher_hash_get(uint32_t hash_handle, uapi_drv_cipher_hash_cl
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 获取中间结果成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 获取中间结果成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持Hash计算功能 | n |
 
 ### uapi_drv_cipher_hash_set <a id="uapi_drv_cipher_hash_set"></a>
@@ -984,7 +988,7 @@ errcode_t uapi_drv_cipher_hash_set(uint32_t hash_handle, const uapi_drv_cipher_h
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | hash_handle | uint32_t | 已创建的Hash通道句柄 | 有效的Hash通道句柄 |
 | hash_clone_ctx | const [uapi_drv_cipher_hash_clone_ctx_t](#struct_uapi_drv_cipher_hash_clone_ctx_t) * | 指向Hash计算中间结果结构体的指针 | 不为NULL |
@@ -993,14 +997,14 @@ errcode_t uapi_drv_cipher_hash_set(uint32_t hash_handle, const uapi_drv_cipher_h
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 设置中间结果成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 设置中间结果成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持Hash计算功能 | n |
 
 ### uapi_drv_cipher_hash_destroy <a id="uapi_drv_cipher_hash_destroy"></a>
@@ -1027,7 +1031,7 @@ errcode_t uapi_drv_cipher_hash_destroy(uint32_t hash_handle)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | hash_handle | uint32_t | 已创建的Hash通道句柄 | 有效的Hash通道句柄 |
 
@@ -1035,14 +1039,14 @@ errcode_t uapi_drv_cipher_hash_destroy(uint32_t hash_handle)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 通道销毁成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 通道销毁成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持Hash计算功能 | n |
 
 ### uapi_drv_cipher_pbkdf2 <a id="uapi_drv_cipher_pbkdf2"></a>
@@ -1070,7 +1074,7 @@ errcode_t uapi_drv_cipher_pbkdf2(const uapi_drv_cipher_kdf_pbkdf2_param_t *param
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | param | const [uapi_drv_cipher_kdf_pbkdf2_param_t](#struct_uapi_drv_cipher_kdf_pbkdf2_param_t) * | PBKDF2算法的参数结构体 | 不为NULL |
 | out | uint8_t * | 输出密钥缓冲区 | 不为NULL |
@@ -1086,14 +1090,14 @@ errcode_t uapi_drv_cipher_pbkdf2(const uapi_drv_cipher_kdf_pbkdf2_param_t *param
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 密钥派生成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 密钥派生成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持Hash计算功能 | n |
 
 ### uapi_drv_cipher_hkdf_extract <a id="uapi_drv_cipher_hkdf_extract"></a>
@@ -1121,7 +1125,7 @@ errcode_t uapi_drv_cipher_hkdf_extract(uapi_drv_cipher_hkdf_extract_t *extract_p
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | extract_param | [uapi_drv_cipher_hkdf_extract_t](#struct_uapi_drv_cipher_hkdf_extract_t) * | 密钥提取的参数结构体 | 不为NULL |
 | prk | uint8_t * | 拓展密钥的伪随机密钥 | 不为NULL |
@@ -1138,14 +1142,14 @@ errcode_t uapi_drv_cipher_hkdf_extract(uapi_drv_cipher_hkdf_extract_t *extract_p
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 密钥提取成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 密钥提取成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持Hash计算功能 | n |
 
 ### uapi_drv_cipher_hkdf_expand <a id="uapi_drv_cipher_hkdf_expand"></a>
@@ -1174,7 +1178,7 @@ errcode_t uapi_drv_cipher_hkdf_expand(const uapi_drv_cipher_hkdf_expand_t *expan
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | expand_param | const [uapi_drv_cipher_hkdf_expand_t](#struct_uapi_drv_cipher_hkdf_expand_t) * | 密钥拓展的参数结构体 | 不为NULL |
 | okm | uint8_t * | 输出密钥材料 | 不为NULL |
@@ -1190,14 +1194,14 @@ errcode_t uapi_drv_cipher_hkdf_expand(const uapi_drv_cipher_hkdf_expand_t *expan
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 密钥拓展成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 密钥拓展成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持Hash计算功能 | n |
 
 ### uapi_drv_cipher_hkdf <a id="uapi_drv_cipher_hkdf"></a>
@@ -1225,7 +1229,7 @@ errcode_t uapi_drv_cipher_hkdf(uapi_drv_cipher_hkdf_t *hkdf_param, uint8_t *okm,
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | hkdf_param | [uapi_drv_cipher_hkdf_t](#struct_uapi_drv_cipher_hkdf_t) * | HKDF的参数结构体 | 不为NULL |
 | okm | uint8_t * | 输出密钥材料 | 不为NULL |
@@ -1241,14 +1245,14 @@ errcode_t uapi_drv_cipher_hkdf(uapi_drv_cipher_hkdf_t *hkdf_param, uint8_t *okm,
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x0) | 成功 | 密钥派生成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 密钥派生成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 功能宏 | 支持安全统一驱动接口功能 | y |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
 | CONFIG_SECURITY_UNIFIED_SUPPORT_HASH | 特性宏 | 支持Hash计算功能 | n |
 
 ### uapi_drv_cipher_symc_crypt <a id="uapi_drv_cipher_symc_crypt"></a>
@@ -1274,14 +1278,14 @@ errcode_t uapi_drv_cipher_symc_crypt(uapi_drv_cipher_symc_alg_t alg, uapi_drv_ci
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | alg | [uapi_drv_cipher_symc_alg_t](#enum_uapi_drv_cipher_symc_alg_t) | 对称加密算法 | 有效枚举值 |
 | work_mode | [uapi_drv_cipher_symc_work_mode_t](#enum_uapi_drv_cipher_symc_work_mode_t) | 对称加密工作模式 | 有效枚举值 |
 | bit_width | [uapi_drv_cipher_symc_bit_width_t](#enum_uapi_drv_cipher_symc_bit_width_t) | 加密位宽 | 有效枚举值 |
 | src | const uint8_t * | 输入数据缓冲区 | 不为NULL |
 | data_len | uint32_t | 输入数据长度 | 大于0 |
-| iv | uint8_t[16] | 初始向量 | 长度为16字节 |
+| iv | uint8_t[16] | 初始向量；运算后更新为最新 IV（inout） | 长度为16字节 |
 | key | const uint8_t * | 明文密钥；为NULL时使用keyslot_handle指定的密钥槽 | 明文密钥或有效密钥槽二选一 |
 | key_len | uint32_t | 明文密钥长度 | 与算法要求一致 |
 | keyslot_handle | uint32_t | 密钥槽句柄 | key为NULL时必须有效 |
@@ -1289,17 +1293,36 @@ errcode_t uapi_drv_cipher_symc_crypt(uapi_drv_cipher_symc_alg_t alg, uapi_drv_ci
 
 **出参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
-| ---- | ---- | ---- | ---- |
-| dst | uint8_t * | 输出数据缓冲区 | 不为NULL，空间不小于data_len |
+| 名称 | 数据类型 | 输出说明 |
+| ---- | ---- | ---- |
+| dst | uint8_t * | 输出数据缓冲区（空间不小于 data_len），由函数写入加解密结果 |
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | ---- | ---- | ---- |
-| ERRCODE_SUCC(0x0) | 成功 | 加解密完成 |
-| ERRCODE_INVALID_PARAM(0x80000001) | 参数无效 | 输入参数不满足约束 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 成功 | 加解密完成 |
+| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | 输入参数不满足约束 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_DRIVER_SUPPORT_SECURITY_UNIFIED | 编译参与宏 | 控制 security_unified 驱动模块参与编译 | y |
+| CONFIG_SECURITY_UNIFIED_SUPPORT_SYMC | 特性宏 | 支持对称加密功能 | n |
+
+## Type definitions
+
+### typedef_errcode_t <a id="typedef_errcode_t"></a>
+
+```c
+typedef uint32_t errcode_t;
+```
+
+**使用说明**
+
+本模块返回类型为 errcode_t 的对外接口的返回值类型。
 
 ## Enumerations
 
@@ -1483,15 +1506,15 @@ typedef enum {
 
 ```c
 typedef enum uapi_drv_cipher_buffer_secure {
-    UAPI_DRV_CIPHER_BUF_NONSECURE,
     UAPI_DRV_CIPHER_BUF_SECURE,
+    UAPI_DRV_CIPHER_BUF_NONSECURE,
 } uapi_drv_cipher_buffer_secure_t;
 ```
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| UAPI_DRV_CIPHER_BUF_NONSECURE | 0 | 非安全缓冲区 |
-| UAPI_DRV_CIPHER_BUF_SECURE | 1 | 安全缓冲区 |
+| UAPI_DRV_CIPHER_BUF_SECURE | 0 | 安全缓冲区 |
+| UAPI_DRV_CIPHER_BUF_NONSECURE | 1 | 非安全缓冲区 |
 
 ### uapi_drv_cipher_hash_type_t <a id="enum_uapi_drv_cipher_hash_type_t"></a>
 
@@ -1683,7 +1706,7 @@ typedef struct uapi_drv_cipher_hash_clone_ctx {
 | i_key_pad | uint8_t[128] | 保存i_key_pad，HMAC算法使用 |
 | tail | uint8_t[128] | 上次计算后剩余未对齐的尾部数据 |
 
-> **说明**：该结构体的内容无需用户构造，通过uapi_drv_cipher_hash_get接口获取，并通过uapi_drv_cipher_hash_set接口设置。
+该结构体的内容无需用户构造，通过 uapi_drv_cipher_hash_get 接口获取，并通过 uapi_drv_cipher_hash_set 接口设置。
 
 ### uapi_drv_cipher_kdf_pbkdf2_param_t <a id="struct_uapi_drv_cipher_kdf_pbkdf2_param_t"></a>
 

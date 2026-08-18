@@ -1,4 +1,4 @@
-# I2S
+# i2s
 
 I2S (Inter-IC Sound) 提供集成电路间数字音频总线的数据收发能力，支持主从模式、多种数据位宽与通道数的配置，可工作在轮询、中断以及 DMA (Direct Memory Access) 传输模式下。本模块对外接口以 SIO (Serial Input/Output) 总线编号为索引对硬件 I2S 控制器进行操作。
 
@@ -50,13 +50,12 @@ errcode_t uapi_i2s_init(sio_bus_t bus, i2s_callback_t callback)
 
 - 调用时序约束：当前接口需在调用本模块其它配置/收发接口之前首先调用
 - 依赖关系：当前接口依赖目标 SIO 总线的 HAL 函数已注册且 SIO 时钟可被使能
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0(0) |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
 | callback | [i2s_callback_t](#typedef_i2s_callback_t) | I2S 设备的接收数据回调函数 | 不为NULL |
 
 **返回值**
@@ -73,6 +72,11 @@ errcode_t uapi_i2s_init(sio_bus_t bus, i2s_callback_t callback)
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
 | CONFIG_I2S_SUPPORT_DMA | 特性宏 | 支持 DMA 模式下初始化收发信号量（分支级） | n |
+
+**参考案例**
+
+- `src/application/samples/peripheral/i2s/i2s_master_demo.c`
+- `src/application/samples/peripheral/i2s/i2s_slave_demo.c`
 
 ### uapi_i2s_deinit <a id="uapi_i2s_deinit"></a>
 
@@ -96,13 +100,12 @@ errcode_t uapi_i2s_deinit(sio_bus_t bus)
 
 - 调用时序约束：当前接口应在完成全部收发操作后调用
 - 依赖关系：当前接口依赖目标 SIO 总线已通过 uapi_i2s_init 完成初始化或处于可去初始化状态
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0(0) |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
 
 **返回值**
 
@@ -128,19 +131,18 @@ errcode_t uapi_i2s_set_config(sio_bus_t bus, const i2s_config_t *config)
 **功能说明**
 
 - 设置 I2S 设备的主从模式、传输路径模式、数据位宽、通道数、时序模式、时钟边沿、分频系数等配置
-- 配置参数经映射后下发到 SIO 硬件
+- 按入参配置 SIO 传输参数
 
 **前置条件**
 
 - 调用时序约束：当前接口必须在 uapi_i2s_init 成功返回后调用
 - 依赖关系：当前接口依赖目标 SIO 总线 HAL 的配置接口已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0(0) |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
 | config | [i2s_config_t](#struct_i2s_config_t) * | I2S 设备的配置参数指针 | 不为NULL |
 
 **返回值**
@@ -151,6 +153,11 @@ errcode_t uapi_i2s_set_config(sio_bus_t bus, const i2s_config_t *config)
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | 配置下发成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围或 config 为 NULL |
+
+**参考案例**
+
+- `src/application/samples/peripheral/i2s/i2s_master_demo.c`
+- `src/application/samples/peripheral/i2s/i2s_slave_demo.c`
 
 ### uapi_i2s_get_config <a id="uapi_i2s_get_config"></a>
 
@@ -173,13 +180,12 @@ errcode_t uapi_i2s_get_config(sio_bus_t bus, i2s_config_t *config)
 
 - 调用时序约束：当前接口必须在 uapi_i2s_init 成功返回后调用
 - 依赖关系：当前接口依赖目标 SIO 总线 HAL 的配置获取接口已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0(0) |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
 
 **出参**
 
@@ -217,13 +223,12 @@ errcode_t uapi_i2s_write_data(sio_bus_t bus, i2s_tx_data_t *data)
 
 - 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_set_config 成功返回后调用
 - 依赖关系：当前接口依赖目标 SIO 总线 HAL 的写接口已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0(0) |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
 | data | [i2s_tx_data_t](#struct_i2s_tx_data_t) * | 发送数据指针，含左右声道缓冲区与长度 | 不为NULL；data->left_buff 与 data->right_buff 不为NULL |
 
 **返回值**
@@ -260,13 +265,12 @@ errcode_t uapi_i2s_read_start(sio_bus_t bus)
 
 - 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_set_config 成功返回后调用
 - 依赖关系：当前接口依赖目标 SIO 总线 HAL 的接收使能接口已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0(0) |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
 
 **返回值**
 
@@ -301,13 +305,12 @@ void uapi_i2s_set_crg_clock_enable(sio_bus_t bus, bool enable)
 
 - 调用时序约束：当前接口必须在 uapi_i2s_init 成功返回后调用
 - 依赖关系：当前接口依赖目标 SIO 总线 CRG 时钟使能接口已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0(0) |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
 | enable | bool | 打开或关闭 BCLK/WS 时钟 | - true<br>- false |
 
 ### uapi_i2s_loop_trans <a id="uapi_i2s_loop_trans"></a>
@@ -331,13 +334,12 @@ errcode_t uapi_i2s_loop_trans(sio_bus_t bus, i2s_tx_data_t *data)
 
 - 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_set_config 成功返回后调用
 - 依赖关系：当前接口依赖目标 SIO 总线 HAL 的回路自测接口已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0(0) |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
 | data | [i2s_tx_data_t](#struct_i2s_tx_data_t) * | 自测发送数据指针，含左右声道缓冲区与长度 | 不为NULL；data->left_buff 与 data->right_buff 不为NULL |
 
 **返回值**
@@ -370,13 +372,12 @@ errcode_t uapi_i2s_get_data(sio_bus_t bus, i2s_rx_data_t *data)
 
 - 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_read_start 成功返回后调用
 - 依赖关系：当前接口依赖目标 SIO 总线 HAL 的数据获取接口已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0(0) |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
 
 **出参**
 
@@ -414,13 +415,12 @@ errcode_t uapi_i2s_loopback(sio_bus_t bus, bool en)
 
 - 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_set_config 成功返回后调用
 - 依赖关系：当前接口依赖目标 SIO 总线 HAL 的回环接口已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0(0) |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
 | en | bool | 是否开启回环模式 | - true<br>- false |
 
 **返回值**
@@ -459,13 +459,12 @@ int32_t uapi_i2s_dma_config(sio_bus_t bus, i2s_dma_attr_t *i2s_dma_cfg)
 
 - 调用时序约束：当前接口必须在 uapi_i2s_init 成功返回后调用
 - 依赖关系：当前接口依赖目标 SIO 总线 HAL 的 DMA 配置接口已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0(0) |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
 | i2s_dma_cfg | [i2s_dma_attr_t](#struct_i2s_dma_attr_t) * | I2S 使用 DMA 传输时的配置参数指针 | 不为NULL |
 
 **返回值**
@@ -505,13 +504,12 @@ int32_t uapi_i2s_merge_write_by_dma(sio_bus_t bus, const void *buffer, uint32_t 
 
 - 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_dma_config 成功返回后调用
 - 依赖关系：当前接口依赖目标 SIO 总线的 DMA 合并发送地址及 DMA 通道资源已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0(0) |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
 | buffer | const void * | 待写入的数据缓冲区指针 | 不为NULL |
 | length | uint32_t | 需要写入的数据长度 | 大于0 |
 | dma_cfg | [i2s_dma_config_t](#struct_i2s_dma_config_t) * | DMA 传输配置参数指针 | 不为NULL |
@@ -556,13 +554,12 @@ int32_t uapi_i2s_merge_read_by_dma(sio_bus_t bus, const void *buffer, uint32_t l
 
 - 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_dma_config 成功返回后调用
 - 依赖关系：当前接口依赖目标 SIO 总线的 DMA 合并接收地址及 DMA 通道资源已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0(0) |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
 | buffer | const void * | 存储读取数据的缓冲区指针 | 不为NULL |
 | length | uint32_t | 需要读取的数据长度 | 大于0 |
 | dma_cfg | [i2s_dma_config_t](#struct_i2s_dma_config_t) * | DMA 传输配置参数指针 | 不为NULL |
@@ -595,7 +592,7 @@ typedef uint32_t errcode_t;
 
 **使用说明**
 
-本模块对外接口的返回值类型，用于表示接口执行结果。[SDK公共基础类型]
+本模块对外接口的返回值类型，用于表示接口执行结果。
 
 ### typedef_i2s_callback_t <a id="typedef_i2s_callback_t"></a>
 
@@ -613,9 +610,12 @@ I2S 设备的接收数据回调函数类型，由 uapi_i2s_init 注册；在中�
 
 ```c
 typedef struct i2s_rx_data {
-    uint32_t left_buff[CONFIG_DATA_LEN_MAX];    /*!< 左声道数据。 */
-    uint32_t right_buff[CONFIG_DATA_LEN_MAX];   /*!< 右声道数据。 */
-    uint32_t length;                            /*!< 数据长度。 */
+    uint32_t left_buff[CONFIG_DATA_LEN_MAX];    /*!< @if Eng Left data.
+                                                     @else   左声道数据。 @endif */
+    uint32_t right_buff[CONFIG_DATA_LEN_MAX];   /*!< @if Eng Right data.
+                                                     @else   右声道数据。 @endif */
+    uint32_t length;                            /*!< @if Eng Data length.
+                                                     @else   数据长度。 @endif */
 } i2s_rx_data_t;
 ```
 
@@ -623,17 +623,20 @@ typedef struct i2s_rx_data {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| left_buff | uint32_t[8] (CONFIG_DATA_LEN_MAX) | 左声道接收数据缓冲区 |
-| right_buff | uint32_t[8] (CONFIG_DATA_LEN_MAX) | 右声道接收数据缓冲区 |
+| left_buff | uint32_t[CONFIG_DATA_LEN_MAX] | 左声道接收数据缓冲区 |
+| right_buff | uint32_t[CONFIG_DATA_LEN_MAX] | 右声道接收数据缓冲区 |
 | length | uint32_t | 数据长度 |
 
 ### struct_i2s_tx_data_t <a id="struct_i2s_tx_data_t"></a>
 
 ```c
 typedef struct i2s_tx_data {
-    uint32_t *left_buff;                        /*!< 通过TX 左FIFO发送的数据。 */
-    uint32_t *right_buff;                       /*!< 通过TX 右FIFO发送的数据。 */
-    uint32_t length;                            /*!< 发送数据的个数。 */
+    uint32_t *left_buff;                        /*!< @if Eng Data send through tx left FIFO.
+                                                     @else   通过TX 左FIFO发送的数据。 @endif */
+    uint32_t *right_buff;                       /*!< @if Eng Data send through tx right FIFO.
+                                                     @else   通过TX 右FIFO发送的数据。 @endif */
+    uint32_t length;                            /*!< @if Eng Bytes of data need to send.
+                                                     @else   发送数据的个数。 @endif */
 } i2s_tx_data_t;
 ```
 
@@ -649,14 +652,64 @@ typedef struct i2s_tx_data {
 
 ```c
 typedef struct i2s_config {
-    uint8_t drive_mode;                         /*!< I2S 设备模式：0:从模式 / 1:主模式 */
-    uint8_t transfer_mode;                      /*!< I2S 传输路径模式：0:标准模式 / 1:多路模式 */
-    uint8_t data_width;                         /*!< I2S 数据宽度：0:保留 / 1:16位 / 2:18位 / 3:20位 / 4:24位 / 5:32位 */
-    uint8_t channels_num;                       /*!< I2S 传输通道数：0:2通道 / 1:4通道 / 2:8通道 / 3:16通道 */
-    uint8_t timing;                             /*!< I2S 时序模式：0:标准时序模式 / 1:自定义时序模式 */
-    uint8_t clk_edge;                           /*!< I2S 时钟边沿模式：0:下降沿 / 1:上升沿 */
-    uint8_t div_number;                         /*!< 分频系数，见 data_width 成员。 */
-    uint8_t number_of_channels;                 /*!< 通道数，见 channels_num 成员。 */
+    uint8_t drive_mode;                         /*!< @if Eng I2S divice modes:
+                                                 *           - 0: SLAVE
+                                                 *           - 1: MASTER
+                                                 *   @else   I2S 设备模式：
+                                                 *           - 0: 从模式
+                                                 *           - 1: 主模式
+                                                 *   @endif */
+    uint8_t transfer_mode;                      /*!< @if Eng I2S transmission path modes:
+                                                 *           - 0: Standard mode
+                                                 *           - 1: Multichannel mode
+                                                 *   @else   I2S 传输路径模式：
+                                                 *           - 0: 标准模式
+                                                 *           - 1: 多路模式
+                                                 *   @endif */
+    uint8_t data_width;                         /*!< @if Eng I2S data width:
+                                                 *           - 0: RESERVED
+                                                 *           - 1: 16 Bits
+                                                 *           - 2: 18 Bits
+                                                 *           - 3: 20 Bits
+                                                 *           - 4: 24 Bits
+                                                 *           - 5: 32 Bits
+                                                 *   @else   I2S 数据宽度：
+                                                 *           - 0: 保留
+                                                 *           - 1: 16位
+                                                 *           - 2: 18位
+                                                 *           - 3: 20位
+                                                 *           - 4: 24位
+                                                 *           - 5: 32位
+                                                 *   @endif */
+    uint8_t channels_num;                       /*!< @if Eng I2S transmission Channels Number:
+                                                 *           - 0: 2 Channels
+                                                 *           - 1: 4 Channels
+                                                 *           - 2: 8 Channels
+                                                 *           - 3: 16 Channels
+                                                 *   @else   I2S 传输通道数：
+                                                 *           - 0: 2通道
+                                                 *           - 1: 4通道
+                                                 *           - 2: 8通道
+                                                 *           - 3: 16通道
+                                                 *   @endif */
+    uint8_t timing;                             /*!< @if Eng I2S timing mode:
+                                                 *           - 0: Standard timing mode
+                                                 *           - 1: User-defined timing mode
+                                                 *   @else   I2S 时序模式：
+                                                 *           - 0: 标准时序模式
+                                                 *           - 1: 自定义时序模式
+                                                 *   @endif */
+    uint8_t clk_edge;                           /*!< @if Eng I2S clock edge mode:
+                                                 *           - 0: Falling edge
+                                                 *           - 1: Rising edge
+                                                 *   @else   I2S 时钟边沿模式：
+                                                 *           - 0: 下降沿
+                                                 *           - 1: 上升沿
+                                                 *   @endif */
+    uint8_t div_number;                         /*!< @if Eng Div number, see @ref i2s_config.data_width.
+                                                     @else   分频系数，见 @ref i2s_config.data_width 成员。 @endif */
+    uint8_t number_of_channels;                 /*!< @if Eng Number of channels, see @ref i2s_config.channels_num.
+                                                     @else   通道数，见 @ref i2s_config.channels_num 成员。 @endif */
 } i2s_config_t;
 ```
 
@@ -677,10 +730,39 @@ typedef struct i2s_config {
 
 ```c
 typedef struct i2s_dma_config {
-    uint8_t src_width;          /*!< 源端传输数据宽度：0:1字节 / 1:2字节 / 2:4字节 */
-    uint8_t dest_width;         /*!< 目的端传输数据宽度：0:1字节 / 1:2字节 / 2:4字节 */
-    uint8_t burst_length;       /*!< 每次目的burst请求写入目的端数据量：0:1 / 1:4 / 2:8 / 3:16 */
-    uint8_t priority;           /*!< 传输通道优先级(最小为0以及最大为3)。 */
+    uint8_t src_width;          /*!< @if Eng Transfer data width of the source.
+                                 *           - 0: 1byte
+                                 *           - 1: 2byte
+                                 *           - 2: 4byte
+                                 *   @else   源端传输数据宽度 \n
+                                 *           - 0: 1字节
+                                 *           - 1: 2字节
+                                 *           - 2: 4字节
+                                 *   @endif */
+    uint8_t dest_width;         /*!< @if Eng Transfer data width of the destination.
+                                 *            - 0: 1byte
+                                 *            - 1: 2byte
+                                 *            - 2: 4byte
+                                 *   @else   目的端传输数据宽度 \n
+                                 *           - 0: 1字节
+                                 *           - 1: 2字节
+                                 *           - 2: 4字节
+                                 *   @endif */
+    uint8_t burst_length;       /*!< @if Eng Number of data items, to be written to the destination every time
+                                 *           a destination burst transaction request is made from
+                                 *           either the corresponding hardware or software handshaking interface.
+                                 *           - 0: burst length is 1
+                                 *           - 1: burst length is 4
+                                 *           - 2: burst length is 8
+                                 *           - 3: burst length is 16
+                                 *   @else   每次从相应的硬件或软件握手接口发出目的burst请求时,要写入目的端数据量
+                                 *           - 0: burst长度是1
+                                 *           - 1: burst长度是4
+                                 *           - 2: burst长度是8
+                                 *           - 3: burst长度是16
+                                 *   @endif */
+    uint8_t priority;           /*!< @if Eng Transfer channel priority(Minimum: 0 and Maximum: 3).
+                                 *   @else   传输通道优先级(最小为0以及最大为3)  @endif */
 } i2s_dma_config_t;
 ```
 
@@ -697,12 +779,18 @@ typedef struct i2s_dma_config {
 
 ```c
 typedef struct i2s_dma_attr {
-    bool tx_dma_enable;                     /*!< false: TX 没有使用 DMA，使用 uapi_i2s_write_data 发送数据；
-                                                 true:  TX 使用 DMA，使用 uapi_i2s_merge_write_by_dma 发送数据 */
-    uint8_t tx_int_threshold;               /*!< 触发中断的 tx fifo 水线 */
-    bool rx_dma_enable;                     /*!< false: RX 没有使用 DMA，使用 uapi_i2s_write_data 发送数据;
-                                                 true:  RX 使用 DMA，使用 uapi_i2s_merge_write_by_dma 发送数据 */
-    uint8_t rx_int_threshold;               /*!< 触发中断的 rx fifo 水线 */
+    bool tx_dma_enable;                     /*!< @if Eng false: tx not use dma @ref uapi_i2s_write can be used. \n
+                                                     true:  tx use dma @ref uapi_i2s_write_by_dma can be used.
+                                             @else   false: TX没有使用DMA，使用 @ref uapi_i2s_write 发送数据 \n
+                                                     true:  TX使用DMA，使用 @ref uapi_i2s_write_by_dma 发送数据 @endif */
+    uint8_t tx_int_threshold;               /*!< @if Eng i2s tx fifo level to trigger interrupt.
+                                             @else 触发中断的txfifo水线 @endif */
+    bool rx_dma_enable;                     /*!< @if Eng false: rx not use dma @ref uapi_i2s_write can be used. \n
+                                                     true:  rx use dma @ref uapi_i2s_write_by_dma can be used.
+                                             @else   false: RX没有使用DMA，使用 @ref uapi_i2s_write 发送数据 \n
+                                                     true:  RX使用DMA，使用 @ref uapi_i2s_write_by_dma 发送数据 @endif */
+    uint8_t rx_int_threshold;               /*!< @if Eng i2s rx fifo level to trigger interrupt.
+                                             @else 触发中断的rxfifo水线 @endif */
 } i2s_dma_attr_t;
 ```
 
@@ -717,7 +805,7 @@ typedef struct i2s_dma_attr {
 
 ## Macros
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC                                        0UL

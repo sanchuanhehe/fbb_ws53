@@ -1,6 +1,6 @@
-# Debug
+# debug
 
-OSAL (OS Abstract Layer) debug 模块提供内核调试与诊断功能，包括格式化日志打印、内核 panic 触发、调用栈回溯打印、条件断言异常触发与 CPU (Central Processing Unit) D-Cache (Data Cache) 刷新能力，用于系统运行时调试与异常诊断。该模块面向 linux、liteos、seliteos、freertos、nonos 等多种操作系统环境提供统一的调试接口抽象。
+OSAL (OS Abstract Layer) debug 模块提供内核调试与诊断功能，包括格式化日志打印、内核 panic 触发、调用栈回溯打印与 CPU (Central Processing Unit) D-Cache (Data Cache) 刷新能力，用于系统运行时调试与异常诊断。该模块面向 linux、liteos、seliteos、freertos、nonos 等多种操作系统环境提供统一的调试接口抽象。
 
 **模块公共头文件**
 
@@ -28,7 +28,7 @@ void osal_printk(const char *fmt, ...)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/debug/osal_debug.h"
+#include "debug/osal_debug.h"
 ```
 
 **功能说明**
@@ -39,13 +39,15 @@ void osal_printk(const char *fmt, ...)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | fmt | const char * | 格式化字符串指针 | 非NULL，指向有效的格式化字符串 |
 | ... | ... | 可变参数列表 | 与fmt中的格式说明符匹配 |
 
 **参考案例**
 
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/peripheral/uart/uart_demo.c`
 
 ### osal_panic <a id="osal_panic"></a>
 
@@ -56,7 +58,7 @@ void osal_panic(const char *fmt, const char *fun, int line, const char *cond)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/debug/osal_debug.h"
+#include "debug/osal_debug.h"
 ```
 
 **功能说明**
@@ -72,7 +74,7 @@ void osal_panic(const char *fmt, const char *fun, int line, const char *cond)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | fmt | const char * | 格式化字符串指针 | 非NULL |
 | fun | const char * | 发生panic的函数名 | 非NULL |
@@ -88,7 +90,7 @@ void osal_dump_stack(void)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/debug/osal_debug.h"
+#include "debug/osal_debug.h"
 ```
 
 **功能说明**
@@ -101,6 +103,12 @@ void osal_dump_stack(void)
 
 - 仅在linux、liteos系统下可用
 
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| OSAL_DEBUG_DUMP | 特性宏 | linux 实现中控制 dump_stack 调用分支（分支级，无前缀注入宏） | 由构建目标决定 |
+
 ### osal_flush_cache <a id="osal_flush_cache"></a>
 
 ```c
@@ -110,7 +118,7 @@ void osal_flush_cache(void)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/debug/osal_debug.h"
+#include "debug/osal_debug.h"
 ```
 
 **功能说明**

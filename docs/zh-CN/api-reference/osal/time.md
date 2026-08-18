@@ -1,12 +1,12 @@
-# Time
+# time
 
 time 模块提供 RTC (Real-Time Clock) 时间转换与定时器管理功能，支持时间戳与 rtc_time 的相互转换及有效性校验，提供普通定时器与高精度定时器的生命周期管理，以及系统时间获取与毫秒/Ticks 单位转换能力。
 
 **模块公共头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_rtc.h"
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_rtc.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 ## 接口清单
@@ -45,7 +45,7 @@ void osal_rtc_time_to_tm(unsigned long time, osal_rtc_time *tm)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_rtc.h"
+#include "src/kernel/osal/include/time/osal_rtc.h"
 ```
 
 **功能说明**
@@ -75,7 +75,7 @@ void osal_rtc_tm_to_time(const osal_rtc_time *tm, unsigned long *time)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_rtc.h"
+#include "src/kernel/osal/include/time/osal_rtc.h"
 ```
 
 **功能说明**
@@ -105,7 +105,7 @@ int osal_rtc_valid_tm(const osal_rtc_time *tm)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_rtc.h"
+#include "src/kernel/osal/include/time/osal_rtc.h"
 ```
 
 **功能说明**
@@ -138,19 +138,19 @@ int osal_timer_init(osal_timer *timer)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
 
-- 初始化定时器，分配内部定时器资源并设置到期回调
+- 初始化定时器并设置到期回调
 - 定时器到期时通过注册的回调函数通知调用方
 - 支持 linux、liteos、freertos 系统
 
 **前置条件**
 
 - 依赖关系：调用前需设置 timer 的 handler 和 data 字段，初始化完成后无法再修改这两个字段
-- 上下文限制：模块退出时必须调用 osal_timer_destroy 释放定时器，否则会导致内存泄漏
+- 依赖关系：不再使用定时器时应调用 osal_timer_destroy 释放，否则会导致内存泄漏
 
 **入参**
 
@@ -171,7 +171,6 @@ int osal_timer_init(osal_timer *timer)
 
 - `src/application/samples/peripheral/adc/adc_demo.c`
 - `src/middleware/utils/dfx/log_file/log_file.c`
-- `src/protocol/wifi/source/host/frw/frw_timer.c`
 
 ### osal_timer_start <a id="osal_timer_start"></a>
 
@@ -182,12 +181,12 @@ int osal_timer_start(osal_timer *timer)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
 
-- 启动已初始化的定时器，将其加入内核定时器链表
+- 启动已初始化的定时器，按设定超时时间调度
 - 定时器到期时内核将通过定时器中断回调 handler
 - 支持 linux、liteos、freertos 系统
 
@@ -215,7 +214,6 @@ int osal_timer_start(osal_timer *timer)
 
 - `src/application/samples/peripheral/adc/adc_demo.c`
 - `src/middleware/utils/dfx/log_file/log_file.c`
-- `src/protocol/wifi/source/host/frw/frw_timer.c`
 
 ### osal_timer_mod <a id="osal_timer_mod"></a>
 
@@ -226,7 +224,7 @@ int osal_timer_mod(osal_timer *timer, unsigned int interval)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -264,7 +262,7 @@ int osal_timer_start_on(osal_timer *timer, unsigned long delay, int cpu)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -298,7 +296,7 @@ int osal_timer_stop(osal_timer *timer)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -336,7 +334,7 @@ int osal_timer_destroy(osal_timer *timer)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -372,7 +370,7 @@ unsigned long osal_timer_get_private_data(const void *sys_data)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -405,7 +403,7 @@ int osal_timer_destroy_sync(osal_timer *timer)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -444,7 +442,7 @@ unsigned long long osal_sched_clock(void)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -469,7 +467,7 @@ unsigned long long osal_get_jiffies(void)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -498,7 +496,7 @@ unsigned long osal_msecs_to_jiffies(const unsigned int m)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -529,7 +527,7 @@ unsigned int osal_jiffies_to_msecs(const unsigned int n)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -561,7 +559,7 @@ unsigned int osal_get_cycle_per_tick(void)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -586,7 +584,7 @@ void osal_gettimeofday(osal_timeval *tv)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -615,7 +613,7 @@ int osal_hrtimer_create(osal_hrtimer *hrtimer)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -643,6 +641,12 @@ int osal_hrtimer_create(osal_hrtimer *hrtimer)
 | [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 高精度定时器创建成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE):-1 | 执行失败 | 高精度定时器创建失败 |
 
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| LOSCFG_COMPAT_LINUX_HRTIMER | 特性宏 | 支持 high resolution timer 接口（接口级，liteos 实现体由 #ifdef 包裹，LiteOS Kconfig 声明） | n |
+
 ### osal_hrtimer_start <a id="osal_hrtimer_start"></a>
 
 ```c
@@ -652,7 +656,7 @@ int osal_hrtimer_start(osal_hrtimer *hrtimer)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -676,6 +680,12 @@ int osal_hrtimer_start(osal_hrtimer *hrtimer)
 | 0 | 启动成功 | 高精度定时器成功启动 |
 | 1 | 节点已存在 | 高精度定时器节点已在链表中 |
 
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| LOSCFG_COMPAT_LINUX_HRTIMER | 特性宏 | 支持 high resolution timer 接口（接口级，liteos 实现体由 #ifdef 包裹，LiteOS Kconfig 声明） | n |
+
 ### osal_hrtimer_destroy <a id="osal_hrtimer_destroy"></a>
 
 ```c
@@ -685,7 +695,7 @@ int osal_hrtimer_destroy(osal_hrtimer *hrtimer)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/time/osal_timer.h"
+#include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
 **功能说明**
@@ -707,6 +717,12 @@ int osal_hrtimer_destroy(osal_hrtimer *hrtimer)
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 高精度定时器删除成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE):-1 | 执行失败 | 参数为空或定时器节点不存在 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| LOSCFG_COMPAT_LINUX_HRTIMER | 特性宏 | 支持 high resolution timer 接口（接口级，liteos 实现体由 #ifdef 包裹，LiteOS Kconfig 声明） | n |
 
 ## Enumerations
 
@@ -812,13 +828,13 @@ typedef struct osal_hrtimer {
 
 ## Macros
 
-### OSAL_SUCCESS <a id="OSAL_SUCCESS"></a> [SDK公共共享宏]
+### OSAL_SUCCESS <a id="OSAL_SUCCESS"></a>
 
 ```c
 #define OSAL_SUCCESS 0
 ```
 
-### OSAL_FAILURE <a id="OSAL_FAILURE"></a> [SDK公共共享宏]
+### OSAL_FAILURE <a id="OSAL_FAILURE"></a>
 
 ```c
 #define OSAL_FAILURE (-1)

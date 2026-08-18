@@ -176,7 +176,6 @@ errcode_t sle_factory_register_callbacks(sle_factory_callbacks_t *func)
 
 - 注册 SLE factory 管理回调函数
 - 注册射频长发、射频长收、射频收发结束、射频收发复位四类事件的回调函数集合
-- 后续射频收发相关接口的异步执行结果通过已注册的回调函数返回
 
 **前置条件**
 
@@ -201,7 +200,7 @@ errcode_t sle_factory_register_callbacks(sle_factory_callbacks_t *func)
 
 ## Type definitions
 
-### errcode_t <a id="errcode_t"></a> [SDK公共基础类型]
+### errcode_t <a id="errcode_t"></a>
 
 ```c
 // 源码原始定义
@@ -210,7 +209,7 @@ typedef uint32_t errcode_t;
 
 **使用说明**
 
-本模块对外接口的返回值类型，表示接口执行结果错误码。[SDK公共基础类型]
+本模块对外接口的返回值类型，表示接口执行结果错误码。
 
 ### sle_rf_tx_start_callback <a id="typedef_sle_rf_tx_start_callback"></a>
 
@@ -519,7 +518,7 @@ typedef struct {
 
 ## Macros
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC                                        0UL

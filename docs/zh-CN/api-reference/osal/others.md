@@ -1,6 +1,6 @@
 # Others
 
-others 模块提供 OSAL (OS Abstract Layer) 通用基础设施，核心为双向链表 (doubly linked list) 与哈希链表 (hash list) 的内联操作接口，涵盖链表节点的初始化、插入、删除、替换、移动、拼接、判空、切割与旋转等操作。所有接口以 static inline 函数形式实现于头文件中，无独立编译单元，不依赖 Kconfig 配置，可在任意包含该头文件的上下文中直接使用。模块还包含 OSAL 通用定义、错误码与 ioctl 辅助宏等头文件，为其他 OSAL 子模块提供基础类型与宏定义支撑。
+others 模块提供 OSAL (OS Abstract Layer) 通用基础设施，核心为双向链表 (doubly linked list) 与哈希链表 (hash list) 的内联操作接口，涵盖链表节点的初始化、插入、删除、替换、移动、拼接、判空、切割与旋转等操作。所有接口以 static inline 函数形式实现于头文件中，无独立编译单元，不依赖 Kconfig 配置，可在任意包含该头文件的上下文中直接使用。相关 OSAL 通用定义、错误码与 ioctl 辅助宏等头文件由 OSAL 其他子模块文档覆盖。
 
 **模块公共头文件**
 
@@ -53,7 +53,7 @@ others 模块提供 OSAL (OS Abstract Layer) 通用基础设施，核心为双�
 ### OSAL_INIT_LIST_HEAD <a id="OSAL_INIT_LIST_HEAD"></a>
 
 ```c
-void OSAL_INIT_LIST_HEAD(struct osal_list_head *list)
+static INLINE__ void OSAL_INIT_LIST_HEAD(struct osal_list_head *list)
 ```
 
 **声明头文件**
@@ -86,7 +86,7 @@ void OSAL_INIT_LIST_HEAD(struct osal_list_head *list)
 ### osal___list_add <a id="osal___list_add"></a>
 
 ```c
-void osal___list_add(struct osal_list_head *_new, struct osal_list_head *prev, struct osal_list_head *next)
+static INLINE__ void osal___list_add(struct osal_list_head *_new, struct osal_list_head *prev, struct osal_list_head *next)
 ```
 
 **声明头文件**
@@ -117,7 +117,7 @@ void osal___list_add(struct osal_list_head *_new, struct osal_list_head *prev, s
 ### osal_list_add <a id="osal_list_add"></a>
 
 ```c
-void osal_list_add(struct osal_list_head *cur, struct osal_list_head *head)
+static INLINE__ void osal_list_add(struct osal_list_head *cur, struct osal_list_head *head)
 ```
 
 **声明头文件**
@@ -130,7 +130,7 @@ void osal_list_add(struct osal_list_head *cur, struct osal_list_head *head)
 
 - 在链表头部（head 之后）添加新节点 cur
 - 适用于实现栈结构（后进先出）
-- 内部调用 osal___list_add 在 head 与 head->next 之间插入
+- 将节点插入 head 与 head->next 之间
 
 **前置条件**
 
@@ -152,7 +152,7 @@ void osal_list_add(struct osal_list_head *cur, struct osal_list_head *head)
 ### osal_list_add_tail <a id="osal_list_add_tail"></a>
 
 ```c
-void osal_list_add_tail(struct osal_list_head *cur, struct osal_list_head *head)
+static INLINE__ void osal_list_add_tail(struct osal_list_head *cur, struct osal_list_head *head)
 ```
 
 **声明头文件**
@@ -165,7 +165,7 @@ void osal_list_add_tail(struct osal_list_head *cur, struct osal_list_head *head)
 
 - 在链表尾部（head 之前）添加新节点 cur
 - 适用于实现队列结构（先进先出）
-- 内部调用 osal___list_add 在 head->prev 与 head 之间插入
+- 将节点插入 head->prev 与 head 之间
 
 **前置条件**
 
@@ -188,7 +188,7 @@ void osal_list_add_tail(struct osal_list_head *cur, struct osal_list_head *head)
 ### osal___list_del <a id="osal___list_del"></a>
 
 ```c
-void osal___list_del(struct osal_list_head *prev, struct osal_list_head *next)
+static INLINE__ void osal___list_del(struct osal_list_head *prev, struct osal_list_head *next)
 ```
 
 **声明头文件**
@@ -218,7 +218,7 @@ void osal___list_del(struct osal_list_head *prev, struct osal_list_head *next)
 ### osal___list_del_entry <a id="osal___list_del_entry"></a>
 
 ```c
-void osal___list_del_entry(struct osal_list_head *entry)
+static INLINE__ void osal___list_del_entry(struct osal_list_head *entry)
 ```
 
 **声明头文件**
@@ -229,7 +229,7 @@ void osal___list_del_entry(struct osal_list_head *entry)
 
 **功能说明**
 
-- 删除链表节点 entry，通过调用 osal___list_del 修改其前后节点指针
+- 删除链表节点 entry，修改其前后节点指针
 - 仅供内部链表操作使用
 - 当 entry 为 NULL 时直接返回，不执行删除
 - 删除后 entry 的 next/prev 指针处于未定义状态，不应再访问
@@ -247,7 +247,7 @@ void osal___list_del_entry(struct osal_list_head *entry)
 ### osal_list_del <a id="osal_list_del"></a>
 
 ```c
-void osal_list_del(struct osal_list_head *entry)
+static INLINE__ void osal_list_del(struct osal_list_head *entry)
 ```
 
 **声明头文件**
@@ -282,7 +282,7 @@ void osal_list_del(struct osal_list_head *entry)
 ### osal_list_replace <a id="osal_list_replace"></a>
 
 ```c
-void osal_list_replace(struct osal_list_head *old, struct osal_list_head *_new)
+static INLINE__ void osal_list_replace(struct osal_list_head *old, struct osal_list_head *_new)
 ```
 
 **声明头文件**
@@ -312,7 +312,7 @@ void osal_list_replace(struct osal_list_head *old, struct osal_list_head *_new)
 ### osal_list_replace_init <a id="osal_list_replace_init"></a>
 
 ```c
-void osal_list_replace_init(struct osal_list_head *old, struct osal_list_head *_new)
+static INLINE__ void osal_list_replace_init(struct osal_list_head *old, struct osal_list_head *_new)
 ```
 
 **声明头文件**
@@ -341,7 +341,7 @@ void osal_list_replace_init(struct osal_list_head *old, struct osal_list_head *_
 ### osal_list_del_init <a id="osal_list_del_init"></a>
 
 ```c
-void osal_list_del_init(struct osal_list_head *entry)
+static INLINE__ void osal_list_del_init(struct osal_list_head *entry)
 ```
 
 **声明头文件**
@@ -366,15 +366,10 @@ void osal_list_del_init(struct osal_list_head *entry)
 | ---- | ---- | ---- | ---- |
 | entry | struct [osal_list_head](#osal_list_head) * | 指向待删除并重新初始化的链表节点 | 不为NULL |
 
-**参考案例**
-
-- `src/kernel/osal/src/linux/kernel/osal_proc.c`
-- `src/kernel/osal/src/linux/kernel/osal_workqueue.c`
-
 ### osal_list_move <a id="osal_list_move"></a>
 
 ```c
-void osal_list_move(struct osal_list_head *list, struct osal_list_head *head)
+static INLINE__ void osal_list_move(struct osal_list_head *list, struct osal_list_head *head)
 ```
 
 **声明头文件**
@@ -386,7 +381,7 @@ void osal_list_move(struct osal_list_head *list, struct osal_list_head *head)
 **功能说明**
 
 - 将节点 list 从原链表中删除，并添加到目标链表 head 的头部
-- 等效于先调用 osal___list_del_entry 再调用 osal_list_add
+- 删除 entry 后将其插入 head 之后
 
 **前置条件**
 
@@ -400,14 +395,10 @@ void osal_list_move(struct osal_list_head *list, struct osal_list_head *head)
 | list | struct [osal_list_head](#osal_list_head) * | 指向待移动的节点 | 不为NULL |
 | head | struct [osal_list_head](#osal_list_head) * | 指向目标链表头节点 | 不为NULL，且已初始化 |
 
-**参考案例**
-
-- `src/middleware/utils/hcc/host/hcc_ipc_host.c`
-
 ### osal_list_move_tail <a id="osal_list_move_tail"></a>
 
 ```c
-void osal_list_move_tail(struct osal_list_head *list, struct osal_list_head *head)
+static INLINE__ void osal_list_move_tail(struct osal_list_head *list, struct osal_list_head *head)
 ```
 
 **声明头文件**
@@ -419,7 +410,7 @@ void osal_list_move_tail(struct osal_list_head *list, struct osal_list_head *hea
 **功能说明**
 
 - 将节点 list 从原链表中删除，并添加到目标链表 head 的尾部
-- 等效于先调用 osal___list_del_entry 再调用 osal_list_add_tail
+- 删除 entry 后将其插入 head 之前（尾部）
 
 **前置条件**
 
@@ -436,7 +427,7 @@ void osal_list_move_tail(struct osal_list_head *list, struct osal_list_head *hea
 ### osal_list_is_last <a id="osal_list_is_last"></a>
 
 ```c
-int osal_list_is_last(const struct osal_list_head *list, const struct osal_list_head *head)
+static INLINE__ int osal_list_is_last(const struct osal_list_head *list, const struct osal_list_head *head)
 ```
 
 **声明头文件**
@@ -475,7 +466,7 @@ int osal_list_is_last(const struct osal_list_head *list, const struct osal_list_
 ### osal_list_empty <a id="osal_list_empty"></a>
 
 ```c
-int osal_list_empty(const struct osal_list_head *head)
+static INLINE__ int osal_list_empty(const struct osal_list_head *head)
 ```
 
 **声明头文件**
@@ -517,7 +508,7 @@ int osal_list_empty(const struct osal_list_head *head)
 ### osal_list_empty_careful <a id="osal_list_empty_careful"></a>
 
 ```c
-int osal_list_empty_careful(const struct osal_list_head *head)
+static INLINE__ int osal_list_empty_careful(const struct osal_list_head *head)
 ```
 
 **声明头文件**
@@ -556,7 +547,7 @@ int osal_list_empty_careful(const struct osal_list_head *head)
 ### osal_list_rotate_left <a id="osal_list_rotate_left"></a>
 
 ```c
-void osal_list_rotate_left(struct osal_list_head *head)
+static INLINE__ void osal_list_rotate_left(struct osal_list_head *head)
 ```
 
 **声明头文件**
@@ -583,7 +574,7 @@ void osal_list_rotate_left(struct osal_list_head *head)
 ### osal_list_is_singular <a id="osal_list_is_singular"></a>
 
 ```c
-int osal_list_is_singular(const struct osal_list_head *head)
+static INLINE__ int osal_list_is_singular(const struct osal_list_head *head)
 ```
 
 **声明头文件**
@@ -619,7 +610,7 @@ int osal_list_is_singular(const struct osal_list_head *head)
 ### osal___list_cut_position <a id="osal___list_cut_position"></a>
 
 ```c
-void osal___list_cut_position(struct osal_list_head *list, struct osal_list_head *head, struct osal_list_head *entry)
+static INLINE__ void osal___list_cut_position(struct osal_list_head *list, struct osal_list_head *head, struct osal_list_head *entry)
 ```
 
 **声明头文件**
@@ -649,7 +640,7 @@ void osal___list_cut_position(struct osal_list_head *list, struct osal_list_head
 ### osal_list_cut_position <a id="osal_list_cut_position"></a>
 
 ```c
-void osal_list_cut_position(struct osal_list_head *list, struct osal_list_head *head, struct osal_list_head *entry)
+static INLINE__ void osal_list_cut_position(struct osal_list_head *list, struct osal_list_head *head, struct osal_list_head *entry)
 ```
 
 **声明头文件**
@@ -681,7 +672,7 @@ void osal_list_cut_position(struct osal_list_head *list, struct osal_list_head *
 ### osal___list_splice <a id="osal___list_splice"></a>
 
 ```c
-void osal___list_splice(const struct osal_list_head *list, struct osal_list_head *prev, struct osal_list_head *next)
+static INLINE__ void osal___list_splice(const struct osal_list_head *list, struct osal_list_head *prev, struct osal_list_head *next)
 ```
 
 **声明头文件**
@@ -711,7 +702,7 @@ void osal___list_splice(const struct osal_list_head *list, struct osal_list_head
 ### osal_list_splice <a id="osal_list_splice"></a>
 
 ```c
-void osal_list_splice(const struct osal_list_head *list, struct osal_list_head *head)
+static INLINE__ void osal_list_splice(const struct osal_list_head *list, struct osal_list_head *head)
 ```
 
 **声明头文件**
@@ -741,7 +732,7 @@ void osal_list_splice(const struct osal_list_head *list, struct osal_list_head *
 ### osal_list_splice_tail <a id="osal_list_splice_tail"></a>
 
 ```c
-void osal_list_splice_tail(struct osal_list_head *list, struct osal_list_head *head)
+static INLINE__ void osal_list_splice_tail(struct osal_list_head *list, struct osal_list_head *head)
 ```
 
 **声明头文件**
@@ -771,7 +762,7 @@ void osal_list_splice_tail(struct osal_list_head *list, struct osal_list_head *h
 ### osal_list_splice_init <a id="osal_list_splice_init"></a>
 
 ```c
-void osal_list_splice_init(struct osal_list_head *list, struct osal_list_head *head)
+static INLINE__ void osal_list_splice_init(struct osal_list_head *list, struct osal_list_head *head)
 ```
 
 **声明头文件**
@@ -801,7 +792,7 @@ void osal_list_splice_init(struct osal_list_head *list, struct osal_list_head *h
 ### osal_list_splice_tail_init <a id="osal_list_splice_tail_init"></a>
 
 ```c
-void osal_list_splice_tail_init(struct osal_list_head *list, struct osal_list_head *head)
+static INLINE__ void osal_list_splice_tail_init(struct osal_list_head *list, struct osal_list_head *head)
 ```
 
 **声明头文件**
@@ -831,7 +822,7 @@ void osal_list_splice_tail_init(struct osal_list_head *list, struct osal_list_he
 ### INIT_OSAL_HLIST_NODE <a id="INIT_OSAL_HLIST_NODE"></a>
 
 ```c
-void INIT_OSAL_HLIST_NODE(struct osal_hlist_node *h)
+static INLINE__ void INIT_OSAL_HLIST_NODE(struct osal_hlist_node *h)
 ```
 
 **声明头文件**
@@ -858,7 +849,7 @@ void INIT_OSAL_HLIST_NODE(struct osal_hlist_node *h)
 ### osal_hlist_unhashed <a id="osal_hlist_unhashed"></a>
 
 ```c
-int osal_hlist_unhashed(const struct osal_hlist_node *h)
+static INLINE__ int osal_hlist_unhashed(const struct osal_hlist_node *h)
 ```
 
 **声明头文件**
@@ -894,7 +885,7 @@ int osal_hlist_unhashed(const struct osal_hlist_node *h)
 ### osal_hlist_empty <a id="osal_hlist_empty"></a>
 
 ```c
-int osal_hlist_empty(const struct osal_hlist_head *h)
+static INLINE__ int osal_hlist_empty(const struct osal_hlist_head *h)
 ```
 
 **声明头文件**
@@ -930,7 +921,7 @@ int osal_hlist_empty(const struct osal_hlist_head *h)
 ### osal___hlist_del <a id="osal___hlist_del"></a>
 
 ```c
-void osal___hlist_del(struct osal_hlist_node *n)
+static INLINE__ void osal___hlist_del(struct osal_hlist_node *n)
 ```
 
 **声明头文件**
@@ -958,7 +949,7 @@ void osal___hlist_del(struct osal_hlist_node *n)
 ### osal_hlist_del <a id="osal_hlist_del"></a>
 
 ```c
-void osal_hlist_del(struct osal_hlist_node *n)
+static INLINE__ void osal_hlist_del(struct osal_hlist_node *n)
 ```
 
 **声明头文件**
@@ -986,7 +977,7 @@ void osal_hlist_del(struct osal_hlist_node *n)
 ### osal_hlist_del_init <a id="osal_hlist_del_init"></a>
 
 ```c
-void osal_hlist_del_init(struct osal_hlist_node *n)
+static INLINE__ void osal_hlist_del_init(struct osal_hlist_node *n)
 ```
 
 **声明头文件**
@@ -1014,7 +1005,7 @@ void osal_hlist_del_init(struct osal_hlist_node *n)
 ### osal_hlist_add_head <a id="osal_hlist_add_head"></a>
 
 ```c
-void osal_hlist_add_head(struct osal_hlist_node *n, struct osal_hlist_head *h)
+static INLINE__ void osal_hlist_add_head(struct osal_hlist_node *n, struct osal_hlist_head *h)
 ```
 
 **声明头文件**
@@ -1043,7 +1034,7 @@ void osal_hlist_add_head(struct osal_hlist_node *n, struct osal_hlist_head *h)
 ### osal_hlist_add_before <a id="osal_hlist_add_before"></a>
 
 ```c
-void osal_hlist_add_before(struct osal_hlist_node *n, struct osal_hlist_node *next)
+static INLINE__ void osal_hlist_add_before(struct osal_hlist_node *n, struct osal_hlist_node *next)
 ```
 
 **声明头文件**
@@ -1072,7 +1063,7 @@ void osal_hlist_add_before(struct osal_hlist_node *n, struct osal_hlist_node *ne
 ### osal_hlist_add_after <a id="osal_hlist_add_after"></a>
 
 ```c
-void osal_hlist_add_after(struct osal_hlist_node *n, struct osal_hlist_node *next)
+static INLINE__ void osal_hlist_add_after(struct osal_hlist_node *n, struct osal_hlist_node *next)
 ```
 
 **声明头文件**
@@ -1102,7 +1093,7 @@ void osal_hlist_add_after(struct osal_hlist_node *n, struct osal_hlist_node *nex
 ### osal_hlist_add_fake <a id="osal_hlist_add_fake"></a>
 
 ```c
-void osal_hlist_add_fake(struct osal_hlist_node *n)
+static INLINE__ void osal_hlist_add_fake(struct osal_hlist_node *n)
 ```
 
 **声明头文件**
@@ -1129,7 +1120,7 @@ void osal_hlist_add_fake(struct osal_hlist_node *n)
 ### osal_hlist_move_list <a id="osal_hlist_move_list"></a>
 
 ```c
-void osal_hlist_move_list(struct osal_hlist_head *old, struct osal_hlist_head *cur)
+static INLINE__ void osal_hlist_move_list(struct osal_hlist_head *old, struct osal_hlist_head *cur)
 ```
 
 **声明头文件**

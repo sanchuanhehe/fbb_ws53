@@ -1,6 +1,6 @@
-# Factory
+# factory
 
-factory 提供 BLE (Bluetooth Low Energy) 产测 RF (Radio Frequency) 收发测试、单音模式与产线校准能力。该模块支持射频长发/长收的启停与复位、NV (Non-Volatile) 校准，以及 XO (Crystal Oscillator) 频偏校准、芯片温度获取、功率校准及其补偿值的 EFUSE 读写等产线校准命令。
+factory 提供 BLE (Bluetooth Low Energy) 产测 RF (Radio Frequency) 收发测试、单音模式与产线校准能力。该模块支持射频长发/长收的启停与复位、NV (Non-Volatile) 校准，以及 XO (Crystal Oscillator) 频偏校准、芯片温度获取、功率校准及其补偿值的 EFUSE (electronic Fuse) 读写等产线校准命令。
 
 **模块公共头文件**
 
@@ -43,9 +43,7 @@ errcode_t ble_factory_register_callbacks(ble_factory_callbacks_t *func)
 
 **前置条件**
 
-- 调用时序约束：当前接口须在 BLE service 初始化就绪后调用
 - 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
-- 上下文限制：当前接口不应在中断上下文调用
 
 **入参**
 
@@ -83,7 +81,6 @@ errcode_t ble_factory_rf_tx_start(ble_rf_tx_start_t* param)
 
 - 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用
 - 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
-- 上下文限制：当前接口不应在中断上下文调用
 
 **入参**
 
@@ -121,7 +118,6 @@ errcode_t ble_factory_rf_rx_start(ble_rf_rx_start_t* param)
 
 - 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用
 - 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
-- 上下文限制：当前接口不应在中断上下文调用
 
 **入参**
 
@@ -159,7 +155,6 @@ errcode_t ble_factory_rf_trx_end(void)
 
 - 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用
 - 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
-- 上下文限制：当前接口不应在中断上下文调用
 
 **返回值**
 
@@ -191,7 +186,6 @@ errcode_t ble_factory_rf_reset(void)
 
 - 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用
 - 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
-- 上下文限制：当前接口不应在中断上下文调用
 
 **返回值**
 
@@ -223,7 +217,6 @@ errcode_t ble_factory_rf_cali_nv(void)
 
 - 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用
 - 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
-- 上下文限制：当前接口不应在中断上下文调用
 
 **返回值**
 
@@ -255,7 +248,6 @@ errcode_t ble_factory_rf_single_tone(ble_rf_single_tone_t* param)
 
 - 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用
 - 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
-- 上下文限制：当前接口不应在中断上下文调用
 
 **入参**
 
@@ -293,7 +285,6 @@ errcode_t ble_factory_vendor_productline_cmd(ble_vendor_productline_cmd_t* param
 
 - 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用
 - 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
-- 上下文限制：当前接口不应在中断上下文调用
 
 **入参**
 
@@ -311,7 +302,7 @@ errcode_t ble_factory_vendor_productline_cmd(ble_vendor_productline_cmd_t* param
 
 ## Type definitions
 
-### errcode_t <a id="errcode_t"></a> [SDK公共基础类型]
+### errcode_t <a id="errcode_t"></a>
 
 ```c
 typedef uint32_t errcode_t;

@@ -1,11 +1,11 @@
 # FileOps
 
-fileops 提供内核态文件操作抽象接口，支持文件的打开、关闭、读写、同步、定位、删除及截断操作，屏蔽 Linux、LiteOS、FreeRTOS 等多操作系统底层差异。
+fileops 提供内核态文件操作抽象接口，支持文件的打开、关闭、读写、同步与定位操作，屏蔽 Linux、LiteOS、FreeRTOS 等多操作系统底层差异。
 
 **模块公共头文件**
 
 ```c
-#include "osal/fileops/osal_fileops.h"
+#include "fileops/osal_fileops.h"
 ```
 
 ## 接口清单
@@ -30,23 +30,21 @@ void *osal_klib_fopen(const char *file, int flags, int mode)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/fileops/osal_fileops.h"
+#include "fileops/osal_fileops.h"
 ```
 
 **功能说明**
 
 - 打开指定路径的文件，根据标志位和模式参数控制文件的打开方式
 - 返回文件指针用于后续文件操作接口的入参
-- 文件指针由内核动态分配内存管理，调用者需通过 osal_klib_fclose 释放
 
 **前置条件**
 
 - 文件系统已初始化且可访问
-- 入参 file 不为 NULL
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | file | const char * | 文件路径字符串 | 非 NULL |
 | flags | int | 文件操作标志，控制打开方式；访问模式（RDONLY / WRONLY / RDWR）互斥且必选其一，其余标志可组合 | [OSAL_O_RDONLY](#OSAL_O_RDONLY)(00000000) / [OSAL_O_WRONLY](#OSAL_O_WRONLY)(00000001) / [OSAL_O_RDWR](#OSAL_O_RDWR)(00000002) / [OSAL_O_CREAT](#OSAL_O_CREAT)(00000100) / [OSAL_O_EXCL](#OSAL_O_EXCL)(00000200) / [OSAL_O_TRUNC](#OSAL_O_TRUNC)(00001000) / [OSAL_O_APPEND](#OSAL_O_APPEND)(00002000) / [OSAL_O_CLOEXEC](#OSAL_O_CLOEXEC)(02000000) |
@@ -70,7 +68,7 @@ void osal_klib_fclose(void *filp)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/fileops/osal_fileops.h"
+#include "fileops/osal_fileops.h"
 ```
 
 **功能说明**
@@ -85,7 +83,7 @@ void osal_klib_fclose(void *filp)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | filp | void * | 文件指针 | osal_klib_fopen 返回的有效指针，非 NULL |
 
@@ -98,7 +96,7 @@ int osal_klib_fwrite(const char *buf, unsigned long size, void *filp)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/fileops/osal_fileops.h"
+#include "fileops/osal_fileops.h"
 ```
 
 **功能说明**
@@ -114,7 +112,7 @@ int osal_klib_fwrite(const char *buf, unsigned long size, void *filp)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | buf | const char * | 待写入数据缓冲区 | 非 NULL |
 | size | unsigned long | 待写入数据字节数 | > 0 |
@@ -138,7 +136,7 @@ int osal_klib_fread(char *buf, unsigned long size, void *filp)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/fileops/osal_fileops.h"
+#include "fileops/osal_fileops.h"
 ```
 
 **功能说明**
@@ -154,7 +152,7 @@ int osal_klib_fread(char *buf, unsigned long size, void *filp)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | size | unsigned long | 待读取数据字节数 | > 0 |
 | filp | void * | 文件指针 | osal_klib_fopen 返回的有效指针，非 NULL |
@@ -183,7 +181,7 @@ void osal_klib_fsync(void *filp)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/fileops/osal_fileops.h"
+#include "fileops/osal_fileops.h"
 ```
 
 **功能说明**
@@ -199,7 +197,7 @@ void osal_klib_fsync(void *filp)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | filp | void * | 文件指针 | osal_klib_fopen 返回的有效指针，非 NULL |
 
@@ -212,7 +210,7 @@ int osal_klib_fseek(long long offset, int whence, void *filp)
 **声明头文件**
 
 ```c
-#include "kernel/osal/include/fileops/osal_fileops.h"
+#include "fileops/osal_fileops.h"
 ```
 
 **功能说明**
@@ -227,7 +225,7 @@ int osal_klib_fseek(long long offset, int whence, void *filp)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | offset | long long | 偏移量 | ≤ INT32_MAX |
 | whence | int | 偏移基准位置 | [OSAL_SEEK_SET](#OSAL_SEEK_SET)(0) / [OSAL_SEEK_CUR](#OSAL_SEEK_CUR)(1) / [OSAL_SEEK_END](#OSAL_SEEK_END)(2) |
@@ -261,12 +259,6 @@ int osal_klib_fseek(long long offset, int whence, void *filp)
 
 ```c
 #define OSAL_O_RDWR 00000002
-```
-
-### OSAL_O_ACCMODE <a id="OSAL_O_ACCMODE"></a>
-
-```c
-#define OSAL_O_ACCMODE 00000003
 ```
 
 ### OSAL_O_CREAT <a id="OSAL_O_CREAT"></a>
