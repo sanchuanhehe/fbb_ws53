@@ -40,13 +40,11 @@ errcode_t wifi_softap_enable(const softap_config_stru *config)
 
 - 启动 SoftAP 接口，使设备以热点模式工作
 - 根据 config 参数中的 SSID、密码、安全类型和信道号配置热点
-- 启动前需先通过 wifi_set_softap_config_advance 设置扩展配置
 
 **前置条件**
 
 - 调用时序约束：当前接口必须在 WiFi 初始化完成（wifi_init 成功返回）后调用
 - 依赖关系：当前接口依赖 SoftAP 未处于使能状态，且 P2P 未使能
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
 
 **入参**
 
@@ -66,6 +64,12 @@ errcode_t wifi_softap_enable(const softap_config_stru *config)
 **参考案例**
 
 - `src/application/samples/wifi/softap_sample/softap_sample.c`
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_OWE | 特性宏 | 支持增强开放（OWE）安全模式分支（分支级，Kconfig 未声明、构建系统注入，实际不可启用） | - |
 
 ### wifi_softap_disable <a id="wifi_softap_disable"></a>
 
@@ -102,6 +106,12 @@ errcode_t wifi_softap_disable(void)
 **参考案例**
 
 - `src/application/samples/wifi/softap_sample/softap_sample.c`
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| LWIP_DHCPS | 特性宏 | 支持DHCP服务器资源清理分支（分支级，无前缀注入宏） | 由构建目标决定 |
 
 ### wifi_is_softap_enabled <a id="wifi_is_softap_enabled"></a>
 
@@ -144,8 +154,7 @@ errcode_t wifi_set_softap_config_advance(const softap_config_advance_stru *confi
 
 **功能说明**
 
-- 设置 SoftAP 的扩展配置参数，包括信标间隔、DTIM 周期、组播密钥更新时间、SSID 隐藏标志、GI 和协议模式
-- 必须在 SoftAP 使能之前调用
+- 设置 SoftAP 的扩展配置参数，包括信标间隔、DTIM (Delivery Traffic Indication Message) 周期、组播密钥更新时间、SSID 隐藏标志、GI 和协议模式
 - 配置中 protocol_mode 为 0 表示不配置，按芯片最大协议能力设置
 
 **前置条件**
@@ -193,7 +202,6 @@ errcode_t wifi_get_softap_config(softap_config_stru *result)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| result | [softap_config_stru](#softap_config_stru)* | SoftAP 基本配置输出缓冲区 | 不为NULL |
 
 **出参**
 
@@ -235,7 +243,6 @@ errcode_t wifi_get_softap_config_advance(softap_config_advance_stru *result)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| result | [softap_config_advance_stru](#softap_config_advance_stru)* | SoftAP 扩展配置输出缓冲区 | 不为NULL |
 
 **出参**
 
@@ -271,7 +278,7 @@ errcode_t wifi_softap_get_sta_list(wifi_sta_info_stru *result, uint32_t *size)
 **功能说明**
 
 - 获取当前连接到 SoftAP 的所有 STA 信息
-- 返回每个 STA 的 MAC 地址、RSSI 和最佳发送速率
+- 返回每个 STA 的 MAC 地址、RSSI (Received Signal Strength Indicator) 和最佳发送速率
 - size 参数输入时表示缓冲区可容纳的 STA 数量，输出时为实际 STA 数量
 
 **前置条件**
@@ -283,7 +290,6 @@ errcode_t wifi_softap_get_sta_list(wifi_sta_info_stru *result, uint32_t *size)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| result | [wifi_sta_info_stru](#wifi_sta_info_stru)* | STA 信息输出缓冲区 | 不为NULL |
 | size | uint32_t* | 输入时为缓冲区可容纳 STA 数量，输出时为实际 STA 数量 | 不为NULL，*size > 0 |
 
 **出参**
@@ -348,8 +354,18 @@ errcode_t wifi_softap_deauth_sta(const uint8_t *mac, int32_t mac_len)
 
 - `src/middleware/utils/at/at_wifi_cmd/at/at_wifi.c`
 
-## Enumerations
+## Type definitions
+### errcode_t <a id="errcode_t"></a>
 
+```c
+typedef uint32_t errcode_t;
+```
+
+**使用说明**
+
+SDK 公共基础类型，本模块对外接口的返回值类型。
+
+## Enumerations
 ### wifi_security_enum <a id="wifi_security_enum"></a>
 
 ```c
@@ -415,7 +431,6 @@ typedef enum {
 | WIFI_MODE_11B_G_N_AX | 4 | 802.11b/g/n/ax |
 
 ## Structures
-
 ### softap_config_stru <a id="softap_config_stru"></a>
 
 ```c
@@ -484,45 +499,33 @@ typedef struct {
 | rsv | int8_t | 保留字段 |
 | best_rate | uint32_t | 最佳发送速率，单位 kbps |
 
-## Type definitions
-
-### errcode_t <a id="errcode_t"></a>
-
-```c
-typedef uint32_t errcode_t;
-```
-
-**使用说明**
-
-SDK 公共基础类型，本模块对外接口的返回值类型。
-
 ## Macros
 
-### WIFI_MAX_SSID_LEN <a id="WIFI_MAX_SSID_LEN"></a> [SDK公共共享宏]
+### WIFI_MAX_SSID_LEN <a id="WIFI_MAX_SSID_LEN"></a>
 
 ```c
 #define WIFI_MAX_SSID_LEN 33 // 32 + \0
 ```
 
-### WIFI_MAX_KEY_LEN <a id="WIFI_MAX_KEY_LEN"></a> [SDK公共共享宏]
+### WIFI_MAX_KEY_LEN <a id="WIFI_MAX_KEY_LEN"></a>
 
 ```c
 #define WIFI_MAX_KEY_LEN 65 // 64 + \0
 ```
 
-### WIFI_MAC_LEN <a id="WIFI_MAC_LEN"></a> [SDK公共共享宏]
+### WIFI_MAC_LEN <a id="WIFI_MAC_LEN"></a>
 
 ```c
 #define WIFI_MAC_LEN 6
 ```
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC 0UL
 ```
 
-### ERRCODE_FAIL <a id="ERRCODE_FAIL"></a> [SDK公共共享宏]
+### ERRCODE_FAIL <a id="ERRCODE_FAIL"></a>
 
 ```c
 #define ERRCODE_FAIL 0xFFFFFFFF

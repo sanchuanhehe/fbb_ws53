@@ -1,6 +1,6 @@
 # Device
 
-WiFi (Wireless Fidelity) Device 提供STA模式的初始化、扫描、连接、断连等基础能力，支持协议模式配置、PMF (Protected Management Frames) 设置、CSI (Channel State Information) 数据采集、管理帧收包回调注册、混杂模式报文接收、WoW (Wake on Wireless) 模式配置、MAC地址管理、国家码设置、PSD (Power Spectral Density) 数据采集以及WPS (Wi-Fi Protected Setup) 连接等功能。
+WiFi (Wireless Fidelity) Device 提供STA模式的初始化、扫描、连接、断连等基础能力，支持协议模式配置、PMF (Protected Management Frames) 设置、CSI (Channel State Information) 数据采集、管理帧收包回调注册、混杂模式报文接收、WoW (Wake on Wireless) 模式配置、MAC地址管理、国家码设置、PSD (Power Spectral Density) 数据采集等功能。
 
 **模块公共头文件**
 
@@ -89,7 +89,6 @@ errcode_t wifi_init(void)
 **功能说明**
 
 - WiFi模块初始化，完成WiFi子系统资源分配与底层驱动加载
-- 必须在所有WiFi功能接口调用前执行
 - 重复调用返回错误码
 
 **前置条件**
@@ -101,8 +100,8 @@ errcode_t wifi_init(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | WiFi初始化成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | WiFi初始化成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_deinit <a id="wifi_deinit"></a>
 
@@ -120,7 +119,6 @@ errcode_t wifi_deinit(void)
 
 - WiFi去初始化，释放WiFi子系统资源
 - 需在WiFi模块不再使用时调用
-- 调用前需关闭STA/AP等已使能的接口
 
 **前置条件**
 
@@ -131,8 +129,8 @@ errcode_t wifi_deinit(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | WiFi去初始化成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | WiFi去初始化成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_is_wifi_inited <a id="wifi_is_wifi_inited"></a>
 
@@ -160,6 +158,7 @@ int32_t wifi_is_wifi_inited(void)
 
 **参考案例**
 
+- `src/application/samples/wifi/sta_sample/sta_sample.c`
 
 ### wifi_sta_enable <a id="wifi_sta_enable"></a>
 
@@ -177,7 +176,6 @@ errcode_t wifi_sta_enable(void)
 
 - 开启STA模式
 - 使能后可进行扫描、连接等STA操作
-- 需先调用wifi_init()完成WiFi初始化
 
 **前置条件**
 
@@ -188,11 +186,12 @@ errcode_t wifi_sta_enable(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | STA使能成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | STA使能成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
 
+- `src/application/samples/wifi/sta_sample/sta_sample.c`
 
 ### wifi_sta_disable <a id="wifi_sta_disable"></a>
 
@@ -210,7 +209,6 @@ errcode_t wifi_sta_disable(void)
 
 - 关闭STA模式
 - 关闭后STA相关功能不可用
-- 需先断开当前STA连接
 
 **前置条件**
 
@@ -221,11 +219,12 @@ errcode_t wifi_sta_disable(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | STA关闭成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | STA关闭成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
 
+- `src/middleware/utils/at/at_wifi_cmd/at/at_wifi.c`
 
 ### wifi_is_sta_enabled <a id="wifi_is_sta_enabled"></a>
 
@@ -251,9 +250,6 @@ int32_t wifi_is_sta_enabled(void)
 | 1 | STA已使能 | wifi_sta_enable()已成功调用 |
 | 0 | STA未使能 | wifi_sta_enable()未调用或未成功 |
 
-**参考案例**
-
-
 ### wifi_get_dev <a id="wifi_get_dev"></a>
 
 ```c
@@ -278,7 +274,7 @@ wifi_dev_t *wifi_get_dev(wifi_iftype_t iftype)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | [in] iftype | [wifi_iftype_t](#enum_wifi_iftype_t) | WiFi接口类型 | WIFI_IFTYPE_STATION(2)、WIFI_IFTYPE_AP(3)、WIFI_IFTYPE_P2P_CLIENT、WIFI_IFTYPE_P2P_GO、WIFI_IFTYPE_P2P_DEVICE |
 
@@ -314,7 +310,7 @@ errcode_t wifi_sta_set_protocol_mode(protocol_mode_enum mode)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | mode | [protocol_mode_enum](#enum_protocol_mode_enum) | 协议模式 | WIFI_MODE_UNDEFINE(0)、WIFI_MODE_11B(1)、WIFI_MODE_11B_G(2)、WIFI_MODE_11B_G_N(3)、WIFI_MODE_11B_G_N_AX(4) |
 
@@ -322,8 +318,8 @@ errcode_t wifi_sta_set_protocol_mode(protocol_mode_enum mode)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_sta_get_protocol_mode <a id="wifi_sta_get_protocol_mode"></a>
 
@@ -380,11 +376,12 @@ errcode_t wifi_sta_scan(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 扫描启动成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 扫描启动成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
 
+- `src/application/samples/wifi/sta_sample/sta_sample.c`
 
 ### wifi_sta_scan_advance <a id="wifi_sta_scan_advance"></a>
 
@@ -411,7 +408,7 @@ errcode_t wifi_sta_scan_advance(const wifi_scan_params_stru *scan_param)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | scan_param | const [wifi_scan_params_stru](#struct_wifi_scan_params_stru) * | 扫描网络参数设置 | 非NULL，指向有效扫描参数结构体 |
 
@@ -419,11 +416,12 @@ errcode_t wifi_sta_scan_advance(const wifi_scan_params_stru *scan_param)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 扫描启动成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 扫描启动成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
 
+- `src/middleware/utils/at/at_wifi_cmd/at/at_wifi.c`
 
 ### wifi_sta_set_scan_policy <a id="wifi_sta_set_scan_policy"></a>
 
@@ -449,7 +447,7 @@ errcode_t wifi_sta_set_scan_policy(wifi_if_type_enum iftype, wifi_scan_strategy_
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | IFTYPE_STA(0)、IFTYPE_AP(1) |
 | scan_strategy | [wifi_scan_strategy_stru](#struct_wifi_scan_strategy_stru) * | 扫描策略参数配置 | 非NULL，指向有效策略结构体 |
@@ -458,11 +456,8 @@ errcode_t wifi_sta_set_scan_policy(wifi_if_type_enum iftype, wifi_scan_strategy_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
-
-**参考案例**
-
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_raw_scan <a id="wifi_raw_scan"></a>
 
@@ -489,7 +484,7 @@ errcode_t wifi_raw_scan(wifi_scan_params_stru *scan_param, wifi_scan_no_save_cb 
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | scan_param | [wifi_scan_params_stru](#struct_wifi_scan_params_stru) * | 扫描网络参数设置 | 非NULL |
 | cb | [wifi_scan_no_save_cb](#typedef_wifi_scan_no_save_cb) | 扫描完成回调函数 | 非NULL |
@@ -498,8 +493,8 @@ errcode_t wifi_raw_scan(wifi_scan_params_stru *scan_param, wifi_scan_no_save_cb 
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 原始扫描启动成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 原始扫描启动成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_sta_scan_stop <a id="wifi_sta_scan_stop"></a>
 
@@ -528,8 +523,8 @@ errcode_t wifi_sta_scan_stop(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 扫描停止成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 扫描停止成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_sta_get_scan_info <a id="wifi_sta_get_scan_info"></a>
 
@@ -547,7 +542,6 @@ errcode_t wifi_sta_get_scan_info(wifi_scan_info_stru *result, uint32_t *size)
 
 - 获取STA扫描结果
 - 扫描结果存入result数组，size返回扫描到的网络数目
-- 需在扫描完成后调用
 
 **前置条件**
 
@@ -556,7 +550,7 @@ errcode_t wifi_sta_get_scan_info(wifi_scan_info_stru *result, uint32_t *size)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | [out] result | [wifi_scan_info_stru](#struct_wifi_scan_info_stru) * | 扫描结果输出缓冲区 | 非NULL，指向有效内存空间 |
 | [in/out] size | uint32_t * | 扫描到的网络数目 | 非NULL，输入时为缓冲区最大容量，输出时为实际数目 |
@@ -572,11 +566,12 @@ errcode_t wifi_sta_get_scan_info(wifi_scan_info_stru *result, uint32_t *size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 获取成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 获取成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
 
+- `src/application/samples/wifi/sta_sample/sta_sample.c`
 
 ### wifi_sta_scan_result_clear <a id="wifi_sta_scan_result_clear"></a>
 
@@ -604,8 +599,8 @@ errcode_t wifi_sta_scan_result_clear(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 清空成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 清空成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_channel <a id="wifi_set_channel"></a>
 
@@ -630,7 +625,7 @@ errcode_t wifi_set_channel(wifi_if_type_enum iftype, int32_t channel)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | IFTYPE_STA(0)、IFTYPE_AP(1) |
 | channel | int32_t | 信道号 | 1~14(2.4GHz) |
@@ -639,8 +634,8 @@ errcode_t wifi_set_channel(wifi_if_type_enum iftype, int32_t channel)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_get_channel <a id="wifi_get_channel"></a>
 
@@ -665,7 +660,7 @@ errcode_t wifi_get_channel(wifi_if_type_enum iftype, int32_t *channel)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | IFTYPE_STA(0)、IFTYPE_AP(1) |
 | channel | int32_t * | 信道号输出 | 非NULL |
@@ -680,8 +675,8 @@ errcode_t wifi_get_channel(wifi_if_type_enum iftype, int32_t *channel)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 获取成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 获取成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_sta_wnm_bss_query <a id="wifi_sta_wnm_bss_query"></a>
 
@@ -707,7 +702,7 @@ errcode_t wifi_sta_wnm_bss_query(int32_t reason_code, int32_t candidate_list)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | reason_code | int32_t | 原因码 | 有效reason code值 |
 | candidate_list | int32_t | 候选列表标记 | 0或1 |
@@ -722,8 +717,8 @@ errcode_t wifi_sta_wnm_bss_query(int32_t reason_code, int32_t candidate_list)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 发送成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 发送成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_sta_wnm_notify <a id="wifi_sta_wnm_notify"></a>
 
@@ -749,7 +744,7 @@ errcode_t wifi_sta_wnm_notify(const char *param, uint32_t len)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | param | const char * | WNM notify参数 | 非NULL |
 | len | uint32_t | 参数长度 | 大于0 |
@@ -764,8 +759,8 @@ errcode_t wifi_sta_wnm_notify(const char *param, uint32_t len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 发送成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 发送成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_sta_connect <a id="wifi_sta_connect"></a>
 
@@ -793,7 +788,7 @@ errcode_t wifi_sta_connect(const wifi_sta_config_stru *config)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | config | const [wifi_sta_config_stru](#struct_wifi_sta_config_stru) * | 连接网络参数设置 | 非NULL，指向有效连接配置结构体 |
 
@@ -801,11 +796,12 @@ errcode_t wifi_sta_connect(const wifi_sta_config_stru *config)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 连接请求发起成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 连接请求发起成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
 
+- `src/application/samples/wifi/sta_sample/sta_sample.c`
 
 ### wifi_sta_disconnect <a id="wifi_sta_disconnect"></a>
 
@@ -833,11 +829,12 @@ errcode_t wifi_sta_disconnect(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 断连请求发起成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 断连请求发起成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
 
+- `src/middleware/utils/at/at_wifi_cmd/at/at_wifi.c`
 
 ### wifi_sta_get_ap_info <a id="wifi_sta_get_ap_info"></a>
 
@@ -863,7 +860,7 @@ errcode_t wifi_sta_get_ap_info(wifi_linked_info_stru *result)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | [out] result | [wifi_linked_info_stru](#struct_wifi_linked_info_stru) * | 连接状态输出 | 非NULL |
 
@@ -877,11 +874,12 @@ errcode_t wifi_sta_get_ap_info(wifi_linked_info_stru *result)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 获取成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 获取成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
 
+- `src/application/samples/wifi/sta_sample/sta_sample.c`
 
 ### wifi_sta_set_reconnect_policy <a id="wifi_sta_set_reconnect_policy"></a>
 
@@ -908,7 +906,7 @@ errcode_t wifi_sta_set_reconnect_policy(int32_t enable, uint32_t seconds, uint32
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | enable | int32_t | 使能重连网络 | 0:关闭，1:开启 |
 | seconds | uint32_t | 单次重连超时时间(秒) | 2~65535 |
@@ -919,11 +917,12 @@ errcode_t wifi_sta_set_reconnect_policy(int32_t enable, uint32_t seconds, uint32
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
 
+- `src/middleware/utils/at/at_wifi_cmd/at/at_wifi.c`
 
 ### wifi_sta_set_pmf_mode <a id="wifi_sta_set_pmf_mode"></a>
 
@@ -949,7 +948,7 @@ errcode_t wifi_sta_set_pmf_mode(wifi_pmf_option_enum pmf)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pmf | [wifi_pmf_option_enum](#enum_wifi_pmf_option_enum) | PMF模式 | WIFI_MGMT_FRAME_PROTECTION_CLOSE(0)、WIFI_MGMT_FRAME_PROTECTION_OPTIONAL(1)、WIFI_MGMT_FRAME_PROTECTION_REQUIRED(2) |
 
@@ -957,8 +956,8 @@ errcode_t wifi_sta_set_pmf_mode(wifi_pmf_option_enum pmf)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_sta_get_pmf_mode <a id="wifi_sta_get_pmf_mode"></a>
 
@@ -1043,7 +1042,7 @@ errcode_t wifi_set_mgmt_frame_rx_cb(wifi_rx_mgmt_cb data_cb, uint8_t mode)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | data_cb | [wifi_rx_mgmt_cb](#typedef_wifi_rx_mgmt_cb) | 管理帧上报回调函数 | 非NULL |
 | mode | uint8_t | 上报管理帧模式 | 有效模式值 |
@@ -1052,8 +1051,8 @@ errcode_t wifi_set_mgmt_frame_rx_cb(wifi_rx_mgmt_cb data_cb, uint8_t mode)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 注册成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 注册成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_promis_mode <a id="wifi_set_promis_mode"></a>
 
@@ -1080,7 +1079,7 @@ errcode_t wifi_set_promis_mode(wifi_if_type_enum iftype, int32_t enable, const w
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | IFTYPE_STA(0)、IFTYPE_AP(1) |
 | enable | int32_t | 开启/关闭 | 0:关闭，1:开启 |
@@ -1090,8 +1089,8 @@ errcode_t wifi_set_promis_mode(wifi_if_type_enum iftype, int32_t enable, const w
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_promis_rx_pkt_cb <a id="wifi_set_promis_rx_pkt_cb"></a>
 
@@ -1117,7 +1116,7 @@ errcode_t wifi_set_promis_rx_pkt_cb(wifi_promis_cb data_cb)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | data_cb | [wifi_promis_cb](#typedef_wifi_promis_cb) | 混杂模式回调函数 | 非NULL |
 
@@ -1125,8 +1124,8 @@ errcode_t wifi_set_promis_rx_pkt_cb(wifi_promis_cb data_cb)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 注册成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 注册成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_sta_fast_connect <a id="wifi_sta_fast_connect"></a>
 
@@ -1154,7 +1153,7 @@ errcode_t wifi_sta_fast_connect(const wifi_fast_connect_stru *fast_request)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | fast_request | const [wifi_fast_connect_stru](#struct_wifi_fast_connect_stru) * | 快速连接网络参数 | 非NULL，指向有效快速连接参数结构体 |
 
@@ -1162,8 +1161,8 @@ errcode_t wifi_sta_fast_connect(const wifi_fast_connect_stru *fast_request)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 快速连接请求发起成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 快速连接请求发起成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_register_event_cb <a id="wifi_register_event_cb"></a>
 
@@ -1189,7 +1188,7 @@ errcode_t wifi_register_event_cb(const wifi_event_stru *event)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | event | const [wifi_event_stru](#struct_wifi_event_stru) * | 事件回调函数结构体 | 非NULL |
 
@@ -1197,11 +1196,12 @@ errcode_t wifi_register_event_cb(const wifi_event_stru *event)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 注册成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 注册成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
 
+- `src/application/samples/wifi/sta_sample/sta_sample.c`
 
 ### wifi_unregister_event_cb <a id="wifi_unregister_event_cb"></a>
 
@@ -1227,7 +1227,7 @@ errcode_t wifi_unregister_event_cb(const wifi_event_stru *event)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | event | const [wifi_event_stru](#struct_wifi_event_stru) * | 待撤销的回调函数结构体 | 非NULL，与注册时一致 |
 
@@ -1235,8 +1235,8 @@ errcode_t wifi_unregister_event_cb(const wifi_event_stru *event)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 去注册成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 去注册成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_app_ie <a id="wifi_set_app_ie"></a>
 
@@ -1262,7 +1262,7 @@ errcode_t wifi_set_app_ie(wifi_if_type_enum iftype, ie_index_enmu ie_index, uint
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | IFTYPE_STA(0)、IFTYPE_AP(1) |
 | ie_index | [ie_index_enmu](#enum_ie_index_enmu) | IE索引 | IE_FIRST(0)、IE_SECOND(1)、IE_THIRD(2)、IE_FORTH(3) |
@@ -1274,8 +1274,8 @@ errcode_t wifi_set_app_ie(wifi_if_type_enum iftype, ie_index_enmu ie_index, uint
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 添加成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 添加成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_del_app_ie <a id="wifi_del_app_ie"></a>
 
@@ -1301,7 +1301,7 @@ errcode_t wifi_del_app_ie(wifi_if_type_enum iftype, ie_index_enmu ie_index, uint
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | IFTYPE_STA(0)、IFTYPE_AP(1) |
 | ie_index | [ie_index_enmu](#enum_ie_index_enmu) | IE索引 | IE_FIRST(0)、IE_SECOND(1)、IE_THIRD(2)、IE_FORTH(3) |
@@ -1311,8 +1311,8 @@ errcode_t wifi_del_app_ie(wifi_if_type_enum iftype, ie_index_enmu ie_index, uint
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 删除成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 删除成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_wow_pattern <a id="wifi_set_wow_pattern"></a>
 
@@ -1339,7 +1339,7 @@ errcode_t wifi_set_wow_pattern(int32_t type, uint8_t index, int8_t *pattern)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | type | int32_t | Wow Pattern模式 | 有效pattern类型值 |
 | index | uint8_t | 位置索引 | 有效索引值 |
@@ -1355,8 +1355,8 @@ errcode_t wifi_set_wow_pattern(int32_t type, uint8_t index, int8_t *pattern)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_wow_sleep_mode <a id="wifi_set_wow_sleep_mode"></a>
 
@@ -1383,7 +1383,7 @@ errcode_t wifi_set_wow_sleep_mode(uint8_t en)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | en | uint8_t | 使能/去使能WoW休眠 | 0:去使能，1:使能 |
 
@@ -1397,8 +1397,8 @@ errcode_t wifi_set_wow_sleep_mode(uint8_t en)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_csi_start <a id="wifi_csi_start"></a>
 
@@ -1415,8 +1415,6 @@ errcode_t wifi_csi_start(void)
 **功能说明**
 
 - 开启CSI上报
-- 需先通过wifi_set_csi_config()配置CSI参数
-- 需先通过wifi_register_csi_report_cb()注册回调
 
 **前置条件**
 
@@ -1428,8 +1426,8 @@ errcode_t wifi_csi_start(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | CSI上报开启成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | CSI上报开启成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_csi_stop <a id="wifi_csi_stop"></a>
 
@@ -1457,8 +1455,8 @@ errcode_t wifi_csi_stop(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | CSI上报关闭成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | CSI上报关闭成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_csi_config <a id="wifi_set_csi_config"></a>
 
@@ -1476,7 +1474,6 @@ errcode_t wifi_set_csi_config(const int8_t *ifname, const csi_config_stru *confi
 
 - 配置CSI参数
 - 包括用户ID、白名单、帧类型过滤、上报周期等
-- 需在wifi_csi_start()之前调用
 
 **前置条件**
 
@@ -1484,7 +1481,7 @@ errcode_t wifi_set_csi_config(const int8_t *ifname, const csi_config_stru *confi
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | ifname | const int8_t * | 使能CSI的接口名 | 非NULL，如"wlan0" |
 | config | const [csi_config_stru](#struct_csi_config_stru) * | CSI配置参数 | 非NULL |
@@ -1493,8 +1490,8 @@ errcode_t wifi_set_csi_config(const int8_t *ifname, const csi_config_stru *confi
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 配置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 配置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_register_csi_report_cb <a id="wifi_register_csi_report_cb"></a>
 
@@ -1512,7 +1509,6 @@ errcode_t wifi_register_csi_report_cb(wifi_csi_data_cb data_cb)
 
 - 注册CSI数据上报回调函数
 - CSI数据通过回调函数上报给上层
-- 需在wifi_csi_start()之前调用
 
 **前置条件**
 
@@ -1520,7 +1516,7 @@ errcode_t wifi_register_csi_report_cb(wifi_csi_data_cb data_cb)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | data_cb | [wifi_csi_data_cb](#typedef_wifi_csi_data_cb) | CSI数据上报回调函数 | 非NULL |
 
@@ -1528,8 +1524,8 @@ errcode_t wifi_register_csi_report_cb(wifi_csi_data_cb data_cb)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 注册成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 注册成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_send_custom_pkt <a id="wifi_send_custom_pkt"></a>
 
@@ -1553,18 +1549,18 @@ errcode_t wifi_send_custom_pkt(const wifi_if_type_enum iftype, const uint8_t *da
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | IFTYPE_STA/IFTYPE_AP/IFTYPE_P2P_CLIENT/IFTYPE_P2P_GO/IFTYPE_P2P_DEVICE |
 | data | const uint8_t* | 待发送帧的内容 | 非NULL，须按802.11协议格式封装 |
-| len | uint32_t | 待发送的帧长度 | 大于0 |
+| len | uint32_t | 待发送报文的长度 | 10 ~ 1400（实现边界 WIFI_SENDPKT_MIN_LEN = 10 / WIFI_SENDPKT_MAX_LEN = 1400） |
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 发送成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 发送成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_pkt_retry_policy <a id="wifi_set_pkt_retry_policy"></a>
 
@@ -1588,7 +1584,7 @@ errcode_t wifi_set_pkt_retry_policy(uint8_t type, uint8_t limit)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | type | uint8_t | 帧类型 | 数据帧/管理帧 |
 | limit | uint8_t | 需要设置的软件最大重传次数 | 大于0 |
@@ -1597,8 +1593,8 @@ errcode_t wifi_set_pkt_retry_policy(uint8_t type, uint8_t limit)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_reset_mac_phy <a id="wifi_reset_mac_phy"></a>
 
@@ -1624,8 +1620,8 @@ errcode_t wifi_reset_mac_phy(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 复位成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 复位成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_linkloss_config <a id="wifi_set_linkloss_config"></a>
 
@@ -1650,7 +1646,7 @@ errcode_t wifi_set_linkloss_config(linkloss_paras_stru *linkloss_paras)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | linkloss_paras | [linkloss_paras_stru](#struct_linkloss_paras_stru)* | 设置linkloss相关参数 | 非NULL |
 
@@ -1658,8 +1654,8 @@ errcode_t wifi_set_linkloss_config(linkloss_paras_stru *linkloss_paras)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_base_mac_addr <a id="wifi_set_base_mac_addr"></a>
 
@@ -1683,7 +1679,7 @@ errcode_t wifi_set_base_mac_addr(const int8_t *mac_addr, uint8_t mac_len)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | mac_addr | const int8_t* | MAC地址指针 | 非NULL |
 | mac_len | uint8_t | MAC地址长度 | WIFI_MAC_LEN(6) |
@@ -1692,8 +1688,8 @@ errcode_t wifi_set_base_mac_addr(const int8_t *mac_addr, uint8_t mac_len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_get_base_mac_addr <a id="wifi_get_base_mac_addr"></a>
 
@@ -1717,7 +1713,7 @@ errcode_t wifi_get_base_mac_addr(int8_t *mac_addr, uint8_t mac_len)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | [out] mac_addr | int8_t* | MAC地址指针 | 非NULL，用于存储获取的MAC地址 |
 | mac_len | uint8_t | MAC地址长度 | WIFI_MAC_LEN(6) |
@@ -1726,8 +1722,8 @@ errcode_t wifi_get_base_mac_addr(int8_t *mac_addr, uint8_t mac_len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 获取成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 获取成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_softap_set_mac_addr <a id="wifi_softap_set_mac_addr"></a>
 
@@ -1751,7 +1747,7 @@ errcode_t wifi_softap_set_mac_addr(const int8_t *mac_addr, uint8_t mac_len)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | mac_addr | const int8_t* | MAC地址指针 | 非NULL |
 | mac_len | uint8_t | MAC地址长度 | WIFI_MAC_LEN(6) |
@@ -1760,8 +1756,8 @@ errcode_t wifi_softap_set_mac_addr(const int8_t *mac_addr, uint8_t mac_len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_softap_get_mac_addr <a id="wifi_softap_get_mac_addr"></a>
 
@@ -1785,7 +1781,7 @@ errcode_t wifi_softap_get_mac_addr(int8_t *mac_addr, uint8_t mac_len)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | [out] mac_addr | int8_t* | MAC地址指针 | 非NULL，用于存储获取的MAC地址 |
 | mac_len | uint8_t | MAC地址长度 | WIFI_MAC_LEN(6) |
@@ -1794,8 +1790,8 @@ errcode_t wifi_softap_get_mac_addr(int8_t *mac_addr, uint8_t mac_len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 获取成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 获取成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_mac_derivation_ptr <a id="wifi_set_mac_derivation_ptr"></a>
 
@@ -1819,7 +1815,7 @@ errcode_t wifi_set_mac_derivation_ptr(wifi_mac_derivation_ptr ptr)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | ptr | [wifi_mac_derivation_ptr](#typedef_wifi_mac_derivation_ptr) | 派生方法指针 | 非NULL |
 
@@ -1827,8 +1823,8 @@ errcode_t wifi_set_mac_derivation_ptr(wifi_mac_derivation_ptr ptr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_low_current_boot_mode <a id="wifi_set_low_current_boot_mode"></a>
 
@@ -1852,7 +1848,7 @@ errcode_t wifi_set_low_current_boot_mode(uint8_t flag)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | flag | uint8_t | 模式设置 | 0:关闭 / 1:开启 |
 
@@ -1860,8 +1856,8 @@ errcode_t wifi_set_low_current_boot_mode(uint8_t flag)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_get_country_code <a id="wifi_get_country_code"></a>
 
@@ -1885,7 +1881,7 @@ errcode_t wifi_get_country_code(int8_t *country_code, uint8_t *len)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | [out] country_code | int8_t* | 国家码 | 非NULL，用于存储获取的国家码 |
 | [out] len | uint8_t* | 国家码数组长度 | 非NULL |
@@ -1894,8 +1890,8 @@ errcode_t wifi_get_country_code(int8_t *country_code, uint8_t *len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 获取成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 获取成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_country_code <a id="wifi_set_country_code"></a>
 
@@ -1919,7 +1915,7 @@ errcode_t wifi_set_country_code(const int8_t* country_code, uint8_t len)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | country_code | const int8_t* | 国家码 | 非NULL |
 | len | uint8_t | 国家码数组长度 | 大于0 |
@@ -1928,8 +1924,8 @@ errcode_t wifi_set_country_code(const int8_t* country_code, uint8_t len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_sta_set_pm <a id="wifi_sta_set_pm"></a>
 
@@ -1954,7 +1950,7 @@ errcode_t wifi_sta_set_pm(uint8_t ps_switch)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | ps_switch | uint8_t | 低功耗模式 | 0:关闭 / 1:开启 |
 
@@ -1962,8 +1958,8 @@ errcode_t wifi_sta_set_pm(uint8_t ps_switch)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_sdp_mode <a id="wifi_set_sdp_mode"></a>
 
@@ -1987,7 +1983,7 @@ errcode_t wifi_set_sdp_mode(wifi_if_type_enum iftype, int32_t enable, int32_t ra
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | IFTYPE_STA/IFTYPE_AP/IFTYPE_P2P_CLIENT/IFTYPE_P2P_GO/IFTYPE_P2P_DEVICE |
 | enable | int32_t | 使能开关 | 0:关闭 / 1:开启 |
@@ -1997,8 +1993,8 @@ errcode_t wifi_set_sdp_mode(wifi_if_type_enum iftype, int32_t enable, int32_t ra
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_sdp_subscribe <a id="wifi_set_sdp_subscribe"></a>
 
@@ -2022,7 +2018,7 @@ errcode_t wifi_set_sdp_subscribe(wifi_if_type_enum iftype, char *sdp_subscribe, 
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | IFTYPE_STA/IFTYPE_AP/IFTYPE_P2P_CLIENT/IFTYPE_P2P_GO/IFTYPE_P2P_DEVICE |
 | sdp_subscribe | char* | SDP订阅 | 非NULL |
@@ -2032,8 +2028,8 @@ errcode_t wifi_set_sdp_subscribe(wifi_if_type_enum iftype, char *sdp_subscribe, 
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_psd_mode <a id="wifi_set_psd_mode"></a>
 
@@ -2057,7 +2053,7 @@ errcode_t wifi_set_psd_mode(ext_psd_option_param *psd_option)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | psd_option | [ext_psd_option_param](#struct_ext_psd_option_param)* | PSD参数 | 非NULL |
 
@@ -2065,8 +2061,8 @@ errcode_t wifi_set_psd_mode(ext_psd_option_param *psd_option)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_psd_cb <a id="wifi_set_psd_cb"></a>
 
@@ -2090,7 +2086,7 @@ errcode_t wifi_set_psd_cb(wifi_psd_cb data_cb)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | data_cb | [wifi_psd_cb](#typedef_wifi_psd_cb) | PSD回调函数 | 非NULL |
 
@@ -2098,8 +2094,8 @@ errcode_t wifi_set_psd_cb(wifi_psd_cb data_cb)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 设置成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_sta_config_probe_req_max_times <a id="wifi_sta_config_probe_req_max_times"></a>
 
@@ -2119,16 +2115,16 @@ errcode_t wifi_sta_config_probe_req_max_times(uint8_t max_times)
 
 **入参**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| max_times | uint8_t | beacon miss后probe request的最大发送次数 | 1～5 |
+| max_times | uint8_t | 快速连接所需的扫描次数 | 1 ~ 33（实现上界 WIFI_STA_SEND_PROBE_REQ_MAX = 33，拒绝 0 与超界值；头文件注释同为 [1,33]） |
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | ---- | ---- | ---- |
-| ERRCODE_SUCC(0x0) | 成功 | 配置成功 |
-| Other | 其他错误码，参考errcode_t | 配置失败 |
+| ERRCODE_SUCC:0x0 | 成功 | 配置成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 配置失败 |
 
 ## Type definitions
 
@@ -2148,9 +2144,9 @@ typedef void (*wifi_csi_data_cb)(uint8_t *csi_data, int32_t len);
 
 - 用户注册的回调函数，用于处理CSI上报的数据
 
-**参数说明**
+**使用说明**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | csi_data | uint8_t* | 4字节扩展时间戳+758字节64位小端存储格式的CSI数据 | 非NULL |
 | len | int32_t | 数据长度，固定为762字节 | 762 |
@@ -2175,9 +2171,9 @@ typedef int32_t (*wifi_promis_cb)(void* recv_buf, int32_t frame_len, int8_t rssi
 
 - 混杂模式收包回调接口定义
 
-**参数说明**
+**使用说明**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | recv_buf | void* | 帧数据 | 非NULL |
 | frame_len | int32_t | 帧长度 | 大于0 |
@@ -2187,8 +2183,8 @@ typedef int32_t (*wifi_promis_cb)(void* recv_buf, int32_t frame_len, int8_t rssi
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 处理成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 处理成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_rx_mgmt_cb <a id="typedef_wifi_rx_mgmt_cb"></a>
 
@@ -2206,9 +2202,9 @@ typedef int32_t (*wifi_rx_mgmt_cb)(void* recv_buf, int32_t frame_len, int8_t rss
 
 - 管理帧收包回调接口定义
 
-**参数说明**
+**使用说明**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | recv_buf | void* | 帧数据 | 非NULL |
 | frame_len | int32_t | 帧长度 | 大于0 |
@@ -2218,8 +2214,8 @@ typedef int32_t (*wifi_rx_mgmt_cb)(void* recv_buf, int32_t frame_len, int8_t rss
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 处理成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 处理成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_psd_cb <a id="typedef_wifi_psd_cb"></a>
 
@@ -2237,9 +2233,9 @@ typedef int32_t (*wifi_psd_cb)(void *recv_buf, uint32_t data_len);
 
 - PSD数据上报回调接口定义
 
-**参数说明**
+**使用说明**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | recv_buf | void* | PSD数据 | 非NULL |
 | data_len | uint32_t | PSD数据长度 | 大于0 |
@@ -2248,8 +2244,8 @@ typedef int32_t (*wifi_psd_cb)(void *recv_buf, uint32_t data_len);
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 处理成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 处理成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_scan_no_save_cb <a id="typedef_wifi_scan_no_save_cb"></a>
 
@@ -2267,9 +2263,9 @@ typedef void (*wifi_scan_no_save_cb)(wifi_scan_info_stru *scan_result);
 
 - 定制化扫描回调函数
 
-**参数说明**
+**使用说明**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | scan_result | [wifi_scan_info_stru](#struct_wifi_scan_info_stru)* | 扫描结果 | 非NULL |
 
@@ -2293,9 +2289,9 @@ typedef unsigned int(*wifi_mac_derivation_ptr)(unsigned char *origin_mac, unsign
 
 - MAC派生方法指针定义
 
-**参数说明**
+**使用说明**
 
-| 名称 | 参数类型 | 详细说明 | 约束取值范围 |
+| 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | origin_mac | unsigned char* | 输入MAC地址 | 非NULL |
 | num | unsigned char | 输入MAC地址长度 | WIFI_MAC_LEN(6) |
@@ -2307,8 +2303,8 @@ typedef unsigned int(*wifi_mac_derivation_ptr)(unsigned char *origin_mac, unsign
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0x00) | 执行成功 | 派生成功 |
-| Other | 其他错误码，参考errcode_t | 执行失败 |
+| ERRCODE_SUCC:0x00 | 执行成功 | 派生成功 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### errcode_t <a id="typedef_errcode_t"></a>
 
@@ -2349,9 +2345,9 @@ typedef enum {
 
 - PMF管理帧保护模式类型
 
-**枚举值说明**
+**使用说明**
 
-| 枚举值 | 数值 | 说明 |
+| 枚举成员 | 取值 | 描述 |
 | ---- | ---- | ---- |
 | WIFI_MGMT_FRAME_PROTECTION_CLOSE | 0 | 管理帧保护模式：关闭 |
 | WIFI_MGMT_FRAME_PROTECTION_OPTIONAL | 1 | 管理帧保护模式：可选 |
@@ -2381,9 +2377,9 @@ typedef enum {
 
 - WiFi接口类型
 
-**枚举值说明**
+**使用说明**
 
-| 枚举值 | 数值 | 说明 |
+| 枚举成员 | 取值 | 描述 |
 | ---- | ---- | ---- |
 | IFTYPE_STA | 0 | STATION |
 | IFTYPE_AP | 1 | HOTSPOT |
@@ -2414,9 +2410,9 @@ typedef enum ie_index_enmu {
 
 - IE索引，有四个索引可供选择
 
-**枚举值说明**
+**使用说明**
 
-| 枚举值 | 数值 | 说明 |
+| 枚举成员 | 取值 | 描述 |
 | ---- | ---- | ---- |
 | IE_FIRST | 0 | 索引1 |
 | IE_SECOND | 1 | 索引2 |
@@ -2458,9 +2454,9 @@ typedef enum wifi_security_enum {
 
 - WiFi安全类型枚举
 
-**枚举值说明**
+**使用说明**
 
-| 枚举值 | 数值 | 说明 |
+| 枚举成员 | 取值 | 描述 |
 | ---- | ---- | ---- |
 | WIFI_SEC_TYPE_INVALID | -1 | 无效安全类型 |
 | WIFI_SEC_TYPE_OPEN | 0 | Open |
@@ -2509,9 +2505,9 @@ typedef enum {
 
 - WiFi接口类型
 
-**枚举值说明**
+**使用说明**
 
-| 枚举值 | 数值 | 说明 |
+| 枚举成员 | 取值 | 描述 |
 | ---- | ---- | ---- |
 | WIFI_IFTYPE_UNSPECIFIED | 0 | UNSPECIFIED |
 | WIFI_IFTYPE_ADHOC | 1 | ADHOC |
@@ -2547,40 +2543,14 @@ typedef enum {
 
 - WiFi的连接状态
 
-**枚举值说明**
+**使用说明**
 
-| 枚举值 | 数值 | 说明 |
+| 枚举成员 | 取值 | 描述 |
 | ---- | ---- | ---- |
 | WIFI_DISCONNECTED | 0 | 断连 |
 | WIFI_CONNECTED | 1 | 已连接 |
 | WIFI_CONNECTING | 2 | 连接中 |
 | WIFI_CONN_STATUS_BUTT | 3 | 枚举边界值，不可使用 |
-
-### wifi_event_state_enum <a id="enum_wifi_event_state_enum"></a>
-
-```c
-typedef enum {
-    WIFI_STATE_NOT_AVALIABLE = 0,
-    WIFI_STATE_AVALIABLE
-} wifi_event_state_enum;
-```
-
-**声明头文件**
-
-```c
-#include "include/middleware/services/wifi/wifi_event.h"
-```
-
-**功能说明**
-
-- WiFi事件状态
-
-**枚举值说明**
-
-| 枚举值 | 数值 | 说明 |
-| ---- | ---- | ---- |
-| WIFI_STATE_NOT_AVALIABLE | 0 | 不可用状态 |
-| WIFI_STATE_AVALIABLE | 1 | 可用状态 |
 
 ### wifi_scan_type_enum <a id="enum_wifi_scan_type_enum"></a>
 
@@ -2605,9 +2575,9 @@ typedef enum {
 
 - WiFi扫描的类型
 
-**枚举值说明**
+**使用说明**
 
-| 枚举值 | 数值 | 说明 |
+| 枚举成员 | 取值 | 描述 |
 | ---- | ---- | ---- |
 | WIFI_BASIC_SCAN | 0 | 普通扫描 |
 | WIFI_CHANNEL_SCAN | 1 | 基于指定信道的扫描 |
@@ -2638,9 +2608,9 @@ typedef enum {
 
 - SoftAP和Station接口的协议模式
 
-**枚举值说明**
+**使用说明**
 
-| 枚举值 | 数值 | 说明 |
+| 枚举成员 | 取值 | 描述 |
 | ---- | ---- | ---- |
 | WIFI_MODE_UNDEFINE | 0 | 未配置 |
 | WIFI_MODE_11B | 1 | 11b |
@@ -2668,9 +2638,9 @@ typedef enum {
 
 - IP (Internet Protocol) 的分配类型
 
-**枚举值说明**
+**使用说明**
 
-| 枚举值 | 数值 | 说明 |
+| 枚举成员 | 取值 | 描述 |
 | ---- | ---- | ---- |
 | STATIC_IP | 0 | 静态IP地址 |
 | DHCP (Dynamic Host Configuration Protocol) | 1 | 由DHCP动态分配的IP地址 |
@@ -2694,9 +2664,9 @@ typedef enum {
 
 - PSK的类型
 
-**枚举值说明**
+**使用说明**
 
-| 枚举值 | 数值 | 说明 |
+| 枚举成员 | 取值 | 描述 |
 | ---- | ---- | ---- |
 | WIFI_WPA_PSK_NOT_USE | 0 | 不用提前计算PSK，本情况下不使用wifi_fast_connect_stru中的psk |
 
@@ -3031,32 +3001,6 @@ typedef struct {
 | linkloss_threshold | uint16_t | 取值范围[50, 500]，设置为n时，表示linkloss阈值基础时间为(100*n)ms |
 | send_probe_request_ratio | uint8_t | 取值范围[1, 10]，设置为n时，表示linkloss计数达到阈值的(n/10)时，开始发送探测帧保活 |
 | resv | uint8_t[1] | 保留 |
-
-### wifi_conn_sec_stru <a id="struct_wifi_conn_sec_stru"></a>
-
-```c
-typedef struct {
-    wifi_security_enum sec_type;
-    int32_t pairwise;
-} wifi_conn_sec_stru;
-```
-
-**声明头文件**
-
-```c
-#include "include/middleware/services/wifi/wifi_device_config.h"
-```
-
-**功能说明**
-
-- WiFi连接加密方式
-
-**成员说明**
-
-| 成员名称 | 数据类型 | 描述 |
-| ------- | ------- | ---- |
-| sec_type | [wifi_security_enum](#enum_wifi_security_enum) | 安全类型 |
-| pairwise | int32_t | 加密方式，AES/TKIP/MIX |
 
 ### ext_psd_option_param <a id="struct_ext_psd_option_param"></a>
 

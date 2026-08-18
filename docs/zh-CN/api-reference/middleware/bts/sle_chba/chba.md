@@ -49,7 +49,7 @@ errcode_t sle_chba_netdev_create(uint8_t chba_role, uint8_t chba_mode)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| chba_role | uint8_t | SLE CHBA 设备角色，取值参考 [sle_chba_role](#enum_sle_chba_role) | [CHBA_ROLE_AP](#enum_sle_chba_role)(0) / [CHBA_ROLE_STA](#enum_sle_chba_role)(1) |
+| chba_role | uint8_t | SLE CHBA 设备角色，取值参考 [sle_chba_role](#enum_sle_chba_role) | [CHBA_ROLE_AP](#enum_sle_chba_role):0 / [CHBA_ROLE_STA](#enum_sle_chba_role):1 |
 | chba_mode | uint8_t | SLE CHBA 工作模式 | 0 ~ 255 |
 
 **返回值**
@@ -62,7 +62,7 @@ errcode_t sle_chba_netdev_create(uint8_t chba_role, uint8_t chba_mode)
 
 **参考案例**
 
-- `application/samples/bt/sle_chba/src/sle_chba_server.c`
+- `src/application/samples/bt/sle_chba/src/sle_chba_server.c`
 
 ### sle_chba_netdev_destroy <a id="sle_chba_netdev_destroy"></a>
 
@@ -135,7 +135,7 @@ errcode_t sle_chba_netdev_add_link(uint16_t conn_id, const sle_addr_t *remote_ad
 
 **参考案例**
 
-- `application/samples/bt/sle_chba/src/sle_chba_server.c`
+- `src/application/samples/bt/sle_chba/src/sle_chba_server.c`
 
 ### sle_chba_netdev_del_link <a id="sle_chba_netdev_del_link"></a>
 
@@ -177,7 +177,7 @@ errcode_t sle_chba_netdev_del_link(uint16_t conn_id, const sle_addr_t *remote_ad
 
 **参考案例**
 
-- `application/samples/bt/sle_chba/src/sle_chba_server.c`
+- `src/application/samples/bt/sle_chba/src/sle_chba_server.c`
 
 ### sle_chba_netdev_get_linkinfo <a id="sle_chba_netdev_get_linkinfo"></a>
 
@@ -262,8 +262,8 @@ errcode_t sle_chba_netdev_driver_send(uint8_t *data, uint16_t len)
 
 **参考案例**
 
-- `application/samples/bt/sle_chba/src/sle_chba_netif_mng.c`
-- `application/samples/bt/sle_chba/src/sle_chba_bridge.c`
+- `src/application/samples/bt/sle_chba/src/sle_chba_netif_mng.c`
+- `src/application/samples/bt/sle_chba/src/sle_chba_bridge.c`
 
 ### sle_chba_netdev_register_callbacks <a id="sle_chba_netdev_register_callbacks"></a>
 
@@ -304,7 +304,7 @@ errcode_t sle_chba_netdev_register_callbacks(sle_chba_netdev_callbacks_t *func)
 
 **参考案例**
 
-- `application/samples/bt/sle_chba/src/sle_chba_netif_mng.c`
+- `src/application/samples/bt/sle_chba/src/sle_chba_netif_mng.c`
 
 ## Type definitions
 

@@ -1,4 +1,4 @@
-# AT
+# at
 
 at (Attention) 提供 Hayes AT 命令集解析与处理服务，支持注册自定义 AT 命令表、命令执行/设置/读取/测试/查询回调、异步命令结果上报、命令交互处理以及向默认或指定通道输出 AT 响应信息与 URC (Unsolicited Result Code) 主动上报。
 
@@ -70,8 +70,14 @@ errcode_t uapi_at_cmd_table_register(const at_cmd_entry_t *table, uint32_t len,
 
 **参考案例**
 
-- `middleware/utils/at/at_wifi_cmd/src/at_cmd_register.c`
-- `middleware/utils/at/at_plt_cmd/src/at_plt_cmd_register.c`
+- `src/middleware/utils/at/at_wifi_cmd/src/at_cmd_register.c`
+- `src/middleware/utils/at/at_plt_cmd/src/at_plt_cmd_register.c`
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_AT_SUPPORT_CMD_TABLE_CHECK | 特性宏 | 启用注册时命令表合法性检查分支（分支级；Kconfig 未声明，需构建系统注入） | - |
 
 ### uapi_at_cmd_abort_register <a id="uapi_at_cmd_abort_register"></a>
 
@@ -89,7 +95,7 @@ errcode_t uapi_at_cmd_abort_register(at_abort_func_t func, void *arg)
 
 - 注册当前 AT 命令执行过程中使用的打断处理函数及其入参，用于在框架判定需要打断当前命令时回调该函数。
 - 注册的函数与入参会覆盖此前注册的当前命令打断函数，框架在执行打断流程时优先调用本接口注册的函数。
-- 仅当框架支持异步特性时此接口对外可用。
+- 接口可用性由构建配置控制（见 Kconfig配置）。
 
 **前置条件**
 
@@ -135,7 +141,7 @@ errcode_t uapi_at_send_async_result(uint16_t err)
 
 - 向 AT 框架发送异步阻塞式 AT 命令的执行结果，由框架在消息处理后输出对应响应。
 - 输入 0 表示执行成功，其他值表示失败，框架据此决定后续响应流程。
-- 仅当框架支持异步特性时此接口对外可用。
+- 接口可用性由构建配置控制（见 Kconfig配置）。
 
 **前置条件**
 
@@ -180,7 +186,7 @@ errcode_t uapi_at_interactivity_func_register(at_interactivity_func_t func)
 
 - 注册 AT 交互命令处理函数，用于在框架进入交互等待状态时回调该函数处理后续交互数据。
 - 注册的函数会覆盖此前注册的交互处理函数，框架在交互流程中通过该回调向调用方传递交互数据。
-- 仅当框架支持异步特性时此接口对外可用。
+- 接口可用性由构建配置控制（见 Kconfig配置）。
 
 **前置条件**
 
@@ -235,10 +241,10 @@ void uapi_at_report(const char *str)
 
 **参考案例**
 
-- `middleware/utils/at/at_plt_cmd/at/at_plt.c`
-- `middleware/utils/at/at_wifi_cmd/at/at_ccpriv.c`
-- `middleware/utils/at/at_wifi_cmd/at/at_mfg.c`
-- `middleware/utils/at/at_wifi_cmd/at/at_wifi.c`
+- `src/middleware/utils/at/at_plt_cmd/at/at_plt.c`
+- `src/middleware/utils/at/at_wifi_cmd/at/at_ccpriv.c`
+- `src/middleware/utils/at/at_wifi_cmd/at/at_mfg.c`
+- `src/middleware/utils/at/at_wifi_cmd/at/at_wifi.c`
 
 ### uapi_at_print <a id="uapi_at_print"></a>
 
@@ -255,7 +261,7 @@ void uapi_at_print(const char* str, ...)
 **功能说明**
 
 - 向默认通道输出格式化 AT 打印信息，按 printf 风格的格式串与可变参数生成最终字符串。
-- 内部申请格式化缓冲区，缓冲区大小由 CONFIG_AT_PRINT_BUFFER_SIZE 配置决定，未配置时使用默认值。
+- 格式化缓冲区大小由 CONFIG_AT_PRINT_BUFFER_SIZE 配置决定，未配置时使用默认值。
 - 格式化失败或参数非法时不输出内容，并在结束时释放缓冲区。
 
 **入参**
@@ -269,7 +275,7 @@ void uapi_at_print(const char* str, ...)
 
 - `drivers/chips/ws53/porting/uart/uart_porting.c`
 - `drivers/chips/ws53/porting/version/version_porting.c`
-- `middleware/utils/at/at_plt_cmd/at/at_plt.c`
+- `src/middleware/utils/at/at_plt_cmd/at/at_plt.c`
 
 ### uapi_at_report_to_single_channel <a id="uapi_at_report_to_single_channel"></a>
 
@@ -304,8 +310,8 @@ void uapi_at_report_to_single_channel(at_channel_id_t channel_id, const char *st
 
 **参考案例**
 
-- `middleware/utils/at/at_plt_cmd/src/at_plt_cmd_register.c`
-- `middleware/utils/at/at_wifi_cmd/src/at_cmd_register.c`
+- `src/middleware/utils/at/at_plt_cmd/src/at_plt_cmd_register.c`
+- `src/middleware/utils/at/at_wifi_cmd/src/at_cmd_register.c`
 
 ### uapi_at_urc_to_channel <a id="uapi_at_urc_to_channel"></a>
 
@@ -348,6 +354,7 @@ errcode_t uapi_at_urc_to_channel(at_channel_id_t channel_id, const char *msg, ui
 | ERRCODE_SUCC:0x00 | 执行成功 | 上报消息成功加入队列并触发消息发送 |
 | ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | msg 为 NULL 或 msg_len 为 0 |
 | ERRCODE_MALLOC:0x80000005 | 内存分配失败 | 分配上报节点或消息字符串缓冲区失败 |
+| ERRCODE_AT_MSG_SEND_ERROR:0x80003024 | 消息发送失败 | 消息队列写入失败 |
 | ERRCODE_MEMCPY:0x80000004 | 内存拷贝失败 | 拷贝消息内容到缓冲区失败 |
 
 **Kconfig配置**
@@ -668,7 +675,7 @@ typedef uint32_t errcode_t;
 
 **使用说明**
 
-本模块多个对外接口（uapi_at_cmd_table_register、uapi_at_cmd_abort_register、uapi_at_send_async_result、uapi_at_interactivity_func_register、uapi_at_urc_to_channel）的返回值类型。 [SDK公共基础类型]
+本模块多个对外接口（uapi_at_cmd_table_register、uapi_at_cmd_abort_register、uapi_at_send_async_result、uapi_at_interactivity_func_register、uapi_at_urc_to_channel）的返回值类型。 
 
 ## Associations
 
@@ -991,43 +998,43 @@ typedef struct {
 
 ## Macros
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC                                        0UL
 ```
 
-### ERRCODE_INVALID_PARAM <a id="ERRCODE_INVALID_PARAM"></a> [SDK公共共享宏]
+### ERRCODE_INVALID_PARAM <a id="ERRCODE_INVALID_PARAM"></a>
 
 ```c
 #define ERRCODE_INVALID_PARAM                               0x80000001
 ```
 
-### ERRCODE_MEMCPY <a id="ERRCODE_MEMCPY"></a> [SDK公共共享宏]
+### ERRCODE_MEMCPY <a id="ERRCODE_MEMCPY"></a>
 
 ```c
 #define ERRCODE_MEMCPY                                      0x80000004
 ```
 
-### ERRCODE_MALLOC <a id="ERRCODE_MALLOC"></a> [SDK公共共享宏]
+### ERRCODE_MALLOC <a id="ERRCODE_MALLOC"></a>
 
 ```c
 #define ERRCODE_MALLOC                                      0x80000005
 ```
 
-### ERRCODE_AT_CMD_REPEAT <a id="ERRCODE_AT_CMD_REPEAT"></a> [SDK公共共享宏]
+### ERRCODE_AT_CMD_REPEAT <a id="ERRCODE_AT_CMD_REPEAT"></a>
 
 ```c
 #define ERRCODE_AT_CMD_REPEAT                               0x80003022
 ```
 
-### ERRCODE_AT_CMD_TABLE_PARA_ERROR <a id="ERRCODE_AT_CMD_TABLE_PARA_ERROR"></a> [SDK公共共享宏]
+### ERRCODE_AT_CMD_TABLE_PARA_ERROR <a id="ERRCODE_AT_CMD_TABLE_PARA_ERROR"></a>
 
 ```c
 #define ERRCODE_AT_CMD_TABLE_PARA_ERROR                     0x80003023
 ```
 
-### ERRCODE_AT_MSG_SEND_ERROR <a id="ERRCODE_AT_MSG_SEND_ERROR"></a> [SDK公共共享宏]
+### ERRCODE_AT_MSG_SEND_ERROR <a id="ERRCODE_AT_MSG_SEND_ERROR"></a>
 
 ```c
 #define ERRCODE_AT_MSG_SEND_ERROR                           0x80003024

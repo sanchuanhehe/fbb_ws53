@@ -52,7 +52,7 @@ errcode_t plat_set_pm_mode(int32_t pm_switch)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x0 | 执行成功 | 低功耗开关设置成功 |
+| ERRCODE_SUCC:0 | 执行成功 | 低功耗开关设置成功 |
 | ERRCODE_FAIL:0xFFFFFFFF | 执行失败 | 低功耗开关设置失败 |
 
 **Kconfig配置**
@@ -90,7 +90,7 @@ errcode_t plat_reset_board(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x0 | 执行成功 | 复位流程全部成功 |
+| ERRCODE_SUCC:0 | 执行成功 | 复位流程全部成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 复位过程中任一步骤失败 |
 
 **Kconfig配置**
@@ -109,17 +109,17 @@ typedef uint32_t errcode_t;
 
 **使用说明**
 
-本模块对外接口的返回值类型。[SDK公共基础类型]
+本模块对外接口的返回值类型。
 
 ## Macros
 
-### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a> [SDK公共共享宏]
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
 
 ```c
 #define ERRCODE_SUCC                                        0UL
 ```
 
-### ERRCODE_FAIL <a id="ERRCODE_FAIL"></a> [SDK公共共享宏]
+### ERRCODE_FAIL <a id="ERRCODE_FAIL"></a>
 
 ```c
 #define ERRCODE_FAIL                                        0xFFFFFFFF

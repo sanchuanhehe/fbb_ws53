@@ -19,7 +19,7 @@ SSAP (Service Access Protocol) client 提供 SLE (Star Flash Low Energy) 协议�
 | [ssapc_read_req](#ssapc_read_req) | 发起按句柄读取请求 |
 | [ssapc_write_req](#ssapc_write_req) | 发起写请求（需服务端响应） |
 | [ssapc_write_cmd](#ssapc_write_cmd) | 发起写命令（无需服务端响应） |
-| [ssapc_exchange_info_req](#ssapc_exchange_info_req) | 发送交换信息请求（协商 MTU 等） |
+| [ssapc_exchange_info_req](#ssapc_exchange_info_req) | 发送交换信息请求（协商 MTU (Maximum Transmission Unit) 等） |
 | [ssapc_register_callbacks](#ssapc_register_callbacks) | 注册 SSAP 客户端回调函数集合 |
 
 ## Functions
@@ -53,7 +53,6 @@ errcode_t ssapc_register_client(sle_uuid_t *app_uuid, uint8_t *client_id)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | app_uuid | [sle_uuid_t](#struct_sle_uuid_t) * | 上层应用 UUID | 不为NULL |
-| client_id | uint8_t * | 输出参数，用于回传分配到的客户端 ID | 不为NULL |
 
 **出参**
 
@@ -151,7 +150,8 @@ errcode_t ssapc_find_structure(uint8_t client_id, uint16_t conn_id, ssapc_find_s
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| errcode_t | 执行结果错误码 | 服务发现结果将在 ssapc_find_structure_callback 和 ssapc_find_structure_complete_callback 中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；服务发现结果将在 ssapc_find_structure_callback 和 ssapc_find_structure_complete_callback 中返回 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **参考案例**
@@ -190,13 +190,18 @@ errcode_t ssapc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, ssapc_read
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
 | param | [ssapc_read_req_by_uuid_param_t](#struct_ssapc_read_req_by_uuid_param_t) * | 按 UUID 读取请求参数 | 不为NULL |
 
+**参考案例**
+
+- `src/application/samples/bt/sle/sle_sensor_report/sle_sensor_report_client/src/sle_sensor_report_client.c`
+
 **返回值**
 
 - 返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| errcode_t | 执行结果错误码 | 读取结果将在 ssapc_read_cfm_callback 和 ssapc_read_by_uuid_complete_callback 中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；读取结果将在 ssapc_read_cfm_callback 和 ssapc_read_by_uuid_complete_callback 中返回 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 ### ssapc_read_req <a id="ssapc_read_req"></a>
@@ -230,7 +235,11 @@ errcode_t ssapc_read_req(uint8_t client_id, uint16_t conn_id, uint16_t handle, u
 | client_id | uint8_t | 客户端 ID | 由 ssapc_register_client 分配 |
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
 | handle | uint16_t | 属性句柄 | 有效属性句柄 |
-| type | uint8_t | 特征类型 | [SSAP_PROPERTY_TYPE_VALUE](#enum_ssap_property_type_t)(0) / [SSAP_DESCRIPTOR_USER_DESCRIPTION](#enum_ssap_property_type_t)(1) / [SSAP_DESCRIPTOR_CLIENT_CONFIGURATION](#enum_ssap_property_type_t)(2) / [SSAP_DESCRIPTOR_SERVER_CONFIGURATION](#enum_ssap_property_type_t)(3) / [SSAP_DESCRIPTOR_PRESENTATION_FORMAT](#enum_ssap_property_type_t)(4) / [SSAP_DESCRIPTOR_RFU](#enum_ssap_property_type_t)(5) / [SSAP_DESCRIPTOR_CUSTOM](#enum_ssap_property_type_t)(255) |
+| type | uint8_t | 特征类型 | [SSAP_PROPERTY_TYPE_VALUE](#enum_ssap_property_type_t):0 / [SSAP_DESCRIPTOR_USER_DESCRIPTION](#enum_ssap_property_type_t):1 / [SSAP_DESCRIPTOR_CLIENT_CONFIGURATION](#enum_ssap_property_type_t):2 / [SSAP_DESCRIPTOR_SERVER_CONFIGURATION](#enum_ssap_property_type_t):3 / [SSAP_DESCRIPTOR_PRESENTATION_FORMAT](#enum_ssap_property_type_t):4 / [SSAP_DESCRIPTOR_RFU](#enum_ssap_property_type_t):5 / [SSAP_DESCRIPTOR_CUSTOM](#enum_ssap_property_type_t):255 |
+
+**参考案例**
+
+- `src/application/samples/bt/sle/sle_hello/sle_hello_client/src/sle_hello_client.c`
 
 **返回值**
 
@@ -238,7 +247,8 @@ errcode_t ssapc_read_req(uint8_t client_id, uint16_t conn_id, uint16_t handle, u
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| errcode_t | 执行结果错误码 | 读取结果将在 ssapc_read_cfm_callback 中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；读取结果将在 ssapc_read_cfm_callback 中返回 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **参考案例**
@@ -277,13 +287,18 @@ errcode_t ssapc_write_req(uint8_t client_id, uint16_t conn_id, ssapc_write_param
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
 | param | [ssapc_write_param_t](#struct_ssapc_handle_value_t) * | 写请求参数 | 不为NULL |
 
+**参考案例**
+
+- `src/application/samples/bt/sle/sle_hello/sle_hello_client/src/sle_hello_client.c`
+
 **返回值**
 
 - 返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| errcode_t | 执行结果错误码 | 写结果将在 ssapc_write_cfm_callback 中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；写结果将在 ssapc_write_cfm_callback 中返回 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 ### ssapc_write_cmd <a id="ssapc_write_cmd"></a>
@@ -365,7 +380,8 @@ errcode_t ssapc_exchange_info_req(uint8_t client_id, uint16_t conn_id, ssap_exch
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| errcode_t | 执行结果错误码 | MTU 改变结果将在 ssapc_exchange_info_callback 中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；MTU 改变结果将在 ssapc_exchange_info_callback 中返回 |
+| Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **参考案例**
@@ -416,6 +432,16 @@ errcode_t ssapc_register_callbacks(ssapc_callbacks_t *func)
 - `src/application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
 
 ## Type definitions
+
+### typedef_errcode_t <a id="typedef_errcode_t"></a>
+
+```c
+typedef uint32_t errcode_t;
+```
+
+**使用说明**
+
+本模块返回类型为 errcode_t 的对外接口的返回值类型。
 
 ### ssapc_find_structure_callback <a id="typedef_ssapc_find_structure_callback"></a>
 
@@ -787,6 +813,12 @@ typedef struct {
 | indication_cb | ssapc_indication_callback | 指示事件上报钩子 |
 
 ## Macros
+
+### ERRCODE_SUCC <a id="ERRCODE_SUCC"></a>
+
+```c
+#define ERRCODE_SUCC                                        0UL
+```
 
 ### SLE_UUID_LEN <a id="SLE_UUID_LEN"></a>
 
