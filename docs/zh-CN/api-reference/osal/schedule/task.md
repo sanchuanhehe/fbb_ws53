@@ -91,8 +91,6 @@ osal_task *osal_kthread_create(osal_kthread_handler handler, void *data, const c
 **参考案例**
 
 - `src/application/samples/peripheral/blinky/blinky_demo.c`
-- `src/application/samples/peripheral/adc/adc_demo_inc.c`
-- `src/application/samples/peripheral/dma/dma_demo.c`
 
 ### osal_kthread_create_static_ext <a id="osal_kthread_create_static_ext"></a>
 
@@ -132,6 +130,12 @@ osal_task *osal_kthread_create_static_ext(osal_kthread_init *init_handle, void *
 | -------- | -------- | -------- |
 | 非NULL指针 | 线程创建成功 | 静态栈线程创建成功 |
 | NULL | 线程创建失败 | init_handle 为 NULL 或未启用静态栈分配或内存分配失败或 LOS_TaskCreateStatic 失败 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| LOSCFG_TASK_STACK_STATIC_ALLOCATION | 特性宏 | 支持静态栈线程创建（接口级，liteos 实现体由 #ifdef 包裹；LiteOS Kconfig 声明） | n |
 
 ### osal_kthread_create_ext <a id="osal_kthread_create_ext"></a>
 
@@ -243,7 +247,7 @@ void osal_kthread_set_affinity(osal_task *task, int cpu_mask)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | task | [osal_task](#osal_task) * | 目标线程指针 | 不为NULL |
-| cpu_mask | int | CPU 核心掩码 | OSAL_CPU_ALL(0) / OSAL_CPU_0(2) / OSAL_CPU_1(4) / OSAL_CPU_2(8) / OSAL_CPU_3(16) |
+| cpu_mask | int | CPU 核心掩码 | OSAL_CPU_ALL:0 / OSAL_CPU_0:2 / OSAL_CPU_1:4 / OSAL_CPU_2:8 / OSAL_CPU_3:16 |
 
 **参考案例**
 
@@ -281,9 +285,6 @@ int osal_kthread_should_stop(void)
 | 0 | 线程应继续运行 | 未收到停止请求 |
 | 1 | 线程应停止 | 收到 kthread_stop 停止请求 |
 
-**参考案例**
-
-- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
 
 ### osal_kthread_wakeup_process <a id="osal_kthread_wakeup_process"></a>
 
@@ -368,7 +369,6 @@ void osal_kthread_lock(void)
 **功能说明**
 
 - 锁定任务调度，防止当前任务被切换
-- 调用后任务调度锁计数加一，需与 osal_kthread_unlock 配对使用
 - 调度锁定期间中断仍可触发，但不会发生任务切换
 
 **前置条件**
@@ -396,7 +396,6 @@ void osal_kthread_unlock(void)
 
 - 解锁任务调度，使任务调度恢复
 - 调用后任务调度锁计数减一，锁计数归零时调度恢复
-- 需与 osal_kthread_lock 配对使用，多次锁定需同等次数解锁
 
 **前置条件**
 
@@ -437,10 +436,6 @@ void osal_kthread_destroy(osal_task *task, unsigned int stop_flag)
 | task | [osal_task](#osal_task) * | 待销毁的线程指针 | 不为NULL |
 | stop_flag | unsigned int | 线程停止标志，0 表示不停止线程，非 0 表示停止线程 | - |
 
-**参考案例**
-
-- `src/application/samples/peripheral/adc/adc_demo_inc.c`
-- `src/application/samples/peripheral/dma/dma_demo.c`
 
 ### osal_kthread_schedule <a id="osal_kthread_schedule"></a>
 
@@ -608,7 +603,6 @@ void osal_kneon_end(void)
 
 - 关闭内核态 NEON 算法加速
 - 仅在定义了 CONFIG_KERNEL_MODE_NEON 时生效，否则不执行任何操作
-- 须在 osal_kneon_begin 之后调用，恢复 NEON 状态
 
 **前置条件**
 
@@ -829,9 +823,6 @@ void osal_msleep_uninterruptible(unsigned int msecs)
 | ---- | ---- | ---- | ---- |
 | msecs | unsigned int | 休眠时长（毫秒） | 大于0 |
 
-**参考案例**
-
-- `src/kernel/osal/src/linux/kernel/osal_timer.c`
 
 ### osal_udelay <a id="osal_udelay"></a>
 
@@ -895,9 +886,6 @@ void osal_mdelay(unsigned int msecs)
 | ---- | ---- | ---- | ---- |
 | msecs | unsigned int | 延时时长（毫秒） | 大于0 |
 
-**参考案例**
-
-- `src/kernel/osal/src/linux/kernel/osal_timer.c`
 
 ### osal_kthread_suspend <a id="osal_kthread_suspend"></a>
 
@@ -973,7 +961,6 @@ unsigned int osal_kernel_init(void)
 
 - 初始化内核，完成内核基础数据结构和资源初始化
 - 初始化成功后内核状态由 INACTIVE 转为 READY
-- 须在 osal_kernel_start 之前调用
 
 **前置条件**
 

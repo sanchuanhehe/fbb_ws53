@@ -55,6 +55,12 @@ unsigned int osal_drvmgr_switch_to_drvbox(unsigned int drv_id)
 | LOS_OK:0 | 区域切换成功 | 切换操作成功完成 |
 | Other | 其他错误码，参考源码头文件注释中的 DRV_BOX_INVALID_SWITCH / DRV_BOX_SWITCH_FAIL | 执行失败 |
 
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_SEC_CORE | 特性宏 | 安全核构建门控（接口级，soc_osal.h 以 #if defined 包裹本模块头文件引入；Kconfig 未声明） | - |
+
 ### osal_drvmgr_switch_to_usrbox <a id="osal_drvmgr_switch_to_usrbox"></a>
 
 ```c
@@ -77,3 +83,9 @@ void osal_drvmgr_switch_to_usrbox(void)
 
 - 调用时序约束：当前接口只能在 common usr lib space 中调用
 - 依赖关系：当前接口依赖 CONFIG_SEC_CORE 宏已启用，drvbox 头文件通过 soc_osal.h 在该宏条件下引入
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_SEC_CORE | 特性宏 | 安全核构建门控（接口级，soc_osal.h 以 #if defined 包裹本模块头文件引入；Kconfig 未声明） | - |

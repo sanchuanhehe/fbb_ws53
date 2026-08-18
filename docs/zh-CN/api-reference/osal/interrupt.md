@@ -109,8 +109,8 @@ int osal_irq_request(unsigned int irq, osal_irq_handler handler, osal_irq_handle
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS(0) | 执行成功 | 中断申请成功 |
-| OSAL_FAILURE(-1) | 执行失败 | handler 为 NULL 或中断申请失败 |
+| OSAL_SUCCESS:0 | 执行成功 | 中断申请成功 |
+| OSAL_FAILURE:-1 | 执行失败 | handler 为 NULL 或中断申请失败 |
 
 **参考案例**
 
@@ -171,7 +171,7 @@ int osal_irq_set_priority(unsigned int irq, unsigned short priority)
 **功能说明**
 
 - 设置指定中断线的优先级
-- 优先级设置依赖中断控制器和 CPU 架构的硬件实现
+- 优先级取值受中断控制器与 CPU (Central Processing Unit) 架构约束
 - 优先级数值的具体含义由底层硬件平台决定
 
 **前置条件**
@@ -192,8 +192,8 @@ int osal_irq_set_priority(unsigned int irq, unsigned short priority)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS(0) | 执行成功 | 优先级设置成功 |
-| OSAL_FAILURE(-1) | 执行失败 | 优先级设置失败 |
+| OSAL_SUCCESS:0 | 执行成功 | 优先级设置成功 |
+| OSAL_FAILURE:-1 | 执行失败 | 优先级设置失败 |
 
 **参考案例**
 
@@ -237,8 +237,8 @@ int osal_irq_set_affinity(unsigned int irq, const char *name, int cpu_mask)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS(0) | 执行成功 | 亲和性设置成功 |
-| OSAL_FAILURE(-1) | 执行失败 | 亲和性设置失败 |
+| OSAL_SUCCESS:0 | 执行成功 | 亲和性设置成功 |
+| OSAL_FAILURE:-1 | 执行失败 | 亲和性设置失败 |
 
 ### osal_irq_enable <a id="osal_irq_enable"></a>
 
@@ -451,7 +451,7 @@ unsigned int osal_irq_clear(unsigned int vector)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS(0) | 执行成功 | pending 状态清除成功 |
+| OSAL_SUCCESS:0 | 执行成功 | pending 状态清除成功 |
 | Other | 其他错误码 | pending 状态清除失败 |
 
 **参考案例**
@@ -505,13 +505,11 @@ int osal_tasklet_init(osal_tasklet *tasklet)
 **功能说明**
 
 - 初始化 tasklet 结构体，为 tasklet 分配资源
-- 初始化前需设置 osal_tasklet 的 handler 和 data 成员，tasklet 成员置空
 - 初始化后 tasklet 可通过 osal_tasklet_schedule 进行调度
 
 **前置条件**
 
-- 调用时序约束：当前接口需在 osal_tasklet_schedule 之前调用
-- 依赖关系：当前接口依赖 tasklet 不为 NULL 且 tasklet->tasklet 为空
+- 调用时序约束：当前接口需在 osal_tasklet_schedule 之前调用，且须先设置 osal_tasklet 的 handler 和 data 成员（tasklet 成员置空）
 
 **入参**
 
@@ -525,8 +523,8 @@ int osal_tasklet_init(osal_tasklet *tasklet)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS(0) | 执行成功 | tasklet 初始化成功 |
-| OSAL_FAILURE(-1) | 执行失败 | tasklet 为 NULL 或 tasklet->tasklet 不为空或内存分配失败 |
+| OSAL_SUCCESS:0 | 执行成功 | tasklet 初始化成功 |
+| OSAL_FAILURE:-1 | 执行失败 | tasklet 为 NULL 或 tasklet->tasklet 不为空或内存分配失败 |
 
 ### osal_tasklet_schedule <a id="osal_tasklet_schedule"></a>
 
@@ -549,7 +547,7 @@ int osal_tasklet_schedule(osal_tasklet *tasklet)
 **前置条件**
 
 - 调用时序约束：当前接口必须在 osal_tasklet_init 成功返回后调用
-- 依赖关系：当前接口依赖 tasklet 已初始化且 tasklet->tasklet 不为空
+- 依赖关系：当前接口依赖 tasklet 已初始化
 
 **入参**
 
@@ -563,8 +561,8 @@ int osal_tasklet_schedule(osal_tasklet *tasklet)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS(0) | 执行成功 | tasklet 调度成功 |
-| OSAL_FAILURE(-1) | 执行失败 | tasklet 为 NULL 或 tasklet->tasklet 为空 |
+| OSAL_SUCCESS:0 | 执行成功 | tasklet 调度成功 |
+| OSAL_FAILURE:-1 | 执行失败 | tasklet 为 NULL 或 tasklet->tasklet 为空 |
 
 ### osal_tasklet_kill <a id="osal_tasklet_kill"></a>
 
@@ -587,7 +585,7 @@ int osal_tasklet_kill(osal_tasklet *tasklet)
 **前置条件**
 
 - 调用时序约束：当前接口必须在 osal_tasklet_init 成功返回后调用
-- 依赖关系：当前接口依赖 tasklet 已初始化且 tasklet->tasklet 不为空
+- 依赖关系：当前接口依赖 tasklet 已初始化
 
 **入参**
 
@@ -601,8 +599,8 @@ int osal_tasklet_kill(osal_tasklet *tasklet)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS(0) | 执行成功 | tasklet 销毁成功 |
-| OSAL_FAILURE(-1) | 执行失败 | tasklet 为 NULL 或 tasklet->tasklet 为空 |
+| OSAL_SUCCESS:0 | 执行成功 | tasklet 销毁成功 |
+| OSAL_FAILURE:-1 | 执行失败 | tasklet 为 NULL 或 tasklet->tasklet 为空 |
 
 ### osal_tasklet_update <a id="osal_tasklet_update"></a>
 
@@ -620,12 +618,11 @@ int osal_tasklet_update(osal_tasklet *tasklet)
 
 - 更新 tasklet 的处理函数和数据
 - 更新后后续调度将使用新的处理函数和数据
-- 需在 osal_tasklet_init 成功后调用
 
 **前置条件**
 
 - 调用时序约束：当前接口必须在 osal_tasklet_init 成功返回后调用
-- 依赖关系：当前接口依赖 tasklet 已初始化且 tasklet->tasklet 不为空
+- 依赖关系：当前接口依赖 tasklet 已初始化
 
 **入参**
 
@@ -639,8 +636,8 @@ int osal_tasklet_update(osal_tasklet *tasklet)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS(0) | 执行成功 | tasklet 更新成功 |
-| OSAL_FAILURE(-1) | 执行失败 | tasklet 为 NULL 或 tasklet->tasklet 为空 |
+| OSAL_SUCCESS:0 | 执行成功 | tasklet 更新成功 |
+| OSAL_FAILURE:-1 | 执行失败 | tasklet 为 NULL 或 tasklet->tasklet 为空 |
 
 ## Type definitions
 
@@ -724,13 +721,13 @@ typedef struct {
 #define OSAL_CPU_3 (1 << 4)
 ```
 
-### OSAL_SUCCESS <a id="OSAL_SUCCESS"></a> [SDK公共共享宏]
+### OSAL_SUCCESS <a id="OSAL_SUCCESS"></a>
 
 ```c
 #define OSAL_SUCCESS 0
 ```
 
-### OSAL_FAILURE <a id="OSAL_FAILURE"></a> [SDK公共共享宏]
+### OSAL_FAILURE <a id="OSAL_FAILURE"></a>
 
 ```c
 #define OSAL_FAILURE (-1)
