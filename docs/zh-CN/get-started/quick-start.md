@@ -70,7 +70,7 @@
 2. 配置烧录参数：
 
     - **传输方式**：选择 `serial`（串口烧录）
-    - **烧写文件**：使用当前工程目录下的 `output/ws53/fwpkg/ws53-liteos-app/ws53-liteos-app_all.fwpkg`
+    - **烧写文件**：使用当前工程目录下的 `output\ws53\fwpkg\pack_all_core\ws53_liteos_app\ws53_liteos_app_all_in_one.fwpkg`
     - **端口选择**：选择硬件连接步骤中记录的实际 COM 口
     - **波特率**：选择 `921600`
 
