@@ -25,6 +25,7 @@ import stat
 import shutil
 import hashlib
 import zipfile
+import threading
 from typing import List, Set, Optional
 
 # ============================================================
@@ -421,7 +422,7 @@ def _zip_archived_files(archive_dir: str, extension: str, zip_name: str) -> None
 
 
 def package_archives() -> None:
-    """Package all archived logs and firmware packages into zip files."""
+    """Package archived logs and firmware packages into zip files."""
     _phase("Package archives")
     _zip_archived_files(ARCHIVE_DIRECTORY, '.log', BUILD_LOG_ZIP_NAME)
     _zip_archived_files(ARCHIVE_DIRECTORY, '.fwpkg', FWPKG_ZIP_NAME)
@@ -630,7 +631,7 @@ def sample_build_cleanup_one(entry: dict) -> None:
 
 def compile_sdk_and_save_log(build_target_name: str) -> None:
     """
-    在 src/ 目录下执行编译，将日志保存到 archives/，
+    在 src/ 目录下执行编译，完整日志实时输出到终端并归档，
     构建产物 .fwpkg 移动到 archives/。
     """
     _phase("执行编译")
@@ -639,80 +640,80 @@ def compile_sdk_and_save_log(build_target_name: str) -> None:
     _info("工作目录", os.path.abspath(BUILD_DIRECTORY))
 
     start_time = time.time()
+    log_path = os.path.abspath(os.path.join(ARCHIVE_DIRECTORY, f'build-{global_combined}.log'))
+    _info("日志文件", log_path)
 
     # 确保 archives 目录存在
-    if not os.path.exists("./archives"):
-        os.mkdir("./archives")
+    os.makedirs(ARCHIVE_DIRECTORY, exist_ok=True)
 
     os.chdir(BUILD_DIRECTORY)
-    log_path = os.path.join('..', 'archives', f'build-{global_combined}.log')
-    _info("日志文件", os.path.abspath(log_path))
-
-    writer = os.fdopen(os.open(
-        log_path,
-        os.O_WRONLY | os.O_CREAT | os.O_TRUNC,
-        stat.S_IWUSR | stat.S_IRUSR,
-    ), 'wb')
-    reader = os.fdopen(os.open(
-        log_path,
-        os.O_RDONLY,
-        stat.S_IWUSR | stat.S_IRUSR,
-    ), 'rb')
-    os.chmod(log_path, stat.S_IRWXU | stat.S_IRGRP | stat.S_IXGRP | stat.S_IROTH | stat.S_IXOTH)
 
     args = ['-c', build_target_name]
-    try:
-        process = subprocess.Popen(
-            [sys.executable, BUILD_SCRIPT] + args,
-            text=False,
-            stdout=writer,
-            stderr=writer
-        )
-        start = time.time()
-        while True:
-            timeout = (time.time() - start) > DEFAULT_BUILD_TIMEOUT
+    process = None
+    stdout_pipe = None
+    output_thread = None
 
-            line = reader.readline()
-            if line == b'':
-                if process.poll() is not None:
-                    break
-                time.sleep(2)
-                if not timeout:
-                    continue
-                else:
-                    process.kill()
-                    raise Exception("构建超时")
+    def _mirror_build_output(stream, log_file) -> None:
+        """将构建输出同时写到终端和日志文件。"""
+        while True:
+            raw_line = stream.readline()
+            if raw_line == b'':
+                break
 
             try:
-                outs = line.decode('utf-8', errors='strict').rstrip()
+                text_line = raw_line.decode('utf-8', errors='strict')
             except UnicodeDecodeError:
-                outs = line.decode('gbk', errors='replace').rstrip()
-            if not outs:
-                if not timeout:
-                    continue
-                else:
-                    process.kill()
-                    raise Exception("构建超时")
-            print(outs)
+                text_line = raw_line.decode('gbk', errors='replace')
+
+            sys.stdout.write(text_line)
+            sys.stdout.flush()
+            log_file.write(text_line)
+            log_file.flush()
+
+    try:
+        with open(log_path, 'w', encoding='utf-8', newline='') as log_file:
+            process = subprocess.Popen(
+                [sys.executable, '-u', BUILD_SCRIPT] + args,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+            )
+            stdout_pipe = process.stdout
+            if stdout_pipe is None:
+                raise Exception("无法获取构建输出")
+
+            output_thread = threading.Thread(
+                target=_mirror_build_output,
+                args=(stdout_pipe, log_file),
+                daemon=True,
+            )
+            output_thread.start()
+            process.wait(timeout=DEFAULT_BUILD_TIMEOUT)
+            output_thread.join()
 
         elapsed = time.time() - start_time
         _info("构建耗时", f"{elapsed:.1f}s")
 
         if process.returncode == 0:
-            writer.write(b"Finished: SUCCESS")
-            _ok(f"编译成功, 日志已保存至: {log_path}")
+            _ok("编译成功")
         else:
-            writer.write(b"Finished: FAILURE")
-            _fail(f"编译失败! 请检查日志: {log_path}")
-            print(process.stderr.read().decode('utf-8'))
-
+            _fail("编译失败!")
+    except subprocess.TimeoutExpired:
+        if process is not None and process.poll() is None:
+            process.kill()
+            process.wait()
+        if output_thread is not None:
+            output_thread.join()
+        _fail("构建超时")
     except Exception as e:
+        if process is not None and process.poll() is None:
+            process.kill()
+            process.wait()
+        if output_thread is not None:
+            output_thread.join()
         _fail(f"编译异常: {str(e)}")
     finally:
-        if writer:
-            writer.close()
-        if reader:
-            reader.close()
+        if stdout_pipe is not None:
+            stdout_pipe.close()
 
     move_file(OUTPUT_FWPKG_PATH, global_combined)
 
