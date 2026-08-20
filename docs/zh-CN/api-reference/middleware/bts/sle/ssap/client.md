@@ -67,7 +67,6 @@ errcode_t ssapc_register_client(sle_uuid_t *app_uuid, uint8_t *client_id)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | 请求成功发起 |
-| Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **参考案例**
 
@@ -110,7 +109,6 @@ errcode_t ssapc_unregister_client(uint8_t client_id)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | 请求成功发起 |
-| Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 ### ssapc_find_structure <a id="ssapc_find_structure"></a>
 
@@ -152,7 +150,6 @@ errcode_t ssapc_find_structure(uint8_t client_id, uint16_t conn_id, ssapc_find_s
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；服务发现结果将在 ssapc_find_structure_callback 和 ssapc_find_structure_complete_callback 中返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
-| Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **参考案例**
 
@@ -202,7 +199,6 @@ errcode_t ssapc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, ssapc_read
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；读取结果将在 ssapc_read_cfm_callback 和 ssapc_read_by_uuid_complete_callback 中返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
-| Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 ### ssapc_read_req <a id="ssapc_read_req"></a>
 
@@ -237,10 +233,6 @@ errcode_t ssapc_read_req(uint8_t client_id, uint16_t conn_id, uint16_t handle, u
 | handle | uint16_t | 属性句柄 | 有效属性句柄 |
 | type | uint8_t | 特征类型 | [SSAP_PROPERTY_TYPE_VALUE](#enum_ssap_property_type_t):0 / [SSAP_DESCRIPTOR_USER_DESCRIPTION](#enum_ssap_property_type_t):1 / [SSAP_DESCRIPTOR_CLIENT_CONFIGURATION](#enum_ssap_property_type_t):2 / [SSAP_DESCRIPTOR_SERVER_CONFIGURATION](#enum_ssap_property_type_t):3 / [SSAP_DESCRIPTOR_PRESENTATION_FORMAT](#enum_ssap_property_type_t):4 / [SSAP_DESCRIPTOR_RFU](#enum_ssap_property_type_t):5 / [SSAP_DESCRIPTOR_CUSTOM](#enum_ssap_property_type_t):255 |
 
-**参考案例**
-
-- `src/application/samples/bt/sle/sle_hello/sle_hello_client/src/sle_hello_client.c`
-
 **返回值**
 
 - 返回类型：errcode_t
@@ -249,11 +241,11 @@ errcode_t ssapc_read_req(uint8_t client_id, uint16_t conn_id, uint16_t handle, u
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；读取结果将在 ssapc_read_cfm_callback 中返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
-| Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **参考案例**
 
 - `src/application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
+- `src/application/samples/bt/sle/sle_hello/sle_hello_client/src/sle_hello_client.c`
 
 ### ssapc_write_req <a id="ssapc_write_req"></a>
 
@@ -287,10 +279,6 @@ errcode_t ssapc_write_req(uint8_t client_id, uint16_t conn_id, ssapc_write_param
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
 | param | [ssapc_write_param_t](#struct_ssapc_handle_value_t) * | 写请求参数 | 不为NULL |
 
-**参考案例**
-
-- `src/application/samples/bt/sle/sle_hello/sle_hello_client/src/sle_hello_client.c`
-
 **返回值**
 
 - 返回类型：errcode_t
@@ -299,7 +287,6 @@ errcode_t ssapc_write_req(uint8_t client_id, uint16_t conn_id, ssapc_write_param
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；写结果将在 ssapc_write_cfm_callback 中返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
-| Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 ### ssapc_write_cmd <a id="ssapc_write_cmd"></a>
 
@@ -340,7 +327,6 @@ errcode_t ssapc_write_cmd(uint8_t client_id, uint16_t conn_id, ssapc_write_param
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | 请求成功发起 |
-| Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 ### ssapc_exchange_info_req <a id="ssapc_exchange_info_req"></a>
 
@@ -382,7 +368,6 @@ errcode_t ssapc_exchange_info_req(uint8_t client_id, uint16_t conn_id, ssap_exch
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；MTU 改变结果将在 ssapc_exchange_info_callback 中返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
-| Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **参考案例**
 
@@ -425,7 +410,6 @@ errcode_t ssapc_register_callbacks(ssapc_callbacks_t *func)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | 请求成功发起 |
-| Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **参考案例**
 

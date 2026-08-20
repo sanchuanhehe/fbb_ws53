@@ -90,13 +90,7 @@ errcode_t wifi_p2p_disable(void)
 **前置条件**
 
 - 调用时序约束：需在 wifi_p2p_enable 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
-下文调用
+- 上下文限制：需在主线程调用，禁止在中断上下文调用
 
 **返回值**
 
@@ -107,17 +101,17 @@ errcode_t wifi_p2p_disable(void)
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 功能关闭成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
-### wifi_p2p_is_enabled <a id="wifi_p2p_is_enabled"></a>
-
-```c
-int32_t wifi_p2p_is_enabled(void)
-```
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
 | CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
 
+### wifi_p2p_is_enabled <a id="wifi_p2p_is_enabled"></a>
+
+```c
+int32_t wifi_p2p_is_enabled(void)
+```
 
 **声明头文件**
 
@@ -145,6 +139,12 @@ int32_t wifi_p2p_is_enabled(void)
 | 1 | P2P 已初始化 | P2P 功能已开启 |
 | 0 | P2P 未初始化 | P2P 功能未开启 |
 
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
+
 ### wifi_p2p_find <a id="wifi_p2p_find"></a>
 
 ```c
@@ -154,13 +154,7 @@ errcode_t wifi_p2p_find(int32_t sec)
 **声明头文件**
 
 ```c
-#inc
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
-lude "middleware/services/wifi/wifi_p2p.h"
+#include "middleware/services/wifi/wifi_p2p.h"
 ```
 
 **功能说明**
@@ -178,13 +172,7 @@ lude "middleware/services/wifi/wifi_p2p.h"
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| sec | int32_t | 扫描时间，单位秒 | 0（
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
-默认 120 秒）/ 5 ~ 120（0 走默认，1~4 与 >120 拒绝） |
+| sec | int32_t | 扫描时间，单位秒 | 0（默认 120 秒）/ 5 ~ 120（0 走默认，1~4 与 >120 拒绝） |
 
 **返回值**
 
@@ -195,19 +183,19 @@ lude "middleware/services/wifi/wifi_p2p.h"
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 设备扫描启动成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
+
 ### wifi_p2p_stop_find <a id="wifi_p2p_stop_find"></a>
 
 ```c
 errcode_t wifi_p2p_stop_find(void)
 ```
 
-**声明头文件
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
-**
+**声明头文件**
 
 ```c
 #include "middleware/services/wifi/wifi_p2p.h"
@@ -233,6 +221,12 @@ errcode_t wifi_p2p_stop_find(void)
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 扫描停止成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
+
 ### wifi_p2p_connect_cancel <a id="wifi_p2p_connect_cancel"></a>
 
 ```c
@@ -248,13 +242,7 @@ errcode_t wifi_p2p_connect_cancel(void)
 **功能说明**
 
 - 停止 P2P 设备连接过程
-- 终止当前正在进行的 
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
-P2P 连接协商
+- 终止当前正在进行的 P2P 连接协商
 - 调用后取消与对端设备的连接流程
 
 **前置条件**
@@ -270,6 +258,12 @@ P2P 连接协商
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 连接取消成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
 
 ### wifi_p2p_listen <a id="wifi_p2p_listen"></a>
 
@@ -303,18 +297,18 @@ errcode_t wifi_p2p_listen(uint32_t period, uint32_t interval)
 
 **返回值**
 
-- 返
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
-回类型：errcode_t
+- 返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | WIFI_SUCCESS:0 | 执行成功 | P2P 监听设置成功 |
 | Other | 其他错误码（含 ERROR_WIFI_* 负值错误码），参考`errcode_t` | 执行失败 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
 
 ### wifi_p2p_get_peers_info <a id="wifi_p2p_get_peers_info"></a>
 
@@ -331,13 +325,7 @@ errcode_t wifi_p2p_get_peers_info(p2p_device_stru *dev_list, uint32_t *dev_num)
 **功能说明**
 
 - 获取扫描发现的 P2P 设备信息列表
-- 返回 P2P 设备名称、MAC (Media Access Control) 地址、WPS (Wi-Fi Protected Setu
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
-p) 连接方式等信息
+- 返回 P2P 设备名称、MAC (Media Access Control) 地址、WPS (Wi-Fi Protected Setup) 连接方式等信息
 - 入参 dev_num 同时用于传入最大反馈数量与返回实际反馈数量
 
 **前置条件**
@@ -363,16 +351,16 @@ p) 连接方式等信息
 
 - 返回类型：errcode_t
 
-| 返
+| 返回值 | 文字含义 | 触发场景 |
+| -------- | -------- | -------- |
+| ERRCODE_SUCC:0x00 | 执行成功 | P2P 设备信息获取成功 |
+| Other | 其他错误码，参考`errcode_t` | 执行失败 |
+
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
 | CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
-回值 | 文字含义 | 触发场景 |
-| -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | P2P 设备信息获取成功 |
-| Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### wifi_p2p_connect <a id="wifi_p2p_connect"></a>
 
@@ -383,13 +371,7 @@ errcode_t wifi_p2p_connect(const p2p_config_stru *p2p_config)
 **声明头文件**
 
 ```c
-#include "m
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
-iddleware/services/wifi/wifi_p2p.h"
+#include "middleware/services/wifi/wifi_p2p.h"
 ```
 
 **功能说明**
@@ -418,6 +400,12 @@ iddleware/services/wifi/wifi_p2p.h"
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 连接请求发起成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
+
 ### wifi_p2p_connect_accept <a id="wifi_p2p_connect_accept"></a>
 
 ```c
@@ -438,13 +426,7 @@ errcode_t wifi_p2p_connect_accept(const p2p_config_stru *p2p_config, int assoc)
 
 **前置条件**
 
-- 调用时序约束：需在收到对端 P2P 连接
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
-请求后调用
+- 调用时序约束：需在收到对端 P2P 连接请求后调用
 - 上下文限制：需在主线程调用，禁止在中断上下文调用
 
 **入参**
@@ -463,6 +445,12 @@ errcode_t wifi_p2p_connect_accept(const p2p_config_stru *p2p_config, int assoc)
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 连接响应设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
+
 ### wifi_p2p_disconnect <a id="wifi_p2p_disconnect"></a>
 
 ```c
@@ -472,13 +460,7 @@ errcode_t wifi_p2p_disconnect(void)
 **声明头文件**
 
 ```c
-#include "middleware/
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
-services/wifi/wifi_p2p.h"
+#include "middleware/services/wifi/wifi_p2p.h"
 ```
 
 **功能说明**
@@ -501,6 +483,12 @@ services/wifi/wifi_p2p.h"
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 断连成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
+
 ### wifi_p2p_go_get_gc_info <a id="wifi_p2p_go_get_gc_info"></a>
 
 ```c
@@ -521,13 +509,7 @@ errcode_t wifi_p2p_go_get_gc_info(p2p_client_info_stru *client_list, uint32_t *c
 
 **前置条件**
 
-- 调用时序约束：
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
-需在 P2P 以 GO 模式连接成功后调用
+- 调用时序约束：需在 P2P 以 GO 模式连接成功后调用
 - 上下文限制：需在主线程调用，禁止在中断上下文调用
 
 **入参**
@@ -553,16 +535,16 @@ errcode_t wifi_p2p_go_get_gc_info(p2p_client_info_stru *client_list, uint32_t *c
 | ERRCODE_SUCC:0x00 | 执行成功 | GC 信息获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
-### wifi_p2p_set_device_config <a id="wifi_p2p_set_device_config"></a>
-
-```c
-errcode_t wifi_p2p_set_
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
 | CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
-device_config(const p2p_device_config_stru *p2p_dev_set_info)
+
+### wifi_p2p_set_device_config <a id="wifi_p2p_set_device_config"></a>
+
+```c
+errcode_t wifi_p2p_set_device_config(const p2p_device_config_stru *p2p_dev_set_info)
 ```
 
 **声明头文件**
@@ -596,6 +578,12 @@ device_config(const p2p_device_config_stru *p2p_dev_set_info)
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 设备信息设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
 
 ### wifi_p2p_get_device_config <a id="wifi_p2p_get_device_config"></a>
 
@@ -641,6 +629,12 @@ errcode_t wifi_p2p_get_device_config(p2p_device_config_stru *p2p_dev_set_info)
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 设备信息获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
+
 ### wifi_p2p_get_connect_info <a id="wifi_p2p_get_connect_info"></a>
 
 ```c
@@ -684,6 +678,12 @@ errcode_t wifi_p2p_get_connect_info(p2p_status_info_stru *status)
 | -------- | -------- | -------- |
 | ERRCODE_SUCC:0x00 | 执行成功 | P2P 连接状态信息获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
+
+**Kconfig配置**
+
+| 配置项 | 宏类型 | 说明 | 默认值 |
+| -------- | -------- | -------- | -------- |
+| CONFIG_P2P_SUPPORT | 特性宏 | 支持 P2P 功能（接口级，实现体由 #ifdef 包裹；Kconfig 未声明，构建系统注入） | - |
 
 ## Enumerations
 

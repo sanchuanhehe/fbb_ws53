@@ -1196,11 +1196,6 @@ typedef void (*uart_tx_callback_t)(const void *buffer, uint32_t length, const vo
 - 参数 length：发送时的数据长度
 - 参数 params：传递的参数
 
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_UART_SUPPORT_TX | 特性宏 | 启用UART发送支持 | y |
 
 ### uart_error_callback_t <a id="uart_error_callback_t"></a>
 
@@ -1418,12 +1413,6 @@ typedef struct uart_write_dma_config {
 | burst_length | uint8_t | burst长度：0-1，1-4，2-8，3-16 |
 | priority | uint8_t | 传输通道优先级（最小0，最大3） |
 
-**Kconfig配置**
-
-| 配置项 | 宏类型 | 说明 | 默认值 |
-| -------- | -------- | -------- | -------- |
-| CONFIG_UART_SUPPORT_TX | 特性宏 | 启用UART发送支持 | y |
-| CONFIG_UART_SUPPORT_DMA | 特性宏 | 启用UART DMA支持 | y |
 
 ## Macros
 
