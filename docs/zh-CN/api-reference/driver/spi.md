@@ -1090,16 +1090,6 @@ typedef uint32_t errcode_t;
 
 ```c
 typedef enum {
-    I2C_BUS_0,               // !< I2C0
-    I2C_BUS_1,               // !< I2C1
-    I2C_BUS_NONE = I2C_BUS_MAX_NUMBER
-} i2c_bus_t;
-
-
-/**
- * @brief  Definition of SPI bus index.
- */
-typedef enum {
     SPI_BUS_0 = 0,         // SPI
     SPI_BUS_MAX = SPI_BUS_0,
     SPI_BUS_1 = 1,         // QSPI
@@ -1119,28 +1109,6 @@ typedef enum {
 ### enum spi_slave_t <a id="spi_slave_t"></a>
 
 ```c
-typedef enum {
-    HAL_SPI_DMA_CONTROL_DISABLE = 0,        //!< Disables the transmit fifo and the receive fifo dma channel.
-    HAL_SPI_DMA_CONTROL_RX_ENABLE = 1,      //!< Enables the receive fifo dma channel.
-    HAL_SPI_DMA_CONTROL_TX_ENABLE = 2,      //!< Enables the transmit fifo dma channel.
-    HAL_SPI_DMA_CONTROL_TXRX_ENABLE = 3,    //!< Enables the transmit fifo and the receive fifo dma channel.
-    HAL_SPI_DMA_CONTROL_MAX_NUM,
-    HAL_SPI_DMA_CONTROL_NONE = HAL_SPI_DMA_CONTROL_MAX_NUM,
-} hal_spi_dma_control_t;
-
-/**
- * @brief  SPI mode.
- */
-typedef enum spi_mode {
-    SPI_MODE_SLAVE,         /*!< SPI Slave mode. */
-    SPI_MODE_MASTER,        /*!< SPI Master mode. */
-    SPI_MODE_MAX_NUM,
-    SPI_MODE_NONE = SPI_MODE_MAX_NUM
-} spi_mode_t;
-
-/**
- * @brief  SPI slave select.
- */
 typedef enum spi_slave {
     SPI_SLAVE0 = 0,         /*!< SPI Slave index 0. */
     SPI_SLAVE_MAX_NUM,
