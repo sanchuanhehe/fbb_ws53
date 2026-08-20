@@ -1,6 +1,6 @@
 # ADC
 
-ADC (Analog-to-Digital Converter) 提供模拟信号到数字信号的转换能力，支持通道配置、自动扫描与手动采样等多种工作模式。ADC 一次采样需要 16 个时钟周期，采样速率 = ADC 时钟 / 16，ADC 源时钟为 2MHz。
+LSADC (Low Speed Analog-to-Digital Converter) 提供模拟信号到数字信号的转换能力。输入时钟 32MHz，12bit 分辨率，单通道采样率最大为 1Msps。共 6 个通道，支持软件配置 0～5 任意通道使能，逻辑按通道编号先低后高发起切换，完成单通道采样并完成平均值滤波后自动进行通道切换。支持 128×17bit FIFO 用于数据缓存，数据存储格式：高 3bit 为通道编号，低 14bit 为有效数据。支持对 ADC 采样数据进行平均滤波处理，平均次数支持 1（不进行平均）、2、4、8；多通道时，每个通道接收 N 个数据（平均滤波个数）再切换通道。支持 FIFO 水线中断、满中断上报，ADC 忙状态、控制器 FIFO 空满状态查询。
 
 **模块公共头文件**
 
@@ -40,9 +40,9 @@ errcode_t uapi_adc_init(adc_clock_t clock)
 
 **功能说明**
 
-- 配置 ADC 采样时钟并初始化 ADC
-- 支持四档采样时钟（500KHZ/250KHZ/125KHZ/015KHZ）配置
+- 初始化 ADC 模块
 - ADC 已完成初始化时再次调用直接返回成功
+- 初始化成功后本模块其他接口方可使用
 
 **前置条件**
 
@@ -54,7 +54,7 @@ errcode_t uapi_adc_init(adc_clock_t clock)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| clock | [adc_clock_t](#enum_adc_clock) | ADC 采样时钟，ADC 源时钟为 2MHz | [ADC_CLOCK_500KHZ](#enum_adc_clock)(0) / [ADC_CLOCK_250KHZ](#enum_adc_clock)(1) / [ADC_CLOCK_125KHZ](#enum_adc_clock)(2) / [ADC_CLOCK_015KHZ](#enum_adc_clock)(3) / [ADC_CLOCK_MAX](#enum_adc_clock)(4) / [ADC_CLOCK_NONE](#enum_adc_clock)(4) |
+| clock | [adc_clock_t](#enum_adc_clock) | 采样时钟参数。当前芯片版本上此参数不影响实际采样时钟配置 | [ADC_CLOCK_500KHZ](#enum_adc_clock)(0) / [ADC_CLOCK_250KHZ](#enum_adc_clock)(1) / [ADC_CLOCK_125KHZ](#enum_adc_clock)(2) / [ADC_CLOCK_015KHZ](#enum_adc_clock)(3) / [ADC_CLOCK_MAX](#enum_adc_clock)(4) / [ADC_CLOCK_NONE](#enum_adc_clock)(4) |
 
 **返回值**
 

@@ -145,9 +145,10 @@ int osal_event_read(osal_event *event_obj, unsigned int mask, unsigned int timeo
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 事件读取成功 |
-| [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 执行失败 | event_obj 为 NULL 或 mask 使用了 bit 31 |
-| Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
+| 非零位掩码 | 成功读取到的事件位 | 等待条件满足，返回实际读取到的事件位 |
+| 0 | 未读取到事件 | 超时或事件已被消费 |
+| [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 参数无效 | event_obj 为 NULL |
+| Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码（含 LOS_ERRTYPE_ERROR 标志） |
 
 **参考案例**
 
