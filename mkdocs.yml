@@ -225,7 +225,6 @@ nav:
           - OS 抽象层 API: zh-CN/api-reference/osal/index.md
           - Atomic: zh-CN/api-reference/osal/atomic.md
           - Debug: zh-CN/api-reference/osal/debug.md
-          - Device: zh-CN/api-reference/osal/device.md
           - Drvbox: zh-CN/api-reference/osal/drvbox.md
           - Event: zh-CN/api-reference/osal/event.md
           - File Operations: zh-CN/api-reference/osal/fileops.md
