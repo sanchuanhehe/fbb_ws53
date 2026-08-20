@@ -5,7 +5,6 @@ time 模块提供 RTC (Real-Time Clock) 时间转换与定时器管理功能，�
 **模块公共头文件**
 
 ```c
-#include "src/kernel/osal/include/time/osal_rtc.h"
 #include "src/kernel/osal/include/time/osal_timer.h"
 ```
 
@@ -13,9 +12,6 @@ time 模块提供 RTC (Real-Time Clock) 时间转换与定时器管理功能，�
 
 | 接口名称 | 功能简述 |
 | -------- | -------- |
-| [osal_rtc_time_to_tm](#osal_rtc_time_to_tm) | 将时间戳转换为 rtc_time |
-| [osal_rtc_tm_to_time](#osal_rtc_tm_to_time) | 将 rtc_time 转换为时间戳 |
-| [osal_rtc_valid_tm](#osal_rtc_valid_tm) | 校验 rtc_time 是否表示有效的日期时间 |
 | [osal_timer_init](#osal_timer_init) | 初始化定时器 |
 | [osal_timer_start](#osal_timer_start) | 启动定时器 |
 | [osal_timer_mod](#osal_timer_mod) | 修改定时器超时时间 |
@@ -35,99 +31,6 @@ time 模块提供 RTC (Real-Time Clock) 时间转换与定时器管理功能，�
 | [osal_hrtimer_destroy](#osal_hrtimer_destroy) | 删除高精度定时器 |
 
 ## Functions
-
-### osal_rtc_time_to_tm <a id="osal_rtc_time_to_tm"></a>
-
-```c
-void osal_rtc_time_to_tm(unsigned long time, osal_rtc_time *tm)
-```
-
-**声明头文件**
-
-```c
-#include "src/kernel/osal/include/time/osal_rtc.h"
-```
-
-**功能说明**
-
-- 将自 1970-01-01 00:00:00 起的秒数（时间戳）转换为格里高利日期时间
-- 转换结果通过 tm 出参返回
-- 支持 linux 和 liteos 系统
-
-**入参**
-
-| 名称 | 参数类型 | 说明 | 约束取值范围 |
-| ---- | ---- | ---- | ---- |
-| time | unsigned long | 要转换的时间戳，自 1970-01-01 00:00:00 起的秒数 | - |
-
-**出参**
-
-| 名称 | 数据类型 | 输出说明 |
-| ---- | ---- | ---- |
-| tm | [osal_rtc_time](#struct_osal_rtc_time) * | 转换得到的 rtc_time，由调用方分配内存、函数填充 |
-
-### osal_rtc_tm_to_time <a id="osal_rtc_tm_to_time"></a>
-
-```c
-void osal_rtc_tm_to_time(const osal_rtc_time *tm, unsigned long *time)
-```
-
-**声明头文件**
-
-```c
-#include "src/kernel/osal/include/time/osal_rtc.h"
-```
-
-**功能说明**
-
-- 将 rtc_time 表示的格里高利日期时间转换为自 1970-01-01 00:00:00 起的秒数（时间戳）
-- 转换结果通过 time 出参返回
-- 支持 linux 和 liteos 系统
-
-**入参**
-
-| 名称 | 参数类型 | 说明 | 约束取值范围 |
-| ---- | ---- | ---- | ---- |
-| tm | [osal_rtc_time](#struct_osal_rtc_time) * | 要转换的 rtc_time | 不为NULL |
-
-**出参**
-
-| 名称 | 数据类型 | 输出说明 |
-| ---- | ---- | ---- |
-| time | unsigned long * | 转换得到的时间戳，自 1970-01-01 00:00:00 起的秒数，由调用方分配内存、函数填充 |
-
-### osal_rtc_valid_tm <a id="osal_rtc_valid_tm"></a>
-
-```c
-int osal_rtc_valid_tm(const osal_rtc_time *tm)
-```
-
-**声明头文件**
-
-```c
-#include "src/kernel/osal/include/time/osal_rtc.h"
-```
-
-**功能说明**
-
-- 校验 rtc_time 是否表示有效的日期时间
-- 返回 OSAL_SUCCESS 表示有效，返回 OSAL_FAILURE 表示无效
-- 支持 linux 和 liteos 系统
-
-**入参**
-
-| 名称 | 参数类型 | 说明 | 约束取值范围 |
-| ---- | ---- | ---- | ---- |
-| tm | [osal_rtc_time](#struct_osal_rtc_time) * | 要校验的 rtc_time | 不为NULL |
-
-**返回值**
-
-- 返回类型：int
-
-| 返回值 | 文字含义 | 触发场景 |
-| -------- | -------- | -------- |
-| [OSAL_SUCCESS](#OSAL_SUCCESS):0 | rtc_time 表示有效的日期时间 | 校验通过 |
-| [OSAL_FAILURE](#OSAL_FAILURE):-1 | rtc_time 表示无效的日期时间 | 参数为空或校验不通过 |
 
 ### osal_timer_init <a id="osal_timer_init"></a>
 
@@ -741,36 +644,6 @@ typedef enum {
 | OSAL_HRTIMER_RESTART | 1 | 定时器需要重启 |
 
 ## Structures
-
-### osal_rtc_time <a id="struct_osal_rtc_time"></a>
-
-```c
-typedef struct {
-    int tm_sec;
-    int tm_min;
-    int tm_hour; // Eight hours less than Beijing
-    int tm_mday;
-    int tm_mon;
-    int tm_year;
-    int tm_wday;
-    int tm_yday; // 1-366
-    int tm_isdst;
-} osal_rtc_time;
-```
-
-**成员说明**
-
-| 成员名称 | 数据类型 | 描述 |
-| ------- | ------- | ---- |
-| tm_sec | int | 秒 |
-| tm_min | int | 分 |
-| tm_hour | int | 小时，比北京时间少 8 小时 |
-| tm_mday | int | 月中的日期 |
-| tm_mon | int | 月份 |
-| tm_year | int | 年份 |
-| tm_wday | int | 星期几 |
-| tm_yday | int | 年中的天数，取值范围 1-366 |
-| tm_isdst | int | 夏令时标志 |
 
 ### osal_timer <a id="struct_osal_timer"></a>
 

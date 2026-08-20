@@ -7,7 +7,6 @@ hide:
 
 - [Atomic](atomic.md) — 原子操作
 - [Debug](debug.md) — 调试接口
-- [Device](device.md) — 设备框架
 - [Drvbox](drvbox.md) — 驱动盒子
 - [Event](event.md) — 事件标志
 - [FileOps](fileops.md) — 文件操作

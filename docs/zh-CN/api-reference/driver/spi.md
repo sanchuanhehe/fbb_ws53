@@ -1122,10 +1122,75 @@ typedef enum spi_slave {
 | SPI_SLAVE_MAX_NUM | 1 | SPI 从机数量上限 |
 | SPI_SLAVE_NONE | 1 | 无效/未指定的从机编号（等同 SPI_SLAVE_MAX_NUM） |
 
+### hal_spi_cfg_frame_format_t <a id="hal_spi_cfg_frame_format_t"></a>
+
+```c
+typedef enum hal_spi_cfg_frame_format {
+    SPI_CFG_FRAME_FORMAT_MOTOROLA_SPI,
+    SPI_CFG_FRAME_FORMAT_TEXAS_SSP,
+    SPI_CFG_FRAME_FORMAT_NS_MICROWIRE,
+    SPI_CFG_FRAME_FORMAT_MAX
+} hal_spi_cfg_frame_format_t;
+```
+
+| 枚举成员 | 取值 | 描述 |
+| ------- | ---- | ---- |
+| SPI_CFG_FRAME_FORMAT_MOTOROLA_SPI | 0 | Motorola SPI 帧格式 |
+| SPI_CFG_FRAME_FORMAT_TEXAS_SSP | 1 | Texas Instruments SSP 帧格式 |
+| SPI_CFG_FRAME_FORMAT_NS_MICROWIRE | 2 | National Microwire 帧格式 |
+| SPI_CFG_FRAME_FORMAT_MAX | 3 | 配置帧格式上限值 |
+
+### hal_spi_cfg_clk_cpol_t <a id="hal_spi_cfg_clk_cpol_t"></a>
+
+```c
+typedef enum hal_spi_cfg_clk_cpol {
+    SPI_CFG_CLK_CPOL_0,
+    SPI_CFG_CLK_CPOL_1,
+    SPI_CFG_CLK_CPOL_MAX
+} hal_spi_cfg_clk_cpol_t;
+```
+
+| 枚举成员 | 取值 | 描述 |
+| ------- | ---- | ---- |
+| SPI_CFG_CLK_CPOL_0 | 0 | 串行时钟空闲状态为低电平 |
+| SPI_CFG_CLK_CPOL_1 | 1 | 串行时钟空闲状态为高电平 |
+| SPI_CFG_CLK_CPOL_MAX | 2 | 时钟极性上限值 |
+
+### hal_spi_cfg_clk_cpha_t <a id="hal_spi_cfg_clk_cpha_t"></a>
+
+```c
+typedef enum hal_spi_cfg_clk_cpha {
+    SPI_CFG_CLK_CPHA_0,
+    SPI_CFG_CLK_CPHA_1,
+    SPI_CFG_CLK_CPHA_MAX
+} hal_spi_cfg_clk_cpha_t;
+```
+
+| 枚举成员 | 取值 | 描述 |
+| ------- | ---- | ---- |
+| SPI_CFG_CLK_CPHA_0 | 0 | 串行时钟在第一个数据位中间切换 |
+| SPI_CFG_CLK_CPHA_1 | 1 | 串行时钟在第一个数据位开始时切换 |
+| SPI_CFG_CLK_CPHA_MAX | 2 | 时钟相位上限值 |
+
+### hal_spi_cfg_sste_t <a id="hal_spi_cfg_sste_t"></a>
+
+```c
+typedef enum hal_spi_cfg_sste {
+    SPI_CFG_SSTE_DISABLE,
+    SPI_CFG_SSTE_ENABLE,
+    SPI_CFG_SSTE_MAX
+} hal_spi_cfg_sste_t;
+```
+
+| 枚举成员 | 取值 | 描述 |
+| ------- | ---- | ---- |
+| SPI_CFG_SSTE_DISABLE | 0 | 不使能从机选择切换 |
+| SPI_CFG_SSTE_ENABLE | 1 | 使能从机选择切换 |
+| SPI_CFG_SSTE_MAX | 2 | 从机选择切换配置上限值 |
+
 ### hal_spi_trans_mode_t <a id="hal_spi_trans_mode_t"></a>
 
 ```c
-// 源码原始定义，无修改、无补充
 typedef enum hal_spi_trans_mode {
     HAL_SPI_TRANS_MODE_TXRX = 0,
     HAL_SPI_TRANS_MODE_TX,
@@ -1142,6 +1207,132 @@ typedef enum hal_spi_trans_mode {
 | HAL_SPI_TRANS_MODE_RX | 2 | 接收模式 |
 | HAL_SPI_TRANS_MODE_EEPROM | 3 | EEPROM 读模式 |
 | HAL_SPI_TRANS_MODE_MAX | 4 | 传输模式上限值 |
+
+### hal_spi_frame_size_t <a id="hal_spi_frame_size_t"></a>
+
+```c
+typedef enum hal_spi_frame_size {
+    HAL_SPI_FRAME_SIZE_8    = 0x07,
+    HAL_SPI_FRAME_SIZE_16   = 0x0F,
+    HAL_SPI_FRAME_SIZE_24   = 0x17,
+    HAL_SPI_FRAME_SIZE_32   = 0x1F
+} hal_spi_frame_size_t;
+```
+
+| 枚举成员 | 取值 | 描述 |
+| ------- | ---- | ---- |
+| HAL_SPI_FRAME_SIZE_8 | 0x07 | 8 位串行数据传输 |
+| HAL_SPI_FRAME_SIZE_16 | 0x0F | 16 位串行数据传输，当前暂不支持 |
+| HAL_SPI_FRAME_SIZE_24 | 0x17 | 24 位串行数据传输，当前暂不支持 |
+| HAL_SPI_FRAME_SIZE_32 | 0x1F | 32 位串行数据传输 |
+
+### hal_spi_frame_format_t <a id="hal_spi_frame_format_t"></a>
+
+```c
+typedef enum hal_spi_frame_format {
+    HAL_SPI_FRAME_FORMAT_STANDARD = 0,
+    HAL_SPI_FRAME_FORMAT_DUAL,
+    HAL_SPI_FRAME_FORMAT_QUAD,
+    HAL_SPI_FRAME_FORMAT_OCTAL,
+    HAL_SPI_FRAME_FORMAT_DOUBLE_OCTAL,
+    HAL_SPI_FRAME_FORMAT_SIXT,
+    HAL_SPI_FRAME_FORMAT_MAX_NUM,
+    HAL_SPI_FRAME_FORMAT_NONE = HAL_SPI_FRAME_FORMAT_MAX_NUM
+} hal_spi_frame_format_t;
+```
+
+| 枚举成员 | 取值 | 描述 |
+| ------- | ---- | ---- |
+| HAL_SPI_FRAME_FORMAT_STANDARD | 0 | 标准单线 SPI 帧格式 |
+| HAL_SPI_FRAME_FORMAT_DUAL | 1 | 双线 SPI 帧格式 |
+| HAL_SPI_FRAME_FORMAT_QUAD | 2 | 四线 SPI 帧格式 |
+| HAL_SPI_FRAME_FORMAT_OCTAL | 3 | 八线 SPI 帧格式 |
+| HAL_SPI_FRAME_FORMAT_DOUBLE_OCTAL | 4 | 十六线 SPI 帧格式 |
+| HAL_SPI_FRAME_FORMAT_SIXT | 5 | 保留的帧格式值 |
+| HAL_SPI_FRAME_FORMAT_MAX_NUM | 6 | SPI 帧格式数量上限 |
+| HAL_SPI_FRAME_FORMAT_NONE | 6 | 无效/未指定的 SPI 帧格式，等同 HAL_SPI_FRAME_FORMAT_MAX_NUM |
+
+### hal_spi_trans_type_t <a id="hal_spi_trans_type_t"></a>
+
+```c
+typedef enum hal_spi_trans_type {
+    HAL_SPI_TRANS_TYPE_INST_S_ADDR_S = 0,
+    HAL_SPI_TRANS_TYPE_INST_S_ADDR_Q,
+    HAL_SPI_TRANS_TYPE_INST_Q_ADDR_Q,
+    HAL_SPI_TRANS_TYPE_MAX = HAL_SPI_TRANS_TYPE_INST_Q_ADDR_Q
+} hal_spi_trans_type_t;
+```
+
+| 枚举成员 | 取值 | 描述 |
+| ------- | ---- | ---- |
+| HAL_SPI_TRANS_TYPE_INST_S_ADDR_S | 0 | 指令和地址均使用单线 SPI 传输 |
+| HAL_SPI_TRANS_TYPE_INST_S_ADDR_Q | 1 | 指令使用单线 SPI 传输，地址按照帧格式寄存器配置传输 |
+| HAL_SPI_TRANS_TYPE_INST_Q_ADDR_Q | 2 | 指令和地址均按照帧格式寄存器配置传输 |
+| HAL_SPI_TRANS_TYPE_MAX | 2 | 传输类型上限值 |
+
+### hal_spi_inst_len_t <a id="hal_spi_inst_len_t"></a>
+
+```c
+typedef enum hal_spi_inst_len {
+    HAL_SPI_INST_LEN_0 = 0,
+    HAL_SPI_INST_LEN_4,
+    HAL_SPI_INST_LEN_8,
+    HAL_SPI_INST_LEN_16,
+    HAL_SPI_INST_LEN_MAX = HAL_SPI_INST_LEN_16
+} hal_spi_inst_len_t;
+```
+
+| 枚举成员 | 取值 | 描述 |
+| ------- | ---- | ---- |
+| HAL_SPI_INST_LEN_0 | 0 | 不携带指令 |
+| HAL_SPI_INST_LEN_4 | 1 | 4 位指令 |
+| HAL_SPI_INST_LEN_8 | 2 | 8 位指令 |
+| HAL_SPI_INST_LEN_16 | 3 | 16 位指令 |
+| HAL_SPI_INST_LEN_MAX | 3 | 指令长度上限值 |
+
+### hal_spi_addr_len_t <a id="hal_spi_addr_len_t"></a>
+
+```c
+typedef enum hal_spi_addr_len {
+    HAL_SPI_ADDR_LEN_0 = 0,
+    HAL_SPI_ADDR_LEN_4,
+    HAL_SPI_ADDR_LEN_8,
+    HAL_SPI_ADDR_LEN_12,
+    HAL_SPI_ADDR_LEN_16,
+    HAL_SPI_ADDR_LEN_20,
+    HAL_SPI_ADDR_LEN_24,
+    HAL_SPI_ADDR_LEN_28,
+    HAL_SPI_ADDR_LEN_32,
+    HAL_SPI_ADDR_LEN_36,
+    HAL_SPI_ADDR_LEN_40,
+    HAL_SPI_ADDR_LEN_44,
+    HAL_SPI_ADDR_LEN_48,
+    HAL_SPI_ADDR_LEN_52,
+    HAL_SPI_ADDR_LEN_56,
+    HAL_SPI_ADDR_LEN_60,
+    HAL_SPI_ADDR_LEN_MAX = HAL_SPI_ADDR_LEN_60
+} hal_spi_addr_len_t;
+```
+
+| 枚举成员 | 取值 | 描述 |
+| ------- | ---- | ---- |
+| HAL_SPI_ADDR_LEN_0 | 0 | 0 位地址长度 |
+| HAL_SPI_ADDR_LEN_4 | 1 | 4 位地址长度 |
+| HAL_SPI_ADDR_LEN_8 | 2 | 8 位地址长度 |
+| HAL_SPI_ADDR_LEN_12 | 3 | 12 位地址长度 |
+| HAL_SPI_ADDR_LEN_16 | 4 | 16 位地址长度 |
+| HAL_SPI_ADDR_LEN_20 | 5 | 20 位地址长度 |
+| HAL_SPI_ADDR_LEN_24 | 6 | 24 位地址长度 |
+| HAL_SPI_ADDR_LEN_28 | 7 | 28 位地址长度 |
+| HAL_SPI_ADDR_LEN_32 | 8 | 32 位地址长度 |
+| HAL_SPI_ADDR_LEN_36 | 9 | 36 位地址长度 |
+| HAL_SPI_ADDR_LEN_40 | 10 | 40 位地址长度 |
+| HAL_SPI_ADDR_LEN_44 | 11 | 44 位地址长度 |
+| HAL_SPI_ADDR_LEN_48 | 12 | 48 位地址长度 |
+| HAL_SPI_ADDR_LEN_52 | 13 | 52 位地址长度 |
+| HAL_SPI_ADDR_LEN_56 | 14 | 56 位地址长度 |
+| HAL_SPI_ADDR_LEN_60 | 15 | 60 位地址长度 |
+| HAL_SPI_ADDR_LEN_MAX | 15 | 地址长度上限值 |
 
 ## Structures
 
@@ -1201,427 +1392,56 @@ typedef struct spi_crc_config {
 | rx_crc_refin | bool | 接收方向 CRC 输入值翻转配置 |
 | rx_crc_refout | bool | 接收方向 CRC 输出值翻转配置 |
 
-### struct hal_spi_attr_t <a id="hal_spi_attr_t"></a>
+### hal_spi_xfer_qspi_param_t <a id="hal_spi_xfer_qspi_param_t"></a>
 
 ```c
-typedef enum hal_spi_ctrl_id {
-    SPI_CTRL_SET_ATTR,                  /*!< @if Eng Set SPI basic attribute.
-                                             @else   设置基础参数。 @endif */
-
-    SPI_CTRL_GET_ATTR,                  /*!< @if Eng Get SPI basic attribute.
-                                             @else   获取基础参数。 @endif */
-
-    SPI_CTRL_SET_EXTRA_ATTR,            /*!< @if Eng Set SPI extral attribute.
-                                             @else   设置高级参数。 @endif */
-
-    SPI_CTRL_GET_EXTRA_ATTR,            /*!< @if Eng Get SPI extral attribute.
-                                             @else   获取高级参数。 @endif */
-
-    SPI_CTRL_SELECT_SLAVE,              /*!< @if Eng Select the slave.
-                                             @else   选择指定的设备。 @endif */
-
-    SPI_CTRL_CHECK_FIFO_BUSY,           /*!< @if Eng Check whether the SPI is busy.
-                                             @else   检查SPI是否忙碌状态。 @endif */
-#if defined(CONFIG_SPI_SUPPORT_DMA) && (CONFIG_SPI_SUPPORT_DMA == 1)
-    SPI_CTRL_SET_DMA_CFG,               /*!< @if Eng Set the DMA transfer enable/disable and datalevel.
-                                             @else   设置DMA的传输使能和数据level。 @endif */
-
-    SPI_CTRL_GET_DMA_DATA_ADDR,         /*!< @if Eng Get the DMA transfer data address.
-                                             @else   获取DMA的传输数据地址。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_DMA */
-
-#if defined(CONFIG_SPI_SUPPORT_INTERRUPT) && (CONFIG_SPI_SUPPORT_INTERRUPT == 1)
-    SPI_CTRL_EN_RXFI_INT,               /*!< @if Eng Enable the Receive FIFO full interrupt.
-                                             @else   使能RX FIFO是否已满中断。 @endif */
-
-    SPI_CTRL_CHECK_RX_FIFO_EMPTY,       /*!< @if Eng Check if rx fifo is empty or not.
-                                             @else   判断RX FIFO是否为空。 @endif */
-
-    SPI_CTRL_EN_TXEI_INT,               /*!< @if Eng Enable the transmit FIFO empty interrupt.
-                                             @else   使能TX FIFO是否为空中断。 @endif */
-
-    SPI_CTRL_CHECK_TX_FIFO_FULL,        /*!< @if Eng Check if tx fifo is full or not.
-                                             @else   判断RX FIFO是否已满。 @endif */
-
-    SPI_CTRL_EN_MULTI_MASTER_ERR_INT,   /*!< @if Eng Enable the Multi-Master contention interrupt.
-                                             @else   使能双主机竞争中断。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_INTERRUPT */
-
-#if defined(CONFIG_SPI_SUPPORT_LPM) && (CONFIG_SPI_SUPPORT_LPM == 1)
-    SPI_CTRL_SUSPEND,                   /*!< @if Eng Suspend all of the spi channels.
-                                             @else   挂起所有spi通道。 @endif */
-    SPI_CTRL_RESUME,                    /*!< @if Eng Resume all of the spi channels.
-                                             @else   挂起所有spi通道。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_LPM */
-    SPI_CTRL_SET_TMOD,                  /*!< @if Eng Set SPI transfer mode.
-                                             @else   设置SPI传输模式。 @endif */
-    SPI_CTRL_MAX,
-    SPI_CTRL_ID_INVALID = 0xFF
-} hal_spi_ctrl_id_t;
-
-/**
- * @if Eng
- * @brief  Frame Format.
- * @else
- * @brief  帧格式。
- * @endif
- */
-typedef enum hal_spi_cfg_frame_format {
-    SPI_CFG_FRAME_FORMAT_MOTOROLA_SPI,      /*!< @if Eng Motorolla SPI Frame Format.
-                                                 @else   摩托罗拉SPI帧格式。 @endif */
-
-    SPI_CFG_FRAME_FORMAT_TEXAS_SSP,         /*!< @if Eng Texas Instruments SSP Frame Format.
-                                                 @else   德州仪器SSP帧格式。 @endif */
-
-    SPI_CFG_FRAME_FORMAT_NS_MICROWIRE,      /*!< @if Eng National Microwire Frame Format.
-                                                 @else   国家微线帧格式。 @endif */
-    SPI_CFG_FRAME_FORMAT_MAX
-} hal_spi_cfg_frame_format_t;
-
-/**
- * @if Eng
- * @brief  Clock polarity.
- * @else
- * @brief  时钟极性。
- * @endif
- */
-typedef enum hal_spi_cfg_clk_cpol {
-    SPI_CFG_CLK_CPOL_0,                     /*!< @if Eng Inactive state of serial clock is low.
-                                                 @else   SPI的非激活状态为低电平。 @endif */
-
-    SPI_CFG_CLK_CPOL_1,                     /*!< @if Eng Inactive state of serial clock is high.
-                                                 @else   SPI的非激活状态为高电平。 @endif */
-    SPI_CFG_CLK_CPOL_MAX
-} hal_spi_cfg_clk_cpol_t;
-
-/**
- * @if Eng
- * @brief  Clock phase.
- * @else
- * @brief  时钟相位。
- * @endif
- */
-typedef enum hal_spi_cfg_clk_cpha {
-    SPI_CFG_CLK_CPHA_0,                     /*!< @if Eng Serial clock toggles in middle of first data bit.
-                                                 @else   SPI时钟在第一个数据位中间切换。 @endif */
-
-    SPI_CFG_CLK_CPHA_1,                     /*!< @if Eng Serial clock toggles at start of first data bit.
-                                                 @else   SPI时钟在第一个数据位开始时切换。 @endif */
-    SPI_CFG_CLK_CPHA_MAX
-} hal_spi_cfg_clk_cpha_t;
-
-/**
- * @if Eng
- * @brief  SPI slave select toggle enable.
- * @else
- * @brief  SPI 从机选择切换使能
- * @endif
- */
-typedef enum hal_spi_cfg_sste {
-    SPI_CFG_SSTE_DISABLE,                   /*!< @if Eng SPI slave select toggle disable.
-                                                         When disable, master should reed all data in slave tx_queue
-                                                         at ONE time when reading data from slave device. Otherwise,
-                                                         data loss occurs.
-                                                 @else   SPI 从机选择切换不使能。
-                                                         当此配置不使能，主机从从机读取数据时，需要一次性将从机发送
-                                                         队列中的数据读完，否则会出现丢失数据问题。@endif */
-    SPI_CFG_SSTE_ENABLE,                    /*!< @if Eng SPI slave select toggle enable.
-                                                 @else   SPI 从机选择切换使能 @endif */
-    SPI_CFG_SSTE_MAX
-} hal_spi_cfg_sste_t;
-
-/**
- * @if Eng
- * @brief  Transfer Mode.
- * @else
- * @brief  传输模式。
- * @endif
- */
-typedef enum hal_spi_trans_mode {
-    HAL_SPI_TRANS_MODE_TXRX = 0,            /*!< @if Eng Transmit and receive mode.
-                                                 @else   收发模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_TX,                  /*!< @if Eng Transmit only / Transmit mode.
-                                                 @else   发送模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_RX,                  /*!< @if Eng Receive only / Receive mode.
-                                                 @else   接收模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_EEPROM,              /*!< @if Eng EEPROM read mode.
-                                                 @else   EEPROM模式。 @endif */
-    HAL_SPI_TRANS_MODE_MAX
-} hal_spi_trans_mode_t;
-
-/**
- * @if Eng
- * @brief  Data Frame Size.
- * @else
- * @brief  数据帧长度。
- * @endif
- */
-typedef enum hal_spi_frame_size {
-    HAL_SPI_FRAME_SIZE_8    = 0x07,         /*!< @if Eng 8-bit serial data transfer.
-                                                 @else   8-位串行数据传输。 @endif */
-
-    HAL_SPI_FRAME_SIZE_16   = 0x0F,         /*!< @if Eng 16-bit serial data transfer(Not supported now).
-                                                 @else   16-位串行数据传输（暂不支持）。 @endif */
-
-    HAL_SPI_FRAME_SIZE_24   = 0x17,         /*!< @if Eng 24-bit serial data transfer(Not supported now).
-                                                 @else   24-位串行数据传输（暂不支持）。 @endif */
-
-    HAL_SPI_FRAME_SIZE_32   = 0x1F          /*!< @if Eng 32-bit serial data transfer.
-                                                 @else   32-位串行数据传输。 @endif */
-} hal_spi_frame_size_t;
-
-/**
- * @if Eng
- * @brief  SPI Frame Format.
- * @else
- * @brief  SPI数据帧格式。
- * @endif
- */
-typedef enum hal_spi_frame_format {
-    HAL_SPI_FRAME_FORMAT_STANDARD = 0,      /*!< @if Eng SPI Standard frame format.
-                                                 @else   标准的单线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_DUAL,              /*!< @if Eng SPI Dual frame format.
-                                                 @else   双线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_QUAD,              /*!< @if Eng SPI Quad frame format.
-                                                 @else   4线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_OCTAL,             /*!< @if Eng SPI Octal frame format.
-                                                 @else   8线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_DOUBLE_OCTAL,      /*!< @if Eng SPI Double Octal frame format.
-                                                 @else   16线SPI帧格式。 @endif */
-    HAL_SPI_FRAME_FORMAT_SIXT,
-    HAL_SPI_FRAME_FORMAT_MAX_NUM,
-    HAL_SPI_FRAME_FORMAT_NONE = HAL_SPI_FRAME_FORMAT_MAX_NUM
-} hal_spi_frame_format_t;
-
-/**
- * @if Eng
- * @brief  SPI Transfer Types.
- * @else
- * @brief  SPI传输类型。
- * @endif
- */
-typedef enum hal_spi_trans_type {
-    HAL_SPI_TRANS_TYPE_INST_S_ADDR_S = 0,   /*!< @if Eng Instruction and Address will be sent in standard SPI mode.
-                                                 @else   指令和地址使用单线SPI传输。 @endif */
-
-    HAL_SPI_TRANS_TYPE_INST_S_ADDR_Q,       /*!< @if Eng Instruction will be sent in standard mode and address will
-                                                         be sent in mode specified by frame format register.
-                                                 @else   指令使用单线SPI传输，
-                                                         地址按照帧格式寄存器的配置传输。 @endif */
-
-    HAL_SPI_TRANS_TYPE_INST_Q_ADDR_Q,       /*!< @if Eng Both instruction and address will be sent in
-                                                         the mode specified by frame format register.
-                                                 @else   指令和地址都按照帧格式寄存器的配置传输。 @endif */
-    HAL_SPI_TRANS_TYPE_MAX = HAL_SPI_TRANS_TYPE_INST_Q_ADDR_Q
-} hal_spi_trans_type_t;
-
-/**
- * @if Eng
- * @brief  SPI length of instruction.
- * @else
- * @brief  SPI指令长度定义。
- * @endif
- */
-typedef enum hal_spi_inst_len {
-    HAL_SPI_INST_LEN_0 = 0,                 /*!< @if Eng 0-bit (no instruction).
-                                                 @else   不携带指令。 @endif */
-
-    HAL_SPI_INST_LEN_4,                     /*!< @if Eng 4-bit instruction.
-                                                 @else   4-位指令。 @endif */
-
-    HAL_SPI_INST_LEN_8,                     /*!< @if Eng 8-bit instruction.
-                                                 @else   8-位指令。 @endif */
-
-    HAL_SPI_INST_LEN_16,                    /*!< @if Eng 16-bit instruction.
-                                                 @else   16-位指令。 @endif */
-    HAL_SPI_INST_LEN_MAX = HAL_SPI_INST_LEN_16
-} hal_spi_inst_len_t;
-
-/**
- * @if Eng
- * @brief  SPI length of address.
- * @else
- * @brief  SPI地址长度定义。
- * @endif
- */
-typedef enum hal_spi_addr_len {
-    HAL_SPI_ADDR_LEN_0 = 0,                 /*!< @if Eng 0-bit address length.
-                                                 @else   0-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_4,                     /*!< @if Eng 4-bit address length.
-                                                 @else   4-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_8,                     /*!< @if Eng 8-bit address length.
-                                                 @else   8-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_12,                    /*!< @if Eng 12-bit address length.
-                                                 @else   12-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_16,                    /*!< @if Eng 16-bit address length.
-                                                 @else   16-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_20,                    /*!< @if Eng 20-bit address length.
-                                                 @else   20-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_24,                    /*!< @if Eng 24-bit address length.
-                                                 @else   24-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_28,                    /*!< @if Eng 28-bit address length.
-                                                 @else   28-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_32,                    /*!< @if Eng 32-bit address length.
-                                                 @else   32-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_36,                    /*!< @if Eng 36-bit address length.
-                                                 @else   36-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_40,                    /*!< @if Eng 40-bit address length.
-                                                 @else   40-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_44,                    /*!< @if Eng 44-bit address length.
-                                                 @else   44-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_48,                    /*!< @if Eng 48-bit address length.
-                                                 @else   48-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_52,                    /*!< @if Eng 52-bit address length.
-                                                 @else   52-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_56,                    /*!< @if Eng 56-bit address length.
-                                                 @else   56-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_60,                    /*!< @if Eng 60-bit address length.
-                                                 @else   60-位地址长度。 @endif */
-    HAL_SPI_ADDR_LEN_MAX = HAL_SPI_ADDR_LEN_60
-} hal_spi_addr_len_t;
-
-/**
- * @if Eng
- * @brief  Definition of the event ID of hal spi.
- * @else
- * @brief  HAL层SPI事件ID的定义
- * @endif
- */
-typedef enum hal_spi_evt_id {
-    SPI_EVT_RX_FULL_ISR,           /*!< @if Eng Rx full isr triggered.
-                                        @else   接收满中断触发 @endif */
-    SPI_EVT_RX_OVERFLOW_ISR,       /*!< @if Eng Rx overflow isr triggered.
-                                        @else   接收溢出中断触发 @endif */
-    SPI_EVT_RX_UNDERFLOW_ISR,      /*!< @if Eng Rx underflow isr triggered.
-                                        @else   接收空读中断触发 @endif */
-    SPI_EVT_TX_EMPTY_ISR,          /*!< @if Eng Tx empty isr triggered.
-                                        @else   TX空中断被触发 @endif */
-    SPI_EVT_TX_OVERFLOW_ISR,       /*!< @if Eng Tx overflow isr triggered.
-                                        @else   TX溢出中断被触发 @endif */
-    SPI_EVT_MULTI_MASTER_ISR       /*!< @if Eng Multi-master contention isr triggered.
-                                        @else   双主机竞争中断被触发 @endif */
-} hal_spi_evt_id_t;
-
-/**
- * @if Eng
- * @brief  QSPI parameters of SPI transfer.
- * @else
- * @brief  SPI传输中QSPI的参数。
- * @endif
- */
 typedef struct hal_spi_xfer_qspi_param {
-    hal_spi_trans_type_t trans_type;  /*!< @if Eng SPI frame format for instruction and address.
-                                           @else   传输类型，用于指定指令和地址的长度。 @endif */
-
-    hal_spi_inst_len_t   inst_len;    /*!< @if Eng Instruction length, support 0, 4, 8, 16bits.
-                                           @else   指令长度，支持0、4、8、16位。 @endif */
-
-    hal_spi_addr_len_t   addr_len;    /*!< @if Eng Address length, support 0, 8, 16, 24, 32bits.
-                                           @else   地址长度，支持0、8、16、24、32位。 @endif */
-
-    uint32_t             wait_cycles; /*!< @if Eng Indicates the wait cycles.
-                                           @else   等待的周期数。 @endif */
+    hal_spi_trans_type_t trans_type;
+    hal_spi_inst_len_t   inst_len;
+    hal_spi_addr_len_t   addr_len;
+    uint32_t             wait_cycles;
 } hal_spi_xfer_qspi_param_t;
+```
 
-/**
- * @if Eng
- * @brief  Single SPI parameters of SPI transfer.
- * @else
- * @brief  SPI传输中Single SPI的参数。
- * @endif
- */
+**成员说明**
+
+| 成员名称 | 数据类型 | 描述 |
+| ------- | ------- | ---- |
+| trans_type | hal_spi_trans_type_t | 传输类型，用于指定指令和地址的传输方式 |
+| inst_len | hal_spi_inst_len_t | 指令长度，支持 0、4、8、16 位 |
+| addr_len | hal_spi_addr_len_t | 地址长度，支持 0、8、16、24、32 位 |
+| wait_cycles | uint32_t | 等待的周期数 |
+
+### hal_spi_xfer_sspi_param_t <a id="hal_spi_xfer_sspi_param_t"></a>
+
+```c
 typedef struct hal_spi_xfer_sspi_param {
-    uint32_t             wait_cycles; /*!< @if Eng Indicates the wait cycles.
-                                           @else   等待的周期数。 @endif */
+    uint32_t             wait_cycles;
 } hal_spi_xfer_sspi_param_t;
+```
 
-/**
- * @if Eng
- * @brief  Definition of SPI basic attributes.
- * @else
- * @brief  SPI基础配置参数定义。
- * @endif
- */
+**成员说明**
+
+| 成员名称 | 数据类型 | 描述 |
+| ------- | ------- | ---- |
+| wait_cycles | uint32_t | 等待的周期数 |
+
+### hal_spi_attr_t <a id="hal_spi_attr_t"></a>
+
+```c
 typedef struct hal_spi_attr {
-    bool is_slave;                      /*!< @if Eng Indicates if SPI work in slave mode or not.
-                                             @else   SPI工作在Master/Slave模式。 @endif */
-
-    uint32_t slave_num;                 /*!< @if Eng Index when selecting a slave.
-                                                     - 0: Not select.
-                                                     - 1: slave index 0.
-                                                     - 2: slave index 1.
-                                                     - ...
-                                             @else   选择从机时的索引
-                                                     - 0：不选择。
-                                                     - 1：从机索引0。
-                                                     - 2：从机索引1。
-                                                     - ...
-                                             @endif */
-
-    uint32_t bus_clk;                   /*!< @if Eng Provide ssi_clk for clock freq division calculation.
-                                             @else   用于计算SPI的时钟分频系数。 @endif */
-
-    uint32_t freq_mhz;                  /*!< @if Eng Indicates the frequency of SPI.
-                                             @else   SPI的工作频率。 @endif */
-
-    uint32_t clk_polarity;              /*!< @if Eng Indicates the clock polarity of SPI.
-                                                     For details, see @ref hal_spi_cfg_clk_cpol_t
-                                             @else   SPI的时钟极性。参考 @ref hal_spi_cfg_clk_cpol_t @endif */
-
-    uint32_t clk_phase;                 /*!< @if Eng Indicates the clock phase of SPI.
-                                                     For details, see @ref hal_spi_cfg_clk_cpha_t
-                                             @else   SPI的时钟相位。参考 @ref hal_spi_cfg_clk_cpha_t @endif */
-
-    uint32_t frame_format;              /*!< @if Eng Indicates the which serial protocol transfers the data.
-                                                     For details, see @ref hal_spi_cfg_frame_format_t
-                                             @else   选择串行传输的协议。参考 @ref hal_spi_cfg_frame_format_t @endif */
-
-    uint32_t spi_frame_format;          /*!< @if Eng Indicates the frame format of SPI.
-                                                     For details, see @ref hal_spi_frame_format_t
-                                             @else   SPI的帧格式。参考 @ref hal_spi_frame_format_t @endif */
-
-    uint32_t frame_size;                /*!< @if Eng Indicates the frame size of SPI.
-                                                     For details, see @ref hal_spi_frame_size_t
-                                             @else   SPI的帧长度。参考 @ref hal_spi_frame_size_t @endif */
-
-    uint32_t tmod;                      /*!< @if Eng Indicates the transfer mode.
-                                                     For details, see @ref hal_spi_trans_mode_t
-                                             @else   SPI的传输模式。参考 @ref hal_spi_trans_mode_t @endif */
-
-    uint32_t ndf;                       /*!< @if Eng Indicates the number of data frames.
-                                             @else   SPI的数据帧数。 @endif */
-
-    uint32_t sste;                      /*!< @if Eng Indicates if SPI slave select toggle enable or not.
-                                                     When disable, master should reed all data in slave tx_queue
-                                                     at ONE time when reading data from slave device. Otherwise,
-                                                     data loss occurs.
-                                                     For details, see @ref hal_spi_cfg_sste_t
-                                             @else   SPI从机选择切换使能/不使能。
-                                                     当此配置不使能，主机从从机读取数据时，需要一次性将从机发送
-                                                     队列中的数据读完，否则会出现丢失数据问题。
-                                                     参考 @ref hal_spi_cfg_sste_t @endif */
+    bool is_slave;
+    uint32_t slave_num;
+    uint32_t bus_clk;
+    uint32_t freq_mhz;
+    uint32_t clk_polarity;
+    uint32_t clk_phase;
+    uint32_t frame_format;
+    uint32_t spi_frame_format;
+    uint32_t frame_size;
+    uint32_t tmod;
+    uint32_t ndf;
+    uint32_t sste;
 } hal_spi_attr_t;
 ```
 
@@ -1629,461 +1449,27 @@ typedef struct hal_spi_attr {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| is_slave | bool | SPI 工作模式（true 为从机模式，false 为主机模式） |
-| slave_num | uint32_t | 选择从机时的索引（0 表示不选择，1 表示从机索引 0，依此类推） |
-| bus_clk | uint32_t | 用于计算 SPI 时钟分频系数的时钟 |
+| is_slave | bool | SPI 工作模式，true 表示从机模式，false 表示主机模式 |
+| slave_num | uint32_t | 选择从机时的索引，0 表示不选择，1 表示从机索引 0，2 表示从机索引 1，依此类推 |
+| bus_clk | uint32_t | 用于计算 SPI 时钟分频系数的输入时钟 |
 | freq_mhz | uint32_t | SPI 的工作频率 |
-| clk_polarity | uint32_t | SPI 的时钟极性 |
-| clk_phase | uint32_t | SPI 的时钟相位 |
-| frame_format | uint32_t | 选择的串行传输协议 |
-| spi_frame_format | uint32_t | SPI 的帧格式 |
-| frame_size | uint32_t | SPI 的帧大小 |
-| tmod | uint32_t | SPI 的传输模式 |
-| ndf | uint32_t | 接收数据帧的数量 |
-| sste | uint32_t | 从机片选翻转是否使能 |
+| clk_polarity | uint32_t | SPI 的时钟极性，取值参考 [hal_spi_cfg_clk_cpol_t](#hal_spi_cfg_clk_cpol_t) |
+| clk_phase | uint32_t | SPI 的时钟相位，取值参考 [hal_spi_cfg_clk_cpha_t](#hal_spi_cfg_clk_cpha_t) |
+| frame_format | uint32_t | 串行传输协议，取值参考 [hal_spi_cfg_frame_format_t](#hal_spi_cfg_frame_format_t) |
+| spi_frame_format | uint32_t | SPI 帧格式，取值参考 [hal_spi_frame_format_t](#hal_spi_frame_format_t) |
+| frame_size | uint32_t | SPI 帧长度，取值参考 [hal_spi_frame_size_t](#hal_spi_frame_size_t) |
+| tmod | uint32_t | SPI 传输模式，取值参考 [hal_spi_trans_mode_t](#hal_spi_trans_mode_t) |
+| ndf | uint32_t | SPI 的数据帧数 |
+| sste | uint32_t | SPI 从机选择切换使能配置，取值参考 [hal_spi_cfg_sste_t](#hal_spi_cfg_sste_t) |
 
-### struct hal_spi_extra_attr_t <a id="hal_spi_extra_attr_t"></a>
+### hal_spi_extra_attr_t <a id="hal_spi_extra_attr_t"></a>
 
 ```c
-typedef enum hal_spi_ctrl_id {
-    SPI_CTRL_SET_ATTR,                  /*!< @if Eng Set SPI basic attribute.
-                                             @else   设置基础参数。 @endif */
-
-    SPI_CTRL_GET_ATTR,                  /*!< @if Eng Get SPI basic attribute.
-                                             @else   获取基础参数。 @endif */
-
-    SPI_CTRL_SET_EXTRA_ATTR,            /*!< @if Eng Set SPI extral attribute.
-                                             @else   设置高级参数。 @endif */
-
-    SPI_CTRL_GET_EXTRA_ATTR,            /*!< @if Eng Get SPI extral attribute.
-                                             @else   获取高级参数。 @endif */
-
-    SPI_CTRL_SELECT_SLAVE,              /*!< @if Eng Select the slave.
-                                             @else   选择指定的设备。 @endif */
-
-    SPI_CTRL_CHECK_FIFO_BUSY,           /*!< @if Eng Check whether the SPI is busy.
-                                             @else   检查SPI是否忙碌状态。 @endif */
-#if defined(CONFIG_SPI_SUPPORT_DMA) && (CONFIG_SPI_SUPPORT_DMA == 1)
-    SPI_CTRL_SET_DMA_CFG,               /*!< @if Eng Set the DMA transfer enable/disable and datalevel.
-                                             @else   设置DMA的传输使能和数据level。 @endif */
-
-    SPI_CTRL_GET_DMA_DATA_ADDR,         /*!< @if Eng Get the DMA transfer data address.
-                                             @else   获取DMA的传输数据地址。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_DMA */
-
-#if defined(CONFIG_SPI_SUPPORT_INTERRUPT) && (CONFIG_SPI_SUPPORT_INTERRUPT == 1)
-    SPI_CTRL_EN_RXFI_INT,               /*!< @if Eng Enable the Receive FIFO full interrupt.
-                                             @else   使能RX FIFO是否已满中断。 @endif */
-
-    SPI_CTRL_CHECK_RX_FIFO_EMPTY,       /*!< @if Eng Check if rx fifo is empty or not.
-                                             @else   判断RX FIFO是否为空。 @endif */
-
-    SPI_CTRL_EN_TXEI_INT,               /*!< @if Eng Enable the transmit FIFO empty interrupt.
-                                             @else   使能TX FIFO是否为空中断。 @endif */
-
-    SPI_CTRL_CHECK_TX_FIFO_FULL,        /*!< @if Eng Check if tx fifo is full or not.
-                                             @else   判断RX FIFO是否已满。 @endif */
-
-    SPI_CTRL_EN_MULTI_MASTER_ERR_INT,   /*!< @if Eng Enable the Multi-Master contention interrupt.
-                                             @else   使能双主机竞争中断。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_INTERRUPT */
-
-#if defined(CONFIG_SPI_SUPPORT_LPM) && (CONFIG_SPI_SUPPORT_LPM == 1)
-    SPI_CTRL_SUSPEND,                   /*!< @if Eng Suspend all of the spi channels.
-                                             @else   挂起所有spi通道。 @endif */
-    SPI_CTRL_RESUME,                    /*!< @if Eng Resume all of the spi channels.
-                                             @else   挂起所有spi通道。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_LPM */
-    SPI_CTRL_SET_TMOD,                  /*!< @if Eng Set SPI transfer mode.
-                                             @else   设置SPI传输模式。 @endif */
-    SPI_CTRL_MAX,
-    SPI_CTRL_ID_INVALID = 0xFF
-} hal_spi_ctrl_id_t;
-
-/**
- * @if Eng
- * @brief  Frame Format.
- * @else
- * @brief  帧格式。
- * @endif
- */
-typedef enum hal_spi_cfg_frame_format {
-    SPI_CFG_FRAME_FORMAT_MOTOROLA_SPI,      /*!< @if Eng Motorolla SPI Frame Format.
-                                                 @else   摩托罗拉SPI帧格式。 @endif */
-
-    SPI_CFG_FRAME_FORMAT_TEXAS_SSP,         /*!< @if Eng Texas Instruments SSP Frame Format.
-                                                 @else   德州仪器SSP帧格式。 @endif */
-
-    SPI_CFG_FRAME_FORMAT_NS_MICROWIRE,      /*!< @if Eng National Microwire Frame Format.
-                                                 @else   国家微线帧格式。 @endif */
-    SPI_CFG_FRAME_FORMAT_MAX
-} hal_spi_cfg_frame_format_t;
-
-/**
- * @if Eng
- * @brief  Clock polarity.
- * @else
- * @brief  时钟极性。
- * @endif
- */
-typedef enum hal_spi_cfg_clk_cpol {
-    SPI_CFG_CLK_CPOL_0,                     /*!< @if Eng Inactive state of serial clock is low.
-                                                 @else   SPI的非激活状态为低电平。 @endif */
-
-    SPI_CFG_CLK_CPOL_1,                     /*!< @if Eng Inactive state of serial clock is high.
-                                                 @else   SPI的非激活状态为高电平。 @endif */
-    SPI_CFG_CLK_CPOL_MAX
-} hal_spi_cfg_clk_cpol_t;
-
-/**
- * @if Eng
- * @brief  Clock phase.
- * @else
- * @brief  时钟相位。
- * @endif
- */
-typedef enum hal_spi_cfg_clk_cpha {
-    SPI_CFG_CLK_CPHA_0,                     /*!< @if Eng Serial clock toggles in middle of first data bit.
-                                                 @else   SPI时钟在第一个数据位中间切换。 @endif */
-
-    SPI_CFG_CLK_CPHA_1,                     /*!< @if Eng Serial clock toggles at start of first data bit.
-                                                 @else   SPI时钟在第一个数据位开始时切换。 @endif */
-    SPI_CFG_CLK_CPHA_MAX
-} hal_spi_cfg_clk_cpha_t;
-
-/**
- * @if Eng
- * @brief  SPI slave select toggle enable.
- * @else
- * @brief  SPI 从机选择切换使能
- * @endif
- */
-typedef enum hal_spi_cfg_sste {
-    SPI_CFG_SSTE_DISABLE,                   /*!< @if Eng SPI slave select toggle disable.
-                                                         When disable, master should reed all data in slave tx_queue
-                                                         at ONE time when reading data from slave device. Otherwise,
-                                                         data loss occurs.
-                                                 @else   SPI 从机选择切换不使能。
-                                                         当此配置不使能，主机从从机读取数据时，需要一次性将从机发送
-                                                         队列中的数据读完，否则会出现丢失数据问题。@endif */
-    SPI_CFG_SSTE_ENABLE,                    /*!< @if Eng SPI slave select toggle enable.
-                                                 @else   SPI 从机选择切换使能 @endif */
-    SPI_CFG_SSTE_MAX
-} hal_spi_cfg_sste_t;
-
-/**
- * @if Eng
- * @brief  Transfer Mode.
- * @else
- * @brief  传输模式。
- * @endif
- */
-typedef enum hal_spi_trans_mode {
-    HAL_SPI_TRANS_MODE_TXRX = 0,            /*!< @if Eng Transmit and receive mode.
-                                                 @else   收发模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_TX,                  /*!< @if Eng Transmit only / Transmit mode.
-                                                 @else   发送模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_RX,                  /*!< @if Eng Receive only / Receive mode.
-                                                 @else   接收模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_EEPROM,              /*!< @if Eng EEPROM read mode.
-                                                 @else   EEPROM模式。 @endif */
-    HAL_SPI_TRANS_MODE_MAX
-} hal_spi_trans_mode_t;
-
-/**
- * @if Eng
- * @brief  Data Frame Size.
- * @else
- * @brief  数据帧长度。
- * @endif
- */
-typedef enum hal_spi_frame_size {
-    HAL_SPI_FRAME_SIZE_8    = 0x07,         /*!< @if Eng 8-bit serial data transfer.
-                                                 @else   8-位串行数据传输。 @endif */
-
-    HAL_SPI_FRAME_SIZE_16   = 0x0F,         /*!< @if Eng 16-bit serial data transfer(Not supported now).
-                                                 @else   16-位串行数据传输（暂不支持）。 @endif */
-
-    HAL_SPI_FRAME_SIZE_24   = 0x17,         /*!< @if Eng 24-bit serial data transfer(Not supported now).
-                                                 @else   24-位串行数据传输（暂不支持）。 @endif */
-
-    HAL_SPI_FRAME_SIZE_32   = 0x1F          /*!< @if Eng 32-bit serial data transfer.
-                                                 @else   32-位串行数据传输。 @endif */
-} hal_spi_frame_size_t;
-
-/**
- * @if Eng
- * @brief  SPI Frame Format.
- * @else
- * @brief  SPI数据帧格式。
- * @endif
- */
-typedef enum hal_spi_frame_format {
-    HAL_SPI_FRAME_FORMAT_STANDARD = 0,      /*!< @if Eng SPI Standard frame format.
-                                                 @else   标准的单线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_DUAL,              /*!< @if Eng SPI Dual frame format.
-                                                 @else   双线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_QUAD,              /*!< @if Eng SPI Quad frame format.
-                                                 @else   4线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_OCTAL,             /*!< @if Eng SPI Octal frame format.
-                                                 @else   8线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_DOUBLE_OCTAL,      /*!< @if Eng SPI Double Octal frame format.
-                                                 @else   16线SPI帧格式。 @endif */
-    HAL_SPI_FRAME_FORMAT_SIXT,
-    HAL_SPI_FRAME_FORMAT_MAX_NUM,
-    HAL_SPI_FRAME_FORMAT_NONE = HAL_SPI_FRAME_FORMAT_MAX_NUM
-} hal_spi_frame_format_t;
-
-/**
- * @if Eng
- * @brief  SPI Transfer Types.
- * @else
- * @brief  SPI传输类型。
- * @endif
- */
-typedef enum hal_spi_trans_type {
-    HAL_SPI_TRANS_TYPE_INST_S_ADDR_S = 0,   /*!< @if Eng Instruction and Address will be sent in standard SPI mode.
-                                                 @else   指令和地址使用单线SPI传输。 @endif */
-
-    HAL_SPI_TRANS_TYPE_INST_S_ADDR_Q,       /*!< @if Eng Instruction will be sent in standard mode and address will
-                                                         be sent in mode specified by frame format register.
-                                                 @else   指令使用单线SPI传输，
-                                                         地址按照帧格式寄存器的配置传输。 @endif */
-
-    HAL_SPI_TRANS_TYPE_INST_Q_ADDR_Q,       /*!< @if Eng Both instruction and address will be sent in
-                                                         the mode specified by frame format register.
-                                                 @else   指令和地址都按照帧格式寄存器的配置传输。 @endif */
-    HAL_SPI_TRANS_TYPE_MAX = HAL_SPI_TRANS_TYPE_INST_Q_ADDR_Q
-} hal_spi_trans_type_t;
-
-/**
- * @if Eng
- * @brief  SPI length of instruction.
- * @else
- * @brief  SPI指令长度定义。
- * @endif
- */
-typedef enum hal_spi_inst_len {
-    HAL_SPI_INST_LEN_0 = 0,                 /*!< @if Eng 0-bit (no instruction).
-                                                 @else   不携带指令。 @endif */
-
-    HAL_SPI_INST_LEN_4,                     /*!< @if Eng 4-bit instruction.
-                                                 @else   4-位指令。 @endif */
-
-    HAL_SPI_INST_LEN_8,                     /*!< @if Eng 8-bit instruction.
-                                                 @else   8-位指令。 @endif */
-
-    HAL_SPI_INST_LEN_16,                    /*!< @if Eng 16-bit instruction.
-                                                 @else   16-位指令。 @endif */
-    HAL_SPI_INST_LEN_MAX = HAL_SPI_INST_LEN_16
-} hal_spi_inst_len_t;
-
-/**
- * @if Eng
- * @brief  SPI length of address.
- * @else
- * @brief  SPI地址长度定义。
- * @endif
- */
-typedef enum hal_spi_addr_len {
-    HAL_SPI_ADDR_LEN_0 = 0,                 /*!< @if Eng 0-bit address length.
-                                                 @else   0-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_4,                     /*!< @if Eng 4-bit address length.
-                                                 @else   4-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_8,                     /*!< @if Eng 8-bit address length.
-                                                 @else   8-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_12,                    /*!< @if Eng 12-bit address length.
-                                                 @else   12-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_16,                    /*!< @if Eng 16-bit address length.
-                                                 @else   16-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_20,                    /*!< @if Eng 20-bit address length.
-                                                 @else   20-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_24,                    /*!< @if Eng 24-bit address length.
-                                                 @else   24-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_28,                    /*!< @if Eng 28-bit address length.
-                                                 @else   28-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_32,                    /*!< @if Eng 32-bit address length.
-                                                 @else   32-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_36,                    /*!< @if Eng 36-bit address length.
-                                                 @else   36-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_40,                    /*!< @if Eng 40-bit address length.
-                                                 @else   40-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_44,                    /*!< @if Eng 44-bit address length.
-                                                 @else   44-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_48,                    /*!< @if Eng 48-bit address length.
-                                                 @else   48-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_52,                    /*!< @if Eng 52-bit address length.
-                                                 @else   52-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_56,                    /*!< @if Eng 56-bit address length.
-                                                 @else   56-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_60,                    /*!< @if Eng 60-bit address length.
-                                                 @else   60-位地址长度。 @endif */
-    HAL_SPI_ADDR_LEN_MAX = HAL_SPI_ADDR_LEN_60
-} hal_spi_addr_len_t;
-
-/**
- * @if Eng
- * @brief  Definition of the event ID of hal spi.
- * @else
- * @brief  HAL层SPI事件ID的定义
- * @endif
- */
-typedef enum hal_spi_evt_id {
-    SPI_EVT_RX_FULL_ISR,           /*!< @if Eng Rx full isr triggered.
-                                        @else   接收满中断触发 @endif */
-    SPI_EVT_RX_OVERFLOW_ISR,       /*!< @if Eng Rx overflow isr triggered.
-                                        @else   接收溢出中断触发 @endif */
-    SPI_EVT_RX_UNDERFLOW_ISR,      /*!< @if Eng Rx underflow isr triggered.
-                                        @else   接收空读中断触发 @endif */
-    SPI_EVT_TX_EMPTY_ISR,          /*!< @if Eng Tx empty isr triggered.
-                                        @else   TX空中断被触发 @endif */
-    SPI_EVT_TX_OVERFLOW_ISR,       /*!< @if Eng Tx overflow isr triggered.
-                                        @else   TX溢出中断被触发 @endif */
-    SPI_EVT_MULTI_MASTER_ISR       /*!< @if Eng Multi-master contention isr triggered.
-                                        @else   双主机竞争中断被触发 @endif */
-} hal_spi_evt_id_t;
-
-/**
- * @if Eng
- * @brief  QSPI parameters of SPI transfer.
- * @else
- * @brief  SPI传输中QSPI的参数。
- * @endif
- */
-typedef struct hal_spi_xfer_qspi_param {
-    hal_spi_trans_type_t trans_type;  /*!< @if Eng SPI frame format for instruction and address.
-                                           @else   传输类型，用于指定指令和地址的长度。 @endif */
-
-    hal_spi_inst_len_t   inst_len;    /*!< @if Eng Instruction length, support 0, 4, 8, 16bits.
-                                           @else   指令长度，支持0、4、8、16位。 @endif */
-
-    hal_spi_addr_len_t   addr_len;    /*!< @if Eng Address length, support 0, 8, 16, 24, 32bits.
-                                           @else   地址长度，支持0、8、16、24、32位。 @endif */
-
-    uint32_t             wait_cycles; /*!< @if Eng Indicates the wait cycles.
-                                           @else   等待的周期数。 @endif */
-} hal_spi_xfer_qspi_param_t;
-
-/**
- * @if Eng
- * @brief  Single SPI parameters of SPI transfer.
- * @else
- * @brief  SPI传输中Single SPI的参数。
- * @endif
- */
-typedef struct hal_spi_xfer_sspi_param {
-    uint32_t             wait_cycles; /*!< @if Eng Indicates the wait cycles.
-                                           @else   等待的周期数。 @endif */
-} hal_spi_xfer_sspi_param_t;
-
-/**
- * @if Eng
- * @brief  Definition of SPI basic attributes.
- * @else
- * @brief  SPI基础配置参数定义。
- * @endif
- */
-typedef struct hal_spi_attr {
-    bool is_slave;                      /*!< @if Eng Indicates if SPI work in slave mode or not.
-                                             @else   SPI工作在Master/Slave模式。 @endif */
-
-    uint32_t slave_num;                 /*!< @if Eng Index when selecting a slave.
-                                                     - 0: Not select.
-                                                     - 1: slave index 0.
-                                                     - 2: slave index 1.
-                                                     - ...
-                                             @else   选择从机时的索引
-                                                     - 0：不选择。
-                                                     - 1：从机索引0。
-                                                     - 2：从机索引1。
-                                                     - ...
-                                             @endif */
-
-    uint32_t bus_clk;                   /*!< @if Eng Provide ssi_clk for clock freq division calculation.
-                                             @else   用于计算SPI的时钟分频系数。 @endif */
-
-    uint32_t freq_mhz;                  /*!< @if Eng Indicates the frequency of SPI.
-                                             @else   SPI的工作频率。 @endif */
-
-    uint32_t clk_polarity;              /*!< @if Eng Indicates the clock polarity of SPI.
-                                                     For details, see @ref hal_spi_cfg_clk_cpol_t
-                                             @else   SPI的时钟极性。参考 @ref hal_spi_cfg_clk_cpol_t @endif */
-
-    uint32_t clk_phase;                 /*!< @if Eng Indicates the clock phase of SPI.
-                                                     For details, see @ref hal_spi_cfg_clk_cpha_t
-                                             @else   SPI的时钟相位。参考 @ref hal_spi_cfg_clk_cpha_t @endif */
-
-    uint32_t frame_format;              /*!< @if Eng Indicates the which serial protocol transfers the data.
-                                                     For details, see @ref hal_spi_cfg_frame_format_t
-                                             @else   选择串行传输的协议。参考 @ref hal_spi_cfg_frame_format_t @endif */
-
-    uint32_t spi_frame_format;          /*!< @if Eng Indicates the frame format of SPI.
-                                                     For details, see @ref hal_spi_frame_format_t
-                                             @else   SPI的帧格式。参考 @ref hal_spi_frame_format_t @endif */
-
-    uint32_t frame_size;                /*!< @if Eng Indicates the frame size of SPI.
-                                                     For details, see @ref hal_spi_frame_size_t
-                                             @else   SPI的帧长度。参考 @ref hal_spi_frame_size_t @endif */
-
-    uint32_t tmod;                      /*!< @if Eng Indicates the transfer mode.
-                                                     For details, see @ref hal_spi_trans_mode_t
-                                             @else   SPI的传输模式。参考 @ref hal_spi_trans_mode_t @endif */
-
-    uint32_t ndf;                       /*!< @if Eng Indicates the number of data frames.
-                                             @else   SPI的数据帧数。 @endif */
-
-    uint32_t sste;                      /*!< @if Eng Indicates if SPI slave select toggle enable or not.
-                                                     When disable, master should reed all data in slave tx_queue
-                                                     at ONE time when reading data from slave device. Otherwise,
-                                                     data loss occurs.
-                                                     For details, see @ref hal_spi_cfg_sste_t
-                                             @else   SPI从机选择切换使能/不使能。
-                                                     当此配置不使能，主机从从机读取数据时，需要一次性将从机发送
-                                                     队列中的数据读完，否则会出现丢失数据问题。
-                                                     参考 @ref hal_spi_cfg_sste_t @endif */
-} hal_spi_attr_t;
-
-/**
- * @if Eng
- * @brief  Definition of SPI extra attributes.
- * @else
- * @brief  SPI扩展配置参数定义。
- * @endif
- */
 typedef struct hal_spi_extra_attr {
-    bool tx_use_dma;                        /*!< @if Eng Indicates if SPI use dma or not in TX.
-                                                 @else   SPI是否使用DMA发送数据。 @endif */
-
-    bool rx_use_dma;                        /*!< @if Eng Indicates if SPI use dma or not in RX.
-                                                 @else   SPI是否使用DMA接收数据。 @endif */
-
-    hal_spi_xfer_qspi_param_t qspi_param;   /*!< @if Eng Indicates the qspi parameters.
-                                                 @else   QSPI参数。 @endif */
-
-    hal_spi_xfer_sspi_param_t sspi_param;   /*!< @if Eng Indicates the single spi parameters.
-                                                 @else   Single SPI参数。 @endif */
+    bool tx_use_dma;
+    bool rx_use_dma;
+    hal_spi_xfer_qspi_param_t qspi_param;
+    hal_spi_xfer_sspi_param_t sspi_param;
 } hal_spi_extra_attr_t;
 ```
 
@@ -2096,490 +1482,17 @@ typedef struct hal_spi_extra_attr {
 | qspi_param | hal_spi_xfer_qspi_param_t | QSPI 参数 |
 | sspi_param | hal_spi_xfer_sspi_param_t | Single SPI 参数 |
 
-### struct hal_spi_xfer_data_t <a id="hal_spi_xfer_data_t"></a>
+### hal_spi_xfer_data_t <a id="hal_spi_xfer_data_t"></a>
 
 ```c
-typedef enum hal_spi_ctrl_id {
-    SPI_CTRL_SET_ATTR,                  /*!< @if Eng Set SPI basic attribute.
-                                             @else   设置基础参数。 @endif */
-
-    SPI_CTRL_GET_ATTR,                  /*!< @if Eng Get SPI basic attribute.
-                                             @else   获取基础参数。 @endif */
-
-    SPI_CTRL_SET_EXTRA_ATTR,            /*!< @if Eng Set SPI extral attribute.
-                                             @else   设置高级参数。 @endif */
-
-    SPI_CTRL_GET_EXTRA_ATTR,            /*!< @if Eng Get SPI extral attribute.
-                                             @else   获取高级参数。 @endif */
-
-    SPI_CTRL_SELECT_SLAVE,              /*!< @if Eng Select the slave.
-                                             @else   选择指定的设备。 @endif */
-
-    SPI_CTRL_CHECK_FIFO_BUSY,           /*!< @if Eng Check whether the SPI is busy.
-                                             @else   检查SPI是否忙碌状态。 @endif */
-#if defined(CONFIG_SPI_SUPPORT_DMA) && (CONFIG_SPI_SUPPORT_DMA == 1)
-    SPI_CTRL_SET_DMA_CFG,               /*!< @if Eng Set the DMA transfer enable/disable and datalevel.
-                                             @else   设置DMA的传输使能和数据level。 @endif */
-
-    SPI_CTRL_GET_DMA_DATA_ADDR,         /*!< @if Eng Get the DMA transfer data address.
-                                             @else   获取DMA的传输数据地址。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_DMA */
-
-#if defined(CONFIG_SPI_SUPPORT_INTERRUPT) && (CONFIG_SPI_SUPPORT_INTERRUPT == 1)
-    SPI_CTRL_EN_RXFI_INT,               /*!< @if Eng Enable the Receive FIFO full interrupt.
-                                             @else   使能RX FIFO是否已满中断。 @endif */
-
-    SPI_CTRL_CHECK_RX_FIFO_EMPTY,       /*!< @if Eng Check if rx fifo is empty or not.
-                                             @else   判断RX FIFO是否为空。 @endif */
-
-    SPI_CTRL_EN_TXEI_INT,               /*!< @if Eng Enable the transmit FIFO empty interrupt.
-                                             @else   使能TX FIFO是否为空中断。 @endif */
-
-    SPI_CTRL_CHECK_TX_FIFO_FULL,        /*!< @if Eng Check if tx fifo is full or not.
-                                             @else   判断RX FIFO是否已满。 @endif */
-
-    SPI_CTRL_EN_MULTI_MASTER_ERR_INT,   /*!< @if Eng Enable the Multi-Master contention interrupt.
-                                             @else   使能双主机竞争中断。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_INTERRUPT */
-
-#if defined(CONFIG_SPI_SUPPORT_LPM) && (CONFIG_SPI_SUPPORT_LPM == 1)
-    SPI_CTRL_SUSPEND,                   /*!< @if Eng Suspend all of the spi channels.
-                                             @else   挂起所有spi通道。 @endif */
-    SPI_CTRL_RESUME,                    /*!< @if Eng Resume all of the spi channels.
-                                             @else   挂起所有spi通道。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_LPM */
-    SPI_CTRL_SET_TMOD,                  /*!< @if Eng Set SPI transfer mode.
-                                             @else   设置SPI传输模式。 @endif */
-    SPI_CTRL_MAX,
-    SPI_CTRL_ID_INVALID = 0xFF
-} hal_spi_ctrl_id_t;
-
-/**
- * @if Eng
- * @brief  Frame Format.
- * @else
- * @brief  帧格式。
- * @endif
- */
-typedef enum hal_spi_cfg_frame_format {
-    SPI_CFG_FRAME_FORMAT_MOTOROLA_SPI,      /*!< @if Eng Motorolla SPI Frame Format.
-                                                 @else   摩托罗拉SPI帧格式。 @endif */
-
-    SPI_CFG_FRAME_FORMAT_TEXAS_SSP,         /*!< @if Eng Texas Instruments SSP Frame Format.
-                                                 @else   德州仪器SSP帧格式。 @endif */
-
-    SPI_CFG_FRAME_FORMAT_NS_MICROWIRE,      /*!< @if Eng National Microwire Frame Format.
-                                                 @else   国家微线帧格式。 @endif */
-    SPI_CFG_FRAME_FORMAT_MAX
-} hal_spi_cfg_frame_format_t;
-
-/**
- * @if Eng
- * @brief  Clock polarity.
- * @else
- * @brief  时钟极性。
- * @endif
- */
-typedef enum hal_spi_cfg_clk_cpol {
-    SPI_CFG_CLK_CPOL_0,                     /*!< @if Eng Inactive state of serial clock is low.
-                                                 @else   SPI的非激活状态为低电平。 @endif */
-
-    SPI_CFG_CLK_CPOL_1,                     /*!< @if Eng Inactive state of serial clock is high.
-                                                 @else   SPI的非激活状态为高电平。 @endif */
-    SPI_CFG_CLK_CPOL_MAX
-} hal_spi_cfg_clk_cpol_t;
-
-/**
- * @if Eng
- * @brief  Clock phase.
- * @else
- * @brief  时钟相位。
- * @endif
- */
-typedef enum hal_spi_cfg_clk_cpha {
-    SPI_CFG_CLK_CPHA_0,                     /*!< @if Eng Serial clock toggles in middle of first data bit.
-                                                 @else   SPI时钟在第一个数据位中间切换。 @endif */
-
-    SPI_CFG_CLK_CPHA_1,                     /*!< @if Eng Serial clock toggles at start of first data bit.
-                                                 @else   SPI时钟在第一个数据位开始时切换。 @endif */
-    SPI_CFG_CLK_CPHA_MAX
-} hal_spi_cfg_clk_cpha_t;
-
-/**
- * @if Eng
- * @brief  SPI slave select toggle enable.
- * @else
- * @brief  SPI 从机选择切换使能
- * @endif
- */
-typedef enum hal_spi_cfg_sste {
-    SPI_CFG_SSTE_DISABLE,                   /*!< @if Eng SPI slave select toggle disable.
-                                                         When disable, master should reed all data in slave tx_queue
-                                                         at ONE time when reading data from slave device. Otherwise,
-                                                         data loss occurs.
-                                                 @else   SPI 从机选择切换不使能。
-                                                         当此配置不使能，主机从从机读取数据时，需要一次性将从机发送
-                                                         队列中的数据读完，否则会出现丢失数据问题。@endif */
-    SPI_CFG_SSTE_ENABLE,                    /*!< @if Eng SPI slave select toggle enable.
-                                                 @else   SPI 从机选择切换使能 @endif */
-    SPI_CFG_SSTE_MAX
-} hal_spi_cfg_sste_t;
-
-/**
- * @if Eng
- * @brief  Transfer Mode.
- * @else
- * @brief  传输模式。
- * @endif
- */
-typedef enum hal_spi_trans_mode {
-    HAL_SPI_TRANS_MODE_TXRX = 0,            /*!< @if Eng Transmit and receive mode.
-                                                 @else   收发模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_TX,                  /*!< @if Eng Transmit only / Transmit mode.
-                                                 @else   发送模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_RX,                  /*!< @if Eng Receive only / Receive mode.
-                                                 @else   接收模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_EEPROM,              /*!< @if Eng EEPROM read mode.
-                                                 @else   EEPROM模式。 @endif */
-    HAL_SPI_TRANS_MODE_MAX
-} hal_spi_trans_mode_t;
-
-/**
- * @if Eng
- * @brief  Data Frame Size.
- * @else
- * @brief  数据帧长度。
- * @endif
- */
-typedef enum hal_spi_frame_size {
-    HAL_SPI_FRAME_SIZE_8    = 0x07,         /*!< @if Eng 8-bit serial data transfer.
-                                                 @else   8-位串行数据传输。 @endif */
-
-    HAL_SPI_FRAME_SIZE_16   = 0x0F,         /*!< @if Eng 16-bit serial data transfer(Not supported now).
-                                                 @else   16-位串行数据传输（暂不支持）。 @endif */
-
-    HAL_SPI_FRAME_SIZE_24   = 0x17,         /*!< @if Eng 24-bit serial data transfer(Not supported now).
-                                                 @else   24-位串行数据传输（暂不支持）。 @endif */
-
-    HAL_SPI_FRAME_SIZE_32   = 0x1F          /*!< @if Eng 32-bit serial data transfer.
-                                                 @else   32-位串行数据传输。 @endif */
-} hal_spi_frame_size_t;
-
-/**
- * @if Eng
- * @brief  SPI Frame Format.
- * @else
- * @brief  SPI数据帧格式。
- * @endif
- */
-typedef enum hal_spi_frame_format {
-    HAL_SPI_FRAME_FORMAT_STANDARD = 0,      /*!< @if Eng SPI Standard frame format.
-                                                 @else   标准的单线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_DUAL,              /*!< @if Eng SPI Dual frame format.
-                                                 @else   双线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_QUAD,              /*!< @if Eng SPI Quad frame format.
-                                                 @else   4线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_OCTAL,             /*!< @if Eng SPI Octal frame format.
-                                                 @else   8线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_DOUBLE_OCTAL,      /*!< @if Eng SPI Double Octal frame format.
-                                                 @else   16线SPI帧格式。 @endif */
-    HAL_SPI_FRAME_FORMAT_SIXT,
-    HAL_SPI_FRAME_FORMAT_MAX_NUM,
-    HAL_SPI_FRAME_FORMAT_NONE = HAL_SPI_FRAME_FORMAT_MAX_NUM
-} hal_spi_frame_format_t;
-
-/**
- * @if Eng
- * @brief  SPI Transfer Types.
- * @else
- * @brief  SPI传输类型。
- * @endif
- */
-typedef enum hal_spi_trans_type {
-    HAL_SPI_TRANS_TYPE_INST_S_ADDR_S = 0,   /*!< @if Eng Instruction and Address will be sent in standard SPI mode.
-                                                 @else   指令和地址使用单线SPI传输。 @endif */
-
-    HAL_SPI_TRANS_TYPE_INST_S_ADDR_Q,       /*!< @if Eng Instruction will be sent in standard mode and address will
-                                                         be sent in mode specified by frame format register.
-                                                 @else   指令使用单线SPI传输，
-                                                         地址按照帧格式寄存器的配置传输。 @endif */
-
-    HAL_SPI_TRANS_TYPE_INST_Q_ADDR_Q,       /*!< @if Eng Both instruction and address will be sent in
-                                                         the mode specified by frame format register.
-                                                 @else   指令和地址都按照帧格式寄存器的配置传输。 @endif */
-    HAL_SPI_TRANS_TYPE_MAX = HAL_SPI_TRANS_TYPE_INST_Q_ADDR_Q
-} hal_spi_trans_type_t;
-
-/**
- * @if Eng
- * @brief  SPI length of instruction.
- * @else
- * @brief  SPI指令长度定义。
- * @endif
- */
-typedef enum hal_spi_inst_len {
-    HAL_SPI_INST_LEN_0 = 0,                 /*!< @if Eng 0-bit (no instruction).
-                                                 @else   不携带指令。 @endif */
-
-    HAL_SPI_INST_LEN_4,                     /*!< @if Eng 4-bit instruction.
-                                                 @else   4-位指令。 @endif */
-
-    HAL_SPI_INST_LEN_8,                     /*!< @if Eng 8-bit instruction.
-                                                 @else   8-位指令。 @endif */
-
-    HAL_SPI_INST_LEN_16,                    /*!< @if Eng 16-bit instruction.
-                                                 @else   16-位指令。 @endif */
-    HAL_SPI_INST_LEN_MAX = HAL_SPI_INST_LEN_16
-} hal_spi_inst_len_t;
-
-/**
- * @if Eng
- * @brief  SPI length of address.
- * @else
- * @brief  SPI地址长度定义。
- * @endif
- */
-typedef enum hal_spi_addr_len {
-    HAL_SPI_ADDR_LEN_0 = 0,                 /*!< @if Eng 0-bit address length.
-                                                 @else   0-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_4,                     /*!< @if Eng 4-bit address length.
-                                                 @else   4-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_8,                     /*!< @if Eng 8-bit address length.
-                                                 @else   8-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_12,                    /*!< @if Eng 12-bit address length.
-                                                 @else   12-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_16,                    /*!< @if Eng 16-bit address length.
-                                                 @else   16-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_20,                    /*!< @if Eng 20-bit address length.
-                                                 @else   20-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_24,                    /*!< @if Eng 24-bit address length.
-                                                 @else   24-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_28,                    /*!< @if Eng 28-bit address length.
-                                                 @else   28-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_32,                    /*!< @if Eng 32-bit address length.
-                                                 @else   32-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_36,                    /*!< @if Eng 36-bit address length.
-                                                 @else   36-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_40,                    /*!< @if Eng 40-bit address length.
-                                                 @else   40-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_44,                    /*!< @if Eng 44-bit address length.
-                                                 @else   44-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_48,                    /*!< @if Eng 48-bit address length.
-                                                 @else   48-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_52,                    /*!< @if Eng 52-bit address length.
-                                                 @else   52-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_56,                    /*!< @if Eng 56-bit address length.
-                                                 @else   56-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_60,                    /*!< @if Eng 60-bit address length.
-                                                 @else   60-位地址长度。 @endif */
-    HAL_SPI_ADDR_LEN_MAX = HAL_SPI_ADDR_LEN_60
-} hal_spi_addr_len_t;
-
-/**
- * @if Eng
- * @brief  Definition of the event ID of hal spi.
- * @else
- * @brief  HAL层SPI事件ID的定义
- * @endif
- */
-typedef enum hal_spi_evt_id {
-    SPI_EVT_RX_FULL_ISR,           /*!< @if Eng Rx full isr triggered.
-                                        @else   接收满中断触发 @endif */
-    SPI_EVT_RX_OVERFLOW_ISR,       /*!< @if Eng Rx overflow isr triggered.
-                                        @else   接收溢出中断触发 @endif */
-    SPI_EVT_RX_UNDERFLOW_ISR,      /*!< @if Eng Rx underflow isr triggered.
-                                        @else   接收空读中断触发 @endif */
-    SPI_EVT_TX_EMPTY_ISR,          /*!< @if Eng Tx empty isr triggered.
-                                        @else   TX空中断被触发 @endif */
-    SPI_EVT_TX_OVERFLOW_ISR,       /*!< @if Eng Tx overflow isr triggered.
-                                        @else   TX溢出中断被触发 @endif */
-    SPI_EVT_MULTI_MASTER_ISR       /*!< @if Eng Multi-master contention isr triggered.
-                                        @else   双主机竞争中断被触发 @endif */
-} hal_spi_evt_id_t;
-
-/**
- * @if Eng
- * @brief  QSPI parameters of SPI transfer.
- * @else
- * @brief  SPI传输中QSPI的参数。
- * @endif
- */
-typedef struct hal_spi_xfer_qspi_param {
-    hal_spi_trans_type_t trans_type;  /*!< @if Eng SPI frame format for instruction and address.
-                                           @else   传输类型，用于指定指令和地址的长度。 @endif */
-
-    hal_spi_inst_len_t   inst_len;    /*!< @if Eng Instruction length, support 0, 4, 8, 16bits.
-                                           @else   指令长度，支持0、4、8、16位。 @endif */
-
-    hal_spi_addr_len_t   addr_len;    /*!< @if Eng Address length, support 0, 8, 16, 24, 32bits.
-                                           @else   地址长度，支持0、8、16、24、32位。 @endif */
-
-    uint32_t             wait_cycles; /*!< @if Eng Indicates the wait cycles.
-                                           @else   等待的周期数。 @endif */
-} hal_spi_xfer_qspi_param_t;
-
-/**
- * @if Eng
- * @brief  Single SPI parameters of SPI transfer.
- * @else
- * @brief  SPI传输中Single SPI的参数。
- * @endif
- */
-typedef struct hal_spi_xfer_sspi_param {
-    uint32_t             wait_cycles; /*!< @if Eng Indicates the wait cycles.
-                                           @else   等待的周期数。 @endif */
-} hal_spi_xfer_sspi_param_t;
-
-/**
- * @if Eng
- * @brief  Definition of SPI basic attributes.
- * @else
- * @brief  SPI基础配置参数定义。
- * @endif
- */
-typedef struct hal_spi_attr {
-    bool is_slave;                      /*!< @if Eng Indicates if SPI work in slave mode or not.
-                                             @else   SPI工作在Master/Slave模式。 @endif */
-
-    uint32_t slave_num;                 /*!< @if Eng Index when selecting a slave.
-                                                     - 0: Not select.
-                                                     - 1: slave index 0.
-                                                     - 2: slave index 1.
-                                                     - ...
-                                             @else   选择从机时的索引
-                                                     - 0：不选择。
-                                                     - 1：从机索引0。
-                                                     - 2：从机索引1。
-                                                     - ...
-                                             @endif */
-
-    uint32_t bus_clk;                   /*!< @if Eng Provide ssi_clk for clock freq division calculation.
-                                             @else   用于计算SPI的时钟分频系数。 @endif */
-
-    uint32_t freq_mhz;                  /*!< @if Eng Indicates the frequency of SPI.
-                                             @else   SPI的工作频率。 @endif */
-
-    uint32_t clk_polarity;              /*!< @if Eng Indicates the clock polarity of SPI.
-                                                     For details, see @ref hal_spi_cfg_clk_cpol_t
-                                             @else   SPI的时钟极性。参考 @ref hal_spi_cfg_clk_cpol_t @endif */
-
-    uint32_t clk_phase;                 /*!< @if Eng Indicates the clock phase of SPI.
-                                                     For details, see @ref hal_spi_cfg_clk_cpha_t
-                                             @else   SPI的时钟相位。参考 @ref hal_spi_cfg_clk_cpha_t @endif */
-
-    uint32_t frame_format;              /*!< @if Eng Indicates the which serial protocol transfers the data.
-                                                     For details, see @ref hal_spi_cfg_frame_format_t
-                                             @else   选择串行传输的协议。参考 @ref hal_spi_cfg_frame_format_t @endif */
-
-    uint32_t spi_frame_format;          /*!< @if Eng Indicates the frame format of SPI.
-                                                     For details, see @ref hal_spi_frame_format_t
-                                             @else   SPI的帧格式。参考 @ref hal_spi_frame_format_t @endif */
-
-    uint32_t frame_size;                /*!< @if Eng Indicates the frame size of SPI.
-                                                     For details, see @ref hal_spi_frame_size_t
-                                             @else   SPI的帧长度。参考 @ref hal_spi_frame_size_t @endif */
-
-    uint32_t tmod;                      /*!< @if Eng Indicates the transfer mode.
-                                                     For details, see @ref hal_spi_trans_mode_t
-                                             @else   SPI的传输模式。参考 @ref hal_spi_trans_mode_t @endif */
-
-    uint32_t ndf;                       /*!< @if Eng Indicates the number of data frames.
-                                             @else   SPI的数据帧数。 @endif */
-
-    uint32_t sste;                      /*!< @if Eng Indicates if SPI slave select toggle enable or not.
-                                                     When disable, master should reed all data in slave tx_queue
-                                                     at ONE time when reading data from slave device. Otherwise,
-                                                     data loss occurs.
-                                                     For details, see @ref hal_spi_cfg_sste_t
-                                             @else   SPI从机选择切换使能/不使能。
-                                                     当此配置不使能，主机从从机读取数据时，需要一次性将从机发送
-                                                     队列中的数据读完，否则会出现丢失数据问题。
-                                                     参考 @ref hal_spi_cfg_sste_t @endif */
-} hal_spi_attr_t;
-
-/**
- * @if Eng
- * @brief  Definition of SPI extra attributes.
- * @else
- * @brief  SPI扩展配置参数定义。
- * @endif
- */
-typedef struct hal_spi_extra_attr {
-    bool tx_use_dma;                        /*!< @if Eng Indicates if SPI use dma or not in TX.
-                                                 @else   SPI是否使用DMA发送数据。 @endif */
-
-    bool rx_use_dma;                        /*!< @if Eng Indicates if SPI use dma or not in RX.
-                                                 @else   SPI是否使用DMA接收数据。 @endif */
-
-    hal_spi_xfer_qspi_param_t qspi_param;   /*!< @if Eng Indicates the qspi parameters.
-                                                 @else   QSPI参数。 @endif */
-
-    hal_spi_xfer_sspi_param_t sspi_param;   /*!< @if Eng Indicates the single spi parameters.
-                                                 @else   Single SPI参数。 @endif */
-} hal_spi_extra_attr_t;
-
-/**
- * @if Eng
- * @brief  SPI transfer data structure.
- * @else
- * @brief  SPI传输结构体。
- * @endif
- */
 typedef struct hal_spi_xfer_data {
-    uint8_t *tx_buff;       /*!< @if Eng Buff to send data through tx fifo.
-                                 @else   通过tx fifo发送数据的Buff。 @endif */
-    uint32_t tx_bytes;      /*!< @if Eng Bytes of data need to send. For details, see @ref hal_spi_attr_t.frame_size.
-                                         when frame_size is HAL_SPI_FRAME_SIZE_8, The value must be a multiple of 1.
-                                         when frame_size is HAL_SPI_FRAME_SIZE_16, The value must be a multiple of 2.
-                                         when frame_size is HAL_SPI_FRAME_SIZE_24, The value must be a multiple of 3.
-                                         when frame_size is HAL_SPI_FRAME_SIZE_32, The value must be a multiple of 4.
-                                 @else   发送数据的个数。参考 @ref hal_spi_attr_t.frame_size.
-                                         如果frame_size为HAL_SPI_FRAME_SIZE_8，则需设定为1的倍数
-                                         如果frame_size为HAL_SPI_FRAME_SIZE_16，则需设定为2的倍数
-                                         如果frame_size为HAL_SPI_FRAME_SIZE_24，则需设定为3的倍数
-                                         如果frame_size为HAL_SPI_FRAME_SIZE_32，则需设定为4的倍数
-                                 @endif */
-    uint8_t *rx_buff;       /*!< @if Eng Buff to receive data from rx fifo.
-                                 @else   通过rx fifo接收数据的Buff。 @endif */
-    uint32_t rx_bytes;      /*!< @if Eng Bytes of data need to receive, For details, see @ref hal_spi_attr_t.frame_size.
-                                         when frame_size is HAL_SPI_FRAME_SIZE_8, The value must be a multiple of 1.
-                                         when frame_size is HAL_SPI_FRAME_SIZE_16, The value must be a multiple of 2.
-                                         when frame_size is HAL_SPI_FRAME_SIZE_24, The value must be a multiple of 3.
-                                         when frame_size is HAL_SPI_FRAME_SIZE_32, The value must be a multiple of 4.
-                                 @else   接收数据的个数。参考 @ref hal_spi_attr_t.frame_size.
-                                         如果frame_size为HAL_SPI_FRAME_SIZE_8，则需设定为1的倍数
-                                         如果frame_size为HAL_SPI_FRAME_SIZE_16，则需设定为2的倍数
-                                         如果frame_size为HAL_SPI_FRAME_SIZE_24，则需设定为3的倍数
-                                         如果frame_size为HAL_SPI_FRAME_SIZE_32，则需设定为4的倍数
-                                 @endif */
-    uint8_t cmd;            /*!< @if Eng Command for QSPI mode.
-                                 @else   QSPI模式下的命令。 @endif */
-    uint8_t reserved[3];    /*!< @if Eng Reserved.
-                                 @else   保留。 @endif */
-    uint32_t addr;          /*!< @if Eng Address for QSPI mode.
-                                 @else   QSPI模式下的地址。 @endif */
+    uint8_t *tx_buff;
+    uint32_t tx_bytes;
+    uint8_t *rx_buff;
+    uint32_t rx_bytes;
+    uint8_t cmd;
+    uint8_t reserved[3];
+    uint32_t addr;
 } hal_spi_xfer_data_t;
 ```
 
@@ -2588,729 +1501,12 @@ typedef struct hal_spi_xfer_data {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | tx_buff | uint8_t * | 通过 TX FIFO 发送数据的缓冲区 |
-| tx_bytes | uint32_t | 发送数据的字节数（须为帧大小对应字节数的整数倍） |
-| rx_buff | uint8_t * | 从 RX FIFO 接收数据的缓冲区 |
-| rx_bytes | uint32_t | 接收数据的字节数（须为帧大小对应字节数的整数倍） |
-| cmd | uint8_t | QSPI 模式的指令 |
-| reserved | uint8_t[3] | 保留 |
-| addr | uint32_t | QSPI 模式的地址 |
-
-### struct hal_spi_xfer_qspi_param_t <a id="hal_spi_xfer_qspi_param_t"></a>
-
-```c
-typedef enum hal_spi_ctrl_id {
-    SPI_CTRL_SET_ATTR,                  /*!< @if Eng Set SPI basic attribute.
-                                             @else   设置基础参数。 @endif */
-
-    SPI_CTRL_GET_ATTR,                  /*!< @if Eng Get SPI basic attribute.
-                                             @else   获取基础参数。 @endif */
-
-    SPI_CTRL_SET_EXTRA_ATTR,            /*!< @if Eng Set SPI extral attribute.
-                                             @else   设置高级参数。 @endif */
-
-    SPI_CTRL_GET_EXTRA_ATTR,            /*!< @if Eng Get SPI extral attribute.
-                                             @else   获取高级参数。 @endif */
-
-    SPI_CTRL_SELECT_SLAVE,              /*!< @if Eng Select the slave.
-                                             @else   选择指定的设备。 @endif */
-
-    SPI_CTRL_CHECK_FIFO_BUSY,           /*!< @if Eng Check whether the SPI is busy.
-                                             @else   检查SPI是否忙碌状态。 @endif */
-#if defined(CONFIG_SPI_SUPPORT_DMA) && (CONFIG_SPI_SUPPORT_DMA == 1)
-    SPI_CTRL_SET_DMA_CFG,               /*!< @if Eng Set the DMA transfer enable/disable and datalevel.
-                                             @else   设置DMA的传输使能和数据level。 @endif */
-
-    SPI_CTRL_GET_DMA_DATA_ADDR,         /*!< @if Eng Get the DMA transfer data address.
-                                             @else   获取DMA的传输数据地址。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_DMA */
-
-#if defined(CONFIG_SPI_SUPPORT_INTERRUPT) && (CONFIG_SPI_SUPPORT_INTERRUPT == 1)
-    SPI_CTRL_EN_RXFI_INT,               /*!< @if Eng Enable the Receive FIFO full interrupt.
-                                             @else   使能RX FIFO是否已满中断。 @endif */
-
-    SPI_CTRL_CHECK_RX_FIFO_EMPTY,       /*!< @if Eng Check if rx fifo is empty or not.
-                                             @else   判断RX FIFO是否为空。 @endif */
-
-    SPI_CTRL_EN_TXEI_INT,               /*!< @if Eng Enable the transmit FIFO empty interrupt.
-                                             @else   使能TX FIFO是否为空中断。 @endif */
-
-    SPI_CTRL_CHECK_TX_FIFO_FULL,        /*!< @if Eng Check if tx fifo is full or not.
-                                             @else   判断RX FIFO是否已满。 @endif */
-
-    SPI_CTRL_EN_MULTI_MASTER_ERR_INT,   /*!< @if Eng Enable the Multi-Master contention interrupt.
-                                             @else   使能双主机竞争中断。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_INTERRUPT */
-
-#if defined(CONFIG_SPI_SUPPORT_LPM) && (CONFIG_SPI_SUPPORT_LPM == 1)
-    SPI_CTRL_SUSPEND,                   /*!< @if Eng Suspend all of the spi channels.
-                                             @else   挂起所有spi通道。 @endif */
-    SPI_CTRL_RESUME,                    /*!< @if Eng Resume all of the spi channels.
-                                             @else   挂起所有spi通道。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_LPM */
-    SPI_CTRL_SET_TMOD,                  /*!< @if Eng Set SPI transfer mode.
-                                             @else   设置SPI传输模式。 @endif */
-    SPI_CTRL_MAX,
-    SPI_CTRL_ID_INVALID = 0xFF
-} hal_spi_ctrl_id_t;
-
-/**
- * @if Eng
- * @brief  Frame Format.
- * @else
- * @brief  帧格式。
- * @endif
- */
-typedef enum hal_spi_cfg_frame_format {
-    SPI_CFG_FRAME_FORMAT_MOTOROLA_SPI,      /*!< @if Eng Motorolla SPI Frame Format.
-                                                 @else   摩托罗拉SPI帧格式。 @endif */
-
-    SPI_CFG_FRAME_FORMAT_TEXAS_SSP,         /*!< @if Eng Texas Instruments SSP Frame Format.
-                                                 @else   德州仪器SSP帧格式。 @endif */
-
-    SPI_CFG_FRAME_FORMAT_NS_MICROWIRE,      /*!< @if Eng National Microwire Frame Format.
-                                                 @else   国家微线帧格式。 @endif */
-    SPI_CFG_FRAME_FORMAT_MAX
-} hal_spi_cfg_frame_format_t;
-
-/**
- * @if Eng
- * @brief  Clock polarity.
- * @else
- * @brief  时钟极性。
- * @endif
- */
-typedef enum hal_spi_cfg_clk_cpol {
-    SPI_CFG_CLK_CPOL_0,                     /*!< @if Eng Inactive state of serial clock is low.
-                                                 @else   SPI的非激活状态为低电平。 @endif */
-
-    SPI_CFG_CLK_CPOL_1,                     /*!< @if Eng Inactive state of serial clock is high.
-                                                 @else   SPI的非激活状态为高电平。 @endif */
-    SPI_CFG_CLK_CPOL_MAX
-} hal_spi_cfg_clk_cpol_t;
-
-/**
- * @if Eng
- * @brief  Clock phase.
- * @else
- * @brief  时钟相位。
- * @endif
- */
-typedef enum hal_spi_cfg_clk_cpha {
-    SPI_CFG_CLK_CPHA_0,                     /*!< @if Eng Serial clock toggles in middle of first data bit.
-                                                 @else   SPI时钟在第一个数据位中间切换。 @endif */
-
-    SPI_CFG_CLK_CPHA_1,                     /*!< @if Eng Serial clock toggles at start of first data bit.
-                                                 @else   SPI时钟在第一个数据位开始时切换。 @endif */
-    SPI_CFG_CLK_CPHA_MAX
-} hal_spi_cfg_clk_cpha_t;
-
-/**
- * @if Eng
- * @brief  SPI slave select toggle enable.
- * @else
- * @brief  SPI 从机选择切换使能
- * @endif
- */
-typedef enum hal_spi_cfg_sste {
-    SPI_CFG_SSTE_DISABLE,                   /*!< @if Eng SPI slave select toggle disable.
-                                                         When disable, master should reed all data in slave tx_queue
-                                                         at ONE time when reading data from slave device. Otherwise,
-                                                         data loss occurs.
-                                                 @else   SPI 从机选择切换不使能。
-                                                         当此配置不使能，主机从从机读取数据时，需要一次性将从机发送
-                                                         队列中的数据读完，否则会出现丢失数据问题。@endif */
-    SPI_CFG_SSTE_ENABLE,                    /*!< @if Eng SPI slave select toggle enable.
-                                                 @else   SPI 从机选择切换使能 @endif */
-    SPI_CFG_SSTE_MAX
-} hal_spi_cfg_sste_t;
-
-/**
- * @if Eng
- * @brief  Transfer Mode.
- * @else
- * @brief  传输模式。
- * @endif
- */
-typedef enum hal_spi_trans_mode {
-    HAL_SPI_TRANS_MODE_TXRX = 0,            /*!< @if Eng Transmit and receive mode.
-                                                 @else   收发模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_TX,                  /*!< @if Eng Transmit only / Transmit mode.
-                                                 @else   发送模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_RX,                  /*!< @if Eng Receive only / Receive mode.
-                                                 @else   接收模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_EEPROM,              /*!< @if Eng EEPROM read mode.
-                                                 @else   EEPROM模式。 @endif */
-    HAL_SPI_TRANS_MODE_MAX
-} hal_spi_trans_mode_t;
-
-/**
- * @if Eng
- * @brief  Data Frame Size.
- * @else
- * @brief  数据帧长度。
- * @endif
- */
-typedef enum hal_spi_frame_size {
-    HAL_SPI_FRAME_SIZE_8    = 0x07,         /*!< @if Eng 8-bit serial data transfer.
-                                                 @else   8-位串行数据传输。 @endif */
-
-    HAL_SPI_FRAME_SIZE_16   = 0x0F,         /*!< @if Eng 16-bit serial data transfer(Not supported now).
-                                                 @else   16-位串行数据传输（暂不支持）。 @endif */
-
-    HAL_SPI_FRAME_SIZE_24   = 0x17,         /*!< @if Eng 24-bit serial data transfer(Not supported now).
-                                                 @else   24-位串行数据传输（暂不支持）。 @endif */
-
-    HAL_SPI_FRAME_SIZE_32   = 0x1F          /*!< @if Eng 32-bit serial data transfer.
-                                                 @else   32-位串行数据传输。 @endif */
-} hal_spi_frame_size_t;
-
-/**
- * @if Eng
- * @brief  SPI Frame Format.
- * @else
- * @brief  SPI数据帧格式。
- * @endif
- */
-typedef enum hal_spi_frame_format {
-    HAL_SPI_FRAME_FORMAT_STANDARD = 0,      /*!< @if Eng SPI Standard frame format.
-                                                 @else   标准的单线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_DUAL,              /*!< @if Eng SPI Dual frame format.
-                                                 @else   双线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_QUAD,              /*!< @if Eng SPI Quad frame format.
-                                                 @else   4线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_OCTAL,             /*!< @if Eng SPI Octal frame format.
-                                                 @else   8线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_DOUBLE_OCTAL,      /*!< @if Eng SPI Double Octal frame format.
-                                                 @else   16线SPI帧格式。 @endif */
-    HAL_SPI_FRAME_FORMAT_SIXT,
-    HAL_SPI_FRAME_FORMAT_MAX_NUM,
-    HAL_SPI_FRAME_FORMAT_NONE = HAL_SPI_FRAME_FORMAT_MAX_NUM
-} hal_spi_frame_format_t;
-
-/**
- * @if Eng
- * @brief  SPI Transfer Types.
- * @else
- * @brief  SPI传输类型。
- * @endif
- */
-typedef enum hal_spi_trans_type {
-    HAL_SPI_TRANS_TYPE_INST_S_ADDR_S = 0,   /*!< @if Eng Instruction and Address will be sent in standard SPI mode.
-                                                 @else   指令和地址使用单线SPI传输。 @endif */
-
-    HAL_SPI_TRANS_TYPE_INST_S_ADDR_Q,       /*!< @if Eng Instruction will be sent in standard mode and address will
-                                                         be sent in mode specified by frame format register.
-                                                 @else   指令使用单线SPI传输，
-                                                         地址按照帧格式寄存器的配置传输。 @endif */
-
-    HAL_SPI_TRANS_TYPE_INST_Q_ADDR_Q,       /*!< @if Eng Both instruction and address will be sent in
-                                                         the mode specified by frame format register.
-                                                 @else   指令和地址都按照帧格式寄存器的配置传输。 @endif */
-    HAL_SPI_TRANS_TYPE_MAX = HAL_SPI_TRANS_TYPE_INST_Q_ADDR_Q
-} hal_spi_trans_type_t;
-
-/**
- * @if Eng
- * @brief  SPI length of instruction.
- * @else
- * @brief  SPI指令长度定义。
- * @endif
- */
-typedef enum hal_spi_inst_len {
-    HAL_SPI_INST_LEN_0 = 0,                 /*!< @if Eng 0-bit (no instruction).
-                                                 @else   不携带指令。 @endif */
-
-    HAL_SPI_INST_LEN_4,                     /*!< @if Eng 4-bit instruction.
-                                                 @else   4-位指令。 @endif */
-
-    HAL_SPI_INST_LEN_8,                     /*!< @if Eng 8-bit instruction.
-                                                 @else   8-位指令。 @endif */
-
-    HAL_SPI_INST_LEN_16,                    /*!< @if Eng 16-bit instruction.
-                                                 @else   16-位指令。 @endif */
-    HAL_SPI_INST_LEN_MAX = HAL_SPI_INST_LEN_16
-} hal_spi_inst_len_t;
-
-/**
- * @if Eng
- * @brief  SPI length of address.
- * @else
- * @brief  SPI地址长度定义。
- * @endif
- */
-typedef enum hal_spi_addr_len {
-    HAL_SPI_ADDR_LEN_0 = 0,                 /*!< @if Eng 0-bit address length.
-                                                 @else   0-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_4,                     /*!< @if Eng 4-bit address length.
-                                                 @else   4-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_8,                     /*!< @if Eng 8-bit address length.
-                                                 @else   8-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_12,                    /*!< @if Eng 12-bit address length.
-                                                 @else   12-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_16,                    /*!< @if Eng 16-bit address length.
-                                                 @else   16-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_20,                    /*!< @if Eng 20-bit address length.
-                                                 @else   20-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_24,                    /*!< @if Eng 24-bit address length.
-                                                 @else   24-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_28,                    /*!< @if Eng 28-bit address length.
-                                                 @else   28-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_32,                    /*!< @if Eng 32-bit address length.
-                                                 @else   32-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_36,                    /*!< @if Eng 36-bit address length.
-                                                 @else   36-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_40,                    /*!< @if Eng 40-bit address length.
-                                                 @else   40-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_44,                    /*!< @if Eng 44-bit address length.
-                                                 @else   44-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_48,                    /*!< @if Eng 48-bit address length.
-                                                 @else   48-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_52,                    /*!< @if Eng 52-bit address length.
-                                                 @else   52-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_56,                    /*!< @if Eng 56-bit address length.
-                                                 @else   56-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_60,                    /*!< @if Eng 60-bit address length.
-                                                 @else   60-位地址长度。 @endif */
-    HAL_SPI_ADDR_LEN_MAX = HAL_SPI_ADDR_LEN_60
-} hal_spi_addr_len_t;
-
-/**
- * @if Eng
- * @brief  Definition of the event ID of hal spi.
- * @else
- * @brief  HAL层SPI事件ID的定义
- * @endif
- */
-typedef enum hal_spi_evt_id {
-    SPI_EVT_RX_FULL_ISR,           /*!< @if Eng Rx full isr triggered.
-                                        @else   接收满中断触发 @endif */
-    SPI_EVT_RX_OVERFLOW_ISR,       /*!< @if Eng Rx overflow isr triggered.
-                                        @else   接收溢出中断触发 @endif */
-    SPI_EVT_RX_UNDERFLOW_ISR,      /*!< @if Eng Rx underflow isr triggered.
-                                        @else   接收空读中断触发 @endif */
-    SPI_EVT_TX_EMPTY_ISR,          /*!< @if Eng Tx empty isr triggered.
-                                        @else   TX空中断被触发 @endif */
-    SPI_EVT_TX_OVERFLOW_ISR,       /*!< @if Eng Tx overflow isr triggered.
-                                        @else   TX溢出中断被触发 @endif */
-    SPI_EVT_MULTI_MASTER_ISR       /*!< @if Eng Multi-master contention isr triggered.
-                                        @else   双主机竞争中断被触发 @endif */
-} hal_spi_evt_id_t;
-
-/**
- * @if Eng
- * @brief  QSPI parameters of SPI transfer.
- * @else
- * @brief  SPI传输中QSPI的参数。
- * @endif
- */
-typedef struct hal_spi_xfer_qspi_param {
-    hal_spi_trans_type_t trans_type;  /*!< @if Eng SPI frame format for instruction and address.
-                                           @else   传输类型，用于指定指令和地址的长度。 @endif */
-
-    hal_spi_inst_len_t   inst_len;    /*!< @if Eng Instruction length, support 0, 4, 8, 16bits.
-                                           @else   指令长度，支持0、4、8、16位。 @endif */
-
-    hal_spi_addr_len_t   addr_len;    /*!< @if Eng Address length, support 0, 8, 16, 24, 32bits.
-                                           @else   地址长度，支持0、8、16、24、32位。 @endif */
-
-    uint32_t             wait_cycles; /*!< @if Eng Indicates the wait cycles.
-                                           @else   等待的周期数。 @endif */
-} hal_spi_xfer_qspi_param_t;
-```
-
-**成员说明**
-
-| 成员名称 | 数据类型 | 描述 |
-| ------- | ------- | ---- |
-| trans_type | hal_spi_trans_type_t | 传输类型，用于指定指令和地址的长度 |
-| inst_len | hal_spi_inst_len_t | 指令长度，支持 0、4、8、16 位 |
-| addr_len | hal_spi_addr_len_t | 地址长度，支持 0、8、16、24、32 位 |
-
-### struct hal_spi_xfer_sspi_param_t <a id="hal_spi_xfer_sspi_param_t"></a>
-
-```c
-typedef enum hal_spi_ctrl_id {
-    SPI_CTRL_SET_ATTR,                  /*!< @if Eng Set SPI basic attribute.
-                                             @else   设置基础参数。 @endif */
-
-    SPI_CTRL_GET_ATTR,                  /*!< @if Eng Get SPI basic attribute.
-                                             @else   获取基础参数。 @endif */
-
-    SPI_CTRL_SET_EXTRA_ATTR,            /*!< @if Eng Set SPI extral attribute.
-                                             @else   设置高级参数。 @endif */
-
-    SPI_CTRL_GET_EXTRA_ATTR,            /*!< @if Eng Get SPI extral attribute.
-                                             @else   获取高级参数。 @endif */
-
-    SPI_CTRL_SELECT_SLAVE,              /*!< @if Eng Select the slave.
-                                             @else   选择指定的设备。 @endif */
-
-    SPI_CTRL_CHECK_FIFO_BUSY,           /*!< @if Eng Check whether the SPI is busy.
-                                             @else   检查SPI是否忙碌状态。 @endif */
-#if defined(CONFIG_SPI_SUPPORT_DMA) && (CONFIG_SPI_SUPPORT_DMA == 1)
-    SPI_CTRL_SET_DMA_CFG,               /*!< @if Eng Set the DMA transfer enable/disable and datalevel.
-                                             @else   设置DMA的传输使能和数据level。 @endif */
-
-    SPI_CTRL_GET_DMA_DATA_ADDR,         /*!< @if Eng Get the DMA transfer data address.
-                                             @else   获取DMA的传输数据地址。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_DMA */
-
-#if defined(CONFIG_SPI_SUPPORT_INTERRUPT) && (CONFIG_SPI_SUPPORT_INTERRUPT == 1)
-    SPI_CTRL_EN_RXFI_INT,               /*!< @if Eng Enable the Receive FIFO full interrupt.
-                                             @else   使能RX FIFO是否已满中断。 @endif */
-
-    SPI_CTRL_CHECK_RX_FIFO_EMPTY,       /*!< @if Eng Check if rx fifo is empty or not.
-                                             @else   判断RX FIFO是否为空。 @endif */
-
-    SPI_CTRL_EN_TXEI_INT,               /*!< @if Eng Enable the transmit FIFO empty interrupt.
-                                             @else   使能TX FIFO是否为空中断。 @endif */
-
-    SPI_CTRL_CHECK_TX_FIFO_FULL,        /*!< @if Eng Check if tx fifo is full or not.
-                                             @else   判断RX FIFO是否已满。 @endif */
-
-    SPI_CTRL_EN_MULTI_MASTER_ERR_INT,   /*!< @if Eng Enable the Multi-Master contention interrupt.
-                                             @else   使能双主机竞争中断。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_INTERRUPT */
-
-#if defined(CONFIG_SPI_SUPPORT_LPM) && (CONFIG_SPI_SUPPORT_LPM == 1)
-    SPI_CTRL_SUSPEND,                   /*!< @if Eng Suspend all of the spi channels.
-                                             @else   挂起所有spi通道。 @endif */
-    SPI_CTRL_RESUME,                    /*!< @if Eng Resume all of the spi channels.
-                                             @else   挂起所有spi通道。 @endif */
-#endif  /* CONFIG_SPI_SUPPORT_LPM */
-    SPI_CTRL_SET_TMOD,                  /*!< @if Eng Set SPI transfer mode.
-                                             @else   设置SPI传输模式。 @endif */
-    SPI_CTRL_MAX,
-    SPI_CTRL_ID_INVALID = 0xFF
-} hal_spi_ctrl_id_t;
-
-/**
- * @if Eng
- * @brief  Frame Format.
- * @else
- * @brief  帧格式。
- * @endif
- */
-typedef enum hal_spi_cfg_frame_format {
-    SPI_CFG_FRAME_FORMAT_MOTOROLA_SPI,      /*!< @if Eng Motorolla SPI Frame Format.
-                                                 @else   摩托罗拉SPI帧格式。 @endif */
-
-    SPI_CFG_FRAME_FORMAT_TEXAS_SSP,         /*!< @if Eng Texas Instruments SSP Frame Format.
-                                                 @else   德州仪器SSP帧格式。 @endif */
-
-    SPI_CFG_FRAME_FORMAT_NS_MICROWIRE,      /*!< @if Eng National Microwire Frame Format.
-                                                 @else   国家微线帧格式。 @endif */
-    SPI_CFG_FRAME_FORMAT_MAX
-} hal_spi_cfg_frame_format_t;
-
-/**
- * @if Eng
- * @brief  Clock polarity.
- * @else
- * @brief  时钟极性。
- * @endif
- */
-typedef enum hal_spi_cfg_clk_cpol {
-    SPI_CFG_CLK_CPOL_0,                     /*!< @if Eng Inactive state of serial clock is low.
-                                                 @else   SPI的非激活状态为低电平。 @endif */
-
-    SPI_CFG_CLK_CPOL_1,                     /*!< @if Eng Inactive state of serial clock is high.
-                                                 @else   SPI的非激活状态为高电平。 @endif */
-    SPI_CFG_CLK_CPOL_MAX
-} hal_spi_cfg_clk_cpol_t;
-
-/**
- * @if Eng
- * @brief  Clock phase.
- * @else
- * @brief  时钟相位。
- * @endif
- */
-typedef enum hal_spi_cfg_clk_cpha {
-    SPI_CFG_CLK_CPHA_0,                     /*!< @if Eng Serial clock toggles in middle of first data bit.
-                                                 @else   SPI时钟在第一个数据位中间切换。 @endif */
-
-    SPI_CFG_CLK_CPHA_1,                     /*!< @if Eng Serial clock toggles at start of first data bit.
-                                                 @else   SPI时钟在第一个数据位开始时切换。 @endif */
-    SPI_CFG_CLK_CPHA_MAX
-} hal_spi_cfg_clk_cpha_t;
-
-/**
- * @if Eng
- * @brief  SPI slave select toggle enable.
- * @else
- * @brief  SPI 从机选择切换使能
- * @endif
- */
-typedef enum hal_spi_cfg_sste {
-    SPI_CFG_SSTE_DISABLE,                   /*!< @if Eng SPI slave select toggle disable.
-                                                         When disable, master should reed all data in slave tx_queue
-                                                         at ONE time when reading data from slave device. Otherwise,
-                                                         data loss occurs.
-                                                 @else   SPI 从机选择切换不使能。
-                                                         当此配置不使能，主机从从机读取数据时，需要一次性将从机发送
-                                                         队列中的数据读完，否则会出现丢失数据问题。@endif */
-    SPI_CFG_SSTE_ENABLE,                    /*!< @if Eng SPI slave select toggle enable.
-                                                 @else   SPI 从机选择切换使能 @endif */
-    SPI_CFG_SSTE_MAX
-} hal_spi_cfg_sste_t;
-
-/**
- * @if Eng
- * @brief  Transfer Mode.
- * @else
- * @brief  传输模式。
- * @endif
- */
-typedef enum hal_spi_trans_mode {
-    HAL_SPI_TRANS_MODE_TXRX = 0,            /*!< @if Eng Transmit and receive mode.
-                                                 @else   收发模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_TX,                  /*!< @if Eng Transmit only / Transmit mode.
-                                                 @else   发送模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_RX,                  /*!< @if Eng Receive only / Receive mode.
-                                                 @else   接收模式。 @endif */
-
-    HAL_SPI_TRANS_MODE_EEPROM,              /*!< @if Eng EEPROM read mode.
-                                                 @else   EEPROM模式。 @endif */
-    HAL_SPI_TRANS_MODE_MAX
-} hal_spi_trans_mode_t;
-
-/**
- * @if Eng
- * @brief  Data Frame Size.
- * @else
- * @brief  数据帧长度。
- * @endif
- */
-typedef enum hal_spi_frame_size {
-    HAL_SPI_FRAME_SIZE_8    = 0x07,         /*!< @if Eng 8-bit serial data transfer.
-                                                 @else   8-位串行数据传输。 @endif */
-
-    HAL_SPI_FRAME_SIZE_16   = 0x0F,         /*!< @if Eng 16-bit serial data transfer(Not supported now).
-                                                 @else   16-位串行数据传输（暂不支持）。 @endif */
-
-    HAL_SPI_FRAME_SIZE_24   = 0x17,         /*!< @if Eng 24-bit serial data transfer(Not supported now).
-                                                 @else   24-位串行数据传输（暂不支持）。 @endif */
-
-    HAL_SPI_FRAME_SIZE_32   = 0x1F          /*!< @if Eng 32-bit serial data transfer.
-                                                 @else   32-位串行数据传输。 @endif */
-} hal_spi_frame_size_t;
-
-/**
- * @if Eng
- * @brief  SPI Frame Format.
- * @else
- * @brief  SPI数据帧格式。
- * @endif
- */
-typedef enum hal_spi_frame_format {
-    HAL_SPI_FRAME_FORMAT_STANDARD = 0,      /*!< @if Eng SPI Standard frame format.
-                                                 @else   标准的单线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_DUAL,              /*!< @if Eng SPI Dual frame format.
-                                                 @else   双线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_QUAD,              /*!< @if Eng SPI Quad frame format.
-                                                 @else   4线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_OCTAL,             /*!< @if Eng SPI Octal frame format.
-                                                 @else   8线SPI帧格式。 @endif */
-
-    HAL_SPI_FRAME_FORMAT_DOUBLE_OCTAL,      /*!< @if Eng SPI Double Octal frame format.
-                                                 @else   16线SPI帧格式。 @endif */
-    HAL_SPI_FRAME_FORMAT_SIXT,
-    HAL_SPI_FRAME_FORMAT_MAX_NUM,
-    HAL_SPI_FRAME_FORMAT_NONE = HAL_SPI_FRAME_FORMAT_MAX_NUM
-} hal_spi_frame_format_t;
-
-/**
- * @if Eng
- * @brief  SPI Transfer Types.
- * @else
- * @brief  SPI传输类型。
- * @endif
- */
-typedef enum hal_spi_trans_type {
-    HAL_SPI_TRANS_TYPE_INST_S_ADDR_S = 0,   /*!< @if Eng Instruction and Address will be sent in standard SPI mode.
-                                                 @else   指令和地址使用单线SPI传输。 @endif */
-
-    HAL_SPI_TRANS_TYPE_INST_S_ADDR_Q,       /*!< @if Eng Instruction will be sent in standard mode and address will
-                                                         be sent in mode specified by frame format register.
-                                                 @else   指令使用单线SPI传输，
-                                                         地址按照帧格式寄存器的配置传输。 @endif */
-
-    HAL_SPI_TRANS_TYPE_INST_Q_ADDR_Q,       /*!< @if Eng Both instruction and address will be sent in
-                                                         the mode specified by frame format register.
-                                                 @else   指令和地址都按照帧格式寄存器的配置传输。 @endif */
-    HAL_SPI_TRANS_TYPE_MAX = HAL_SPI_TRANS_TYPE_INST_Q_ADDR_Q
-} hal_spi_trans_type_t;
-
-/**
- * @if Eng
- * @brief  SPI length of instruction.
- * @else
- * @brief  SPI指令长度定义。
- * @endif
- */
-typedef enum hal_spi_inst_len {
-    HAL_SPI_INST_LEN_0 = 0,                 /*!< @if Eng 0-bit (no instruction).
-                                                 @else   不携带指令。 @endif */
-
-    HAL_SPI_INST_LEN_4,                     /*!< @if Eng 4-bit instruction.
-                                                 @else   4-位指令。 @endif */
-
-    HAL_SPI_INST_LEN_8,                     /*!< @if Eng 8-bit instruction.
-                                                 @else   8-位指令。 @endif */
-
-    HAL_SPI_INST_LEN_16,                    /*!< @if Eng 16-bit instruction.
-                                                 @else   16-位指令。 @endif */
-    HAL_SPI_INST_LEN_MAX = HAL_SPI_INST_LEN_16
-} hal_spi_inst_len_t;
-
-/**
- * @if Eng
- * @brief  SPI length of address.
- * @else
- * @brief  SPI地址长度定义。
- * @endif
- */
-typedef enum hal_spi_addr_len {
-    HAL_SPI_ADDR_LEN_0 = 0,                 /*!< @if Eng 0-bit address length.
-                                                 @else   0-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_4,                     /*!< @if Eng 4-bit address length.
-                                                 @else   4-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_8,                     /*!< @if Eng 8-bit address length.
-                                                 @else   8-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_12,                    /*!< @if Eng 12-bit address length.
-                                                 @else   12-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_16,                    /*!< @if Eng 16-bit address length.
-                                                 @else   16-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_20,                    /*!< @if Eng 20-bit address length.
-                                                 @else   20-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_24,                    /*!< @if Eng 24-bit address length.
-                                                 @else   24-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_28,                    /*!< @if Eng 28-bit address length.
-                                                 @else   28-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_32,                    /*!< @if Eng 32-bit address length.
-                                                 @else   32-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_36,                    /*!< @if Eng 36-bit address length.
-                                                 @else   36-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_40,                    /*!< @if Eng 40-bit address length.
-                                                 @else   40-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_44,                    /*!< @if Eng 44-bit address length.
-                                                 @else   44-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_48,                    /*!< @if Eng 48-bit address length.
-                                                 @else   48-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_52,                    /*!< @if Eng 52-bit address length.
-                                                 @else   52-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_56,                    /*!< @if Eng 56-bit address length.
-                                                 @else   56-位地址长度。 @endif */
-
-    HAL_SPI_ADDR_LEN_60,                    /*!< @if Eng 60-bit address length.
-                                                 @else   60-位地址长度。 @endif */
-    HAL_SPI_ADDR_LEN_MAX = HAL_SPI_ADDR_LEN_60
-} hal_spi_addr_len_t;
-
-/**
- * @if Eng
- * @brief  Definition of the event ID of hal spi.
- * @else
- * @brief  HAL层SPI事件ID的定义
- * @endif
- */
-typedef enum hal_spi_evt_id {
-    SPI_EVT_RX_FULL_ISR,           /*!< @if Eng Rx full isr triggered.
-                                        @else   接收满中断触发 @endif */
-    SPI_EVT_RX_OVERFLOW_ISR,       /*!< @if Eng Rx overflow isr triggered.
-                                        @else   接收溢出中断触发 @endif */
-    SPI_EVT_RX_UNDERFLOW_ISR,      /*!< @if Eng Rx underflow isr triggered.
-                                        @else   接收空读中断触发 @endif */
-    SPI_EVT_TX_EMPTY_ISR,          /*!< @if Eng Tx empty isr triggered.
-                                        @else   TX空中断被触发 @endif */
-    SPI_EVT_TX_OVERFLOW_ISR,       /*!< @if Eng Tx overflow isr triggered.
-                                        @else   TX溢出中断被触发 @endif */
-    SPI_EVT_MULTI_MASTER_ISR       /*!< @if Eng Multi-master contention isr triggered.
-                                        @else   双主机竞争中断被触发 @endif */
-} hal_spi_evt_id_t;
-
-/**
- * @if Eng
- * @brief  QSPI parameters of SPI transfer.
- * @else
- * @brief  SPI传输中QSPI的参数。
- * @endif
- */
-typedef struct hal_spi_xfer_qspi_param {
-    hal_spi_trans_type_t trans_type;  /*!< @if Eng SPI frame format for instruction and address.
-                                           @else   传输类型，用于指定指令和地址的长度。 @endif */
-
-    hal_spi_inst_len_t   inst_len;    /*!< @if Eng Instruction length, support 0, 4, 8, 16bits.
-                                           @else   指令长度，支持0、4、8、16位。 @endif */
-
-    hal_spi_addr_len_t   addr_len;    /*!< @if Eng Address length, support 0, 8, 16, 24, 32bits.
-                                           @else   地址长度，支持0、8、16、24、32位。 @endif */
-
-    uint32_t             wait_cycles; /*!< @if Eng Indicates the wait cycles.
-                                           @else   等待的周期数。 @endif */
-} hal_spi_xfer_qspi_param_t;
-
-/**
- * @if Eng
- * @brief  Single SPI parameters of SPI transfer.
- * @else
- * @brief  SPI传输中Single SPI的参数。
- * @endif
- */
-typedef struct hal_spi_xfer_sspi_param {
-    uint32_t             wait_cycles; /*!< @if Eng Indicates the wait cycles.
-                                           @else   等待的周期数。 @endif */
-} hal_spi_xfer_sspi_param_t;
-```
-
-**成员说明**
-
-| 成员名称 | 数据类型 | 描述 |
-| ------- | ------- | ---- |
-| wait_cycles | uint32_t | 等待的周期数 |
-
+| tx_bytes | uint32_t | 需要发送的数据字节数，取值需与 [hal_spi_attr_t](#hal_spi_attr_t) 的 frame_size 配置匹配 |
+| rx_buff | uint8_t * | 通过 RX FIFO 接收数据的缓冲区 |
+| rx_bytes | uint32_t | 需要接收的数据字节数，取值需与 [hal_spi_attr_t](#hal_spi_attr_t) 的 frame_size 配置匹配 |
+| cmd | uint8_t | QSPI 模式下的命令 |
+| reserved | uint8_t[3] | 保留字段 |
+| addr | uint32_t | QSPI 模式下的地址 |
 
 ## Macros
 
