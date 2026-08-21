@@ -1,182 +1,143 @@
-# BLE HID Button 示例
+# WS53 BLE HID Button
 
-## 功能说明
+## 1. 一句话说明
 
-WS53 作为蓝牙键盘外设。按下板载物理按键（默认 GPIO 13），WS53 通过 BLE HID 协议发送标准键盘输入报告，接收端（PC / 手机）蓝牙连接后识别为标准键盘设备，无需额外驱动。
+本示例将 WS53 板载 S1 按键映射为 BLE HID 键盘按键，通过标准 HID Service 向手机或 PC 发送 8 字节键盘报告。
 
-支持特性：
-- 单键 HID 键盘，键码通过 Kconfig 可配（默认 Page Down = PPT 翻页）
-- 长按自动重复（按住 > 500ms 模拟一次重复）
-- 按键消抖（2 次连续采样确认）
-- 断连自动重新广播
+## 2. 适用场景
 
-## 硬件连接
+- BLE 翻页器、遥控按键、快捷键和媒体控制原型。
+- 验证 WS53 GPIO 输入、BLE HID Service 和 Notification。
+- 作为标准免驱 BLE 键盘外设的最小参考。
 
-| GPIO | 连接 | 说明 |
-|------|------|------|
-| 13 | 按键 → GND | 按下为低电平，内部上拉 |
-| 开发板 USB | PC / 手机 | 烧录 + 串口监控 |
+## 3. 支持能力
 
-## 启用与编译
+- 标准 HID Service `0x1812` 和 Boot Keyboard Input `0x2A22`。
+- S1/MGPIO6 高电平按下、无上下拉，已与 WS53 SLE S1 映射对齐。
+- 20 ms 轮询、2 次采样消抖、可选 500 ms 长按重复。
+- 按键码和广播名称可由 Kconfig 配置，断线后重新广播。
 
-### 1. Kconfig 配置
+## 4. 不支持/限制
 
-HiSpark Studio → Kconfig 或命令行 `menuconfig`：
+- 默认只上报一个普通键码，不处理组合键或多键同时按下。
+- 默认 Page Down 键码为 `0x4E`；Consumer Page 音量键不能直接当作普通 Keyboard Page 键码使用。
+- 非 GPIO6 引脚走低电平有效、内部上拉的通用分支，需按实际硬件复核。
+- 手机 BLE 调试工具需手动订阅 `0x2A22` CCCD 才能实时收到报告。
 
+## 5. 关键词
+
+### 中文关键词
+
+WS53、BLE HID、蓝牙键盘、S1 按键、GPIO、Page Down、通知、翻页器
+
+### English Keywords
+
+WS53, BLE HID, keyboard, button, GPIO, Boot Keyboard Input, notification, presenter
+
+## 6. 目录结构
+
+```text
+ble_hid_btn/
+  README.md
+  SDD.md
+  Kconfig
+  CMakeLists.txt
+  inc/
+    ble_hid_btn.h
+    ble_hid_adv.h
+  src/
+    ble_hid_btn_sample.c
+    ble_hid_btn.c
+    ble_hid_adv.c
 ```
-Application → Enable Sample → Enable the Sample of BT → [*]
-  → Support BLE Sample → [*]
-    → Support BLE HID Button Sample → [*]
-```
 
-**注意：** `application/samples/bt/Kconfig` 和 `application/samples/bt/ble/Kconfig` 都是 Kconfig `choice` 互斥块。启用 HID Button 时必须显式禁用其他 BT sample（如 BLE WIFI CFG、SLE、CHBA）。
+## 7. 入口文件
 
-可选配置项（在 `BLE HID Button Configuration` 子菜单）：
+- 主入口：`src/ble_hid_btn_sample.c` 中的 `app_run(ble_hid_btn_sample_entry)`。
+- 初始化入口：`ble_hid_btn_init()`。
+- 按键业务：`hid_btn_task()`、`hid_button_handle_state()`。
+- GATT 服务：`src/ble_hid_btn.c`。
+- 配置入口：`Kconfig`。
+
+## 8. 整体流程
+
+1. 创建主任务并等待 BLE 基础环境就绪。
+2. 初始化 HID GATT 服务并启动 `ble_hid_btn` 广播。
+3. 创建按键任务，配置 S1 为 `S_MGPIO6`、GPIO 输入、无上下拉。
+4. 周期采样并消抖；检测按下时发送键码报告，松开时发送全零报告。
+5. 启用长按时，按住超过 500 ms 后额外发送一次释放/按下序列。
+6. Host 断开后重新广播，等待下一次连接。
+
+## 9. 核心文件说明
+
+| 文件 | 作用 | 关键内容 |
+|---|---|---|
+| `src/ble_hid_btn_sample.c` | 入口、按键采样与任务 | GPIO6 映射、消抖、长按 |
+| `src/ble_hid_btn.c` | HID GATT 服务 | Report Map、6 个 HID 特征、报告发送 |
+| `src/ble_hid_adv.c` | HID 广播 | 设备名、HID UUID、Keyboard Appearance |
+| `Kconfig` | 用户配置 | GPIO、键码、长按、设备名 |
+
+## 10. 核心函数/类说明
+
+- `ble_hid_btn_init()`：注册 GAP/GATTS 回调并创建 HID Service。
+- `ble_hid_btn_send_report()`：发送 `hid_kb_report_t` 键盘输入报告。
+- `hid_button_update_level()`：完成按键电平采样和两次确认消抖。
+- `hid_button_handle_state()`：处理按下、松开和长按重复状态。
+- `ble_hid_adv_start()`：配置并启动可连接广播。
+
+## 11. 配置项说明
 
 | 配置项 | 默认值 | 说明 |
-|--------|--------|------|
-| `CONFIG_BLE_HID_BTN_PIN` | 13 | 按键 GPIO Pin |
-| `CONFIG_BLE_HID_BTN_KEYCODE` | 78 | HID 键码（十进制，78=Page Down，44=Space，40=Enter，233=Vol+，234=Vol-） |
-| `CONFIG_BLE_HID_BTN_LONGPRESS` | y | 长按自动重复 |
-| `CONFIG_BLE_HID_DEVICE_NAME` | `ble_hid_btn` | BLE 广播设备名 |
+|---|---:|---|
+| `CONFIG_SAMPLE_SUPPORT_BLE_HID_BTN_SAMPLE` | `y` | 选择本示例 |
+| `CONFIG_BLE_HID_BTN_PIN` | `6` | 逻辑 MGPIO 号；6 映射为 `S_MGPIO6`/`pin_t 32` |
+| `CONFIG_BLE_HID_BTN_KEYCODE` | `78` | USB HID Usage ID，即 `0x4E` Page Down |
+| `CONFIG_BLE_HID_BTN_LONGPRESS` | `y` | 启用一次长按重复 |
+| `CONFIG_BLE_HID_DEVICE_NAME` | `ble_hid_btn` | 广播设备名 |
 
-### 2. 编译
+## 12. 使用方法
 
-```bash
-cd src
-python build.py -c ws53_liteos_app
+### 环境准备
+
+- WS53 开发板，使用板载 S1，无需外接按键。
+- 支持 BLE HID 的 PC/手机，或支持 GATT Notification 的调试工具。
+
+### 编译
+
+选择 `CONFIG_SAMPLE_SUPPORT_BLE_HID_BTN_SAMPLE=y` 后执行：
+
+```powershell
+fbb build ws53-liteos-app --clean -j1
 ```
 
-或使用 fbb：
+### 运行
 
-```bash
-fbb build ws53_liteos_app --clean -j1
+```powershell
+fbb flash -f src/output/ws53/fwpkg/ws53_liteos_app/ws53_liteos_app_all.fwpkg --chip ws53 -p COM<N> --timeout 240
+fbb monitor --port COM<N> --baud 115200 --chip ws53 --reset --timeout 40
 ```
 
-### 3. 烧录
+连接 `ble_hid_btn`；使用 GATT 工具时订阅 HID Service `0x1812` 下的 `0x2A22`。
 
-HiSpark Studio → 程序加载 → `src/output/ws53/fwpkg/ws53_liteos_app/ws53_liteos_app_all.fwpkg`
+### 运行结果
 
-或：
+初始化成功后输出 `ready` 和 `task started, gpio=6 pin_t=32 ... active=high`。按下/松开 S1 分别输出 `press key=0x4E` 和 `release`。
 
-```bash
-fbb flash ws53_liteos_app --port COM<N> --json-summary
+## 13. 输入输出示例
+
+### 输入
+
+短按板载 S1。
+
+### 输出
+
+| 状态 | `0x2A22` 报告 |
+|---|---|
+| 按下 | `00 00 4E 00 00 00 00 00` |
+| 松开 | `00 00 00 00 00 00 00 00` |
+
+```text
+[ble_hid_btn_sample] task started, gpio=6 pin_t=32 keycode=0x4E active=high
+[ble_hid_btn_sample] press key=0x4E
+[ble_hid_btn_sample] release
 ```
-
-### 4. 验证广播
-
-烧录后串口（115200 baud）应看到：
-
-```
-[ble_hid_btn_sample] entry
-[ble_hid_btn_sample] main task start
-[ble_hid_btn] init begin
-[ble_hid_btn] registering callbacks
-[ble_hid_btn] enabling BLE
-[ble_hid_btn] reg server
-[ble_hid_btn] server_id=1
-[ble_hid_btn] building service
-[ble_hid_btn] svc hdl=14
-[ble_hid_btn] chara uuid=0x2A4E val_hdl=16 ret=0
-[ble_hid_btn] chara uuid=0x2A4B val_hdl=18 ret=0
-[ble_hid_btn] chara uuid=0x2A22 val_hdl=20 ret=0    ← Boot Keyboard Input
-[ble_hid_btn] chara uuid=0x2A32 val_hdl=23 ret=0
-[ble_hid_btn] chara uuid=0x2A4A val_hdl=25 ret=0
-[ble_hid_btn] chara uuid=0x2A4C val_hdl=27 ret=0
-[ble_hid_btn] init done
-[ble_hid_adv] started ret=0
-[ble_hid_btn_sample] ready
-[ble_hid_btn_sample] task started, pin=13 keycode=0x4E
-```
-
-6 个特征值全部 `ret=0` 说明 HID 服务注册成功，广播已启动。
-
----
-
-## 测试验证
-
-### 手机端验证
-
-1. 打开 **BLE 调试助手**（华为应用市场可下载）
-2. 点击 **扫描** → 在设备列表找到 **`ble_hid_btn`**
-3. 点击 **CONNECT** → 连接成功
-4. 展开 Service **`0x1812`**（HID Service）
-5. 找到 Characteristic **`0x2A22`**（Boot Keyboard Input）
-6. **打开"接收通知数据"开关**
-
-#### 测试按键：
-
-| 操作 | 手机收到 Notify（HEX） | 含义 |
-|------|----------------------|------|
-| 按下 GPIO 13 | `00 00 4E 00 00 00 00 00` | Page Down 键按下 |
-| 松开 GPIO 13 | `00 00 00 00 00 00 00 00` | 所有键释放 |
-
-- 如果不打开"接收通知数据"开关，点"读取"只能拿到当前静态快照（按下时读到键码，松开时读到全零）
-- 打开通知开关后，每次按键状态变化都会实时推送
-
-### PC 端验证
-
-1. PC 打开 **蓝牙设置** → 添加蓝牙设备
-2. 搜索到 **`ble_hid_btn`** → 设备类型显示**"键盘"**
-3. 点击配对 → 连接成功
-4. 打开 **记事本** 或 **PPT** → 确保窗口有焦点
-5. 按下 GPIO 13 → 触发 Page Down（默认键码）
-
-### 改键码测试
-
-在 Kconfig 中修改 `CONFIG_BLE_HID_BTN_KEYCODE`（十进制），重编烧录后验证：
-
-| 键码值 | 场景 | 手机端验证 |
-|--------|------|-----------|
-| 78 | PPT 翻页（默认） | 收到 `00 00 4E 00 00 00 00 00` |
-| 44 | 空格/暂停播放 | 收到 `00 00 2C 00 00 00 00 00` |
-| 40 | 回车/快门 | 收到 `00 00 28 00 00 00 00 00` |
-| 233 | 音量+ | 收到 `00 00 E9 00 00 00 00 00` |
-| 234 | 音量- | 收到 `00 00 EA 00 00 00 00 00` |
-
----
-
-## 串口日志速查
-
-| 阶段 | 关键字 | 说明 |
-|------|--------|------|
-| 入口 | `[ble_hid_btn_sample] entry` | 启动回调执行 |
-| 主任务 | `main task start` | 主任务开始（含 3s 延迟等 BLE 就绪） |
-| 回调注册 | `registering callbacks` | GAP + GATT 回调注册完成 |
-| BLE 使能 | `enabling BLE` | `enable_ble()` 调用 |
-| 服务注册 | `building service` | 开始添加特征值 |
-| 初始化完成 | `init done` | 6 个特征值全部 `ret=0` |
-| 广播启动 | `[ble_hid_adv] started ret=0` | 广播已开始 |
-| 按键就绪 | `ready` + `task started, pin=13` | 按键任务开始轮询 |
-| 按键按下 | `press key=0x4E` | 按键按下，发送报告 |
-| 按键松开 | `release` | 按键松开，发送释放报告 |
-| 长按重复 | `repeat key=0x4E` | 长按触发重复 |
-| PC 连接 | `conn: id=0 state=1 pair=0 disc=0` | HID Host 已连接 |
-| PC 断开 | `PC disconnected, re-advertising...` | 自动恢复广播 |
-
----
-
-## BLE GATT 协议摘要
-
-| 属性 | UUID | 权限 | 说明 |
-|------|------|------|------|
-| HID Service | `0x1812` | — | Human Interface Device |
-| Protocol Mode | `0x2A4E` | Read, Write No Response | 默认 0 (Boot) |
-| Report Map | `0x2A4B` | Read | 63 字节键盘报告描述符 |
-| **Boot Keyboard Input** | **`0x2A22`** | Read, **Notify** | **按键输入报告（8 字节）** |
-| Boot Keyboard Output | `0x2A32` | Read, Write | LED 输出 |
-| HID Information | `0x2A4A` | Read | HID 版本信息 |
-| HID Control Point | `0x2A4C` | Write No Response | 挂起/唤醒 |
-
-- `0x2A22` 是发送按键报告的特征值，需要启用 CCCD Notify 才能收到实时推送
-- 输入报告固定 8 字节：`[modifiers(1), reserved(1), keys[6]]`
-- 按下：`[00, 00, KEYCODE, 00, 00, 00, 00, 00]`
-- 松开：`[00, 00, 00, 00, 00, 00, 00, 00]`
-
-## 代码文件
-
-| 文件 | 说明 |
-|------|------|
-| `ble_hid_btn_sample.c` | 主入口：app_run → hid_main_task（延迟初始化）→ hid_btn_task（按键检测） |
-| `ble_hid_btn.c` | HID GATT 服务：6 个特征值 + 标准键盘报告描述符 |
-| `ble_hid_adv.c` | 广播：ADV 数据含 HID UUID + Keyboard Appearance |
