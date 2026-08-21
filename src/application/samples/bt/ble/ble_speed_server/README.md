@@ -99,6 +99,8 @@ ble_speed_server/
 - WS53 Server 和匹配模式的 WS63 Speed Client。
 - 两块板尽量靠近，并关闭同地址 BLE Sample。
 
+由于 WS53 工程未提供 BLE Central/GATT Client 相关组件，无法承担 Client 角色，因此本例使用 WS63 作为配套 Client 验证端。Client 工程位于 `fbb_ws63/src/application/samples/bt/ble/ble_speed_client`，在 WS63 工程中选择 `CONFIG_SAMPLE_SUPPORT_BLE_SPEED_CLIENT_SAMPLE=y` 后编译、烧录。现有 WS63 Client 用于验证 WS53 的 `CONFIG_BLE_SPEED_TEST=y` Notification 吞吐模式，并负责统计包数、耗时和吞吐；若将 WS53 切换为回环模式，Client 还需支持 Write Without Response 和 Indication。
+
 ### 编译
 
 选择 Speed Server 和所需模式后执行：

@@ -108,6 +108,8 @@ ble_gateway/
 - SDA 接 MGPIO22，SCL 接 MGPIO21，并共地。
 - WS63 Gateway/Sensor Client 或能解析自定义报告的 BLE 工具。
 
+由于 WS53 工程未提供 BLE Central/GATT Client 相关组件，无法承担 Client 角色，因此本例使用 WS63 作为配套 Client 验证端。Client 工程位于 `fbb_ws63/src/application/samples/bt/ble/ble_gateway/ble_gateway_client`，在 WS63 工程中选择 `CONFIG_SAMPLE_SUPPORT_BLE_GATEWAY_CLIENT_SAMPLE=y` 后编译、烧录。WS53 运行本目录的 Sensor Node Server，WS63 负责扫描、连接、订阅、解析报告及写入采样周期命令。
+
 ### 编译
 
 ```powershell

@@ -109,6 +109,8 @@ GATT 数据模型：
 - WS63 BLE Client、手机或 PC BLE 调试工具。
 - 串口监视参数为 115200 8N1。
 
+由于 WS53 工程未提供 BLE Central/GATT Client 相关组件，无法承担 Client 角色，因此本例使用 WS63 作为配套 Client 验证端。Client 工程位于 `fbb_ws63/src/application/samples/bt/ble/ble_hello/ble_hello_client`，在 WS63 工程中选择 `CONFIG_SAMPLE_SUPPORT_BLE_HELLO_CLIENT_SAMPLE=y` 后编译、烧录。WS63 Client 会完成扫描、连接、配对、MTU 协商、服务发现、CCCD 订阅以及特征 Read/Write 验证。
+
 ### 编译
 
 在 `fbb_ws53` 根目录选择上述 Kconfig 项，然后执行：

@@ -111,6 +111,8 @@ ble_uart_bridge/
 - WS53、3.3 V USB-TTL 和 WS63 BLE Client。
 - WS53 调试串口、WS63 调试串口和 USB-TTL 三个串口。
 
+由于 WS53 工程未提供 BLE Central/GATT Client 相关组件，无法承担 Client 角色，因此本例使用 WS63 作为配套 Client 验证端。Client 工程位于 `fbb_ws63/src/application/samples/bt/ble/ble_uart_bridge/ble_uart_bridge_client`，在 WS63 工程中选择 `CONFIG_SAMPLE_SUPPORT_BLE_UART_BRIDGE_CLIENT_SAMPLE=y` 后编译、烧录。WS63 Client 自动完成扫描、连接、配对、MTU 协商、服务发现和 Indication 订阅，并作为 BLE 侧数据收发端。
+
 ### 编译
 
 ```powershell

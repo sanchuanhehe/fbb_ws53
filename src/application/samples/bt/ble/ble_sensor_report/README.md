@@ -104,6 +104,8 @@ GATT 模型：Service `0x3333`；Data `0x3434` Read/Write；Report `0x3435` Noti
 - SDA 接 MGPIO22，SCL 接 MGPIO21，使用 3.3 V 并共地。
 - WS63 Sensor Client 或手机 BLE 调试工具。
 
+由于 WS53 工程未提供 BLE Central/GATT Client 相关组件，无法承担 Client 角色，因此本例使用 WS63 作为配套 Client 验证端。Client 工程位于 `fbb_ws63/src/application/samples/bt/ble/ble_sensor_report/ble_sensor_report_client`，在 WS63 工程中选择 `CONFIG_SAMPLE_SUPPORT_BLE_SENSOR_REPORT_CLIENT_SAMPLE=y` 后编译、烧录。WS63 Client 负责发现服务、订阅 Notification、校验传感器数据并写入 `interval=<ms>` 周期配置。
+
 ### 编译
 
 ```powershell
