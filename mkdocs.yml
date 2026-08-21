@@ -30,10 +30,6 @@ extra:
   version_selector:
     repo_path: fbb_ws53
     version: master
-  header_link:
-    name: 返回旧版
-    link: https://docs.hisilicon.com/repos/fbb_ws53/zh-CN/master/
-    external: true
 
 nav:
   - 概览: zh-CN/index.md
@@ -232,7 +228,6 @@ nav:
           - OS 抽象层 API: zh-CN/api-reference/osal/index.md
           - Atomic: zh-CN/api-reference/osal/atomic.md
           - Debug: zh-CN/api-reference/osal/debug.md
-          - Device: zh-CN/api-reference/osal/device.md
           - Drvbox: zh-CN/api-reference/osal/drvbox.md
           - Event: zh-CN/api-reference/osal/event.md
           - File Operations: zh-CN/api-reference/osal/fileops.md
