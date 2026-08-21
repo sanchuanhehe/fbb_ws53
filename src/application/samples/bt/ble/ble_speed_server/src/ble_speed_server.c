@@ -68,6 +68,7 @@ static uint8_t g_speed_task_started = 0;
 #define SPEED_DEFAULT_TIMEOUT_MULTIPLIER 0x1f4
 #define WAIT_DISCOVERY_MS 5000
 #define FLOW_CONTROL_TIME_MS 330
+#define BLE_SPEED_SERVER_STARTUP_DELAY_MS 1000U
 
 #define BLE_SPEED_TASK_PRIO 26
 #define BLE_SPEED_STACK_SIZE 0x2000
@@ -394,7 +395,7 @@ static errcode_t ble_uuid_gatts_register_server(void)
 errcode_t ble_uuid_server_init(void)
 {
     gap_ble_sec_params_t security = {0};
-    (void)osal_msleep(1000); /* 延时1000ms，等待BLE初始化完毕 */
+    (void)osal_msleep(BLE_SPEED_SERVER_STARTUP_DELAY_MS); /* 等待 BLE 初始化完毕。 */
     errcode_t ret = enable_ble();
     if (ret != ERRCODE_BT_SUCCESS) {
         return ret;

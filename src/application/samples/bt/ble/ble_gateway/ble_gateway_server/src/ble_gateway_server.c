@@ -22,6 +22,7 @@
 #define BLE_GATEWAY_SERVER_LOG "[ble environment node]"
 #define BLE_GATEWAY_UUID_LEN 2
 #define BLE_GATEWAY_MS_PER_SECOND 1000U
+#define BLE_GATEWAY_SERVER_STARTUP_DELAY_MS 1000U
 
 static uint8_t g_server_id;
 static uint16_t g_conn_id;
@@ -368,7 +369,7 @@ errcode_t ble_gateway_server_send_notification(const uint8_t *data, uint16_t len
 
 errcode_t ble_gateway_server_init(void)
 {
-    (void)osal_msleep(1000);
+    (void)osal_msleep(BLE_GATEWAY_SERVER_STARTUP_DELAY_MS);
     errcode_t enable_ret = enable_ble();
     osal_printk("%s enable request ret=0x%x\r\n", BLE_GATEWAY_SERVER_LOG, enable_ret);
 

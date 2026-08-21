@@ -28,6 +28,7 @@
 
 #define BLE_SENSOR_REPORT_SERVER_LOG "[ble sensor report server]"
 #define BLE_SENSOR_REPORT_UUID_LEN 2
+#define BLE_SENSOR_REPORT_SERVER_STARTUP_DELAY_MS 1000U
 #define BLE_SENSOR_REPORT_DEFAULT_INTERVAL_MS 1000
 #define BLE_SENSOR_REPORT_MIN_INTERVAL_MS 200
 #define BLE_SENSOR_REPORT_MAX_INTERVAL_MS 60000
@@ -547,7 +548,7 @@ errcode_t ble_sensor_report_server_send_notification(const uint8_t *data, uint16
  */
 errcode_t ble_sensor_report_server_init(void)
 {
-    (void)osal_msleep(1000);
+    (void)osal_msleep(BLE_SENSOR_REPORT_SERVER_STARTUP_DELAY_MS);
     errcode_t enable_ret = enable_ble();
     osal_printk("%s enable request ret=0x%x\r\n", BLE_SENSOR_REPORT_SERVER_LOG, enable_ret);
 

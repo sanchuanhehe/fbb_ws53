@@ -60,6 +60,7 @@ static const uint8_t HELLO_MESSAGE[] = "uart_from_peripheral";
 #define BLE_ATT_PROTOCOL_OVERHEAD 3
 #define BLE_ATT_READ_RESPONSE_OVERHEAD 1
 #define BLE_UART_BRIDGE_PREFERRED_MTU (BLE_UART_BRIDGE_BLE_PAYLOAD_MAX_LEN + BLE_ATT_PROTOCOL_OVERHEAD)
+#define BLE_UART_BRIDGE_SERVER_STARTUP_DELAY_MS 1000U
 #define BLE_UART_BRIDGE_ENABLE_TIMEOUT_MS 5000
 
 /**
@@ -249,6 +250,70 @@ static void ble_uart_bridge_handle_cccd_write(uint8_t server_id, uint16_t conn_i
 
 /**
  * @if Eng
+ * @brief Validates and queues one data characteristic write.
+ * @else
+ * @brief 校验一条数据特征写请求并将其加入 UART 发送队列。
+ * @endif
+ */
+static uint8_t ble_uart_bridge_process_data_write(const gatts_req_write_cb_t *request)
+{
+    if (request->is_prep) {
+        return GATT_STATUS_REQUEST_NOT_SUPPORTED;
+    }
+    if (request->offset != 0) {
+        return GATT_STATUS_INVALID_OFFSET;
+    }
+    if (request->handle != g_data_handle) {
+        return GATT_STATUS_INVALID_HANDLE;
+    }
+    if (request->value == NULL || request->length == 0 ||
+        request->length > BLE_UART_BRIDGE_PROPERTY_MAX_LEN) {
+        return GATT_STATUS_INVALID_ATTRIBUTE_VALUE_LENGTH;
+    }
+    if (ble_uart_bridge_uart_enqueue(request->value, request->length) != ERRCODE_BT_SUCCESS) {
+        /* Report backpressure when the UART queue has no room. / UART 队列空间不足时返回资源不足。 */
+        return GATT_STATUS_INSUFFICIENT_RESOURCES;
+    }
+
+    /* Update the readable cache only after the complete fragment is queued for UART. / 完整分片成功入队后再更新可读缓存。 */
+    (void)memset_s(g_property_value, sizeof(g_property_value), 0, sizeof(g_property_value));
+    if (memcpy_s(g_property_value, sizeof(g_property_value), request->value, request->length) != EOK) {
+        return GATT_STATUS_UNLIKELY_ERROR;
+    }
+    g_property_value_len = request->length;
+    return GATT_STATUS_SUCCESS;
+}
+
+/**
+ * @if Eng
+ * @brief Sends an ATT response when the peer used a Write Request.
+ * @else
+ * @brief 当对端使用写请求时发送 ATT 应答。
+ * @endif
+ */
+static void ble_uart_bridge_send_write_response(uint8_t server_id,
+                                                uint16_t conn_id,
+                                                const gatts_req_write_cb_t *request,
+                                                uint8_t response_status)
+{
+    ble_uart_bridge_response_t response;
+    errcode_t response_ret;
+
+    if (!request->need_rsp) {
+        return;
+    }
+    response = (ble_uart_bridge_response_t){request->request_id, response_status, 0, NULL, 0};
+    response_ret = ble_uart_bridge_send_response(server_id, conn_id, &response);
+    if (response_ret != ERRCODE_BT_SUCCESS) {
+        /* A failed ATT response stalls the client's single-flight Write Request queue. / ATT 应答失败会阻塞客户端的单请求发送队列。 */
+        osal_printk("%s write response failed: ret=0x%x, request_id=%u, offset=%u, authorize=%u, prepare=%u\r\n",
+                    BLE_UART_BRIDGE_SERVER_LOG, response_ret, request->request_id, request->offset,
+                    request->need_authorize, request->is_prep);
+    }
+}
+
+/**
+ * @if Eng
  * @brief Queues data characteristic writes for UART transmission.
  * @else
  * @brief 将数据特征写入内容加入 UART 发送队列。
@@ -259,8 +324,7 @@ static void ble_uart_bridge_write_request_cb(uint8_t server_id,
                                              gatts_req_write_cb_t *request,
                                              errcode_t status)
 {
-    uint8_t response_status = GATT_STATUS_SUCCESS;
-    errcode_t response_ret;
+    uint8_t response_status;
 
     if (status != ERRCODE_BT_SUCCESS) {
         /* Preserve the ATT request metadata when the stack reports a callback error. / 协议栈回调异常时保留 ATT 请求元数据。 */
@@ -268,50 +332,19 @@ static void ble_uart_bridge_write_request_cb(uint8_t server_id,
                     BLE_UART_BRIDGE_SERVER_LOG, status, request->request_id, request->need_rsp,
                     request->need_authorize, request->is_prep);
         response_status = GATT_STATUS_UNLIKELY_ERROR;
-        goto send_response;
-    }
-
-    osal_printk("%s write request received, handle=0x%04x, len=%u\r\n", BLE_UART_BRIDGE_SERVER_LOG, request->handle,
-                request->length);
-    if (request->handle == g_notify_cccd_handle) {
-        /* CCCD writes configure indications and are not UART payload. / CCCD 写用于配置指示，不属于 UART 载荷。 */
-        ble_uart_bridge_handle_cccd_write(server_id, conn_id, request);
-        return;
-    }
-    if (request->is_prep) {
-        response_status = GATT_STATUS_REQUEST_NOT_SUPPORTED;
-    } else if (request->offset != 0) {
-        response_status = GATT_STATUS_INVALID_OFFSET;
-    } else if (request->handle != g_data_handle) {
-        response_status = GATT_STATUS_INVALID_HANDLE;
-    } else if (request->value == NULL || request->length == 0 ||
-               request->length > BLE_UART_BRIDGE_PROPERTY_MAX_LEN) {
-        response_status = GATT_STATUS_INVALID_ATTRIBUTE_VALUE_LENGTH;
-    } else if (ble_uart_bridge_uart_enqueue(request->value, request->length) != ERRCODE_BT_SUCCESS) {
-        /* Report backpressure to Write Requests when the UART queue has no room. / UART 队列空间不足时向写请求返回资源不足。 */
-        response_status = GATT_STATUS_INSUFFICIENT_RESOURCES;
     } else {
-        /* Update the readable cache only after the complete fragment is queued for UART. / 完整分片成功入队后再更新可读缓存。 */
-        (void)memset_s(g_property_value, sizeof(g_property_value), 0, sizeof(g_property_value));
-        if (memcpy_s(g_property_value, sizeof(g_property_value), request->value, request->length) != EOK) {
-            response_status = GATT_STATUS_UNLIKELY_ERROR;
-        } else {
-            g_property_value_len = request->length;
+        osal_printk("%s write request received, handle=0x%04x, len=%u\r\n", BLE_UART_BRIDGE_SERVER_LOG,
+                    request->handle, request->length);
+        if (request->handle == g_notify_cccd_handle) {
+            /* CCCD writes configure indications and are not UART payload. / CCCD 写用于配置指示，不属于 UART 载荷。 */
+            ble_uart_bridge_handle_cccd_write(server_id, conn_id, request);
+            return;
         }
+        response_status = ble_uart_bridge_process_data_write(request);
     }
 
-send_response:
-    if (request->need_rsp) {
-        /* Write Commands skip this response, while Write Requests receive the mapped status. / 写命令无响应，写请求返回映射状态。 */
-        ble_uart_bridge_response_t response = {request->request_id, response_status, 0, NULL, 0};
-        response_ret = ble_uart_bridge_send_response(server_id, conn_id, &response);
-        if (response_ret != ERRCODE_BT_SUCCESS) {
-            /* A failed ATT response stalls the client's single-flight Write Request queue. / ATT 应答失败会阻塞客户端的单请求发送队列。 */
-            osal_printk("%s write response failed: ret=0x%x, request_id=%u, offset=%u, authorize=%u, prepare=%u\r\n",
-                        BLE_UART_BRIDGE_SERVER_LOG, response_ret, request->request_id, request->offset,
-                        request->need_authorize, request->is_prep);
-        }
-    }
+    /* Write Commands skip this response, while Write Requests receive the mapped status. / 写命令无响应，写请求返回映射状态。 */
+    ble_uart_bridge_send_write_response(server_id, conn_id, request, response_status);
     if (response_status == GATT_STATUS_SUCCESS) {
         /* Mirror the cached-value state into future advertisements for reconnect recovery. / 将缓存状态同步到后续广播以支持重连恢复。 */
         ble_uart_bridge_server_set_adv_default_state(
@@ -702,7 +735,7 @@ errcode_t ble_uart_bridge_server_init(void)
     bts_dev_manager_callbacks_t manager_callbacks = {0};
     errcode_t ret;
 
-    (void)osal_msleep(1000);
+    (void)osal_msleep(BLE_UART_BRIDGE_SERVER_STARTUP_DELAY_MS);
     if (osal_sem_init(&g_ble_enable_sem, 0) != OSAL_SUCCESS) {
         return ERRCODE_BT_FAIL;
     }

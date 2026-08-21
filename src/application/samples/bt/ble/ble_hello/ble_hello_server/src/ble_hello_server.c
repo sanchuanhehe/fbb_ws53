@@ -19,6 +19,7 @@
 
 #define BLE_HELLO_SERVER_LOG "[ble hello server]"
 #define BLE_HELLO_UUID_LEN 2
+#define BLE_HELLO_SERVER_STARTUP_DELAY_MS 1000U
 
 static uint8_t g_server_id;
 static uint16_t g_conn_id;
@@ -357,7 +358,7 @@ errcode_t ble_hello_server_send_notification(const uint8_t *data, uint16_t len)
 
 errcode_t ble_hello_server_init(void)
 {
-    (void)osal_msleep(1000);
+    (void)osal_msleep(BLE_HELLO_SERVER_STARTUP_DELAY_MS);
     errcode_t enable_ret = enable_ble();
     osal_printk("%s enable request ret=0x%x\r\n", BLE_HELLO_SERVER_LOG, enable_ret);
 
