@@ -30,10 +30,6 @@ extra:
   version_selector:
     repo_path: fbb_ws53
     version: master
-  header_link:
-    name: 返回旧版
-    link: https://docs.hisilicon.com/repos/fbb_ws53/zh-CN/master/
-    external: true
 
 nav:
   - 概览: zh-CN/index.md
