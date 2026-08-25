@@ -14,6 +14,7 @@
 #include "cmsis_os2.h"
 #include "securec.h"
 #include "errcode.h"
+#include "common_def.h"
 
 #include "osal_addr.h"
 #include "bts_def.h"
@@ -38,6 +39,9 @@ uint16_t g_indication_characteristic_att_hdl = 0;
 /* ble notification att handle */
 uint16_t g_notification_characteristic_att_hdl = 0;
 
+/* Only this handle may trigger application advertising. */
+static uint16_t g_speed_service_handle = 0;
+
 /* ble connect handle */
 uint16_t g_conn_hdl = 0;
 
@@ -49,32 +53,37 @@ bd_addr_t g_ble_speed_addr = {
     .addr = {0x11, 0x22, 0x33, 0x63, 0x88, 0x63},
 };
 
-#define DATA_LEN 236
+#define DATA_LEN 220
 unsigned char data[DATA_LEN];
 uint64_t g_count_before_get_us;
 uint64_t g_count_after_get_us;
+static uint8_t g_speed_task_started = 0;
 #define SEND_PKT_TIMES 8
 #define SEND_PKT_CNT 100
-#define DEFAULT_BLE_SPEED_MTU_SIZE 500
+#define DEFAULT_BLE_SPEED_MTU_SIZE 247
 #define GAP_MAX_TX_OCTETS 251
-#define GAP_MAX_TX_TIME 2200
+#define GAP_MAX_TX_TIME 2000
 #define SPEED_DEFAULT_CONN_INTERVAL 0x50
 #define SPEED_DEFAULT_SLAVE_LATENCY 0
 #define SPEED_DEFAULT_TIMEOUT_MULTIPLIER 0x1f4
+#define WAIT_DISCOVERY_MS 5000
+#define FLOW_CONTROL_TIME_MS 330
+#define BLE_SPEED_SERVER_STARTUP_DELAY_MS 1000U
 
 #define BLE_SPEED_TASK_PRIO 26
 #define BLE_SPEED_STACK_SIZE 0x2000
 
 extern uint16_t ble_get_tx_number_by_handle(uint16_t co_handle);
 
+#if CONFIG_BLE_SPEED_TEST
 void send_data_thread_function(void)
 {
     printf("start send notify info.\n");
     gap_le_set_phy_t phy_param = {
         .conn_handle    = g_conn_hdl,
         .all_phys       = 0,
-        .tx_phys        = 1,
-        .rx_phys        = 1,
+        .tx_phys        = GAP_BLE_PHY_2M,
+        .rx_phys        = GAP_BLE_PHY_2M,
         .phy_options    = 0,
     };
     gap_ble_set_phy(&phy_param);
@@ -87,6 +96,7 @@ void send_data_thread_function(void)
     gap_ble_set_data_length(&data_param);
 
     int i = 0;
+    osal_msleep(WAIT_DISCOVERY_MS);
     g_count_before_get_us = uapi_systick_get_us();
     while (1) {
         data[0] = (i >> 8) & 0xFF;  /* offset 8bits */
@@ -99,12 +109,33 @@ void send_data_thread_function(void)
         }
         if (i == SEND_PKT_CNT) {
             i = 0;
+            osal_printk("[SYS INFO] send %d pkt:", SEND_PKT_CNT);
             LOS_MEM_POOL_STATUS status;
             LOS_MemInfoGet(m_aucSysMem0, &status);
             osal_printk(" mem: used:%u, free:%u.\r\n", status.uwTotalUsedSize, status.uwTotalFreeSize);
+            osal_msleep(FLOW_CONTROL_TIME_MS);
         }
     }
 }
+#else
+static void ble_uuid_server_send_report_back(const gatts_req_write_cb_t *write_cb_para)
+{
+    uint8_t *response = osal_vmalloc(write_cb_para->length + 1U);
+    if (response == NULL) {
+        return;
+    }
+    (void)memset_s(response, write_cb_para->length + 1U, 0, write_cb_para->length + 1U);
+    if (memcpy_s(response, write_cb_para->length + 1U, write_cb_para->value, write_cb_para->length) != EOK) {
+        osal_printk("[uuid server] write echo copy failed\r\n");
+        osal_vfree(response);
+        return;
+    }
+    osal_printk("[uuid server] write echo len=%hu\r\n", write_cb_para->length);
+    (void)ble_uuid_server_send_report_by_handle(g_notification_characteristic_att_hdl, response,
+        (uint8_t)write_cb_para->length);
+    osal_vfree(response);
+}
+#endif
 
 /* 将uint16的uuid数字转化为bt_uuid_t */
 void stream_data_to_uuid(uint16_t uuid_data, bt_uuid_t *out_uuid)
@@ -132,35 +163,34 @@ static void ble_uuid_server_add_descriptor_ccc(uint32_t server_id, uint32_t srvc
 {
     bt_uuid_t ccc_uuid = {0};
     uint8_t ccc_data_val[] = {0x01, 0x00};
+    uint16_t handle = 0;
 
     osal_printk("[uuid server] beginning add descriptors\r\n");
     stream_data_to_uuid(BLE_UUID_CLIENT_CHARACTERISTIC_CONFIGURATION, &ccc_uuid);
-    gatts_add_desc_info_t descriptor;
-    uint16_t handle;
+    gatts_add_desc_info_t descriptor = {0};
     descriptor.desc_uuid = ccc_uuid;
     descriptor.permissions = GATT_ATTRIBUTE_PERMISSION_READ | GATT_ATTRIBUTE_PERMISSION_WRITE;
     descriptor.value_len = sizeof(ccc_data_val);
     descriptor.value = ccc_data_val;
     gatts_add_descriptor_sync(server_id, srvc_handle, &descriptor, &handle);
-    gatts_start_service(server_id, srvc_handle);
-    osal_vfree(ccc_uuid.uuid);
 }
 
 /* 添加服务的特征和描述符 */
 static void ble_uuid_server_add_characters_and_descriptors(uint32_t server_id, uint32_t srvc_handle)
 {
     bt_uuid_t server_uuid = {0};
-    uint8_t server_value[] = {0x12, 0x34};
+    uint8_t server_value[SDK_BLE_MTU_MAX - BLE_HEAD_BYTE] = {0x12, 0x34};
     osal_printk("[uuid server] beginning add characteristic\r\n");
     stream_data_to_uuid(BLE_UUID_UUID_SERVER_REPORT, &server_uuid);
-    gatts_add_chara_info_t character;
-    gatts_add_character_result_t result;
+    gatts_add_chara_info_t character = {0};
+    gatts_add_character_result_t result = {0};
     character.chara_uuid = server_uuid;
     character.properties = UUID_SERVER_PROPERTIES;
-    character.permissions = 0;
+    character.permissions = GATT_ATTRIBUTE_PERMISSION_READ | GATT_ATTRIBUTE_PERMISSION_WRITE;
     character.value_len = sizeof(server_value);
     character.value = server_value;
     gatts_add_characteristic_sync(server_id, srvc_handle, &character, &result);
+    osal_printk("[uuid server] characteristic handle=%u\r\n", result.value_handle);
     g_notification_characteristic_att_hdl = result.value_handle;
     ble_uuid_server_add_descriptor_ccc(server_id, srvc_handle);
 }
@@ -168,8 +198,12 @@ static void ble_uuid_server_add_characters_and_descriptors(uint32_t server_id, u
 /* 开始服务回调 */
 static void ble_uuid_server_service_start_cbk(uint8_t server_id, uint16_t handle, errcode_t status)
 {
-    osal_printk("[uuid server] start service cbk : server: %d status: %d srv_hdl: %d\n",
+    osal_printk("[uuid server] start service cbk: server=%d status=0x%x handle=%d\r\n",
         server_id, status, handle);
+    if ((server_id == g_server_id) && (handle == g_speed_service_handle) &&
+        (status == ERRCODE_BT_SUCCESS)) {
+        (void)ble_start_adv();
+    }
 }
 
 static void ble_uuid_server_receive_write_req_cbk(uint8_t server_id, uint16_t conn_id,
@@ -184,7 +218,10 @@ static void ble_uuid_server_receive_write_req_cbk(uint8_t server_id, uint16_t co
         osal_printk("%02x ", write_cb_para->value[i]);
     }
     osal_printk("\n");
-    osal_printk("status:%d\n", status);
+    osal_printk("status:0x%x\n", status);
+#if !CONFIG_BLE_SPEED_TEST
+    ble_uuid_server_send_report_back(write_cb_para);
+#endif
 }
 
 static void ble_uuid_server_receive_read_req_cbk(uint8_t server_id, uint16_t conn_id,
@@ -208,6 +245,23 @@ static void ble_uuid_server_adv_disable_cbk(uint8_t adv_id, adv_status_t status)
         adv_id, status);
 }
 
+static void ble_uuid_server_adv_terminate_cbk(uint8_t adv_id, adv_status_t status)
+{
+    osal_printk("adv terminate adv_id: %d, status:0x%x\n", adv_id, status);
+}
+
+static void ble_uuid_server_auth_complete_cbk(uint16_t conn_id, const bd_addr_t *addr, errcode_t status,
+    const ble_auth_info_evt_t *evt)
+{
+    unused(conn_id);
+    unused(evt);
+    osal_printk("[uuid server] auth status:0x%x\r\n", status);
+    if (status != ERRCODE_BT_SUCCESS) {
+        (void)gap_ble_remove_pair(addr);
+        (void)gap_ble_start_adv(BTH_GAP_BLE_ADV_HANDLE_DEFAULT);
+    }
+}
+
 void ble_uuid_server_connect_change_cbk(uint16_t conn_id, bd_addr_t *addr, gap_ble_conn_state_t conn_state,
     gap_ble_pair_state_t pair_state, gap_ble_disc_reason_t disc_reason)
 {
@@ -221,6 +275,7 @@ void ble_uuid_server_connect_change_cbk(uint16_t conn_id, bd_addr_t *addr, gap_b
     g_conn_hdl = conn_id;
 
     if (conn_state == GAP_BLE_STATE_CONNECTED) {
+#if CONFIG_BLE_SPEED_TEST
         gap_conn_param_update_t conn_param = {0};
         conn_param.conn_handle  = conn_id;
         conn_param.interval_min = SPEED_DEFAULT_CONN_INTERVAL;
@@ -228,6 +283,19 @@ void ble_uuid_server_connect_change_cbk(uint16_t conn_id, bd_addr_t *addr, gap_b
         conn_param.slave_latency  = SPEED_DEFAULT_SLAVE_LATENCY;
         conn_param.timeout_multiplier = SPEED_DEFAULT_TIMEOUT_MULTIPLIER;
         gap_ble_connect_param_update(&conn_param);
+        if (g_speed_task_started == 0) {
+            osal_task *task_handle = NULL;
+            osal_kthread_lock();
+            task_handle = osal_kthread_create((osal_kthread_handler)send_data_thread_function, 0,
+                "SpeedTask", BLE_SPEED_STACK_SIZE);
+            if (task_handle != NULL) {
+                g_speed_task_started = 1;
+                osal_kthread_set_priority(task_handle, BLE_SPEED_TASK_PRIO + 1);
+                osal_kfree(task_handle);
+            }
+            osal_kthread_unlock();
+        }
+#endif
     } else if (conn_state == GAP_BLE_STATE_DISCONNECTED) {
         gap_ble_start_adv(BTH_GAP_BLE_ADV_HANDLE_DEFAULT);
     }
@@ -249,17 +317,11 @@ void ble_uuid_server_pair_result_cbk(uint16_t conn_id, const bd_addr_t *addr, er
     }
     osal_printk("\n");
     
-    if (status == 0) {
-        osal_task *task_handle = NULL;
-        osal_kthread_lock();
-        task_handle = osal_kthread_create((osal_kthread_handler)send_data_thread_function, 0,
-            "SpeedTask", BLE_SPEED_STACK_SIZE);
-        osal_kthread_set_priority(task_handle, BLE_SPEED_TASK_PRIO + 1);
-        if (task_handle != NULL) {
-            osal_kfree(task_handle);
-        }
-        osal_kthread_unlock();
+    if (status == ERRCODE_BT_SUCCESS) {
+        return;
     }
+    osal_printk("[uuid server] pair failed, remove stale pair\r\n");
+    (void)gap_ble_remove_pair(addr);
 }
 
 static void ble_uuid_server_conn_param_update_cbk(uint16_t conn_id, errcode_t status,
@@ -277,7 +339,9 @@ static errcode_t ble_uuid_server_register_callbacks(void)
     gap_ble_callbacks_t gap_cb = {0};
     gap_cb.start_adv_cb = ble_uuid_server_adv_enable_cbk;
     gap_cb.stop_adv_cb = ble_uuid_server_adv_disable_cbk;
+    gap_cb.terminate_adv_cb = ble_uuid_server_adv_terminate_cbk;
     gap_cb.conn_state_change_cb = ble_uuid_server_connect_change_cbk;
+    gap_cb.auth_complete_cb = ble_uuid_server_auth_complete_cbk;
     gap_cb.pair_result_cb = ble_uuid_server_pair_result_cbk;
     gap_cb.conn_param_update_cb = ble_uuid_server_conn_param_update_cbk;
     ret |= gap_ble_register_callbacks(&gap_cb);
@@ -299,16 +363,22 @@ static errcode_t ble_uuid_server_register_callbacks(void)
     return ret;
 }
 
-uint8_t ble_uuid_add_service(void)
+static errcode_t ble_uuid_add_service(void)
 {
     osal_printk("[uuid server] ble uuid add service in\r\n");
     bt_uuid_t service_uuid = {0};
     stream_data_to_uuid(BLE_UUID_UUID_SERVER_SERVICE, &service_uuid);
-    uint16_t handle;
-    gatts_add_service_sync(BLE_UUID_SERVER_ID, &service_uuid, true, &handle);
+    uint16_t handle = 0;
+    errcode_t ret = gatts_add_service_sync(BLE_UUID_SERVER_ID, &service_uuid, true, &handle);
+    if (ret != ERRCODE_BT_SUCCESS) {
+        osal_printk("[uuid server] add service failed:0x%x\r\n", ret);
+        return ret;
+    }
+    g_speed_service_handle = handle;
     ble_uuid_server_add_characters_and_descriptors(BLE_UUID_SERVER_ID, handle);
-    osal_printk("[uuid server] ble uuid add service out\r\n");
-    return ERRCODE_BT_SUCCESS;
+    ret = gatts_start_service(g_server_id, handle);
+    osal_printk("[uuid server] ble uuid add service out:0x%x\r\n", ret);
+    return ret;
 }
 
 static errcode_t ble_uuid_gatts_register_server(void)
@@ -324,16 +394,36 @@ static errcode_t ble_uuid_gatts_register_server(void)
 /* 初始化uuid server service */
 errcode_t ble_uuid_server_init(void)
 {
-    (void)osal_msleep(1000); /* 延时1000ms，等待BLE初始化完毕 */
-    enable_ble();
-    ble_uuid_server_register_callbacks();
-    ble_uuid_gatts_register_server();
-    ble_uuid_add_service();
-    gap_ble_set_local_addr(&g_ble_speed_addr);
-    osal_printk("[uuid server] init ok\r\n");
-    ble_start_adv();
-    osal_printk("[uuid server] adv ok\r\n");
-    return ERRCODE_BT_SUCCESS;
+    gap_ble_sec_params_t security = {0};
+    (void)osal_msleep(BLE_SPEED_SERVER_STARTUP_DELAY_MS); /* 等待 BLE 初始化完毕。 */
+    errcode_t ret = enable_ble();
+    if (ret != ERRCODE_BT_SUCCESS) {
+        return ret;
+    }
+    ret = ble_uuid_server_register_callbacks();
+    if (ret != ERRCODE_BT_SUCCESS) {
+        return ret;
+    }
+    security.bondable = 1;
+    security.io_capability = GAP_BLE_IO_CAPABILITY_NOINPUTNOOUTPUT;
+    security.sc_enable = 0;
+    security.sc_mode = GAP_BLE_GAP_SECURITY_MODE1_LEVEL2;
+    ret = gap_ble_set_sec_param(&security);
+    if (ret != ERRCODE_BT_SUCCESS) {
+        osal_printk("[uuid server] security config failed:0x%x\r\n", ret);
+        return ret;
+    }
+    ret = ble_uuid_gatts_register_server();
+    if (ret != ERRCODE_BT_SUCCESS) {
+        return ret;
+    }
+    ret = gap_ble_set_local_addr(&g_ble_speed_addr);
+    if (ret != ERRCODE_BT_SUCCESS) {
+        osal_printk("[uuid server] set local address failed:0x%x\r\n", ret);
+    }
+    ret = ble_uuid_add_service();
+    osal_printk("[uuid server] init status:0x%x\r\n", ret);
+    return ret;
 }
 
 /* device通过uuid向host发送数据：report */
@@ -350,8 +440,7 @@ errcode_t ble_uuid_server_send_report_by_uuid(uint8_t *data, uint16_t len)
         osal_printk("[hid][ERROR]send report new fail\r\n");
         return ERRCODE_BT_FAIL;
     }
-    gatts_notify_indicate_by_uuid(BLE_UUID_SERVER_ID, conn_id, &param);
-    return ERRCODE_BT_SUCCESS;
+    return gatts_notify_indicate_by_uuid(BLE_UUID_SERVER_ID, conn_id, &param);
 }
 
 /* device通过handle向host发送数据：report */
@@ -373,9 +462,9 @@ errcode_t ble_uuid_server_send_report_by_handle(uint16_t attr_handle, const uint
         osal_vfree(param.value);
         return ERRCODE_BT_FAIL;
     }
-    gatts_notify_indicate(BLE_UUID_SERVER_ID, conn_id, &param);
+    errcode_t ret = gatts_notify_indicate(BLE_UUID_SERVER_ID, conn_id, &param);
     osal_vfree(param.value);
-    return ERRCODE_BT_SUCCESS;
+    return ret;
 }
 
 static void ble_speed_entry(void)
