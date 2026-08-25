@@ -168,9 +168,9 @@ SLE 1000认证仪使用方法，设备使用可自行认证实验室工作人员
 
 3.  打开server/config.json文件，将被测设备（接入层）单板的HCI口（M12M13）配置到dut.uHCI。
 
-3. 双击server/main.exe，出现"http server Running on http://0.0.0.0:36066"表示启动正常。
+4. 双击server/main.exe，出现 `http server Running on http://0.0.0.0:36066`，表示启动正常。
 
-4. 双击web/index.html，打开的网页为仪表的操作界面，可执行相关测试操作。
+5. 双击web/index.html，打开的网页为仪表的操作界面，可执行相关测试操作。
 
 ![](figures/zh-cn_image_0000001993226701.png)
 

@@ -38,41 +38,33 @@
 在本文中可能出现下列标志，它们所代表的含义如下。
 
 <a name="table2778843115213"></a>
-<table><thead align="left"><tr id="row677894355211"><th class="cellrowborder" valign="top" width="20.580000000000002%" id="mcps1.1.3.1.1"><p id="p1778104315217"><a name="p1778104315217"></a><a name="p1778104315217"></a><strong id="b15778194315217"><a name="b15778194315217"></a><a name="b15778194315217"></a>符号</strong></p>
-</th>
-<th class="cellrowborder" valign="top" width="79.42%" id="mcps1.1.3.1.2"><p id="p97795439524"><a name="p97795439524"></a><a name="p97795439524"></a><strong id="b197791443195213"><a name="b197791443195213"></a><a name="b197791443195213"></a>说明</strong></p>
-</th>
-</tr>
-</thead>
-<tbody><tr id="row12779743155210"><td class="cellrowborder" valign="top" width="20.580000000000002%" headers="mcps1.1.3.1.1 "><p id="p17779184315215"><a name="p17779184315215"></a><a name="p17779184315215"></a><a name="image1577994319522"></a><a name="image1577994319522"></a><span><img class="" id="image1577994319522" height="25.270000000000003" width="55.9265" src="figures/zh-cn_image_0000001505603565.png"></span></p>
-</td>
-<td class="cellrowborder" valign="top" width="79.42%" headers="mcps1.1.3.1.2 "><p id="p87791343185215"><a name="p87791343185215"></a><a name="p87791343185215"></a>表示如不避免则将会导致死亡或严重伤害的具有高等级风险的危害。</p>
-</td>
-</tr>
-<tr id="row97791743205210"><td class="cellrowborder" valign="top" width="20.580000000000002%" headers="mcps1.1.3.1.1 "><p id="p10779194345220"><a name="p10779194345220"></a><a name="p10779194345220"></a><a name="image67796439522"></a><a name="image67796439522"></a><span><img class="" id="image67796439522" height="25.270000000000003" width="55.9265" src="figures/zh-cn_image_0000001505882589.png"></span></p>
-</td>
-<td class="cellrowborder" valign="top" width="79.42%" headers="mcps1.1.3.1.2 "><p id="p14779443205218"><a name="p14779443205218"></a><a name="p14779443205218"></a>表示如不避免则可能导致死亡或严重伤害的具有中等级风险的危害。</p>
-</td>
-</tr>
-<tr id="row4779184315526"><td class="cellrowborder" valign="top" width="20.580000000000002%" headers="mcps1.1.3.1.1 "><p id="p7779114315210"><a name="p7779114315210"></a><a name="p7779114315210"></a><a name="image17795435522"></a><a name="image17795435522"></a><span><img class="" id="image17795435522" height="25.270000000000003" width="55.9265" src="figures/zh-cn_image_0000001505722841.png"></span></p>
-</td>
-<td class="cellrowborder" valign="top" width="79.42%" headers="mcps1.1.3.1.2 "><p id="p17779164315214"><a name="p17779164315214"></a><a name="p17779164315214"></a>表示如不避免则可能导致轻微或中度伤害的具有低等级风险的危害。</p>
-</td>
-</tr>
-<tr id="row677924319525"><td class="cellrowborder" valign="top" width="20.580000000000002%" headers="mcps1.1.3.1.1 "><p id="p8779124315523"><a name="p8779124315523"></a><a name="p8779124315523"></a><a name="image177798438523"></a><a name="image177798438523"></a><span><img class="" id="image177798438523" height="25.270000000000003" width="55.9265" src="figures/zh-cn_image_0000001456082760.png"></span></p>
-</td>
-<td class="cellrowborder" valign="top" width="79.42%" headers="mcps1.1.3.1.2 "><p id="p5779184355211"><a name="p5779184355211"></a><a name="p5779184355211"></a>用于传递设备或环境安全警示信息。如不避免则可能会导致设备损坏、数据丢失、设备性能降低或其它不可预知的结果。</p>
-<p id="p18779204305212"><a name="p18779204305212"></a><a name="p18779204305212"></a>“须知”不涉及人身伤害。</p>
-</td>
-</tr>
-<tr id="row137792043195210"><td class="cellrowborder" valign="top" width="20.580000000000002%" headers="mcps1.1.3.1.1 "><p id="p1277964313522"><a name="p1277964313522"></a><a name="p1277964313522"></a><a name="image577974325215"></a><a name="image577974325215"></a><span><img class="" id="image577974325215" height="15.96" width="47.88" src="figures/zh-cn_image_0000001455922852.png"></span></p>
-</td>
-<td class="cellrowborder" valign="top" width="79.42%" headers="mcps1.1.3.1.2 "><p id="p1877912438522"><a name="p1877912438522"></a><a name="p1877912438522"></a>对正文中重点信息的补充说明。</p>
-<p id="p37791843185213"><a name="p37791843185213"></a><a name="p37791843185213"></a>“说明”不是安全警示信息，不涉及人身、设备及环境伤害信息。</p>
-</td>
-</tr>
-</tbody>
-</table>
+
+<style>
+.symbol-convention-table table {
+  table-layout: fixed;
+}
+
+.symbol-convention-table th:first-child,
+.symbol-convention-table td:first-child {
+  width: 120px;
+}
+
+.symbol-convention-table .img-wrapper img {
+  max-width: 100% !important;
+}
+</style>
+
+<div class="symbol-convention-table" markdown="1">
+
+| 符号 | 说明 |
+| --- | --- |
+| ![危险](figures/zh-cn_image_0000001505603565.png) | 表示如不避免则将会导致死亡或严重伤害的具有高等级风险的危害。 |
+| ![警告](figures/zh-cn_image_0000001505882589.png) | 表示如不避免则可能导致死亡或严重伤害的具有中等级风险的危害。 |
+| ![小心](figures/zh-cn_image_0000001505722841.png) | 表示如不避免则可能导致轻微或中度伤害的具有低等级风险的危害。 |
+| ![须知](figures/zh-cn_image_0000001456082760.png) | 用于传递设备或环境安全警示信息。如不避免则可能会导致设备损坏、数据丢失、设备性能降低或其它不可预知的结果。“须知”不涉及人身伤害。 |
+| ![说明](figures/zh-cn_image_0000001455922852.png) | 对正文中重点信息的补充说明。“说明”不是安全警示信息，不涉及人身、设备及环境伤害信息。 |
+
+</div>
 
 **修改记录<a name="section2467512116410"></a>**
 
