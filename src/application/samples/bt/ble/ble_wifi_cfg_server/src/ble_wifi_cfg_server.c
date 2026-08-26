@@ -67,7 +67,7 @@ uint16_t g_conn_handle = 0;
 #define BLE_WIFI_CFG_CHARACTER_VALUE_INDICATE_0 0X00
 #define BLE_WIFI_CFG_CHARACTER_VALUE_INDICATE_2 0X02
 
-extern void set_wifi_cfg_info(uint8_t *info, uint16_t info_len);
+extern int set_wifi_cfg_info(const uint8_t *info, uint16_t info_len);
 extern int bgwc_wifi_list_resp_send(uint16_t handle);
 
 /* 将uint16的uuid数字转化为bt_uuid_t */
@@ -101,22 +101,50 @@ static void ble_wifi_cfg_server_service_start_cbk(uint8_t server_id, uint16_t ha
 static void ble_wifi_cfg_server_receive_write_req_cbk(uint8_t server_id, uint16_t conn_id,
     gatts_req_write_cb_t *write_cb_para, errcode_t status)
 {
+    uint8_t rsp_status = GATT_STATUS_SUCCESS;
+
+    if (write_cb_para == NULL) {
+        osal_printk("[wifi_cfg_server] null write request\r\n");
+        return;
+    }
+
     osal_printk("[wifi_cfg_server]ReceiveWriteReqCallback--server_id:%d conn_id:%d\n", server_id, conn_id);
     osal_printk("request_id:%d att_handle:%d offset:%d need_rsp:%d need_authorize:%d is_prep:%d\n",
         write_cb_para->request_id, write_cb_para->handle, write_cb_para->offset, write_cb_para->need_rsp,
         write_cb_para->need_authorize, write_cb_para->is_prep);
     osal_printk("data_len:%d data:\n", write_cb_para->length);
-    for (uint16_t i = 0; i < write_cb_para->length; i++) {
-        osal_printk("%02x ", write_cb_para->value[i]);
+    if (write_cb_para->value != NULL) {
+        for (uint16_t i = 0; i < write_cb_para->length; i++) {
+            osal_printk("%02x ", write_cb_para->value[i]);
+        }
     }
     osal_printk("\n");
     osal_printk("status: 0x%x\n", status);
 
-    if (write_cb_para->handle == g_chara_cfg_hdl) {
-        set_wifi_cfg_info(write_cb_para->value, write_cb_para->length);
+    if (status != ERRCODE_BT_SUCCESS) {
+        rsp_status = GATT_STATUS_UNLIKELY_ERROR;
+    } else if ((write_cb_para->length > 0) && (write_cb_para->value == NULL)) {
+        rsp_status = GATT_STATUS_INVALID_ATTRIBUTE_VALUE_LENGTH;
+    } else if ((write_cb_para->offset != 0) || write_cb_para->is_prep) {
+        /* This sample does not support fragmented or prepared writes. */
+        rsp_status = GATT_STATUS_REQUEST_NOT_SUPPORTED;
+    } else if (write_cb_para->handle == g_chara_cfg_hdl) {
+        if (set_wifi_cfg_info(write_cb_para->value,
+                              write_cb_para->length) != 0) {
+            rsp_status = GATT_STATUS_INVALID_ATTRIBUTE_VALUE_LENGTH;
+        }
+    } else if (write_cb_para->handle == g_chara_wifi_list_hdl) {
+        if (bgwc_wifi_list_resp_send(write_cb_para->handle) != ERRCODE_BT_SUCCESS) {
+            rsp_status = GATT_STATUS_UNLIKELY_ERROR;
+        }
     }
-    if (write_cb_para->handle == g_chara_wifi_list_hdl) {
-        bgwc_wifi_list_resp_send(write_cb_para->handle);
+
+    if (write_cb_para->need_rsp) {
+        gatts_send_rsp_t response = {0};
+        response.request_id = write_cb_para->request_id;
+        response.status = rsp_status;
+        response.offset = write_cb_para->offset;
+        (void)gatts_send_response(server_id, conn_id, &response);
     }
 }
 
