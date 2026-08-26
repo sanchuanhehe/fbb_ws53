@@ -119,18 +119,12 @@ void set_wifi_list_req_flag(uint8_t flag)
 
 int set_wifi_cfg_info(const uint8_t *info, uint16_t info_len)
 {
-    uint8_t temp[WIFI_MAX_CONFIG_INFO_LEN] = {0};
-
-    if ((info == NULL) || (info_len == 0) || (info_len > WIFI_MAX_CONFIG_INFO_LEN)) {
+    /* This sample only accepts one complete 64-byte Wi-Fi configuration packet. */
+    if ((info == NULL) || (info_len != sizeof(g_data))) {
         return -1;
     }
 
-    /* temp 尾部保持为 0，避免短数据残留旧密码 */
-    if (memcpy_s(temp, sizeof(temp), info, info_len) != EOK) {
-        return -1;
-    }
-
-    if (memcpy_s(g_data, sizeof(g_data), temp, sizeof(temp)) != EOK) {
+    if (memcpy_s(g_data, sizeof(g_data), info, info_len) != EOK) {
         return -1;
     }
 
