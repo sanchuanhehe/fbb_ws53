@@ -2,9 +2,9 @@
 
 本文档主要介绍TLS/DTLS组件的开发实现示例。
 
-TLS/DTLS以及其他加密套基于开源组件MbedTLS 3.1.0实现，详细说明请参见官方说明：[https://tls.mbed.org/api/index.html](https://tls.mbed.org/api/index.html)
+TLS/DTLS以及其他加密套件基于开源组件Mbed TLS 3.1.0实现，详细说明请参考[Mbed TLS官方文档](https://mbed-tls.readthedocs.io/en/latest/)和[Mbed TLS 3.1.0源代码](https://github.com/Mbed-TLS/mbedtls/tree/v3.1.0)。
 
-如果官方说明版本与SDK版本不一致，请参考官方release说明：[https://github.com/ARMmbed/mbedtls/releases](https://github.com/ARMmbed/mbedtls/releases)
+SDK使用Mbed TLS 3.1.0，版本差异请参考[Mbed TLS 3.1.0发布说明](https://github.com/Mbed-TLS/mbedtls/releases/tag/v3.1.0)。
 
 # API接口说明<a name="ZH-CN_TOPIC_0000001945138665"></a>
 
@@ -16,19 +16,19 @@ TLS/DTLS以及其他加密套基于开源组件MbedTLS 3.1.0实现，详细说�
 
 ## 结构体说明<a name="ZH-CN_TOPIC_0000001912299528"></a>
 
-MbedTLS详细的结构体说明请参考官方说明文档：[https://tls.mbed.org/api/annotated.html](https://tls.mbed.org/api/annotated.html)
+Mbed TLS详细的结构体说明请参考[官方API结构体列表](https://mbed-tls.readthedocs.io/projects/api/en/latest/api/structlist/)。
 
 ## API列表<a name="ZH-CN_TOPIC_0000001912299544"></a>
 
-MbedTLS详细的API说明请参考官方说明文档：[https://tls.mbed.org/api/globals_func.html](https://tls.mbed.org/api/globals_func.html)
+Mbed TLS详细的API说明请参考[官方API文档](https://mbed-tls.readthedocs.io/projects/api/en/latest/)。
 
 ## 配置说明<a name="ZH-CN_TOPIC_0000001912459456"></a>
 
-MbedTLS详细的配置项说明请参考官方说明文档：[https://tls.mbed.org/api/config_8h.html#ab3bca0048342cf2789e7d170548ff3a5](https://tls.mbed.org/api/config_8h.html#ab3bca0048342cf2789e7d170548ff3a5)
+Mbed TLS的配置方法请参考[官方配置指南](https://mbed-tls.readthedocs.io/en/latest/kb/compiling-and-building/how-do-i-configure-mbedtls/)，各配置项说明请参考[Mbed TLS 3.1.0配置文件](https://github.com/Mbed-TLS/mbedtls/blob/v3.1.0/include/mbedtls/mbedtls_config.h)。
 
 # 开发指南<a name="ZH-CN_TOPIC_0000001912299536"></a>
 
-MbedTLS详细的开发DEMO请参考官方说明文档：[https://tls.mbed.org/api/modules.html](https://tls.mbed.org/api/modules.html)
+Mbed TLS开发示例请参考[官方示例程序说明](https://mbed-tls.readthedocs.io/en/latest/kb/development/sample_applications/)。
 
 # 硬件适配<a name="ZH-CN_TOPIC_0000001912459468"></a>
 
