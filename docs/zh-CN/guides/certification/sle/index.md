@@ -555,7 +555,7 @@ AT串口：UART波特率115200，对应UART0
 
     https://www.driverguide.com/driver/detail.php?driverid=2041464
 
--   版本烧写，使用burntools工具（海思工）
+-   版本烧写，使用[BurnTool](https://gitcode.com/HiSpark/fbb_burntool)工具。
 
 ## 软件启动加载<a name="ZH-CN_TOPIC_0000001956227360"></a>
 
