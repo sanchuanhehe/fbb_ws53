@@ -189,49 +189,37 @@ WS53属于轻量级系统，只需要关注轻量级系统的测试项，当前�
 
 ## 创建WS53V100工程<a name="ZH-CN_TOPIC_0000001999755525"></a>
 
-1.  拷贝device/board/hisilicon/hispark\_pegasus文件夹， 重命名为“ws53
+1.  拷贝device/board/hisilicon/hispark\_pegasus文件夹，重命名为“ws53”。
 
-    cp -r device/board/hisilicon/hispark\_pegasus device/board/hisilicon/ws53”。
+    ```
+    cp -r device/board/hisilicon/hispark_pegasus device/board/hisilicon/ws53
+    ```
 
     ![](figures/zh-cn_image_0000001963074854.png)
 
 2.  在“device/soc/hisilicon”下创建ws53v100文件夹。
 
-    cd device/soc/hisilicon 
-
     ```
+    cd device/soc/hisilicon
     mkdir ws53v100
     ```
 
 3.  添加编译文件device/soc/hisilicon/ws53v100/BUILD.gn，文件内容如下：
 
-    \# Copyright \(C\) 2024 Hisilicon \(Shanghai\) Technologies Co., Ltd. All rights reserved. 
+    ```
+    # Copyright (C) 2024 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
 
-    ```
-    group("ws53v100") { 
-    ```
-
-    ```
+    group("ws53v100") {
     }
     ```
 
 4.  进入ws53v100目录，将WS53V100 SDK拷贝到该目录下，并创建文件夹adapter/hals用存放升级及文件系统接口适配源码。
 
-    cd device/soc/hisilicon/ws53v100 
-
     ```
-    cp -r ***/sdk ./ 
-    ```
-
-    ```
-    mkdir adapter 
-    ```
-
-    ```
-    cd adapter 
-    ```
-
-    ```
+    cd device/soc/hisilicon/ws53v100
+    cp -r ***/sdk ./
+    mkdir adapter
+    cd adapter
     mkdir hals
     ```
 
@@ -239,25 +227,12 @@ WS53属于轻量级系统，只需要关注轻量级系统的测试项，当前�
 
 5.  拷贝vendor/hisilicon/hispark\_pegasus目录到vendor/hisilicon，并重命名为ws53；去掉demo，audio以及token，仅保留下图所示文件。
 
-    cp -r vendor/hisilicon/hispark\_pegasus vendor/hisilicon/ws53 
-
     ```
-    cd vendor/hisilicon/ws53 
-    ```
-
-    ```
-    rm -rf demo 
-    ```
-
-    ```
-    cd hals 
-    ```
-
-    ```
-    rm -rf audio 
-    ```
-
-    ```
+    cp -r vendor/hisilicon/hispark_pegasus vendor/hisilicon/ws53
+    cd vendor/hisilicon/ws53
+    rm -rf demo
+    cd hals
+    rm -rf audio
     rm -rf utils/token
     ```
 
@@ -377,11 +352,8 @@ WS53属于轻量级系统，只需要关注轻量级系统的测试项，当前�
 1.  配置编译工具链文件“device/board/hisilicon/ws53/liteos\_m/config.gni”，文件内容如下：
 
     ```
-    # Copyright (C) 2024 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved. 
-    
-    ```
+    # Copyright (C) 2024 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
 
-    ```
     # Kernel type, e.g. "linux", "liteos_a", "liteos_m". 
     kernel_type = "liteos_m" 
      
@@ -480,41 +452,16 @@ WS53属于轻量级系统，只需要关注轻量级系统的测试项，当前�
 
 2.  编译适配 device/board/hisilicon/ws53/ohos.build，文件内容如下：
 
-    \{ 
-
     ```
-      "parts": { 
-    ```
-
-    ```
-        "device_ws53": { 
-    ```
-
-    ```
-          "module_list": [ 
-    ```
-
-    ```
-            "//device/soc/hisilicon/ws53v100:ws53v100" 
-    ```
-
-    ```
-          ] 
-    ```
-
-    ```
-        } 
-    ```
-
-    ```
-      }, 
-    ```
-
-    ```
-      "subsystem": "device_ws53" 
-    ```
-
-    ```
+    {
+      "parts": {
+        "device_ws53": {
+          "module_list": [
+            "//device/soc/hisilicon/ws53v100:ws53v100"
+          ]
+        }
+      },
+      "subsystem": "device_ws53"
     }
     ```
 
