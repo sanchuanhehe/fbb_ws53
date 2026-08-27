@@ -5,17 +5,29 @@ hide:
 
 # BLE
 
-WS53 的 BLE 示例以 **Peripheral（外设）** 角色运行。烧录后，设备先广播，手机或其他 BLE Central（中心设备）扫描并连接，再按示例定义的 GATT 服务进行数据交互。
+> GATT (Generic Attribute Profile) Server、基础入门、数据通信、垂直应用
 
-当前源码提供以下两个示例：
+WS53 不支持 BLE Central（中心设备）/GATT Client（客户端）功能，BLE 示例均以 Peripheral（外设）/GATT Server（服务端）角色运行。验证示例时，请使用手机、PC 调试工具、WS63 或其他支持 BLE Client 功能的设备完成扫描、连接、服务发现和特征操作。BLE Sample 通过 Kconfig `choice` 互斥选择，同一固件中只能启用一个 BLE 示例。
 
-| 示例 | 你可以看到什么 | 入口 |
-| --- | --- | --- |
-| BLE 高吞吐传输 | 连接后订阅通知，持续接收 236 字节测试数据 | [高吞吐传输](high-throughput.md) |
-| BLE Wi-Fi 配网 | 通过 BLE 写入 SSID/密码，设备扫描并连接 Wi-Fi，再返回结果码 | [Wi-Fi 配网](verticals/wifi-config.md) |
+## 快速导航
 
-两个示例都需要一个 BLE Client 进行扫描、连接、服务发现和特征操作。请以页面列出的 UUID、特征属性和数据格式为准。
+### 基础入门
 
-!!! note
+- [Hello BLE (Bluetooth Low Energy)](./basics/hello-connect.md)
+- [Hello Notify](./basics/hello-notify.md)
+- [Hello ReadWrite](./basics/hello-readwrite.md)
 
-    WS63 中的 BLE 基础、OTA、安全和其他行业案例没有对应的 WS53 示例源码，因此本目录暂不列出这些页面，避免把不可直接运行的功能误认为 WS53 已支持。
+### 数据通信
+
+- [UART (Universal Asynchronous Receiver/Transmitter) 透传](./data-comm/uart-bridge.md)
+- [传感器上报](./data-comm/sensor-report.md)
+
+### 高级功能
+
+- [高吞吐传输](./high-throughput.md)
+
+### 垂直应用场景
+
+- [Wi-Fi 配网](./verticals/wifi-config.md)
+- [HID (Human Interface Device) 按键](./verticals/hid.md)
+- [网关传感器节点](./verticals/gateway.md)

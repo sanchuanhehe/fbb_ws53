@@ -31,7 +31,7 @@ WS53 是海思推出的低功耗 Wi-Fi、BLE 和 SLE Combo 芯片，适用于智
 | | 特性 | 支持 A-MPDU、A-MSDU、QoS、STBC 和 LDPC |
 | BLE | 协议 | BLE 5.4 |
 | | 频宽 / 速率 | 1 MHz、2 MHz；125 Kbit/s、500 Kbit/s、1 Mbit/s、2 Mbit/s，最大发射功率 14 dBm |
-| | 特性 | 多路广播，支持 Class 1 和 Class 2 |
+| | 特性 | 多路广播，支持 Class 1 和 Class 2；不支持 BLE Central（中心设备）/GATT Client（客户端）功能 |
 | SLE | 协议 | SLE 1.0 |
 | | 频宽 / 速率 | 1 MHz、2 MHz、4 MHz，最高 12 Mbps，最大发射功率 14 dBm |
 | | 特性 | 低功耗、Polar 信道编码、SM4 |

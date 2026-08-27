@@ -1,10 +1,12 @@
 # Wi-Fi 配网
 
+> BLE (Bluetooth Low Energy) GATT (Generic Attribute Profile) 配网服务、Wi-Fi STA 接入与结果回传
+
+> 前置阅读：[Hello BLE](../basics/hello-connect.md)、[Hello Notify](../basics/hello-notify.md)、[Hello ReadWrite](../basics/hello-readwrite.md)
+
 通过 BLE（Bluetooth Low Energy）将手机或其他 BLE Client 下发的 Wi-Fi 凭证传给 WS53。设备收到凭证后扫描并连接目标 AP（Access Point），完成 DHCP（Dynamic Host Configuration Protocol）后，再通过 BLE 返回配网结果。
 
 本案例由 BLE GATT Server 和 Wi-Fi STA 两部分组成，不依赖 GPIO、LED、按键等外设。
-
-> 前置阅读：[Hello Notify](../../sle/basics/hello-notify.md)
 
 ## 学习目标
 
@@ -165,12 +167,12 @@ flowchart TD
 
 | 偏移 | 长度 | 内容 |
 | --- | --- | --- |
-| `0` | 32 字节 | SSID，以 `0x00` 结尾，不足部分补 `0x00` |
-| `32` | 32 字节 | Password，以 `0x00` 结尾，不足部分补 `0x00` |
+| `0` | 32 字节 | SSID；不足 32 字节时以 `0x00` 结尾并补齐，恰好为 32 字节时可不带结束符 |
+| `32` | 32 字节 | Password；不足 32 字节时以 `0x00` 结尾并补齐，恰好为 32 字节时可不带结束符 |
 
-由于 WS53 源码将两个字段复制到 32 字节的 C 字符串缓冲区，建议 SSID 和密码各不超过 31 字节，并确保字段末尾包含 `0x00`。
+WS53 将两个字段分别复制到 33 字节的缓冲区，并在第 33 字节补 `\0`，因此 SSID 和密码字段均可包含最多 32 字节。字段不足 32 字节时，应使用 `0x00` 填充剩余空间。
 
-**凭证传输要求：**当前 `set_wifi_cfg_info()` 不处理写入偏移，也不拼接分片。Client 必须先将 ATT MTU 协商到至少 67 字节，再将完整 64 字节作为一次 Write Without Response 写入。若调试工具把数据拆成多包，每包都会从缓冲区起始位置覆盖，最终无法得到正确凭证。
+**凭证传输要求：**Server 只接受 `offset=0`、非 Prepared Write 的完整 64 字节配置包；非零 offset、Prepared Write 和长度不等于 64 字节的请求都会被拒绝。Client 应先将 ATT MTU 协商到至少 67 字节，再将完整配置包作为一次 Write Without Response 写入。本案例不支持分片拼接。
 
 #### AP 列表请求和确认
 
@@ -232,7 +234,7 @@ fbb flash ws53-liteos-app
 2. 确认日志出现 `Ble Init State:0` 和 `Ble Adv State:0`。
 3. 使用支持自定义 GATT 操作的 BLE Client 扫描 `ble_wifi_config`。
 4. 连接设备并发现 Service `0xFD5C`。
-5. 订阅 `0xFD5D` 和 `0xFD5F` 的 Notification；如需接收 `0xFD5E` 的 Indication，也应写入其 CCCD。
+5. 订阅 `0xFD5D` 和 `0xFD5F` 的 Notification。`0xFD5E` 在当前案例中仅用于接收 Wi-Fi 凭证，案例代码不会通过该特征发送 Indication。
 
 ### 第五步：请求 AP 列表
 
@@ -243,8 +245,8 @@ fbb flash ws53-liteos-app
 
 ### 第六步：下发凭证
 
-1. 将 SSID 编码为最多 31 字节，末尾补 `0x00`，再补齐到 32 字节。
-2. 将密码按相同方式补齐到 32 字节。
+1. 将 SSID 编码为最多 32 字节；不足 32 字节时末尾补 `0x00`，再补齐到 32 字节。
+2. 将密码按相同规则编码并补齐到 32 字节。
 3. 拼接为完整 64 字节，并确保 Client 不会分片写入。
 4. 向 `0xFD5E` 执行 Write Without Response。
 5. 观察串口中的扫描、关联和 DHCP 日志。
@@ -258,7 +260,7 @@ STA DHCP Succ.
 result code:0.
 ```
 
-调试日志会打印目标 SSID 和扫描到的 AP 信息，分享日志前请先去除敏感网络信息。
+本案例的调试日志会打印目标 SSID、扫描到的 AP 信息，以及包含 SSID 和密码的 64 字节原始写入数据。请仅使用测试凭证；分享串口日志前，应删除或脱敏 SSID、密码等网络信息。
 
 ## 关键配置
 
@@ -345,25 +347,41 @@ static int bgwc_wifi_start(void)
 
 ### 凭证写入回调
 
-Client 向 `0xFD5E` 写入数据时，GATT Server 根据 Characteristic Handle 调用 `set_wifi_cfg_info()`：
+Client 向 `0xFD5E` 写入数据时，GATT Server 先检查协议栈状态、数据指针、offset 和 Prepared Write 标志，再根据 Characteristic Handle 调用 `set_wifi_cfg_info()`。核心处理如下：
 
 ```c
-if (write_cb_para->handle == g_chara_cfg_hdl) {
-    set_wifi_cfg_info(write_cb_para->value, write_cb_para->length);
+if (status != ERRCODE_BT_SUCCESS) {
+    rsp_status = GATT_STATUS_UNLIKELY_ERROR;
+} else if ((write_cb_para->length > 0) && (write_cb_para->value == NULL)) {
+    rsp_status = GATT_STATUS_INVALID_ATTRIBUTE_VALUE_LENGTH;
+} else if ((write_cb_para->offset != 0) || write_cb_para->is_prep) {
+    rsp_status = GATT_STATUS_REQUEST_NOT_SUPPORTED;
+} else if (write_cb_para->handle == g_chara_cfg_hdl) {
+    if (set_wifi_cfg_info(write_cb_para->value, write_cb_para->length) != 0) {
+        rsp_status = GATT_STATUS_INVALID_ATTRIBUTE_VALUE_LENGTH;
+    }
 }
 ```
 
-当前实现直接从 `g_data[0]` 开始复制，并立即置位凭证标志：
+`set_wifi_cfg_info()` 只接受完整的 64 字节配置包，检查复制结果，并在数据完整复制后设置凭证就绪标志：
 
 ```c
-void set_wifi_cfg_info(uint8_t *info, uint16_t info_len)
+int set_wifi_cfg_info(const uint8_t *info, uint16_t info_len)
 {
+    if ((info == NULL) || (info_len != sizeof(g_data))) {
+        return -1;
+    }
+
+    if (memcpy_s(g_data, sizeof(g_data), info, info_len) != EOK) {
+        return -1;
+    }
+
     set_wifi_cfg_info_flag(1);
-    (void)memcpy_s(g_data, WIFI_MAX_CONFIG_INFO_LEN, info, info_len);
+    return 0;
 }
 ```
 
-因此当前 Client 必须保证单次写入完整的 64 字节。Server 既没有要求 `info_len == 64`，也没有检查 `memcpy_s()` 返回值，而且在复制前就把凭证就绪标志置为 `1`；长度错误或复制失败仍可能驱动后续配网流程。
+写回调使用 `uint16_t` 遍历写入数据；当请求需要响应时，还会根据上述检查结果返回对应的 GATT 状态。长度错误、复制失败、非零 offset 或 Prepared Write 均不会设置凭证就绪标志。
 
 ### AP 列表生成
 
@@ -395,13 +413,3 @@ netifapi_dhcp_start(netif_p);
 ```
 
 当接口获得非零 IP 地址时，结果码置为 `0`；否则保持为 `3`（DHCP 失败）。最终通过 `0xFD5D` 返回两个字节。
-
-### 输入处理要求
-
-GATT 写回调使用 `uint8_t` 循环变量遍历 `uint16_t length`。若协议栈传入长度大于 255，循环变量会回绕，存在无法正常结束的风险。`set_wifi_cfg_info()` 还会先置就绪标志，再忽略 `memcpy_s()` 返回值，并且没有校验长度必须为 64。
-
-在修复 Server 前，只应使用受控 Client 发送单个、`offset=0`、长度恰好为 64 字节的写请求。产品化实现应先校验 Handle、offset、长度和分片状态，再复制数据、设置就绪标志，并按请求类型返回成功或错误响应。
-
-当前案例不保存 SSID 和密码到 NV，不提供自动重连、配网超时、多次重试、LED/按键交互或 WS53 BLE Client；配网任务执行一次后退出。
-
-如果后续要补齐 NV、LED 或按键功能，应先与对应模块的维护者确认接口和驱动方案，再把这些能力加入本文。

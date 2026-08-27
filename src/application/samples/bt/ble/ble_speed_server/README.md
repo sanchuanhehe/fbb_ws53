@@ -6,7 +6,7 @@
 
 ## 2. 适用场景
 
-- 测量 WS53 BLE 空口吞吐和稳定性。
+- 测量 WS53 BLE 应用层有效载荷吞吐率和稳定性。
 - 验证 ATT MTU、2M PHY、Data Length Extension 和协议栈发送缓冲。
 - 作为 WS63 Speed Client 的吞吐或回环联调端。
 
@@ -20,7 +20,9 @@
 ## 4. 不支持/限制
 
 - 吞吐结果受 Client、射频环境、连接参数和日志打印影响，不代表产品保证值。
+- 文中的吞吐率按 Client 实际接收的应用数据计算，不等同于包含协议开销的空口速率。
 - 吞吐模式持续运行，发送任务不会自动结束。
+- 发送任务按发送尝试计数，不检查 Notification 接口返回值；接收端可能观察到序号跳变。
 - 本示例使用固定 BLE 地址，和其他固定地址 Sample 并行时需避免冲突。
 - `CONFIG_BLE_SPEED_TEST` 改变特征属性，Server 和 Client 必须选择匹配模式。
 
@@ -62,8 +64,8 @@ ble_speed_server/
 1. 创建 Speed Server 任务，使能 BLE 并注册 GAP/GATTS 回调。
 2. 创建 `0xABCD/0xCDEF` 服务并广播 `ble_uuid_server`。
 3. Client 连接后请求 MTU 247。
-4. 吞吐模式等待 5 秒，设置 2M PHY 和 Data Length，再按发送缓冲余量持续发送。
-5. 每发送 100 包打印一次内存状态并退避 330 ms。
+4. 吞吐模式请求 2M PHY 和 251 字节 Data Length，再等待 5 秒，然后按发送缓冲余量持续发送。
+5. 每进行 100 次发送尝试，打印一次内存状态并退避 330 ms。
 6. 回环模式把 Client 写入载荷通过 Indication 返回。
 
 ## 9. 核心文件说明
@@ -99,7 +101,7 @@ ble_speed_server/
 - WS53 Server 和匹配模式的 WS63 Speed Client。
 - 两块板尽量靠近，并关闭同地址 BLE Sample。
 
-由于 WS53 工程未提供 BLE Central/GATT Client 相关组件，无法承担 Client 角色，因此本例使用 WS63 作为配套 Client 验证端。Client 工程位于 `fbb_ws63/src/application/samples/bt/ble/ble_speed_client`，在 WS63 工程中选择 `CONFIG_SAMPLE_SUPPORT_BLE_SPEED_CLIENT_SAMPLE=y` 后编译、烧录。现有 WS63 Client 用于验证 WS53 的 `CONFIG_BLE_SPEED_TEST=y` Notification 吞吐模式，并负责统计包数、耗时和吞吐；若将 WS53 切换为回环模式，Client 还需支持 Write Without Response 和 Indication。
+由于 WS53 工程未提供 BLE Central/GATT Client 相关组件，无法承担 Client 角色，因此本例使用 WS63 作为配套 Client 验证端。Client 工程位于 `fbb_ws63/src/application/samples/bt/ble/ble_speed_client`，在 WS63 工程中选择 `CONFIG_SAMPLE_SUPPORT_BLE_SPEED_CLIENT_SAMPLE=y` 后编译、烧录。现有 WS63 Client 用于验证 WS53 的 `CONFIG_BLE_SPEED_TEST=y` Notification 吞吐模式，并负责统计实际接收包数、耗时和应用层有效载荷吞吐率；若将 WS53 切换为回环模式，Client 还需支持 Write Without Response 和 Indication。
 
 ### 编译
 
@@ -118,7 +120,7 @@ fbb monitor --port COM<N> --baud 115200 --chip ws53 --reset --timeout 60
 
 ### 运行结果
 
-吞吐模式应看到 `start send notify info` 和每 100 包的内存日志；回环模式应看到 `write echo len=<n>`，Client 负责统计包数、耗时和吞吐。
+吞吐模式应看到 `start send notify info` 和每 100 次发送尝试对应的内存日志；该日志不表示 Client 已成功接收 100 包。回环模式应看到 `write echo len=<n>`，Client 负责统计实际接收包数、耗时和应用层有效载荷吞吐率。
 
 ## 13. 输入输出示例
 

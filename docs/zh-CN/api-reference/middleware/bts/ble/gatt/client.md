@@ -1,6 +1,10 @@
 # GATT Client
 
-GATT (Generic Attribute Profile) client 提供 BLE (Bluetooth Low Energy) 通用属性规范客户端能力，支持向远端服务端发起服务发现、特征发现、特征描述符发现，以及按照句柄或 UUID (Universally Unique Identifier) 读取与写入属性值，并支持通过回调向应用上报发现结果、读写响应、MTU (Maximum Transmission Unit) 协商结果、Notification 与 Indication 等事件。
+本页记录 GATT (Generic Attribute Profile) Client 相关接口声明，包括向远端服务端发起服务发现、特征发现、特征描述符发现，按照句柄或 UUID (Universally Unique Identifier) 读取与写入属性值，以及通过回调上报发现结果、读写响应、MTU (Maximum Transmission Unit) 协商结果、Notification 与 Indication 等事件。
+
+!!! warning "当前 WS53 方案不支持 BLE Client"
+
+    当前 WS53 SDK 解决方案未集成 BLE Central（中心设备）/GATT Client（客户端）相关组件，不支持使用本页接口开发 BLE Client。公共头文件中保留的接口声明不代表当前 WS53 方案支持该能力；WS53 仅支持 BLE Peripheral（外设）/GATT Server（服务端）角色。
 
 **模块公共头文件**
 

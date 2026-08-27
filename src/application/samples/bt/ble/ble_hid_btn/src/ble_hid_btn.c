@@ -45,7 +45,7 @@ static const uint8_t HID_INFO[] = {0x11, 0x01, 0x00, 0x03};
 /* ---- Protocol Mode (1 byte, default Boot) ---- */
 static uint8_t g_protocol_mode = 0x00;
 
-/* ---- Standard Keyboard Boot Report Descriptor (63 bytes, USB HID 1.11) ---- */
+/* ---- Standard Keyboard Boot Report Descriptor (68 bytes, USB HID 1.11) ---- */
 static const uint8_t REPORT_MAP[] = {
     0x05, 0x01, /* Usage Page (Generic Desktop)              */
     0x09, 0x06, /* Usage (Keyboard)                          */
