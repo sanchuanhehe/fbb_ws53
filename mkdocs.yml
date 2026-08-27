@@ -260,6 +260,13 @@ nav:
       - SoC Wi-Fi、BLE 和 SLE Combo 芯片硬件用户指南: zh-CN/hardware/SoC Wi-Fi、BLE和SLE Combo芯片 硬件用户指南/SoC Wi-Fi、BLE和SLE Combo芯片 硬件用户指南.md
       - 单板硬件关键器件选型指导: zh-CN/hardware/单板硬件关键器件选型指导/单板硬件关键器件选型指导.md
       - 射频测试用户指南: zh-CN/hardware/射频测试 用户指南/射频测试 用户指南.md
+  - 工具中心:
+      - 工具中心索引: zh-CN/tools/index.md
+      - HiSpark插件:
+          - HiSpark插件: zh-CN/tools/HiSparkStudioforVSCodeUserGuide/index.md
+          - 插件指南: zh-CN/tools/HiSparkStudioforVSCodeUserGuide/HiSparkStudioforVSCodeUserGuide.md
+          - GUI指南: zh-CN/tools/HiSparkStudioforVSCodeUserGuide/GUIProjectCreationAndUsage.md
+      - BurnTool: zh-CN/tools/BurnToolUserGuide/BurnToolUserGuide.md
   - FAQ:
       - 常见问题: zh-CN/FAQ/index.md
       - 产测 FAQ: zh-CN/FAQ/manufacturing/index.md
