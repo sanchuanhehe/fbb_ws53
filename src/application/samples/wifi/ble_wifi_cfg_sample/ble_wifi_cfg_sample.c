@@ -13,6 +13,7 @@
 #include "td_base.h"
 #include "td_type.h"
 #include "stdlib.h"
+#include "string.h"
 #include "uart.h"
 #include "cmsis_os2.h"
 #include "soc_osal.h"
@@ -116,10 +117,20 @@ void set_wifi_list_req_flag(uint8_t flag)
     g_wifi_list_req_flag = flag;
 }
 
-void set_wifi_cfg_info(uint8_t *info, uint16_t info_len)
+int set_wifi_cfg_info(const uint8_t *info, uint16_t info_len)
 {
+    /* This sample only accepts one complete 64-byte Wi-Fi configuration packet. */
+    if ((info == NULL) || (info_len != sizeof(g_data))) {
+        return -1;
+    }
+
+    if (memcpy_s(g_data, sizeof(g_data), info, info_len) != EOK) {
+        return -1;
+    }
+
+    /* 数据完整复制后，才通知业务任务 */
     set_wifi_cfg_info_flag(1);
-    (void)memcpy_s(g_data, WIFI_MAX_CONFIG_INFO_LEN, info, info_len);
+    return 0;
 }
 
 int bgwc_wifi_list_resp_send(uint16_t handle)
@@ -137,10 +148,17 @@ td_s32 example_get_match_network(wifi_sta_config_stru *expected_bss)
 {
     td_s32 ret;
     td_u32 num = 64; /* 最大扫描到网络数量64 */
-    td_char expected_ssid[WIFI_CONFIG_INFO_SSID_LEN] = {0};
-    td_char key[WIFI_CONFIG_INFO_KEY_LEN] = {0}; /* 待连接的网络接入密码 */
+    td_char expected_ssid[WIFI_CONFIG_INFO_SSID_LEN + 1] = {0};
+    td_char key[WIFI_CONFIG_INFO_KEY_LEN + 1] = {0}; /* 待连接的网络接入密码 */
+    size_t ssid_len;
+    size_t key_len;
     td_bool find_ap = TD_FALSE;
     td_u8 bss_index;
+
+    if (expected_bss == NULL) {
+        return -1;
+    }
+
     /* 获取扫描结果 */
     td_u32 scan_len = sizeof(wifi_scan_info_stru) * WIFI_SCAN_AP_LIMIT;
     wifi_scan_info_stru *result = osal_kmalloc(scan_len, OSAL_GFP_ATOMIC);
@@ -154,18 +172,28 @@ td_s32 example_get_match_network(wifi_sta_config_stru *expected_bss)
         return -1;
     }
 
-    memcpy_s(expected_ssid, WIFI_CONFIG_INFO_SSID_LEN, g_data, WIFI_CONFIG_INFO_SSID_LEN);
-    memcpy_s(key, WIFI_CONFIG_INFO_SSID_LEN, g_data + WIFI_CONFIG_INFO_SSID_LEN, WIFI_CONFIG_INFO_KEY_LEN);
+    if (memcpy_s(expected_ssid, sizeof(expected_ssid), g_data, WIFI_CONFIG_INFO_SSID_LEN) != EOK) {
+        osal_kfree(result);
+        return -1;
+    }
+    if (memcpy_s(key, sizeof(key), g_data + WIFI_CONFIG_INFO_SSID_LEN, WIFI_CONFIG_INFO_KEY_LEN) != EOK) {
+        osal_kfree(result);
+        return -1;
+    }
+    expected_ssid[WIFI_CONFIG_INFO_SSID_LEN] = '\0';
+    key[WIFI_CONFIG_INFO_KEY_LEN] = '\0';
+    ssid_len = strnlen(expected_ssid, WIFI_CONFIG_INFO_SSID_LEN);
+    key_len = strnlen(key, WIFI_CONFIG_INFO_KEY_LEN);
 
     PRINT("%s expected_ssid :%s\r\n", BGLE_WIFI_CFG_LOG, expected_ssid);
 
     /* 筛选扫描到的Wi-Fi网络，选择待连接的网络 */
     for (bss_index = 0; bss_index < num; bss_index++) {
-        if (strlen(expected_ssid) == strlen(result[bss_index].ssid)) {
-            if (memcmp(expected_ssid, result[bss_index].ssid, strlen(expected_ssid)) == 0) {
-                find_ap = TD_TRUE;
-                break;
-            }
+        size_t scan_ssid_len = strnlen(result[bss_index].ssid, sizeof(result[bss_index].ssid));
+        if ((ssid_len == scan_ssid_len) &&
+            (memcmp(expected_ssid, result[bss_index].ssid, ssid_len) == 0)) {
+            find_ap = TD_TRUE;
+            break;
         }
     }
     /* 未找到待连接AP,可以继续尝试扫描或者退出 */
@@ -174,19 +202,21 @@ td_s32 example_get_match_network(wifi_sta_config_stru *expected_bss)
         return -1;
     }
     /* 找到网络后复制网络信息和接入密码 */
-    if (memcpy_s(expected_bss->ssid, WIFI_MAX_SSID_LEN, expected_ssid, strlen(expected_ssid)) != 0) {
+    if (memcpy_s(expected_bss->ssid, sizeof(expected_bss->ssid), expected_ssid, ssid_len) != EOK) {
         osal_kfree(result);
         return -1;
     }
+    expected_bss->ssid[ssid_len] = '\0';
     if (memcpy_s(expected_bss->bssid, WIFI_MAC_LEN, result[bss_index].bssid, WIFI_MAC_LEN) != 0) {
         osal_kfree(result);
         return -1;
     }
     expected_bss->security_type = result[bss_index].security_type;
-    if (memcpy_s(expected_bss->pre_shared_key, WIFI_MAX_SSID_LEN, key, strlen(key)) != 0) {
+    if (memcpy_s(expected_bss->pre_shared_key, sizeof(expected_bss->pre_shared_key), key, key_len) != EOK) {
         osal_kfree(result);
         return -1;
     }
+    expected_bss->pre_shared_key[key_len] = '\0';
     expected_bss->ip_type = 1;
     osal_kfree(result);
     return 0;
