@@ -4,7 +4,7 @@
 **适用范围：** WS53 系列
 **目标平台：** Huawei LiteOS (v208.5.0)，RISC-V rv32imc
 **Profile：** BLE HID over GATT (HoG)，Boot Keyboard
-**状态：** ✅ 已实现并验证
+**状态：** Boot Keyboard Input 已实现；标准写属性处理待完善
 
 ---
 
@@ -12,12 +12,12 @@
 
 ### 1.1 背景
 
-WS53 作为 BLE HID 键盘外设。板载物理按键 GPIO 13 按下时发送标准 HID 键盘输入报告，松开时发送释放报告。接收端（PC/手机）通过蓝牙连接后识别为标准蓝牙键盘，无需驱动。
+WS53 作为 BLE HID 键盘外设。板载 S1（逻辑 MGPIO6，运行时 `S_MGPIO6` / `pin_t 32`）按下时发送标准 HID 键盘输入报告，松开时发送释放报告。接收端（PC/手机）通过蓝牙连接后识别为标准蓝牙键盘，无需驱动。
 
 ### 1.2 系统拓扑
 
 ```
-┌──────────┐  GPIO 13     ┌──────────────┐  BLE HID Report  ┌──────────────┐
+┌──────────┐  S1/MGPIO6   ┌──────────────┐  BLE HID Report  ┌──────────────┐
 │ 物理按键  │ ───────────► │    WS53      │ ────────────────► │  PC / 手机    │
 │          │  按下/松开    │ HID Keyboard │  [0,0,KEY,...]   │ 蓝牙键盘设备  │
 └──────────┘              └──────────────┘                   └──────────────┘
@@ -40,7 +40,7 @@ ble_hid_btn_sample.c             ← 入口（app_run）
   └→ hid_main_task               ← 主任务：延迟 3s → 初始化 HID + 广播 → 创建按键任务
        ├── ble_hid_btn.c          ← HID GATT 服务（0x1812 + 6 个特征值 + 报告描述符）
        ├── ble_hid_adv.c          ← BLE 广播（Appearance=Keyboard，Service UUID=0x1812）
-       └→ hid_btn_task            ← 按键任务：50Hz 轮询 GPIO 13，消抖，长按重复
+       └→ hid_btn_task            ← 按键任务：50Hz 轮询板载 S1 / MGPIO6，消抖，长按重复
 ```
 
 ### 2.2 任务划分
@@ -48,7 +48,7 @@ ble_hid_btn_sample.c             ← 入口（app_run）
 | 任务 | 优先级 | 栈 | 职责 |
 |------|--------|------|------|
 | `hid_main` | 26 | 0x1000 | 延迟初始化：等待调度器就绪 → `ble_hid_btn_init()` → `ble_hid_adv_start()` → 创建 `hid_btn` |
-| `hid_btn` | 30 | 0x400 | 轮询 GPIO 13（20ms 周期），消抖，按键/松开/长按检测 → 发送 HID 报告 |
+| `hid_btn` | 30 | 0x400 | 轮询板载 S1 / MGPIO6（20ms 周期），消抖，按键/松开/长按检测 → 发送 HID 报告 |
 | BLE 协议栈 | 内部 | — | GATT / GAP |
 
 ### 2.3 初始化时序
@@ -75,7 +75,7 @@ app_run(ble_hid_btn_sample_entry)     ← 调度器启动前调用
 |------|------|------|-----|------|
 | **Primary Service** | `0x1812` | — | `gatts_add_service_sync` | HID |
 | **Protocol Mode** | `0x2A4E` | Read, Write No Resp | `gatts_add_characteristic_sync` | 默认 0 (Boot) |
-| **Report Map** | `0x2A4B` | Read | `gatts_add_characteristic_sync` | 63 字节键盘描述符 |
+| **Report Map** | `0x2A4B` | Read | `gatts_add_characteristic_sync` | 68 字节键盘描述符 |
 | **Boot KB Input** | `0x2A22` | Read, Notify | + `gatts_add_descriptor_sync` (CCCD) | 按键输入 → Notify |
 | **Boot KB Output** | `0x2A32` | Read, Write, Write No Resp | `gatts_add_characteristic_sync` | LED 输出 |
 | **HID Information** | `0x2A4A` | Read | `gatts_add_characteristic_sync` | bcdHID=0x0111, Country=0, Flags=0x03 |
@@ -148,8 +148,8 @@ typedef struct __attribute__((packed)) {
 
 ### 5.1 GPIO 配置
 
-- GPIO 13：输入模式 + `PIN_PULL_UP`（内部上拉）
-- 按键对地短接 → 低电平 = 按下
+- 板载 S1：逻辑 MGPIO6，运行时映射为 `S_MGPIO6` / `pin_t 32`
+- 输入模式 + `PIN_PULL_NONE`，高电平 = 按下
 - 包含 2 次消抖（需连续 2 次读到相同值才确认状态变化）
 
 ### 5.2 按键状态机
@@ -187,7 +187,7 @@ Application → Enable Sample → Enable the Sample of BT
 | 配置项 | 类型 | 默认值 | 说明 |
 |--------|------|--------|------|
 | `CONFIG_SAMPLE_SUPPORT_BLE_HID_BTN_SAMPLE` | bool | n | 启用 BLE HID Button |
-| `CONFIG_BLE_HID_BTN_PIN` | int | 13 | 按键 GPIO |
+| `CONFIG_BLE_HID_BTN_PIN` | int | 6 | 逻辑 MGPIO 编号；默认映射板载 S1 / `S_MGPIO6` |
 | `CONFIG_BLE_HID_BTN_KEYCODE` | int | 78 | HID 键码（十进制，默认 78=PageDown） |
 | `CONFIG_BLE_HID_BTN_LONGPRESS` | bool | y | 长按重复 |
 | `CONFIG_BLE_HID_DEVICE_NAME` | string | `ble_hid_btn` | 设备名 |
@@ -201,8 +201,8 @@ Application → Enable Sample → Enable the Sample of BT
 1. 打开 BLE 调试助手 → 扫描 → 找到 `ble_hid_btn` → **CONNECT**
 2. 展开 Service `0x1812` → 找到 `0x2A22`（Boot Keyboard Input）
 3. **打开"接收通知数据"开关**（等价于向 CCCD `0x2902` 写入 `01 00`）
-4. 按下 GPIO 13 → 手机实时收到 Notify：`00 00 4E 00 00 00 00 00`
-5. 松开 GPIO 13 → 手机实时收到 Notify：`00 00 00 00 00 00 00 00`
+4. 按下板载 S1 / MGPIO6 → 手机实时收到 Notify：`00 00 4E 00 00 00 00 00`
+5. 松开板载 S1 / MGPIO6 → 手机实时收到 Notify：`00 00 00 00 00 00 00 00`
 6. 不打开通知开关 → 点击"读取"获得的是当前静态快照
 
 ---
@@ -214,7 +214,7 @@ Application → Enable Sample → Enable the Sample of BT
 | 编号 | 名称 | 步骤 | 预期 | 优先级 |
 |------|------|------|------|--------|
 | TC-B01 | 手机识别 HID 服务 | 手机 BLE 扫描 → 连接 `ble_hid_btn` → 展开 Service | 看到 `0x1812` HID Service + 6 个特征值 | P0 |
-| TC-B02 | 按下发送键码 | 打开 Notify → 按下 GPIO 13 | 实时收到 `00 00 4E 00 00 00 00 00` | P0 |
+| TC-B02 | 按下发送键码 | 打开 Notify → 按下板载 S1 / MGPIO6 | 实时收到 `00 00 4E 00 00 00 00 00` | P0 |
 | TC-B03 | 松开释放 | 按住 → 松开 | 收到全零释放报告 `00 00 00 00 00 00 00 00` | P0 |
 | TC-B04 | PC 识别为键盘 | PC 蓝牙设置 → 添加设备 → 搜索 | 找到 `ble_hid_btn`，设备类型显示"键盘" | P0 |
 | TC-B05 | 长按不重复 2 次以上 | 按住 1 秒以上 | 只触发一次重复（释放+按下），之后不再重复 | P1 |
@@ -255,6 +255,6 @@ src/application/samples/bt/ble/ble_hid_btn/
 │   └── ble_hid_adv.h             ← 广播接口
 └── src/
     ├── ble_hid_btn_sample.c      ← 主入口：app_run → hid_main_task → hid_btn_task
-    ├── ble_hid_btn.c             ← HID GATT 服务：6 个特征值 + 73 字节报告描述符
+    ├── ble_hid_btn.c             ← HID GATT 服务：6 个特征值 + 68 字节报告描述符
     └── ble_hid_adv.c             ← 广播：ADV 数据（HID UUID + Keyboard Appearance）
 ```

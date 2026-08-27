@@ -130,9 +130,19 @@ nav:
                   - CHBA: zh-CN/samples/connectivity/sle/verticals/chba.md
           - BLE:
               - BLE: zh-CN/samples/connectivity/ble/index.md
-              - 高吞吐传输: zh-CN/samples/connectivity/ble/high-throughput.md
-              - 行业方案:
+              - 基础入门:
+                  - Hello BLE: zh-CN/samples/connectivity/ble/basics/hello-connect.md
+                  - Hello Notify: zh-CN/samples/connectivity/ble/basics/hello-notify.md
+                  - Hello ReadWrite: zh-CN/samples/connectivity/ble/basics/hello-readwrite.md
+              - 数据通信:
+                  - UART 透传: zh-CN/samples/connectivity/ble/data-comm/uart-bridge.md
+                  - 传感器上报: zh-CN/samples/connectivity/ble/data-comm/sensor-report.md
+              - 高级功能:
+                  - 高吞吐传输: zh-CN/samples/connectivity/ble/high-throughput.md
+              - 垂直应用场景:
                   - Wi-Fi 配网: zh-CN/samples/connectivity/ble/verticals/wifi-config.md
+                  - HID 按键: zh-CN/samples/connectivity/ble/verticals/hid.md
+                  - 网关传感器节点: zh-CN/samples/connectivity/ble/verticals/gateway.md
           - Wi-Fi:
               - Wi-Fi: zh-CN/samples/connectivity/wifi/index.md
               - STA 连接: zh-CN/samples/connectivity/wifi/sta/sta-connect.md
@@ -200,7 +210,7 @@ nav:
           - BLE:
               - Factory: zh-CN/api-reference/middleware/bts/ble/factory.md
               - GAP: zh-CN/api-reference/middleware/bts/ble/gap.md
-              - GATT Client: zh-CN/api-reference/middleware/bts/ble/gatt/client.md
+              - GATT Client（当前 WS53 不支持）: zh-CN/api-reference/middleware/bts/ble/gatt/client.md
               - GATT Server: zh-CN/api-reference/middleware/bts/ble/gatt/server.md
           - BTS Common: zh-CN/api-reference/middleware/bts/common/common.md
           - SLE:
