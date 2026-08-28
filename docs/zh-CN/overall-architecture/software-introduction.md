@@ -53,20 +53,23 @@ graph TD
     MW[中间件公开 API]
     DRIVER[驱动 UAPI]
     HAL[HAL]
+    PORTING[Porting 适配层]
     KERNEL[LiteOS 内核]
-    HW[硬件寄存器]
+    HW[芯片资源与硬件寄存器]
 
     MW --> DRIVER
     MW --> OSAL
     DRIVER --> HAL
     OSAL --> KERNEL
-    HAL --> HW
+    HAL -- 获取芯片适配参数 --> PORTING
+    PORTING --> HW
+    HAL -- 寄存器访问 --> HW
 
     APP -- 调用 --> MW
     APP -- 调用 --> OSAL
     APP -- 调用 --> DRIVER
 
-    linkStyle 5,6,7 stroke-width:3px
+    linkStyle 7,8,9 stroke-width:3px
 ```
 
 应用层推荐调用以下三类接口：
@@ -80,7 +83,7 @@ graph TD
 以下接口不作为应用层接口：
 
 - **HAL**：外设驱动对硬件能力的内部抽象。
-- **Porting**：芯片、板级或操作系统相关的适配实现。
+- **Porting**：芯片、板级或操作系统相关的适配实现，由驱动或 HAL 内部调用。
 - **寄存器接口**：由驱动和芯片适配代码管理，应用直接访问会绕过资源、时钟和并发控制。
 
 ---
