@@ -67,7 +67,10 @@ nav:
           - MQTT: zh-CN/guides/network/mqtt/index.md
           - CoAP: zh-CN/guides/network/coap/index.md
           - HTTP: zh-CN/guides/network/http/index.md
-      - 外设驱动: zh-CN/guides/peripherals/index.md
+      - 外设驱动:
+          - 外设驱动: zh-CN/guides/peripherals/index.md
+          - 外设驱动开发指南: zh-CN/guides/peripherals/manual/index.md
+          - 驱动 API: zh-CN/api-reference/driver/index.md
       - 安全:
           - 安全: zh-CN/guides/security/index.md
           - 安全模块: zh-CN/guides/security/crypto/index.md
@@ -80,7 +83,10 @@ nav:
           - FOTA: zh-CN/guides/system/fota/index.md
           - NV: zh-CN/guides/system/nv/index.md
           - 低功耗: zh-CN/guides/system/power-management/index.md
-      - AT 命令: zh-CN/guides/commands/index.md
+      - AT 命令:
+          - AT 命令: zh-CN/guides/commands/index.md
+          - AT 命令使用指南: zh-CN/guides/commands/manual/index.md
+          - AT 模块 API: zh-CN/api-reference/middleware/utils/at.md
       - Boot:
           - Boot: zh-CN/guides/boot/index.md
           - Boot 移植: zh-CN/guides/boot/porting/index.md
