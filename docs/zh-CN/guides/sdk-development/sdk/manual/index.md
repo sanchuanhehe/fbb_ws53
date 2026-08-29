@@ -106,101 +106,59 @@ SDK模块框架
 
 ## SDK目录说明<a name="ZH-CN_TOPIC_0000001959871262"></a>
 
-├── application                     \# 应用初始化代码目录
+SDK 源码统一位于 `src/` 目录，当前目录结构如下：
 
-│   ├── samples                     \# 应用示例代码
-
-│   └── ws53                        \# ws53的初始化代码，app的从汇编开始到C语言入口的初始化代码
-
-├── bootloader                      \# boot程序代码目录
-
-│   ├── commonboot                  \# 公共boot代码
-
-│   └── flashboot\_ws53              \# ws53的flashboot代码
-
-├── build                           \# 编译构建相关的脚本目录
-
-│   ├── cmake                       \# cmake脚本代码
-
-│   ├── config                      \# 编译构建相关的配置文件目录
-
-│   ├── script                      \# 编译构建相关的脚本文件目录
-
-│   └── toolchains                  \# 编译构建工具链
-
-├── drivers                         \# 外设驱动目录
-
-│   ├── boards                      \# 板级配置文件目录，主要是链接脚本
-
-│   ├── chips                       \# 外设驱动的芯片适配层代码
-
-│   └── drivers                     \# 外设驱动目录, 包含与芯片无关的纯驱动层，和外设的ip驱动
-
-├── include                         \# 对外头文件目录
-
-│   ├── driver                      \# 外设驱动的头文件目录
-
-│   └── middleware                  \# 中间件的头文件目录
-
-├── interim\_binary                  \# 二进制交付件目录
-
-│   └── ws53                        \# ws53的二进制交付件存放目录
-
-├── kernel                          \# 内核源码目录
-
-│   ├── liteos                      \# liteos源码目录
-
-│   ├── non\_os                      \# non\_os源码目录，目前用于flashboot
-
-│   ├── osal                        \# osal接口层源码实现目录
-
-│   └── osal\_adapt                  \# osal适配层源码实现目录
-
-├── middleware                      \# 中间件目录
-
-│   ├── chips                       \# 中间件的芯片适配层源码目录
-
-│   ├── services                    \# 中间件服务模块源码目录
-
-│   └── utils                       \# 中间件的utils实现源码目录
-
-├── open\_source                     \# 开源组件源码目录
-
-│   ├── 7-zip-lzma-sdk              \# 7zip-lzma源码
-
-│   ├── cjson                       \# cjson源码
-
-│   ├── libboundscheck              \# libboundscheck源码
-
-│   ├── libcoap                     \# libcoap源码
-
-│   ├── littlefs                    \# littlefs源码
-
-│   ├── lwip                        \# lwip源码
-
-│   ├── mbedtls                     \# mbedtls源码
-
-│   ├── mqtt                        \# mqtt源码
-
-│   └── wpa\_supplicant              \# wpa\_supplicant源码
-
-├── protocol                        \# 协议组件目录
-
-│   ├── bt                          \# ble/sle协议代码目录
-
-│   └── wifi                        \# wifi协议代码目录
-
-├── test                            \# 测试代码目录
-
-│   └── common                      \# 测试代码目录
-
-└── tools                           \# 工具目录
-
-│   ├── bin                         \# 工具二进制可执行程序存放目录
-
-│   └── pkg                         \# 镜像打包脚本目录
-
-.
+```text
+src/
+|-- application/                  应用初始化代码目录
+|   |-- samples/                  应用示例代码
+|   `-- ws53/                     WS53 应用初始化代码
+|-- bootloader/                   Boot 程序代码目录
+|   |-- commonboot/               公共 Boot 代码
+|   `-- flashboot_ws53/           WS53 Flash Boot 代码
+|-- build/                        编译构建相关目录
+|   |-- cmake/                    CMake 脚本
+|   |-- config/                   编译配置文件
+|   |-- script/                   构建脚本
+|   `-- toolchains/               编译工具链配置
+|-- drivers/                      外设驱动目录
+|   |-- boards/                   板级配置和链接脚本
+|   |-- chips/                    芯片适配层驱动
+|   `-- drivers/                  与芯片无关的通用驱动和 IP 驱动
+|-- include/                      对外头文件目录
+|   |-- driver/                   外设驱动头文件
+|   `-- middleware/               中间件头文件
+|-- interim_binary/               二进制交付件目录
+|   `-- ws53/                     WS53 二进制交付件
+|-- kernel/                       内核源码目录
+|   |-- liteos/                   LiteOS 源码
+|   |-- non_os/                   Non-OS 源码（当前用于 Flash Boot）
+|   |-- osal/                     OSAL 接口层实现
+|   `-- osal_adapt/               OSAL 适配层实现
+|-- middleware/                   中间件目录
+|   |-- chips/                    芯片适配层
+|   |-- services/                 中间件服务模块
+|   `-- utils/                    中间件工具实现
+|-- open_source/                  开源组件源码目录
+|   |-- 7-zip-lzma-sdk/
+|   |-- cjson/
+|   |-- libboundscheck/
+|   |-- libcoap/
+|   |-- littlefs/
+|   |-- lwip/
+|   |-- mbedtls/
+|   |-- mqtt/
+|   `-- wpa_supplicant/
+|-- protocol/                     协议组件目录
+|   |-- bt/                       BLE/SLE 协议代码
+|   `-- wifi/                     Wi-Fi 协议代码
+|-- test/                         测试代码目录
+|   `-- common/                   通用测试代码
+`-- tools/                        工具目录
+    |-- bin/                      工具二进制可执行程序
+    |-- pkg/                      镜像打包脚本
+    `-- templates/                工具模板
+```
 
 **表 1**  SDK目录介绍
 

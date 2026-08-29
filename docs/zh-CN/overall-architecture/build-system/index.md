@@ -45,6 +45,7 @@ set(PRIVATE_DEFINES
 )
 
 set(PUBLIC_DEFINES
+    SUPPORT_GPIO
 )
 
 #use this when you want to add ccflags like -include xxx

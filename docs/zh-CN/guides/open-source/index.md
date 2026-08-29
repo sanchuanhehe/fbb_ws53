@@ -75,7 +75,7 @@ WS53V100的SDK使用CMake作为构建工具，因此建议使用CMake进行第�
 
 用户可参考标准CMakeLists.txt的开发流程，对SDK进行定制化修改。
 
-若在三方组件中已有CMakeLists.txt可进行调用，也可以opensource路径下的CMakeLists.txt将文件夹直接add\_subdirectory\_if\_exits（目录名称），来进行编译
+若第三方组件目录中已有 `CMakeLists.txt`，可以在 `src/open_source/CMakeLists.txt` 中使用 `add_subdirectory_if_exist(<目录名>)`，将该组件加入构建流程。
 
 ## 头文件引用问题<a name="ZH-CN_TOPIC_0000001891939418"></a>
 
