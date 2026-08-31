@@ -361,7 +361,7 @@ WS53只负责接收解析报文，al\_rx\_info统计的成功收包数时，要�
 
 如果AT+CCPRIV=wlan0,freq,11和AT+CCPRIV=wlan0,mode,11n2g40，则中心频点对应chn9。
 
-## BLE/SLLE<a name="ZH-CN_TOPIC_0000002088567972"></a>
+## BLE/SLE<a name="ZH-CN_TOPIC_0000002088567972"></a>
 
 -   **[默认产测用BLE校准，可以使用SLE校准吗？](#ZH-CN_TOPIC_0000002124247237)**  
 
