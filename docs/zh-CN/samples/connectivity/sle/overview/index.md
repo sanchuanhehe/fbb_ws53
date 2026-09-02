@@ -319,7 +319,7 @@ ssapc_register_callbacks(&client_callbacks);
 | 连接管理 | [连接参数动态更新](../link-mgmt/conn-param-tuning.md) | 低功耗、均衡和低时延参数档位 |
 | 连接管理 | [无线链路自适应](../link-mgmt/phy-mcs-switch.md) | 基于 RSSI 的 PHY/MCS 动态切换 |
 | 连接管理 | [RSSI 测距](../link-mgmt/rssi-ranging.md) | 滤波、粗测距、一米校准和 NV |
-| 行业方案 | [CHBA](../verticals/chba.md) | CHBA 组网及可选 lwIP 数据通道 |
+| 行业方案 | [SLE CHBA](../verticals/chba.md) | CHBA 组网及可选 lwIP 数据通道 |
 
 建议先完成 Hello SLE，再依次学习数据通信和连接管理案例，最后根据产品需求组合传感器、NV、低时延、OTA、HADM 或 CHBA 能力。
 

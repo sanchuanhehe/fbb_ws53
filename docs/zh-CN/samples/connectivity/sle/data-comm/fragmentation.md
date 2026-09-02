@@ -2,7 +2,7 @@
 
 > 使用技术：SLE、SSAP 属性读写、Notification、应用层分片与顺序重组、累加校验和
 
-> 前置阅读：必须了解 [Hello Connect](../basics/hello-connect.md) 的扫描与连接流程，建议先完成 [Hello Notify](../basics/hello-notify.md) 的 Notification 实验。
+> 前置阅读：必须了解 [Hello SLE](../basics/hello-connect.md) 的扫描与连接流程，建议先完成 [Hello Notify](../basics/hello-notify.md) 的 Notification 实验。
 
 本案例使用两块 WS53 演示固定长度的大数据传输：Client 通过 SSAP 写请求触发传输；Server 将 1024 字节测试数据拆成 6 个 Notification；Client 按分片序号顺序追加负载，并在最后一片到达后检查总长度和校验和。
 

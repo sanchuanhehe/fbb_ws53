@@ -57,7 +57,7 @@ sequenceDiagram
 | `wifi_p2p_get_connect_info()` | 查询当前角色、连接状态和工作信道 |
 | `wifi_p2p_disconnect()` | 断开当前 P2P 连接 |
 
-完整定义参见 [Wi-Fi P2P API](../../../api-reference/middleware/services/wifi/p2p.md)。
+完整定义参见 [P2P](../../../api-reference/middleware/services/wifi/p2p.md)。
 
 ## 代码详解
 

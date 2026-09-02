@@ -2,7 +2,7 @@
 
 > 使用技术：SLE(SparkLink Low Energy)、SSAP(SLE Service Access Protocol) Notification/Indication、AHT20、I2C0、定长应用帧、阈值告警
 
-> 前置阅读：必须了解 [Hello Connect](../basics/hello-connect.md) 的扫描与连接流程，建议先完成 [Hello Notify](../basics/hello-notify.md) 的 Notification 实验。
+> 前置阅读：必须了解 [Hello SLE](../basics/hello-connect.md) 的扫描与连接流程，建议先完成 [Hello Notify](../basics/hello-notify.md) 的 Notification 实验。
 
 本案例使用两块 WS53：Server 通过 I2C0 读取 AHT20 兼容温湿度传感器，按固定延时循环组装 11 字节数据帧；Client 扫描名为 `sensor_server` 的设备，连接、配对并完成服务发现后接收数据。
 

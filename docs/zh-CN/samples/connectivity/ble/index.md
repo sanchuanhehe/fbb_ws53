@@ -24,7 +24,7 @@ WS53 不支持 BLE Central（中心设备）/GATT Client（客户端）功能，
 
 ### 高级功能
 
-- [高吞吐传输](./high-throughput.md)
+- [BLE 高吞吐传输](./high-throughput.md)
 
 ### 垂直应用场景
 

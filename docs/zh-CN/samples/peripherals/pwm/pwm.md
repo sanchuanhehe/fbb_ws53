@@ -111,7 +111,7 @@ fbb build ws53-liteos-app
 fbb flash ws53-liteos-app
 ```
 
-> 完整的工程配置、编译和烧录方式请参考 [快速入门](../../../get-started/quick-start.md)。
+> 完整的工程配置、编译和烧录方式请参考 [构建系统](../../../overall-architecture/build-system/index.md)。
 
 ### 第三步：验证
 
