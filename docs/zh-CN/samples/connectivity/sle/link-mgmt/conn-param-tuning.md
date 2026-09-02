@@ -68,7 +68,7 @@ supervision_timeout × 20 > (max_latency + 1) × interval_max
 源码中的 `interval` 单位为 0.25 ms，`supervision_timeout` 单位为 10 ms。Server 的三种 profile 如下：
 
 | 档位 | interval | 折算连接间隔 | max_latency | timeout | 折算监督超时 | 适用方向 |
-|---|---:|---:|---:|---:|---:|---|
+|---|---|---|---|---|---|---|
 | Low Power | 400 | 100 ms | 49 | 1200 | 12 s | 低频上报、低功耗 |
 | Balanced（默认） | 50 | 12.5 ms | 0 | 500 | 5 s | 通用交互 |
 | Low Latency | 30 | 7.5 ms | 0 | 200 | 2 s | 实时控制、HID |
