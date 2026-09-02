@@ -105,7 +105,7 @@ real time[3] = 4000ms  delay = 4000ms
 ## 关键配置
 
 | 配置项 | 默认值 | 说明 |
-|--------|:---:|------|
+|--------|---|------|
 | `CONFIG_RTC_INDEX` | 0 | RTC 硬件通道编号 |
 | `CONFIG_RTC_IRQN` | 49 | RTC 中断号 |
 | `CONFIG_RTC_PRIO` | 1 | RTC 中断优先级 |

@@ -74,7 +74,7 @@ code: ploar MCS10, PHY 4MHZ, power: 20dbm
 三者位于不同层次：
 
 | 层次 | WS53 源码请求值 | 作用 |
-|---|---:|---|
+|---|---|---|
 | SSAP MTU | 1500 | Server `ssaps_set_info()` 和 Client MTU 交换的请求值 |
 | 链路数据长度 | 1500 | `sle_set_data_len()` 请求的首选最大发送 payload 字节数 |
 | Notification 数据长度 | 1450 | 每次 `ssaps_notify_indicate()` 提交的应用数据长度 |
@@ -346,7 +346,7 @@ CONFIG_LARGE_THROUGHPUT_SERVER
 ### 链路与统计常量
 
 | 常量 | 值 | 源码位置 |
-|---|---:|---|
+|---|---|---|
 | `PKT_DATA_LEN` | 1450 | `sle_speed_server.c` |
 | `DEFAULT_SLE_SPEED_DATA_LEN` | 1500 | `sle_speed_server.c` |
 | `DEFAULT_SLE_SPEED_MTU_SIZE` | 1500 | `sle_speed_server.c` |

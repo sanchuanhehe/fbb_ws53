@@ -161,7 +161,7 @@ ssapc_write_req(0, g_conn_id, &g_write_param);
 ### MTU、队列项与 UART 缓冲区
 
 | 参数 | 默认值 | 所属层次 | 作用 |
-|---|---:|---|---|
+|---|---|---|---|
 | UART RX 缓冲区 | 512 字节 | UART 驱动 | 驱动接收缓冲区大小 |
 | 消息队列单项 | 520 字节 | OSAL/应用 | 一次回调复制到队列的最大消息大小 |
 | 消息队列深度 | 16 | OSAL/应用 | 最多暂存的数据块数量 |
@@ -437,7 +437,7 @@ C2S_OK_F3U4
 ### UART、任务与队列参数
 
 | 配置 | 默认值 | 当前含义 |
-|---|---:|---|
+|---|---|---|
 | `CONFIG_UART_BUS_ID` | 1 | UART1 |
 | `CONFIG_UART_TXD_PIN` | 17 | MIO17 |
 | `CONFIG_UART_RXD_PIN` | 18 | MIO18 |
@@ -455,7 +455,7 @@ UART 配置为 8 数据位、1 停止位、无校验；CTS 和 RTS 均为 `PIN_N
 ### SLE 服务与扫描参数
 
 | 参数 | 当前值 | 说明 |
-|---|---:|---|
+|---|---|---|
 | Server 应用 UUID | `{0x12,0x34}` | 注册 SSAP Server |
 | Service UUID | `0x2222` | UART Bridge 服务 |
 | Property UUID | `0x2323` | READ、WRITE、NOTIFY |

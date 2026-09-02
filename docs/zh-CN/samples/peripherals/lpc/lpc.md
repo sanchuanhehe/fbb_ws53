@@ -112,7 +112,7 @@ lpc gpio test count isr:1, suspend:1, resume:1
 ## 关键配置
 
 | 配置项 | 默认值 | 说明 |
-|--------|:---:|------|
+|--------|---|------|
 | `CONFIG_LPC_GPIO_WAKEUP_PIN` | 0 | GPIO 唤醒引脚 |
 | `LPC_GPIO_TIMER_MS` | 10ms | 中断防重复触发时间 |
 | 中断边沿 | `GPIO_INTERRUPT_FALLING_EDGE` | 高电平到低电平时触发 |

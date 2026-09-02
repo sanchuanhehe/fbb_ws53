@@ -51,7 +51,7 @@ WS53 不支持 BLE Central/GATT Client 功能；本案例中的 Client/Host 是�
 输入报告固定为 8 字节：
 
 | 字节 | 字段 | 说明 |
-| ---: | --- | --- |
+| --- | --- | --- |
 | 0 | Modifier | Ctrl、Shift、Alt 等修饰键位图，本 Sample 固定为 0 |
 | 1 | Reserved | 固定为 0 |
 | 2～7 | Keycodes | 最多 6 个普通键码，本 Sample 只使用第一个 |
@@ -193,7 +193,7 @@ WS53 正常输出：
 ## 关键配置
 
 | 配置项 | 默认值 | 说明 |
-| --- | ---: | --- |
+| --- | --- | --- |
 | `CONFIG_BLE_HID_BTN_PIN` | `6` | 逻辑 MGPIO 编号；6 对应板载 S1 |
 | `CONFIG_BLE_HID_BTN_KEYCODE` | `78` | USB HID Usage ID，即 `0x4E` Page Down |
 | `CONFIG_BLE_HID_BTN_LONGPRESS` | `y` | 启用一次长按重复 |

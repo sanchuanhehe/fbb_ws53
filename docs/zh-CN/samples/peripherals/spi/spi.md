@@ -23,7 +23,7 @@ flowchart LR
 ```
 
 | 信号 | 方向 | 说明 |
-|------|:---:|------|
+|------|---|------|
 | SCK (Serial Clock) | Master→Slave | 时钟信号 |
 | MOSI (Master Out Slave In) | Master→Slave | 主机发从机收 |
 | MISO (Master In Slave Out) | Slave→Master | 从机发主机收 |
@@ -32,7 +32,7 @@ flowchart LR
 ### CPOL 和 CPHA —— 四种模式
 
 | 模式 | CPOL | CPHA | SCK 空闲电平 | 采样边沿 |
-|:---:|:---:|:---:|:---:|:---:|
+|---|---|---|---|---|
 | 0 | 0 | 0 | 低 | 上升沿 |
 | 1 | 0 | 1 | 低 | 下降沿 |
 | 2 | 1 | 0 | 高 | 下降沿 |
@@ -43,7 +43,7 @@ flowchart LR
 ### SPI vs I2C vs UART
 
 | 对比项 | SPI | I2C (Inter-Integrated Circuit) | UART |
-|--------|:---:|:---:|:---:|
+|--------|---|---|---|
 | 线数 | 4（多从机时通常各自使用 CS，Chip Select） | 2 | 3（TX/RX/GND） |
 | 速率 | 由主从设备、布线和驱动配置决定 | 由模式和设备决定 | 由双方波特率配置决定 |
 | 全双工 | 是 | 否 | 是 |

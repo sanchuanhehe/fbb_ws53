@@ -24,7 +24,7 @@ SSAP MTU 限制一次属性数据可承载的最大规模。本案例双方请�
 在当前 WS53 工具链下，`offsetof(sle_fragmentation_packet_t, payload)` 为 16，因此：
 
 | 分片 | 业务负载 | 实际属性数据长度 |
-|---|---:|---:|
+|---|---|---|
 | 第 1～5 片 | 180 字节 | 16 + 180 = 196 字节 |
 | 第 6 片 | 124 字节 | 16 + 124 = 140 字节 |
 
@@ -70,7 +70,7 @@ typedef struct {
 当前 16 字节头的字段为：
 
 | 字段 | 长度 | WS53 当前值或作用 |
-|---|---:|---|
+|---|---|---|
 | `magic` | 2 | 固定为 `0x5346`，识别分片协议 |
 | `transfer_id` | 2 | 固定为 1，识别传输会话 |
 | `index` | 2 | 从 0 开始的片序号 |
@@ -139,7 +139,7 @@ API 按实际调用阶段排列。详细参数和返回值请查阅对应 API Re
 ### 功能规格
 
 | 规格项 | WS53 源码值 |
-|---|---:|
+|---|---|
 | Server 广播名称 | `fragment_server` |
 | 服务 UUID | `0x3333` |
 | 属性 UUID | `0x3434` |
@@ -331,7 +331,7 @@ CONFIG_SAMPLE_SUPPORT_SLE_FRAGMENTATION_CLIENT_SAMPLE
 ### 协议与任务参数
 
 | 常量 | 值 | 源码位置 |
-|---|---:|---|
+|---|---|---|
 | `SLE_FRAGMENTATION_MAGIC` | `0x5346` | `sle_fragmentation_protocol.h` |
 | `SLE_FRAGMENTATION_TRANSFER_ID` | 1 | `sle_fragmentation_protocol.h` |
 | `SLE_FRAGMENTATION_DATA_SIZE` | 1024 | `sle_fragmentation_protocol.h` |

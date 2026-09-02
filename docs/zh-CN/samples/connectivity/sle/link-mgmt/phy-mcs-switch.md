@@ -66,7 +66,7 @@ src/application/samples/bt/sle/sle_phy_mcs_switch/
 WS53 源码定义了以下三个有效档位，三档的导频密度均为 `SLE_PHY_PILOT_DENSITY_16_TO_1`：
 
 | 档位 | PHY | MCS | 调制编码 | 方向 |
-|---|---:|---:|---|---|
+|---|---|---|---|---|
 | Robust | 1M | 0 | BPSK 1/4 | 链路鲁棒性优先 |
 | Balanced | 2M | 4 | QPSK 1/2 | 吞吐与鲁棒性平衡 |
 | Fast | 4M | 10 | 8PSK 3/4 | 吞吐能力优先 |

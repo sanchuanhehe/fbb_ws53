@@ -27,7 +27,7 @@ flowchart LR
 ### TCXO 时钟 vs Systick 时钟
 
 | 对比项 | TCXO API | Systick API |
-|--------|:---:|:---:|
+|--------|---|---|
 | 时间戳接口 | `uapi_tcxo_get_ms/us` | `uapi_systick_get_ms/us` |
 | 延时接口 | `uapi_tcxo_delay_ms/us` | `uapi_systick_delay_ms/us` |
 | 本页面验证范围 | TCXO 接口的计数递增和延时基本功能 | 不在本案例中验证 |
@@ -99,7 +99,7 @@ sequenceDiagram
 ## 关键配置
 
 | 配置项 | 推荐值 | 说明 |
-|--------|:---:|------|
+|--------|---|------|
 | TCXO 初始化时机 | 使用计时 API 之前 | `get_ms/get_us` 和延时接口应在初始化后调用 |
 | 延时参数 | 按接口定义和实际需求设置 | 极短延时会受到函数调用和中断等开销影响，误差需在目标系统实测 |
 

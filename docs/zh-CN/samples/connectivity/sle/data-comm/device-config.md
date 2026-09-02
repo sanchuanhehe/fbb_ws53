@@ -299,7 +299,7 @@ CONFIG_SAMPLE_SUPPORT_SLE_DEVICE_CONFIG_CLIENT_SAMPLE
 ### 协议与测试值
 
 | 常量或配置 | 值 | 源码位置 |
-|---|---:|---|
+|---|---|---|
 | `SLE_DEVICE_CONFIG_MAGIC` | `0x5343` | `sle_device_config_protocol.h` |
 | `SLE_DEVICE_CONFIG_VERSION` | 1 | `sle_device_config_protocol.h` |
 | 周期范围 | 100～60000 ms | `sle_device_config_protocol.h` |

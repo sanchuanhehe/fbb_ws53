@@ -20,7 +20,7 @@
 CHBA 角色由 NV 中的 `role_idx` 决定，不是两个独立的 Kconfig Sample：
 
 | `role_idx` | CHBA 角色 | SLE 行为 | 拓扑职责 |
-| ---: | --- | --- | --- |
+| --- | --- | --- | --- |
 | `0` | `CHBA_ROLE_AP` | 扫描并主动连接，公共头文件称为 SLE Client 侧 | 网络中心，可管理 STA |
 | `1`～`4` | `CHBA_ROLE_STA` | 发布 `SLE_CHBA` 广播，公共头文件称为 SLE Server 侧 | 叶子节点，等待 AP 连接 |
 | 大于 `4` | 无效 | 初始化函数直接返回 | 不启动发现流程 |
@@ -165,7 +165,7 @@ sle_announce_data_t adv_data = {
 `sizeof("SLE_CHBA")` 包含结尾的 `\0`，因此发布和匹配长度都是 9 字节：
 
 | 偏移 | 长度 | 内容 |
-| ---: | ---: | --- |
+| --- | --- | --- |
 | 0～7 | 8 字节 | ASCII `SLE_CHBA` |
 | 8 | 1 字节 | `0x00` |
 
@@ -191,7 +191,7 @@ typedef struct {
 案例优先调用 `get_dev_addr(..., IFTYPE_SLE)` 获取设备地址。读取失败时，按 `role_idx` 使用固定回退地址：
 
 | `role_idx` | 回退地址 |
-| ---: | --- |
+| --- | --- |
 | 0 | `02:02:02:02:02:02` |
 | 1 | `12:12:12:12:12:12` |
 | 2 | `22:22:22:22:22:22` |
@@ -299,7 +299,7 @@ SLE 发现 → 连接 → 配对 → PHY 回调 → CHBA link → sle netif → 
 ## 关键配置
 
 | 配置或宏 | 当前值 | 说明 |
-| --- | ---: | --- |
+| --- | --- | --- |
 | `NV_ID_CHBA_MODE_CFG` | `0x2160` | 保存 `chba_mode` 和 `role_idx` |
 | `CHBA_AP_IDX` | `0` | AP 角色编号 |
 | `SLE_CHBA_LINK_NUM_MAX` | `4` | 静态链路表容量 |

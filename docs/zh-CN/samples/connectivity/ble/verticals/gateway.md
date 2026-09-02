@@ -36,7 +36,7 @@ WS53 仓库不提供 Gateway Client、Wi-Fi 桥接或云端上报实现。外部
 Sensor Node 每次发送固定 14 字节报告：
 
 | 偏移 | 长度 | 字段 | 编码与单位 |
-| ---: | ---: | --- | --- |
+| --- | --- | --- | --- |
 | 0 | 1 | `version` | 协议版本，当前为 1 |
 | 1 | 1 | `node_id` | 节点 ID，当前固定为 1 |
 | 2 | 4 | `sequence` | 递增序号，little-endian |
@@ -61,7 +61,7 @@ Sensor Node 每次发送固定 14 字节报告：
 Gateway 通过 Data Characteristic 写入固定 6 字节命令：
 
 | 偏移 | 长度 | 字段 | 说明 |
-| ---: | ---: | --- | --- |
+| --- | --- | --- | --- |
 | 0 | 1 | `version` | 必须为 1 |
 | 1 | 1 | `command` | `1` 表示设置采样周期 |
 | 2 | 4 | `interval_s` | 5～3600 秒，little-endian |
