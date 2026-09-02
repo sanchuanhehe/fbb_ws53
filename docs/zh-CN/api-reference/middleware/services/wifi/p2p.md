@@ -337,7 +337,6 @@ errcode_t wifi_p2p_get_peers_info(p2p_device_stru *dev_list, uint32_t *dev_num)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| dev_list | [p2p_device_stru](#p2p_device_stru)* | 搜索到的 P2P 设备列表缓冲区 | 不为NULL |
 | dev_num | uint32_t* | 最大反馈 P2P 设备数目 | 1 ~ 32（实现上界 SERVICE_P2P_MAX_FIND_NUM = 32） |
 
 **出参**

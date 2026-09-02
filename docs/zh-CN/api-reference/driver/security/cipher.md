@@ -532,7 +532,6 @@ errcode_t uapi_drv_cipher_symc_get_tag(uint32_t symc_handle, uint8_t *tag, uint3
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | symc_handle | uint32_t | 加解密句柄 | 有效的CCM/GCM通道句柄 |
-| tag | uint8_t * | 标签值缓冲区 | 不为NULL |
 | tag_length | uint32_t | 标签值缓冲区长度 | 大于0，与算法配置的tag_len一致 |
 
 **出参**
@@ -582,8 +581,13 @@ errcode_t uapi_drv_cipher_mac_start(uint32_t *symc_handle, const uapi_drv_cipher
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| symc_handle | uint32_t * | 指向创建的symc通道句柄的指针 | 不为NULL，用于输出通道句柄 |
 | mac_attr | const [uapi_drv_cipher_symc_mac_attr_t](#struct_uapi_drv_cipher_symc_mac_attr_t) * | 指向MAC算法参数结构体的指针 | 不为NULL |
+
+**出参**
+
+| 名称 | 数据类型 | 输出说明 |
+| ---- | ---- | ---- |
+| symc_handle | uint32_t * | 创建的symc通道句柄，由调用方分配内存、函数填充 |
 
 **返回值**
 
@@ -798,8 +802,13 @@ errcode_t uapi_drv_cipher_hash_start(uint32_t *hash_handle, const uapi_drv_ciphe
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| hash_handle | uint32_t * | 指向创建的Hash通道句柄的指针 | 不为NULL，用于输出通道句柄 |
-| hash_attr | const [uapi_drv_cipher_hash_attr_t](#struct_uapi_drv_cipher_hash_attr_t) * | 指向Hash算法参数结构体的指针 | 不为NULL |
+| hash_attr | const [uapi_drv_cipher_hash_attr_t](#struct_uapi_drv_cipher_hash_attr_t) * | 指向Hash属性结构体的指针 | 不为NULL |
+
+**出参**
+
+| 名称 | 数据类型 | 输出说明 |
+| ---- | ---- | ---- |
+| hash_handle | uint32_t * | 创建的Hash通道句柄，由调用方分配内存、函数填充 |
 
 **返回值**
 
@@ -890,7 +899,6 @@ errcode_t uapi_drv_cipher_hash_finish(uint32_t hash_handle, uint8_t *out, uint32
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | hash_handle | uint32_t | 已创建的Hash通道句柄 | 有效的Hash通道句柄 |
-| out | uint8_t * | 存储摘要信息的缓冲区地址指针 | 不为NULL |
 | out_len | uint32_t * | 存储摘要信息的缓冲区大小指针 | 不为NULL，输入为缓冲区长度，输出为实际摘要长度 |
 
 **出参**
@@ -941,7 +949,6 @@ errcode_t uapi_drv_cipher_hash_get(uint32_t hash_handle, uapi_drv_cipher_hash_cl
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | hash_handle | uint32_t | 已创建的Hash通道句柄 | 有效的Hash通道句柄 |
-| hash_clone_ctx | [uapi_drv_cipher_hash_clone_ctx_t](#struct_uapi_drv_cipher_hash_clone_ctx_t) * | 指向Hash计算中间结果结构体的指针 | 不为NULL |
 
 **出参**
 
@@ -1128,7 +1135,6 @@ errcode_t uapi_drv_cipher_hkdf_extract(uapi_drv_cipher_hkdf_extract_t *extract_p
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | extract_param | [uapi_drv_cipher_hkdf_extract_t](#struct_uapi_drv_cipher_hkdf_extract_t) * | 密钥提取的参数结构体 | 不为NULL |
-| prk | uint8_t * | 拓展密钥的伪随机密钥 | 不为NULL |
 | prk_length | uint32_t * | 拓展密钥的伪随机密钥长度 | 不为NULL，输入为缓冲区长度，输出为实际长度 |
 
 **出参**
@@ -1181,7 +1187,6 @@ errcode_t uapi_drv_cipher_hkdf_expand(const uapi_drv_cipher_hkdf_expand_t *expan
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | expand_param | const [uapi_drv_cipher_hkdf_expand_t](#struct_uapi_drv_cipher_hkdf_expand_t) * | 密钥拓展的参数结构体 | 不为NULL |
-| okm | uint8_t * | 输出密钥材料 | 不为NULL |
 | okm_length | uint32_t | 输出密钥材料长度 | 大于0 |
 
 **出参**
@@ -1232,7 +1237,6 @@ errcode_t uapi_drv_cipher_hkdf(uapi_drv_cipher_hkdf_t *hkdf_param, uint8_t *okm,
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | hkdf_param | [uapi_drv_cipher_hkdf_t](#struct_uapi_drv_cipher_hkdf_t) * | HKDF的参数结构体 | 不为NULL |
-| okm | uint8_t * | 输出密钥材料 | 不为NULL |
 | okm_length | uint32_t | 输出密钥材料长度 | 大于0 |
 
 **出参**

@@ -552,8 +552,7 @@ errcode_t wifi_sta_get_scan_info(wifi_scan_info_stru *result, uint32_t *size)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| [out] result | [wifi_scan_info_stru](#struct_wifi_scan_info_stru) * | 扫描结果输出缓冲区 | 非NULL，指向有效内存空间 |
-| [in/out] size | uint32_t * | 扫描到的网络数目 | 非NULL，输入时为缓冲区最大容量，输出时为实际数目 |
+| size | uint32_t * | 扫描到的网络数目 | 非NULL，输入时为缓冲区最大容量，输出时为实际数目 |
 
 **出参**
 
@@ -663,7 +662,6 @@ errcode_t wifi_get_channel(wifi_if_type_enum iftype, int32_t *channel)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | IFTYPE_STA(0)、IFTYPE_AP(1) |
-| channel | int32_t * | 信道号输出 | 非NULL |
 
 **出参**
 
@@ -857,12 +855,6 @@ errcode_t wifi_sta_get_ap_info(wifi_linked_info_stru *result)
 
 - WiFi已通过wifi_init()初始化完成
 - STA已使能
-
-**入参**
-
-| 名称 | 参数类型 | 说明 | 约束取值范围 |
-| ---- | ---- | ---- | ---- |
-| [out] result | [wifi_linked_info_stru](#struct_wifi_linked_info_stru) * | 连接状态输出 | 非NULL |
 
 **出参**
 
@@ -1715,8 +1707,13 @@ errcode_t wifi_get_base_mac_addr(int8_t *mac_addr, uint8_t mac_len)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| [out] mac_addr | int8_t* | MAC地址指针 | 非NULL，用于存储获取的MAC地址 |
 | mac_len | uint8_t | MAC地址长度 | WIFI_MAC_LEN(6) |
+
+**出参**
+
+| 名称 | 数据类型 | 输出说明 |
+| ---- | ---- | ---- |
+| mac_addr | int8_t* | 基础MAC地址，由调用方分配内存、函数填充 |
 
 **返回值**
 
@@ -1783,8 +1780,13 @@ errcode_t wifi_softap_get_mac_addr(int8_t *mac_addr, uint8_t mac_len)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| [out] mac_addr | int8_t* | MAC地址指针 | 非NULL，用于存储获取的MAC地址 |
 | mac_len | uint8_t | MAC地址长度 | WIFI_MAC_LEN(6) |
+
+**出参**
+
+| 名称 | 数据类型 | 输出说明 |
+| ---- | ---- | ---- |
+| mac_addr | int8_t* | SoftAP的MAC地址，由调用方分配内存、函数填充 |
 
 **返回值**
 
@@ -1883,8 +1885,14 @@ errcode_t wifi_get_country_code(int8_t *country_code, uint8_t *len)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| [out] country_code | int8_t* | 国家码 | 非NULL，用于存储获取的国家码 |
-| [out] len | uint8_t* | 国家码数组长度 | 非NULL |
+| len | uint8_t* | 国家码数组长度 | 非NULL，输入时为缓冲区容量，输出时为实际长度 |
+
+**出参**
+
+| 名称 | 数据类型 | 输出说明 |
+| ---- | ---- | ---- |
+| country_code | int8_t* | 国家码，由调用方分配内存、函数填充 |
+| len | uint8_t* | 国家码的实际长度 |
 
 **返回值**
 
