@@ -85,7 +85,7 @@ flowchart TD
 fbb build ws53-liteos-app
 ```
 
-> 完整的工程配置和编译方式请参考 [快速入门](../../../get-started/quick-start.md)。
+> 完整的编译方式请参考 [构建](../../../overall-architecture/build-system/index.md#构建)。
 
 ### 第二步：烧录
 
@@ -93,7 +93,7 @@ fbb build ws53-liteos-app
 fbb flash ws53-liteos-app
 ```
 
-> 完整的烧录和串口监视方式请参考 [快速入门](../../../get-started/quick-start.md)。
+> 完整的烧录方式请参考 [烧录](../../../overall-architecture/build-system/index.md#烧录)。
 
 ### 第三步：验证
 

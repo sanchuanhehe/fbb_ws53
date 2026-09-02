@@ -100,7 +100,7 @@ sequenceDiagram
    ```bash
    fbb build ws53-liteos-app
    ```
-   更多编译选项请参考 [构建操作](../../../get-started/quick-start.md)。
+   更多编译选项请参考 [构建](../../../overall-architecture/build-system/index.md#构建)。
 3. 如需体验 LLI 链式传输，在 `menuconfig` 中开启 `CONFIG_DMA_MEMORY_LLI_TRANSFER_MODE` 后重新编译
 4. 烧录固件后，串口观察输出：
    - 单次模式输出：`dma single memory transfer start!` → `dma memory copy test succ, length = 32 block`。该日志只表示当前源码比较的前 32 字节一致
