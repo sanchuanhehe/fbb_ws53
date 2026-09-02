@@ -2,7 +2,7 @@
 
 > 使用技术：SLE、SSAP Notification/Write Request、UART1、中断接收、任务转发、消息队列
 
-> 前置阅读：必须了解 [Hello Connect](../basics/hello-connect.md) 的扫描与连接流程，建议先完成 [Hello Notify](../basics/hello-notify.md) 的 Notification 实验。
+> 前置阅读：必须了解 [Hello SLE](../basics/hello-connect.md) 的扫描与连接流程，建议先完成 [Hello Notify](../basics/hello-notify.md) 的 Notification 实验。
 
 本案例的设计目标是把两块 WS53 的 UART1 通过 SLE 组成双向数据桥：Server 串口收到的字节块通过 Notification 发给 Client；Client 串口收到的字节块通过 SSAP Write Request 发给 Server；无线接收端再把数据写入本地 UART TX。
 

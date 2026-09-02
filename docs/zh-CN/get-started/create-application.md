@@ -32,6 +32,6 @@ python build.py ws53_liteos_app -c -j1
 
 - [快速开始](quick-start.md)
 - [烧录与运行](flash-and-run.md)
-- [WS53 外设案例](../samples/peripherals/index.md)
-- [WS53 架构](../overall-architecture/index.md)
+- [外设驱动](../samples/peripherals/index.md)
+- [整体架构](../overall-architecture/index.md)
 - [SDK 开发](../guides/sdk-development/index.md)
