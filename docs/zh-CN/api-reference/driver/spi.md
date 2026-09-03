@@ -1,6 +1,6 @@
 # SPI
 
-SPI (Serial Peripheral Interface) 提供串行外设接口的主机与从机模式数据收发能力，支持轮询、DMA (Direct Memory Access)、中断三种传输模式以及轮询与 DMA 自动切换模式，并支持 QSPI (Quad SPI) 帧格式、CRC (Cyclic Redundancy Check) 校验、环回测试与低功耗挂起恢复等配置。
+SPI（Serial Peripheral Interface）提供串行外设接口的主机与从机模式数据收发能力，支持轮询、DMA（Direct Memory Access）、中断三种传输模式以及轮询与 DMA 自动切换模式，并支持 QSPI（Quad SPI）帧格式、CRC（Cyclic Redundancy Check）校验、环回测试与低功耗挂起恢复等配置。
 
 **模块公共头文件**
 
@@ -49,13 +49,13 @@ errcode_t uapi_spi_init(spi_bus_t bus, spi_attr_t *attr, spi_extra_attr_t *extra
 
 **功能说明**
 
-- 初始化指定 SPI 总线，按入参应用基础与高级配置参数
-- 对已初始化的总线重复调用时直接返回成功，不重复执行初始化流程
+- 初始化指定 SPI 总线，按入参应用基础与高级配置参数。
+- 对已初始化的总线重复调用时直接返回成功，不重复执行初始化流程。
 
 **前置条件**
 
-- 调用时序约束：调用本模块其他接口前必须先调用本接口成功返回
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：调用本模块其他接口前必须先调用本接口成功返回。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -71,8 +71,8 @@ errcode_t uapi_spi_init(spi_bus_t bus, spi_attr_t *attr, spi_extra_attr_t *extra
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且初始化成功，或总线已初始化 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 attr 为空 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且初始化成功，或总线已初始化 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 attr 为空 |
 | Other | 其他错误码，参考errcode_t | HAL 初始化失败 |
 
 **参考案例**
@@ -94,13 +94,13 @@ errcode_t uapi_spi_deinit(spi_bus_t bus)
 
 **功能说明**
 
-- 去初始化指定 SPI 总线，释放相关资源
-- 对未初始化的总线调用时直接返回成功
+- 去初始化指定 SPI 总线，释放相关资源。
+- 对未初始化的总线调用时直接返回成功。
 
 **前置条件**
 
-- 调用时序约束：应在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：应在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -114,8 +114,8 @@ errcode_t uapi_spi_deinit(spi_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且去初始化成功，或总线未初始化 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且去初始化成功，或总线未初始化 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
 | Other | 其他错误码，参考errcode_t | HAL 去初始化失败 |
 
 ### uapi_spi_set_tmod <a id="uapi_spi_set_tmod"></a>
@@ -132,21 +132,21 @@ errcode_t uapi_spi_set_tmod(spi_bus_t bus, hal_spi_trans_mode_t tmod, uint8_t da
 
 **功能说明**
 
-- 设置指定 SPI 总线的传输模式与接收数据帧数
-- 传输模式与接收数据帧数通过属性结构体配置
-- 用于在运行时切换收发模式、发送模式、接收模式、EEPROM 读模式
+- 设置指定 SPI 总线的传输模式与接收数据帧数。
+- 传输模式与接收数据帧数通过属性结构体配置。
+- 用于在运行时切换收发模式、发送模式、接收模式、EEPROM 读模式。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待设置的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| tmod | hal_spi_trans_mode_t | SPI 传输模式 | [HAL_SPI_TRANS_MODE_TXRX](#hal_spi_trans_mode_t):0 / [HAL_SPI_TRANS_MODE_TX](#hal_spi_trans_mode_t):1 / [HAL_SPI_TRANS_MODE_RX](#hal_spi_trans_mode_t):2 / [HAL_SPI_TRANS_MODE_EEPROM](#hal_spi_trans_mode_t):3 |
+| tmod | hal_spi_trans_mode_t | SPI 传输模式 | [HAL_SPI_TRANS_MODE_TXRX](#hal_spi_trans_mode_t)：0 / [HAL_SPI_TRANS_MODE_TX](#hal_spi_trans_mode_t)：1 / [HAL_SPI_TRANS_MODE_RX](#hal_spi_trans_mode_t)：2 / [HAL_SPI_TRANS_MODE_EEPROM](#hal_spi_trans_mode_t)：3 |
 | data_frame_num | uint8_t | SPI 接收数据帧数量 | 0 ~ 255 |
 
 **返回值**
@@ -155,8 +155,8 @@ errcode_t uapi_spi_set_tmod(spi_bus_t bus, hal_spi_trans_mode_t tmod, uint8_t da
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且设置成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 tmod 大于等于 HAL_SPI_TRANS_MODE_MAX |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且设置成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 tmod 大于等于 HAL_SPI_TRANS_MODE_MAX |
 | Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
 
 ### uapi_spi_set_attr <a id="uapi_spi_set_attr"></a>
@@ -173,14 +173,14 @@ errcode_t uapi_spi_set_attr(spi_bus_t bus, spi_attr_t *attr)
 
 **功能说明**
 
-- 设置指定 SPI 总线的基础配置参数
-- 基础配置参数通过硬件控制接口下发
-- 用于运行时更新主机从机模式、时钟极性相位、帧格式、帧长度等参数
+- 设置指定 SPI 总线的基础配置参数。
+- 基础配置参数通过硬件控制接口下发。
+- 用于运行时更新主机从机模式、时钟极性相位、帧格式、帧长度等参数。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -195,8 +195,8 @@ errcode_t uapi_spi_set_attr(spi_bus_t bus, spi_attr_t *attr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且设置成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 attr 为空 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且设置成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 attr 为空 |
 | Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
 
 ### uapi_spi_get_attr <a id="uapi_spi_get_attr"></a>
@@ -213,14 +213,14 @@ errcode_t uapi_spi_get_attr(spi_bus_t bus, spi_attr_t *attr)
 
 **功能说明**
 
-- 读取指定 SPI 总线的基础配置参数
-- 参数由硬件控制接口拷贝到调用方提供的结构体
-- 用于运行时获取当前主机从机模式、时钟极性相位、帧格式、帧长度等参数
+- 读取指定 SPI 总线的基础配置参数。
+- 参数由硬件控制接口拷贝到调用方提供的结构体。
+- 用于运行时获取当前主机从机模式、时钟极性相位、帧格式、帧长度等参数。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -240,8 +240,8 @@ errcode_t uapi_spi_get_attr(spi_bus_t bus, spi_attr_t *attr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且读取成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 attr 为空 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且读取成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 attr 为空 |
 | Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
 
 ### uapi_spi_set_extra_attr <a id="uapi_spi_set_extra_attr"></a>
@@ -258,14 +258,14 @@ errcode_t uapi_spi_set_extra_attr(spi_bus_t bus, spi_extra_attr_t *extra_attr)
 
 **功能说明**
 
-- 设置指定 SPI 总线的高级配置参数
-- 高级配置参数通过硬件控制接口下发
-- 用于运行时更新 DMA 收发使用、QSPI 参数、Single SPI 参数等配置
+- 设置指定 SPI 总线的高级配置参数。
+- 高级配置参数通过硬件控制接口下发。
+- 用于运行时更新 DMA 收发使用、QSPI 参数、Single SPI 参数等配置。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -280,8 +280,8 @@ errcode_t uapi_spi_set_extra_attr(spi_bus_t bus, spi_extra_attr_t *extra_attr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且设置成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 extra_attr 为空 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且设置成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 extra_attr 为空 |
 | Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
 
 ### uapi_spi_get_extra_attr <a id="uapi_spi_get_extra_attr"></a>
@@ -298,14 +298,14 @@ errcode_t uapi_spi_get_extra_attr(spi_bus_t bus, spi_extra_attr_t *extra_attr)
 
 **功能说明**
 
-- 读取指定 SPI 总线的高级配置参数
-- 参数由硬件控制接口拷贝到调用方提供的结构体
-- 用于运行时获取当前 DMA 收发使用、QSPI 参数、Single SPI 参数等配置
+- 读取指定 SPI 总线的高级配置参数。
+- 参数由硬件控制接口拷贝到调用方提供的结构体。
+- 用于运行时获取当前 DMA 收发使用、QSPI 参数、Single SPI 参数等配置。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -325,8 +325,8 @@ errcode_t uapi_spi_get_extra_attr(spi_bus_t bus, spi_extra_attr_t *extra_attr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且读取成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 extra_attr 为空 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且读取成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 extra_attr 为空 |
 | Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
 
 ### uapi_spi_select_slave <a id="uapi_spi_select_slave"></a>
@@ -343,22 +343,22 @@ errcode_t uapi_spi_select_slave(spi_bus_t bus, spi_slave_t cs)
 
 **功能说明**
 
-- 主机模式下选择指定 SPI 总线需要对通的从机设备
-- 通过硬件控制接口完成从机选择
-- 仅在主机模式下有效
+- 主机模式下选择指定 SPI 总线需要对通的从机设备。
+- 通过硬件控制接口完成从机选择。
+- 仅在主机模式下有效。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 依赖关系：总线必须配置为主机模式
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 依赖关系：总线必须配置为主机模式。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待操作的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| cs | [spi_slave_t](#spi_slave_t) | 被选中的从机设备 | [SPI_SLAVE0](#spi_slave_t):0（有效值小于 [SPI_SLAVE_MAX_NUM](#spi_slave_t):1） |
+| cs | [spi_slave_t](#spi_slave_t) | 被选中的从机设备 | [SPI_SLAVE0](#spi_slave_t)：0（有效值小于 [SPI_SLAVE_MAX_NUM](#spi_slave_t)：1） |
 
 **返回值**
 
@@ -366,9 +366,9 @@ errcode_t uapi_spi_select_slave(spi_bus_t bus, spi_slave_t cs)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且选择成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 cs 大于等于 SPI_SLAVE_MAX_NUM |
-| [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH):0x80001332 | 模式不匹配 | 总线未配置为主机模式 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且选择成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 cs 大于等于 SPI_SLAVE_MAX_NUM |
+| [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为主机模式 |
 | Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
 
 **Kconfig配置**
@@ -391,15 +391,15 @@ errcode_t uapi_spi_master_write(spi_bus_t bus, const spi_xfer_data_t *data, uint
 
 **功能说明**
 
-- 主机模式下将数据写入到从机
-- 支持轮询、DMA、中断三种手动切换传输模式以及轮询与 DMA 自动切换模式
-- 自动切换模式下根据数据长度与阈值比较结果选择轮询或 DMA 模式
+- 主机模式下将数据写入到从机。
+- 支持轮询、DMA、中断三种手动切换传输模式以及轮询与 DMA 自动切换模式。
+- 自动切换模式下根据数据长度与阈值比较结果选择轮询或 DMA 模式。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 依赖关系：总线必须配置为主机模式，传输模式不能与读取模式冲突
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 依赖关系：总线必须配置为主机模式，传输模式不能与读取模式冲突。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -415,14 +415,14 @@ errcode_t uapi_spi_master_write(spi_bus_t bus, const spi_xfer_data_t *data, uint
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且写入成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 越界、data 为空、DMA 下发送缓冲区为空或字节数对齐不合法 |
-| [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH):0x80001332 | 模式不匹配 | 总线未配置为主机模式 |
-| [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE):0x8000133E | 传输模式无效 | 当前传输模式与读取模式相同 |
-| [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT):0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
-| [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR):0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
-| [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR):0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
-| [ERRCODE_SPI_ADD_QUEUE_FAIL](#ERRCODE_SPI_ADD_QUEUE_FAIL):0x8000133B | 入队失败 | 中断模式下发送片段队列已满 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且写入成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 越界、data 为空、DMA 下发送缓冲区为空或字节数对齐不合法 |
+| [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为主机模式 |
+| [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE)：0x8000133E | 传输模式无效 | 当前传输模式与读取模式相同 |
+| [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT)：0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
+| [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR)：0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
+| [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR)：0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
+| [ERRCODE_SPI_ADD_QUEUE_FAIL](#ERRCODE_SPI_ADD_QUEUE_FAIL)：0x8000133B | 入队失败 | 中断模式下发送片段队列已满 |
 | Other | 其他错误码，参考errcode_t | HAL 写入接口执行失败 |
 
 **参考案例**
@@ -449,15 +449,15 @@ errcode_t uapi_spi_master_read(spi_bus_t bus, const spi_xfer_data_t *data, uint3
 
 **功能说明**
 
-- 主机模式下从从机读取数据
-- 支持轮询、DMA、中断三种手动切换传输模式以及轮询与 DMA 自动切换模式
-- 自动切换模式下根据数据长度与阈值比较结果选择轮询或 DMA 模式
+- 主机模式下从从机读取数据。
+- 支持轮询、DMA、中断三种手动切换传输模式以及轮询与 DMA 自动切换模式。
+- 自动切换模式下根据数据长度与阈值比较结果选择轮询或 DMA 模式。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 依赖关系：总线必须配置为主机模式，传输模式不能与发送模式冲突
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 依赖关系：总线必须配置为主机模式，传输模式不能与发送模式冲突。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -473,14 +473,14 @@ errcode_t uapi_spi_master_read(spi_bus_t bus, const spi_xfer_data_t *data, uint3
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且读取成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 越界、data 为空、rx_buff 为空、rx_bytes 为 0，或 DMA 下字节数对齐不合法 |
-| [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH):0x80001332 | 模式不匹配 | 总线未配置为主机模式 |
-| [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE):0x8000133E | 传输模式无效 | 当前传输模式与发送模式相同 |
-| [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT):0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
-| [ERRCODE_SPI_CONFIG_FAIL](#ERRCODE_SPI_CONFIG_FAIL):0x80001330 | 配置失败 | DMA 读路径下帧字节数为 0 或属性设置失败 |
-| [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR):0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
-| [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR):0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且读取成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 越界、data 为空、rx_buff 为空、rx_bytes 为 0，或 DMA 下字节数对齐不合法 |
+| [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为主机模式 |
+| [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE)：0x8000133E | 传输模式无效 | 当前传输模式与发送模式相同 |
+| [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT)：0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
+| [ERRCODE_SPI_CONFIG_FAIL](#ERRCODE_SPI_CONFIG_FAIL)：0x80001330 | 配置失败 | DMA 读路径下帧字节数为 0 或属性设置失败 |
+| [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR)：0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
+| [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR)：0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
 | Other | 其他错误码，参考errcode_t | HAL 读取接口执行失败 |
 
 **参考案例**
@@ -507,15 +507,15 @@ errcode_t uapi_spi_master_writeread(spi_bus_t bus, const spi_xfer_data_t *data, 
 
 **功能说明**
 
-- 主机模式下同时写入与读取数据
-- 支持轮询、DMA 两种传输模式以及轮询与 DMA 自动切换模式
-- 自动切换模式下根据数据长度与阈值比较结果选择轮询或 DMA 模式
+- 主机模式下同时写入与读取数据。
+- 支持轮询、DMA 两种传输模式以及轮询与 DMA 自动切换模式。
+- 自动切换模式下根据数据长度与阈值比较结果选择轮询或 DMA 模式。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 依赖关系：总线必须配置为主机模式，传输模式不能与发送模式冲突
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 依赖关系：总线必须配置为主机模式，传输模式不能与发送模式冲突。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -531,13 +531,13 @@ errcode_t uapi_spi_master_writeread(spi_bus_t bus, const spi_xfer_data_t *data, 
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且写入读取成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 越界、data 为空、rx_buff 为空、rx_bytes 为 0，或 DMA 下发送缓冲区为空、字节数对齐不合法 |
-| [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH):0x80001332 | 模式不匹配 | 总线未配置为主机模式 |
-| [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE):0x8000133E | 传输模式无效 | 当前传输模式与发送模式相同 |
-| [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT):0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
-| [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR):0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
-| [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR):0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且写入读取成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 越界、data 为空、rx_buff 为空、rx_bytes 为 0，或 DMA 下发送缓冲区为空、字节数对齐不合法 |
+| [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为主机模式 |
+| [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE)：0x8000133E | 传输模式无效 | 当前传输模式与发送模式相同 |
+| [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT)：0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
+| [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR)：0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
+| [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR)：0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
 | Other | 其他错误码，参考errcode_t | HAL 写入或读取接口执行失败 |
 
 **参考案例**
@@ -564,15 +564,15 @@ errcode_t uapi_spi_slave_write(spi_bus_t bus, const spi_xfer_data_t *data, uint3
 
 **功能说明**
 
-- 从机模式下向主机写入数据
-- 支持轮询、DMA、中断三种手动切换传输模式以及轮询与 DMA 自动切换模式
-- 自动切换模式下根据数据长度与阈值比较结果选择轮询或 DMA 模式
+- 从机模式下向主机写入数据。
+- 支持轮询、DMA、中断三种手动切换传输模式以及轮询与 DMA 自动切换模式。
+- 自动切换模式下根据数据长度与阈值比较结果选择轮询或 DMA 模式。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 依赖关系：总线必须配置为从机模式，传输模式不能与读取模式冲突
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 依赖关系：总线必须配置为从机模式，传输模式不能与读取模式冲突。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -588,14 +588,14 @@ errcode_t uapi_spi_slave_write(spi_bus_t bus, const spi_xfer_data_t *data, uint3
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且写入成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | data 为空、tx_buff 为空、tx_bytes 为 0，或 DMA 下字节数对齐不合法 |
-| [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH):0x80001332 | 模式不匹配 | 总线未配置为从机模式 |
-| [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE):0x8000133E | 传输模式无效 | 当前传输模式与读取模式相同 |
-| [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT):0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
-| [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR):0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
-| [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR):0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
-| [ERRCODE_SPI_ADD_QUEUE_FAIL](#ERRCODE_SPI_ADD_QUEUE_FAIL):0x8000133B | 入队失败 | 中断模式下发送片段队列已满 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且写入成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | data 为空、tx_buff 为空、tx_bytes 为 0，或 DMA 下字节数对齐不合法 |
+| [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为从机模式 |
+| [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE)：0x8000133E | 传输模式无效 | 当前传输模式与读取模式相同 |
+| [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT)：0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
+| [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR)：0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
+| [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR)：0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
+| [ERRCODE_SPI_ADD_QUEUE_FAIL](#ERRCODE_SPI_ADD_QUEUE_FAIL)：0x8000133B | 入队失败 | 中断模式下发送片段队列已满 |
 | Other | 其他错误码，参考errcode_t | HAL 写入接口执行失败 |
 
 **参考案例**
@@ -622,15 +622,15 @@ errcode_t uapi_spi_slave_read(spi_bus_t bus, const spi_xfer_data_t *data, uint32
 
 **功能说明**
 
-- 从机模式下从主机读取数据
-- 支持轮询、DMA、中断三种手动切换传输模式以及轮询与 DMA 自动切换模式
-- 自动切换模式下根据数据长度与阈值比较结果选择轮询或 DMA 模式
+- 从机模式下从主机读取数据。
+- 支持轮询、DMA、中断三种手动切换传输模式以及轮询与 DMA 自动切换模式。
+- 自动切换模式下根据数据长度与阈值比较结果选择轮询或 DMA 模式。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 依赖关系：总线必须配置为从机模式，传输模式不能与发送模式冲突
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 依赖关系：总线必须配置为从机模式，传输模式不能与发送模式冲突。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -646,13 +646,13 @@ errcode_t uapi_spi_slave_read(spi_bus_t bus, const spi_xfer_data_t *data, uint32
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且读取成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 越界、data 为空、rx_buff 为空、rx_bytes 为 0，或 DMA 下字节数对齐不合法 |
-| [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH):0x80001332 | 模式不匹配 | 总线未配置为从机模式 |
-| [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE):0x8000133E | 传输模式无效 | 当前传输模式与发送模式相同 |
-| [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT):0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
-| [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR):0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
-| [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR):0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且读取成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 越界、data 为空、rx_buff 为空、rx_bytes 为 0，或 DMA 下字节数对齐不合法 |
+| [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为从机模式 |
+| [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE)：0x8000133E | 传输模式无效 | 当前传输模式与发送模式相同 |
+| [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT)：0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
+| [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR)：0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
+| [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR)：0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
 | Other | 其他错误码，参考errcode_t | HAL 读取接口执行失败 |
 
 **参考案例**
@@ -679,15 +679,15 @@ errcode_t uapi_spi_slave_writeread(spi_bus_t bus, const spi_xfer_data_t *data, u
 
 **功能说明**
 
-- 从机模式下同时写入与读取数据
-- 支持轮询、DMA 两种传输模式以及轮询与 DMA 自动切换模式
-- 自动切换模式下根据数据长度与阈值比较结果选择轮询或 DMA 模式
+- 从机模式下同时写入与读取数据。
+- 支持轮询、DMA 两种传输模式以及轮询与 DMA 自动切换模式。
+- 自动切换模式下根据数据长度与阈值比较结果选择轮询或 DMA 模式。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 依赖关系：总线必须配置为从机模式，传输模式不能与发送模式冲突
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 依赖关系：总线必须配置为从机模式，传输模式不能与发送模式冲突。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -703,13 +703,13 @@ errcode_t uapi_spi_slave_writeread(spi_bus_t bus, const spi_xfer_data_t *data, u
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且写入读取成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 越界、data 为空、rx_buff 为空、rx_bytes 为 0，或 DMA 下字节数对齐不合法 |
-| [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH):0x80001332 | 模式不匹配 | 总线未配置为从机模式 |
-| [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE):0x8000133E | 传输模式无效 | 当前传输模式与发送模式相同 |
-| [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT):0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
-| [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR):0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
-| [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR):0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且写入读取成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 越界、data 为空、rx_buff 为空、rx_bytes 为 0，或 DMA 下字节数对齐不合法 |
+| [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为从机模式 |
+| [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE)：0x8000133E | 传输模式无效 | 当前传输模式与发送模式相同 |
+| [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT)：0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
+| [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR)：0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
+| [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR)：0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
 | Other | 其他错误码，参考errcode_t | HAL 写入或读取接口执行失败 |
 
 **参考案例**
@@ -736,15 +736,15 @@ errcode_t uapi_spi_set_dma_mode(spi_bus_t bus, bool en, const spi_dma_config_t *
 
 **功能说明**
 
-- 使能或去使能指定 SPI 总线的 DMA 模式传输
-- 使能时按入参 DMA 配置生效
-- 去使能时清零 DMA 收发数据电平
+- 使能或去使能指定 SPI 总线的 DMA 模式传输。
+- 使能时按入参 DMA 配置生效。
+- 去使能时清零 DMA 收发数据电平。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用，使能 DMA 模式前需完成 DMA 初始化与打开
-- 依赖关系：中断模式下使能 DMA 会被拒绝
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用，使能 DMA 模式前需完成 DMA 初始化与打开。
+- 依赖关系：中断模式下使能 DMA 会被拒绝。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -760,9 +760,9 @@ errcode_t uapi_spi_set_dma_mode(spi_bus_t bus, bool en, const spi_dma_config_t *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且设置成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| [ERRCODE_SPI_DMA_IRQ_MODE_MUTEX](#ERRCODE_SPI_DMA_IRQ_MODE_MUTEX):0x8000133C | DMA 与中断模式互斥 | 中断模式已使能时使能 DMA |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且设置成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
+| [ERRCODE_SPI_DMA_IRQ_MODE_MUTEX](#ERRCODE_SPI_DMA_IRQ_MODE_MUTEX)：0x8000133C | DMA 与中断模式互斥 | 中断模式已使能时使能 DMA |
 
 **参考案例**
 
@@ -790,15 +790,15 @@ errcode_t uapi_spi_set_irq_mode(spi_bus_t bus, bool irq_en, spi_rx_callback_t rx
 
 **功能说明**
 
-- 使能或去使能指定 SPI 总线的中断模式传输
-- 使能时注册接收完成回调与发送完成回调
-- 去使能时清空已注册的接收与发送回调
+- 使能或去使能指定 SPI 总线的中断模式传输。
+- 使能时注册接收完成回调与发送完成回调。
+- 去使能时清空已注册的接收与发送回调。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 依赖关系：DMA 模式已使能时使能中断会被拒绝
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 依赖关系：DMA 模式已使能时使能中断会被拒绝。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -815,9 +815,9 @@ errcode_t uapi_spi_set_irq_mode(spi_bus_t bus, bool irq_en, spi_rx_callback_t rx
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 参数合法且设置成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| [ERRCODE_SPI_DMA_IRQ_MODE_MUTEX](#ERRCODE_SPI_DMA_IRQ_MODE_MUTEX):0x8000133C | DMA 与中断模式互斥 | DMA 模式已使能时使能中断 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且设置成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
+| [ERRCODE_SPI_DMA_IRQ_MODE_MUTEX](#ERRCODE_SPI_DMA_IRQ_MODE_MUTEX)：0x8000133C | DMA 与中断模式互斥 | DMA 模式已使能时使能中断 |
 
 **参考案例**
 
@@ -845,15 +845,15 @@ errcode_t uapi_spi_set_loop_back_mode(spi_bus_t bus, bool loopback_en)
 
 **功能说明**
 
-- 设置指定 SPI 总线是否进入环回测试模式
-- 调用后直接返回成功，不改变硬件配置
-- 用于预留环回测试能力
+- 设置指定 SPI 总线是否进入环回测试模式。
+- 调用后直接返回成功，不改变硬件配置。
+- 用于预留环回测试能力。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 依赖关系：需开启 CONFIG_SPI_SUPPORT_LOOPBACK 配置项接口才可见
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 依赖关系：需开启 CONFIG_SPI_SUPPORT_LOOPBACK 配置项接口才可见。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -868,7 +868,7 @@ errcode_t uapi_spi_set_loop_back_mode(spi_bus_t bus, bool loopback_en)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 调用即返回成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 调用即返回成功 |
 
 **Kconfig配置**
 
@@ -890,15 +890,15 @@ errcode_t uapi_spi_set_crc_mode(spi_bus_t bus, const spi_crc_config_t *crc_confi
 
 **功能说明**
 
-- 设置指定 SPI 总线的发送与接收 CRC 校验模式
-- 注册 CRC 校验错误回调函数
-- 调用后直接返回成功，不改变硬件配置
+- 设置指定 SPI 总线的发送与接收 CRC 校验模式。
+- 注册 CRC 校验错误回调函数。
+- 调用后直接返回成功，不改变硬件配置。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 依赖关系：需开启 CONFIG_SPI_SUPPORT_CRC 配置项接口才可见
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 依赖关系：需开启 CONFIG_SPI_SUPPORT_CRC 配置项接口才可见。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -914,7 +914,7 @@ errcode_t uapi_spi_set_crc_mode(spi_bus_t bus, const spi_crc_config_t *crc_confi
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 调用即返回成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 调用即返回成功 |
 
 **Kconfig配置**
 
@@ -936,15 +936,15 @@ errcode_t uapi_spi_suspend(uintptr_t arg)
 
 **功能说明**
 
-- 挂起所有 SPI 通道
-- 通过硬件控制接口完成挂起操作
-- 在开启低功耗时钟控制或 DMA 时联动执行对应的关闭动作
+- 挂起所有 SPI 通道。
+- 通过硬件控制接口完成挂起操作。
+- 在开启低功耗时钟控制或 DMA 时联动执行对应的关闭动作。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用
-- 依赖关系：需开启 CONFIG_SPI_SUPPORT_LPM 配置项接口才可见
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用。
+- 依赖关系：需开启 CONFIG_SPI_SUPPORT_LPM 配置项接口才可见。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -958,8 +958,8 @@ errcode_t uapi_spi_suspend(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 总线未初始化或挂起成功 |
-| [ERRCODE_FAIL](#ERRCODE_FAIL):0xFFFFFFFF | 执行失败 | HAL 挂起控制接口执行失败 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 总线未初始化或挂起成功 |
+| [ERRCODE_FAIL](#ERRCODE_FAIL)：0xFFFFFFFF | 执行失败 | HAL 挂起控制接口执行失败 |
 
 **Kconfig配置**
 
@@ -981,15 +981,15 @@ errcode_t uapi_spi_resume(uintptr_t arg)
 
 **功能说明**
 
-- 恢复所有 SPI 通道
-- 通过硬件控制接口完成恢复操作
-- 在开启低功耗时钟控制或 DMA 时联动执行对应的恢复动作
+- 恢复所有 SPI 通道。
+- 通过硬件控制接口完成恢复操作。
+- 在开启低功耗时钟控制或 DMA 时联动执行对应的恢复动作。
 
 **前置条件**
 
-- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用，且应先调用过 [uapi_spi_suspend](#uapi_spi_suspend)
-- 依赖关系：需开启 CONFIG_SPI_SUPPORT_LPM 配置项接口才可见
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：必须在 [uapi_spi_init](#uapi_spi_init) 成功返回后调用，且应先调用过 [uapi_spi_suspend](#uapi_spi_suspend)。
+- 依赖关系：需开启 CONFIG_SPI_SUPPORT_LPM 配置项接口才可见。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -1003,8 +1003,8 @@ errcode_t uapi_spi_resume(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 总线未初始化或恢复成功 |
-| [ERRCODE_FAIL](#ERRCODE_FAIL):0xFFFFFFFF | 执行失败 | HAL 恢复控制接口执行失败 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 总线未初始化或恢复成功 |
+| [ERRCODE_FAIL](#ERRCODE_FAIL)：0xFFFFFFFF | 执行失败 | HAL 恢复控制接口执行失败 |
 
 **Kconfig配置**
 
@@ -1221,7 +1221,7 @@ typedef enum hal_spi_frame_size {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| HAL_SPI_FRAME_SIZE_8 | 0x07 | 8 位串行数据传输 |
+| HAL_SPI_FRAME_SIZE_8 | 7 | 8 位串行数据传输 |
 | HAL_SPI_FRAME_SIZE_16 | 0x0F | 16 位串行数据传输，当前暂不支持 |
 | HAL_SPI_FRAME_SIZE_24 | 0x17 | 24 位串行数据传输，当前暂不支持 |
 | HAL_SPI_FRAME_SIZE_32 | 0x1F | 32 位串行数据传输 |

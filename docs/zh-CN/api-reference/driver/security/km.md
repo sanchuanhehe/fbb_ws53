@@ -1,6 +1,6 @@
 # km
 
-security_unified KM (Key Manager) 子模块提供 Keyslot、KLAD (Key Ladder)、KDF (Key Derivation Function) 三类密钥管理能力，包括密钥槽句柄的创建与销毁、Key Ladder 通道的创建、属性配置与密钥派生下发、根密钥更新等接口。该模块通过统一的对外句柄抽象，由应用层发起调用，完成对称密钥与 HMAC (Hash-based Message Authentication Code) 密钥的安全派生与下发。
+security_unified KM（Key Manager）子模块提供 Keyslot、KLAD（Key Ladder）、KDF（Key Derivation Function）三类密钥管理能力，包括密钥槽句柄的创建与销毁、Key Ladder 通道的创建、属性配置与密钥派生下发、根密钥更新等接口。该模块通过统一的对外句柄抽象，由应用层发起调用，完成对称密钥与 HMAC（Hash-based Message Authentication Code）密钥的安全派生与下发。
 
 **模块公共头文件**
 
@@ -42,14 +42,14 @@ errcode_t uapi_drv_km_init(void)
 
 **功能说明**
 
-- 初始化 KM (Key Manager) 模块运行所需的内部资源与状态
-- 初始化成功后本模块 Keyslot、KLAD (Key Ladder)、KDF (Key Derivation Function) 接口方可使用
-- 返回执行结果状态码
+- 初始化 KM（Key Manager）模块运行所需的内部资源与状态。
+- 初始化成功后本模块 Keyslot、KLAD（Key Ladder）、KDF（Key Derivation Function）接口方可使用。
+- 返回执行结果状态码。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在应用使用任意 Keyslot / KLAD / KDF 接口之前调用
-- 依赖关系：当前接口依赖 security_unified 模块底层驱动已就绪
+- 调用时序约束：当前接口必须在应用使用任意 Keyslot / KLAD / KDF 接口之前调用。
+- 依赖关系：当前接口依赖 security_unified 模块底层驱动已就绪。
 
 **返回值**
 
@@ -57,7 +57,7 @@ errcode_t uapi_drv_km_init(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 初始化成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 初始化成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 初始化失败 |
 
 **参考案例**
@@ -78,14 +78,14 @@ errcode_t uapi_drv_km_deinit(void)
 
 **功能说明**
 
-- 去初始化 KM 模块，释放初始化阶段占用的资源
-- 恢复模块至未初始化状态（与 uapi_drv_km_init 配对使用）
-- 返回执行结果状态码
+- 去初始化 KM 模块，释放初始化阶段占用的资源。
+- 恢复模块至未初始化状态（与 uapi_drv_km_init 配对使用）。
+- 返回执行结果状态码。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_drv_km_init 成功返回后调用
-- 依赖关系：当前接口依赖 KM 模块已初始化
+- 调用时序约束：当前接口必须在 uapi_drv_km_init 成功返回后调用。
+- 依赖关系：当前接口依赖 KM 模块已初始化。
 
 **返回值**
 
@@ -93,7 +93,7 @@ errcode_t uapi_drv_km_deinit(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 去初始化成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 去初始化成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 去初始化失败 |
 
 **参考案例**
@@ -114,14 +114,14 @@ errcode_t uapi_drv_keyslot_create(uint32_t *keyslot_handle, uapi_drv_keyslot_typ
 
 **功能说明**
 
-- 按指定用途类型创建一个 keyslot 句柄，用于保存密钥
-- 创建成功后通过出参返回句柄，供后续 KLAD 关联或销毁使用
-- 返回执行结果状态码
+- 按指定用途类型创建一个 keyslot 句柄，用于保存密钥。
+- 创建成功后通过出参返回句柄，供后续 KLAD 关联或销毁使用。
+- 返回执行结果状态码。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_drv_km_init 成功返回后调用
-- 依赖关系：当前接口依赖 KM 模块已初始化
+- 调用时序约束：当前接口必须在 uapi_drv_km_init 成功返回后调用。
+- 依赖关系：当前接口依赖 KM 模块已初始化。
 
 **入参**
 
@@ -141,7 +141,7 @@ errcode_t uapi_drv_keyslot_create(uint32_t *keyslot_handle, uapi_drv_keyslot_typ
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | keyslot 创建成功 |
+| ERRCODE_SUCC：0 | 执行成功 | keyslot 创建成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 创建失败 |
 
 **参考案例**
@@ -163,14 +163,14 @@ errcode_t uapi_drv_keyslot_destroy(uint32_t keyslot_handle)
 
 **功能说明**
 
-- 销毁指定的 keyslot 句柄，释放其占用的通道资源
-- 销毁后该句柄不再可用，需重新创建才能再次使用
-- 返回执行结果状态码
+- 销毁指定的 keyslot 句柄，释放其占用的通道资源。
+- 销毁后该句柄不再可用，需重新创建才能再次使用。
+- 返回执行结果状态码。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_drv_keyslot_create 成功返回后调用
-- 依赖关系：当前接口依赖待销毁的 keyslot 句柄有效
+- 调用时序约束：当前接口必须在 uapi_drv_keyslot_create 成功返回后调用。
+- 依赖关系：当前接口依赖待销毁的 keyslot 句柄有效。
 
 **入参**
 
@@ -184,7 +184,7 @@ errcode_t uapi_drv_keyslot_destroy(uint32_t keyslot_handle)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | keyslot 销毁成功 |
+| ERRCODE_SUCC：0 | 执行成功 | keyslot 销毁成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 销毁失败 |
 
 **参考案例**
@@ -206,14 +206,14 @@ errcode_t uapi_drv_klad_create(uint32_t *klad_handle)
 
 **功能说明**
 
-- 创建一个 Key Ladder 通道句柄，用于后续密钥派生与下发
-- 创建成功后通过出参返回句柄
-- 返回执行结果状态码
+- 创建一个 Key Ladder 通道句柄，用于后续密钥派生与下发。
+- 创建成功后通过出参返回句柄。
+- 返回执行结果状态码。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_drv_km_init 成功返回后调用
-- 依赖关系：当前接口依赖 KM 模块已初始化
+- 调用时序约束：当前接口必须在 uapi_drv_km_init 成功返回后调用。
+- 依赖关系：当前接口依赖 KM 模块已初始化。
 
 **出参**
 
@@ -227,7 +227,7 @@ errcode_t uapi_drv_klad_create(uint32_t *klad_handle)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | Key Ladder 通道创建成功 |
+| ERRCODE_SUCC：0 | 执行成功 | Key Ladder 通道创建成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 创建失败 |
 
 **参考案例**
@@ -249,14 +249,14 @@ errcode_t uapi_drv_klad_destroy(uint32_t klad_handle)
 
 **功能说明**
 
-- 销毁指定的 Key Ladder 通道句柄，释放其占用的通道资源
-- 销毁后该句柄不再可用，需重新创建才能再次使用
-- 返回执行结果状态码
+- 销毁指定的 Key Ladder 通道句柄，释放其占用的通道资源。
+- 销毁后该句柄不再可用，需重新创建才能再次使用。
+- 返回执行结果状态码。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_drv_klad_create 成功返回后调用
-- 依赖关系：当前接口依赖待销毁的 klad 通道句柄有效
+- 调用时序约束：当前接口必须在 uapi_drv_klad_create 成功返回后调用。
+- 依赖关系：当前接口依赖待销毁的 klad 通道句柄有效。
 
 **入参**
 
@@ -270,7 +270,7 @@ errcode_t uapi_drv_klad_destroy(uint32_t klad_handle)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | Key Ladder 通道销毁成功 |
+| ERRCODE_SUCC：0 | 执行成功 | Key Ladder 通道销毁成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 销毁失败 |
 
 **参考案例**
@@ -292,21 +292,21 @@ errcode_t uapi_drv_klad_attach(uint32_t klad_handle, uapi_drv_klad_dest_t klad_t
 
 **功能说明**
 
-- 将指定 keyslot 句柄与 Key Ladder 通道建立关联关系
-- 通过 klad_type 指定密钥送出的目标模块
-- 返回执行结果状态码
+- 将指定 keyslot 句柄与 Key Ladder 通道建立关联关系。
+- 通过 klad_type 指定密钥送出的目标模块。
+- 返回执行结果状态码。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_drv_klad_create 与 uapi_drv_keyslot_create 成功返回后调用
-- 依赖关系：当前接口依赖待关联的 klad 通道与 keyslot 句柄均有效
+- 调用时序约束：当前接口必须在 uapi_drv_klad_create 与 uapi_drv_keyslot_create 成功返回后调用。
+- 依赖关系：当前接口依赖待关联的 klad 通道与 keyslot 句柄均有效。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | klad_handle | uint32_t | 要关联的 Key Ladder 通道句柄 | 由 uapi_drv_klad_create 返回的有效句柄 |
-| klad_type | [uapi_drv_klad_dest_t](#enum_uapi_drv_klad_dest_t) | klad 目标模块类型 | [UAPI_DRV_KLAD_DEST_MCIPHER](#enum_uapi_drv_klad_dest_t):0 / [UAPI_DRV_KLAD_DEST_HMAC](#enum_uapi_drv_klad_dest_t):1 / [UAPI_DRV_KLAD_DEST_FLASH](#enum_uapi_drv_klad_dest_t):2 / [UAPI_DRV_KLAD_DEST_NPU](#enum_uapi_drv_klad_dest_t):3 / [UAPI_DRV_KLAD_DEST_AIDSP](#enum_uapi_drv_klad_dest_t):4 / [UAPI_DRV_KLAD_DEST_MAX](#enum_uapi_drv_klad_dest_t):5 |
+| klad_type | [uapi_drv_klad_dest_t](#enum_uapi_drv_klad_dest_t) | klad 目标模块类型 | [UAPI_DRV_KLAD_DEST_MCIPHER](#enum_uapi_drv_klad_dest_t)：0 / [UAPI_DRV_KLAD_DEST_HMAC](#enum_uapi_drv_klad_dest_t)：1 / [UAPI_DRV_KLAD_DEST_FLASH](#enum_uapi_drv_klad_dest_t)：2 / [UAPI_DRV_KLAD_DEST_NPU](#enum_uapi_drv_klad_dest_t)：3 / [UAPI_DRV_KLAD_DEST_AIDSP](#enum_uapi_drv_klad_dest_t)：4 / [UAPI_DRV_KLAD_DEST_MAX](#enum_uapi_drv_klad_dest_t)：5 |
 | keyslot_handle | uint32_t | 要关联的 keyslot 通道句柄 | 由 uapi_drv_keyslot_create 返回的有效句柄 |
 
 **返回值**
@@ -315,7 +315,7 @@ errcode_t uapi_drv_klad_attach(uint32_t klad_handle, uapi_drv_klad_dest_t klad_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 关联成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 关联成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 关联失败 |
 
 **参考案例**
@@ -337,21 +337,21 @@ errcode_t uapi_drv_klad_detach(uint32_t klad_handle, uapi_drv_klad_dest_t klad_t
 
 **功能说明**
 
-- 将指定 keyslot 句柄与 Key Ladder 通道解除关联关系
-- 通过 klad_type 指定密钥送出的目标模块
-- 返回执行结果状态码
+- 将指定 keyslot 句柄与 Key Ladder 通道解除关联关系。
+- 通过 klad_type 指定密钥送出的目标模块。
+- 返回执行结果状态码。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_drv_klad_attach 成功返回后调用
-- 依赖关系：当前接口依赖待解关联的 klad 通道与 keyslot 句柄均有效
+- 调用时序约束：当前接口必须在 uapi_drv_klad_attach 成功返回后调用。
+- 依赖关系：当前接口依赖待解关联的 klad 通道与 keyslot 句柄均有效。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | klad_handle | uint32_t | 要解关联的 Key Ladder 通道句柄 | 由 uapi_drv_klad_create 返回的有效句柄 |
-| klad_type | [uapi_drv_klad_dest_t](#enum_uapi_drv_klad_dest_t) | klad 目标模块类型 | [UAPI_DRV_KLAD_DEST_MCIPHER](#enum_uapi_drv_klad_dest_t):0 / [UAPI_DRV_KLAD_DEST_HMAC](#enum_uapi_drv_klad_dest_t):1 / [UAPI_DRV_KLAD_DEST_FLASH](#enum_uapi_drv_klad_dest_t):2 / [UAPI_DRV_KLAD_DEST_NPU](#enum_uapi_drv_klad_dest_t):3 / [UAPI_DRV_KLAD_DEST_AIDSP](#enum_uapi_drv_klad_dest_t):4 / [UAPI_DRV_KLAD_DEST_MAX](#enum_uapi_drv_klad_dest_t):5 |
+| klad_type | [uapi_drv_klad_dest_t](#enum_uapi_drv_klad_dest_t) | klad 目标模块类型 | [UAPI_DRV_KLAD_DEST_MCIPHER](#enum_uapi_drv_klad_dest_t)：0 / [UAPI_DRV_KLAD_DEST_HMAC](#enum_uapi_drv_klad_dest_t)：1 / [UAPI_DRV_KLAD_DEST_FLASH](#enum_uapi_drv_klad_dest_t)：2 / [UAPI_DRV_KLAD_DEST_NPU](#enum_uapi_drv_klad_dest_t)：3 / [UAPI_DRV_KLAD_DEST_AIDSP](#enum_uapi_drv_klad_dest_t)：4 / [UAPI_DRV_KLAD_DEST_MAX](#enum_uapi_drv_klad_dest_t)：5 |
 | keyslot_handle | uint32_t | 要解关联的 keyslot 通道句柄 | 由 uapi_drv_keyslot_create 返回的有效句柄 |
 
 **返回值**
@@ -360,7 +360,7 @@ errcode_t uapi_drv_klad_detach(uint32_t klad_handle, uapi_drv_klad_dest_t klad_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 解关联成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 解关联成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 解关联失败 |
 
 **参考案例**
@@ -381,14 +381,14 @@ errcode_t uapi_drv_klad_set_attr(uint32_t klad_handle, const uapi_drv_klad_attr_
 
 **功能说明**
 
-- 设置 Key Ladder 通道的配置属性，包括 Key Ladder 配置、工作密钥配置与工作密钥安全配置
-- 设置完成后影响后续派生密钥的属性与安全策略
-- 返回执行结果状态码
+- 设置 Key Ladder 通道的配置属性，包括 Key Ladder 配置、工作密钥配置与工作密钥安全配置。
+- 设置完成后影响后续派生密钥的属性与安全策略。
+- 返回执行结果状态码。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_drv_klad_create 成功返回后调用
-- 依赖关系：当前接口依赖待配置的 klad 通道句柄有效，attr 指针非空
+- 调用时序约束：当前接口必须在 uapi_drv_klad_create 成功返回后调用。
+- 依赖关系：当前接口依赖待配置的 klad 通道句柄有效，attr 指针非空。
 
 **入参**
 
@@ -403,8 +403,8 @@ errcode_t uapi_drv_klad_set_attr(uint32_t klad_handle, const uapi_drv_klad_attr_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 属性设置成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | attr 为 NULL |
+| ERRCODE_SUCC：0 | 执行成功 | 属性设置成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | attr 为 NULL |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设置失败 |
 
 **参考案例**
@@ -426,14 +426,14 @@ errcode_t uapi_drv_klad_get_attr(uint32_t klad_handle, uapi_drv_klad_attr_t *att
 
 **功能说明**
 
-- 获取 Key Ladder 通道当前配置属性，包括 Key Ladder 配置、工作密钥配置与工作密钥安全配置
-- 获取结果通过出参 attr 返回
-- 返回执行结果状态码
+- 获取 Key Ladder 通道当前配置属性，包括 Key Ladder 配置、工作密钥配置与工作密钥安全配置。
+- 获取结果通过出参 attr 返回。
+- 返回执行结果状态码。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_drv_klad_create 成功返回后调用
-- 依赖关系：当前接口依赖待查询的 klad 通道句柄有效，attr 指针非空
+- 调用时序约束：当前接口必须在 uapi_drv_klad_create 成功返回后调用。
+- 依赖关系：当前接口依赖待查询的 klad 通道句柄有效，attr 指针非空。
 
 **入参**
 
@@ -453,8 +453,8 @@ errcode_t uapi_drv_klad_get_attr(uint32_t klad_handle, uapi_drv_klad_attr_t *att
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 属性获取成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | attr 为 NULL |
+| ERRCODE_SUCC：0 | 执行成功 | 属性获取成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | attr 为 NULL |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 获取失败 |
 
 ### uapi_drv_klad_set_effective_key <a id="uapi_drv_klad_set_effective_key"></a>
@@ -471,14 +471,14 @@ errcode_t uapi_drv_klad_set_effective_key(uint32_t klad_handle, const uapi_drv_k
 
 **功能说明**
 
-- 设置 Key Ladder 通道硬件派生密钥参数，包括派生 HMAC 算法、主密钥类型、密钥长度、盐值与单向性配置
-- 设置完成后触发硬件密钥派生并下发至目标引擎
-- 返回执行结果状态码
+- 设置 Key Ladder 通道硬件派生密钥参数，包括派生 HMAC 算法、主密钥类型、密钥长度、盐值与单向性配置。
+- 设置完成后触发硬件密钥派生并下发至目标引擎。
+- 返回执行结果状态码。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_drv_klad_set_attr 成功返回后调用
-- 依赖关系：当前接口依赖待配置的 klad 通道句柄有效，key 指针及其 salt 字段非空
+- 调用时序约束：当前接口必须在 uapi_drv_klad_set_attr 成功返回后调用。
+- 依赖关系：当前接口依赖待配置的 klad 通道句柄有效，key 指针及其 salt 字段非空。
 
 **入参**
 
@@ -493,9 +493,9 @@ errcode_t uapi_drv_klad_set_effective_key(uint32_t klad_handle, const uapi_drv_k
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 硬件派生密钥设置成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | key 为 NULL |
-| [ERRCODE_FAIL](#ERRCODE_FAIL):0xFFFFFFFF | 执行失败 | salt 拷贝失败 |
+| ERRCODE_SUCC：0 | 执行成功 | 硬件派生密钥设置成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | key 为 NULL |
+| [ERRCODE_FAIL](#ERRCODE_FAIL)：0xFFFFFFFF | 执行失败 | salt 拷贝失败 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设置失败 |
 
 **参考案例**
@@ -516,14 +516,14 @@ errcode_t uapi_drv_klad_set_clear_key(uint32_t klad_handle, const uapi_drv_klad_
 
 **功能说明**
 
-- 设置 Key Ladder 通道的明文密钥，包括明文密钥内容、长度、奇偶属性与 HMAC 算法类型
-- 设置完成后将明文密钥下发至目标引擎
-- 返回执行结果状态码
+- 设置 Key Ladder 通道的明文密钥，包括明文密钥内容、长度、奇偶属性与 HMAC 算法类型。
+- 设置完成后将明文密钥下发至目标引擎。
+- 返回执行结果状态码。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_drv_klad_set_attr 成功返回后调用
-- 依赖关系：当前接口依赖待配置的 klad 通道句柄有效，key 指针及其 key 字段非空
+- 调用时序约束：当前接口必须在 uapi_drv_klad_set_attr 成功返回后调用。
+- 依赖关系：当前接口依赖待配置的 klad 通道句柄有效，key 指针及其 key 字段非空。
 
 **入参**
 
@@ -538,9 +538,9 @@ errcode_t uapi_drv_klad_set_clear_key(uint32_t klad_handle, const uapi_drv_klad_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 明文密钥设置成功 |
-| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM):0x80000001 | 参数无效 | key 为 NULL |
-| [ERRCODE_FAIL](#ERRCODE_FAIL):0xFFFFFFFF | 执行失败 | 明文密钥拷贝失败 |
+| ERRCODE_SUCC：0 | 执行成功 | 明文密钥设置成功 |
+| [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | key 为 NULL |
+| [ERRCODE_FAIL](#ERRCODE_FAIL)：0xFFFFFFFF | 执行失败 | 明文密钥拷贝失败 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设置失败 |
 
 **参考案例**
@@ -561,14 +561,14 @@ errcode_t uapi_drv_kdf_update(uapi_drv_kdf_otp_key_t otp_key, uapi_drv_kdf_updat
 
 **功能说明**
 
-- 更新指定的 OTP (One-Time Programmable) 根密钥
-- 通过 alg 指定更新所使用的对称算法
-- 返回执行结果状态码
+- 更新指定的 OTP（One-Time Programmable）根密钥。
+- 通过 alg 指定更新所使用的对称算法。
+- 返回执行结果状态码。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_drv_km_init 成功返回后调用
-- 依赖关系：当前接口依赖 KM 模块已初始化
+- 调用时序约束：当前接口必须在 uapi_drv_km_init 成功返回后调用。
+- 依赖关系：当前接口依赖 KM 模块已初始化。
 
 **入参**
 
@@ -583,7 +583,7 @@ errcode_t uapi_drv_kdf_update(uapi_drv_kdf_otp_key_t otp_key, uapi_drv_kdf_updat
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 根密钥更新成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 根密钥更新成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 更新失败 |
 
 ## Type definitions
@@ -648,7 +648,7 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| UAPI_DRV_KDF_UPDATE_ALG_AES | 0 | KDF 密钥派生使用 AES (Advanced Encryption Standard) 对称算法 |
+| UAPI_DRV_KDF_UPDATE_ALG_AES | 0 | KDF 密钥派生使用 AES（Advanced Encryption Standard）对称算法 |
 | UAPI_DRV_KDF_UPDATE_ALG_SM4 | 1 | KDF 密钥派生使用 SM4 对称算法 |
 
 ### enum_uapi_drv_kdf_hard_key_type_t <a id="enum_uapi_drv_kdf_hard_key_type_t"></a>
@@ -693,7 +693,7 @@ typedef enum {
 | UAPI_DRV_KDF_HARD_KEY_TYPE_ABRK2 | 0x03000005 | 动态启动根密钥 2 |
 | UAPI_DRV_KDF_HARD_KEY_TYPE_DRK0 | 0x03000006 | 设备根密钥 0 |
 | UAPI_DRV_KDF_HARD_KEY_TYPE_DRK1 | 0x03000007 | 设备根密钥 1 |
-| UAPI_DRV_KDF_HARD_KEY_TYPE_RDRK0 | 0x03000008 | REE (Rich Execution Environment) 设备根密钥 0 |
+| UAPI_DRV_KDF_HARD_KEY_TYPE_RDRK0 | 0x03000008 | REE（Rich Execution Environment）设备根密钥 0 |
 | UAPI_DRV_KDF_HARD_KEY_TYPE_RDRK1 | 0x03000009 | REE 设备根密钥 1 |
 | UAPI_DRV_KDF_HARD_KEY_TYPE_PSK | 0x0300000A | 预共享密钥 |
 | UAPI_DRV_KDF_HARD_KEY_TYPE_FDRK0 | 0x0300000B | Flash 设备根密钥 0 |
@@ -723,7 +723,7 @@ typedef enum {
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
 | UAPI_DRV_KDF_HARD_ALG_SHA256 | 0 | 硬件 PBKDF2 算法使用 SHA256 |
-| UAPI_DRV_KDF_HARD_ALG_SM3 | 1 | 硬件 PBKDF2 (Password-Based Key Derivation Function 2) 算法使用 SM3 哈希算法 |
+| UAPI_DRV_KDF_HARD_ALG_SM3 | 1 | 硬件 PBKDF2（Password-Based Key Derivation Function 2）算法使用 SM3 哈希算法 |
 | UAPI_DRV_KDF_HARD_ALG_MAX | 2 | 算法类型上限，无效值 |
 
 ### enum_uapi_drv_kdf_master_key_type <a id="enum_uapi_drv_kdf_master_key_type"></a>
@@ -762,7 +762,7 @@ typedef enum {
 | UAPI_DRV_KLAD_ENGINE_AES | 0x20 | AES 算法引擎 |
 | UAPI_DRV_KLAD_ENGINE_LAE | 0x40 | LAE 算法引擎 |
 | UAPI_DRV_KLAD_ENGINE_SM4 | 0x50 | SM4 算法引擎 |
-| UAPI_DRV_KLAD_ENGINE_TDES | 0x70 | 三重 DES (Triple Data Encryption Standard) 算法引擎 |
+| UAPI_DRV_KLAD_ENGINE_TDES | 0x70 | 三重 DES（Triple Data Encryption Standard）算法引擎 |
 | UAPI_DRV_KLAD_ENGINE_SHA1_HMAC | 0xA0 | SHA1 HMAC 算法引擎 |
 | UAPI_DRV_KLAD_ENGINE_SHA2_HMAC | 0xA1 | SHA2 HMAC 算法引擎 |
 | UAPI_DRV_KLAD_ENGINE_SM3_HMAC | 0xA2 | SM3 HMAC 算法引擎 |
@@ -787,7 +787,7 @@ typedef enum {
 | UAPI_DRV_KLAD_DEST_MCIPHER | 0 | 目标为对称加解密模块 |
 | UAPI_DRV_KLAD_DEST_HMAC | 1 | 目标为 HMAC 模块 |
 | UAPI_DRV_KLAD_DEST_FLASH | 2 | 目标为 Flash 在线解密模块 |
-| UAPI_DRV_KLAD_DEST_NPU | 3 | 目标为 NPU (Neural Processing Unit) 模块 |
+| UAPI_DRV_KLAD_DEST_NPU | 3 | 目标为 NPU（Neural Processing Unit）模块 |
 | UAPI_DRV_KLAD_DEST_AIDSP | 4 | 目标为 AIDSP 模块 |
 | UAPI_DRV_KLAD_DEST_MAX | 5 | 目标模块类型上限，无效值 |
 
@@ -808,7 +808,7 @@ typedef enum {
 | UAPI_DRV_KLAD_KEY_SIZE_128BIT | 0 | 128 位对称密钥 |
 | UAPI_DRV_KLAD_KEY_SIZE_192BIT | 1 | 192 位对称密钥 |
 | UAPI_DRV_KLAD_KEY_SIZE_256BIT | 2 | 256 位对称密钥 |
-| UAPI_DRV_KLAD_KEY_SIZE_INVALID | 0xFFFFFFFF | 无效密钥长度 |
+| UAPI_DRV_KLAD_KEY_SIZE_INVALID | 0xffffffff | 无效密钥长度 |
 
 ### enum_uapi_drv_klad_hmac_type_t <a id="enum_uapi_drv_klad_hmac_type_t"></a>
 
@@ -835,7 +835,7 @@ typedef enum {
 | UAPI_DRV_KLAD_HMAC_TYPE_SHA512 | 0x24 | HMAC 使用 SHA512 算法 |
 | UAPI_DRV_KLAD_HMAC_TYPE_SM3 | 0x30 | HMAC 使用 SM3 算法 |
 | UAPI_DRV_KLAD_HMAC_TYPE_MAX | 0x31 | 算法类型上限，无效值 |
-| UAPI_DRV_KLAD_HMAC_TYPE_INVALID | 0xFFFFFFFF | 无效 HMAC 算法类型 |
+| UAPI_DRV_KLAD_HMAC_TYPE_INVALID | 0xffffffff | 无效 HMAC 算法类型 |
 
 ## Structures
 

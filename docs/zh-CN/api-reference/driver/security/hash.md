@@ -1,6 +1,6 @@
 # hash
 
-security_hash 提供 SHA-256 (Secure Hash Algorithm 256-bit) 哈希计算接口，基于安全硬件加速器对外提供单次计算与流式（start/update/finish）分块计算两种使用方式，输出 256 位（32 字节）摘要。
+security_hash 提供 SHA-256（Secure Hash Algorithm 256-bit）哈希计算接口，基于安全硬件加速器对外提供单次计算与流式（start/update/finish）分块计算两种使用方式，输出 256 位（32 字节）摘要。
 
 **模块公共头文件**
 
@@ -55,7 +55,7 @@ errcode_t uapi_drv_cipher_sha256_start(uint32_t *hash_handle)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 通道创建成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 通道创建成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -106,7 +106,7 @@ errcode_t uapi_drv_cipher_sha256_update(uint32_t hash_handle, const uint8_t *buf
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 数据追加成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 数据追加成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -162,7 +162,7 @@ errcode_t uapi_drv_cipher_sha256_finish(uint32_t hash_handle, uint8_t *out, uint
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 计算成功并销毁通道句柄 |
+| ERRCODE_SUCC：0 | 执行成功 | 计算成功并销毁通道句柄 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -205,7 +205,7 @@ errcode_t uapi_drv_cipher_sha256(const uint8_t *buf, uint32_t len, uint8_t *out,
 | ---- | ---- | ---- | ---- |
 | buf | const uint8_t * | 待计算摘要的源数据缓冲区指针 | 不为NULL |
 | len | uint32_t | 待计算摘要的源数据缓冲区大小，单位字节 | 0 ~ 0xFFFFFFFF |
-| out_len | uint32_t | 存储摘要的缓冲区容量，单位字节；实际写入固定为 32 字节摘要 | [SHA256_HASH_SIZE](#SHA256_HASH_SIZE):32 |
+| out_len | uint32_t | 存储摘要的缓冲区容量，单位字节；实际写入固定为 32 字节摘要 | [SHA256_HASH_SIZE](#SHA256_HASH_SIZE)：32 |
 
 **出参**
 
@@ -219,8 +219,8 @@ errcode_t uapi_drv_cipher_sha256(const uint8_t *buf, uint32_t len, uint8_t *out,
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 单次计算成功并输出摘要 |
-| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | out_len 不等于 SHA256_HASH_SIZE(32) |
+| ERRCODE_SUCC：0 | 执行成功 | 单次计算成功并输出摘要 |
+| ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | out_len 不等于 SHA256_HASH_SIZE(32) |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**

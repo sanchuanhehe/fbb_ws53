@@ -1,6 +1,6 @@
 # cipher
 
-cipher 提供 security_unified 模块下对称加解密、消息认证码、哈希与 KDF (Key Derivation Function) 的统一密码服务接口。支持 AES (Advanced Encryption Standard)/SM4/TDES (Triple Data Encryption Standard) 等对称算法的 ECB/CBC/CTR/CCM/GCM 等工作模式，以及 SHA (Secure Hash Algorithm)/SM3 哈希与 PBKDF2/HKDF 密钥派生。
+cipher 提供 security_unified 模块下对称加解密、消息认证码、哈希与 KDF（Key Derivation Function）的统一密码服务接口。支持 AES（Advanced Encryption Standard）/SM4/TDES（Triple Data Encryption Standard）等对称算法的 ECB/CBC/CTR/CCM/GCM 等工作模式，以及 SHA（Secure Hash Algorithm）/SM3 哈希与 PBKDF2/HKDF 密钥派生。
 
 **模块公共头文件**
 
@@ -56,21 +56,21 @@ errcode_t uapi_drv_cipher_symc_init(void)
 
 **功能说明**
 
-- 初始化对称加密（SYMC）模块，完成安全引擎通道资源分配
-- 初始化成功后本模块 symc 接口方可使用
-- 支持后续创建与管理加解密通道
+- 初始化对称加密（SYMC）模块，完成安全引擎通道资源分配。
+- 初始化成功后本模块 symc 接口方可使用。
+- 支持后续创建与管理加解密通道。
 
 **前置条件**
 
-- 调用时序约束：作为 symc 模块入口，须在其他 symc 接口之前调用
-- 依赖关系：安全引擎硬件已上电就绪
-- 未重复调用本接口，重复调用可能导致 ERROR_SECURITY_COUNT_OVERFLOW
+- 调用时序约束：作为 symc 模块入口，须在其他 symc 接口之前调用。
+- 依赖关系：安全引擎硬件已上电就绪。
+- 未重复调用本接口，重复调用可能导致 ERROR_SECURITY_COUNT_OVERFLOW。
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 初始化成功 |
+| ERRCODE_SUCC：0 | 成功 | 初始化成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -94,20 +94,20 @@ errcode_t uapi_drv_cipher_symc_deinit(void)
 
 **功能说明**
 
-- 对称加密模块去初始化，释放symc通道资源与全局状态
-- 调用本接口后，所有已创建的symc通道不再可用，需重新初始化后方可使用
-- 返回去初始化执行结果
+- 对称加密模块去初始化，释放symc通道资源与全局状态。
+- 调用本接口后，所有已创建的symc通道不再可用，需重新初始化后方可使用。
+- 返回去初始化执行结果。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_symc_init()完成初始化
-- 调用时序约束：应确保所有 symc 通道已销毁后再调用本接口
+- 已通过uapi_drv_cipher_symc_init()完成初始化。
+- 调用时序约束：应确保所有 symc 通道已销毁后再调用本接口。
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 去初始化成功 |
+| ERRCODE_SUCC：0 | 成功 | 去初始化成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -131,14 +131,14 @@ errcode_t uapi_drv_cipher_symc_create(uint32_t *symc_handle, const uapi_drv_ciph
 
 **功能说明**
 
-- 创建symc通道，并根据传入的属性参数设置通道类型、算法、工作模式及通道占用周期
-- 创建成功后返回通道句柄，后续加解密操作均通过该句柄进行
-- 支持长期通道与短期通道，长期通道占用资源直到显式销毁
+- 创建symc通道，并根据传入的属性参数设置通道类型、算法、工作模式及通道占用周期。
+- 创建成功后返回通道句柄，后续加解密操作均通过该句柄进行。
+- 支持长期通道与短期通道，长期通道占用资源直到显式销毁。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_symc_init()完成初始化，返回成功状态
-- symc_attr指针不为NULL，且指向合法的属性结构体
+- 已通过uapi_drv_cipher_symc_init()完成初始化，返回成功状态。
+- symc_attr指针不为NULL，且指向合法的属性结构体。
 
 **入参**
 
@@ -156,8 +156,8 @@ errcode_t uapi_drv_cipher_symc_create(uint32_t *symc_handle, const uapi_drv_ciph
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 通道创建成功 |
-| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | symc_attr为NULL |
+| ERRCODE_SUCC：0 | 成功 | 通道创建成功 |
+| ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | symc_attr为NULL |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -181,14 +181,14 @@ errcode_t uapi_drv_cipher_symc_destroy(uint32_t symc_handle)
 
 **功能说明**
 
-- 销毁指定的symc通道，释放通道资源
-- 销毁后该句柄不再可用，后续操作需重新创建通道
-- 销毁时自动移除安全模块的睡眠否决，允许系统进入低功耗
+- 销毁指定的symc通道，释放通道资源。
+- 销毁后该句柄不再可用，后续操作需重新创建通道。
+- 销毁时自动移除安全模块的睡眠否决，允许系统进入低功耗。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_symc_init()完成初始化
-- symc_handle为已通过uapi_drv_cipher_symc_create()创建的有效通道句柄
+- 已通过uapi_drv_cipher_symc_init()完成初始化。
+- symc_handle为已通过uapi_drv_cipher_symc_create()创建的有效通道句柄。
 
 **入参**
 
@@ -200,7 +200,7 @@ errcode_t uapi_drv_cipher_symc_destroy(uint32_t symc_handle)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 通道销毁成功 |
+| ERRCODE_SUCC：0 | 成功 | 通道销毁成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -224,15 +224,15 @@ errcode_t uapi_drv_cipher_symc_set_config(uint32_t symc_handle, const uapi_drv_c
 
 **功能说明**
 
-- 设置指定symc通道的算法参数，包括算法类型、工作模式、密钥长度、IV (Initialization Vector) 等
-- 对于CCM/GCM工作模式，还需通过param字段配置附加参数
-- 配置成功后通道按所设参数执行加解密
+- 设置指定symc通道的算法参数，包括算法类型、工作模式、密钥长度、IV（Initialization Vector）等。
+- 对于CCM/GCM工作模式，还需通过param字段配置附加参数。
+- 配置成功后通道按所设参数执行加解密。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_symc_init()完成初始化
-- symc_handle为已创建的有效通道句柄
-- symc_ctrl指针不为NULL
+- 已通过uapi_drv_cipher_symc_init()完成初始化。
+- symc_handle为已创建的有效通道句柄。
+- symc_ctrl指针不为NULL。
 
 **入参**
 
@@ -245,7 +245,7 @@ errcode_t uapi_drv_cipher_symc_set_config(uint32_t symc_handle, const uapi_drv_c
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功 | 设置成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -269,15 +269,15 @@ errcode_t uapi_drv_cipher_symc_get_config(uint32_t symc_handle, const uapi_drv_c
 
 **功能说明**
 
-- 获取指定symc通道的当前算法参数配置
-- 返回的参数包括算法类型、工作模式、密钥长度、IV及其长度等
-- 可用于确认当前通道配置状态
+- 获取指定symc通道的当前算法参数配置。
+- 返回的参数包括算法类型、工作模式、密钥长度、IV及其长度等。
+- 可用于确认当前通道配置状态。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_symc_init()完成初始化
-- symc_handle为已创建的有效通道句柄
-- 已通过uapi_drv_cipher_symc_set_config()完成参数配置
+- 已通过uapi_drv_cipher_symc_init()完成初始化。
+- symc_handle为已创建的有效通道句柄。
+- 已通过uapi_drv_cipher_symc_set_config()完成参数配置。
 
 **入参**
 
@@ -295,7 +295,7 @@ errcode_t uapi_drv_cipher_symc_get_config(uint32_t symc_handle, const uapi_drv_c
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 成功 | 获取成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -319,16 +319,16 @@ errcode_t uapi_drv_cipher_symc_attach(uint32_t symc_handle, uint32_t keyslot_han
 
 **功能说明**
 
-- 将keyslot句柄关联到加解密句柄，使加解密操作使用指定keyslot中的密钥
-- 关联后，加解密操作使用keyslot中存储的密钥而非明文密钥
-- 返回关联执行结果
+- 将keyslot句柄关联到加解密句柄，使加解密操作使用指定keyslot中的密钥。
+- 关联后，加解密操作使用keyslot中存储的密钥而非明文密钥。
+- 返回关联执行结果。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_symc_init()完成初始化
-- 调用时序约束：加密/解密操作前须先完成 keyslot 关联
-- symc_handle为已创建且已配置算法参数的通道句柄
-- keyslot_handle为已创建的有效keyslot句柄
+- 已通过uapi_drv_cipher_symc_init()完成初始化。
+- 调用时序约束：加密/解密操作前须先完成 keyslot 关联。
+- symc_handle为已创建且已配置算法参数的通道句柄。
+- keyslot_handle为已创建的有效keyslot句柄。
 
 **入参**
 
@@ -341,7 +341,7 @@ errcode_t uapi_drv_cipher_symc_attach(uint32_t symc_handle, uint32_t keyslot_han
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 关联成功 |
+| ERRCODE_SUCC：0 | 成功 | 关联成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -365,16 +365,16 @@ errcode_t uapi_drv_cipher_symc_detach(uint32_t symc_handle, uint32_t keyslot_han
 
 **功能说明**
 
-- 将keyslot句柄与加解密句柄解关联
-- 解关联后，加解密操作不再使用该keyslot中的密钥
-- 返回解关联执行结果
+- 将keyslot句柄与加解密句柄解关联。
+- 解关联后，加解密操作不再使用该keyslot中的密钥。
+- 返回解关联执行结果。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_symc_init()完成初始化
-- 调用时序约束：通常在加解密操作完成后调用
-- symc_handle为已创建的有效通道句柄
-- keyslot_handle为已关联到该通道的有效keyslot句柄
+- 已通过uapi_drv_cipher_symc_init()完成初始化。
+- 调用时序约束：通常在加解密操作完成后调用。
+- symc_handle为已创建的有效通道句柄。
+- keyslot_handle为已关联到该通道的有效keyslot句柄。
 
 **入参**
 
@@ -387,7 +387,7 @@ errcode_t uapi_drv_cipher_symc_detach(uint32_t symc_handle, uint32_t keyslot_han
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 解关联成功 |
+| ERRCODE_SUCC：0 | 成功 | 解关联成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -411,15 +411,15 @@ errcode_t uapi_drv_cipher_symc_encrypt(uint32_t symc_handle, const uapi_drv_ciph
 
 **功能说明**
 
-- 将源地址数据加密，输出到目的地址
-- 支持AES/SM4/TDES/LEA等对称加密算法，具体算法由通道配置决定
-- 加密数据长度需满足算法对齐要求（除CTR/CCM/GCM模式外需16字节对齐）
+- 将源地址数据加密，输出到目的地址。
+- 支持AES/SM4/TDES/LEA等对称加密算法，具体算法由通道配置决定。
+- 加密数据长度需满足算法对齐要求（除CTR/CCM/GCM模式外需16字节对齐）。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_symc_init()完成初始化
-- symc_handle为已创建、已配置算法参数、已关联keyslot的通道句柄
-- src_buf和dst_buf指向的缓冲区地址有效且长度不小于length
+- 已通过uapi_drv_cipher_symc_init()完成初始化。
+- symc_handle为已创建、已配置算法参数、已关联keyslot的通道句柄。
+- src_buf和dst_buf指向的缓冲区地址有效且长度不小于length。
 
 **入参**
 
@@ -440,7 +440,7 @@ errcode_t uapi_drv_cipher_symc_encrypt(uint32_t symc_handle, const uapi_drv_ciph
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 加密成功 |
+| ERRCODE_SUCC：0 | 成功 | 加密成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -464,15 +464,15 @@ errcode_t uapi_drv_cipher_symc_decrypt(uint32_t symc_handle, const uapi_drv_ciph
 
 **功能说明**
 
-- 将源地址数据解密，输出到目的地址
-- 支持AES/SM4/TDES/LEA等对称解密算法，具体算法由通道配置决定
-- 解密数据长度需满足算法对齐要求（除CTR/CCM/GCM模式外需16字节对齐）
+- 将源地址数据解密，输出到目的地址。
+- 支持AES/SM4/TDES/LEA等对称解密算法，具体算法由通道配置决定。
+- 解密数据长度需满足算法对齐要求（除CTR/CCM/GCM模式外需16字节对齐）。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_symc_init()完成初始化
-- symc_handle为已创建、已配置算法参数、已关联keyslot的通道句柄
-- src_buf和dst_buf指向的缓冲区地址有效且长度不小于length
+- 已通过uapi_drv_cipher_symc_init()完成初始化。
+- symc_handle为已创建、已配置算法参数、已关联keyslot的通道句柄。
+- src_buf和dst_buf指向的缓冲区地址有效且长度不小于length。
 
 **入参**
 
@@ -493,7 +493,7 @@ errcode_t uapi_drv_cipher_symc_decrypt(uint32_t symc_handle, const uapi_drv_ciph
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 解密成功 |
+| ERRCODE_SUCC：0 | 成功 | 解密成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -517,15 +517,15 @@ errcode_t uapi_drv_cipher_symc_get_tag(uint32_t symc_handle, uint8_t *tag, uint3
 
 **功能说明**
 
-- 获取CCM或GCM模式的认证标签值
-- 获取的认证标签用于数据完整性校验
-- 标签长度由算法配置决定，GCM模式典型标签长度为16字节
+- 获取CCM或GCM模式的认证标签值。
+- 获取的认证标签用于数据完整性校验。
+- 标签长度由算法配置决定，GCM模式典型标签长度为16字节。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_symc_init()完成初始化
-- symc_handle为已创建且工作模式为CCM/GCM的通道句柄
-- 已完成加密操作
+- 已通过uapi_drv_cipher_symc_init()完成初始化。
+- symc_handle为已创建且工作模式为CCM/GCM的通道句柄。
+- 已完成加密操作。
 
 **入参**
 
@@ -544,7 +544,7 @@ errcode_t uapi_drv_cipher_symc_get_tag(uint32_t symc_handle, uint8_t *tag, uint3
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 获取标签成功 |
+| ERRCODE_SUCC：0 | 成功 | 获取标签成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -568,14 +568,14 @@ errcode_t uapi_drv_cipher_mac_start(uint32_t *symc_handle, const uapi_drv_cipher
 
 **功能说明**
 
-- 创建symc通道并设置MAC算法参数，启动MAC计算流程
-- 支持CBC-MAC和CMAC (Cipher-based Message Authentication Code) 工作模式
-- 创建成功后返回通道句柄，后续通过uapi_drv_cipher_mac_update输入数据，通过uapi_drv_cipher_mac_finish获取结果
+- 创建symc通道并设置MAC算法参数，启动MAC计算流程。
+- 支持CBC-MAC和CMAC（Cipher-based Message Authentication Code）工作模式。
+- 创建成功后返回通道句柄，后续通过uapi_drv_cipher_mac_update输入数据，通过uapi_drv_cipher_mac_finish获取结果。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_symc_init()完成初始化，返回成功状态
-- mac_attr指针不为NULL，且指向合法的MAC属性结构体
+- 已通过uapi_drv_cipher_symc_init()完成初始化，返回成功状态。
+- mac_attr指针不为NULL，且指向合法的MAC属性结构体。
 
 **入参**
 
@@ -593,8 +593,8 @@ errcode_t uapi_drv_cipher_mac_start(uint32_t *symc_handle, const uapi_drv_cipher
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 通道创建成功 |
-| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | mac_attr为NULL |
+| ERRCODE_SUCC：0 | 成功 | 通道创建成功 |
+| ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | mac_attr为NULL |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -618,14 +618,14 @@ errcode_t uapi_drv_cipher_mac_update(uint32_t symc_handle, const uapi_drv_cipher
 
 **功能说明**
 
-- 向MAC计算通道输入数据，进行MAC计算
-- 支持多次调用，将数据分批输入，最终结果与一次性输入相同
-- 输入数据长度需满足算法对齐要求
+- 向MAC计算通道输入数据，进行MAC计算。
+- 支持多次调用，将数据分批输入，最终结果与一次性输入相同。
+- 输入数据长度需满足算法对齐要求。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_mac_start()成功创建MAC通道
-- src_buf指向的缓冲区有效且长度不小于length
+- 已通过uapi_drv_cipher_mac_start()成功创建MAC通道。
+- src_buf指向的缓冲区有效且长度不小于length。
 
 **入参**
 
@@ -639,7 +639,7 @@ errcode_t uapi_drv_cipher_mac_update(uint32_t symc_handle, const uapi_drv_cipher
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | MAC计算更新成功 |
+| ERRCODE_SUCC：0 | 成功 | MAC计算更新成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -663,14 +663,14 @@ errcode_t uapi_drv_cipher_mac_finish(uint32_t symc_handle, uint8_t *mac, uint32_
 
 **功能说明**
 
-- 获取MAC计算结果，并在计算成功时销毁MAC通道
-- 输出MAC值到指定缓冲区，同时返回实际MAC长度
-- 调用后通道句柄不再可用
+- 获取MAC计算结果，并在计算成功时销毁MAC通道。
+- 输出MAC值到指定缓冲区，同时返回实际MAC长度。
+- 调用后通道句柄不再可用。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_mac_start()成功创建MAC通道
-- 已通过uapi_drv_cipher_mac_update()完成数据输入
+- 已通过uapi_drv_cipher_mac_start()成功创建MAC通道。
+- 已通过uapi_drv_cipher_mac_update()完成数据输入。
 
 **入参**
 
@@ -691,7 +691,7 @@ errcode_t uapi_drv_cipher_mac_finish(uint32_t symc_handle, uint8_t *mac, uint32_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 获取MAC结果成功 |
+| ERRCODE_SUCC：0 | 成功 | 获取MAC结果成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -715,20 +715,20 @@ errcode_t uapi_drv_cipher_hash_init(void)
 
 **功能说明**
 
-- Hash计算模块初始化，完成Hash通道资源分配
-- 初始化成功后本模块 Hash 接口方可使用
-- 支持后续创建与管理 Hash 通道
+- Hash计算模块初始化，完成Hash通道资源分配。
+- 初始化成功后本模块 Hash 接口方可使用。
+- 支持后续创建与管理 Hash 通道。
 
 **前置条件**
 
-- 安全引擎硬件已上电就绪
-- 未重复调用本接口
+- 安全引擎硬件已上电就绪。
+- 未重复调用本接口。
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 初始化成功 |
+| ERRCODE_SUCC：0 | 成功 | 初始化成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -752,20 +752,20 @@ errcode_t uapi_drv_cipher_hash_deinit(void)
 
 **功能说明**
 
-- Hash计算模块去初始化，释放Hash通道资源与全局状态
-- 调用后所有已创建的Hash通道不再可用
-- 返回去初始化执行结果
+- Hash计算模块去初始化，释放Hash通道资源与全局状态。
+- 调用后所有已创建的Hash通道不再可用。
+- 返回去初始化执行结果。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_hash_init()完成初始化
-- 调用时序约束：应确保所有 Hash 通道已销毁后再调用本接口
+- 已通过uapi_drv_cipher_hash_init()完成初始化。
+- 调用时序约束：应确保所有 Hash 通道已销毁后再调用本接口。
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 去初始化成功 |
+| ERRCODE_SUCC：0 | 成功 | 去初始化成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -789,14 +789,14 @@ errcode_t uapi_drv_cipher_hash_start(uint32_t *hash_handle, const uapi_drv_ciphe
 
 **功能说明**
 
-- 创建Hash通道，并根据传入的属性参数设置Hash算法类型、密钥等
-- 支持SHA1/SHA224/SHA256/SHA384/SHA512/SM3及对应HMAC (Hash-based Message Authentication Code) 算法
-- 支持长期通道与短期通道，最大支持2个长期通道和8个短期通道
+- 创建Hash通道，并根据传入的属性参数设置Hash算法类型、密钥等。
+- 支持SHA1/SHA224/SHA256/SHA384/SHA512/SM3及对应HMAC（Hash-based Message Authentication Code）算法。
+- 支持长期通道与短期通道，最大支持2个长期通道和8个短期通道。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_hash_init()完成初始化，返回成功状态
-- hash_attr指针不为NULL，且指向合法的Hash属性结构体
+- 已通过uapi_drv_cipher_hash_init()完成初始化，返回成功状态。
+- hash_attr指针不为NULL，且指向合法的Hash属性结构体。
 
 **入参**
 
@@ -814,8 +814,8 @@ errcode_t uapi_drv_cipher_hash_start(uint32_t *hash_handle, const uapi_drv_ciphe
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 通道创建成功 |
-| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | hash_attr为NULL |
+| ERRCODE_SUCC：0 | 成功 | 通道创建成功 |
+| ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | hash_attr为NULL |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -839,15 +839,15 @@ errcode_t uapi_drv_cipher_hash_update(uint32_t hash_handle, const uapi_drv_ciphe
 
 **功能说明**
 
-- 向Hash通道输入数据，进行Hash计算
-- 支持多次调用，将数据分批输入，最终结果与一次性输入相同
-- 已调用uapi_drv_cipher_hash_finish获取摘要后，不能再调用本接口
+- 向Hash通道输入数据，进行Hash计算。
+- 支持多次调用，将数据分批输入，最终结果与一次性输入相同。
+- 已调用uapi_drv_cipher_hash_finish获取摘要后，不能再调用本接口。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_hash_start()成功创建Hash通道
-- 调用时序约束：已调用 uapi_drv_cipher_hash_finish 获取摘要后不可再调用本接口
-- src_buf指向的缓冲区有效
+- 已通过uapi_drv_cipher_hash_start()成功创建Hash通道。
+- 调用时序约束：已调用 uapi_drv_cipher_hash_finish 获取摘要后不可再调用本接口。
+- src_buf指向的缓冲区有效。
 
 **入参**
 
@@ -861,7 +861,7 @@ errcode_t uapi_drv_cipher_hash_update(uint32_t hash_handle, const uapi_drv_ciphe
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | Hash计算更新成功 |
+| ERRCODE_SUCC：0 | 成功 | Hash计算更新成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -885,14 +885,14 @@ errcode_t uapi_drv_cipher_hash_finish(uint32_t hash_handle, uint8_t *out, uint32
 
 **功能说明**
 
-- Hash计算获取摘要信息，并在计算成功时销毁hash句柄
-- 输入为缓冲区长度，输出为实际摘要长度
-- 调用成功后hash句柄不再可用
+- Hash计算获取摘要信息，并在计算成功时销毁hash句柄。
+- 输入为缓冲区长度，输出为实际摘要长度。
+- 调用成功后hash句柄不再可用。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_hash_start()成功创建Hash通道
-- 已通过uapi_drv_cipher_hash_update()完成数据输入
+- 已通过uapi_drv_cipher_hash_start()成功创建Hash通道。
+- 已通过uapi_drv_cipher_hash_update()完成数据输入。
 
 **入参**
 
@@ -912,7 +912,7 @@ errcode_t uapi_drv_cipher_hash_finish(uint32_t hash_handle, uint8_t *out, uint32
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 获取摘要成功 |
+| ERRCODE_SUCC：0 | 成功 | 获取摘要成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -936,13 +936,13 @@ errcode_t uapi_drv_cipher_hash_get(uint32_t hash_handle, uapi_drv_cipher_hash_cl
 
 **功能说明**
 
-- 获取Hash计算中间结果
-- 中间结果通过uapi_drv_cipher_hash_set接口可恢复到其他Hash通道
-- 该结构体无需用户构造，由接口自动填充
+- 获取Hash计算中间结果。
+- 中间结果通过uapi_drv_cipher_hash_set接口可恢复到其他Hash通道。
+- 该结构体无需用户构造，由接口自动填充。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_hash_start()成功创建Hash通道
+- 已通过uapi_drv_cipher_hash_start()成功创建Hash通道。
 
 **入参**
 
@@ -960,7 +960,7 @@ errcode_t uapi_drv_cipher_hash_get(uint32_t hash_handle, uapi_drv_cipher_hash_cl
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 获取中间结果成功 |
+| ERRCODE_SUCC：0 | 成功 | 获取中间结果成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -984,14 +984,14 @@ errcode_t uapi_drv_cipher_hash_set(uint32_t hash_handle, const uapi_drv_cipher_h
 
 **功能说明**
 
-- 设置Hash计算中间结果，将之前通过uapi_drv_cipher_hash_get获取的中间状态恢复到Hash通道
-- 可用于在不同通道间迁移Hash计算状态
-- 设置后可继续调用uapi_drv_cipher_hash_update进行后续计算
+- 设置Hash计算中间结果，将之前通过uapi_drv_cipher_hash_get获取的中间状态恢复到Hash通道。
+- 可用于在不同通道间迁移Hash计算状态。
+- 设置后可继续调用uapi_drv_cipher_hash_update进行后续计算。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_hash_start()成功创建Hash通道
-- hash_clone_ctx为由uapi_drv_cipher_hash_get获取的有效中间结果
+- 已通过uapi_drv_cipher_hash_start()成功创建Hash通道。
+- hash_clone_ctx为由uapi_drv_cipher_hash_get获取的有效中间结果。
 
 **入参**
 
@@ -1004,7 +1004,7 @@ errcode_t uapi_drv_cipher_hash_set(uint32_t hash_handle, const uapi_drv_cipher_h
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 设置中间结果成功 |
+| ERRCODE_SUCC：0 | 成功 | 设置中间结果成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -1028,13 +1028,13 @@ errcode_t uapi_drv_cipher_hash_destroy(uint32_t hash_handle)
 
 **功能说明**
 
-- 销毁hash通道，释放通道资源
-- 该接口只销毁hash通道，不启动计算和获取摘要结果
-- 销毁时自动移除安全模块的睡眠否决，允许系统进入低功耗
+- 销毁hash通道，释放通道资源。
+- 该接口只销毁hash通道，不启动计算和获取摘要结果。
+- 销毁时自动移除安全模块的睡眠否决，允许系统进入低功耗。
 
 **前置条件**
 
-- 已通过uapi_drv_cipher_hash_start()成功创建Hash通道
+- 已通过uapi_drv_cipher_hash_start()成功创建Hash通道。
 
 **入参**
 
@@ -1046,7 +1046,7 @@ errcode_t uapi_drv_cipher_hash_destroy(uint32_t hash_handle)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 通道销毁成功 |
+| ERRCODE_SUCC：0 | 成功 | 通道销毁成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -1070,14 +1070,14 @@ errcode_t uapi_drv_cipher_pbkdf2(const uapi_drv_cipher_kdf_pbkdf2_param_t *param
 
 **功能说明**
 
-- 使用PBKDF2算法派生密钥
-- 支持基于口令的密钥派生，输入口令和盐值，输出派生密钥
-- 迭代次数由参数结构体中的count字段指定
+- 使用PBKDF2算法派生密钥。
+- 支持基于口令的密钥派生，输入口令和盐值，输出派生密钥。
+- 迭代次数由参数结构体中的count字段指定。
 
 **前置条件**
 
-- Hash模块已通过uapi_drv_cipher_hash_init()完成初始化
-- param指针不为NULL，且各字段合法
+- Hash模块已通过uapi_drv_cipher_hash_init()完成初始化。
+- param指针不为NULL，且各字段合法。
 
 **入参**
 
@@ -1097,7 +1097,7 @@ errcode_t uapi_drv_cipher_pbkdf2(const uapi_drv_cipher_kdf_pbkdf2_param_t *param
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 密钥派生成功 |
+| ERRCODE_SUCC：0 | 成功 | 密钥派生成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -1121,14 +1121,14 @@ errcode_t uapi_drv_cipher_hkdf_extract(uapi_drv_cipher_hkdf_extract_t *extract_p
 
 **功能说明**
 
-- 提取密钥，执行HKDF-Extract阶段
-- 使用HMAC算法和盐值对输入密钥材料进行提取，输出伪随机密钥
-- 提取结果可作为uapi_drv_cipher_hkdf_expand的输入
+- 提取密钥，执行HKDF-Extract阶段。
+- 使用HMAC算法和盐值对输入密钥材料进行提取，输出伪随机密钥。
+- 提取结果可作为uapi_drv_cipher_hkdf_expand的输入。
 
 **前置条件**
 
-- Hash模块已通过uapi_drv_cipher_hash_init()完成初始化
-- extract_param指针不为NULL，且各字段合法
+- Hash模块已通过uapi_drv_cipher_hash_init()完成初始化。
+- extract_param指针不为NULL，且各字段合法。
 
 **入参**
 
@@ -1148,7 +1148,7 @@ errcode_t uapi_drv_cipher_hkdf_extract(uapi_drv_cipher_hkdf_extract_t *extract_p
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 密钥提取成功 |
+| ERRCODE_SUCC：0 | 成功 | 密钥提取成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -1172,15 +1172,15 @@ errcode_t uapi_drv_cipher_hkdf_expand(const uapi_drv_cipher_hkdf_expand_t *expan
 
 **功能说明**
 
-- 拓展密钥，执行HKDF-Expand阶段
-- 使用伪随机密钥和信息参数进行密钥拓展，输出指定长度的密钥材料
-- 通常与uapi_drv_cipher_hkdf_extract配合使用
+- 拓展密钥，执行HKDF-Expand阶段。
+- 使用伪随机密钥和信息参数进行密钥拓展，输出指定长度的密钥材料。
+- 通常与uapi_drv_cipher_hkdf_extract配合使用。
 
 **前置条件**
 
-- Hash模块已通过uapi_drv_cipher_hash_init()完成初始化
-- expand_param指针不为NULL，且各字段合法
-- prk为uapi_drv_cipher_hkdf_extract输出的有效伪随机密钥
+- Hash模块已通过uapi_drv_cipher_hash_init()完成初始化。
+- expand_param指针不为NULL，且各字段合法。
+- prk为uapi_drv_cipher_hkdf_extract输出的有效伪随机密钥。
 
 **入参**
 
@@ -1199,7 +1199,7 @@ errcode_t uapi_drv_cipher_hkdf_expand(const uapi_drv_cipher_hkdf_expand_t *expan
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 密钥拓展成功 |
+| ERRCODE_SUCC：0 | 成功 | 密钥拓展成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -1223,14 +1223,14 @@ errcode_t uapi_drv_cipher_hkdf(uapi_drv_cipher_hkdf_t *hkdf_param, uint8_t *okm,
 
 **功能说明**
 
-- HKDF密钥派生，包含提取密钥和拓展密钥两步
-- 输入原始密钥材料、盐值和信息参数，直接输出指定长度的密钥材料
-- 等效于依次调用uapi_drv_cipher_hkdf_extract和uapi_drv_cipher_hkdf_expand
+- HKDF密钥派生，包含提取密钥和拓展密钥两步。
+- 输入原始密钥材料、盐值和信息参数，直接输出指定长度的密钥材料。
+- 等效于依次调用uapi_drv_cipher_hkdf_extract和uapi_drv_cipher_hkdf_expand。
 
 **前置条件**
 
-- Hash模块已通过uapi_drv_cipher_hash_init()完成初始化
-- hkdf_param指针不为NULL，且各字段合法
+- Hash模块已通过uapi_drv_cipher_hash_init()完成初始化。
+- hkdf_param指针不为NULL，且各字段合法。
 
 **入参**
 
@@ -1249,7 +1249,7 @@ errcode_t uapi_drv_cipher_hkdf(uapi_drv_cipher_hkdf_t *hkdf_param, uint8_t *okm,
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 密钥派生成功 |
+| ERRCODE_SUCC：0 | 成功 | 密钥派生成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -1278,7 +1278,7 @@ errcode_t uapi_drv_cipher_symc_crypt(uapi_drv_cipher_symc_alg_t alg, uapi_drv_ci
 
 **功能说明**
 
-- 一步式对称加解密，支持多种算法与工作模式
+- 一步式对称加解密，支持多种算法与工作模式。
 
 **入参**
 
@@ -1305,8 +1305,8 @@ errcode_t uapi_drv_cipher_symc_crypt(uapi_drv_cipher_symc_alg_t alg, uapi_drv_ci
 
 | 返回值 | 文字含义 | 触发场景 |
 | ---- | ---- | ---- |
-| ERRCODE_SUCC:0x00 | 成功 | 加解密完成 |
-| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | 输入参数不满足约束 |
+| ERRCODE_SUCC：0 | 成功 | 加解密完成 |
+| ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | 输入参数不满足约束 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -1343,9 +1343,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| UAPI_DRV_CIPHER_SYMC_TYPE_NORMAL | 0x0 | 普通通道类型 |
-| UAPI_DRV_CIPHER_SYMC_TYPE_REG | 0x1 | 寄存器通道类型 |
-| UAPI_DRV_CIPHER_SYMC_TYPE_MAX | 0x2 | 通道类型上限值 |
+| UAPI_DRV_CIPHER_SYMC_TYPE_NORMAL | 0 | 普通通道类型 |
+| UAPI_DRV_CIPHER_SYMC_TYPE_REG | 1 | 寄存器通道类型 |
+| UAPI_DRV_CIPHER_SYMC_TYPE_MAX | 2 | 通道类型上限值 |
 | UAPI_DRV_CIPHER_SYMC_TYPE_INVALID | 0xffffffff | 无效通道类型 |
 
 ### uapi_drv_cipher_symc_alg_t <a id="enum_uapi_drv_cipher_symc_alg_t"></a>
@@ -1365,12 +1365,12 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| UAPI_DRV_CIPHER_SYMC_ALG_TDES | 0x0 | TDES (Triple Data Encryption Standard) 算法，不建议使用 |
-| UAPI_DRV_CIPHER_SYMC_ALG_AES | 0x1 | AES算法 |
-| UAPI_DRV_CIPHER_SYMC_ALG_SM4 | 0x2 | SM4 (SM4 Block Cipher) 算法 |
-| UAPI_DRV_CIPHER_SYMC_ALG_LEA | 0x3 | LEA (Lightweight Encryption Algorithm) 算法 |
-| UAPI_DRV_CIPHER_SYMC_ALG_DMA | 0x4 | DMA (Direct Memory Access) 模式 |
-| UAPI_DRV_CIPHER_SYMC_ALG_MAX | 0x5 | 算法类型上限值 |
+| UAPI_DRV_CIPHER_SYMC_ALG_TDES | 0 | TDES（Triple Data Encryption Standard）算法，不建议使用 |
+| UAPI_DRV_CIPHER_SYMC_ALG_AES | 1 | AES算法 |
+| UAPI_DRV_CIPHER_SYMC_ALG_SM4 | 2 | SM4（SM4 Block Cipher）算法 |
+| UAPI_DRV_CIPHER_SYMC_ALG_LEA | 3 | LEA（Lightweight Encryption Algorithm）算法 |
+| UAPI_DRV_CIPHER_SYMC_ALG_DMA | 4 | DMA（Direct Memory Access）模式 |
+| UAPI_DRV_CIPHER_SYMC_ALG_MAX | 5 | 算法类型上限值 |
 | UAPI_DRV_CIPHER_SYMC_ALG_INVALID | 0xffffffff | 无效算法类型 |
 
 ### uapi_drv_cipher_symc_work_mode_t <a id="enum_uapi_drv_cipher_symc_work_mode_t"></a>
@@ -1394,16 +1394,16 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| UAPI_DRV_CIPHER_SYMC_WORK_MODE_ECB | 0x0 | ECB (Electronic Codebook) 模式，不建议使用 |
-| UAPI_DRV_CIPHER_SYMC_WORK_MODE_CBC | 0x1 | CBC (Cipher Block Chaining)模式 |
-| UAPI_DRV_CIPHER_SYMC_WORK_MODE_CTR | 0x2 | CTR (Counter Mode)模式 |
-| UAPI_DRV_CIPHER_SYMC_WORK_MODE_OFB | 0x3 | OFB (Output Feedback) 模式 |
-| UAPI_DRV_CIPHER_SYMC_WORK_MODE_CFB | 0x4 | CFB (Cipher Feedback) 模式 |
-| UAPI_DRV_CIPHER_SYMC_WORK_MODE_CCM | 0x5 | CCM模式 |
-| UAPI_DRV_CIPHER_SYMC_WORK_MODE_GCM | 0x6 | GCM模式 |
-| UAPI_DRV_CIPHER_SYMC_WORK_MODE_CBC_MAC | 0x7 | CBC-MAC模式 |
-| UAPI_DRV_CIPHER_SYMC_WORK_MODE_CMAC | 0x8 | CMAC模式 |
-| UAPI_DRV_CIPHER_SYMC_WORK_MODE_MAX | 0x9 | 工作模式上限值 |
+| UAPI_DRV_CIPHER_SYMC_WORK_MODE_ECB | 0 | ECB（Electronic Codebook）模式，不建议使用 |
+| UAPI_DRV_CIPHER_SYMC_WORK_MODE_CBC | 1 | CBC（Cipher Block Chaining）模式 |
+| UAPI_DRV_CIPHER_SYMC_WORK_MODE_CTR | 2 | CTR（Counter Mode）模式 |
+| UAPI_DRV_CIPHER_SYMC_WORK_MODE_OFB | 3 | OFB（Output Feedback）模式 |
+| UAPI_DRV_CIPHER_SYMC_WORK_MODE_CFB | 4 | CFB（Cipher Feedback）模式 |
+| UAPI_DRV_CIPHER_SYMC_WORK_MODE_CCM | 5 | CCM模式 |
+| UAPI_DRV_CIPHER_SYMC_WORK_MODE_GCM | 6 | GCM模式 |
+| UAPI_DRV_CIPHER_SYMC_WORK_MODE_CBC_MAC | 7 | CBC-MAC模式 |
+| UAPI_DRV_CIPHER_SYMC_WORK_MODE_CMAC | 8 | CMAC模式 |
+| UAPI_DRV_CIPHER_SYMC_WORK_MODE_MAX | 9 | 工作模式上限值 |
 | UAPI_DRV_CIPHER_SYMC_WORK_MODE_INVALID | 0xffffffff | 无效工作模式 |
 
 ### uapi_drv_cipher_symc_key_length_t <a id="enum_uapi_drv_cipher_symc_key_length_t"></a>
@@ -1421,11 +1421,11 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| UAPI_DRV_CIPHER_SYMC_KEY_64BIT | 0x0 | 64位密钥长度 |
-| UAPI_DRV_CIPHER_SYMC_KEY_128BIT | 0x1 | 128位密钥长度 |
-| UAPI_DRV_CIPHER_SYMC_KEY_192BIT | 0x2 | 192位密钥长度 |
-| UAPI_DRV_CIPHER_SYMC_KEY_256BIT | 0x3 | 256位密钥长度 |
-| UAPI_DRV_CIPHER_SYMC_KEY_LENGTH_MAX | 0x4 | 密钥长度上限值 |
+| UAPI_DRV_CIPHER_SYMC_KEY_64BIT | 0 | 64位密钥长度 |
+| UAPI_DRV_CIPHER_SYMC_KEY_128BIT | 1 | 128位密钥长度 |
+| UAPI_DRV_CIPHER_SYMC_KEY_192BIT | 2 | 192位密钥长度 |
+| UAPI_DRV_CIPHER_SYMC_KEY_256BIT | 3 | 256位密钥长度 |
+| UAPI_DRV_CIPHER_SYMC_KEY_LENGTH_MAX | 4 | 密钥长度上限值 |
 | UAPI_DRV_CIPHER_SYMC_KEY_LENGTH_INVALID | 0xffffffff | 无效密钥长度 |
 
 ### uapi_drv_cipher_symc_key_parity_t <a id="enum_uapi_drv_cipher_symc_key_parity_t"></a>
@@ -1441,9 +1441,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| UAPI_DRV_CIPHER_SYMC_KEY_EVEN | 0x0 | 偶密钥 |
-| UAPI_DRV_CIPHER_SYMC_KEY_ODD | 0x1 | 奇密钥 |
-| UAPI_DRV_CIPHER_SYMC_KEY_PARITY_MAX | 0x2 | 密钥奇偶性上限值 |
+| UAPI_DRV_CIPHER_SYMC_KEY_EVEN | 0 | 偶密钥 |
+| UAPI_DRV_CIPHER_SYMC_KEY_ODD | 1 | 奇密钥 |
+| UAPI_DRV_CIPHER_SYMC_KEY_PARITY_MAX | 2 | 密钥奇偶性上限值 |
 | UAPI_DRV_CIPHER_SYMC_KEY_PARITY_INVALID | 0xffffffff | 无效密钥奇偶性 |
 
 ### uapi_drv_cipher_symc_bit_width_t <a id="enum_uapi_drv_cipher_symc_bit_width_t"></a>
@@ -1461,11 +1461,11 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_1BIT | 0x0 | 1位宽 |
-| UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_8BIT | 0x1 | 8位宽 |
-| UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_64BIT | 0x2 | 64位宽 |
-| UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_128BIT | 0x3 | 128位宽 |
-| UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_MAX | 0x4 | 位宽上限值 |
+| UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_1BIT | 0 | 1位宽 |
+| UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_8BIT | 1 | 8位宽 |
+| UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_64BIT | 2 | 64位宽 |
+| UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_128BIT | 3 | 128位宽 |
+| UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_MAX | 4 | 位宽上限值 |
 | UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_INVALID | 0xffffffff | 无效位宽 |
 
 ### uapi_drv_cipher_symc_iv_change_type_t <a id="enum_uapi_drv_cipher_symc_iv_change_type_t"></a>
@@ -1542,12 +1542,12 @@ typedef enum uapi_drv_hash_type {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| UAPI_DRV_CIPHER_HASH_TYPE_SHA1 | 0xf690a0 | SHA1 (Secure Hash Algorithm 1) 算法，不建议使用 |
-| UAPI_DRV_CIPHER_HASH_TYPE_SHA224 | 0x10690e0 | SHA224 (Secure Hash Algorithm 224-bit) 算法，不建议使用 |
-| UAPI_DRV_CIPHER_HASH_TYPE_SHA256 | 0x1169100 | SHA256 (Secure Hash Algorithm 256-bit) 算法 |
-| UAPI_DRV_CIPHER_HASH_TYPE_SHA384 | 0x127a180 | SHA384 (Secure Hash Algorithm 384-bit) 算法 |
-| UAPI_DRV_CIPHER_HASH_TYPE_SHA512 | 0x137a200 | SHA512 (Secure Hash Algorithm 512-bit) 算法 |
-| UAPI_DRV_CIPHER_HASH_TYPE_SM3 | 0x2169100 | SM3 (SM3 Cryptographic Hash Algorithm) 算法 |
+| UAPI_DRV_CIPHER_HASH_TYPE_SHA1 | 0xf690a0 | SHA1（Secure Hash Algorithm 1）算法，不建议使用 |
+| UAPI_DRV_CIPHER_HASH_TYPE_SHA224 | 0x10690e0 | SHA224（Secure Hash Algorithm 224-bit）算法，不建议使用 |
+| UAPI_DRV_CIPHER_HASH_TYPE_SHA256 | 0x1169100 | SHA256（Secure Hash Algorithm 256-bit）算法 |
+| UAPI_DRV_CIPHER_HASH_TYPE_SHA384 | 0x127a180 | SHA384（Secure Hash Algorithm 384-bit）算法 |
+| UAPI_DRV_CIPHER_HASH_TYPE_SHA512 | 0x137a200 | SHA512（Secure Hash Algorithm 512-bit）算法 |
+| UAPI_DRV_CIPHER_HASH_TYPE_SM3 | 0x2169100 | SM3（SM3 Cryptographic Hash Algorithm）算法 |
 | UAPI_DRV_CIPHER_HASH_TYPE_HMAC_SHA1 | 0x10f690a0 | HMAC-SHA1算法，不建议使用 |
 | UAPI_DRV_CIPHER_HASH_TYPE_HMAC_SHA224 | 0x110690e0 | HMAC-SHA224算法，不建议使用 |
 | UAPI_DRV_CIPHER_HASH_TYPE_HMAC_SHA256 | 0x11169100 | HMAC-SHA256算法 |

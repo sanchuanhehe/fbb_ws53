@@ -1,6 +1,6 @@
 # trng
 
-TRNG (True Random Number Generator) 提供硬件真随机数生成能力，支持获取单个 uint32_t 随机数和指定字节长度的随机数据，供加密运算、密钥派生等安全场景使用。
+TRNG（True Random Number Generator）提供硬件真随机数生成能力，支持获取单个 uint32_t 随机数和指定字节长度的随机数据，供加密运算、密钥派生等安全场景使用。
 
 **模块公共头文件**
 
@@ -31,13 +31,13 @@ errcode_t uapi_drv_cipher_trng_get_random(uint32_t *randnum)
 
 **功能说明**
 
-- 获取单个 uint32_t（4 字节）大小的硬件随机数
-- 将生成的随机数写入调用方提供的缓冲区
-- 用于需要单个随机数的场景
+- 获取单个 uint32_t（4 字节）大小的硬件随机数。
+- 将生成的随机数写入调用方提供的缓冲区。
+- 用于需要单个随机数的场景。
 
 **前置条件**
 
-- 调用时序约束：TRNG 驱动完成初始化后调用，未初始化时接口返回错误
+- 调用时序约束：TRNG 驱动完成初始化后调用，未初始化时接口返回错误。
 
 **出参**
 
@@ -51,7 +51,7 @@ errcode_t uapi_drv_cipher_trng_get_random(uint32_t *randnum)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 成功获取硬件随机数 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 成功获取硬件随机数 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -72,13 +72,13 @@ errcode_t uapi_drv_cipher_trng_get_random_bytes(uint8_t *randnum, uint32_t size)
 
 **功能说明**
 
-- 获取指定字节长度的硬件随机数
-- 将生成的随机字节序列写入调用方提供的缓冲区
-- 用于需要任意长度随机数据的场景
+- 获取指定字节长度的硬件随机数。
+- 将生成的随机字节序列写入调用方提供的缓冲区。
+- 用于需要任意长度随机数据的场景。
 
 **前置条件**
 
-- 调用时序约束：TRNG 驱动完成初始化后调用，未初始化时接口返回错误
+- 调用时序约束：TRNG 驱动完成初始化后调用，未初始化时接口返回错误。
 
 **入参**
 
@@ -98,7 +98,7 @@ errcode_t uapi_drv_cipher_trng_get_random_bytes(uint8_t *randnum, uint32_t size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 成功获取指定长度的硬件随机数 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 成功获取指定长度的硬件随机数 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**

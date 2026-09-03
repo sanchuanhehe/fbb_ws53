@@ -1,6 +1,6 @@
 # Pinctrl
 
-Pinctrl (Pin Multiplexing Control) 提供引脚复用与引脚配置功能，支持引脚复用模式、驱动能力、上下拉、输入使能与施密特触发状态的设置与获取，并支持低功耗场景下的挂起与恢复。
+Pinctrl（Pin Multiplexing Control）提供引脚复用与引脚配置功能，支持引脚复用模式、驱动能力、上下拉、输入使能与施密特触发状态的设置与获取，并支持低功耗场景下的挂起与恢复。
 
 **模块公共头文件**
 
@@ -43,14 +43,14 @@ void uapi_pin_init(void)
 
 **功能说明**
 
-- 初始化 Pinctrl 模块
-- 作为本模块引脚配置接口的初始化入口
-- 返回初始化执行结果
+- 初始化 Pinctrl 模块。
+- 作为本模块引脚配置接口的初始化入口。
+- 返回初始化执行结果。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在其他本模块函数被调用前执行
-- 依赖关系：当前接口依赖底层 HAL (Hardware Abstraction Layer) 引脚操作接口已实现
+- 调用时序约束：当前接口必须在其他本模块函数被调用前执行。
+- 依赖关系：当前接口依赖底层 HAL（Hardware Abstraction Layer）引脚操作接口已实现。
 
 **参考案例**
 
@@ -70,14 +70,14 @@ void uapi_pin_deinit(void)
 
 **功能说明**
 
-- 去初始化 Pinctrl 模块
-- 释放本模块占用的引脚操作资源
-- 返回去初始化执行结果
+- 去初始化 Pinctrl 模块。
+- 释放本模块占用的引脚操作资源。
+- 返回去初始化执行结果。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用
-- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册
+- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用。
+- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册。
 
 **参考案例**
 
@@ -97,21 +97,21 @@ errcode_t uapi_pin_set_mode(pin_t pin, pin_mode_t mode)
 
 **功能说明**
 
-- 设置指定引脚的复用模式
-- 支持对单个引脚配置其复用功能选择
-- 配置操作具备原子性
+- 设置指定引脚的复用模式。
+- 支持对单个引脚配置其复用功能选择。
+- 配置操作具备原子性。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用
-- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册
+- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用。
+- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#enum_pin_t) | 引脚编号 | 0 ~ 47 |
-| mode | [pin_mode_t](#enum_pin_mode_t) | 复用模式 | [PIN_MODE_0](#enum_pin_mode_t)(0) / [PIN_MODE_1](#enum_pin_mode_t)(1) / [PIN_MODE_2](#enum_pin_mode_t)(2) / [PIN_MODE_3](#enum_pin_mode_t)(3) / [PIN_MODE_4](#enum_pin_mode_t)(4) / [PIN_MODE_5](#enum_pin_mode_t)(5) / [PIN_MODE_6](#enum_pin_mode_t)(6) / [PIN_MODE_7](#enum_pin_mode_t)(7) |
+| mode | [pin_mode_t](#enum_pin_mode_t) | 复用模式 | [PIN_MODE_0](#enum_pin_mode_t)：0 / [PIN_MODE_1](#enum_pin_mode_t)：1 / [PIN_MODE_2](#enum_pin_mode_t)：2 / [PIN_MODE_3](#enum_pin_mode_t)：3 / [PIN_MODE_4](#enum_pin_mode_t)：4 / [PIN_MODE_5](#enum_pin_mode_t)：5 / [PIN_MODE_6](#enum_pin_mode_t)：6 / [PIN_MODE_7](#enum_pin_mode_t)：7 |
 
 **返回值**
 
@@ -119,9 +119,9 @@ errcode_t uapi_pin_set_mode(pin_t pin, pin_mode_t mode)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 设置引脚复用模式成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 设置引脚复用模式成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
-| [ERRCODE_PIN_MODE_NO_FUNC](#ERRCODE_PIN_MODE_NO_FUNC):0x80001191 | 模式无效 | 引脚不支持指定的复用模式 |
+| [ERRCODE_PIN_MODE_NO_FUNC](#ERRCODE_PIN_MODE_NO_FUNC)：0x80001191 | 模式无效 | 引脚不支持指定的复用模式 |
 
 **参考案例**
 
@@ -141,14 +141,14 @@ pin_mode_t uapi_pin_get_mode(pin_t pin)
 
 **功能说明**
 
-- 获取指定引脚的复用模式
-- 返回值类型为 pin_mode_t，取值为引脚复用模式枚举
-- 读取操作具备原子性
+- 获取指定引脚的复用模式。
+- 返回值类型为 pin_mode_t，取值为引脚复用模式枚举。
+- 读取操作具备原子性。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用
-- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册
+- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用。
+- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册。
 
 **入参**
 
@@ -162,8 +162,8 @@ pin_mode_t uapi_pin_get_mode(pin_t pin)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [PIN_MODE_0](#enum_pin_mode_t)(0) ~ [PIN_MODE_7](#enum_pin_mode_t)(7) | 有效复用模式 | 读取到引脚的有效复用模式 |
-| [PIN_MODE_MAX](#enum_pin_mode_t)(8) | 无效值 | pin 大于等于 PIN_MAX_NUMBER 或 HAL 引脚操作接口未注册 |
+| [PIN_MODE_0](#enum_pin_mode_t)：0 ~ [PIN_MODE_7](#enum_pin_mode_t)：7 | 有效复用模式 | 读取到引脚的有效复用模式 |
+| [PIN_MODE_MAX](#enum_pin_mode_t)：8 | 无效值 | pin 大于等于 PIN_MAX_NUMBER 或 HAL 引脚操作接口未注册 |
 
 **参考案例**
 
@@ -183,21 +183,21 @@ errcode_t uapi_pin_set_ds(pin_t pin, pin_drive_strength_t ds)
 
 **功能说明**
 
-- 设置指定引脚的驱动能力
-- 支持对单个引脚配置其驱动强度等级
-- 配置操作具备原子性
+- 设置指定引脚的驱动能力。
+- 支持对单个引脚配置其驱动强度等级。
+- 配置操作具备原子性。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用
-- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册
+- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用。
+- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#enum_pin_t) | 引脚编号 | 0 ~ 47 |
-| ds | [pin_drive_strength_t](#enum_pin_drive_strength_t) | 驱动能力 | [PIN_DS_0](#enum_pin_drive_strength_t)(0) / [PIN_DS_1](#enum_pin_drive_strength_t)(1) / [PIN_DS_2](#enum_pin_drive_strength_t)(2) / [PIN_DS_3](#enum_pin_drive_strength_t)(3) / [PIN_DS_4](#enum_pin_drive_strength_t)(4) / [PIN_DS_5](#enum_pin_drive_strength_t)(5) / [PIN_DS_6](#enum_pin_drive_strength_t)(6) / [PIN_DS_7](#enum_pin_drive_strength_t)(7) / [PIN_DS_8](#enum_pin_drive_strength_t)(8) / [PIN_DS_9](#enum_pin_drive_strength_t)(9) / [PIN_DS_10](#enum_pin_drive_strength_t)(10) / [PIN_DS_11](#enum_pin_drive_strength_t)(11) / [PIN_DS_12](#enum_pin_drive_strength_t)(12) / [PIN_DS_13](#enum_pin_drive_strength_t)(13) / [PIN_DS_14](#enum_pin_drive_strength_t)(14) / [PIN_DS_15](#enum_pin_drive_strength_t)(15) |
+| ds | [pin_drive_strength_t](#enum_pin_drive_strength_t) | 驱动能力 | [PIN_DS_0](#enum_pin_drive_strength_t)：0 / [PIN_DS_1](#enum_pin_drive_strength_t)：1 / [PIN_DS_2](#enum_pin_drive_strength_t)：2 / [PIN_DS_3](#enum_pin_drive_strength_t)：3 / [PIN_DS_4](#enum_pin_drive_strength_t)：4 / [PIN_DS_5](#enum_pin_drive_strength_t)：5 / [PIN_DS_6](#enum_pin_drive_strength_t)：6 / [PIN_DS_7](#enum_pin_drive_strength_t)：7 / [PIN_DS_8](#enum_pin_drive_strength_t)：8 / [PIN_DS_9](#enum_pin_drive_strength_t)：9 / [PIN_DS_10](#enum_pin_drive_strength_t)：10 / [PIN_DS_11](#enum_pin_drive_strength_t)：11 / [PIN_DS_12](#enum_pin_drive_strength_t)：12 / [PIN_DS_13](#enum_pin_drive_strength_t)：13 / [PIN_DS_14](#enum_pin_drive_strength_t)：14 / [PIN_DS_15](#enum_pin_drive_strength_t)：15 |
 
 **返回值**
 
@@ -205,7 +205,7 @@ errcode_t uapi_pin_set_ds(pin_t pin, pin_drive_strength_t ds)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 设置引脚驱动能力成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 设置引脚驱动能力成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
 
 **参考案例**
@@ -226,14 +226,14 @@ pin_drive_strength_t uapi_pin_get_ds(pin_t pin)
 
 **功能说明**
 
-- 获取指定引脚的驱动能力
-- 返回值类型为 pin_drive_strength_t，取值为驱动能力等级枚举
-- 读取操作具备原子性
+- 获取指定引脚的驱动能力。
+- 返回值类型为 pin_drive_strength_t，取值为驱动能力等级枚举。
+- 读取操作具备原子性。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用
-- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册
+- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用。
+- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册。
 
 **入参**
 
@@ -247,8 +247,8 @@ pin_drive_strength_t uapi_pin_get_ds(pin_t pin)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [PIN_DS_0](#enum_pin_drive_strength_t)(0) ~ [PIN_DS_15](#enum_pin_drive_strength_t)(15) | 有效驱动能力 | 读取到引脚的有效驱动能力 |
-| [PIN_DS_MAX](#enum_pin_drive_strength_t)(16) | 无效值 | pin 大于等于 PIN_MAX_NUMBER 或 HAL 引脚操作接口未注册 |
+| [PIN_DS_0](#enum_pin_drive_strength_t)：0 ~ [PIN_DS_15](#enum_pin_drive_strength_t)：15 | 有效驱动能力 | 读取到引脚的有效驱动能力 |
+| [PIN_DS_MAX](#enum_pin_drive_strength_t)：16 | 无效值 | pin 大于等于 PIN_MAX_NUMBER 或 HAL 引脚操作接口未注册 |
 
 **参考案例**
 
@@ -268,21 +268,21 @@ errcode_t uapi_pin_set_pull(pin_t pin, pin_pull_t pull_type)
 
 **功能说明**
 
-- 设置指定引脚的上下拉状态
-- 支持对单个引脚配置无上下拉、上拉或下拉
-- 配置操作具备原子性
+- 设置指定引脚的上下拉状态。
+- 支持对单个引脚配置无上下拉、上拉或下拉。
+- 配置操作具备原子性。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用
-- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册
+- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用。
+- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#enum_pin_t) | 引脚编号 | 0 ~ 47 |
-| pull_type | [pin_pull_t](#enum_pin_pull_t) | 上下拉类型 | [PIN_PULL_NONE](#enum_pin_pull_t)(0) / [PIN_PULL_UP](#enum_pin_pull_t)(1) / [PIN_PULL_DOWN](#enum_pin_pull_t)(2) |
+| pull_type | [pin_pull_t](#enum_pin_pull_t) | 上下拉类型 | [PIN_PULL_NONE](#enum_pin_pull_t)：0 / [PIN_PULL_UP](#enum_pin_pull_t)：1 / [PIN_PULL_DOWN](#enum_pin_pull_t)：2 |
 
 **返回值**
 
@@ -290,7 +290,7 @@ errcode_t uapi_pin_set_pull(pin_t pin, pin_pull_t pull_type)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 设置引脚上下拉状态成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 设置引脚上下拉状态成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
 
 **参考案例**
@@ -311,14 +311,14 @@ pin_pull_t uapi_pin_get_pull(pin_t pin)
 
 **功能说明**
 
-- 获取指定引脚的上下拉状态
-- 返回值类型为 pin_pull_t，取值为上下拉类型枚举
-- 读取操作具备原子性
+- 获取指定引脚的上下拉状态。
+- 返回值类型为 pin_pull_t，取值为上下拉类型枚举。
+- 读取操作具备原子性。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用
-- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册
+- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用。
+- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册。
 
 **入参**
 
@@ -332,8 +332,8 @@ pin_pull_t uapi_pin_get_pull(pin_t pin)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [PIN_PULL_NONE](#enum_pin_pull_t)(0) / [PIN_PULL_UP](#enum_pin_pull_t)(1) / [PIN_PULL_DOWN](#enum_pin_pull_t)(2) | 有效上下拉状态 | 读取到引脚的有效上下拉状态 |
-| [PIN_PULL_MAX](#enum_pin_pull_t)(3) | 无效值 | pin 大于等于 PIN_MAX_NUMBER 或 HAL 引脚操作接口未注册 |
+| [PIN_PULL_NONE](#enum_pin_pull_t)：0 / [PIN_PULL_UP](#enum_pin_pull_t)：1 / [PIN_PULL_DOWN](#enum_pin_pull_t)：2 | 有效上下拉状态 | 读取到引脚的有效上下拉状态 |
+| [PIN_PULL_MAX](#enum_pin_pull_t)：3 | 无效值 | pin 大于等于 PIN_MAX_NUMBER 或 HAL 引脚操作接口未注册 |
 
 **参考案例**
 
@@ -353,14 +353,14 @@ errcode_t uapi_pin_set_ie(pin_t pin, pin_input_enable_t ie)
 
 **功能说明**
 
-- 设置指定引脚的输入使能状态
-- 支持对单个引脚配置其输入缓冲使能开关
-- 配置操作具备原子性
+- 设置指定引脚的输入使能状态。
+- 支持对单个引脚配置其输入缓冲使能开关。
+- 配置操作具备原子性。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用
-- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册
+- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用。
+- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册。
 
 **入参**
 
@@ -375,7 +375,7 @@ errcode_t uapi_pin_set_ie(pin_t pin, pin_input_enable_t ie)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 设置引脚输入使能状态成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 设置引脚输入使能状态成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
 
 **参考案例**
@@ -404,14 +404,14 @@ pin_input_enable_t uapi_pin_get_ie(pin_t pin)
 
 **功能说明**
 
-- 获取指定引脚的输入使能状态
-- 返回值类型为 pin_input_enable_t，取值为输入使能状态枚举
-- 读取操作具备原子性
+- 获取指定引脚的输入使能状态。
+- 返回值类型为 pin_input_enable_t，取值为输入使能状态枚举。
+- 读取操作具备原子性。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用
-- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册
+- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用。
+- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册。
 
 **入参**
 
@@ -448,21 +448,21 @@ errcode_t uapi_pin_set_st(pin_t pin, pin_schmitt_trigger_t st)
 
 **功能说明**
 
-- 设置指定引脚的施密特触发状态
-- 支持对单个引脚配置其施密特触发使能开关
-- 配置操作具备原子性
+- 设置指定引脚的施密特触发状态。
+- 支持对单个引脚配置其施密特触发使能开关。
+- 配置操作具备原子性。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用
-- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册
+- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用。
+- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#enum_pin_t) | 引脚编号 | 0 ~ 47 |
-| st | [pin_schmitt_trigger_t](#enum_pin_schmitt_trigger_t) | 施密特触发状态 | [PIN_ST_DISABLE](#enum_pin_schmitt_trigger_t)(0) / [PIN_ST_ENABLE](#enum_pin_schmitt_trigger_t)(1) |
+| st | [pin_schmitt_trigger_t](#enum_pin_schmitt_trigger_t) | 施密特触发状态 | [PIN_ST_DISABLE](#enum_pin_schmitt_trigger_t)：0 / [PIN_ST_ENABLE](#enum_pin_schmitt_trigger_t)：1 |
 
 **返回值**
 
@@ -470,7 +470,7 @@ errcode_t uapi_pin_set_st(pin_t pin, pin_schmitt_trigger_t st)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 设置引脚施密特触发状态成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 设置引脚施密特触发状态成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
 
 **参考案例**
@@ -497,14 +497,14 @@ pin_schmitt_trigger_t uapi_pin_get_st(pin_t pin)
 
 **功能说明**
 
-- 获取指定引脚的施密特触发状态
-- 返回值类型为 pin_schmitt_trigger_t，取值为施密特触发状态枚举
-- 读取操作具备原子性
+- 获取指定引脚的施密特触发状态。
+- 返回值类型为 pin_schmitt_trigger_t，取值为施密特触发状态枚举。
+- 读取操作具备原子性。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用
-- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册
+- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用。
+- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册。
 
 **入参**
 
@@ -518,8 +518,8 @@ pin_schmitt_trigger_t uapi_pin_get_st(pin_t pin)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [PIN_ST_DISABLE](#enum_pin_schmitt_trigger_t)(0) / [PIN_ST_ENABLE](#enum_pin_schmitt_trigger_t)(1) | 有效施密特触发状态 | 读取到引脚的有效施密特触发状态 |
-| [PIN_ST_MAX](#enum_pin_schmitt_trigger_t)(2) | 无效值 | pin 大于等于 PIN_MAX_NUMBER 或 HAL 引脚操作接口未注册 |
+| [PIN_ST_DISABLE](#enum_pin_schmitt_trigger_t)：0 / [PIN_ST_ENABLE](#enum_pin_schmitt_trigger_t)：1 | 有效施密特触发状态 | 读取到引脚的有效施密特触发状态 |
+| [PIN_ST_MAX](#enum_pin_schmitt_trigger_t)：2 | 无效值 | pin 大于等于 PIN_MAX_NUMBER 或 HAL 引脚操作接口未注册 |
 
 **Kconfig配置**
 
@@ -541,14 +541,14 @@ errcode_t uapi_pin_suspend(uintptr_t arg)
 
 **功能说明**
 
-- 挂起 Pinctrl，用于低功耗进入前的引脚配置保存
-- 挂起前保存引脚配置
-- 支持透传挂起所需参数
+- 挂起 Pinctrl，用于低功耗进入前的引脚配置保存。
+- 挂起前保存引脚配置。
+- 支持透传挂起所需参数。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用
-- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册
+- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用。
+- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册。
 
 **入参**
 
@@ -562,7 +562,7 @@ errcode_t uapi_pin_suspend(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 挂起操作成功，或 HAL 引脚操作接口未注册时直接返回成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 挂起操作成功，或 HAL 引脚操作接口未注册时直接返回成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 挂起接口执行失败 |
 
 **参考案例**
@@ -589,14 +589,14 @@ errcode_t uapi_pin_resume(uintptr_t arg)
 
 **功能说明**
 
-- 恢复 Pinctrl，用于低功耗退出后的引脚配置恢复
-- 恢复挂起前保存的引脚配置
-- 支持透传恢复所需参数
+- 恢复 Pinctrl，用于低功耗退出后的引脚配置恢复。
+- 恢复挂起前保存的引脚配置。
+- 支持透传恢复所需参数。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用
-- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册
+- 调用时序约束：当前接口必须在 uapi_pin_init 成功返回后调用。
+- 依赖关系：当前接口依赖底层 HAL 引脚操作接口已注册。
 
 **入参**
 
@@ -610,7 +610,7 @@ errcode_t uapi_pin_resume(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 恢复操作成功，或 HAL 引脚操作接口未注册时直接返回成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 恢复操作成功，或 HAL 引脚操作接口未注册时直接返回成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 恢复接口执行失败 |
 
 **参考案例**

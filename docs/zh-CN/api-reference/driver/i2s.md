@@ -1,6 +1,6 @@
 # i2s
 
-I2S (Inter-IC Sound) 提供集成电路间数字音频总线的数据收发能力，支持主从模式、多种数据位宽与通道数的配置，可工作在轮询、中断以及 DMA (Direct Memory Access) 传输模式下。本模块对外接口以 SIO (Serial Input/Output) 总线编号为索引对硬件 I2S 控制器进行操作。
+I2S（Inter-IC Sound）提供集成电路间数字音频总线的数据收发能力，支持主从模式、多种数据位宽与通道数的配置，可工作在轮询、中断以及 DMA（Direct Memory Access）传输模式下。本模块对外接口以 SIO（Serial Input/Output）总线编号为索引对硬件 I2S 控制器进行操作。
 
 **模块公共头文件**
 
@@ -42,20 +42,20 @@ errcode_t uapi_i2s_init(sio_bus_t bus, i2s_callback_t callback)
 
 **功能说明**
 
-- 初始化指定 SIO 总线上的 I2S 设备
-- 注册应用侧的接收数据回调函数
-- 当设备已初始化时重复调用直接返回成功
+- 初始化指定 SIO 总线上的 I2S 设备。
+- 注册应用侧的接收数据回调函数。
+- 当设备已初始化时重复调用直接返回成功。
 
 **前置条件**
 
-- 调用时序约束：当前接口需在调用本模块其它配置/收发接口之前首先调用
-- 依赖关系：当前接口依赖目标 SIO 总线的 HAL 函数已注册且 SIO 时钟可被使能
+- 调用时序约束：当前接口需在调用本模块其它配置/收发接口之前首先调用。
+- 依赖关系：当前接口依赖目标 SIO 总线的 HAL 函数已注册且 SIO 时钟可被使能。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
 | callback | [i2s_callback_t](#typedef_i2s_callback_t) | I2S 设备的接收数据回调函数 | 不为NULL |
 
 **返回值**
@@ -64,7 +64,7 @@ errcode_t uapi_i2s_init(sio_bus_t bus, i2s_callback_t callback)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 设备初始化成功或设备已初始化 |
+| ERRCODE_SUCC：0 | 执行成功 | 设备初始化成功或设备已初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 总线编号超出有效范围 |
 
 **Kconfig配置**
@@ -92,20 +92,20 @@ errcode_t uapi_i2s_deinit(sio_bus_t bus)
 
 **功能说明**
 
-- 去初始化指定 SIO 总线上的 I2S 设备
-- 关闭接收使能并注销接收回调
-- 当设备未初始化时重复调用直接返回成功
+- 去初始化指定 SIO 总线上的 I2S 设备。
+- 关闭接收使能并注销接收回调。
+- 当设备未初始化时重复调用直接返回成功。
 
 **前置条件**
 
-- 调用时序约束：当前接口应在完成全部收发操作后调用
-- 依赖关系：当前接口依赖目标 SIO 总线已通过 uapi_i2s_init 完成初始化或处于可去初始化状态
+- 调用时序约束：当前接口应在完成全部收发操作后调用。
+- 依赖关系：当前接口依赖目标 SIO 总线已通过 uapi_i2s_init 完成初始化或处于可去初始化状态。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
 
 **返回值**
 
@@ -113,7 +113,7 @@ errcode_t uapi_i2s_deinit(sio_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 去初始化成功或设备未初始化 |
+| ERRCODE_SUCC：0 | 执行成功 | 去初始化成功或设备未初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 总线编号超出有效范围 |
 
 ### uapi_i2s_set_config <a id="uapi_i2s_set_config"></a>
@@ -130,19 +130,19 @@ errcode_t uapi_i2s_set_config(sio_bus_t bus, const i2s_config_t *config)
 
 **功能说明**
 
-- 设置 I2S 设备的主从模式、传输路径模式、数据位宽、通道数、时序模式、时钟边沿、分频系数等配置
-- 按入参配置 SIO 传输参数
+- 设置 I2S 设备的主从模式、传输路径模式、数据位宽、通道数、时序模式、时钟边沿、分频系数等配置。
+- 按入参配置 SIO 传输参数。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_i2s_init 成功返回后调用
-- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的配置接口已就绪
+- 调用时序约束：当前接口必须在 uapi_i2s_init 成功返回后调用。
+- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的配置接口已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
 | config | [i2s_config_t](#struct_i2s_config_t) * | I2S 设备的配置参数指针 | 不为NULL |
 
 **返回值**
@@ -151,7 +151,7 @@ errcode_t uapi_i2s_set_config(sio_bus_t bus, const i2s_config_t *config)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 配置下发成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 配置下发成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围或 config 为 NULL |
 
 **参考案例**
@@ -173,19 +173,19 @@ errcode_t uapi_i2s_get_config(sio_bus_t bus, i2s_config_t *config)
 
 **功能说明**
 
-- 获取 I2S 设备当前的工作模式、传输路径模式、数据位宽、通道数、时序模式、时钟边沿、分频系数等配置
-- 通过出参 config 返回当前配置内容
+- 获取 I2S 设备当前的工作模式、传输路径模式、数据位宽、通道数、时序模式、时钟边沿、分频系数等配置。
+- 通过出参 config 返回当前配置内容。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_i2s_init 成功返回后调用
-- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的配置获取接口已就绪
+- 调用时序约束：当前接口必须在 uapi_i2s_init 成功返回后调用。
+- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的配置获取接口已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
 
 **出参**
 
@@ -199,7 +199,7 @@ errcode_t uapi_i2s_get_config(sio_bus_t bus, i2s_config_t *config)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 配置获取成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 配置获取成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围或 config 为 NULL |
 
 ### uapi_i2s_write_data <a id="uapi_i2s_write_data"></a>
@@ -216,19 +216,19 @@ errcode_t uapi_i2s_write_data(sio_bus_t bus, i2s_tx_data_t *data)
 
 **功能说明**
 
-- 在轮询模式下向 I2S 设备写入左右声道发送数据
-- 数据通过发送结构体的左右声道缓冲区与长度指定
+- 在轮询模式下向 I2S 设备写入左右声道发送数据。
+- 数据通过发送结构体的左右声道缓冲区与长度指定。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_set_config 成功返回后调用
-- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的写接口已就绪
+- 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_set_config 成功返回后调用。
+- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的写接口已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
 | data | [i2s_tx_data_t](#struct_i2s_tx_data_t) * | 发送数据指针，含左右声道缓冲区与长度 | 不为NULL；data->left_buff 与 data->right_buff 不为NULL |
 
 **返回值**
@@ -237,7 +237,7 @@ errcode_t uapi_i2s_write_data(sio_bus_t bus, i2s_tx_data_t *data)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 数据写入成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 数据写入成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围或 data 及其缓冲区为 NULL |
 
 **参考案例**
@@ -258,19 +258,19 @@ errcode_t uapi_i2s_read_start(sio_bus_t bus)
 
 **功能说明**
 
-- 在中断模式下启动 I2S 设备的数据接收
-- 当设备配置为主模式时同时打开 CRG (Clock Reset Generator) 时钟
+- 在中断模式下启动 I2S 设备的数据接收。
+- 当设备配置为主模式时同时打开 CRG（Clock Reset Generator）时钟。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_set_config 成功返回后调用
-- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的接收使能接口已就绪
+- 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_set_config 成功返回后调用。
+- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的接收使能接口已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
 
 **返回值**
 
@@ -278,7 +278,7 @@ errcode_t uapi_i2s_read_start(sio_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 接收启动成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 接收启动成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化或总线编号超出有效范围 |
 
 **参考案例**
@@ -299,18 +299,18 @@ void uapi_i2s_set_crg_clock_enable(sio_bus_t bus, bool enable)
 
 **功能说明**
 
-- 打开或关闭 I2S 的位时钟 BCLK 与采样时钟 WS
+- 打开或关闭 I2S 的位时钟 BCLK 与采样时钟 WS。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_i2s_init 成功返回后调用
-- 依赖关系：当前接口依赖目标 SIO 总线 CRG 时钟使能接口已就绪
+- 调用时序约束：当前接口必须在 uapi_i2s_init 成功返回后调用。
+- 依赖关系：当前接口依赖目标 SIO 总线 CRG 时钟使能接口已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
 | enable | bool | 打开或关闭 BCLK/WS 时钟 | - true<br>- false |
 
 ### uapi_i2s_loop_trans <a id="uapi_i2s_loop_trans"></a>
@@ -327,19 +327,19 @@ errcode_t uapi_i2s_loop_trans(sio_bus_t bus, i2s_tx_data_t *data)
 
 **功能说明**
 
-- 在 I2S 回路上进行自测数据发送
-- 数据通过发送结构体的左右声道缓冲区与长度指定
+- 在 I2S 回路上进行自测数据发送。
+- 数据通过发送结构体的左右声道缓冲区与长度指定。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_set_config 成功返回后调用
-- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的回路自测接口已就绪
+- 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_set_config 成功返回后调用。
+- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的回路自测接口已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
 | data | [i2s_tx_data_t](#struct_i2s_tx_data_t) * | 自测发送数据指针，含左右声道缓冲区与长度 | 不为NULL；data->left_buff 与 data->right_buff 不为NULL |
 
 **返回值**
@@ -348,7 +348,7 @@ errcode_t uapi_i2s_loop_trans(sio_bus_t bus, i2s_tx_data_t *data)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 回路自测发送成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 回路自测发送成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围或 data 及其缓冲区为 NULL |
 
 ### uapi_i2s_get_data <a id="uapi_i2s_get_data"></a>
@@ -365,19 +365,19 @@ errcode_t uapi_i2s_get_data(sio_bus_t bus, i2s_rx_data_t *data)
 
 **功能说明**
 
-- 获取中断模式下 I2S 设备已接收的数据
-- 通过出参 data 返回左右声道接收数据与数据长度
+- 获取中断模式下 I2S 设备已接收的数据。
+- 通过出参 data 返回左右声道接收数据与数据长度。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_read_start 成功返回后调用
-- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的数据获取接口已就绪
+- 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_read_start 成功返回后调用。
+- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的数据获取接口已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
 
 **出参**
 
@@ -391,7 +391,7 @@ errcode_t uapi_i2s_get_data(sio_bus_t bus, i2s_rx_data_t *data)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 数据获取成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 数据获取成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围或 data 为 NULL |
 
 ### uapi_i2s_loopback <a id="uapi_i2s_loopback"></a>
@@ -408,19 +408,19 @@ errcode_t uapi_i2s_loopback(sio_bus_t bus, bool en)
 
 **功能说明**
 
-- 打开或关闭 I2S 的回环模式
-- 仅在启用 CONFIG_I2S_SUPPORT_LOOPBACK 配置时该接口对外可用
+- 打开或关闭 I2S 的回环模式。
+- 仅在启用 CONFIG_I2S_SUPPORT_LOOPBACK 配置时该接口对外可用。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_set_config 成功返回后调用
-- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的回环接口已就绪
+- 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_set_config 成功返回后调用。
+- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的回环接口已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
 | en | bool | 是否开启回环模式 | - true<br>- false |
 
 **返回值**
@@ -429,7 +429,7 @@ errcode_t uapi_i2s_loopback(sio_bus_t bus, bool en)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 回环模式设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 回环模式设置成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化或总线编号超出有效范围 |
 
 **Kconfig配置**
@@ -452,19 +452,19 @@ int32_t uapi_i2s_dma_config(sio_bus_t bus, i2s_dma_attr_t *i2s_dma_cfg)
 
 **功能说明**
 
-- 配置 I2S 使用 DMA 传输时的参数，包括发送/接收是否使能 DMA 及其 FIFO (First In First Out) 中断水线
-- 仅在启用 CONFIG_I2S_SUPPORT_DMA 配置时该接口对外可用
+- 配置 I2S 使用 DMA 传输时的参数，包括发送/接收是否使能 DMA 及其 FIFO（First In First Out）中断水线。
+- 仅在启用 CONFIG_I2S_SUPPORT_DMA 配置时该接口对外可用。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_i2s_init 成功返回后调用
-- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的 DMA 配置接口已就绪
+- 调用时序约束：当前接口必须在 uapi_i2s_init 成功返回后调用。
+- 依赖关系：当前接口依赖目标 SIO 总线 HAL 的 DMA 配置接口已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
 | i2s_dma_cfg | [i2s_dma_attr_t](#struct_i2s_dma_attr_t) * | I2S 使用 DMA 传输时的配置参数指针 | 不为NULL |
 
 **返回值**
@@ -473,7 +473,7 @@ int32_t uapi_i2s_dma_config(sio_bus_t bus, i2s_dma_attr_t *i2s_dma_cfg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | DMA 传输参数配置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | DMA 传输参数配置成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化或总线编号超出有效范围 |
 
 **Kconfig配置**
@@ -496,20 +496,20 @@ int32_t uapi_i2s_merge_write_by_dma(sio_bus_t bus, const void *buffer, uint32_t 
 
 **功能说明**
 
-- 在 merge 模式下通过 DMA 向 I2S 写入数据
-- 支持阻塞与非阻塞两种传输方式
-- 仅在启用 CONFIG_I2S_SUPPORT_DMA 配置时该接口对外可用
+- 在 merge 模式下通过 DMA 向 I2S 写入数据。
+- 支持阻塞与非阻塞两种传输方式。
+- 仅在启用 CONFIG_I2S_SUPPORT_DMA 配置时该接口对外可用。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_dma_config 成功返回后调用
-- 依赖关系：当前接口依赖目标 SIO 总线的 DMA 合并发送地址及 DMA 通道资源已就绪
+- 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_dma_config 成功返回后调用。
+- 依赖关系：当前接口依赖目标 SIO 总线的 DMA 合并发送地址及 DMA 通道资源已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
 | buffer | const void * | 待写入的数据缓冲区指针 | 不为NULL |
 | length | uint32_t | 需要写入的数据长度 | 大于0 |
 | dma_cfg | [i2s_dma_config_t](#struct_i2s_dma_config_t) * | DMA 传输配置参数指针 | 不为NULL |
@@ -522,7 +522,7 @@ int32_t uapi_i2s_merge_write_by_dma(sio_bus_t bus, const void *buffer, uint32_t 
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 非阻塞模式发起传输成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 非阻塞模式发起传输成功 |
 | 正整数 | 实际传输的数据块大小 | 阻塞模式传输成功，返回 DMA 实际传输的 block_ts |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围、dma_cfg/buffer 为 NULL、length 为 0、DMA 握手号不支持、或 DMA 配置/启动失败 |
 
@@ -546,20 +546,20 @@ int32_t uapi_i2s_merge_read_by_dma(sio_bus_t bus, const void *buffer, uint32_t l
 
 **功能说明**
 
-- 在 merge 模式下通过 DMA 从 I2S 读取数据到指定缓冲区
-- 支持阻塞与非阻塞两种传输方式
-- 仅在启用 CONFIG_I2S_SUPPORT_DMA 配置时该接口对外可用
+- 在 merge 模式下通过 DMA 从 I2S 读取数据到指定缓冲区。
+- 支持阻塞与非阻塞两种传输方式。
+- 仅在启用 CONFIG_I2S_SUPPORT_DMA 配置时该接口对外可用。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_dma_config 成功返回后调用
-- 依赖关系：当前接口依赖目标 SIO 总线的 DMA 合并接收地址及 DMA 通道资源已就绪
+- 调用时序约束：当前接口必须在 uapi_i2s_init 与 uapi_i2s_dma_config 成功返回后调用。
+- 依赖关系：当前接口依赖目标 SIO 总线的 DMA 合并接收地址及 DMA 通道资源已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0:0 |
+| bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
 | buffer | const void * | 存储读取数据的缓冲区指针 | 不为NULL |
 | length | uint32_t | 需要读取的数据长度 | 大于0 |
 | dma_cfg | [i2s_dma_config_t](#struct_i2s_dma_config_t) * | DMA 传输配置参数指针 | 不为NULL |
@@ -572,7 +572,7 @@ int32_t uapi_i2s_merge_read_by_dma(sio_bus_t bus, const void *buffer, uint32_t l
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 非阻塞模式发起传输成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 非阻塞模式发起传输成功 |
 | 正整数 | 实际传输的数据块大小 | 阻塞模式传输成功，返回 DMA 实际传输的 block_ts |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围、dma_cfg/buffer 为 NULL、length 为 0、DMA 握手号不支持、或 DMA 配置/启动失败 |
 
