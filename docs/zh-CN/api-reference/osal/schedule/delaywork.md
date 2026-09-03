@@ -33,14 +33,14 @@ int osal_delayedwork_init(osal_delayedwork *work, osal_delayedwork_handler handl
 
 **功能说明**
 
-- 初始化延迟工作对象，分配内核延迟工作资源并关联回调处理函数
-- 延迟工作节点纳入调度管理
-- 初始化完成后可通过 osal_delayedwork_schedule 调度执行
+- 初始化延迟工作对象，分配内核延迟工作资源并关联回调处理函数。
+- 延迟工作节点纳入调度管理。
+- 初始化完成后可通过 osal_delayedwork_schedule 调度执行。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在延迟工作对象使用前调用，且必须通过 osal_delayedwork_destroy 释放资源
-- 上下文限制：当前接口在 Linux 内核空间调用
+- 调用时序约束：当前接口必须在延迟工作对象使用前调用，且必须通过 osal_delayedwork_destroy 释放资源。
+- 上下文限制：当前接口在 Linux 内核空间调用。
 
 **入参**
 
@@ -55,8 +55,8 @@ int osal_delayedwork_init(osal_delayedwork *work, osal_delayedwork_handler handl
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 延迟工作对象初始化成功 |
-| [OSAL_FAILURE](#OSAL_FAILURE):-1 | 执行失败 | work 为 NULL、work->work 非 NULL 或内存分配失败 |
+| [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 延迟工作对象初始化成功 |
+| [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 执行失败 | work 为 NULL、work->work 非 NULL 或内存分配失败 |
 
 ### osal_delayedwork_destroy <a id="osal_delayedwork_destroy"></a>
 
@@ -72,14 +72,14 @@ void osal_delayedwork_destroy(osal_delayedwork *work)
 
 **功能说明**
 
-- 销毁延迟工作对象，释放内核延迟工作资源
-- 从内部管理链表中移除对应节点
-- 释放延迟工作对象关联的内核资源并将 work->work 置空
+- 销毁延迟工作对象，释放内核延迟工作资源。
+- 从内部管理链表中移除对应节点。
+- 释放延迟工作对象关联的内核资源并将 work->work 置空。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 osal_delayedwork_init 成功返回后调用
-- 上下文限制：当前接口在 Linux 内核空间调用
+- 调用时序约束：当前接口必须在 osal_delayedwork_init 成功返回后调用。
+- 上下文限制：当前接口在 Linux 内核空间调用。
 
 **入参**
 
@@ -101,14 +101,14 @@ int osal_delayedwork_schedule(osal_delayedwork *work, int timeout)
 
 **功能说明**
 
-- 将延迟工作提交到内核全局工作队列，在指定超时时间后执行回调处理函数
-- 超时时间以毫秒为单位，内部转换为 jiffies 后调度执行
-- 超时时间为 0 时立即提交执行
+- 将延迟工作提交到内核全局工作队列，在指定超时时间后执行回调处理函数。
+- 超时时间以毫秒为单位，内部转换为 jiffies 后调度执行。
+- 超时时间为 0 时立即提交执行。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 osal_delayedwork_init 成功返回后调用
-- 上下文限制：当前接口在 Linux 内核空间调用
+- 调用时序约束：当前接口必须在 osal_delayedwork_init 成功返回后调用。
+- 上下文限制：当前接口在 Linux 内核空间调用。
 
 **入参**
 
@@ -123,8 +123,8 @@ int osal_delayedwork_schedule(osal_delayedwork *work, int timeout)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 延迟工作调度成功 |
-| [OSAL_FAILURE](#OSAL_FAILURE):-1 | 执行失败 | work 为 NULL 或 work->work 为 NULL |
+| [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 延迟工作调度成功 |
+| [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 执行失败 | work 为 NULL 或 work->work 为 NULL |
 
 ### osal_delayedwork_cancel_sync <a id="osal_delayedwork_cancel_sync"></a>
 
@@ -140,14 +140,14 @@ int osal_delayedwork_cancel_sync(osal_delayedwork *work)
 
 **功能说明**
 
-- 同步取消延迟工作，等待正在执行的回调处理函数完成后返回
-- 取消尚未执行的延迟工作调度
-- 确保回调处理函数在当前接口返回后不再运行
+- 同步取消延迟工作，等待正在执行的回调处理函数完成后返回。
+- 取消尚未执行的延迟工作调度。
+- 确保回调处理函数在当前接口返回后不再运行。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 osal_delayedwork_init 成功返回后调用
-- 上下文限制：当前接口在 Linux 内核空间调用，禁止在回调处理函数中调用
+- 调用时序约束：当前接口必须在 osal_delayedwork_init 成功返回后调用。
+- 上下文限制：当前接口在 Linux 内核空间调用，禁止在回调处理函数中调用。
 
 **入参**
 
@@ -161,8 +161,8 @@ int osal_delayedwork_cancel_sync(osal_delayedwork *work)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 延迟工作取消成功 |
-| [OSAL_FAILURE](#OSAL_FAILURE):-1 | 执行失败 | work 为 NULL 或 work->work 为 NULL |
+| [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 延迟工作取消成功 |
+| [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 执行失败 | work 为 NULL 或 work->work 为 NULL |
 
 ## Type definitions
 

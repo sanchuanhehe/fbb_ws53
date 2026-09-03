@@ -33,14 +33,14 @@ int osal_workqueue_init(osal_workqueue *work, osal_workqueue_handler handler)
 
 **功能说明**
 
-- 初始化工作队列，建立工作队列与回调处理函数的关联
-- 初始化完成后工作队列进入可调度状态
-- 支持 Linux、LiteOS、FreeRTOS 系统
+- 初始化工作队列，建立工作队列与回调处理函数的关联。
+- 初始化完成后工作队列进入可调度状态。
+- 支持 Linux、LiteOS、FreeRTOS 系统。
 
 **前置条件**
 
-- 调用时序约束：work 必须未被初始化（work->work 应为 NULL），禁止重复初始化
-- 依赖关系：当前接口是工作队列模块的初始化接口，需在调度、刷新、销毁等操作之前调用
+- 调用时序约束：work 必须未被初始化（work->work 应为 NULL），禁止重复初始化。
+- 依赖关系：当前接口是工作队列模块的初始化接口，需在调度、刷新、销毁等操作之前调用。
 
 **入参**
 
@@ -61,8 +61,8 @@ int osal_workqueue_init(osal_workqueue *work, osal_workqueue_handler handler)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 初始化成功 | 工作队列初始化成功，关联回调处理函数 |
-| [OSAL_FAILURE](#OSAL_FAILURE):-1 | 初始化失败 | work 为 NULL、work->work 不为 NULL，或内存分配失败 |
+| [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 初始化成功 | 工作队列初始化成功，关联回调处理函数 |
+| [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 初始化失败 | work 为 NULL、work->work 不为 NULL，或内存分配失败 |
 
 ### osal_workqueue_schedule <a id="osal_workqueue_schedule"></a>
 
@@ -78,14 +78,14 @@ int osal_workqueue_schedule(osal_workqueue *work)
 
 **功能说明**
 
-- 将工作任务加入系统全局工作队列进行异步执行
-- 若工作已在队列中，保持其在队列中的原有位置
-- 支持 Linux、LiteOS、FreeRTOS 系统
+- 将工作任务加入系统全局工作队列进行异步执行。
+- 若工作已在队列中，保持其在队列中的原有位置。
+- 支持 Linux、LiteOS、FreeRTOS 系统。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 osal_workqueue_init() 成功返回后调用
-- 依赖关系：work 必须已通过 osal_workqueue_init() 完成初始化
+- 调用时序约束：当前接口必须在 osal_workqueue_init() 成功返回后调用。
+- 依赖关系：work 必须已通过 osal_workqueue_init() 完成初始化。
 
 **入参**
 
@@ -116,14 +116,14 @@ void osal_workqueue_destroy(osal_workqueue *work)
 
 **功能说明**
 
-- 销毁工作队列，释放内部工作资源
-- 销毁后工作队列不再可用，需重新初始化才能使用
-- 支持 Linux、LiteOS、FreeRTOS 系统
+- 销毁工作队列，释放内部工作资源。
+- 销毁后工作队列不再可用，需重新初始化才能使用。
+- 支持 Linux、LiteOS、FreeRTOS 系统。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 osal_workqueue_init() 成功返回后调用，销毁后禁止再使用该 work
-- 依赖关系：work 必须由 osal_workqueue_init() 创建，销毁操作会释放内存
+- 调用时序约束：当前接口必须在 osal_workqueue_init() 成功返回后调用，销毁后禁止再使用该 work。
+- 依赖关系：work 必须由 osal_workqueue_init() 创建，销毁操作会释放内存。
 
 **入参**
 
@@ -151,14 +151,14 @@ int osal_workqueue_flush(osal_workqueue *work)
 
 **功能说明**
 
-- 等待工作队列完成最后一次调度执行
-- 阻塞直到当前工作执行完成
-- 支持 Linux、LiteOS 系统
+- 等待工作队列完成最后一次调度执行。
+- 阻塞直到当前工作执行完成。
+- 支持 Linux、LiteOS 系统。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 osal_workqueue_init() 成功返回后调用
-- 依赖关系：work 必须已通过 osal_workqueue_init() 完成初始化
+- 调用时序约束：当前接口必须在 osal_workqueue_init() 成功返回后调用。
+- 依赖关系：work 必须已通过 osal_workqueue_init() 完成初始化。
 
 **入参**
 
@@ -172,7 +172,7 @@ int osal_workqueue_flush(osal_workqueue *work)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [OSAL_FAILURE](#OSAL_FAILURE):-1 | 参数无效 | work 为 NULL 或 work->work 为 NULL |
+| [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 参数无效 | work 为 NULL 或 work->work 为 NULL |
 | 1 | 刷新完成 | 工作已在队列中或正在执行，flush_work 返回非零值，已等待其完成 |
 | 0 | 无需刷新 | 工作未在队列中且未在执行，flush_work 返回 0 |
 

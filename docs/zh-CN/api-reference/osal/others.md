@@ -1,6 +1,6 @@
 # Others
 
-others 模块提供 OSAL (OS Abstract Layer) 通用基础设施，核心为双向链表 (doubly linked list) 与哈希链表 (hash list) 的内联操作接口，涵盖链表节点的初始化、插入、删除、替换、移动、拼接、判空、切割与旋转等操作。所有接口以 static inline 函数形式实现于头文件中，无独立编译单元，不依赖 Kconfig 配置，可在任意包含该头文件的上下文中直接使用。相关 OSAL 通用定义、错误码与 ioctl 辅助宏等头文件由 OSAL 其他子模块文档覆盖。
+others 模块提供 OSAL（OS Abstract Layer）通用基础设施，核心为双向链表（doubly linked list）与哈希链表（hash list）的内联操作接口，涵盖链表节点的初始化、插入、删除、替换、移动、拼接、判空、切割与旋转等操作。所有接口以 static inline 函数形式实现于头文件中，无独立编译单元，不依赖 Kconfig 配置，可在任意包含该头文件的上下文中直接使用。相关 OSAL 通用定义、错误码与 ioctl 辅助宏等头文件由 OSAL 其他子模块文档覆盖。
 
 **模块公共头文件**
 
@@ -64,13 +64,13 @@ static INLINE__ void OSAL_INIT_LIST_HEAD(struct osal_list_head *list)
 
 **功能说明**
 
-- 初始化双向链表头节点
-- 将 list 的 next 和 prev 指针均指向自身，形成自引用的空链表
-- 当 list 为 NULL 时直接返回，不执行初始化操作
+- 初始化双向链表头节点。
+- 将 list 的 next 和 prev 指针均指向自身，形成自引用的空链表。
+- 当 list 为 NULL 时直接返回，不执行初始化操作。
 
 **前置条件**
 
-- list 指向的内存必须已分配且可写
+- list 指向的内存必须已分配且可写。
 
 **入参**
 
@@ -97,14 +97,14 @@ static INLINE__ void osal___list_add(struct osal_list_head *_new, struct osal_li
 
 **功能说明**
 
-- 在两个已知连续节点 prev 和 next 之间插入新节点 _new
-- 仅供内部链表操作使用，调用者需确保 prev 和 next 为连续节点
-- 当 _new、prev 或 next 为 NULL 时直接返回，不执行插入
+- 在两个已知连续节点 prev 和 next 之间插入新节点 _new。
+- 仅供内部链表操作使用，调用者需确保 prev 和 next 为连续节点。
+- 当 _new、prev 或 next 为 NULL 时直接返回，不执行插入。
 
 **前置条件**
 
-- 调用时序约束：调用者必须已知 prev 和 next 为链表中连续的两个节点
-- _new、prev、next 指向的内存必须已分配且可写
+- 调用时序约束：调用者必须已知 prev 和 next 为链表中连续的两个节点。
+- _new、prev、next 指向的内存必须已分配且可写。
 
 **入参**
 
@@ -128,14 +128,14 @@ static INLINE__ void osal_list_add(struct osal_list_head *cur, struct osal_list_
 
 **功能说明**
 
-- 在链表头部（head 之后）添加新节点 cur
-- 适用于实现栈结构（后进先出）
-- 将节点插入 head 与 head->next 之间
+- 在链表头部（head 之后）添加新节点 cur。
+- 适用于实现栈结构（后进先出）。
+- 将节点插入 head 与 head->next 之间。
 
 **前置条件**
 
-- head 必须已通过 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 初始化或通过 OSAL_LIST_HEAD 宏静态初始化
-- cur 指向的内存必须已分配且可写
+- head 必须已通过 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 初始化或通过 OSAL_LIST_HEAD 宏静态初始化。
+- cur 指向的内存必须已分配且可写。
 
 **入参**
 
@@ -163,14 +163,14 @@ static INLINE__ void osal_list_add_tail(struct osal_list_head *cur, struct osal_
 
 **功能说明**
 
-- 在链表尾部（head 之前）添加新节点 cur
-- 适用于实现队列结构（先进先出）
-- 将节点插入 head->prev 与 head 之间
+- 在链表尾部（head 之前）添加新节点 cur。
+- 适用于实现队列结构（先进先出）。
+- 将节点插入 head->prev 与 head 之间。
 
 **前置条件**
 
-- head 必须已通过 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 初始化或通过 OSAL_LIST_HEAD 宏静态初始化
-- cur 指向的内存必须已分配且可写
+- head 必须已通过 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 初始化或通过 OSAL_LIST_HEAD 宏静态初始化。
+- cur 指向的内存必须已分配且可写。
 
 **入参**
 
@@ -199,14 +199,14 @@ static INLINE__ void osal___list_del(struct osal_list_head *prev, struct osal_li
 
 **功能说明**
 
-- 通过修改 prev 和 next 指针来删除它们之间的节点
-- 仅供内部链表操作使用，调用者需确保 prev 和 next 为被删节点的前后节点
-- 当 prev 或 next 为 NULL 时直接返回，不执行删除
+- 通过修改 prev 和 next 指针来删除它们之间的节点。
+- 仅供内部链表操作使用，调用者需确保 prev 和 next 为被删节点的前后节点。
+- 当 prev 或 next 为 NULL 时直接返回，不执行删除。
 
 **前置条件**
 
-- 调用时序约束：调用者必须已知 prev 和 next 分别为待删除节点的前驱和后继节点
-- prev、next 指向的内存必须已分配且可写
+- 调用时序约束：调用者必须已知 prev 和 next 分别为待删除节点的前驱和后继节点。
+- prev、next 指向的内存必须已分配且可写。
 
 **入参**
 
@@ -229,14 +229,14 @@ static INLINE__ void osal___list_del_entry(struct osal_list_head *entry)
 
 **功能说明**
 
-- 删除链表节点 entry，修改其前后节点指针
-- 仅供内部链表操作使用
-- 当 entry 为 NULL 时直接返回，不执行删除
-- 删除后 entry 的 next/prev 指针处于未定义状态，不应再访问
+- 删除链表节点 entry，修改其前后节点指针。
+- 仅供内部链表操作使用。
+- 当 entry 为 NULL 时直接返回，不执行删除。
+- 删除后 entry 的 next/prev 指针处于未定义状态，不应再访问。
 
 **前置条件**
 
-- entry 必须在链表中且指向有效内存
+- entry 必须在链表中且指向有效内存。
 
 **入参**
 
@@ -258,14 +258,14 @@ static INLINE__ void osal_list_del(struct osal_list_head *entry)
 
 **功能说明**
 
-- 删除链表节点 entry
-- 删除后将 entry 的 next 指针置为 [OSAL_LIST_POISON1](#OSAL_LIST_POISON1)、prev 指针置为 [OSAL_LIST_POISON2](#OSAL_LIST_POISON2)，以捕获删除后误用问题
-- 当 entry 为 NULL 时直接返回，不执行删除
+- 删除链表节点 entry。
+- 删除后将 entry 的 next 指针置为 [OSAL_LIST_POISON1](#OSAL_LIST_POISON1)、prev 指针置为 [OSAL_LIST_POISON2](#OSAL_LIST_POISON2)，以捕获删除后误用问题。
+- 当 entry 为 NULL 时直接返回，不执行删除。
 
 **前置条件**
 
-- entry 必须在链表中且指向有效内存
-- 删除后禁止再通过该节点进行链表操作
+- entry 必须在链表中且指向有效内存。
+- 删除后禁止再通过该节点进行链表操作。
 
 **入参**
 
@@ -293,14 +293,14 @@ static INLINE__ void osal_list_replace(struct osal_list_head *old, struct osal_l
 
 **功能说明**
 
-- 用新节点 _new 替换链表中的旧节点 old
-- 替换后 _new 占据 old 原有的位置，old 的 next/prev 处于未定义状态
-- 若 old 为空链表头则会被覆盖
+- 用新节点 _new 替换链表中的旧节点 old。
+- 替换后 _new 占据 old 原有的位置，old 的 next/prev 处于未定义状态。
+- 若 old 为空链表头则会被覆盖。
 
 **前置条件**
 
-- old 必须在链表中且指向有效内存
-- _new 指向的内存必须已分配且可写
+- old 必须在链表中且指向有效内存。
+- _new 指向的内存必须已分配且可写。
 
 **入参**
 
@@ -323,13 +323,13 @@ static INLINE__ void osal_list_replace_init(struct osal_list_head *old, struct o
 
 **功能说明**
 
-- 用新节点 _new 替换链表中的旧节点 old
-- 替换后对 old 调用 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 重新初始化，使其成为空链表头
+- 用新节点 _new 替换链表中的旧节点 old。
+- 替换后对 old 调用 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 重新初始化，使其成为空链表头。
 
 **前置条件**
 
-- old 必须在链表中且指向有效内存
-- _new 指向的内存必须已分配且可写
+- old 必须在链表中且指向有效内存。
+- _new 指向的内存必须已分配且可写。
 
 **入参**
 
@@ -352,13 +352,13 @@ static INLINE__ void osal_list_del_init(struct osal_list_head *entry)
 
 **功能说明**
 
-- 删除链表节点 entry
-- 删除后对 entry 调用 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 重新初始化，使其成为自引用的空节点
-- 当 entry 为 NULL 时不执行操作
+- 删除链表节点 entry。
+- 删除后对 entry 调用 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 重新初始化，使其成为自引用的空节点。
+- 当 entry 为 NULL 时不执行操作。
 
 **前置条件**
 
-- entry 必须在链表中且指向有效内存
+- entry 必须在链表中且指向有效内存。
 
 **入参**
 
@@ -380,13 +380,13 @@ static INLINE__ void osal_list_move(struct osal_list_head *list, struct osal_lis
 
 **功能说明**
 
-- 将节点 list 从原链表中删除，并添加到目标链表 head 的头部
-- 删除 entry 后将其插入 head 之后
+- 将节点 list 从原链表中删除，并添加到目标链表 head 的头部。
+- 删除 entry 后将其插入 head 之后。
 
 **前置条件**
 
-- list 必须在某个链表中且指向有效内存
-- head 必须已初始化
+- list 必须在某个链表中且指向有效内存。
+- head 必须已初始化。
 
 **入参**
 
@@ -409,13 +409,13 @@ static INLINE__ void osal_list_move_tail(struct osal_list_head *list, struct osa
 
 **功能说明**
 
-- 将节点 list 从原链表中删除，并添加到目标链表 head 的尾部
-- 删除 entry 后将其插入 head 之前（尾部）
+- 将节点 list 从原链表中删除，并添加到目标链表 head 的尾部。
+- 删除 entry 后将其插入 head 之前（尾部）。
 
 **前置条件**
 
-- list 必须在某个链表中且指向有效内存
-- head 必须已初始化
+- list 必须在某个链表中且指向有效内存。
+- head 必须已初始化。
 
 **入参**
 
@@ -438,13 +438,13 @@ static INLINE__ int osal_list_is_last(const struct osal_list_head *list, const s
 
 **功能说明**
 
-- 判断节点 list 是否为链表 head 的最后一个节点
-- 当 list 或 head 为 NULL 时返回 -1
+- 判断节点 list 是否为链表 head 的最后一个节点。
+- 当 list 或 head 为 NULL 时返回 -1。
 
 **前置条件**
 
-- head 必须已初始化
-- list 必须在 head 所标识的链表中
+- head 必须已初始化。
+- list 必须在 head 所标识的链表中。
 
 **入参**
 
@@ -477,12 +477,12 @@ static INLINE__ int osal_list_empty(const struct osal_list_head *head)
 
 **功能说明**
 
-- 判断链表是否为空
-- 当 head 为 NULL 时返回 -1
+- 判断链表是否为空。
+- 当 head 为 NULL 时返回 -1。
 
 **前置条件**
 
-- head 必须已通过 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 初始化
+- head 必须已通过 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 初始化。
 
 **入参**
 
@@ -519,14 +519,14 @@ static INLINE__ int osal_list_empty_careful(const struct osal_list_head *head)
 
 **功能说明**
 
-- 判断链表是否为空且未被其他 CPU 修改
-- 检查 head->next 是否等于 head 且 head->next 是否等于 head->prev
-- 当 head 为 NULL 时返回 -1
+- 判断链表是否为空且未被其他 CPU 修改。
+- 检查 head->next 是否等于 head 且 head->next 是否等于 head->prev。
+- 当 head 为 NULL 时返回 -1。
 
 **前置条件**
 
-- head 必须已通过 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 初始化
-- 无同步保护下使用时，仅允许 list_del_init 操作
+- head 必须已通过 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 初始化。
+- 无同步保护下使用时，仅允许 list_del_init 操作。
 
 **入参**
 
@@ -558,12 +558,12 @@ static INLINE__ void osal_list_rotate_left(struct osal_list_head *head)
 
 **功能说明**
 
-- 将链表左旋一位，把第一个节点移动到链表尾部
-- 当链表为空时不执行操作
+- 将链表左旋一位，把第一个节点移动到链表尾部。
+- 当链表为空时不执行操作。
 
 **前置条件**
 
-- head 必须已通过 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 初始化
+- head 必须已通过 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 初始化。
 
 **入参**
 
@@ -585,12 +585,12 @@ static INLINE__ int osal_list_is_singular(const struct osal_list_head *head)
 
 **功能说明**
 
-- 判断链表是否仅包含一个节点
-- 当链表为空时返回 0，当链表有且仅有一个节点时返回 1
+- 判断链表是否仅包含一个节点。
+- 当链表为空时返回 0，当链表有且仅有一个节点时返回 1。
 
 **前置条件**
 
-- head 必须已通过 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 初始化
+- head 必须已通过 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 初始化。
 
 **入参**
 
@@ -621,13 +621,13 @@ static INLINE__ void osal___list_cut_position(struct osal_list_head *list, struc
 
 **功能说明**
 
-- 将 head 链表从头部到 entry（含）之间的节点移动到 list 链表
-- 仅供内部链表操作使用，调用者需确保 list 为空链表且 entry 在 head 链表中
+- 将 head 链表从头部到 entry（含）之间的节点移动到 list 链表。
+- 仅供内部链表操作使用，调用者需确保 list 为空链表且 entry 在 head 链表中。
 
 **前置条件**
 
-- 调用时序约束：list 必须为空链表或不需要保留数据的链表
-- entry 必须在 head 所标识的链表中
+- 调用时序约束：list 必须为空链表或不需要保留数据的链表。
+- entry 必须在 head 所标识的链表中。
 
 **入参**
 
@@ -651,15 +651,15 @@ static INLINE__ void osal_list_cut_position(struct osal_list_head *list, struct 
 
 **功能说明**
 
-- 将 head 链表从头部到 entry（含）之间的节点切出并移入 list 链表
-- 当 head 为空链表时不执行操作
-- 当 head 仅含一个节点且 entry 既不是首节点也不是 head 时不执行操作
-- 当 entry 等于 head 时仅将 list 初始化为空链表
+- 将 head 链表从头部到 entry（含）之间的节点切出并移入 list 链表。
+- 当 head 为空链表时不执行操作。
+- 当 head 仅含一个节点且 entry 既不是首节点也不是 head 时不执行操作。
+- 当 entry 等于 head 时仅将 list 初始化为空链表。
 
 **前置条件**
 
-- list 必须为空链表或不需要保留数据的链表
-- entry 必须在 head 所标识的链表中
+- list 必须为空链表或不需要保留数据的链表。
+- entry 必须在 head 所标识的链表中。
 
 **入参**
 
@@ -683,13 +683,13 @@ static INLINE__ void osal___list_splice(const struct osal_list_head *list, struc
 
 **功能说明**
 
-- 将 list 链表的所有节点插入到 prev 与 next 之间
-- 仅供内部链表操作使用，调用者需确保 list 不为空且 prev/next 连续
+- 将 list 链表的所有节点插入到 prev 与 next 之间。
+- 仅供内部链表操作使用，调用者需确保 list 不为空且 prev/next 连续。
 
 **前置条件**
 
-- 调用时序约束：list 必须不为空，prev 和 next 必须为连续节点
-- list 指向的链表会被直接修改
+- 调用时序约束：list 必须不为空，prev 和 next 必须为连续节点。
+- list 指向的链表会被直接修改。
 
 **入参**
 
@@ -713,14 +713,14 @@ static INLINE__ void osal_list_splice(const struct osal_list_head *list, struct 
 
 **功能说明**
 
-- 将 list 链表的所有节点拼接到 head 链表的头部（head 之后）
-- 当 list 为空链表时不执行操作
-- 拼接后 list 链表头处于未定义状态，不应再直接使用
+- 将 list 链表的所有节点拼接到 head 链表的头部（head 之后）。
+- 当 list 为空链表时不执行操作。
+- 拼接后 list 链表头处于未定义状态，不应再直接使用。
 
 **前置条件**
 
-- head 必须已初始化
-- list 必须已初始化
+- head 必须已初始化。
+- list 必须已初始化。
 
 **入参**
 
@@ -743,14 +743,14 @@ static INLINE__ void osal_list_splice_tail(struct osal_list_head *list, struct o
 
 **功能说明**
 
-- 将 list 链表的所有节点拼接到 head 链表的尾部（head 之前）
-- 当 list 为空链表时不执行操作
-- 拼接后 list 链表头处于未定义状态，不应再直接使用
+- 将 list 链表的所有节点拼接到 head 链表的尾部（head 之前）。
+- 当 list 为空链表时不执行操作。
+- 拼接后 list 链表头处于未定义状态，不应再直接使用。
 
 **前置条件**
 
-- head 必须已初始化
-- list 必须已初始化
+- head 必须已初始化。
+- list 必须已初始化。
 
 **入参**
 
@@ -773,14 +773,14 @@ static INLINE__ void osal_list_splice_init(struct osal_list_head *list, struct o
 
 **功能说明**
 
-- 将 list 链表的所有节点拼接到 head 链表的头部（head 之后）
-- 拼接后对 list 调用 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 重新初始化为空链表
-- 当 list 为空链表时不执行操作
+- 将 list 链表的所有节点拼接到 head 链表的头部（head 之后）。
+- 拼接后对 list 调用 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 重新初始化为空链表。
+- 当 list 为空链表时不执行操作。
 
 **前置条件**
 
-- head 必须已初始化
-- list 必须已初始化
+- head 必须已初始化。
+- list 必须已初始化。
 
 **入参**
 
@@ -803,14 +803,14 @@ static INLINE__ void osal_list_splice_tail_init(struct osal_list_head *list, str
 
 **功能说明**
 
-- 将 list 链表的所有节点拼接到 head 链表的尾部（head 之前）
-- 拼接后对 list 调用 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 重新初始化为空链表
-- 当 list 为空链表时不执行操作
+- 将 list 链表的所有节点拼接到 head 链表的尾部（head 之前）。
+- 拼接后对 list 调用 [OSAL_INIT_LIST_HEAD](#OSAL_INIT_LIST_HEAD) 重新初始化为空链表。
+- 当 list 为空链表时不执行操作。
 
 **前置条件**
 
-- head 必须已初始化
-- list 必须已初始化
+- head 必须已初始化。
+- list 必须已初始化。
 
 **入参**
 
@@ -833,12 +833,12 @@ static INLINE__ void INIT_OSAL_HLIST_NODE(struct osal_hlist_node *h)
 
 **功能说明**
 
-- 初始化哈希链表节点 h
-- 将 h 的 next 指针和 pprev 指针均置为 NULL
+- 初始化哈希链表节点 h。
+- 将 h 的 next 指针和 pprev 指针均置为 NULL。
 
 **前置条件**
 
-- h 指向的内存必须已分配且可写
+- h 指向的内存必须已分配且可写。
 
 **入参**
 
@@ -860,12 +860,12 @@ static INLINE__ int osal_hlist_unhashed(const struct osal_hlist_node *h)
 
 **功能说明**
 
-- 判断哈希链表节点 h 是否未被挂载到任何哈希链表中
-- 通过检查 h->pprev 是否为 NULL 来判断
+- 判断哈希链表节点 h 是否未被挂载到任何哈希链表中。
+- 通过检查 h->pprev 是否为 NULL 来判断。
 
 **前置条件**
 
-- h 必须指向有效的内存地址，禁止为 NULL
+- h 必须指向有效的内存地址，禁止为 NULL。
 
 **入参**
 
@@ -896,12 +896,12 @@ static INLINE__ int osal_hlist_empty(const struct osal_hlist_head *h)
 
 **功能说明**
 
-- 判断哈希链表是否为空
-- 通过检查 h->first 是否为 NULL 来判断
+- 判断哈希链表是否为空。
+- 通过检查 h->first 是否为 NULL 来判断。
 
 **前置条件**
 
-- h 必须指向有效的内存地址，禁止为 NULL
+- h 必须指向有效的内存地址，禁止为 NULL。
 
 **入参**
 
@@ -932,13 +932,13 @@ static INLINE__ void osal___hlist_del(struct osal_hlist_node *n)
 
 **功能说明**
 
-- 删除哈希链表节点 n，通过修改 pprev 和 next 指针完成
-- 仅供内部链表操作使用
-- 当 n->next 不为 NULL 时同步更新后继节点的 pprev 指针
+- 删除哈希链表节点 n，通过修改 pprev 和 next 指针完成。
+- 仅供内部链表操作使用。
+- 当 n->next 不为 NULL 时同步更新后继节点的 pprev 指针。
 
 **前置条件**
 
-- n 必须在哈希链表中且 pprev 不为 NULL
+- n 必须在哈希链表中且 pprev 不为 NULL。
 
 **入参**
 
@@ -960,13 +960,13 @@ static INLINE__ void osal_hlist_del(struct osal_hlist_node *n)
 
 **功能说明**
 
-- 删除哈希链表节点 n
-- 删除后将 n 的 next 指针置为 [OSAL_LIST_POISON1](#OSAL_LIST_POISON1)、pprev 指针置为 [OSAL_LIST_POISON2](#OSAL_LIST_POISON2)，以捕获删除后误用问题
+- 删除哈希链表节点 n。
+- 删除后将 n 的 next 指针置为 [OSAL_LIST_POISON1](#OSAL_LIST_POISON1)、pprev 指针置为 [OSAL_LIST_POISON2](#OSAL_LIST_POISON2)，以捕获删除后误用问题。
 
 **前置条件**
 
-- n 必须在哈希链表中且 pprev 不为 NULL
-- 删除后禁止再通过该节点进行链表操作
+- n 必须在哈希链表中且 pprev 不为 NULL。
+- 删除后禁止再通过该节点进行链表操作。
 
 **入参**
 
@@ -988,13 +988,13 @@ static INLINE__ void osal_hlist_del_init(struct osal_hlist_node *n)
 
 **功能说明**
 
-- 删除哈希链表节点 n
-- 当 n 未被哈希时（pprev 为 NULL）不执行操作
-- 删除后调用 INIT_OSAL_HLIST_NODE 重新初始化 n，使其 next 和 pprev 均为 NULL
+- 删除哈希链表节点 n。
+- 当 n 未被哈希时（pprev 为 NULL）不执行操作。
+- 删除后调用 INIT_OSAL_HLIST_NODE 重新初始化 n，使其 next 和 pprev 均为 NULL。
 
 **前置条件**
 
-- n 必须指向有效的内存地址
+- n 必须指向有效的内存地址。
 
 **入参**
 
@@ -1016,13 +1016,13 @@ static INLINE__ void osal_hlist_add_head(struct osal_hlist_node *n, struct osal_
 
 **功能说明**
 
-- 将节点 n 添加到哈希链表 h 的头部
-- 更新原首节点的 pprev 指针和 h->first 指针
+- 将节点 n 添加到哈希链表 h 的头部。
+- 更新原首节点的 pprev 指针和 h->first 指针。
 
 **前置条件**
 
-- n 指向的内存必须已分配且可写
-- h 必须已初始化
+- n 指向的内存必须已分配且可写。
+- h 必须已初始化。
 
 **入参**
 
@@ -1045,13 +1045,13 @@ static INLINE__ void osal_hlist_add_before(struct osal_hlist_node *n, struct osa
 
 **功能说明**
 
-- 将节点 n 插入到哈希链表节点 next 之前
-- next 必须不为 NULL
+- 将节点 n 插入到哈希链表节点 next 之前。
+- next 必须不为 NULL。
 
 **前置条件**
 
-- next 必须在哈希链表中且 pprev 不为 NULL
-- n 指向的内存必须已分配且可写
+- next 必须在哈希链表中且 pprev 不为 NULL。
+- n 指向的内存必须已分配且可写。
 
 **入参**
 
@@ -1074,14 +1074,14 @@ static INLINE__ void osal_hlist_add_after(struct osal_hlist_node *n, struct osal
 
 **功能说明**
 
-- 将节点 next 插入到哈希链表节点 n 之后
-- 更新 n 的 next 指针和 next 的 pprev 指针
-- 当 n 原有后继节点存在时同步更新其 pprev 指针
+- 将节点 next 插入到哈希链表节点 n 之后。
+- 更新 n 的 next 指针和 next 的 pprev 指针。
+- 当 n 原有后继节点存在时同步更新其 pprev 指针。
 
 **前置条件**
 
-- n 必须在哈希链表中
-- next 指向的内存必须已分配且可写
+- n 必须在哈希链表中。
+- next 指向的内存必须已分配且可写。
 
 **入参**
 
@@ -1104,12 +1104,12 @@ static INLINE__ void osal_hlist_add_fake(struct osal_hlist_node *n)
 
 **功能说明**
 
-- 将节点 n 的 pprev 指向自身的 next 成员地址，使其看起来已在哈希链表中
-- 伪添加后 osal_hlist_del 可正常工作
+- 将节点 n 的 pprev 指向自身的 next 成员地址，使其看起来已在哈希链表中。
+- 伪添加后 osal_hlist_del 可正常工作。
 
 **前置条件**
 
-- n 指向的内存必须已分配且可写
+- n 指向的内存必须已分配且可写。
 
 **入参**
 
@@ -1131,13 +1131,13 @@ static INLINE__ void osal_hlist_move_list(struct osal_hlist_head *old, struct os
 
 **功能说明**
 
-- 将哈希链表从 old 头移动到 cur 头
-- 更新首节点的 pprev 指针指向 cur->first
-- 移动后 old->first 置为 NULL
+- 将哈希链表从 old 头移动到 cur 头。
+- 更新首节点的 pprev 指针指向 cur->first。
+- 移动后 old->first 置为 NULL。
 
 **前置条件**
 
-- old 和 cur 指向的内存必须已分配且可写
+- old 和 cur 指向的内存必须已分配且可写。
 
 **入参**
 

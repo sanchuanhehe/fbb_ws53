@@ -56,20 +56,20 @@ void *osal_kmalloc(unsigned long size, unsigned int osal_gfp_flag)
 
 **功能说明**
 
-- 分配指定大小的动态内存块
-- 在 linux 系统下通过 osal_gfp_flag 指定内存分配类型
-- 分配失败时返回 NULL
+- 分配指定大小的动态内存块。
+- 在 linux 系统下通过 osal_gfp_flag 指定内存分配类型。
+- 分配失败时返回 NULL。
 
 **前置条件**
 
-- 上下文限制：在 linux 系统下，使用 OSAL_GFP_KERNEL 时不得在中断上下文调用
+- 上下文限制：在 linux 系统下，使用 OSAL_GFP_KERNEL 时不得在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | size | unsigned long | 需要分配的内存字节数 | > 0 |
-| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)(0x2) / [OSAL_GFP_DMA](#OSAL_GFP_DMA)(0x4) / [OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)(0x8)，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)(0x1) |
+| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)：2 / [OSAL_GFP_DMA](#OSAL_GFP_DMA)：4 / [OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)：8，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)：1 |
 
 **返回值**
 
@@ -99,20 +99,20 @@ void *osal_kzalloc(unsigned long size, unsigned int osal_gfp_flag)
 
 **功能说明**
 
-- 分配指定大小的动态内存块并将内存内容清零
-- 在 linux 系统下通过 osal_gfp_flag 指定内存分配类型
-- 分配失败时返回 NULL
+- 分配指定大小的动态内存块并将内存内容清零。
+- 在 linux 系统下通过 osal_gfp_flag 指定内存分配类型。
+- 分配失败时返回 NULL。
 
 **前置条件**
 
-- 上下文限制：在 linux 系统下，使用 OSAL_GFP_KERNEL 时不得在中断上下文调用
+- 上下文限制：在 linux 系统下，使用 OSAL_GFP_KERNEL 时不得在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | size | unsigned long | 需要分配的内存字节数 | > 0 |
-| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)(0x2) / [OSAL_GFP_DMA](#OSAL_GFP_DMA)(0x4) / [OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)(0x8)，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)(0x1) |
+| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)：2 / [OSAL_GFP_DMA](#OSAL_GFP_DMA)：4 / [OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)：8，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)：1 |
 
 **返回值**
 
@@ -137,16 +137,16 @@ void *osal_kmalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 
 **功能说明**
 
-- 分配指定大小且起始地址按指定边界对齐的动态内存块
-- 在 linux 系统下通过 osal_gfp_flag 指定内存分配类型
-- 分配失败时返回 NULL
+- 分配指定大小且起始地址按指定边界对齐的动态内存块。
+- 在 linux 系统下通过 osal_gfp_flag 指定内存分配类型。
+- 分配失败时返回 NULL。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | size | unsigned int | 需要分配的内存字节数 | > 0 |
-| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)(0x2) / [OSAL_GFP_DMA](#OSAL_GFP_DMA)(0x4) / [OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)(0x8)，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)(0x1) |
+| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)：2 / [OSAL_GFP_DMA](#OSAL_GFP_DMA)：4 / [OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)：8，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)：1 |
 | boundary | unsigned int | 内存对齐边界（单位：字节） | 2 的幂，≥ 4 |
 
 **返回值**
@@ -172,16 +172,16 @@ void *osal_kzalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 
 **功能说明**
 
-- 分配指定大小且起始地址按指定边界对齐的动态内存块并将内存内容清零
-- 在 linux 系统下通过 osal_gfp_flag 指定内存分配类型
-- 分配失败时返回 NULL
+- 分配指定大小且起始地址按指定边界对齐的动态内存块并将内存内容清零。
+- 在 linux 系统下通过 osal_gfp_flag 指定内存分配类型。
+- 分配失败时返回 NULL。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | size | unsigned int | 需要分配的内存字节数 | > 0 |
-| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)(0x2) / [OSAL_GFP_DMA](#OSAL_GFP_DMA)(0x4) / [OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)(0x8)，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)(0x1) |
+| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)：2 / [OSAL_GFP_DMA](#OSAL_GFP_DMA)：4 / [OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)：8，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)：1 |
 | boundary | unsigned int | 内存对齐边界（单位：字节） | 2 的幂，≥ 4 |
 
 **返回值**
@@ -207,14 +207,14 @@ void osal_kfree(void *addr)
 
 **功能说明**
 
-- 释放由 osal_kmalloc、osal_kzalloc、osal_kmalloc_align 或 osal_kzalloc_align 分配的动态内存
-- 传入 NULL 指针时函数直接返回，不执行释放操作
-- 释放后更新模块内存使用记录
+- 释放由 osal_kmalloc、osal_kzalloc、osal_kmalloc_align 或 osal_kzalloc_align 分配的动态内存。
+- 传入 NULL 指针时函数直接返回，不执行释放操作。
+- 释放后更新模块内存使用记录。
 
 **前置条件**
 
-- 调用时序约束：addr 指向的内存必须由 osal_kmalloc、osal_kzalloc、osal_kmalloc_align 或 osal_kzalloc_align 分配
-- 上下文限制：禁止对同一内存块重复释放
+- 调用时序约束：addr 指向的内存必须由 osal_kmalloc、osal_kzalloc、osal_kmalloc_align 或 osal_kzalloc_align 分配。
+- 上下文限制：禁止对同一内存块重复释放。
 
 **入参**
 
@@ -240,9 +240,9 @@ void *osal_vmalloc(unsigned long size)
 
 **功能说明**
 
-- 分配虚拟地址连续的内存空间
-- 适用于需要大块连续虚拟内存的场景
-- 分配失败时返回 NULL
+- 分配虚拟地址连续的内存空间。
+- 适用于需要大块连续虚拟内存的场景。
+- 分配失败时返回 NULL。
 
 **入参**
 
@@ -277,9 +277,9 @@ void *osal_vzalloc(unsigned long size)
 
 **功能说明**
 
-- 分配虚拟地址连续的内存空间并将内存内容清零
-- 适用于需要大块连续虚拟内存且要求初始化为零的场景
-- 分配失败时返回 NULL
+- 分配虚拟地址连续的内存空间并将内存内容清零。
+- 适用于需要大块连续虚拟内存且要求初始化为零的场景。
+- 分配失败时返回 NULL。
 
 **入参**
 
@@ -310,13 +310,13 @@ void osal_vfree(void *addr)
 
 **功能说明**
 
-- 释放由 osal_vmalloc 或 osal_vzalloc 分配的虚拟内存
-- 传入 NULL 指针时函数直接返回，不执行释放操作
+- 释放由 osal_vmalloc 或 osal_vzalloc 分配的虚拟内存。
+- 传入 NULL 指针时函数直接返回，不执行释放操作。
 
 **前置条件**
 
-- 调用时序约束：addr 指向的内存必须由 osal_vmalloc 或 osal_vzalloc 分配
-- 上下文限制：禁止对同一内存块重复释放
+- 调用时序约束：addr 指向的内存必须由 osal_vmalloc 或 osal_vzalloc 分配。
+- 上下文限制：禁止对同一内存块重复释放。
 
 **入参**
 
@@ -342,13 +342,13 @@ int osal_pool_mem_init(void *pool, unsigned int size)
 
 **功能说明**
 
-- 初始化指定内存池的双向链表动态内存
-- 在 LiteOS 下仅在 LOSCFG_MEM_MUL_MODULE 宏定义时可用
-- 在 FreeRTOS 下仅在 XLTCFG_SUPPORT_MEMMNG 宏定义时可用
+- 初始化指定内存池的双向链表动态内存。
+- 在 LiteOS 下仅在 LOSCFG_MEM_MUL_MODULE 宏定义时可用。
+- 在 FreeRTOS 下仅在 XLTCFG_SUPPORT_MEMMNG 宏定义时可用。
 
 **前置条件**
 
-- 调用时序约束：在使用内存池分配接口之前必须先调用本接口初始化内存池
+- 调用时序约束：在使用内存池分配接口之前必须先调用本接口初始化内存池。
 
 **入参**
 
@@ -363,8 +363,8 @@ int osal_pool_mem_init(void *pool, unsigned int size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS:0 | 初始化成功 | 内存池初始化成功 |
-| OSAL_FAILURE:-1 | 初始化失败 | 内存池初始化失败 |
+| OSAL_SUCCESS：0 | 初始化成功 | 内存池初始化成功 |
+| OSAL_FAILURE：-1 | 初始化失败 | 内存池初始化失败 |
 
 ### osal_pool_mem_alloc <a id="osal_pool_mem_alloc"></a>
 
@@ -380,13 +380,13 @@ void *osal_pool_mem_alloc(void *pool, unsigned int size)
 
 **功能说明**
 
-- 从指定内存池分配指定大小的动态内存块
-- 分配后更新模块内存使用记录
-- 在 LiteOS 下仅在 LOSCFG_MEM_MUL_MODULE 宏定义时可用
+- 从指定内存池分配指定大小的动态内存块。
+- 分配后更新模块内存使用记录。
+- 在 LiteOS 下仅在 LOSCFG_MEM_MUL_MODULE 宏定义时可用。
 
 **前置条件**
 
-- 调用时序约束：pool 必须已通过 osal_pool_mem_init 成功初始化
+- 调用时序约束：pool 必须已通过 osal_pool_mem_init 成功初始化。
 
 **入参**
 
@@ -418,13 +418,13 @@ void *osal_pool_mem_alloc_align(void *pool, unsigned int size, unsigned int boun
 
 **功能说明**
 
-- 从指定内存池分配指定大小且起始地址按指定边界对齐的动态内存块
-- 分配后更新模块内存使用记录
-- 在 LiteOS 下仅在 LOSCFG_MEM_MUL_MODULE 宏定义时可用
+- 从指定内存池分配指定大小且起始地址按指定边界对齐的动态内存块。
+- 分配后更新模块内存使用记录。
+- 在 LiteOS 下仅在 LOSCFG_MEM_MUL_MODULE 宏定义时可用。
 
 **前置条件**
 
-- 调用时序约束：pool 必须已通过 osal_pool_mem_init 成功初始化
+- 调用时序约束：pool 必须已通过 osal_pool_mem_init 成功初始化。
 
 **入参**
 
@@ -457,12 +457,12 @@ void osal_pool_mem_free(void *pool, const void *addr)
 
 **功能说明**
 
-- 从指定内存池释放已分配的动态内存
-- 在 LiteOS 下仅在 LOSCFG_MEM_MUL_MODULE 宏定义时可用
+- 从指定内存池释放已分配的动态内存。
+- 在 LiteOS 下仅在 LOSCFG_MEM_MUL_MODULE 宏定义时可用。
 
 **前置条件**
 
-- 调用时序约束：pool 必须已通过 osal_pool_mem_init 成功初始化
+- 调用时序约束：pool 必须已通过 osal_pool_mem_init 成功初始化。
 
 **入参**
 
@@ -485,14 +485,14 @@ int osal_pool_mem_deinit(void *pool)
 
 **功能说明**
 
-- 去初始化指定内存池的双向链表动态内存
-- 在 LiteOS 下仅在 LOSCFG_MEM_MUL_POOL 宏定义时可用
-- 在 FreeRTOS 下仅在 XLTCFG_SUPPORT_MEMMNG 和 XLTCFG_MEM_MUL_POOL 宏定义时可用
+- 去初始化指定内存池的双向链表动态内存。
+- 在 LiteOS 下仅在 LOSCFG_MEM_MUL_POOL 宏定义时可用。
+- 在 FreeRTOS 下仅在 XLTCFG_SUPPORT_MEMMNG 和 XLTCFG_MEM_MUL_POOL 宏定义时可用。
 
 **前置条件**
 
-- 调用时序约束：pool 必须已通过 osal_pool_mem_init 成功初始化
-- 上下文限制：须确保该内存池中所有已分配内存已释放
+- 调用时序约束：pool 必须已通过 osal_pool_mem_init 成功初始化。
+- 上下文限制：须确保该内存池中所有已分配内存已释放。
 
 **入参**
 
@@ -506,8 +506,8 @@ int osal_pool_mem_deinit(void *pool)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| OSAL_SUCCESS:0 | 去初始化成功 | 内存池去初始化成功 |
-| OSAL_FAILURE:-1 | 去初始化失败 | 内存池去初始化失败 |
+| OSAL_SUCCESS：0 | 去初始化成功 | 内存池去初始化成功 |
+| OSAL_FAILURE：-1 | 去初始化失败 | 内存池去初始化失败 |
 
 ### osal_blockmem_get_status <a id="osal_blockmem_get_status"></a>
 
@@ -523,8 +523,8 @@ osal_blockmem_status osal_blockmem_get_status(unsigned long phyaddr, unsigned in
 
 **功能说明**
 
-- 获取预留内存块的状态
-- 检查指定物理地址和大小的内存块是否为有效的预留内存
+- 获取预留内存块的状态。
+- 检查指定物理地址和大小的内存块是否为有效的预留内存。
 
 **入参**
 
@@ -539,9 +539,9 @@ osal_blockmem_status osal_blockmem_get_status(unsigned long phyaddr, unsigned in
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [OSAL_BLOCKMEM_VALID](#enum_osal_blockmem_status):0 | 内存块有效 | 所有页面均为预留内存 |
-| [OSAL_BLOCKMEM_INVALID_PHYADDR](#enum_osal_blockmem_status):1 | 物理地址无效 | 无有效预留页面 |
-| [OSAL_BLOCKMEM_INVALID_SIZE](#enum_osal_blockmem_status):2 | 大小无效 | 部分页面为预留内存，大小不匹配 |
+| [OSAL_BLOCKMEM_VALID](#enum_osal_blockmem_status)：0 | 内存块有效 | 所有页面均为预留内存 |
+| [OSAL_BLOCKMEM_INVALID_PHYADDR](#enum_osal_blockmem_status)：1 | 物理地址无效 | 无有效预留页面 |
+| [OSAL_BLOCKMEM_INVALID_SIZE](#enum_osal_blockmem_status)：2 | 大小无效 | 部分页面为预留内存，大小不匹配 |
 
 ### osal_ioremap <a id="osal_ioremap"></a>
 
@@ -557,9 +557,9 @@ void *osal_ioremap(unsigned long phys_addr, unsigned long size)
 
 **功能说明**
 
-- 将总线地址映射为设备内存类型的 CPU 虚拟地址
-- 映射的内存类型为设备内存，不使用缓存
-- 映射失败时返回 NULL
+- 将总线地址映射为设备内存类型的 CPU 虚拟地址。
+- 映射的内存类型为设备内存，不使用缓存。
+- 映射失败时返回 NULL。
 
 **入参**
 
@@ -591,13 +591,13 @@ void *osal_ioremap_nocache(unsigned long phys_addr, unsigned long size)
 
 **功能说明**
 
-- 将总线地址映射为不可缓存的 CPU 虚拟地址
-- 功能与 osal_ioremap 相同，保留此接口以兼容已有驱动
-- 映射失败时返回 NULL
+- 将总线地址映射为不可缓存的 CPU 虚拟地址。
+- 功能与 osal_ioremap 相同，保留此接口以兼容已有驱动。
+- 映射失败时返回 NULL。
 
 **前置条件**
 
-- 依赖关系：映射得到的虚拟地址须在不再使用时通过 osal_iounmap 释放
+- 依赖关系：映射得到的虚拟地址须在不再使用时通过 osal_iounmap 释放。
 
 **入参**
 
@@ -629,9 +629,9 @@ void *osal_ioremap_cached(unsigned long phys_addr, unsigned long size)
 
 **功能说明**
 
-- 将总线地址映射为可缓存的 CPU 虚拟地址
-- 映射的内存类型为普通内存，使用缓存，可加速内存访问
-- 映射失败时返回 NULL
+- 将总线地址映射为可缓存的 CPU 虚拟地址。
+- 映射的内存类型为普通内存，使用缓存，可加速内存访问。
+- 映射失败时返回 NULL。
 
 **入参**
 
@@ -663,13 +663,13 @@ void osal_iounmap(void *addr, unsigned long size)
 
 **功能说明**
 
-- 释放由 ioremap 系列接口映射的虚拟地址
-- 解除物理地址到虚拟地址的映射关系
+- 释放由 ioremap 系列接口映射的虚拟地址。
+- 解除物理地址到虚拟地址的映射关系。
 
 **前置条件**
 
-- 调用时序约束：addr 必须由 osal_ioremap、osal_ioremap_nocache、osal_ioremap_cached 或 osal_ioremap_wc 映射获得
-- 上下文限制：同一虚拟地址指针只能执行一次 unmapping
+- 调用时序约束：addr 必须由 osal_ioremap、osal_ioremap_nocache、osal_ioremap_cached 或 osal_ioremap_wc 映射获得。
+- 上下文限制：同一虚拟地址指针只能执行一次 unmapping。
 
 **入参**
 
@@ -692,13 +692,13 @@ void *osal_ioremap_wc(unsigned long phys_addr, unsigned long size)
 
 **功能说明**
 
-- 将总线地址映射为写合并模式的 CPU 虚拟地址
-- 写合并模式可提高设备内存的写入性能
-- 映射失败时返回 NULL
+- 将总线地址映射为写合并模式的 CPU 虚拟地址。
+- 写合并模式可提高设备内存的写入性能。
+- 映射失败时返回 NULL。
 
 **前置条件**
 
-- 依赖关系：映射得到的虚拟地址须在不再使用时通过 osal_iounmap 释放
+- 依赖关系：映射得到的虚拟地址须在不再使用时通过 osal_iounmap 释放。
 
 **入参**
 
@@ -730,8 +730,8 @@ void *osal_phys_to_virt(unsigned long addr)
 
 **功能说明**
 
-- 将物理地址转换为虚拟地址
-- 转换结果为对应的内核虚拟地址
+- 将物理地址转换为虚拟地址。
+- 转换结果为对应的内核虚拟地址。
 
 **入参**
 
@@ -761,8 +761,8 @@ unsigned long osal_virt_to_phys(const void *virt_addr)
 
 **功能说明**
 
-- 将虚拟地址转换为物理地址
-- 转换结果为对应的物理地址
+- 将虚拟地址转换为物理地址。
+- 转换结果为对应的物理地址。
 
 **入参**
 
@@ -792,13 +792,13 @@ void *osal_blockmem_vmap(unsigned long phys_addr, unsigned long size)
 
 **功能说明**
 
-- 将物理地址映射到连续的内核虚拟地址空间
-- 仅支持 VM_MAP 与 PAGE_KERNEL 标志的组合映射
-- 映射失败时返回 NULL
+- 将物理地址映射到连续的内核虚拟地址空间。
+- 仅支持 VM_MAP 与 PAGE_KERNEL 标志的组合映射。
+- 映射失败时返回 NULL。
 
 **前置条件**
 
-- 上下文限制：不得在中断上下文中调用
+- 上下文限制：不得在中断上下文中调用。
 
 **入参**
 
@@ -830,13 +830,13 @@ void osal_blockmem_vunmap(const void *virt_addr)
 
 **功能说明**
 
-- 释放由 osal_blockmem_vmap 映射的虚拟地址空间
-- 传入 NULL 指针时打印错误日志并返回
+- 释放由 osal_blockmem_vmap 映射的虚拟地址空间。
+- 传入 NULL 指针时打印错误日志并返回。
 
 **前置条件**
 
-- 调用时序约束：virt_addr 必须由 osal_blockmem_vmap 映射获得
-- 上下文限制：不得在中断上下文中调用
+- 调用时序约束：virt_addr 必须由 osal_blockmem_vmap 映射获得。
+- 上下文限制：不得在中断上下文中调用。
 
 **入参**
 
@@ -858,8 +858,8 @@ void osal_blockmem_free(unsigned long phys_addr, unsigned long size)
 
 **功能说明**
 
-- 释放产品中已定义的预留内存
-- 逐页清除预留标记并释放页面
+- 释放产品中已定义的预留内存。
+- 逐页清除预留标记并释放页面。
 
 **入参**
 
@@ -882,9 +882,9 @@ unsigned long osal_copy_from_user(void *to, const void *from, unsigned long n)
 
 **功能说明**
 
-- 从用户空间拷贝数据到内核空间
-- 拷贝成功时返回 0
-- 拷贝失败时返回未拷贝的字节数
+- 从用户空间拷贝数据到内核空间。
+- 拷贝成功时返回 0。
+- 拷贝失败时返回未拷贝的字节数。
 
 **入参**
 
@@ -923,9 +923,9 @@ unsigned long osal_copy_to_user(void *to, const void *from, unsigned long n)
 
 **功能说明**
 
-- 从内核空间拷贝数据到用户空间
-- 拷贝成功时返回 0
-- 拷贝失败时返回未拷贝的字节数
+- 从内核空间拷贝数据到用户空间。
+- 拷贝成功时返回 0。
+- 拷贝失败时返回未拷贝的字节数。
 
 **入参**
 
@@ -958,15 +958,15 @@ int osal_access_ok(int type, const void *addr, unsigned long size)
 
 **功能说明**
 
-- 检查用户空间内存块是否可用
-- 检查指定地址和大小的用户空间内存是否具有指定的访问权限
-- 返回 1 表示可用，返回 0 表示不可用
+- 检查用户空间内存块是否可用。
+- 检查指定地址和大小的用户空间内存是否具有指定的访问权限。
+- 返回 1 表示可用，返回 0 表示不可用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| type | int | 访问类型 | [OSAL_VERIFY_READ](#OSAL_VERIFY_READ)(0) / [OSAL_VERIFY_WRITE](#OSAL_VERIFY_WRITE)(1) |
+| type | int | 访问类型 | [OSAL_VERIFY_READ](#OSAL_VERIFY_READ)：0 / [OSAL_VERIFY_WRITE](#OSAL_VERIFY_WRITE)：1 |
 | addr | const void * | 用户空间内存块起始地址 | 不为NULL |
 | size | unsigned long | 需要检查的内存块大小 | > 0 |
 

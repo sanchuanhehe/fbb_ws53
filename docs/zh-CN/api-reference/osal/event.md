@@ -34,14 +34,14 @@ int osal_event_init(osal_event *event_obj)
 
 **功能说明**
 
-- 初始化事件控制块，为事件控制块分配内存资源
-- 初始化底层事件对象，使其处于可操作状态
-- 初始化成功后可进行事件的写入、读取与清除操作
+- 初始化事件控制块，为事件控制块分配内存资源。
+- 初始化底层事件对象，使其处于可操作状态。
+- 初始化成功后可进行事件的写入、读取与清除操作。
 
 **前置条件**
 
-- 调用时序约束：event_obj 指向的内存必须已分配且 event_obj->event 为 NULL
-- 上下文限制：禁止在中断上下文中调用
+- 调用时序约束：event_obj 指向的内存必须已分配且 event_obj->event 为 NULL。
+- 上下文限制：禁止在中断上下文中调用。
 
 **入参**
 
@@ -55,7 +55,7 @@ int osal_event_init(osal_event *event_obj)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 事件控制块初始化成功 |
+| [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 事件控制块初始化成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 执行失败 | event_obj 为 NULL、event 成员非 NULL 或内存分配失败 |
 | Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
 
@@ -77,14 +77,14 @@ int osal_event_write(osal_event *event_obj, unsigned int mask)
 
 **功能说明**
 
-- 向事件控制块写入指定事件掩码
-- 写入后等待该事件的任务将被唤醒
-- 支持 bit 0 ~ bit 30 的事件位写入
+- 向事件控制块写入指定事件掩码。
+- 写入后等待该事件的任务将被唤醒。
+- 支持 bit 0 ~ bit 30 的事件位写入。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [osal_event_init](#osal_event_init) 成功返回后调用
-- 上下文限制：禁止在中断上下文中调用
+- 调用时序约束：当前接口必须在 [osal_event_init](#osal_event_init) 成功返回后调用。
+- 上下文限制：禁止在中断上下文中调用。
 
 **入参**
 
@@ -99,7 +99,7 @@ int osal_event_write(osal_event *event_obj, unsigned int mask)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 事件写入成功 |
+| [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 事件写入成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 执行失败 | event_obj 为 NULL 或 mask 使用了 bit 31 |
 | Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
 
@@ -121,14 +121,14 @@ int osal_event_read(osal_event *event_obj, unsigned int mask, unsigned int timeo
 
 **功能说明**
 
-- 读取事件控制块中指定掩码的事件，支持阻塞等待
-- 支持按 AND 模式（等待所有期望事件发生）或 OR 模式（等待任一期望事件发生）读取事件
-- 支持读取后立即清除已读取的事件标志
+- 读取事件控制块中指定掩码的事件，支持阻塞等待。
+- 支持按 AND 模式（等待所有期望事件发生）或 OR 模式（等待任一期望事件发生）读取事件。
+- 支持读取后立即清除已读取的事件标志。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [osal_event_init](#osal_event_init) 成功返回后调用
-- 上下文限制：禁止在中断上下文中调用；不推荐在软件定时器回调中调用
+- 调用时序约束：当前接口必须在 [osal_event_init](#osal_event_init) 成功返回后调用。
+- 上下文限制：禁止在中断上下文中调用；不推荐在软件定时器回调中调用。
 
 **入参**
 
@@ -168,14 +168,14 @@ int osal_event_clear(osal_event *event_obj, unsigned int mask)
 
 **功能说明**
 
-- 清除事件控制块中指定掩码的事件标志位
-- 清除后对应事件位被置为 0
-- 未在掩码中指定的事件位不受影响
+- 清除事件控制块中指定掩码的事件标志位。
+- 清除后对应事件位被置为 0。
+- 未在掩码中指定的事件位不受影响。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [osal_event_init](#osal_event_init) 成功返回后调用
-- 上下文限制：禁止在中断上下文中调用
+- 调用时序约束：当前接口必须在 [osal_event_init](#osal_event_init) 成功返回后调用。
+- 上下文限制：禁止在中断上下文中调用。
 
 **入参**
 
@@ -190,7 +190,7 @@ int osal_event_clear(osal_event *event_obj, unsigned int mask)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 事件清除成功 |
+| [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 事件清除成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 执行失败 | event_obj 为 NULL |
 | Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
 
@@ -212,14 +212,14 @@ int osal_event_destroy(osal_event *event_obj)
 
 **功能说明**
 
-- 销毁事件控制块，释放其占用的内存资源
-- 销毁后将 event 成员置为 NULL
-- 销毁后该事件控制块不可再被使用
+- 销毁事件控制块，释放其占用的内存资源。
+- 销毁后将 event 成员置为 NULL。
+- 销毁后该事件控制块不可再被使用。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [osal_event_init](#osal_event_init) 成功返回后调用，且 event_obj 应由 osal_event_init 初始化
-- 上下文限制：禁止在中断上下文中调用
+- 调用时序约束：当前接口必须在 [osal_event_init](#osal_event_init) 成功返回后调用，且 event_obj 应由 osal_event_init 初始化。
+- 上下文限制：禁止在中断上下文中调用。
 
 **入参**
 
@@ -233,7 +233,7 @@ int osal_event_destroy(osal_event *event_obj)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [OSAL_SUCCESS](#OSAL_SUCCESS):0 | 执行成功 | 事件控制块销毁成功 |
+| [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 事件控制块销毁成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 执行失败 | event_obj 为 NULL |
 | Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
 

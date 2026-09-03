@@ -34,20 +34,20 @@ void osal_proc_init(const char *name)
 
 **功能说明**
 
-- 在 /proc 目录下创建指定名称的目录
-- 作为后续 osal_create_proc_entry 创建 proc 文件的前置入口
-- 同一时刻仅允许存在一个由本接口创建的 proc 目录
+- 在 /proc 目录下创建指定名称的目录。
+- 作为后续 osal_create_proc_entry 创建 proc 文件的前置入口。
+- 同一时刻仅允许存在一个由本接口创建的 proc 目录。
 
 **前置条件**
 
-- 调用时序约束：当前接口应在调用 osal_create_proc_entry、osal_remove_proc_entry 之前调用
-- 调用限制：当前接口仅可调用一次，重复调用时不会再创建新目录
+- 调用时序约束：当前接口应在调用 osal_create_proc_entry、osal_remove_proc_entry 之前调用。
+- 调用限制：当前接口仅可调用一次，重复调用时不会再创建新目录。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| name | const char * | 待创建的 proc 目录名称 | 字符串长度 < [OSAL_PROC_NAME_LENGTH](#OSAL_PROC_NAME_LENGTH)(32) |
+| name | const char * | 待创建的 proc 目录名称 | 字符串长度 < [OSAL_PROC_NAME_LENGTH](#OSAL_PROC_NAME_LENGTH)：32 |
 
 **Kconfig配置**
 
@@ -69,14 +69,14 @@ void osal_proc_exit(const char *name)
 
 **功能说明**
 
-- 删除由 osal_proc_init 创建的 proc 目录及其下的所有文件
-- 与 osal_proc_init 配对使用，用于清理 proc 模块资源
-- 删除后 proc 目录及其文件不再可访问
+- 删除由 osal_proc_init 创建的 proc 目录及其下的所有文件。
+- 与 osal_proc_init 配对使用，用于清理 proc 模块资源。
+- 删除后 proc 目录及其文件不再可访问。
 
 **前置条件**
 
-- 调用时序约束：当前接口应在 osal_proc_init 成功执行后调用
-- 依赖关系：当前接口依赖 osal_proc_init 已创建 proc 目录
+- 调用时序约束：当前接口应在 osal_proc_init 成功执行后调用。
+- 依赖关系：当前接口依赖 osal_proc_init 已创建 proc 目录。
 
 **入参**
 
@@ -104,14 +104,14 @@ void osal_remove_proc_entry(const char *name, osal_proc_entry *parent)
 
 **功能说明**
 
-- 删除由 osal_create_proc_entry 创建的 proc 文件
-- 通过文件名定位并移除对应的 proc 条目
-- 与 osal_create_proc_entry 配对使用
+- 删除由 osal_create_proc_entry 创建的 proc 文件。
+- 通过文件名定位并移除对应的 proc 条目。
+- 与 osal_create_proc_entry 配对使用。
 
 **前置条件**
 
-- 调用时序约束：当前接口应在 osal_create_proc_entry 成功创建 proc 文件后调用
-- 依赖关系：当前接口依赖 osal_proc_init 已成功执行
+- 调用时序约束：当前接口应在 osal_create_proc_entry 成功创建 proc 文件后调用。
+- 依赖关系：当前接口依赖 osal_proc_init 已成功执行。
 
 **入参**
 
@@ -140,20 +140,20 @@ osal_proc_entry *osal_create_proc_entry(const char *name, osal_proc_entry *paren
 
 **功能说明**
 
-- 在 osal_proc_init 创建的 proc 目录下创建指定名称的 proc 文件
-- 返回 osal_proc_entry 指针，供调用方设置 read/write/open 回调与命令列表
-- 创建的 proc 文件可通过 osal_remove_proc_entry 删除
+- 在 osal_proc_init 创建的 proc 目录下创建指定名称的 proc 文件。
+- 返回 osal_proc_entry 指针，供调用方设置 read/write/open 回调与命令列表。
+- 创建的 proc 文件可通过 osal_remove_proc_entry 删除。
 
 **前置条件**
 
-- 调用时序约束：当前接口应在 osal_proc_init 成功执行后调用
-- 依赖关系：当前接口依赖 osal_proc_init 已创建 proc 目录
+- 调用时序约束：当前接口应在 osal_proc_init 成功执行后调用。
+- 依赖关系：当前接口依赖 osal_proc_init 已创建 proc 目录。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| name | const char * | 待创建的 proc 文件名称 | 字符串长度 < [OSAL_PROC_NAME_LENGTH](#OSAL_PROC_NAME_LENGTH)(32) |
+| name | const char * | 待创建的 proc 文件名称 | 字符串长度 < [OSAL_PROC_NAME_LENGTH](#OSAL_PROC_NAME_LENGTH)：32 |
 | parent | [osal_proc_entry](#osal_proc_entry) * | 保留参数，当前未使用 | 无约束（保留参数，当前未使用） |
 
 **返回值**
@@ -185,14 +185,14 @@ void osal_seq_printf(void *seqfile, const char *fmt, ...)
 
 **功能说明**
 
-- 在 proc 文件的 read 回调执行期间，向 seqfile 顺序写入格式化内容
-- 写入的内容作为 proc 文件的读取输出返回给用户空间
-- 支持可变参数格式化输出
+- 在 proc 文件的 read 回调执行期间，向 seqfile 顺序写入格式化内容。
+- 写入的内容作为 proc 文件的读取输出返回给用户空间。
+- 支持可变参数格式化输出。
 
 **前置条件**
 
-- 调用时序约束：当前接口应在 proc 文件的 read 回调执行期间调用，seqfile 取自回调入参 entry 的 seqfile 字段
-- 依赖关系：当前接口依赖 osal_create_proc_entry 已成功创建 proc 文件并设置了 read 回调
+- 调用时序约束：当前接口应在 proc 文件的 read 回调执行期间调用，seqfile 取自回调入参 entry 的 seqfile 字段。
+- 依赖关系：当前接口依赖 osal_create_proc_entry 已成功创建 proc 文件并设置了 read 回调。
 
 **入参**
 

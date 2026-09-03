@@ -1,6 +1,6 @@
 # cache
 
-cache 模块提供 DCache (Data Cache) 维护接口，作为 OSAL (OS Abstract Layer) 的组成部分，支持按内存区域执行 DCache 回写、失效与清理操作，覆盖 linux、liteos、seliteos 系统。
+cache 模块提供 DCache（Data Cache）维护接口，作为 OSAL（OS Abstract Layer）的组成部分，支持按内存区域执行 DCache 回写、失效与清理操作，覆盖 linux、liteos、seliteos 系统。
 
 **模块公共头文件**
 
@@ -32,13 +32,13 @@ void osal_dcache_region_wb(void *kvirt, unsigned long phys_addr, unsigned long s
 
 **功能说明**
 
-- 将指定内存区域的DCache数据写回主存（write-back）
-- 起始地址若未按CACHE_LINE_SIZE(32Bytes)对齐，将自动向下对齐到CACHE_LINE_SIZE边界
-- 当MMU (Memory Management Unit) 不存在时，需确保phys_addr有效，此时用户通过kvirt参数设置地址
+- 将指定内存区域的DCache数据写回主存（write-back）。
+- 起始地址若未按CACHE_LINE_SIZE(32Bytes)对齐，将自动向下对齐到CACHE_LINE_SIZE边界。
+- 当MMU（Memory Management Unit）不存在时，需确保phys_addr有效，此时用户通过kvirt参数设置地址。
 
 **前置条件**
 
-- 无MMU场景下，phys_addr参数必须为有效的物理地址，或通过kvirt传入有效地址
+- 无MMU场景下，phys_addr参数必须为有效的物理地址，或通过kvirt传入有效地址。
 
 **入参**
 
@@ -73,13 +73,13 @@ void osal_dcache_region_inv(void *addr, unsigned long size)
 
 **功能说明**
 
-- 使指定内存区域的DCache缓存行失效（invalidate）
-- 起始地址若未按CACHE_LINE_SIZE(32Bytes)对齐，将自动向下对齐到CACHE_LINE_SIZE边界
-- 用于DMA读取前使CPU缓存失效，确保后续读取来自主存而非缓存
+- 使指定内存区域的DCache缓存行失效（invalidate）。
+- 起始地址若未按CACHE_LINE_SIZE(32Bytes)对齐，将自动向下对齐到CACHE_LINE_SIZE边界。
+- 用于DMA读取前使CPU缓存失效，确保后续读取来自主存而非缓存。
 
 **前置条件**
 
-- addr指向的内存区域必须有效且可访问
+- addr指向的内存区域必须有效且可访问。
 
 **入参**
 
@@ -109,13 +109,13 @@ void osal_dcache_region_clean(void *addr, unsigned int size)
 
 **功能说明**
 
-- 将指定内存区域的DCache数据写回主存（clean）
-- 根据起始地址和大小清除DCache，将脏缓存行写回主存
-- 用于DMA写入前确保CPU已写入的数据已同步到主存
+- 将指定内存区域的DCache数据写回主存（clean）。
+- 根据起始地址和大小清除DCache，将脏缓存行写回主存。
+- 用于DMA写入前确保CPU已写入的数据已同步到主存。
 
 **前置条件**
 
-- addr指向的内存区域必须有效且可访问
+- addr指向的内存区域必须有效且可访问。
 
 **入参**
 
