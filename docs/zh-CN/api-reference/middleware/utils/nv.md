@@ -1,6 +1,6 @@
 # NV
 
-NV (Non-Volatile storage) 提供基于 key-value 的非易失性数据存储能力，支持按 key ID 写入、读取、备份与恢复 NV 数据项，可配置加密、永久、不可升级等属性，并支持 NV 键值变更通知回调。模块源自 `include/middleware/utils/nv.h`。
+NV（Non-Volatile storage）提供基于 key-value 的非易失性数据存储能力，支持按 key ID 写入、读取、备份与恢复 NV 数据项，可配置加密、永久、不可升级等属性，并支持 NV 键值变更通知回调。模块源自 `include/middleware/utils/nv.h`。
 
 **模块公共头文件**
 
@@ -40,12 +40,12 @@ void uapi_nv_init(void)
 
 **功能说明**
 
-- 初始化 NV 模块，为后续 NV 读写、备份、恢复等接口提供运行环境
+- 初始化 NV 模块，为后续 NV 读写、备份、恢复等接口提供运行环境。
 
 **前置条件**
 
-- 调用时序约束：必须在 NV 模块其它对外接口（如 `uapi_nv_write`、`uapi_nv_read`）之前调用
-- 依赖关系：依赖底层 flash 与 NV 直接控制初始化逻辑已就绪
+- 调用时序约束：必须在 NV 模块其它对外接口（如 `uapi_nv_write`、`uapi_nv_read`）之前调用。
+- 依赖关系：依赖底层 flash 与 NV 直接控制初始化逻辑已就绪。
 
 **参考案例**
 
@@ -65,21 +65,21 @@ errcode_t uapi_nv_write(uint16_t key, const uint8_t *kvalue, uint16_t kvalue_len
 
 **功能说明**
 
-- 写入 NV 数据项，使用默认属性 Normal，且不注册写入完成回调函数
-- 通过 key ID 索引关联待写入的 kvalue 数据
-- 写入完成后触发错误码上报（当 `CONFIG_ERRCODE_SUPPORT_REPORT` 开启时）
+- 写入 NV 数据项，使用默认属性 Normal，且不注册写入完成回调函数。
+- 通过 key ID 索引关联待写入的 kvalue 数据。
+- 写入完成后触发错误码上报（当 `CONFIG_ERRCODE_SUPPORT_REPORT` 开启时）。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用
-- 依赖关系：依赖 flash 存储介质可用，底层 NV 写入逻辑就绪
-- 上下文限制：禁止在中断上下文调用
+- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用。
+- 依赖关系：依赖 flash 存储介质可用，底层 NV 写入逻辑就绪。
+- 上下文限制：禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| key | uint16_t | 要写入的 NV 项的 key ID，用于索引 | KEY_ID_REGION0(0x0001, 0x1000) ~ KEY_ID_REGION15(0xF000, 0xFFFF) 区域内合法 key ID |
+| key | uint16_t | 要写入的 NV 项的 key ID，用于索引 | KEY_ID_REGION0(1, 0x1000) ~ KEY_ID_REGION15(0xF000, 0xFFFF) 区域内合法 key ID |
 | kvalue | const uint8_t * | 指向待写入 NV 项值的指针 | 不为NULL |
 | kvalue_length | uint16_t | 写入数据的长度，单位字节 | 大于 0，普通 NV 不超过 NV_NORMAL_KVALUE_MAX_LEN(4060)，加密 NV 不超过 NV_ENCRYPTED_KVALUE_MAX_LEN(4032) |
 
@@ -89,9 +89,9 @@ errcode_t uapi_nv_write(uint16_t key, const uint8_t *kvalue, uint16_t kvalue_len
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | NV 数据项写入成功 |
-| ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | kvalue 为 NULL 或 kvalue_length 为 0 |
-| ERRCODE_NV_ILLEGAL_OPERATION:0x80003088 | 非法操作 | 当前未支持加密但配置了加密属性 |
+| ERRCODE_SUCC：0 | 执行成功 | NV 数据项写入成功 |
+| ERRCODE_NV_INVALID_PARAMS：0x80003083 | 参数无效 | kvalue 为 NULL 或 kvalue_length 为 0 |
+| ERRCODE_NV_ILLEGAL_OPERATION：0x80003088 | 非法操作 | 当前未支持加密但配置了加密属性 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
@@ -119,21 +119,21 @@ errcode_t uapi_nv_write_with_attr(uint16_t key, const uint8_t *kvalue, uint16_t 
 
 **功能说明**
 
-- 写入 NV 数据项，并按业务需求配置 key 的存储属性
-- 支持注册写入完成回调函数，在 kvalue 写入 flash 后被调用
-- 加密属性与永久属性不可修改，永久属性 key 的 kvalue 不可修改
+- 写入 NV 数据项，并按业务需求配置 key 的存储属性。
+- 支持注册写入完成回调函数，在 kvalue 写入 flash 后被调用。
+- 加密属性与永久属性不可修改，永久属性 key 的 kvalue 不可修改。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用
-- 依赖关系：依赖 flash 存储介质可用，底层 NV 写入逻辑就绪
-- 上下文限制：禁止在中断上下文调用
+- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用。
+- 依赖关系：依赖 flash 存储介质可用，底层 NV 写入逻辑就绪。
+- 上下文限制：禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| key | uint16_t | 要写入的 NV 项的 key ID，用于索引 | KEY_ID_REGION0(0x0001, 0x1000) ~ KEY_ID_REGION15(0xF000, 0xFFFF) 区域内合法 key ID |
+| key | uint16_t | 要写入的 NV 项的 key ID，用于索引 | KEY_ID_REGION0(1, 0x1000) ~ KEY_ID_REGION15(0xF000, 0xFFFF) 区域内合法 key ID |
 | kvalue | const uint8_t * | 指向待写入 NV 项值的指针 | 不为NULL |
 | kvalue_length | uint16_t | 写入数据的长度，单位字节 | 大于 0，普通 NV 不超过 NV_NORMAL_KVALUE_MAX_LEN(4060)，加密 NV 不超过 NV_ENCRYPTED_KVALUE_MAX_LEN(4032) |
 | attr | [nv_key_attr_t](#struct_nv_key_attr_t) * | 指向 NV 项属性配置的指针，传入 NULL 表示使用默认属性 Normal | NULL 或合法属性结构指针 |
@@ -145,9 +145,9 @@ errcode_t uapi_nv_write_with_attr(uint16_t key, const uint8_t *kvalue, uint16_t 
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | NV 数据项写入成功 |
-| ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | kvalue 为 NULL 或 kvalue_length 为 0 |
-| ERRCODE_NV_ILLEGAL_OPERATION:0x80003088 | 非法操作 | 当前未支持加密但配置了加密属性 |
+| ERRCODE_SUCC：0 | 执行成功 | NV 数据项写入成功 |
+| ERRCODE_NV_INVALID_PARAMS：0x80003083 | 参数无效 | kvalue 为 NULL 或 kvalue_length 为 0 |
+| ERRCODE_NV_ILLEGAL_OPERATION：0x80003088 | 非法操作 | 当前未支持加密但配置了加密属性 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
@@ -174,21 +174,21 @@ errcode_t uapi_nv_read(uint16_t key, uint16_t kvalue_max_length, uint16_t *kvalu
 
 **功能说明**
 
-- 读取指定 key ID 对应的 NV 数据项
-- 默认情况下不获取 NV 属性值
-- 读取完成后触发错误码上报（当 `CONFIG_ERRCODE_SUPPORT_REPORT` 开启时）
+- 读取指定 key ID 对应的 NV 数据项。
+- 默认情况下不获取 NV 属性值。
+- 读取完成后触发错误码上报（当 `CONFIG_ERRCODE_SUPPORT_REPORT` 开启时）。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用
-- 依赖关系：依赖 flash 存储介质可用，目标 key ID 对应数据已写入
-- 上下文限制：禁止在中断上下文调用
+- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用。
+- 依赖关系：依赖 flash 存储介质可用，目标 key ID 对应数据已写入。
+- 上下文限制：禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| key | uint16_t | 要读取的 NV 项的 key ID，用于索引 | KEY_ID_REGION0(0x0001, 0x1000) ~ KEY_ID_REGION15(0xF000, 0xFFFF) 区域内合法 key ID |
+| key | uint16_t | 要读取的 NV 项的 key ID，用于索引 | KEY_ID_REGION0(1, 0x1000) ~ KEY_ID_REGION15(0xF000, 0xFFFF) 区域内合法 key ID |
 | kvalue_max_length | uint16_t | 允许拷贝到 kvalue 缓冲区的最大长度，单位字节 | 大于等于实际读取数据长度 |
 
 **出参**
@@ -204,8 +204,8 @@ errcode_t uapi_nv_read(uint16_t key, uint16_t kvalue_max_length, uint16_t *kvalu
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | NV 数据项读取成功 |
-| ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | kvalue_length、kvalue 或 attr 指针为 NULL |
+| ERRCODE_SUCC：0 | 执行成功 | NV 数据项读取成功 |
+| ERRCODE_NV_INVALID_PARAMS：0x80003083 | 参数无效 | kvalue_length、kvalue 或 attr 指针为 NULL |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
@@ -234,20 +234,20 @@ errcode_t uapi_nv_read_with_attr(uint16_t key, uint16_t kvalue_max_length, uint1
 
 **功能说明**
 
-- 读取指定 key ID 对应的 NV 数据项，并同时获取该 key 的属性值
-- 适用于需要读取 NV 数据并感知其加密、永久、不可升级等属性的场景
+- 读取指定 key ID 对应的 NV 数据项，并同时获取该 key 的属性值。
+- 适用于需要读取 NV 数据并感知其加密、永久、不可升级等属性的场景。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用
-- 依赖关系：依赖 flash 存储介质可用，目标 key ID 对应数据已写入
-- 上下文限制：禁止在中断上下文调用
+- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用。
+- 依赖关系：依赖 flash 存储介质可用，目标 key ID 对应数据已写入。
+- 上下文限制：禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| key | uint16_t | 要读取的 NV 项的 key ID，用于索引 | KEY_ID_REGION0(0x0001, 0x1000) ~ KEY_ID_REGION15(0xF000, 0xFFFF) 区域内合法 key ID |
+| key | uint16_t | 要读取的 NV 项的 key ID，用于索引 | KEY_ID_REGION0(1, 0x1000) ~ KEY_ID_REGION15(0xF000, 0xFFFF) 区域内合法 key ID |
 | kvalue_max_length | uint16_t | 允许拷贝到 kvalue 缓冲区的最大长度，单位字节 | 大于等于实际读取数据长度 |
 
 **出参**
@@ -264,8 +264,8 @@ errcode_t uapi_nv_read_with_attr(uint16_t key, uint16_t kvalue_max_length, uint1
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | NV 数据项读取成功 |
-| ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | kvalue_length、kvalue 或 attr 指针为 NULL |
+| ERRCODE_SUCC：0 | 执行成功 | NV 数据项读取成功 |
+| ERRCODE_NV_INVALID_PARAMS：0x80003083 | 参数无效 | kvalue_length、kvalue 或 attr 指针为 NULL |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
@@ -286,15 +286,15 @@ errcode_t uapi_nv_get_store_status(nv_store_status_t *status)
 
 **功能说明**
 
-- 查询当前核的 NV 存储空间使用状态
-- 输出总空间、已用空间、可回收空间、已损坏空间、单 NV 项最大可存储空间等指标
-- 适用于上层业务感知 NV 容量占用、决定是否触发回收或备份恢复
+- 查询当前核的 NV 存储空间使用状态。
+- 输出总空间、已用空间、可回收空间、已损坏空间、单 NV 项最大可存储空间等指标。
+- 适用于上层业务感知 NV 容量占用、决定是否触发回收或备份恢复。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用
-- 依赖关系：依赖 NV 模块已正确初始化并完成 NV 区域扫描
-- 上下文限制：禁止在中断上下文调用
+- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用。
+- 依赖关系：依赖 NV 模块已正确初始化并完成 NV 区域扫描。
+- 上下文限制：禁止在中断上下文调用。
 
 **出参**
 
@@ -308,8 +308,8 @@ errcode_t uapi_nv_get_store_status(nv_store_status_t *status)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | NV 存储状态查询成功 |
-| ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | status 指针为 NULL |
+| ERRCODE_SUCC：0 | 执行成功 | NV 存储状态查询成功 |
+| ERRCODE_NV_INVALID_PARAMS：0x80003083 | 参数无效 | status 指针为 NULL |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### uapi_nv_backup <a id="uapi_nv_backup"></a>
@@ -326,15 +326,15 @@ errcode_t uapi_nv_backup(const nv_backup_mode_t *backup_mode)
 
 **功能说明**
 
-- 按 NV 区域备份标志执行 NV 数据备份
-- 备份区域由 `nv_backup_mode_t` 中各 region 标志位决定，标志位为 true 表示对应区域需要备份
-- 仅在启用 NV 备份恢复特性时有效
+- 按 NV 区域备份标志执行 NV 数据备份。
+- 备份区域由 `nv_backup_mode_t` 中各 region 标志位决定，标志位为 true 表示对应区域需要备份。
+- 仅在启用 NV 备份恢复特性时有效。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用
-- 依赖关系：依赖 flash 存储介质可用，且 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 已开启
-- 上下文限制：禁止在中断上下文调用
+- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用。
+- 依赖关系：依赖 flash 存储介质可用，且 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 已开启。
+- 上下文限制：禁止在中断上下文调用。
 
 **入参**
 
@@ -348,9 +348,9 @@ errcode_t uapi_nv_backup(const nv_backup_mode_t *backup_mode)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | NV 备份成功 |
-| ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | backup_mode 指针为 NULL |
-| ERRCODE_NOT_SUPPORT:0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 特性 |
+| ERRCODE_SUCC：0 | 执行成功 | NV 备份成功 |
+| ERRCODE_NV_INVALID_PARAMS：0x80003083 | 参数无效 | backup_mode 指针为 NULL |
+| ERRCODE_NOT_SUPPORT：0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 特性 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
@@ -377,14 +377,14 @@ errcode_t uapi_nv_set_restore_mode_all(void)
 
 **功能说明**
 
-- 设置 NV 全量恢复标志，标记全部 NV 区域在下次启动时恢复出厂数据
-- 仅在启用 NV 备份恢复特性时有效
+- 设置 NV 全量恢复标志，标记全部 NV 区域在下次启动时恢复出厂数据。
+- 仅在启用 NV 备份恢复特性时有效。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用
-- 依赖关系：依赖 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 已开启
-- 上下文限制：禁止在中断上下文调用
+- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用。
+- 依赖关系：依赖 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 已开启。
+- 上下文限制：禁止在中断上下文调用。
 
 **返回值**
 
@@ -392,8 +392,8 @@ errcode_t uapi_nv_set_restore_mode_all(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 全量恢复标志设置成功 |
-| ERRCODE_NOT_SUPPORT:0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 特性 |
+| ERRCODE_SUCC：0 | 执行成功 | 全量恢复标志设置成功 |
+| ERRCODE_NOT_SUPPORT：0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 特性 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -416,15 +416,15 @@ errcode_t uapi_nv_set_restore_mode_partitial(const nv_restore_mode_t *restore_mo
 
 **功能说明**
 
-- 设置 NV 部分区域恢复标志，按 `nv_restore_mode_t` 中各 region 标志位决定恢复范围
-- 标志位为 true 表示对应区域在下次启动时恢复出厂数据
-- 仅在启用 NV 备份恢复特性时有效
+- 设置 NV 部分区域恢复标志，按 `nv_restore_mode_t` 中各 region 标志位决定恢复范围。
+- 标志位为 true 表示对应区域在下次启动时恢复出厂数据。
+- 仅在启用 NV 备份恢复特性时有效。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用
-- 依赖关系：依赖 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 已开启
-- 上下文限制：禁止在中断上下文调用
+- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用。
+- 依赖关系：依赖 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 已开启。
+- 上下文限制：禁止在中断上下文调用。
 
 **入参**
 
@@ -438,8 +438,8 @@ errcode_t uapi_nv_set_restore_mode_partitial(const nv_restore_mode_t *restore_mo
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 部分区域恢复标志设置成功 |
-| ERRCODE_NOT_SUPPORT:0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 特性 |
+| ERRCODE_SUCC：0 | 执行成功 | 部分区域恢复标志设置成功 |
+| ERRCODE_NOT_SUPPORT：0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_BACKUP_RESTORE` 特性 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -462,15 +462,15 @@ errcode_t uapi_nv_flush(void)
 
 **功能说明**
 
-- 将当前驻留在 RAM 中的 NV 数据同步刷写到 flash
-- 仅在 NV 启用异步存储特性时调用才有效
-- 适用于同步存储语义的业务场景
+- 将当前驻留在 RAM 中的 NV 数据同步刷写到 flash。
+- 仅在 NV 启用异步存储特性时调用才有效。
+- 适用于同步存储语义的业务场景。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用，且 NV 异步存储特性已开启
-- 依赖关系：依赖 `CONFIG_NV_SUPPORT_ASYNCHRONOUS_STORE` 已开启
-- 上下文限制：禁止在中断上下文调用
+- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用，且 NV 异步存储特性已开启。
+- 依赖关系：依赖 `CONFIG_NV_SUPPORT_ASYNCHRONOUS_STORE` 已开启。
+- 上下文限制：禁止在中断上下文调用。
 
 **返回值**
 
@@ -478,8 +478,8 @@ errcode_t uapi_nv_flush(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | RAM 中 NV 数据成功刷写到 flash |
-| ERRCODE_NOT_SUPPORT:0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_ASYNCHRONOUS_STORE` 特性 |
+| ERRCODE_SUCC：0 | 执行成功 | RAM 中 NV 数据成功刷写到 flash |
+| ERRCODE_NOT_SUPPORT：0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_ASYNCHRONOUS_STORE` 特性 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -502,15 +502,15 @@ errcode_t uapi_nv_register_change_notify_proc(uint16_t min_key, uint16_t max_key
 
 **功能说明**
 
-- 注册 NV 键值变更通知回调函数，绑定回调生效的 key ID 区间
-- 当指定区间内的 NV key 值发生变更时，触发已注册的回调
-- 仅在启用 NV 键值变更通知特性时生效
+- 注册 NV 键值变更通知回调函数，绑定回调生效的 key ID 区间。
+- 当指定区间内的 NV key 值发生变更时，触发已注册的回调。
+- 仅在启用 NV 键值变更通知特性时生效。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用
-- 依赖关系：依赖 `CONFIG_NV_SUPPORT_CHANGE_NOTIFY` 已开启，且系统已分配通知注册槽位
-- 上下文限制：禁止在中断上下文调用
+- 调用时序约束：必须在 `uapi_nv_init` 成功返回后调用。
+- 依赖关系：依赖 `CONFIG_NV_SUPPORT_CHANGE_NOTIFY` 已开启，且系统已分配通知注册槽位。
+- 上下文限制：禁止在中断上下文调用。
 
 **入参**
 
@@ -526,9 +526,9 @@ errcode_t uapi_nv_register_change_notify_proc(uint16_t min_key, uint16_t max_key
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 回调函数注册成功 |
-| ERRCODE_NV_INVALID_PARAMS:0x80003083 | 参数无效 | min_key 大于 max_key、func 为 NULL 或通知注册槽位数为 0 |
-| ERRCODE_NOT_SUPPORT:0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_CHANGE_NOTIFY` 特性 |
+| ERRCODE_SUCC：0 | 执行成功 | 回调函数注册成功 |
+| ERRCODE_NV_INVALID_PARAMS：0x80003083 | 参数无效 | min_key 大于 max_key、func 为 NULL 或通知注册槽位数为 0 |
+| ERRCODE_NOT_SUPPORT：0x80000002 | 不支持 | 未开启 `CONFIG_NV_SUPPORT_CHANGE_NOTIFY` 特性 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -590,7 +590,7 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| KEY_ID_REGION0 | 0 | key_id 取值区域 0：[0x0001, 0x1000) |
+| KEY_ID_REGION0 | 0 | key_id 取值区域 0：[1, 0x1000) |
 | KEY_ID_REGION1 | 1 | key_id 取值区域 1：[0x1000, 0x2000) |
 | KEY_ID_REGION2 | 2 | key_id 取值区域 2：[0x2000, 0x3000) |
 | KEY_ID_REGION3 | 3 | key_id 取值区域 3：[0x3000, 0x4000) |

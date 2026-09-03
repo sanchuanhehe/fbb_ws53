@@ -1,6 +1,6 @@
 # at
 
-at (Attention) 提供 Hayes AT 命令集解析与处理服务，支持注册自定义 AT 命令表、命令执行/设置/读取/测试/查询回调、异步命令结果上报、命令交互处理以及向默认或指定通道输出 AT 响应信息与 URC (Unsolicited Result Code) 主动上报。
+at (Attention) 提供 Hayes AT 命令集解析与处理服务，支持注册自定义 AT 命令表、命令执行/设置/读取/测试/查询回调、异步命令结果上报、命令交互处理以及向默认或指定通道输出 AT 响应信息与 URC（Unsolicited Result Code）主动上报。
 
 **模块公共头文件**
 
@@ -62,11 +62,11 @@ errcode_t uapi_at_cmd_table_register(const at_cmd_entry_t *table, uint32_t len,
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 命令表注册成功 |
-| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | table 为 NULL 或 len 为 0 |
-| ERRCODE_MALLOC:0x80000005 | 内存分配失败 | 分配命令链表节点失败 |
-| ERRCODE_AT_CMD_REPEAT:0x80003022 | 命令名重复 | 已注册存在同名命令（仅在开启 CONFIG_AT_SUPPORT_CMD_TABLE_CHECK 时检查） |
-| ERRCODE_AT_CMD_TABLE_PARA_ERROR:0x80003023 | 命令表参数错误 | 命令名超长或包含非大写字母字符、命令回调全部为空、set 回调存在但 syntax 为空、参数校验语法冲突（仅在开启 CONFIG_AT_SUPPORT_CMD_TABLE_CHECK 时检查） |
+| ERRCODE_SUCC：0 | 执行成功 | 命令表注册成功 |
+| ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | table 为 NULL 或 len 为 0 |
+| ERRCODE_MALLOC：0x80000005 | 内存分配失败 | 分配命令链表节点失败 |
+| ERRCODE_AT_CMD_REPEAT：0x80003022 | 命令名重复 | 已注册存在同名命令（仅在开启 CONFIG_AT_SUPPORT_CMD_TABLE_CHECK 时检查） |
+| ERRCODE_AT_CMD_TABLE_PARA_ERROR：0x80003023 | 命令表参数错误 | 命令名超长或包含非大写字母字符、命令回调全部为空、set 回调存在但 syntax 为空、参数校验语法冲突（仅在开启 CONFIG_AT_SUPPORT_CMD_TABLE_CHECK 时检查） |
 
 **参考案例**
 
@@ -116,8 +116,8 @@ errcode_t uapi_at_cmd_abort_register(at_abort_func_t func, void *arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 打断处理函数注册成功 |
-| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | func 为 NULL |
+| ERRCODE_SUCC：0 | 执行成功 | 打断处理函数注册成功 |
+| ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | func 为 NULL |
 
 **Kconfig配置**
 
@@ -161,8 +161,8 @@ errcode_t uapi_at_send_async_result(uint16_t err)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 结果消息成功写入消息队列 |
-| ERRCODE_AT_MSG_SEND_ERROR:0x80003024 | 消息发送失败 | 结果消息写入消息队列失败 |
+| ERRCODE_SUCC：0 | 执行成功 | 结果消息成功写入消息队列 |
+| ERRCODE_AT_MSG_SEND_ERROR：0x80003024 | 消息发送失败 | 结果消息写入消息队列失败 |
 
 **Kconfig配置**
 
@@ -206,8 +206,8 @@ errcode_t uapi_at_interactivity_func_register(at_interactivity_func_t func)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 交互处理函数注册成功 |
-| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | func 为 NULL |
+| ERRCODE_SUCC：0 | 执行成功 | 交互处理函数注册成功 |
+| ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | func 为 NULL |
 
 **Kconfig配置**
 
@@ -351,11 +351,11 @@ errcode_t uapi_at_urc_to_channel(at_channel_id_t channel_id, const char *msg, ui
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 上报消息成功加入队列并触发消息发送 |
-| ERRCODE_INVALID_PARAM:0x80000001 | 参数无效 | msg 为 NULL 或 msg_len 为 0 |
-| ERRCODE_MALLOC:0x80000005 | 内存分配失败 | 分配上报节点或消息字符串缓冲区失败 |
-| ERRCODE_AT_MSG_SEND_ERROR:0x80003024 | 消息发送失败 | 消息队列写入失败 |
-| ERRCODE_MEMCPY:0x80000004 | 内存拷贝失败 | 拷贝消息内容到缓冲区失败 |
+| ERRCODE_SUCC：0 | 执行成功 | 上报消息成功加入队列并触发消息发送 |
+| ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | msg 为 NULL 或 msg_len 为 0 |
+| ERRCODE_MALLOC：0x80000005 | 内存分配失败 | 分配上报节点或消息字符串缓冲区失败 |
+| ERRCODE_AT_MSG_SEND_ERROR：0x80003024 | 消息发送失败 | 消息队列写入失败 |
+| ERRCODE_MEMCPY：0x80000004 | 内存拷贝失败 | 拷贝消息内容到缓冲区失败 |
 
 **Kconfig配置**
 
@@ -805,10 +805,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| AT_SYNTAX_ATTR_NOT_SUPPORTED | 0x0001 | 标识该参数当前不支持 |
-| AT_SYNTAX_ATTR_OPTIONAL | 0x0002 | 标识该参数可缺省 |
-| AT_SYNTAX_ATTR_AT_MIN_VALUE | 0x0004 | 校验方式为最小值校验 |
-| AT_SYNTAX_ATTR_AT_MAX_VALUE | 0x0008 | 校验方式为最大值校验 |
+| AT_SYNTAX_ATTR_NOT_SUPPORTED | 1 | 标识该参数当前不支持 |
+| AT_SYNTAX_ATTR_OPTIONAL | 2 | 标识该参数可缺省 |
+| AT_SYNTAX_ATTR_AT_MIN_VALUE | 4 | 校验方式为最小值校验 |
+| AT_SYNTAX_ATTR_AT_MAX_VALUE | 8 | 校验方式为最大值校验 |
 | AT_SYNTAX_ATTR_LIST_VALUE | 0x0010 | 校验方式为白名单校验 |
 | AT_SYNTAX_ATTR_MAX_LENGTH | 0x0020 | 校验方式为长度校验 |
 | AT_SYNTAX_ATTR_ADD_LENGTH | 0x0040 | 为该参数新增长度字段 |

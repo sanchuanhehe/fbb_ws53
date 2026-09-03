@@ -1,6 +1,6 @@
 # Connection
 
-connection 提供 SLE (Star Flash Low Energy) 连接管理、设备发现与传输管理能力，覆盖连接/断开、配对、连接参数更新、PHY/MCS 设置、设备公开（announce）、扫描（seek）以及传输繁忙回调等接口。
+connection 提供 SLE（Star Flash Low Energy）连接管理、设备发现与传输管理能力，覆盖连接/断开、配对、连接参数更新、PHY/MCS 设置、设备公开（announce）、扫描（seek）以及传输繁忙回调等接口。
 
 **模块公共头文件**
 
@@ -74,15 +74,15 @@ errcode_t sle_connect_remote_device(const sle_addr_t *addr)
 
 **功能说明**
 
-- 向指定地址的对端设备发送 SLE 连接请求
-- 连接状态改变结果通过已注册的 [sle_connect_state_changed_callback](#sle_connect_state_changed_callback) 回调返回
-- 调用结果以错误码形式同步返回
+- 向指定地址的对端设备发送 SLE 连接请求。
+- 连接状态改变结果通过已注册的 [sle_connect_state_changed_callback](#sle_connect_state_changed_callback) 回调返回。
+- 调用结果以错误码形式同步返回。
 
 **前置条件**
 
-- 调用时序约束：调用前需先调用 [sle_connection_register_callbacks](#sle_connection_register_callbacks) 注册连接状态回调
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：调用前需先调用 [sle_connection_register_callbacks](#sle_connection_register_callbacks) 注册连接状态回调。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -96,7 +96,7 @@ errcode_t sle_connect_remote_device(const sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 连接请求成功发起 |
+| ERRCODE_SUCC：0 | 执行成功 | 连接请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -117,15 +117,15 @@ errcode_t sle_create_connection_cancel(void)
 
 **功能说明**
 
-- 取消当前正在进行的连接创建过程
-- 终止由 [sle_connect_remote_device](#sle_connect_remote_device) 发起的连接流程
-- 调用结果以错误码形式返回
+- 取消当前正在进行的连接创建过程。
+- 终止由 [sle_connect_remote_device](#sle_connect_remote_device) 发起的连接流程。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：需在 [sle_connect_remote_device](#sle_connect_remote_device) 已发起连接但尚未完成时调用
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 [sle_connect_remote_device](#sle_connect_remote_device) 已发起连接但尚未完成时调用。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **返回值**
 
@@ -133,7 +133,7 @@ errcode_t sle_create_connection_cancel(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 取消连接创建成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 取消连接创建成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_connect_rssi <a id="sle_set_connect_rssi"></a>
@@ -150,14 +150,14 @@ errcode_t sle_set_connect_rssi(int8_t rssi)
 
 **功能说明**
 
-- 设置连接过程使用的 RSSI 门限值
-- 用于在连接建立阶段对信号强度进行过滤
-- 调用结果以错误码形式返回
+- 设置连接过程使用的 RSSI 门限值。
+- 用于在连接建立阶段对信号强度进行过滤。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -171,7 +171,7 @@ errcode_t sle_set_connect_rssi(int8_t rssi)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_disconnect_remote_device <a id="sle_disconnect_remote_device"></a>
@@ -188,15 +188,15 @@ errcode_t sle_disconnect_remote_device(const sle_addr_t *addr)
 
 **功能说明**
 
-- 向指定地址的对端设备发送断开连接请求
-- 断链结果通过已注册的 [sle_connect_state_changed_callback](#sle_connect_state_changed_callback) 回调返回
-- 调用结果以错误码形式同步返回
+- 向指定地址的对端设备发送断开连接请求。
+- 断链结果通过已注册的 [sle_connect_state_changed_callback](#sle_connect_state_changed_callback) 回调返回。
+- 调用结果以错误码形式同步返回。
 
 **前置条件**
 
-- 调用时序约束：目标设备需已建立连接
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：目标设备需已建立连接。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -210,7 +210,7 @@ errcode_t sle_disconnect_remote_device(const sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 断开连接请求成功发起 |
+| ERRCODE_SUCC：0 | 执行成功 | 断开连接请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_disconnect_all_remote_device <a id="sle_disconnect_all_remote_device"></a>
@@ -227,15 +227,15 @@ errcode_t sle_disconnect_all_remote_device(void)
 
 **功能说明**
 
-- 断开所有已建立的 SLE 连接
-- 各连接的断链结果通过已注册的 [sle_connect_state_changed_callback](#sle_connect_state_changed_callback) 回调返回
-- 调用结果以错误码形式返回
+- 断开所有已建立的 SLE 连接。
+- 各连接的断链结果通过已注册的 [sle_connect_state_changed_callback](#sle_connect_state_changed_callback) 回调返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：需在存在已建立连接时调用
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在存在已建立连接时调用。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **返回值**
 
@@ -243,7 +243,7 @@ errcode_t sle_disconnect_all_remote_device(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 断开所有连接成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 断开所有连接成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_update_connect_param <a id="sle_update_connect_param"></a>
@@ -260,15 +260,15 @@ errcode_t sle_update_connect_param(sle_connection_param_update_t *params)
 
 **功能说明**
 
-- 向对端设备发送连接参数更新请求
-- 更新结果通过已注册的 [sle_connect_param_update_callback](#sle_connect_param_update_callback) 回调返回
-- 调用结果以错误码形式返回
+- 向对端设备发送连接参数更新请求。
+- 更新结果通过已注册的 [sle_connect_param_update_callback](#sle_connect_param_update_callback) 回调返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：目标连接需已建立
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：目标连接需已建立。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -282,7 +282,7 @@ errcode_t sle_update_connect_param(sle_connection_param_update_t *params)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 更新请求成功发起 |
+| ERRCODE_SUCC：0 | 执行成功 | 更新请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -303,15 +303,15 @@ errcode_t sle_pair_remote_device(const sle_addr_t *addr)
 
 **功能说明**
 
-- 向指定地址的对端设备发送配对请求
-- 配对完成结果通过已注册的 [sle_pair_complete_callback](#sle_pair_complete_callback) 回调返回
-- 调用结果以错误码形式返回
+- 向指定地址的对端设备发送配对请求。
+- 配对完成结果通过已注册的 [sle_pair_complete_callback](#sle_pair_complete_callback) 回调返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：目标设备需已建立连接
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：目标设备需已建立连接。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -325,7 +325,7 @@ errcode_t sle_pair_remote_device(const sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 配对请求成功发起 |
+| ERRCODE_SUCC：0 | 执行成功 | 配对请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -346,15 +346,15 @@ errcode_t sle_remove_paired_remote_device(const sle_addr_t *addr)
 
 **功能说明**
 
-- 删除指定地址设备的配对信息
-- 删除结果通过已注册的 [sle_pair_remove_callback](#sle_pair_remove_callback) 回调返回
-- 调用结果以错误码形式返回
+- 删除指定地址设备的配对信息。
+- 删除结果通过已注册的 [sle_pair_remove_callback](#sle_pair_remove_callback) 回调返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：目标设备需已完成配对
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：目标设备需已完成配对。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -368,7 +368,7 @@ errcode_t sle_remove_paired_remote_device(const sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 删除配对成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 删除配对成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_remove_all_pairs <a id="sle_remove_all_pairs"></a>
@@ -385,13 +385,13 @@ errcode_t sle_remove_all_pairs(void)
 
 **功能说明**
 
-- 删除所有已配对设备的配对信息
-- 调用结果以错误码形式返回
+- 删除所有已配对设备的配对信息。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **返回值**
 
@@ -399,7 +399,7 @@ errcode_t sle_remove_all_pairs(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 删除所有配对成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 删除所有配对成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_get_paired_devices_num <a id="sle_get_paired_devices_num"></a>
@@ -416,14 +416,14 @@ errcode_t sle_get_paired_devices_num(uint16_t *number)
 
 **功能说明**
 
-- 获取当前已配对设备的数量
-- 数量通过出参返回
-- 调用结果以错误码形式返回
+- 获取当前已配对设备的数量。
+- 数量通过出参返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **出参**
 
@@ -437,7 +437,7 @@ errcode_t sle_get_paired_devices_num(uint16_t *number)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_get_connect_role <a id="sle_get_connect_role"></a>
@@ -454,15 +454,15 @@ errcode_t sle_get_connect_role(uint16_t conn_id, uint8_t *role)
 
 **功能说明**
 
-- 获取指定连接的链路角色（G 节点或 T 节点）
-- 角色结果通过出参返回
-- 调用结果以错误码形式返回
+- 获取指定连接的链路角色（G 节点或T 节点）。
+- 角色结果通过出参返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：conn_id 对应的连接需已建立
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：conn_id 对应的连接需已建立。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -482,7 +482,7 @@ errcode_t sle_get_connect_role(uint16_t conn_id, uint8_t *role)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_get_paired_devices <a id="sle_get_paired_devices"></a>
@@ -499,14 +499,14 @@ errcode_t sle_get_paired_devices(sle_addr_t *addr, uint16_t *number)
 
 **功能说明**
 
-- 获取已配对设备的地址列表
-- 地址列表与设备数量通过出参返回
-- 调用结果以错误码形式返回
+- 获取已配对设备的地址列表。
+- 地址列表与设备数量通过出参返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **出参**
 
@@ -521,7 +521,7 @@ errcode_t sle_get_paired_devices(sle_addr_t *addr, uint16_t *number)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_get_bonded_devices <a id="sle_get_bonded_devices"></a>
@@ -538,14 +538,14 @@ errcode_t sle_get_bonded_devices(sle_addr_t *addr, uint16_t *number)
 
 **功能说明**
 
-- 获取已绑定设备的地址列表
-- 地址列表与设备数量通过出参返回
-- 调用结果以错误码形式返回
+- 获取已绑定设备的地址列表。
+- 地址列表与设备数量通过出参返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **出参**
 
@@ -560,7 +560,7 @@ errcode_t sle_get_bonded_devices(sle_addr_t *addr, uint16_t *number)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_nv_smp_keys <a id="sle_set_nv_smp_keys"></a>
@@ -577,15 +577,15 @@ errcode_t sle_set_nv_smp_keys(sle_auth_info_evt_t *keys, sle_addr_t *own_addr, s
 
 **功能说明**
 
-- 设置 NV 中保存的 SMP 密钥信息
-- 同时记录本端地址、对端地址与索引下标
-- 调用结果以错误码形式返回
+- 设置 NV 中保存的 SMP 密钥信息。
+- 同时记录本端地址、对端地址与索引下标。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：需在配对/认证流程获得密钥后调用
-- 依赖关系：依赖 SLE 协议栈与 NV 存储已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在配对/认证流程获得密钥后调用。
+- 依赖关系：依赖 SLE 协议栈与 NV 存储已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -602,7 +602,7 @@ errcode_t sle_set_nv_smp_keys(sle_auth_info_evt_t *keys, sle_addr_t *own_addr, s
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_get_pair_state <a id="sle_get_pair_state"></a>
@@ -619,14 +619,14 @@ errcode_t sle_get_pair_state(const sle_addr_t *addr, uint8_t *state)
 
 **功能说明**
 
-- 获取指定地址设备的配对状态
-- 配对状态通过出参返回
-- 调用结果以错误码形式返回
+- 获取指定地址设备的配对状态。
+- 配对状态通过出参返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -646,7 +646,7 @@ errcode_t sle_get_pair_state(const sle_addr_t *addr, uint8_t *state)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_read_remote_device_rssi <a id="sle_read_remote_device_rssi"></a>
@@ -663,15 +663,15 @@ errcode_t sle_read_remote_device_rssi(uint16_t conn_id)
 
 **功能说明**
 
-- 读取指定连接对端设备的 RSSI 值
-- RSSI 读取结果通过已注册的 [sle_read_rssi_callback](#sle_read_rssi_callback) 回调返回
-- 调用结果以错误码形式返回
+- 读取指定连接对端设备的 RSSI 值。
+- RSSI 读取结果通过已注册的 [sle_read_rssi_callback](#sle_read_rssi_callback) 回调返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：conn_id 对应的连接需已建立
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：conn_id 对应的连接需已建立。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -685,7 +685,7 @@ errcode_t sle_read_remote_device_rssi(uint16_t conn_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 读取请求成功发起 |
+| ERRCODE_SUCC：0 | 执行成功 | 读取请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -706,14 +706,14 @@ errcode_t sle_set_acb_evt_param(uint16_t conn_id, uint16_t evt_intv, uint8_t evt
 
 **功能说明**
 
-- 设置指定连接的 ACB 链路重传间隔与重传次数
-- 调用结果以错误码形式返回
+- 设置指定连接的 ACB 链路重传间隔与重传次数。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：conn_id 对应的连接需已建立
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：conn_id 对应的连接需已建立。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -729,7 +729,7 @@ errcode_t sle_set_acb_evt_param(uint16_t conn_id, uint16_t evt_intv, uint8_t evt
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_read_access_filter_list_size <a id="sle_read_access_filter_list_size"></a>
@@ -746,14 +746,14 @@ errcode_t sle_read_access_filter_list_size(uint8_t *size)
 
 **功能说明**
 
-- 查询访问过滤器列表的剩余可容纳大小
-- 剩余大小通过出参返回
-- 调用结果以错误码形式返回
+- 查询访问过滤器列表的剩余可容纳大小。
+- 剩余大小通过出参返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **出参**
 
@@ -767,7 +767,7 @@ errcode_t sle_read_access_filter_list_size(uint8_t *size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 查询成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 查询成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_clear_access_filter_list <a id="sle_clear_access_filter_list"></a>
@@ -784,13 +784,13 @@ errcode_t sle_clear_access_filter_list(void)
 
 **功能说明**
 
-- 清空访问过滤器列表中的所有地址
-- 调用结果以错误码形式返回
+- 清空访问过滤器列表中的所有地址。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **返回值**
 
@@ -798,7 +798,7 @@ errcode_t sle_clear_access_filter_list(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 清空成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 清空成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_add_device_to_access_filter_list <a id="sle_add_device_to_access_filter_list"></a>
@@ -815,13 +815,13 @@ errcode_t sle_add_device_to_access_filter_list(sle_addr_t *addr)
 
 **功能说明**
 
-- 将指定地址加入访问过滤器列表
-- 调用结果以错误码形式返回
+- 将指定地址加入访问过滤器列表。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 依赖关系：依赖 SLE 协议栈已初始化完成、访问过滤器列表有剩余空间
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 依赖关系：依赖 SLE 协议栈已初始化完成、访问过滤器列表有剩余空间。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -835,7 +835,7 @@ errcode_t sle_add_device_to_access_filter_list(sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 添加成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 添加成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_remove_device_from_access_filter_list <a id="sle_remove_device_from_access_filter_list"></a>
@@ -852,13 +852,13 @@ errcode_t sle_remove_device_from_access_filter_list(sle_addr_t *addr)
 
 **功能说明**
 
-- 将指定地址从访问过滤器列表中移除
-- 调用结果以错误码形式返回
+- 将指定地址从访问过滤器列表中移除。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -872,7 +872,7 @@ errcode_t sle_remove_device_from_access_filter_list(sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 移除成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 移除成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_phy_param <a id="sle_set_phy_param"></a>
@@ -889,15 +889,15 @@ errcode_t sle_set_phy_param(uint16_t conn_id, sle_set_phy_t *param)
 
 **功能说明**
 
-- 设置指定连接的 PHY 参数，包括无线帧类型、PHY、导频密度与反馈类型等
-- 设置结果通过已注册的 [sle_set_phy_callback](#sle_set_phy_callback) 回调返回
-- 调用结果以错误码形式返回
+- 设置指定连接的 PHY 参数，包括无线帧类型、PHY、导频密度与反馈类型等。
+- 设置结果通过已注册的 [sle_set_phy_callback](#sle_set_phy_callback) 回调返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：conn_id 对应的连接需已建立
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：conn_id 对应的连接需已建立。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -912,7 +912,7 @@ errcode_t sle_set_phy_param(uint16_t conn_id, sle_set_phy_t *param)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 设置请求成功发起 |
+| ERRCODE_SUCC：0 | 执行成功 | 设置请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -933,19 +933,19 @@ errcode_t sle_set_save_pair_keys_mode(uint8_t is_available)
 
 **功能说明**
 
-- 设置配对密钥的保存模式（自动保存或手动保存）
-- 调用结果以错误码形式返回
+- 设置配对密钥的保存模式（自动保存或手动保存）。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| is_available | uint8_t | 配对密钥保存模式 | [SLE_SAVE_SMP_KEYS_AUTO](#enum_sle_save_smp_keys_mode_switch_t):0x00 / [SLE_SAVE_SMP_KEYS_MANU](#enum_sle_save_smp_keys_mode_switch_t):0x01 |
+| is_available | uint8_t | 配对密钥保存模式 | [SLE_SAVE_SMP_KEYS_AUTO](#enum_sle_save_smp_keys_mode_switch_t)：0 / [SLE_SAVE_SMP_KEYS_MANU](#enum_sle_save_smp_keys_mode_switch_t)：1 |
 
 **返回值**
 
@@ -953,7 +953,7 @@ errcode_t sle_set_save_pair_keys_mode(uint8_t is_available)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_mcs <a id="sle_set_mcs"></a>
@@ -970,14 +970,14 @@ errcode_t sle_set_mcs(uint16_t conn_id, uint8_t mcs)
 
 **功能说明**
 
-- 设置指定连接的调制与编码策略（MCS）索引值
-- 调用结果以错误码形式返回
+- 设置指定连接的调制与编码策略（MCS）索引值。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：conn_id 对应的连接需已建立
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：conn_id 对应的连接需已建立。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -992,7 +992,7 @@ errcode_t sle_set_mcs(uint16_t conn_id, uint8_t mcs)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1013,14 +1013,14 @@ errcode_t sle_set_data_len(uint16_t conn_id, uint16_t tx_octets)
 
 **功能说明**
 
-- 设置指定连接链路上所偏好的最大传输 payload 字节数
-- 调用结果以错误码形式返回
+- 设置指定连接链路上所偏好的最大传输 payload 字节数。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：conn_id 对应的连接需已建立
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：conn_id 对应的连接需已建立。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -1035,7 +1035,7 @@ errcode_t sle_set_data_len(uint16_t conn_id, uint16_t tx_octets)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1056,14 +1056,14 @@ errcode_t sle_default_connection_param_set(sle_default_connect_param_t *set_para
 
 **功能说明**
 
-- 设置 SLE 默认连接参数，包括过滤策略、扫描窗口、调度间隔与超时等
-- 调用结果以错误码形式返回
+- 设置 SLE 默认连接参数，包括过滤策略、扫描窗口、调度间隔与超时等。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：建议在发起连接之前调用
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：建议在发起连接之前调用。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -1077,7 +1077,7 @@ errcode_t sle_default_connection_param_set(sle_default_connect_param_t *set_para
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1099,15 +1099,15 @@ errcode_t sle_connection_register_callbacks(sle_connection_callbacks_t *func)
 
 **功能说明**
 
-- 注册 SLE 连接管理回调函数集合
-- 涵盖连接状态改变、参数更新、认证、配对、RSSI 读取、低时延、PHY 设置与取消配对等事件
-- 调用结果以错误码形式返回
+- 注册 SLE 连接管理回调函数集合。
+- 涵盖连接状态改变、参数更新、认证、配对、RSSI 读取、低时延、PHY 设置与取消配对等事件。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：应在发起连接/配对等相关操作之前调用
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：应在发起连接/配对等相关操作之前调用。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -1121,7 +1121,7 @@ errcode_t sle_connection_register_callbacks(sle_connection_callbacks_t *func)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 注册成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 注册成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1143,13 +1143,13 @@ errcode_t sle_customize_max_pwr(int8_t ble_pwr, int8_t sle_pwr)
 
 **功能说明**
 
-- 配置 BLE 与 SLE 的最大功率定制化信息
-- 调用结果以错误码形式返回
+- 配置 BLE 与 SLE 的最大功率定制化信息。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 依赖关系：依赖 NV 定制化配置模块已就绪
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 依赖关系：依赖 NV 定制化配置模块已就绪。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -1164,7 +1164,7 @@ errcode_t sle_customize_max_pwr(int8_t ble_pwr, int8_t sle_pwr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 配置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 配置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_local_addr <a id="sle_set_local_addr"></a>
@@ -1181,14 +1181,14 @@ errcode_t sle_set_local_addr(sle_addr_t *addr)
 
 **功能说明**
 
-- 设置本地 SLE 设备地址
-- 调用结果以错误码形式返回
+- 设置本地 SLE 设备地址。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：应在发起设备公开或扫描之前调用
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：应在发起设备公开或扫描之前调用。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -1202,7 +1202,7 @@ errcode_t sle_set_local_addr(sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1224,14 +1224,14 @@ errcode_t sle_get_local_addr(sle_addr_t *addr)
 
 **功能说明**
 
-- 获取本地 SLE 设备地址
-- 地址通过出参返回
-- 调用结果以错误码形式返回
+- 获取本地 SLE 设备地址。
+- 地址通过出参返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **出参**
 
@@ -1245,7 +1245,7 @@ errcode_t sle_get_local_addr(sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_local_name <a id="sle_set_local_name"></a>
@@ -1262,14 +1262,14 @@ errcode_t sle_set_local_name(const uint8_t *name, uint8_t len)
 
 **功能说明**
 
-- 设置本地 SLE 设备名称
-- 调用结果以错误码形式返回
+- 设置本地 SLE 设备名称。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：应在发起设备公开之前调用
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：应在发起设备公开之前调用。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -1284,7 +1284,7 @@ errcode_t sle_set_local_name(const uint8_t *name, uint8_t len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_get_local_name <a id="sle_get_local_name"></a>
@@ -1301,14 +1301,14 @@ errcode_t sle_get_local_name(uint8_t *name, uint8_t *len)
 
 **功能说明**
 
-- 获取本地 SLE 设备名称
-- 名称与长度通过出参返回
-- 调用结果以错误码形式返回
+- 获取本地 SLE 设备名称。
+- 名称与长度通过出参返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **出参**
 
@@ -1323,7 +1323,7 @@ errcode_t sle_get_local_name(uint8_t *name, uint8_t *len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_announce_data <a id="sle_set_announce_data"></a>
@@ -1340,20 +1340,20 @@ errcode_t sle_set_announce_data(uint8_t announce_id, const sle_announce_data_t *
 
 **功能说明**
 
-- 设置指定设备公开实例的公开数据与扫描响应数据
-- 调用结果以错误码形式返回
+- 设置指定设备公开实例的公开数据与扫描响应数据。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：应在 [sle_start_announce](#sle_start_announce) 之前调用
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：应在 [sle_start_announce](#sle_start_announce) 之前调用。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX):16 |
+| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX)：16 |
 | data | [sle_announce_data_t](#struct_sle_announce_data_t) * | 设备公开数据 | 不为NULL |
 
 **返回值**
@@ -1362,7 +1362,7 @@ errcode_t sle_set_announce_data(uint8_t announce_id, const sle_announce_data_t *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1383,20 +1383,20 @@ errcode_t sle_remove_announce(uint8_t announce_id)
 
 **功能说明**
 
-- 删除指定的设备公开实例
-- 调用结果以错误码形式返回
+- 删除指定的设备公开实例。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：目标设备公开实例需已停止
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：目标设备公开实例需已停止。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX):16 |
+| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX)：16 |
 
 **返回值**
 
@@ -1404,7 +1404,7 @@ errcode_t sle_remove_announce(uint8_t announce_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 删除成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 删除成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_announce_param <a id="sle_set_announce_param"></a>
@@ -1421,20 +1421,20 @@ errcode_t sle_set_announce_param(uint8_t announce_id, const sle_announce_param_t
 
 **功能说明**
 
-- 设置指定设备公开实例的参数，包括公开类型、G/T 角色、等级、间隔、信道与连接参数等
-- 调用结果以错误码形式返回
+- 设置指定设备公开实例的参数，包括公开类型、G/T 角色、等级、间隔、信道与连接参数等。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：应在 [sle_start_announce](#sle_start_announce) 之前调用
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：应在 [sle_start_announce](#sle_start_announce) 之前调用。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX):16 |
+| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX)：16 |
 | param | [sle_announce_param_t](#struct_sle_announce_param_t) * | 设备公开参数 | 不为NULL |
 
 **返回值**
@@ -1443,7 +1443,7 @@ errcode_t sle_set_announce_param(uint8_t announce_id, const sle_announce_param_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1464,21 +1464,21 @@ errcode_t sle_start_announce(uint8_t announce_id)
 
 **功能说明**
 
-- 启动指定的设备公开实例
-- 启动结果通过已注册的 [sle_announce_enable_callback](#sle_announce_enable_callback) 回调返回
-- 调用结果以错误码形式返回
+- 启动指定的设备公开实例。
+- 启动结果通过已注册的 [sle_announce_enable_callback](#sle_announce_enable_callback) 回调返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：需先调用 [sle_set_announce_param](#sle_set_announce_param) 与 [sle_set_announce_data](#sle_set_announce_data) 完成参数与数据设置
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需先调用 [sle_set_announce_param](#sle_set_announce_param) 与 [sle_set_announce_data](#sle_set_announce_data) 完成参数与数据设置。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX):16 |
+| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX)：16 |
 
 **返回值**
 
@@ -1486,7 +1486,7 @@ errcode_t sle_start_announce(uint8_t announce_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 启动请求成功发起 |
+| ERRCODE_SUCC：0 | 执行成功 | 启动请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1508,21 +1508,21 @@ errcode_t sle_stop_announce(uint8_t announce_id)
 
 **功能说明**
 
-- 停止指定的设备公开实例
-- 停止结果通过已注册的 [sle_announce_disable_callback](#sle_announce_disable_callback) 回调返回
-- 调用结果以错误码形式返回
+- 停止指定的设备公开实例。
+- 停止结果通过已注册的 [sle_announce_disable_callback](#sle_announce_disable_callback) 回调返回。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：目标设备公开实例需已启动
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：目标设备公开实例需已启动。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX):16 |
+| announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX)：16 |
 
 **返回值**
 
@@ -1530,7 +1530,7 @@ errcode_t sle_stop_announce(uint8_t announce_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 停止请求成功发起 |
+| ERRCODE_SUCC：0 | 执行成功 | 停止请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_seek_param <a id="sle_set_seek_param"></a>
@@ -1547,14 +1547,14 @@ errcode_t sle_set_seek_param(sle_seek_param_t *param)
 
 **功能说明**
 
-- 设置设备发现扫描参数，包括地址类型、过滤策略、PHY、扫描类型、间隔与窗口等
-- 调用结果以错误码形式返回
+- 设置设备发现扫描参数，包括地址类型、过滤策略、PHY、扫描类型、间隔与窗口等。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：应在 [sle_start_seek](#sle_start_seek) 之前调用
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：应在 [sle_start_seek](#sle_start_seek) 之前调用。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -1568,7 +1568,7 @@ errcode_t sle_set_seek_param(sle_seek_param_t *param)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1590,15 +1590,15 @@ errcode_t sle_start_seek(void)
 
 **功能说明**
 
-- 启动设备发现扫描
-- 启动结果通过已注册的 [sle_start_seek_callback](#sle_start_seek_callback) 回调返回
-- 扫描到的设备结果通过已注册的 [sle_seek_result_callback](#sle_seek_result_callback) 回调返回
+- 启动设备发现扫描。
+- 启动结果通过已注册的 [sle_start_seek_callback](#sle_start_seek_callback) 回调返回。
+- 扫描到的设备结果通过已注册的 [sle_seek_result_callback](#sle_seek_result_callback) 回调返回。
 
 **前置条件**
 
-- 调用时序约束：需先调用 [sle_set_seek_param](#sle_set_seek_param) 完成扫描参数设置
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需先调用 [sle_set_seek_param](#sle_set_seek_param) 完成扫描参数设置。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **返回值**
 
@@ -1606,7 +1606,7 @@ errcode_t sle_start_seek(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 启动扫描成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 启动扫描成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1627,14 +1627,14 @@ errcode_t sle_stop_seek(void)
 
 **功能说明**
 
-- 停止设备发现扫描
-- 停止结果通过已注册的 [sle_seek_disable_callback](#sle_seek_disable_callback) 回调返回
+- 停止设备发现扫描。
+- 停止结果通过已注册的 [sle_seek_disable_callback](#sle_seek_disable_callback) 回调返回。
 
 **前置条件**
 
-- 调用时序约束：扫描需已启动
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：扫描需已启动。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **返回值**
 
@@ -1642,7 +1642,7 @@ errcode_t sle_stop_seek(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 停止扫描成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 停止扫描成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1663,15 +1663,15 @@ errcode_t sle_announce_seek_register_callbacks(sle_announce_seek_callbacks_t *fu
 
 **功能说明**
 
-- 注册 SLE 设备公开与扫描的回调函数集合
-- 涵盖设备公开使能/关闭/停止/删除、扫描使能/关闭、扫描结果上报与 dfr 等事件
-- 调用结果以错误码形式返回
+- 注册 SLE 设备公开与扫描的回调函数集合。
+- 涵盖设备公开使能/关闭/停止/删除、扫描使能/关闭、扫描结果上报与 dfr 等事件。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：应在发起设备公开或扫描之前调用
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：应在发起设备公开或扫描之前调用。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -1685,7 +1685,7 @@ errcode_t sle_announce_seek_register_callbacks(sle_announce_seek_callbacks_t *fu
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 注册成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 注册成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1707,15 +1707,15 @@ errcode_t sle_transmission_signal_capability_req(uint16_t conn_id, sle_transmiss
 
 **功能说明**
 
-- 向对端发送连接管理能力查询请求
-- 查询的能力信息通过入参指定
-- 调用结果以错误码形式返回
+- 向对端发送连接管理能力查询请求。
+- 查询的能力信息通过入参指定。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：conn_id 对应的连接需已建立
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：conn_id 对应的连接需已建立。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -1730,7 +1730,7 @@ errcode_t sle_transmission_signal_capability_req(uint16_t conn_id, sle_transmiss
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 查询请求成功发起 |
+| ERRCODE_SUCC：0 | 执行成功 | 查询请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_transmission_register_callbacks <a id="sle_transmission_register_callbacks"></a>
@@ -1747,15 +1747,15 @@ errcode_t sle_transmission_register_callbacks(sle_transmission_callbacks_t *func
 
 **功能说明**
 
-- 注册 SLE 传输管理回调函数集合
-- 涵盖传输数据繁忙状态事件
-- 调用结果以错误码形式返回
+- 注册 SLE 传输管理回调函数集合。
+- 涵盖传输数据繁忙状态事件。
+- 调用结果以错误码形式返回。
 
 **前置条件**
 
-- 调用时序约束：应在进行传输数据收发之前调用
-- 依赖关系：依赖 SLE 协议栈已初始化完成
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：应在进行传输数据收发之前调用。
+- 依赖关系：依赖 SLE 协议栈已初始化完成。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -1769,7 +1769,7 @@ errcode_t sle_transmission_register_callbacks(sle_transmission_callbacks_t *func
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 注册成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 注册成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ## Type definitions
@@ -2072,9 +2072,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_PAIR_NONE | 0x01 | 未配对状态 |
-| SLE_PAIR_PAIRING | 0x02 | 正在配对 |
-| SLE_PAIR_PAIRED | 0x03 | 已完成配对 |
+| SLE_PAIR_NONE | 1 | 未配对状态 |
+| SLE_PAIR_PAIRING | 2 | 正在配对 |
+| SLE_PAIR_PAIRED | 3 | 已完成配对 |
 
 ### sle_disc_reason_t <a id="enum_sle_disc_reason_t"></a>
 
@@ -2102,9 +2102,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_ACB_STATE_NONE | 0x00 | SLE ACB 未连接状态 |
-| SLE_ACB_STATE_CONNECTED | 0x01 | SLE ACB 已连接 |
-| SLE_ACB_STATE_DISCONNECTED | 0x02 | SLE ACB 已断接 |
+| SLE_ACB_STATE_NONE | 0 | SLE ACB 未连接状态 |
+| SLE_ACB_STATE_CONNECTED | 1 | SLE ACB 已连接 |
+| SLE_ACB_STATE_DISCONNECTED | 2 | SLE ACB 已断接 |
 
 ### sle_crypto_algo_t <a id="enum_sle_crypto_algo_t"></a>
 
@@ -2119,10 +2119,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_CRYTO_ALGO_AC1 | 0x01 | AC1 加密算法类型 |
-| SLE_CRYTO_ALGO_AC2 | 0x02 | AC2 加密算法类型 |
-| SLE_CRYTO_ALGO_EA1 | 0x03 | EA1 加密算法类型 |
-| SLE_CRYTO_ALGO_EA2 | 0x04 | EA2 加密算法类型 |
+| SLE_CRYTO_ALGO_AC1 | 1 | AC1 加密算法类型 |
+| SLE_CRYTO_ALGO_AC2 | 2 | AC2 加密算法类型 |
+| SLE_CRYTO_ALGO_EA1 | 3 | EA1 加密算法类型 |
+| SLE_CRYTO_ALGO_EA2 | 4 | EA2 加密算法类型 |
 
 ### sle_key_deriv_algo_t <a id="enum_sle_key_deriv_algo_t"></a>
 
@@ -2135,8 +2135,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_KEY_DERIV_ALGO_HA1 | 0x01 | HA1 秘钥分发算法类型 |
-| SLE_KEY_DERIV_ALGO_HA2 | 0x02 | HA2 秘钥分发算法类型 |
+| SLE_KEY_DERIV_ALGO_HA1 | 1 | HA1 秘钥分发算法类型 |
+| SLE_KEY_DERIV_ALGO_HA2 | 2 | HA2 秘钥分发算法类型 |
 
 ### sle_integr_chk_ind_t <a id="enum_sle_integr_chk_ind_t"></a>
 
@@ -2151,10 +2151,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_ENCRYPTION_ENABLE_INTEGRITY_CHK_ENABLE | 0x00 | 加密和完整性保护同时启动 |
-| SLE_ENCRYPTION_DISABLE_INTEGRITY_CHK_ENABLE | 0x01 | 不启动加密，启动完整性保护 |
-| SLE_ENCRYPTION_ENABLE_INTEGRITY_CHK_DISABLE | 0x02 | 启动加密，不启动完整性保护 |
-| SLE_ENCRYPTION_DISABLE_INTEGRITY_CHK_DISABLE | 0x03 | 不启动加密，不启动完整性保护 |
+| SLE_ENCRYPTION_ENABLE_INTEGRITY_CHK_ENABLE | 0 | 加密和完整性保护同时启动 |
+| SLE_ENCRYPTION_DISABLE_INTEGRITY_CHK_ENABLE | 1 | 不启动加密，启动完整性保护 |
+| SLE_ENCRYPTION_ENABLE_INTEGRITY_CHK_DISABLE | 2 | 启动加密，不启动完整性保护 |
+| SLE_ENCRYPTION_DISABLE_INTEGRITY_CHK_DISABLE | 3 | 不启动加密，不启动完整性保护 |
 
 ### sle_bond_ind_t <a id="enum_sle_bond_ind_t"></a>
 
@@ -2167,8 +2167,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_PAIR_NO_BOND | 0x00 | 星闪配对不需要绑定 |
-| SLE_PAIR_NEED_BOND | 0x01 | 星闪配对需要绑定 |
+| SLE_PAIR_NO_BOND | 0 | 星闪配对不需要绑定 |
+| SLE_PAIR_NEED_BOND | 1 | 星闪配对需要绑定 |
 
 ### sle_link_role_t <a id="enum_sle_link_role_t"></a>
 
@@ -2237,10 +2237,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_PHY_1M | 0x0 | 1M PHY |
-| SLE_PHY_2M | 0x1 | 2M PHY |
-| SLE_PHY_4M | 0x2 | 4M PHY |
-| SLE_PHY_SUPPORT_NUM | 0x3 | PHY 支持数量 |
+| SLE_PHY_1M | 0 | 1M PHY |
+| SLE_PHY_2M | 1 | 2M PHY |
+| SLE_PHY_4M | 2 | 4M PHY |
+| SLE_PHY_SUPPORT_NUM | 3 | PHY 支持数量 |
 
 ### sle_phy_tx_rx_pilot_density_t <a id="enum_sle_phy_tx_rx_pilot_density_t"></a>
 
@@ -2256,11 +2256,11 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_PHY_PILOT_DENSITY_4_TO_1 | 0x0 | 导频密度为4:1 |
-| SLE_PHY_PILOT_DENSITY_8_TO_1 | 0x1 | 导频密度为8:1 |
-| SLE_PHY_PILOT_DENSITY_16_TO_1 | 0x2 | 导频密度为16:1 |
-| SLE_PHY_PILOT_DENSITY_NO | 0x3 | 无导频 |
-| SLE_PHY_PILOT_DENSITY_NUM | 0x4 | 导频密度数量 |
+| SLE_PHY_PILOT_DENSITY_4_TO_1 | 0 | 导频密度为4:1 |
+| SLE_PHY_PILOT_DENSITY_8_TO_1 | 1 | 导频密度为8:1 |
+| SLE_PHY_PILOT_DENSITY_16_TO_1 | 2 | 导频密度为16:1 |
+| SLE_PHY_PILOT_DENSITY_NO | 3 | 无导频 |
+| SLE_PHY_PILOT_DENSITY_NUM | 4 | 导频密度数量 |
 
 ### sle_save_smp_keys_mode_switch_t <a id="enum_sle_save_smp_keys_mode_switch_t"></a>
 
@@ -2273,8 +2273,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_SAVE_SMP_KEYS_AUTO | 0x00 | 秘钥自动保存 |
-| SLE_SAVE_SMP_KEYS_MANU | 0x01 | 秘钥用户手动保存 |
+| SLE_SAVE_SMP_KEYS_AUTO | 0 | 秘钥自动保存 |
+| SLE_SAVE_SMP_KEYS_MANU | 1 | 秘钥用户手动保存 |
 
 ### sle_announce_level_t <a id="enum_sle_announce_level_t"></a>
 
@@ -2328,11 +2328,11 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_ANNOUNCE_MODE_NONCONN_NONSCAN | 0x00 | 不可连接不可扫描 |
-| SLE_ANNOUNCE_MODE_CONNECTABLE_NONSCAN | 0x01 | 可连接不可扫描 |
-| SLE_ANNOUNCE_MODE_NONCONN_SCANABLE | 0x02 | 不可连接可扫描 |
-| SLE_ANNOUNCE_MODE_CONNECTABLE_SCANABLE | 0x03 | 可连接可扫描 |
-| SLE_ANNOUNCE_MODE_CONNECTABLE_DIRECTED | 0x07 | 可连接可扫描定向 |
+| SLE_ANNOUNCE_MODE_NONCONN_NONSCAN | 0 | 不可连接不可扫描 |
+| SLE_ANNOUNCE_MODE_CONNECTABLE_NONSCAN | 1 | 可连接不可扫描 |
+| SLE_ANNOUNCE_MODE_NONCONN_SCANABLE | 2 | 不可连接可扫描 |
+| SLE_ANNOUNCE_MODE_CONNECTABLE_SCANABLE | 3 | 可连接可扫描 |
+| SLE_ANNOUNCE_MODE_CONNECTABLE_DIRECTED | 7 | 可连接可扫描定向 |
 
 ### sle_seek_phy_t <a id="enum_sle_seek_phy_t"></a>
 
@@ -2346,9 +2346,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_SEEK_PHY_1M | 0x1 | 1M PHY |
-| SLE_SEEK_PHY_2M | 0x2 | 2M PHY |
-| SLE_SEEK_PHY_4M | 0x4 | 4M PHY |
+| SLE_SEEK_PHY_1M | 1 | 1M PHY |
+| SLE_SEEK_PHY_2M | 2 | 2M PHY |
+| SLE_SEEK_PHY_4M | 4 | 4M PHY |
 
 ### sle_seek_type_t <a id="enum_sle_seek_type_t"></a>
 
@@ -2361,8 +2361,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_SEEK_PASSIVE | 0x00 | 被动扫描 |
-| SLE_SEEK_ACTIVE | 0x01 | 主动扫描 |
+| SLE_SEEK_PASSIVE | 0 | 被动扫描 |
+| SLE_SEEK_ACTIVE | 1 | 主动扫描 |
 
 ### sle_seek_filter_t <a id="enum_sle_seek_filter_t"></a>
 
@@ -2375,8 +2375,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_SEEK_FILTER_ALLOW_ALL | 0x00 | 允许来自任何人的设备发现数据包 |
-| SLE_SEEK_FILTER_ALLOW_WLST | 0x01 | 允许来自白名单设备的设备发现数据包，预留 |
+| SLE_SEEK_FILTER_ALLOW_ALL | 0 | 允许来自任何人的设备发现数据包 |
+| SLE_SEEK_FILTER_ALLOW_WLST | 1 | 允许来自白名单设备的设备发现数据包，预留 |
 
 ### sle_link_qos_state_t <a id="enum_sle_link_qos_state_t"></a>
 
@@ -2390,9 +2390,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_QOS_IDLE | 0x00 | 空闲状态 |
-| SLE_QOS_FLOWCTRL | 0x01 | 流控状态 |
-| SLE_QOS_BUSY | 0x02 | 繁忙状态 |
+| SLE_QOS_IDLE | 0 | 空闲状态 |
+| SLE_QOS_FLOWCTRL | 1 | 流控状态 |
+| SLE_QOS_BUSY | 2 | 繁忙状态 |
 
 ### sle_addr_type_t <a id="enum_sle_addr_type_t"></a>
 
@@ -2490,7 +2490,7 @@ typedef struct {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| link_key | uint8_t[] | 链路密钥，长度为 [SLE_LINK_KEY_LEN](#SLE_LINK_KEY_LEN):16 |
+| link_key | uint8_t[] | 链路密钥，长度为 [SLE_LINK_KEY_LEN](#SLE_LINK_KEY_LEN)：16 |
 | crypto_algo | uint8_t | 加密算法类型，参考 [sle_crypto_algo_t](#enum_sle_crypto_algo_t) |
 | key_deriv_algo | uint8_t | 秘钥分发算法类型，参考 [sle_key_deriv_algo_t](#enum_sle_key_deriv_algo_t) |
 | integr_chk_ind | uint8_t | 完整性校验指示，参考 [sle_integr_chk_ind_t](#enum_sle_integr_chk_ind_t) |
@@ -2620,7 +2620,7 @@ typedef struct sle_announce_param {
 | peer_addr | [sle_addr_t](#struct_sle_addr_t) | 对端地址 |
 | conn_interval_min | uint16_t | 连接间隔最小取值，取值范围 [0x001E,0x3E80]，announce_gt_role 为 SLE_ANNOUNCE_ROLE_T_NO_NEGO 时无需配置 |
 | conn_interval_max | uint16_t | 连接间隔最大取值，取值范围 [0x001E,0x3E80]，announce_gt_role 为 SLE_ANNOUNCE_ROLE_T_NO_NEGO 时无需配置 |
-| conn_max_latency | uint16_t | 最大休眠连接间隔，取值范围 [0x0000,0x01F3]，announce_gt_role 为 SLE_ANNOUNCE_ROLE_T_NO_NEGO 时无需配置 |
+| conn_max_latency | uint16_t | 最大休眠连接间隔，取值范围 [0,0x01F3]，announce_gt_role 为 SLE_ANNOUNCE_ROLE_T_NO_NEGO 时无需配置 |
 | conn_supervision_timeout | uint16_t | 最大超时时间，取值范围 [0x000A,0x0C80]，announce_gt_role 为 SLE_ANNOUNCE_ROLE_T_NO_NEGO 时无需配置 |
 | ext_param | void * | 扩展设备公开参数，缺省时置空 |
 
@@ -2666,9 +2666,9 @@ typedef struct sle_seek_params {
 | filter_duplicates | uint8_t | 重复过滤开关，0 表示关闭，1 表示开启 |
 | seek_filter_policy | uint8_t | 扫描设备使用的过滤类型，参考 [sle_seek_filter_t](#enum_sle_seek_filter_t) |
 | seek_phys | uint8_t | 扫描设备所使用的 PHY，参考 [sle_seek_phy_t](#enum_sle_seek_phy_t) |
-| seek_type | uint8_t[] | 扫描类型，参考 [sle_seek_type_t](#enum_sle_seek_type_t)，数组大小 [SLE_SEEK_PHY_NUM_MAX](#SLE_SEEK_PHY_NUM_MAX):3 |
-| seek_interval | uint16_t[] | 扫描间隔，取值范围 [0x0014, 0xFFFF]，时间 = N * 0.125ms，数组大小 [SLE_SEEK_PHY_NUM_MAX](#SLE_SEEK_PHY_NUM_MAX):3 |
-| seek_window | uint16_t[] | 扫描窗口，取值范围 [0x0014, 0xFFFF]，时间 = N * 0.125ms，数组大小 [SLE_SEEK_PHY_NUM_MAX](#SLE_SEEK_PHY_NUM_MAX):3 |
+| seek_type | uint8_t[] | 扫描类型，参考 [sle_seek_type_t](#enum_sle_seek_type_t)，数组大小 [SLE_SEEK_PHY_NUM_MAX](#SLE_SEEK_PHY_NUM_MAX)：3 |
+| seek_interval | uint16_t[] | 扫描间隔，取值范围 [0x0014, 0xFFFF]，时间 = N * 0.125ms，数组大小 [SLE_SEEK_PHY_NUM_MAX](#SLE_SEEK_PHY_NUM_MAX)：3 |
+| seek_window | uint16_t[] | 扫描窗口，取值范围 [0x0014, 0xFFFF]，时间 = N * 0.125ms，数组大小 [SLE_SEEK_PHY_NUM_MAX](#SLE_SEEK_PHY_NUM_MAX)：3 |
 
 ### sle_seek_result_info_t <a id="struct_sle_seek_result_info_t"></a>
 
@@ -2780,7 +2780,7 @@ typedef struct {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | type | uint8_t | SLE 设备地址类型，参考 [sle_addr_type_t](#enum_sle_addr_type_t) |
-| addr | unsigned char[] | SLE 设备地址，长度为 [SLE_ADDR_LEN](#SLE_ADDR_LEN):6 |
+| addr | unsigned char[] | SLE 设备地址，长度为 [SLE_ADDR_LEN](#SLE_ADDR_LEN)：6 |
 
 **使用说明**
 

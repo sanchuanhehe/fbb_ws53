@@ -1,6 +1,6 @@
 # GATT Client
 
-本页记录 GATT (Generic Attribute Profile) Client 相关接口声明，包括向远端服务端发起服务发现、特征发现、特征描述符发现，按照句柄或 UUID (Universally Unique Identifier) 读取与写入属性值，以及通过回调上报发现结果、读写响应、MTU (Maximum Transmission Unit) 协商结果、Notification 与 Indication 等事件。
+本页记录 GATT（Generic Attribute Profile） Client 相关接口声明，包括向远端服务端发起服务发现、特征发现、特征描述符发现，按照句柄或 UUID（Universally Unique Identifier）读取与写入属性值，以及通过回调上报发现结果、读写响应、MTU（Maximum Transmission Unit）协商结果、Notification 与 Indication 等事件。
 
 !!! warning "当前 WS53 方案不支持 BLE Client"
 
@@ -44,14 +44,14 @@ errcode_t gattc_register_client(bt_uuid_t *app_uuid, uint8_t *client_id)
 
 **功能说明**
 
-- 注册上层应用为 GATT 客户端
-- 根据应用 UUID 分配并返回客户端 ID
-- 客户端 ID 作为后续服务发现、读写等操作的客户端标识
+- 注册上层应用为 GATT 客户端。
+- 根据应用 UUID 分配并返回客户端 ID。
+- 客户端 ID 作为后续服务发现、读写等操作的客户端标识。
 
 **前置条件**
 
-- 调用时序约束：需在 BTS (Bluetooth Stack) 协议栈初始化完成、BLE 功能就绪后调用
-- 依赖关系：入参 app_uuid 指向由调用方填充的应用 UUID 结构
+- 调用时序约束：需在 BTS（Bluetooth Stack）协议栈初始化完成、BLE 功能就绪后调用。
+- 依赖关系：入参 app_uuid 指向由调用方填充的应用 UUID 结构。
 
 **入参**
 
@@ -63,7 +63,7 @@ errcode_t gattc_register_client(bt_uuid_t *app_uuid, uint8_t *client_id)
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| client_id | uint8_t * | 注册成功后由 BTS (Bluetooth Stack) 填充的客户端 ID |
+| client_id | uint8_t * | 注册成功后由 BTS（Bluetooth Stack）填充的客户端 ID |
 
 **返回值**
 
@@ -71,7 +71,7 @@ errcode_t gattc_register_client(bt_uuid_t *app_uuid, uint8_t *client_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x0 | 成功 | 客户端注册成功 |
+| ERRCODE_SUCC：0 | 成功 | 客户端注册成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### gattc_unregister_client <a id="gattc_unregister_client"></a>
@@ -88,13 +88,13 @@ errcode_t gattc_unregister_client(uint8_t client_id)
 
 **功能说明**
 
-- 注销已注册的 GATT 客户端
-- 释放与该客户端 ID 关联的资源
+- 注销已注册的 GATT 客户端。
+- 释放与该客户端 ID 关联的资源。
 
 **前置条件**
 
-- 调用时序约束：需先调用 gattc_register_client 成功获取客户端 ID
-- 依赖关系：传入的 client_id 必须为已注册且未注销的有效客户端 ID
+- 调用时序约束：需先调用 gattc_register_client 成功获取客户端 ID。
+- 依赖关系：传入的 client_id 必须为已注册且未注销的有效客户端 ID。
 
 **入参**
 
@@ -108,7 +108,7 @@ errcode_t gattc_unregister_client(uint8_t client_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x0 | 成功 | 客户端注销成功 |
+| ERRCODE_SUCC：0 | 成功 | 客户端注销成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### gattc_discovery_service <a id="gattc_discovery_service"></a>
@@ -125,14 +125,14 @@ errcode_t gattc_discovery_service(uint8_t client_id, uint16_t conn_id, bt_uuid_t
 
 **功能说明**
 
-- 向远端 GATT 服务端发起服务发现请求
-- 当 uuid 长度为 0 时发现全部服务，否则按 uuid 过滤目标服务
-- 服务发现结果通过已注册的 gattc_discovery_service_callback 与 gattc_discovery_service_complete_callback 回调异步返回
+- 向远端 GATT 服务端发起服务发现请求。
+- 当 uuid 长度为 0 时发现全部服务，否则按 uuid 过滤目标服务。
+- 服务发现结果通过已注册的 gattc_discovery_service_callback 与 gattc_discovery_service_complete_callback 回调异步返回。
 
 **前置条件**
 
-- 调用时序约束：需先调用 gattc_register_client 获取 client_id，并通过 gattc_register_callbacks 注册回调
-- 依赖关系：conn_id 对应的 BLE 连接必须已建立
+- 调用时序约束：需先调用 gattc_register_client 获取 client_id，并通过 gattc_register_callbacks 注册回调。
+- 依赖关系：conn_id 对应的 BLE 连接必须已建立。
 
 **入参**
 
@@ -148,7 +148,7 @@ errcode_t gattc_discovery_service(uint8_t client_id, uint16_t conn_id, bt_uuid_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x0 | 成功 | 服务发现请求成功发起，结果通过回调返回 |
+| ERRCODE_SUCC：0 | 成功 | 服务发现请求成功发起，结果通过回调返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### gattc_discovery_character <a id="gattc_discovery_character"></a>
@@ -165,14 +165,14 @@ errcode_t gattc_discovery_character(uint8_t client_id, uint16_t conn_id, gattc_d
 
 **功能说明**
 
-- 在指定服务范围内向远端发起特征发现请求
-- 当 param 中 uuid 长度为 0 时发现服务内的全部特征，否则按 uuid 过滤
-- 特征发现结果通过已注册的 gattc_discovery_character_callback 与 gattc_discovery_character_complete_callback 回调异步返回
+- 在指定服务范围内向远端发起特征发现请求。
+- 当 param 中 uuid 长度为 0 时发现服务内的全部特征，否则按 uuid 过滤。
+- 特征发现结果通过已注册的 gattc_discovery_character_callback 与 gattc_discovery_character_complete_callback 回调异步返回。
 
 **前置条件**
 
-- 调用时序约束：需先调用 gattc_discovery_service 获取目标服务句柄范围
-- 依赖关系：conn_id 对应的 BLE 连接必须已建立，回调集合需已注册
+- 调用时序约束：需先调用 gattc_discovery_service 获取目标服务句柄范围。
+- 依赖关系：conn_id 对应的 BLE 连接必须已建立，回调集合需已注册。
 
 **入参**
 
@@ -188,7 +188,7 @@ errcode_t gattc_discovery_character(uint8_t client_id, uint16_t conn_id, gattc_d
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x0 | 成功 | 特征发现请求成功发起，结果通过回调返回 |
+| ERRCODE_SUCC：0 | 成功 | 特征发现请求成功发起，结果通过回调返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### gattc_discovery_descriptor <a id="gattc_discovery_descriptor"></a>
@@ -205,13 +205,13 @@ errcode_t gattc_discovery_descriptor(uint8_t client_id, uint16_t conn_id, uint16
 
 **功能说明**
 
-- 向远端发起指定特征声明句柄下的特征描述符发现请求
-- 特征描述符发现结果通过已注册的 gattc_discovery_descriptor_callback 与 gattc_discovery_descriptor_complete_callback 回调异步返回
+- 向远端发起指定特征声明句柄下的特征描述符发现请求。
+- 特征描述符发现结果通过已注册的 gattc_discovery_descriptor_callback 与 gattc_discovery_descriptor_complete_callback 回调异步返回。
 
 **前置条件**
 
-- 调用时序约束：需先调用 gattc_discovery_character 获取目标特征的声明句柄
-- 依赖关系：conn_id 对应的 BLE 连接必须已建立，回调集合需已注册
+- 调用时序约束：需先调用 gattc_discovery_character 获取目标特征的声明句柄。
+- 依赖关系：conn_id 对应的 BLE 连接必须已建立，回调集合需已注册。
 
 **入参**
 
@@ -227,7 +227,7 @@ errcode_t gattc_discovery_descriptor(uint8_t client_id, uint16_t conn_id, uint16
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x0 | 成功 | 特征描述符发现请求成功发起，结果通过回调返回 |
+| ERRCODE_SUCC：0 | 成功 | 特征描述符发现请求成功发起，结果通过回调返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### gattc_read_req_by_handle <a id="gattc_read_req_by_handle"></a>
@@ -244,13 +244,13 @@ errcode_t gattc_read_req_by_handle(uint8_t client_id, uint16_t conn_id, uint16_t
 
 **功能说明**
 
-- 按照属性句柄向远端发起读取请求
-- 读取结果通过已注册的 gattc_read_cfm_callback 回调异步返回
+- 按照属性句柄向远端发起读取请求。
+- 读取结果通过已注册的 gattc_read_cfm_callback 回调异步返回。
 
 **前置条件**
 
-- 调用时序约束：需先通过服务/特征发现获取到目标属性句柄
-- 依赖关系：conn_id 对应的 BLE 连接必须已建立，回调集合需已注册
+- 调用时序约束：需先通过服务/特征发现获取到目标属性句柄。
+- 依赖关系：conn_id 对应的 BLE 连接必须已建立，回调集合需已注册。
 
 **入参**
 
@@ -266,7 +266,7 @@ errcode_t gattc_read_req_by_handle(uint8_t client_id, uint16_t conn_id, uint16_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x0 | 成功 | 读取请求成功发起，结果通过回调返回 |
+| ERRCODE_SUCC：0 | 成功 | 读取请求成功发起，结果通过回调返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### gattc_read_req_by_uuid <a id="gattc_read_req_by_uuid"></a>
@@ -283,13 +283,13 @@ errcode_t gattc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, gattc_read
 
 **功能说明**
 
-- 在指定句柄范围内按照 UUID 向远端发起读取请求
-- 读取结果通过已注册的 gattc_read_cfm_callback 与 gattc_read_by_uuid_complete_callback 回调异步返回
+- 在指定句柄范围内按照 UUID 向远端发起读取请求。
+- 读取结果通过已注册的 gattc_read_cfm_callback 与 gattc_read_by_uuid_complete_callback 回调异步返回。
 
 **前置条件**
 
-- 调用时序约束：需先通过服务/特征发现获取到目标句柄范围
-- 依赖关系：conn_id 对应的 BLE 连接必须已建立，回调集合需已注册
+- 调用时序约束：需先通过服务/特征发现获取到目标句柄范围。
+- 依赖关系：conn_id 对应的 BLE 连接必须已建立，回调集合需已注册。
 
 **入参**
 
@@ -305,7 +305,7 @@ errcode_t gattc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, gattc_read
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x0 | 成功 | 读取请求成功发起，结果通过回调返回 |
+| ERRCODE_SUCC：0 | 成功 | 读取请求成功发起，结果通过回调返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### gattc_write_req <a id="gattc_write_req"></a>
@@ -322,13 +322,13 @@ errcode_t gattc_write_req(uint8_t client_id, uint16_t conn_id, gattc_handle_valu
 
 **功能说明**
 
-- 向远端属性句柄发起写请求（需要远端响应）
-- 写结果通过已注册的 gattc_write_cfm_callback 回调异步返回
+- 向远端属性句柄发起写请求（需要远端响应）。
+- 写结果通过已注册的 gattc_write_cfm_callback 回调异步返回。
 
 **前置条件**
 
-- 调用时序约束：需先通过服务/特征发现获取到目标属性句柄
-- 依赖关系：conn_id 对应的 BLE 连接必须已建立，回调集合需已注册
+- 调用时序约束：需先通过服务/特征发现获取到目标属性句柄。
+- 依赖关系：conn_id 对应的 BLE 连接必须已建立，回调集合需已注册。
 
 **入参**
 
@@ -344,7 +344,7 @@ errcode_t gattc_write_req(uint8_t client_id, uint16_t conn_id, gattc_handle_valu
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x0 | 成功 | 写请求成功发起，结果通过回调返回 |
+| ERRCODE_SUCC：0 | 成功 | 写请求成功发起，结果通过回调返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### gattc_write_cmd <a id="gattc_write_cmd"></a>
@@ -361,13 +361,13 @@ errcode_t gattc_write_cmd(uint8_t client_id, uint16_t conn_id, gattc_handle_valu
 
 **功能说明**
 
-- 向远端属性句柄发起写命令（不需要远端响应）
-- 不产生写响应回调
+- 向远端属性句柄发起写命令（不需要远端响应）。
+- 不产生写响应回调。
 
 **前置条件**
 
-- 调用时序约束：需先通过服务/特征发现获取到目标属性句柄
-- 依赖关系：conn_id 对应的 BLE 连接必须已建立
+- 调用时序约束：需先通过服务/特征发现获取到目标属性句柄。
+- 依赖关系：conn_id 对应的 BLE 连接必须已建立。
 
 **入参**
 
@@ -383,7 +383,7 @@ errcode_t gattc_write_cmd(uint8_t client_id, uint16_t conn_id, gattc_handle_valu
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x0 | 成功 | 写命令成功发起 |
+| ERRCODE_SUCC：0 | 成功 | 写命令成功发起 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### gattc_exchange_mtu_req <a id="gattc_exchange_mtu_req"></a>
@@ -400,13 +400,13 @@ errcode_t gattc_exchange_mtu_req(uint8_t client_id, uint16_t conn_id, uint16_t m
 
 **功能说明**
 
-- 向远端发起 MTU 交换请求，协商本次连接的 ATT (Attribute Protocol) 最大传输单元
-- MTU 协商结果通过已注册的 gattc_mtu_changed_callback 回调异步返回
+- 向远端发起 MTU 交换请求，协商本次连接的 ATT（Attribute Protocol）最大传输单元。
+- MTU 协商结果通过已注册的 gattc_mtu_changed_callback 回调异步返回。
 
 **前置条件**
 
-- 调用时序约束：需在 BLE 连接建立后调用
-- 依赖关系：conn_id 对应的 BLE 连接必须已建立，回调集合需已注册
+- 调用时序约束：需在 BLE 连接建立后调用。
+- 依赖关系：conn_id 对应的 BLE 连接必须已建立，回调集合需已注册。
 
 **入参**
 
@@ -422,7 +422,7 @@ errcode_t gattc_exchange_mtu_req(uint8_t client_id, uint16_t conn_id, uint16_t m
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x0 | 成功 | MTU 交换请求成功发起，结果通过回调返回 |
+| ERRCODE_SUCC：0 | 成功 | MTU 交换请求成功发起，结果通过回调返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### gattc_register_callbacks <a id="gattc_register_callbacks"></a>
@@ -439,13 +439,13 @@ errcode_t gattc_register_callbacks(gattc_callbacks_t *func)
 
 **功能说明**
 
-- 注册 GATT 客户端事件回调函数集合
-- 注册后，服务发现、特征发现、特征描述符发现、读写响应、MTU 改变、Notification、Indication 等事件通过对应回调上报给上层应用
+- 注册 GATT 客户端事件回调函数集合。
+- 注册后，服务发现、特征发现、特征描述符发现、读写响应、MTU 改变、Notification、Indication 等事件通过对应回调上报给上层应用。
 
 **前置条件**
 
-- 调用时序约束：建议在 gattc_register_client 之前或之后、发起任何发现或读写操作之前调用
-- 依赖关系：func 指向由调用方填充的 gattc_callbacks_t 结构
+- 调用时序约束：建议在 gattc_register_client 之前或之后、发起任何发现或读写操作之前调用。
+- 依赖关系：func 指向由调用方填充的 gattc_callbacks_t 结构。
 
 **入参**
 
@@ -459,7 +459,7 @@ errcode_t gattc_register_callbacks(gattc_callbacks_t *func)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x0 | 成功 | 回调函数集合注册成功 |
+| ERRCODE_SUCC：0 | 成功 | 回调函数集合注册成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ## Type definitions

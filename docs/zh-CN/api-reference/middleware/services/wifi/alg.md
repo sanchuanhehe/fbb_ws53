@@ -1,6 +1,6 @@
 # Algorithm
 
-ALG (Algorithm) 提供 Wi-Fi 算法配置能力，包括固定速率设置、协商速率查询、TPC (Transmit Power Control) 模式配置、RTS (Request To Send) 模式配置、CCA (Clear Channel Assessment) 门限设置及抗干扰模式配置。
+ALG (Algorithm) 提供 Wi-Fi 算法配置能力，包括固定速率设置、协商速率查询、TPC（Transmit Power Control）模式配置、RTS（Request To Send）模式配置、CCA（Clear Channel Assessment）门限设置及抗干扰模式配置。
 
 **模块公共头文件**
 
@@ -35,11 +35,11 @@ errcode_t wifi_set_fixed_tx_rate(unsigned char auto_rate, alg_param_stru *alg_pa
 
 **功能说明**
 
-- 设置TX方向发送报文的速率模式，可选择固定速率或自动速率
+- 设置TX方向发送报文的速率模式，可选择固定速率或自动速率。
 
 **前置条件**
 
-- Wi-Fi 已初始化并启动
+- Wi-Fi 已初始化并启动。
 
 **入参**
 
@@ -75,11 +75,11 @@ errcode_t wifi_get_negotiated_rate(const uint8_t *mac, int32_t mac_len, uint32_t
 
 **功能说明**
 
-- 获取指定用户当前协商的最优速率
+- 获取指定用户当前协商的最优速率。
 
 **前置条件**
 
-- Wi-Fi 已初始化并启动
+- Wi-Fi 已初始化并启动。
 
 **入参**
 
@@ -122,11 +122,11 @@ errcode_t wifi_set_tpc_mode(uint32_t tpc_value)
 
 **功能说明**
 
-- 设置TPC模式，用于控制发射功率的动态调整策略
+- 设置TPC模式，用于控制发射功率的动态调整策略。
 
 **前置条件**
 
-- Wi-Fi 已初始化并启动
+- Wi-Fi 已初始化并启动。
 
 **入参**
 
@@ -160,11 +160,11 @@ errcode_t wifi_set_rts_mode(uint8_t mode, uint16_t pkt_length)
 
 **功能说明**
 
-- 设置RTS模式，控制发送报文时是否使用RTS/CTS握手机制
+- 设置RTS模式，控制发送报文时是否使用RTS/CTS握手机制。
 
 **前置条件**
 
-- Wi-Fi 已初始化并启动
+- Wi-Fi 已初始化并启动。
 
 **入参**
 
@@ -199,11 +199,11 @@ errcode_t wifi_set_cca_threshold(uint8_t mode, int8_t threshold)
 
 **功能说明**
 
-- 设置CCA门限值，用于信道空闲检测的判定阈值
+- 设置CCA门限值，用于信道空闲检测的判定阈值。
 
 **前置条件**
 
-- Wi-Fi 已初始化并启动
+- Wi-Fi 已初始化并启动。
 
 **入参**
 
@@ -238,12 +238,12 @@ errcode_t wifi_set_intrf_mode(const char *ifname, uint8_t enable, uint16_t flag)
 
 **功能说明**
 
-- 设置抗干扰模式，配置干扰检测与规避策略的使能及措施标志
+- 设置抗干扰模式，配置干扰检测与规避策略的使能及措施标志。
 
 **前置条件**
 
-- Wi-Fi 已初始化并启动
-- 宏 `_PRE_WLAN_FEATURE_INTRF_MODE` 已在构建配置中使能
+- Wi-Fi 已初始化并启动。
+- 宏 `_PRE_WLAN_FEATURE_INTRF_MODE` 已在构建配置中使能。
 
 **入参**
 

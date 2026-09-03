@@ -1,6 +1,6 @@
 # P2P
 
-P2P (Wi-Fi Peer-to-Peer) 提供 Wi-Fi 直连功能，支持设备扫描、连接、断连及 GO (Group Owner) / GC (Group Client) 角色协商，实现无需接入点的点对点 Wi-Fi 通信。
+P2P（Wi-Fi Peer-to-Peer）提供 Wi-Fi 直连功能，支持设备扫描、连接、断连及 GO（Group Owner） / GC（Group Client）角色协商，实现无需接入点的点对点 Wi-Fi 通信。
 
 **模块公共头文件**
 
@@ -45,14 +45,14 @@ errcode_t wifi_p2p_enable(void)
 
 **功能说明**
 
-- 开启 P2P 功能接口
-- 初始化 P2P 模块相关资源
-- 调用后 P2P 设备进入可用状态
+- 开启 P2P 功能接口。
+- 初始化 P2P 模块相关资源。
+- 调用后 P2P 设备进入可用状态。
 
 **前置条件**
 
-- 调用时序约束：需在 Wi-Fi 驱动初始化完成后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 Wi-Fi 驱动初始化完成后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **返回值**
 
@@ -60,7 +60,7 @@ errcode_t wifi_p2p_enable(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | P2P 功能开启成功 |
+| ERRCODE_SUCC：0 | 执行成功 | P2P 功能开启成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -83,14 +83,14 @@ errcode_t wifi_p2p_disable(void)
 
 **功能说明**
 
-- 关闭 P2P 功能接口
-- 释放 P2P 模块相关资源
-- 调用后 P2P 设备进入不可用状态
+- 关闭 P2P 功能接口。
+- 释放 P2P 模块相关资源。
+- 调用后 P2P 设备进入不可用状态。
 
 **前置条件**
 
-- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **返回值**
 
@@ -98,7 +98,7 @@ errcode_t wifi_p2p_disable(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | P2P 功能关闭成功 |
+| ERRCODE_SUCC：0 | 执行成功 | P2P 功能关闭成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -121,14 +121,14 @@ int32_t wifi_p2p_is_enabled(void)
 
 **功能说明**
 
-- 查询 P2P 功能是否已使能
-- 返回 P2P 初始化状态
-- 用于判断 P2P 模块是否处于可用状态
+- 查询 P2P 功能是否已使能。
+- 返回 P2P 初始化状态。
+- 用于判断 P2P 模块是否处于可用状态。
 
 **前置条件**
 
-- 调用时序约束：需在 Wi-Fi 驱动初始化完成后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 Wi-Fi 驱动初始化完成后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **返回值**
 
@@ -159,14 +159,14 @@ errcode_t wifi_p2p_find(int32_t sec)
 
 **功能说明**
 
-- 触发 P2P 设备扫描搜索
-- 在指定时间内扫描周围 P2P 设备
-- 扫描结果可通过 wifi_p2p_get_peers_info 获取
+- 触发 P2P 设备扫描搜索。
+- 在指定时间内扫描周围 P2P 设备。
+- 扫描结果可通过 wifi_p2p_get_peers_info 获取。
 
 **前置条件**
 
-- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -180,7 +180,7 @@ errcode_t wifi_p2p_find(int32_t sec)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | P2P 设备扫描启动成功 |
+| ERRCODE_SUCC：0 | 执行成功 | P2P 设备扫描启动成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -203,14 +203,14 @@ errcode_t wifi_p2p_stop_find(void)
 
 **功能说明**
 
-- 停止 P2P 设备扫描
-- 终止当前正在进行的 P2P 设备搜索过程
-- 调用后不再继续扫描周围 P2P 设备
+- 停止 P2P 设备扫描。
+- 终止当前正在进行的 P2P 设备搜索过程。
+- 调用后不再继续扫描周围 P2P 设备。
 
 **前置条件**
 
-- 调用时序约束：需在 wifi_p2p_find 调用后使用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 wifi_p2p_find 调用后使用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **返回值**
 
@@ -218,7 +218,7 @@ errcode_t wifi_p2p_stop_find(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | P2P 扫描停止成功 |
+| ERRCODE_SUCC：0 | 执行成功 | P2P 扫描停止成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -241,14 +241,14 @@ errcode_t wifi_p2p_connect_cancel(void)
 
 **功能说明**
 
-- 停止 P2P 设备连接过程
-- 终止当前正在进行的 P2P 连接协商
-- 调用后取消与对端设备的连接流程
+- 停止 P2P 设备连接过程。
+- 终止当前正在进行的 P2P 连接协商。
+- 调用后取消与对端设备的连接流程。
 
 **前置条件**
 
-- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **返回值**
 
@@ -256,7 +256,7 @@ errcode_t wifi_p2p_connect_cancel(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | P2P 连接取消成功 |
+| ERRCODE_SUCC：0 | 执行成功 | P2P 连接取消成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -279,21 +279,21 @@ errcode_t wifi_p2p_listen(uint32_t period, uint32_t interval)
 
 **功能说明**
 
-- 设置 P2P 设备监听时间参数
-- 配置监听周期和总时间间隔
-- 使 P2P 设备在指定时间窗口内监听对端请求
+- 设置 P2P 设备监听时间参数。
+- 配置监听周期和总时间间隔。
+- 使 P2P 设备在指定时间窗口内监听对端请求。
 
 **前置条件**
 
-- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| period | uint32_t | 监听时间 | 0 ~ 65535（与 interval 须同为 0 或同非 0，且 period ≤ interval） |
-| interval | uint32_t | 一个周期的总时间 | 0 ~ 65535（与 period 须同为 0 或同非 0，且 period ≤ interval） |
+| period | uint32_t | 监听时间 | 0 ~ 65535（与 interval 须同为 0或同非 0，且period ≤ interval） |
+| interval | uint32_t | 一个周期的总时间 | 0 ~ 65535（与 period 须同为 0或同非 0，且period ≤ interval） |
 
 **返回值**
 
@@ -301,7 +301,7 @@ errcode_t wifi_p2p_listen(uint32_t period, uint32_t interval)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| WIFI_SUCCESS:0 | 执行成功 | P2P 监听设置成功 |
+| WIFI_SUCCESS：0 | 执行成功 | P2P 监听设置成功 |
 | Other | 其他错误码（含 ERROR_WIFI_* 负值错误码），参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -324,14 +324,14 @@ errcode_t wifi_p2p_get_peers_info(p2p_device_stru *dev_list, uint32_t *dev_num)
 
 **功能说明**
 
-- 获取扫描发现的 P2P 设备信息列表
-- 返回 P2P 设备名称、MAC (Media Access Control) 地址、WPS (Wi-Fi Protected Setup) 连接方式等信息
-- 入参 dev_num 同时用于传入最大反馈数量与返回实际反馈数量
+- 获取扫描发现的 P2P 设备信息列表。
+- 返回 P2P 设备名称、MAC（Media Access Control）地址、WPS（Wi-Fi Protected Setup）连接方式等信息。
+- 入参 dev_num 同时用于传入最大反馈数量与返回实际反馈数量。
 
 **前置条件**
 
-- 调用时序约束：需在 wifi_p2p_find 执行并扫描到设备后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 wifi_p2p_find 执行并扫描到设备后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -352,7 +352,7 @@ errcode_t wifi_p2p_get_peers_info(p2p_device_stru *dev_list, uint32_t *dev_num)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | P2P 设备信息获取成功 |
+| ERRCODE_SUCC：0 | 执行成功 | P2P 设备信息获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -375,14 +375,14 @@ errcode_t wifi_p2p_connect(const p2p_config_stru *p2p_config)
 
 **功能说明**
 
-- P2P 主动连接对端设备
-- 根据配置信息发起与指定 P2P 设备的连接
-- 支持 WPS 连接方式、GO intent 等参数配置
+- P2P 主动连接对端设备。
+- 根据配置信息发起与指定 P2P 设备的连接。
+- 支持 WPS 连接方式、GO intent 等参数配置。
 
 **前置条件**
 
-- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -396,7 +396,7 @@ errcode_t wifi_p2p_connect(const p2p_config_stru *p2p_config)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | P2P 连接请求发起成功 |
+| ERRCODE_SUCC：0 | 执行成功 | P2P 连接请求发起成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -419,14 +419,14 @@ errcode_t wifi_p2p_connect_accept(const p2p_config_stru *p2p_config, int assoc)
 
 **功能说明**
 
-- 接受或拒绝对端的 P2P 连接请求
-- 根据 assoc 参数决定是否接受连接
-- 配合 P2P 连接协商流程使用
+- 接受或拒绝对端的 P2P 连接请求。
+- 根据 assoc 参数决定是否接受连接。
+- 配合 P2P 连接协商流程使用。
 
 **前置条件**
 
-- 调用时序约束：需在收到对端 P2P 连接请求后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在收到对端 P2P 连接请求后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -441,7 +441,7 @@ errcode_t wifi_p2p_connect_accept(const p2p_config_stru *p2p_config, int assoc)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | P2P 连接响应设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | P2P 连接响应设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -464,14 +464,14 @@ errcode_t wifi_p2p_disconnect(void)
 
 **功能说明**
 
-- 断开当前 P2P 连接
-- 终止与对端设备的 P2P 连接关系
-- 调用后设备恢复到未连接状态
+- 断开当前 P2P 连接。
+- 终止与对端设备的 P2P 连接关系。
+- 调用后设备恢复到未连接状态。
 
 **前置条件**
 
-- 调用时序约束：需在 P2P 已建立连接后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 P2P 已建立连接后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **返回值**
 
@@ -479,7 +479,7 @@ errcode_t wifi_p2p_disconnect(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | P2P 断连成功 |
+| ERRCODE_SUCC：0 | 执行成功 | P2P 断连成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -502,14 +502,14 @@ errcode_t wifi_p2p_go_get_gc_info(p2p_client_info_stru *client_list, uint32_t *c
 
 **功能说明**
 
-- GO (Group Owner) 获取已连接的 GC (Group Client) 信息
-- 返回 GC 的 MAC 地址、设备地址和设备名称
-- 入参 client_num 同时用于传入最大反馈数量与返回实际反馈数量
+- GO（Group Owner）获取已连接的 GC（Group Client）信息。
+- 返回 GC 的 MAC 地址、设备地址和设备名称。
+- 入参 client_num 同时用于传入最大反馈数量与返回实际反馈数量。
 
 **前置条件**
 
-- 调用时序约束：需在 P2P 以 GO 模式连接成功后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 P2P 以 GO 模式连接成功后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -531,7 +531,7 @@ errcode_t wifi_p2p_go_get_gc_info(p2p_client_info_stru *client_list, uint32_t *c
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | GC 信息获取成功 |
+| ERRCODE_SUCC：0 | 执行成功 | GC 信息获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -554,14 +554,14 @@ errcode_t wifi_p2p_set_device_config(const p2p_device_config_stru *p2p_dev_set_i
 
 **功能说明**
 
-- 设置 P2P 设备信息
-- 配置设备名称、WPS 连接方式、监听信道和工作信道
-- 在 P2P 连接前配置本端设备参数
+- 设置 P2P 设备信息。
+- 配置设备名称、WPS 连接方式、监听信道和工作信道。
+- 在 P2P 连接前配置本端设备参数。
 
 **前置条件**
 
-- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -575,7 +575,7 @@ errcode_t wifi_p2p_set_device_config(const p2p_device_config_stru *p2p_dev_set_i
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | P2P 设备信息设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | P2P 设备信息设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -598,14 +598,14 @@ errcode_t wifi_p2p_get_device_config(p2p_device_config_stru *p2p_dev_set_info)
 
 **功能说明**
 
-- 获取 P2P 设备信息
-- 读取当前设备名称、WPS 连接方式、监听信道和工作信道等配置
-- 用于查询本端 P2P 设备参数
+- 获取 P2P 设备信息。
+- 读取当前设备名称、WPS 连接方式、监听信道和工作信道等配置。
+- 用于查询本端 P2P 设备参数。
 
 **前置条件**
 
-- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -625,7 +625,7 @@ errcode_t wifi_p2p_get_device_config(p2p_device_config_stru *p2p_dev_set_info)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | P2P 设备信息获取成功 |
+| ERRCODE_SUCC：0 | 执行成功 | P2P 设备信息获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**
@@ -648,14 +648,14 @@ errcode_t wifi_p2p_get_connect_info(p2p_status_info_stru *status)
 
 **功能说明**
 
-- 获取 P2P 连接状态信息
-- 返回工作信道中心频点、P2P 模式、关联状态、Group SSID (Service Set Identifier) 和 Group BSSID (Basic Service Set Identifier)
-- 用于查询当前 P2P 连接的详细状态
+- 获取 P2P 连接状态信息。
+- 返回工作信道中心频点、P2P 模式、关联状态、Group SSID（Service Set Identifier）和 Group BSSID（Basic Service Set Identifier）。
+- 用于查询当前 P2P 连接的详细状态。
 
 **前置条件**
 
-- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用
-- 上下文限制：需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：需在 wifi_p2p_enable 成功返回后调用。
+- 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -675,7 +675,7 @@ errcode_t wifi_p2p_get_connect_info(p2p_status_info_stru *status)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | P2P 连接状态信息获取成功 |
+| ERRCODE_SUCC：0 | 执行成功 | P2P 连接状态信息获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **Kconfig配置**

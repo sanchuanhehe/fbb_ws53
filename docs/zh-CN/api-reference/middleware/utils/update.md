@@ -45,15 +45,15 @@ errcode_t uapi_upg_init(const upg_func_t *func_list)
 
 **功能说明**
 
-- 初始化升级模块，注册内存分配、释放和串口输出函数
-- 标记升级模块为已初始化
-- 获取并保存当前升级状态
+- 初始化升级模块，注册内存分配、释放和串口输出函数。
+- 标记升级模块为已初始化。
+- 获取并保存当前升级状态。
 
 **前置条件**
 
-- 调用时序约束：首次使用升级模块其他接口前必须调用本接口完成初始化
-- 依赖关系：func_list 中 malloc 和 free 函数必须有效
-- 上下文限制：禁止重复调用，重复调用返回 ERRCODE_UPG_ALREADY_INIT
+- 调用时序约束：首次使用升级模块其他接口前必须调用本接口完成初始化。
+- 依赖关系：func_list 中 malloc 和 free 函数必须有效。
+- 上下文限制：禁止重复调用，重复调用返回 ERRCODE_UPG_ALREADY_INIT。
 
 **入参**
 
@@ -67,8 +67,8 @@ errcode_t uapi_upg_init(const upg_func_t *func_list)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 初始化成功 |
-| ERRCODE_UPG_ALREADY_INIT:0x80003041 | 模块已初始化 | 重复调用初始化接口 |
+| ERRCODE_SUCC：0 | 执行成功 | 初始化成功 |
+| ERRCODE_UPG_ALREADY_INIT：0x80003041 | 模块已初始化 | 重复调用初始化接口 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **参考案例**
@@ -96,15 +96,15 @@ errcode_t uapi_upg_start(void)
 
 **功能说明**
 
-- 开始本地升级流程，读取升级标记并校验升级包
-- 根据升级包中的镜像列表逐个执行升级任务
-- 升级完成后更新升级标记和完成标记
+- 开始本地升级流程，读取升级标记并校验升级包。
+- 根据升级包中的镜像列表逐个执行升级任务。
+- 升级完成后更新升级标记和完成标记。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用
-- 依赖关系：当前接口依赖升级标记区已存在有效的升级包信息
-- 上下文限制：升级流程中禁止并发调用
+- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用。
+- 依赖关系：当前接口依赖升级标记区已存在有效的升级包信息。
+- 上下文限制：升级流程中禁止并发调用。
 
 **返回值**
 
@@ -112,9 +112,9 @@ errcode_t uapi_upg_start(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 升级流程执行成功 |
-| ERRCODE_UPG_NOT_INIT:0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
-| ERRCODE_UPG_NOT_NEED_TO_UPDATE:0x80003047 | 不需要升级 | 升级区无有效升级包 |
+| ERRCODE_SUCC：0 | 执行成功 | 升级流程执行成功 |
+| ERRCODE_UPG_NOT_INIT：0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
+| ERRCODE_UPG_NOT_NEED_TO_UPDATE：0x80003047 | 不需要升级 | 升级区无有效升级包 |
 | Other | 其他错误码，参考 errcode_t | 升级流程执行失败 |
 
 **参考案例**
@@ -142,13 +142,13 @@ errcode_t uapi_upg_register_progress_callback(uapi_upg_progress_cb func)
 
 **功能说明**
 
-- 注册升级进度通知回调函数，升级过程中通过回调上报进度百分比
-- 注册后升级流程执行期间会计算已完成镜像大小占总镜像大小的百分比并通知
+- 注册升级进度通知回调函数，升级过程中通过回调上报进度百分比。
+- 注册后升级流程执行期间会计算已完成镜像大小占总镜像大小的百分比并通知。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用
-- 依赖关系：当前接口依赖 UPG_CFG_PROCESS_NOTIFY_SUPPORT 配置开启
+- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用。
+- 依赖关系：当前接口依赖 UPG_CFG_PROCESS_NOTIFY_SUPPORT 配置开启。
 
 **入参**
 
@@ -162,8 +162,8 @@ errcode_t uapi_upg_register_progress_callback(uapi_upg_progress_cb func)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 注册成功 |
-| ERRCODE_UPG_NOT_SUPPORTED:0x80003046 | 不支持 | UPG_CFG_PROCESS_NOTIFY_SUPPORT 未开启 |
+| ERRCODE_SUCC：0 | 执行成功 | 注册成功 |
+| ERRCODE_UPG_NOT_SUPPORTED：0x80003046 | 不支持 | UPG_CFG_PROCESS_NOTIFY_SUPPORT 未开启 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **参考案例**
@@ -195,13 +195,13 @@ errcode_t uapi_upg_get_result(upg_result_t *result, uint32_t *last_image_index)
 
 **功能说明**
 
-- 获取升级结果，包括升级成功或失败的具体原因
-- 获取最后一个处理的升级镜像序号
+- 获取升级结果，包括升级成功或失败的具体原因。
+- 获取最后一个处理的升级镜像序号。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用
-- 依赖关系：当前接口依赖升级标记区已写入升级结果
+- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用。
+- 依赖关系：当前接口依赖升级标记区已写入升级结果。
 
 **出参**
 
@@ -216,8 +216,8 @@ errcode_t uapi_upg_get_result(upg_result_t *result, uint32_t *last_image_index)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 获取升级结果成功 |
-| ERRCODE_UPG_NULL_POINTER:0x80003045 | 空指针 | result 或 last_image_index 为 NULL |
+| ERRCODE_SUCC：0 | 执行成功 | 获取升级结果成功 |
+| ERRCODE_UPG_NULL_POINTER：0x80003045 | 空指针 | result 或 last_image_index 为 NULL |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **Kconfig配置**
@@ -241,12 +241,12 @@ upg_status_t uapi_upg_get_status(void)
 
 **功能说明**
 
-- 获取当前升级状态，包括成功、失败、升级中或非升级状态
-- 返回从升级标记区读取并缓存的状态值
+- 获取当前升级状态，包括成功、失败、升级中或非升级状态。
+- 返回从升级标记区读取并缓存的状态值。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用
+- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用。
 
 **返回值**
 
@@ -254,10 +254,10 @@ upg_status_t uapi_upg_get_status(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| UPG_STATUS_SUCC:0 | 升级成功 | 升级标记区记录升级成功 |
-| UPG_STATUS_FAIL:1 | 升级失败 | 升级标记区记录升级失败 |
-| UPG_STATUS_UPDATING:2 | 正在升级 | 升级标记区记录升级进行中 |
-| UPG_STATUS_NONE:3 | 非升级状态 | 无升级记录或标记区无效 |
+| UPG_STATUS_SUCC：0 | 升级成功 | 升级标记区记录升级成功 |
+| UPG_STATUS_FAIL：1 | 升级失败 | 升级标记区记录升级失败 |
+| UPG_STATUS_UPDATING：2 | 正在升级 | 升级标记区记录升级进行中 |
+| UPG_STATUS_NONE：3 | 非升级状态 | 无升级记录或标记区无效 |
 
 **Kconfig配置**
 
@@ -280,15 +280,15 @@ errcode_t uapi_upg_prepare(upg_prepare_info_t *prepare_info)
 
 **功能说明**
 
-- 准备本地存储空间以保存升级包，擦除升级区和进度状态区
-- 初始化升级标记区中的头部偏移、升级包长度和头部魔数
-- 该函数阻塞等待执行完成后返回
+- 准备本地存储空间以保存升级包，擦除升级区和进度状态区。
+- 初始化升级标记区中的头部偏移、升级包长度和头部魔数。
+- 该函数阻塞等待执行完成后返回。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后、写入升级包数据前调用
-- 依赖关系：当前接口依赖 Flash 升级分区已就绪
-- 上下文限制：该函数为阻塞调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后、写入升级包数据前调用。
+- 依赖关系：当前接口依赖 Flash 升级分区已就绪。
+- 上下文限制：该函数为阻塞调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -302,9 +302,9 @@ errcode_t uapi_upg_prepare(upg_prepare_info_t *prepare_info)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 存储空间准备成功 |
-| ERRCODE_UPG_NOT_INIT:0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
-| ERRCODE_UPG_INVALID_PARAMETER:0x80003042 | 参数无效 | prepare_info 为 NULL 或 package_len 为 0 |
+| ERRCODE_SUCC：0 | 执行成功 | 存储空间准备成功 |
+| ERRCODE_UPG_NOT_INIT：0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
+| ERRCODE_UPG_INVALID_PARAMETER：0x80003042 | 参数无效 | prepare_info 为 NULL 或 package_len 为 0 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **Kconfig配置**
@@ -328,14 +328,14 @@ errcode_t uapi_upg_reset_upgrade_flag(void)
 
 **功能说明**
 
-- 重置升级标记，擦除标记区后重新初始化头部偏移、头部魔数和升级包长度
-- 该函数阻塞等待执行完成后返回
+- 重置升级标记，擦除标记区后重新初始化头部偏移、头部魔数和升级包长度。
+- 该函数阻塞等待执行完成后返回。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用
-- 依赖关系：当前接口依赖 Flash 升级标记区已就绪
-- 上下文限制：该函数为阻塞调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用。
+- 依赖关系：当前接口依赖 Flash 升级标记区已就绪。
+- 上下文限制：该函数为阻塞调用，禁止在中断上下文调用。
 
 **返回值**
 
@@ -343,8 +343,8 @@ errcode_t uapi_upg_reset_upgrade_flag(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 升级标记重置成功 |
-| ERRCODE_UPG_NOT_INIT:0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
+| ERRCODE_SUCC：0 | 执行成功 | 升级标记重置成功 |
+| ERRCODE_UPG_NOT_INIT：0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **参考案例**
@@ -372,14 +372,14 @@ errcode_t uapi_upg_write_package_async(uint32_t offset, const uint8_t *buff, uin
 
 **功能说明**
 
-- 将升级包数据异步写入本地存储，写入完成后调用回调函数通知结果
-- 写入位置由相对升级包起始的偏移量指定
+- 将升级包数据异步写入本地存储，写入完成后调用回调函数通知结果。
+- 写入位置由相对升级包起始的偏移量指定。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_upg_prepare 成功返回后调用
-- 依赖关系：当前接口依赖本地存储区已准备完成
-- 上下文限制：前一次写入的回调返回前禁止再次调用本接口
+- 调用时序约束：当前接口必须在 uapi_upg_prepare 成功返回后调用。
+- 依赖关系：当前接口依赖本地存储区已准备完成。
+- 上下文限制：前一次写入的回调返回前禁止再次调用本接口。
 
 **入参**
 
@@ -396,11 +396,11 @@ errcode_t uapi_upg_write_package_async(uint32_t offset, const uint8_t *buff, uin
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 数据写入成功 |
-| ERRCODE_UPG_NOT_INIT:0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
-| ERRCODE_UPG_NOT_PREPARED:0x80003054 | 未准备存储空间 | 未调用 uapi_upg_prepare |
-| ERRCODE_UPG_NULL_POINTER:0x80003045 | 空指针 | buff 为 NULL |
-| ERRCODE_UPG_INVALID_BUFF_LEN:0x80003055 | 缓冲区长度无效 | len 为 0 |
+| ERRCODE_SUCC：0 | 执行成功 | 数据写入成功 |
+| ERRCODE_UPG_NOT_INIT：0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
+| ERRCODE_UPG_NOT_PREPARED：0x80003054 | 未准备存储空间 | 未调用 uapi_upg_prepare |
+| ERRCODE_UPG_NULL_POINTER：0x80003045 | 空指针 | buff 为 NULL |
+| ERRCODE_UPG_INVALID_BUFF_LEN：0x80003055 | 缓冲区长度无效 | len 为 0 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **Kconfig配置**
@@ -424,13 +424,13 @@ errcode_t uapi_upg_write_package_sync(uint32_t offset, const uint8_t *buff, uint
 
 **功能说明**
 
-- 将升级包数据同步写入本地存储，写入完成后直接返回
-- 写入位置由相对升级包起始的偏移量指定
+- 将升级包数据同步写入本地存储，写入完成后直接返回。
+- 写入位置由相对升级包起始的偏移量指定。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_upg_prepare 成功返回后调用
-- 依赖关系：当前接口依赖本地存储区已准备完成
+- 调用时序约束：当前接口必须在 uapi_upg_prepare 成功返回后调用。
+- 依赖关系：当前接口依赖本地存储区已准备完成。
 
 **入参**
 
@@ -446,11 +446,11 @@ errcode_t uapi_upg_write_package_sync(uint32_t offset, const uint8_t *buff, uint
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 数据写入成功 |
-| ERRCODE_UPG_NOT_INIT:0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
-| ERRCODE_UPG_NOT_PREPARED:0x80003054 | 未准备存储空间 | 未调用 uapi_upg_prepare |
-| ERRCODE_UPG_NULL_POINTER:0x80003045 | 空指针 | buff 为 NULL |
-| ERRCODE_UPG_INVALID_BUFF_LEN:0x80003055 | 缓冲区长度无效 | len 为 0 |
+| ERRCODE_SUCC：0 | 执行成功 | 数据写入成功 |
+| ERRCODE_UPG_NOT_INIT：0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
+| ERRCODE_UPG_NOT_PREPARED：0x80003054 | 未准备存储空间 | 未调用 uapi_upg_prepare |
+| ERRCODE_UPG_NULL_POINTER：0x80003045 | 空指针 | buff 为 NULL |
+| ERRCODE_UPG_INVALID_BUFF_LEN：0x80003055 | 缓冲区长度无效 | len 为 0 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **Kconfig配置**
@@ -474,13 +474,13 @@ errcode_t uapi_upg_read_package(uint32_t offset, uint8_t *buff, uint32_t len)
 
 **功能说明**
 
-- 从本地存储读取升级包数据
-- 读取位置由相对升级包起始的偏移量指定
+- 从本地存储读取升级包数据。
+- 读取位置由相对升级包起始的偏移量指定。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用
-- 依赖关系：当前接口依赖本地存储区已写入升级包数据
+- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用。
+- 依赖关系：当前接口依赖本地存储区已写入升级包数据。
 
 **入参**
 
@@ -496,10 +496,10 @@ errcode_t uapi_upg_read_package(uint32_t offset, uint8_t *buff, uint32_t len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 数据读取成功 |
-| ERRCODE_UPG_NOT_INIT:0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
-| ERRCODE_UPG_NULL_POINTER:0x80003045 | 空指针 | buff 为 NULL |
-| ERRCODE_UPG_INVALID_BUFF_LEN:0x80003055 | 缓冲区长度无效 | len 为 0 |
+| ERRCODE_SUCC：0 | 执行成功 | 数据读取成功 |
+| ERRCODE_UPG_NOT_INIT：0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
+| ERRCODE_UPG_NULL_POINTER：0x80003045 | 空指针 | buff 为 NULL |
+| ERRCODE_UPG_INVALID_BUFF_LEN：0x80003055 | 缓冲区长度无效 | len 为 0 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **Kconfig配置**
@@ -523,12 +523,12 @@ uint32_t uapi_upg_get_storage_size(void)
 
 **功能说明**
 
-- 获取可存放升级包的空间大小
-- 返回本地存储中可用于保存升级包的最大字节数
+- 获取可存放升级包的空间大小。
+- 返回本地存储中可用于保存升级包的最大字节数。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用
+- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用。
 
 **返回值**
 
@@ -560,13 +560,13 @@ errcode_t uapi_upg_request_upgrade(bool reset)
 
 **功能说明**
 
-- 申请开始本地升级，校验升级包后写入升级请求数据到标记区
-- 可选择升级流程结束后是否重启系统
+- 申请开始本地升级，校验升级包后写入升级请求数据到标记区。
+- 可选择升级流程结束后是否重启系统。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用，且升级包已完整写入本地存储
-- 依赖关系：当前接口依赖本地存储区已写入完整升级包
+- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用，且升级包已完整写入本地存储。
+- 依赖关系：当前接口依赖本地存储区已写入完整升级包。
 
 **入参**
 
@@ -580,8 +580,8 @@ errcode_t uapi_upg_request_upgrade(bool reset)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 升级申请成功 |
-| ERRCODE_UPG_NOT_INIT:0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
+| ERRCODE_SUCC：0 | 执行成功 | 升级申请成功 |
+| ERRCODE_UPG_NOT_INIT：0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **参考案例**
@@ -609,13 +609,13 @@ errcode_t uapi_upg_verify_file_head(const upg_package_header_t *pkg_header)
 
 **功能说明**
 
-- 校验升级包头结构，包括使用根公钥校验密钥区签名、使用二级公钥校验信息区签名
-- 若注册了自定义字段校验函数，则校验用户自定义字段
+- 校验升级包头结构，包括使用根公钥校验密钥区签名、使用二级公钥校验信息区签名。
+- 若注册了自定义字段校验函数，则校验用户自定义字段。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用
-- 依赖关系：当前接口依赖根公钥已烧录到 Flash
+- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用。
+- 依赖关系：当前接口依赖根公钥已烧录到 Flash。
 
 **入参**
 
@@ -629,10 +629,10 @@ errcode_t uapi_upg_verify_file_head(const upg_package_header_t *pkg_header)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 包头校验通过 |
-| ERRCODE_UPG_NOT_INIT:0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
-| ERRCODE_UPG_VERIFICATION_KEY_ERROR:0x80003063 | 校验密钥错误 | 获取根公钥失败 |
-| ERRCODE_FAIL:0xFFFFFFFF | 校验失败 | 签名校验不通过或镜像 ID 不正确 |
+| ERRCODE_SUCC：0 | 执行成功 | 包头校验通过 |
+| ERRCODE_UPG_NOT_INIT：0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
+| ERRCODE_UPG_VERIFICATION_KEY_ERROR：0x80003063 | 校验密钥错误 | 获取根公钥失败 |
+| ERRCODE_FAIL：0xFFFFFFFF | 校验失败 | 签名校验不通过或镜像 ID 不正确 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **Kconfig配置**
@@ -661,14 +661,14 @@ errcode_t uapi_upg_verify_file_image(const upg_image_header_t *img_header, const
 
 **功能说明**
 
-- 校验升级包中的升级镜像，包括镜像头哈希校验和新镜像数据哈希校验
-- 若为差分升级且 verify_old 为 true，则校验旧镜像哈希
-- 校验镜像头魔术字有效性
+- 校验升级包中的升级镜像，包括镜像头哈希校验和新镜像数据哈希校验。
+- 若为差分升级且 verify_old 为 true，则校验旧镜像哈希。
+- 校验镜像头魔术字有效性。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用
-- 依赖关系：当前接口依赖升级包数据已写入本地存储
+- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用。
+- 依赖关系：当前接口依赖升级包数据已写入本地存储。
 
 **入参**
 
@@ -685,8 +685,8 @@ errcode_t uapi_upg_verify_file_image(const upg_image_header_t *img_header, const
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 镜像校验通过 |
-| ERRCODE_FAIL:0xFFFFFFFF | 校验失败 | 镜像头魔术字不正确或哈希校验不通过 |
+| ERRCODE_SUCC：0 | 执行成功 | 镜像校验通过 |
+| ERRCODE_FAIL：0xFFFFFFFF | 校验失败 | 镜像头魔术字不正确或哈希校验不通过 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **Kconfig配置**
@@ -715,13 +715,13 @@ errcode_t uapi_upg_verify_file(const upg_package_header_t *pkg_header)
 
 **功能说明**
 
-- 校验整个升级包，依次执行包头校验、镜像哈希表校验和逐个镜像校验
-- 包括防回滚版本号校验（若开启防回滚功能）
+- 校验整个升级包，依次执行包头校验、镜像哈希表校验和逐个镜像校验。
+- 包括防回滚版本号校验（若开启防回滚功能）。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用
-- 依赖关系：当前接口依赖升级包数据已完整写入本地存储
+- 调用时序约束：当前接口必须在 uapi_upg_init 成功返回后调用。
+- 依赖关系：当前接口依赖升级包数据已完整写入本地存储。
 
 **入参**
 
@@ -735,9 +735,9 @@ errcode_t uapi_upg_verify_file(const upg_package_header_t *pkg_header)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 整包校验通过 |
-| ERRCODE_UPG_NOT_INIT:0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
-| ERRCODE_FAIL:0xFFFFFFFF | 校验失败 | 签名或哈希校验不通过 |
+| ERRCODE_SUCC：0 | 执行成功 | 整包校验通过 |
+| ERRCODE_UPG_NOT_INIT：0x80003040 | 模块未初始化 | 未调用 uapi_upg_init |
+| ERRCODE_FAIL：0xFFFFFFFF | 校验失败 | 签名或哈希校验不通过 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **参考案例**
@@ -770,12 +770,12 @@ void uapi_upg_register_user_defined_verify_func(uapi_upg_user_defined_check func
 
 **功能说明**
 
-- 注册用户自定义字段校验函数
-- 注册后调用 uapi_upg_verify_file_head 和 uapi_upg_verify_file 时，校验函数会被调用
+- 注册用户自定义字段校验函数。
+- 注册后调用 uapi_upg_verify_file_head 和 uapi_upg_verify_file 时，校验函数会被调用。
 
 **前置条件**
 
-- 调用时序约束：当前接口须在调用 uapi_upg_verify_file_head 或 uapi_upg_verify_file 之前注册
+- 调用时序约束：当前接口须在调用 uapi_upg_verify_file_head 或 uapi_upg_verify_file 之前注册。
 
 **入参**
 

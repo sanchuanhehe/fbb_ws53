@@ -1,6 +1,6 @@
 # Service OTA
 
-OTA (Over-The-Air) 基于 SLE (Star Flash Low Energy) 通信提供设备固件升级数据的服务端接收与确认能力。本模块对外提供 OTA 服务器初始化、升级数据确认发送以及接收数据回调注册三类接口。
+OTA (Over-The-Air) 基于 SLE（Star Flash Low Energy）通信提供设备固件升级数据的服务端接收与确认能力。本模块对外提供 OTA 服务器初始化、升级数据确认发送以及接收数据回调注册三类接口。
 
 **模块公共头文件**
 
@@ -32,12 +32,12 @@ errcode_t sle_ota_service_init(uint8_t server_id)
 
 **功能说明**
 
-- 初始化 SLE OTA 服务器端，建立升级数据传输所需的服务端运行环境
-- 以入参指定的 server_id 标识本次初始化的 OTA 服务实例
+- 初始化 SLE OTA 服务器端，建立升级数据传输所需的服务端运行环境。
+- 以入参指定的 server_id 标识本次初始化的 OTA 服务实例。
 
 **前置条件**
 
-- 依赖关系：依赖 sle_ssap_server.h 提供的 SSAP 服务端能力（头文件注释 @par 依赖）
+- 依赖关系：依赖 sle_ssap_server.h 提供的 SSAP 服务端能力（头文件注释 @par 依赖）。
 
 **入参**
 
@@ -51,7 +51,7 @@ errcode_t sle_ota_service_init(uint8_t server_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 服务器初始化成功 |
+| ERRCODE_SUCC：0 | 成功 | 服务器初始化成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### sle_ota_data_ack <a id="sle_ota_data_ack"></a>
@@ -68,12 +68,12 @@ errcode_t sle_ota_data_ack(uint16_t value_len, uint8_t *value)
 
 **功能说明**
 
-- 服务端向对端发送 OTA 数据确认信息
-- 通过入参指定待发送数据的长度与内容
+- 服务端向对端发送 OTA 数据确认信息。
+- 通过入参指定待发送数据的长度与内容。
 
 **前置条件**
 
-- 依赖关系：依赖 sle_ssap_server.h 提供的 SSAP 服务端能力（头文件注释 @par 依赖）
+- 依赖关系：依赖 sle_ssap_server.h 提供的 SSAP 服务端能力（头文件注释 @par 依赖）。
 
 **入参**
 
@@ -88,7 +88,7 @@ errcode_t sle_ota_data_ack(uint16_t value_len, uint8_t *value)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 成功 | 数据确认发送成功 |
+| ERRCODE_SUCC：0 | 成功 | 数据确认发送成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### sle_ota_reg_chan_data_report_cbk <a id="sle_ota_reg_chan_data_report_cbk"></a>
@@ -105,9 +105,9 @@ void sle_ota_reg_chan_data_report_cbk(sle_ota_chan_data_report data_report)
 
 **功能说明**
 
-- 注册服务端接收 OTA 升级数据的回调函数
-- 当服务端接收到 OTA 升级数据时，通过已注册的回调向应用层上报数据
-- 应用层通过本接口设置数据上报回调
+- 注册服务端接收 OTA 升级数据的回调函数。
+- 当服务端接收到 OTA 升级数据时，通过已注册的回调向应用层上报数据。
+- 应用层通过本接口设置数据上报回调。
 
 **入参**
 
@@ -129,10 +129,10 @@ typedef void (*sle_ota_chan_data_report) (const uint8_t *data_ptr,  const uint16
 
 回调说明：
 
-- 调用时机：服务端通过 SLE 通道接收到 OTA 升级数据时由本模块调用
-- 参数 `data_ptr`：指向接收到的 OTA 升级数据的指针，数据内容只读
-- 参数 `data_len`：接收到的 OTA 升级数据的字节长度
-- 返回值处理：回调返回类型为 void，无返回值
+- 调用时机：服务端通过 SLE 通道接收到 OTA 升级数据时由本模块调用。
+- 参数 `data_ptr`：指向接收到的 OTA 升级数据的指针，数据内容只读。
+- 参数 `data_len`：接收到的 OTA 升级数据的字节长度。
+- 返回值处理：回调返回类型为 void，无返回值。
 
 ### typedef_errcode_t <a id="typedef_errcode_t"></a>
 
