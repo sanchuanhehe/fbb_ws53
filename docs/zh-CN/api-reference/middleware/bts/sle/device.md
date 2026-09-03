@@ -53,9 +53,9 @@ errcode_t enable_sle(void)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
-- `application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
-- `application/samples/bt/sle_chba/src/sle_chba_server.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
+- `src/application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
+- `src/application/samples/bt/sle_chba/src/sle_chba_server.c`
 
 ### disable_sle <a id="disable_sle"></a>
 
@@ -130,8 +130,8 @@ errcode_t sle_dev_manager_register_callbacks(sle_dev_manager_callbacks_t *func)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server_adv.c`
+- `src/application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server_adv.c`
 
 ## Type definitions
 

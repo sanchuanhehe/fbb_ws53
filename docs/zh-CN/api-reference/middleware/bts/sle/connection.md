@@ -101,7 +101,7 @@ errcode_t sle_connect_remote_device(const sle_addr_t *addr)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
+- `src/application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
 
 ### sle_create_connection_cancel <a id="sle_create_connection_cancel"></a>
 
@@ -287,7 +287,7 @@ errcode_t sle_update_connect_param(sle_connection_param_update_t *params)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
 
 ### sle_pair_remote_device <a id="sle_pair_remote_device"></a>
 
@@ -330,7 +330,7 @@ errcode_t sle_pair_remote_device(const sle_addr_t *addr)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
+- `src/application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
 
 ### sle_remove_paired_remote_device <a id="sle_remove_paired_remote_device"></a>
 
@@ -690,7 +690,7 @@ errcode_t sle_read_remote_device_rssi(uint16_t conn_id)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
+- `src/application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
 
 ### sle_set_acb_evt_param <a id="sle_set_acb_evt_param"></a>
 
@@ -917,7 +917,7 @@ errcode_t sle_set_phy_param(uint16_t conn_id, sle_set_phy_t *param)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
 
 ### sle_set_save_pair_keys_mode <a id="sle_set_save_pair_keys_mode"></a>
 
@@ -997,7 +997,7 @@ errcode_t sle_set_mcs(uint16_t conn_id, uint8_t mcs)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
 
 ### sle_set_data_len <a id="sle_set_data_len"></a>
 
@@ -1040,7 +1040,7 @@ errcode_t sle_set_data_len(uint16_t conn_id, uint16_t tx_octets)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
 
 ### sle_default_connection_param_set <a id="sle_default_connection_param_set"></a>
 
@@ -1082,8 +1082,8 @@ errcode_t sle_default_connection_param_set(sle_default_connect_param_t *set_para
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
+- `src/application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
 
 ### sle_connection_register_callbacks <a id="sle_connection_register_callbacks"></a>
 
@@ -1126,8 +1126,8 @@ errcode_t sle_connection_register_callbacks(sle_connection_callbacks_t *func)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
+- `src/application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
 
 ### sle_customize_max_pwr <a id="sle_customize_max_pwr"></a>
 
@@ -1207,8 +1207,8 @@ errcode_t sle_set_local_addr(sle_addr_t *addr)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
+- `src/application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
 
 ### sle_get_local_addr <a id="sle_get_local_addr"></a>
 
@@ -1367,7 +1367,7 @@ errcode_t sle_set_announce_data(uint8_t announce_id, const sle_announce_data_t *
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server_adv.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server_adv.c`
 
 ### sle_remove_announce <a id="sle_remove_announce"></a>
 
@@ -1448,7 +1448,7 @@ errcode_t sle_set_announce_param(uint8_t announce_id, const sle_announce_param_t
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server_adv.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server_adv.c`
 
 ### sle_start_announce <a id="sle_start_announce"></a>
 
@@ -1491,8 +1491,8 @@ errcode_t sle_start_announce(uint8_t announce_id)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server_adv.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server_adv.c`
 
 ### sle_stop_announce <a id="sle_stop_announce"></a>
 
@@ -1573,7 +1573,7 @@ errcode_t sle_set_seek_param(sle_seek_param_t *param)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
+- `src/application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
 
 
 ### sle_start_seek <a id="sle_start_seek"></a>
@@ -1611,7 +1611,7 @@ errcode_t sle_start_seek(void)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
+- `src/application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
 
 ### sle_stop_seek <a id="sle_stop_seek"></a>
 
@@ -1647,7 +1647,7 @@ errcode_t sle_stop_seek(void)
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
+- `src/application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
 
 ### sle_announce_seek_register_callbacks <a id="sle_announce_seek_register_callbacks"></a>
 
@@ -1690,8 +1690,8 @@ errcode_t sle_announce_seek_register_callbacks(sle_announce_seek_callbacks_t *fu
 
 **参考案例**
 
-- `application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
-- `application/samples/bt/sle/sle_speed_server/src/sle_speed_server_adv.c`
+- `src/application/samples/bt/sle/sle_speed_client/src/sle_speed_client.c`
+- `src/application/samples/bt/sle/sle_speed_server/src/sle_speed_server_adv.c`
 
 ### sle_transmission_signal_capability_req <a id="sle_transmission_signal_capability_req"></a>
 

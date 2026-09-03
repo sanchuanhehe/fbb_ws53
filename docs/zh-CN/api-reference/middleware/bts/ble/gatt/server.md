@@ -78,8 +78,8 @@ errcode_t gatts_register_server(bt_uuid_t *app_uuid, uint8_t *server_id)
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_unregister_server <a id="gatts_unregister_server"></a>
 
@@ -282,8 +282,8 @@ errcode_t gatts_add_service_sync(uint8_t server_id, bt_uuid_t *service_uuid, boo
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_add_characteristic_sync <a id="gatts_add_characteristic_sync"></a>
 
@@ -332,8 +332,8 @@ errcode_t gatts_add_characteristic_sync(uint8_t server_id, uint16_t service_hand
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_add_descriptor_sync <a id="gatts_add_descriptor_sync"></a>
 
@@ -382,8 +382,8 @@ errcode_t gatts_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_start_service <a id="gatts_start_service"></a>
 
@@ -425,8 +425,8 @@ errcode_t gatts_start_service(uint8_t server_id, uint16_t service_handle)
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_stop_service <a id="gatts_stop_service"></a>
 
@@ -621,8 +621,8 @@ errcode_t gatts_notify_indicate(uint8_t server_id, uint16_t conn_id, gatts_ntf_i
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_notify_indicate_by_uuid <a id="gatts_notify_indicate_by_uuid"></a>
 
@@ -665,8 +665,8 @@ errcode_t gatts_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, gat
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_set_mtu_size <a id="gatts_set_mtu_size"></a>
 
@@ -744,8 +744,8 @@ errcode_t gatts_register_callbacks(gatts_callbacks_t *func)
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_exchange_mtu_req <a id="gatts_exchange_mtu_req"></a>
 
@@ -786,7 +786,7 @@ errcode_t gatts_exchange_mtu_req(uint16_t conn_id, uint16_t mtu_size)
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
 
 ## Type definitions
 
