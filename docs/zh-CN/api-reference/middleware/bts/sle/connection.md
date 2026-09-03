@@ -945,7 +945,7 @@ errcode_t sle_set_save_pair_keys_mode(uint8_t is_available)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| is_available | uint8_t | 配对密钥保存模式 | [SLE_SAVE_SMP_KEYS_AUTO](#enum_sle_save_smp_keys_mode_switch_t)：0 / [SLE_SAVE_SMP_KEYS_MANU](#enum_sle_save_smp_keys_mode_switch_t)：1 |
+| is_available | uint8_t | 配对密钥保存模式 | [SLE_SAVE_SMP_KEYS_AUTO](#enum_sle_save_smp_keys_mode_switch_t)：0；<br>[SLE_SAVE_SMP_KEYS_MANU](#enum_sle_save_smp_keys_mode_switch_t)：1。 |
 
 **返回值**
 

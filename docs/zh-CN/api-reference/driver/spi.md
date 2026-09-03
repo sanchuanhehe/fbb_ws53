@@ -146,7 +146,7 @@ errcode_t uapi_spi_set_tmod(spi_bus_t bus, hal_spi_trans_mode_t tmod, uint8_t da
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待设置的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| tmod | hal_spi_trans_mode_t | SPI 传输模式 | [HAL_SPI_TRANS_MODE_TXRX](#hal_spi_trans_mode_t)：0 / [HAL_SPI_TRANS_MODE_TX](#hal_spi_trans_mode_t)：1 / [HAL_SPI_TRANS_MODE_RX](#hal_spi_trans_mode_t)：2 / [HAL_SPI_TRANS_MODE_EEPROM](#hal_spi_trans_mode_t)：3 |
+| tmod | hal_spi_trans_mode_t | SPI 传输模式 | [HAL_SPI_TRANS_MODE_TXRX](#hal_spi_trans_mode_t)：0；<br>[HAL_SPI_TRANS_MODE_TX](#hal_spi_trans_mode_t)：1；<br>[HAL_SPI_TRANS_MODE_RX](#hal_spi_trans_mode_t)：2；<br>[HAL_SPI_TRANS_MODE_EEPROM](#hal_spi_trans_mode_t)：3。 |
 | data_frame_num | uint8_t | SPI 接收数据帧数量 | 0 ~ 255 |
 
 **返回值**
@@ -751,7 +751,7 @@ errcode_t uapi_spi_set_dma_mode(spi_bus_t bus, bool en, const spi_dma_config_t *
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待设置的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| en | bool | 是否使能 DMA 传输 | true / false |
+| en | bool | 是否使能 DMA 传输 | true；<br>false。 |
 | dma_cfg | const spi_dma_config_t * | DMA 配置结构体指针，去使能时配置为 NULL | 使能时不为NULL |
 
 **返回值**
@@ -805,7 +805,7 @@ errcode_t uapi_spi_set_irq_mode(spi_bus_t bus, bool irq_en, spi_rx_callback_t rx
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待设置的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| irq_en | bool | 是否使用中断模式 | true / false |
+| irq_en | bool | 是否使用中断模式 | true；<br>false。 |
 | rx_callback | spi_rx_callback_t | 接收完成回调函数，在中断上下文中调用 | 使能时不为NULL |
 | tx_callback | spi_tx_callback_t | 发送完成回调函数，在中断上下文中调用 | 使能时不为NULL |
 
@@ -860,7 +860,7 @@ errcode_t uapi_spi_set_loop_back_mode(spi_bus_t bus, bool loopback_en)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待设置的 SPI 总线编号 | - |
-| loopback_en | bool | 环回模式使能或去使能 | true / false |
+| loopback_en | bool | 环回模式使能或去使能 | true；<br>false。 |
 
 **返回值**
 

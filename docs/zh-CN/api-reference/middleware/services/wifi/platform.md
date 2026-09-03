@@ -44,7 +44,7 @@ errcode_t plat_set_pm_mode(int32_t pm_switch)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| pm_switch | int32_t | 低功耗开关参数 | 0（关闭） / 1（开启） |
+| pm_switch | int32_t | 低功耗开关参数 | 0（关闭）；<br>1（开启）。 |
 
 **返回值**
 

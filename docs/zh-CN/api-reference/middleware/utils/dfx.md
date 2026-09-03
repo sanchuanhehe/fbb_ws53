@@ -141,7 +141,7 @@ errcode_t uapi_diag_report_packet(uint16_t cmd_id, diag_option_t *option, const 
 | option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址，用于识别报文是本地报文还是远端报文；为 NULL 时按本地默认地址处理 | 可为NULL |
 | packet | const uint8_t * | 数据包缓冲区地址 | 不为NULL |
 | packet_size | uint16_t | 数据包大小（单位：字节） | 0 ~ 65535 |
-| sync | bool | 上报方式，true 表示同步阻塞上报，false 表示异步非阻塞上报 | true / false |
+| sync | bool | 上报方式，true 表示同步阻塞上报，false 表示异步非阻塞上报 | true；<br>false。 |
 
 **返回值**
 

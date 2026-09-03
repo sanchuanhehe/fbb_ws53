@@ -111,7 +111,7 @@ errcode_t uapi_pin_set_mode(pin_t pin, pin_mode_t mode)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#enum_pin_t) | 引脚编号 | 0 ~ 47 |
-| mode | [pin_mode_t](#enum_pin_mode_t) | 复用模式 | [PIN_MODE_0](#enum_pin_mode_t)：0 / [PIN_MODE_1](#enum_pin_mode_t)：1 / [PIN_MODE_2](#enum_pin_mode_t)：2 / [PIN_MODE_3](#enum_pin_mode_t)：3 / [PIN_MODE_4](#enum_pin_mode_t)：4 / [PIN_MODE_5](#enum_pin_mode_t)：5 / [PIN_MODE_6](#enum_pin_mode_t)：6 / [PIN_MODE_7](#enum_pin_mode_t)：7 |
+| mode | [pin_mode_t](#enum_pin_mode_t) | 复用模式 | [pin_mode_t](#enum_pin_mode_t) 全体成员 |
 
 **返回值**
 
@@ -197,7 +197,7 @@ errcode_t uapi_pin_set_ds(pin_t pin, pin_drive_strength_t ds)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#enum_pin_t) | 引脚编号 | 0 ~ 47 |
-| ds | [pin_drive_strength_t](#enum_pin_drive_strength_t) | 驱动能力 | [PIN_DS_0](#enum_pin_drive_strength_t)：0 / [PIN_DS_1](#enum_pin_drive_strength_t)：1 / [PIN_DS_2](#enum_pin_drive_strength_t)：2 / [PIN_DS_3](#enum_pin_drive_strength_t)：3 / [PIN_DS_4](#enum_pin_drive_strength_t)：4 / [PIN_DS_5](#enum_pin_drive_strength_t)：5 / [PIN_DS_6](#enum_pin_drive_strength_t)：6 / [PIN_DS_7](#enum_pin_drive_strength_t)：7 / [PIN_DS_8](#enum_pin_drive_strength_t)：8 / [PIN_DS_9](#enum_pin_drive_strength_t)：9 / [PIN_DS_10](#enum_pin_drive_strength_t)：10 / [PIN_DS_11](#enum_pin_drive_strength_t)：11 / [PIN_DS_12](#enum_pin_drive_strength_t)：12 / [PIN_DS_13](#enum_pin_drive_strength_t)：13 / [PIN_DS_14](#enum_pin_drive_strength_t)：14 / [PIN_DS_15](#enum_pin_drive_strength_t)：15 |
+| ds | [pin_drive_strength_t](#enum_pin_drive_strength_t) | 驱动能力 | [pin_drive_strength_t](#enum_pin_drive_strength_t) 全体成员 |
 
 **返回值**
 
@@ -282,7 +282,7 @@ errcode_t uapi_pin_set_pull(pin_t pin, pin_pull_t pull_type)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#enum_pin_t) | 引脚编号 | 0 ~ 47 |
-| pull_type | [pin_pull_t](#enum_pin_pull_t) | 上下拉类型 | [PIN_PULL_NONE](#enum_pin_pull_t)：0 / [PIN_PULL_UP](#enum_pin_pull_t)：1 / [PIN_PULL_DOWN](#enum_pin_pull_t)：2 |
+| pull_type | [pin_pull_t](#enum_pin_pull_t) | 上下拉类型 | [pin_pull_t](#enum_pin_pull_t) 全体成员 |
 
 **返回值**
 
@@ -462,7 +462,7 @@ errcode_t uapi_pin_set_st(pin_t pin, pin_schmitt_trigger_t st)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#enum_pin_t) | 引脚编号 | 0 ~ 47 |
-| st | [pin_schmitt_trigger_t](#enum_pin_schmitt_trigger_t) | 施密特触发状态 | [PIN_ST_DISABLE](#enum_pin_schmitt_trigger_t)：0 / [PIN_ST_ENABLE](#enum_pin_schmitt_trigger_t)：1 |
+| st | [pin_schmitt_trigger_t](#enum_pin_schmitt_trigger_t) | 施密特触发状态 | [pin_schmitt_trigger_t](#enum_pin_schmitt_trigger_t) 全体成员 |
 
 **返回值**
 

@@ -47,8 +47,8 @@ void *osal_klib_fopen(const char *file, int flags, int mode)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | file | const char * | 文件路径字符串 | 非 NULL |
-| flags | int | 文件操作标志，控制打开方式；访问模式（RDONLY / WRONLY / RDWR）互斥且必选其一，其余标志可组合 | [OSAL_O_RDONLY](#OSAL_O_RDONLY)：00000000 / [OSAL_O_WRONLY](#OSAL_O_WRONLY)：00000001 / [OSAL_O_RDWR](#OSAL_O_RDWR)：00000002 / [OSAL_O_CREAT](#OSAL_O_CREAT)：00000100 / [OSAL_O_EXCL](#OSAL_O_EXCL)：00000200 / [OSAL_O_TRUNC](#OSAL_O_TRUNC)：00001000 / [OSAL_O_APPEND](#OSAL_O_APPEND)：00002000 / [OSAL_O_CLOEXEC](#OSAL_O_CLOEXEC)：02000000 |
-| mode | int | 文件创建权限位，当 flags 含 OSAL_O_CREAT 时生效 | 权限位组合（如 0666 / 0644 / 0600） |
+| flags | int | 文件操作标志，控制打开方式；访问模式（RDONLY / WRONLY / RDWR）互斥且必选其一，其余标志可组合 | [OSAL_O_RDONLY](#OSAL_O_RDONLY)：00000000；<br>[OSAL_O_WRONLY](#OSAL_O_WRONLY)：00000001；<br>[OSAL_O_RDWR](#OSAL_O_RDWR)：00000002；<br>[OSAL_O_CREAT](#OSAL_O_CREAT)：00000100；<br>[OSAL_O_EXCL](#OSAL_O_EXCL)：00000200；<br>[OSAL_O_TRUNC](#OSAL_O_TRUNC)：00001000；<br>[OSAL_O_APPEND](#OSAL_O_APPEND)：00002000；<br>[OSAL_O_CLOEXEC](#OSAL_O_CLOEXEC)：02000000。 |
+| mode | int | 文件创建权限位，当 flags 含 OSAL_O_CREAT 时生效 | 权限位组合（如 0666；<br>0644；<br>0600）。 |
 
 **返回值**
 
@@ -228,7 +228,7 @@ int osal_klib_fseek(long long offset, int whence, void *filp)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | offset | long long | 偏移量 | ≤ INT32_MAX |
-| whence | int | 偏移基准位置 | [OSAL_SEEK_SET](#OSAL_SEEK_SET)：0 / [OSAL_SEEK_CUR](#OSAL_SEEK_CUR)：1 / [OSAL_SEEK_END](#OSAL_SEEK_END)：2 |
+| whence | int | 偏移基准位置 | [OSAL_SEEK_SET](#OSAL_SEEK_SET)：0；<br>[OSAL_SEEK_CUR](#OSAL_SEEK_CUR)：1；<br>[OSAL_SEEK_END](#OSAL_SEEK_END)：2。 |
 | filp | void * | 文件指针 | osal_klib_fopen 返回的有效指针，非 NULL |
 
 **返回值**

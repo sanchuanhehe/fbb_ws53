@@ -108,7 +108,7 @@ errcode_t uapi_gpio_set_dir(pin_t pin, gpio_direction_t dir)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#pin_t) | 待设置方向的 GPIO 引脚编号 | 有效引脚编号 |
-| dir | [gpio_direction_t](#enum_gpio_direction) | 引脚输入输出方向 | [GPIO_DIRECTION_INPUT](#enum_gpio_direction)：0 / [GPIO_DIRECTION_OUTPUT](#enum_gpio_direction)：1 |
+| dir | [gpio_direction_t](#enum_gpio_direction) | 引脚输入输出方向 | [gpio_direction_t](#enum_gpio_direction) 全体成员 |
 
 **返回值**
 
@@ -210,7 +210,7 @@ errcode_t uapi_gpio_set_val(pin_t pin, gpio_level_t level)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#pin_t) | 待设置输出电平的 GPIO 引脚编号 | 有效引脚编号 |
-| level | [gpio_level_t](#enum_gpio_level) | 输出电平值 | [GPIO_LEVEL_LOW](#enum_gpio_level)：0 / [GPIO_LEVEL_HIGH](#enum_gpio_level)：1 |
+| level | [gpio_level_t](#enum_gpio_level) | 输出电平值 | [gpio_level_t](#enum_gpio_level) 全体成员 |
 
 **返回值**
 
@@ -398,7 +398,7 @@ errcode_t uapi_gpio_set_isr_mode(pin_t pin, uint32_t trigger)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#pin_t) | 待设置中断模式的 GPIO 引脚编号 | 有效引脚编号 |
-| trigger | uint32_t | GPIO 中断触发类型 | [GPIO_INTERRUPT_RISING_EDGE](#GPIO_INTERRUPT_RISING_EDGE)：1 / [GPIO_INTERRUPT_FALLING_EDGE](#GPIO_INTERRUPT_FALLING_EDGE)：2 / [GPIO_INTERRUPT_LOW](#GPIO_INTERRUPT_LOW)：4 / [GPIO_INTERRUPT_HIGH](#GPIO_INTERRUPT_HIGH)：8 / [GPIO_INTERRUPT_DEDGE](#GPIO_INTERRUPT_DEDGE)：3 |
+| trigger | uint32_t | GPIO 中断触发类型 | [GPIO_INTERRUPT_RISING_EDGE](#GPIO_INTERRUPT_RISING_EDGE)：1；<br>[GPIO_INTERRUPT_FALLING_EDGE](#GPIO_INTERRUPT_FALLING_EDGE)：2；<br>[GPIO_INTERRUPT_LOW](#GPIO_INTERRUPT_LOW)：4；<br>[GPIO_INTERRUPT_HIGH](#GPIO_INTERRUPT_HIGH)：8；<br>[GPIO_INTERRUPT_DEDGE](#GPIO_INTERRUPT_DEDGE)：3。 |
 
 **返回值**
 
@@ -449,7 +449,7 @@ errcode_t uapi_gpio_register_isr_func(pin_t pin, uint32_t trigger, gpio_callback
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#pin_t) | 待注册中断的 GPIO 引脚编号 | 有效引脚编号 |
-| trigger | uint32_t | GPIO 中断触发类型 | [GPIO_INTERRUPT_RISING_EDGE](#GPIO_INTERRUPT_RISING_EDGE)：1 / [GPIO_INTERRUPT_FALLING_EDGE](#GPIO_INTERRUPT_FALLING_EDGE)：2 / [GPIO_INTERRUPT_LOW](#GPIO_INTERRUPT_LOW)：4 / [GPIO_INTERRUPT_HIGH](#GPIO_INTERRUPT_HIGH)：8 / [GPIO_INTERRUPT_DEDGE](#GPIO_INTERRUPT_DEDGE)：3 |
+| trigger | uint32_t | GPIO 中断触发类型 | [GPIO_INTERRUPT_RISING_EDGE](#GPIO_INTERRUPT_RISING_EDGE)：1；<br>[GPIO_INTERRUPT_FALLING_EDGE](#GPIO_INTERRUPT_FALLING_EDGE)：2；<br>[GPIO_INTERRUPT_LOW](#GPIO_INTERRUPT_LOW)：4；<br>[GPIO_INTERRUPT_HIGH](#GPIO_INTERRUPT_HIGH)：8；<br>[GPIO_INTERRUPT_DEDGE](#GPIO_INTERRUPT_DEDGE)：3。 |
 | callback | [gpio_callback_t](#gpio_callback_t) | 中断回调函数指针 | 不为 NULL |
 
 **返回值**

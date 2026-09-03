@@ -158,7 +158,7 @@ errcode_t gap_ble_set_local_appearance(uint16_t appearance)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| appearance | uint16_t | 本地设备外观类型 | [GAP_BLE_APPEARANCE_TYPE_UNKNOWN](#enum_gap_ble_appearance_type_t)：0 / [GAP_BLE_APPEARANCE_TYPE_GENERIC_PHONE](#enum_gap_ble_appearance_type_t)：64 / [GAP_BLE_APPEARANCE_TYPE_GENERIC_COMPUTER](#enum_gap_ble_appearance_type_t)：128 / [GAP_BLE_APPEARANCE_TYPE_GENERIC_WATCH](#enum_gap_ble_appearance_type_t)：192 / [GAP_BLE_APPEARANCE_TYPE_GENERIC_DISPLAY](#enum_gap_ble_appearance_type_t)：320 / [GAP_BLE_APPEARANCE_TYPE_GENERIC_HID](#enum_gap_ble_appearance_type_t)：960 / [GAP_BLE_APPEARANCE_TYPE_KEYBOARD](#enum_gap_ble_appearance_type_t)：961 / [GAP_BLE_APPEARANCE_TYPE_MOUSE](#enum_gap_ble_appearance_type_t)：962 / [GAP_BLE_APPEARANCE_TYPE_DIGITAL_PEN](#enum_gap_ble_appearance_type_t)：967 |
+| appearance | uint16_t | 本地设备外观类型 | [GAP_BLE_APPEARANCE_TYPE_UNKNOWN](#enum_gap_ble_appearance_type_t)：0；<br>[GAP_BLE_APPEARANCE_TYPE_GENERIC_PHONE](#enum_gap_ble_appearance_type_t)：64；<br>[GAP_BLE_APPEARANCE_TYPE_GENERIC_COMPUTER](#enum_gap_ble_appearance_type_t)：128；<br>[GAP_BLE_APPEARANCE_TYPE_GENERIC_WATCH](#enum_gap_ble_appearance_type_t)：192；<br>[GAP_BLE_APPEARANCE_TYPE_GENERIC_DISPLAY](#enum_gap_ble_appearance_type_t)：320；<br>[GAP_BLE_APPEARANCE_TYPE_GENERIC_HID](#enum_gap_ble_appearance_type_t)：960；<br>[GAP_BLE_APPEARANCE_TYPE_KEYBOARD](#enum_gap_ble_appearance_type_t)：961；<br>[GAP_BLE_APPEARANCE_TYPE_MOUSE](#enum_gap_ble_appearance_type_t)：962；<br>[GAP_BLE_APPEARANCE_TYPE_DIGITAL_PEN](#enum_gap_ble_appearance_type_t)：967。 |
 
 **返回值**
 
@@ -1405,7 +1405,7 @@ errcode_t gap_ble_set_save_smp_keys_mode(uint8_t is_available)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| is_available | uint8_t | 配对密钥保存模式 | [GAP_BLE_SAVE_SMP_KEYS_AUTO](#enum_gap_ble_save_pair_keys_mode_switch_t)：0 / [GAP_BLE_SAVE_SMP_KEYS_MANU](#enum_gap_ble_save_pair_keys_mode_switch_t)：1 |
+| is_available | uint8_t | 配对密钥保存模式 | [GAP_BLE_SAVE_SMP_KEYS_AUTO](#enum_gap_ble_save_pair_keys_mode_switch_t)：0；<br>[GAP_BLE_SAVE_SMP_KEYS_MANU](#enum_gap_ble_save_pair_keys_mode_switch_t)：1。 |
 
 **返回值**
 
@@ -1443,7 +1443,7 @@ errcode_t gap_ble_set_pair_info_available(uint8_t is_available)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| is_available | uint8_t | 配对信息可获取开关 | [GAP_BLE_PAIR_INFO_UNAVAILABLE](#enum_gap_ble_pair_info_switch_t)：0 / [GAP_BLE_PAIR_INFO_AVAILABLE](#enum_gap_ble_pair_info_switch_t)：1 |
+| is_available | uint8_t | 配对信息可获取开关 | [GAP_BLE_PAIR_INFO_UNAVAILABLE](#enum_gap_ble_pair_info_switch_t)：0；<br>[GAP_BLE_PAIR_INFO_AVAILABLE](#enum_gap_ble_pair_info_switch_t)：1。 |
 
 **返回值**
 

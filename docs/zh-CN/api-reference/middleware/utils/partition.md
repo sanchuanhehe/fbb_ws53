@@ -81,7 +81,7 @@ errcode_t uapi_partition_get_info(partition_ids_t partition_id, partition_inform
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| partition_id | [partition_ids_t](#enum_partition_ids_t) | 指定的分区的ID | [PARTITION_SSB](#enum_partition_ids_t)：0 / [PARTITION_FLASH_BOOT_IMAGE](#enum_partition_ids_t)：1 / [PARTITION_FLASH_BOOT_IMAGE_BACKUP](#enum_partition_ids_t)：2 / [PARTITION_FLASH_ROOT_PUBLIC_KEYS_AREA](#enum_partition_ids_t)：3 / [PARTITION_CUSTOMER_FACTORY](#enum_partition_ids_t)：8 / [PARTITION_NV_DATA_BACKUP](#enum_partition_ids_t)：9 / [PARTITION_NV_DATA](#enum_partition_ids_t)：0x10 / [PARTITION_CRASH_INFO](#enum_partition_ids_t)：0x11 / [PARTITION_CCPU_IMAGE](#enum_partition_ids_t)：0x20 / [PARTITION_APP_IMAGE](#enum_partition_ids_t)：0x21 / [PARTITION_FOTA_DATA](#enum_partition_ids_t)：0x22 / [PARTITION_CCPU_IMAGE_BACKUP](#enum_partition_ids_t)：0x23 / [PARTITION_RESERVE2](#enum_partition_ids_t)：0x30 / [PARTITION_RESERVE3](#enum_partition_ids_t)：0x31 / [PARTITION_RESERVE4](#enum_partition_ids_t)：0x32 / [PARTITION_RESERVE5](#enum_partition_ids_t)：0x33 / [PARTITION_MAX_CNT](#enum_partition_ids_t)：16 |
+| partition_id | [partition_ids_t](#enum_partition_ids_t) | 指定的分区的ID | [partition_ids_t](#enum_partition_ids_t) 全体成员 |
 
 **出参**
 

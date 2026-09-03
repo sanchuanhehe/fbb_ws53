@@ -433,7 +433,7 @@ errcode_t wifi_p2p_connect_accept(const p2p_config_stru *p2p_config, int assoc)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | p2p_config | const [p2p_config_stru](#p2p_config_stru)* | 待连接的 P2P 设备网络信息 | 不为NULL |
-| assoc | int | 连接接受标志，1 表示接受连接，0 表示拒绝连接 | 0 / 1 |
+| assoc | int | 连接接受标志，1 表示接受连接，0 表示拒绝连接 | 0；<br>1。 |
 
 **返回值**
 

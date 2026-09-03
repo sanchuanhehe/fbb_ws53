@@ -231,7 +231,7 @@ errcode_t ssapc_read_req(uint8_t client_id, uint16_t conn_id, uint16_t handle, u
 | client_id | uint8_t | 客户端 ID | 由 ssapc_register_client 分配 |
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
 | handle | uint16_t | 属性句柄 | 有效属性句柄 |
-| type | uint8_t | 特征类型 | [SSAP_PROPERTY_TYPE_VALUE](#enum_ssap_property_type_t)：0 / [SSAP_DESCRIPTOR_USER_DESCRIPTION](#enum_ssap_property_type_t)：1 / [SSAP_DESCRIPTOR_CLIENT_CONFIGURATION](#enum_ssap_property_type_t)：2 / [SSAP_DESCRIPTOR_SERVER_CONFIGURATION](#enum_ssap_property_type_t)：3 / [SSAP_DESCRIPTOR_PRESENTATION_FORMAT](#enum_ssap_property_type_t)：4 / [SSAP_DESCRIPTOR_RFU](#enum_ssap_property_type_t)：5 / [SSAP_DESCRIPTOR_CUSTOM](#enum_ssap_property_type_t)：255 |
+| type | uint8_t | 特征类型 | [SSAP_PROPERTY_TYPE_VALUE](#enum_ssap_property_type_t)：0；<br>[SSAP_DESCRIPTOR_USER_DESCRIPTION](#enum_ssap_property_type_t)：1；<br>[SSAP_DESCRIPTOR_CLIENT_CONFIGURATION](#enum_ssap_property_type_t)：2；<br>[SSAP_DESCRIPTOR_SERVER_CONFIGURATION](#enum_ssap_property_type_t)：3；<br>[SSAP_DESCRIPTOR_PRESENTATION_FORMAT](#enum_ssap_property_type_t)：4；<br>[SSAP_DESCRIPTOR_RFU](#enum_ssap_property_type_t)：5；<br>[SSAP_DESCRIPTOR_CUSTOM](#enum_ssap_property_type_t)：255。 |
 
 **返回值**
 

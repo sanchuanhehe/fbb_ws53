@@ -49,7 +49,7 @@ errcode_t sle_chba_netdev_create(uint8_t chba_role, uint8_t chba_mode)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| chba_role | uint8_t | SLE CHBA 设备角色，取值参考 [sle_chba_role](#enum_sle_chba_role) | [CHBA_ROLE_AP](#enum_sle_chba_role)：0 / [CHBA_ROLE_STA](#enum_sle_chba_role)：1 |
+| chba_role | uint8_t | SLE CHBA 设备角色，取值参考 [sle_chba_role](#enum_sle_chba_role) | [CHBA_ROLE_AP](#enum_sle_chba_role)：0；<br>[CHBA_ROLE_STA](#enum_sle_chba_role)：1。 |
 | chba_mode | uint8_t | SLE CHBA 工作模式 | 0 ~ 255 |
 
 **返回值**

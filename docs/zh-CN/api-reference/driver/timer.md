@@ -101,7 +101,7 @@ errcode_t uapi_timer_adapter(timer_index_t index, uint32_t int_id, uint16_t int_
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t)：0 / [TIMER_INDEX_1](#enum_timer_index_t)：1 / [TIMER_INDEX_2](#enum_timer_index_t)：2（CONFIG_TIMER_MAX_NUM > 2 时存在） |
+| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [timer_index_t](#enum_timer_index_t) 全体成员 |
 | int_id | uint32_t | 硬件定时器中断 ID | 有效中断号 |
 | int_priority | uint16_t | 硬件定时器中断优先级 | 有效中断优先级 |
 
@@ -197,7 +197,7 @@ errcode_t uapi_timer_create(timer_index_t index, timer_handle_t *timer)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t)：0 / [TIMER_INDEX_1](#enum_timer_index_t)：1 / [TIMER_INDEX_2](#enum_timer_index_t)：2（CONFIG_TIMER_MAX_NUM > 2 时存在） |
+| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [timer_index_t](#enum_timer_index_t) 全体成员 |
 
 **出参**
 
@@ -420,7 +420,7 @@ errcode_t uapi_timer_get_current_time_us(timer_index_t index, uint32_t *current_
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t)：0 / [TIMER_INDEX_1](#enum_timer_index_t)：1 / [TIMER_INDEX_2](#enum_timer_index_t)：2（CONFIG_TIMER_MAX_NUM > 2 时存在） |
+| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [timer_index_t](#enum_timer_index_t) 全体成员 |
 
 **出参**
 
@@ -466,8 +466,8 @@ errcode_t uapi_timer_start_high_precision(timer_index_t index, timer_trigger_mod
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t)：0 / [TIMER_INDEX_1](#enum_timer_index_t)：1 / [TIMER_INDEX_2](#enum_timer_index_t)：2（CONFIG_TIMER_MAX_NUM > 2 时存在） |
-| mode | [timer_trigger_mode_t](#enum_timer_trigger_mode_t) | 定时器触发模式 | [TIMER_MODE_ONE_SHOT](#enum_timer_trigger_mode_t)：0 / [TIMER_MODE_PERIODIC](#enum_timer_trigger_mode_t)：1 |
+| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [timer_index_t](#enum_timer_index_t) 全体成员 |
+| mode | [timer_trigger_mode_t](#enum_timer_trigger_mode_t) | 定时器触发模式 | [timer_trigger_mode_t](#enum_timer_trigger_mode_t) 全体成员 |
 | time_us | uint32_t | 定时器超时时间，单位 us | 大于 0 且不超过 [uapi_timer_get_max_us](#uapi_timer_get_max_us) 返回值 |
 | irq_info | [timer_irq_info_t](#struct_timer_irq_info_t) * | 中断信息结构体指针，包含中断号与优先级 | 不为NULL |
 | callback | [high_precision_timer_callback_t](#typedef_high_precision_timer_callback_t) | 高精度定时器超时回调函数指针；超时触发时在硬件定时器中断上下文中调用，index 为触发的硬件定时器索引 | 不为NULL |
@@ -517,8 +517,8 @@ errcode_t uapi_timer_reset_high_precision(timer_index_t index, timer_trigger_mod
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t)：0 / [TIMER_INDEX_1](#enum_timer_index_t)：1 / [TIMER_INDEX_2](#enum_timer_index_t)：2（CONFIG_TIMER_MAX_NUM > 2 时存在） |
-| mode | [timer_trigger_mode_t](#enum_timer_trigger_mode_t) | 定时器触发模式 | [TIMER_MODE_ONE_SHOT](#enum_timer_trigger_mode_t)：0 / [TIMER_MODE_PERIODIC](#enum_timer_trigger_mode_t)：1 |
+| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [timer_index_t](#enum_timer_index_t) 全体成员 |
+| mode | [timer_trigger_mode_t](#enum_timer_trigger_mode_t) | 定时器触发模式 | [timer_trigger_mode_t](#enum_timer_trigger_mode_t) 全体成员 |
 | time_us | uint32_t | 定时器超时时间，单位 us | 大于 0 且不超过 [uapi_timer_get_max_us](#uapi_timer_get_max_us) 返回值 |
 
 **返回值**
@@ -564,7 +564,7 @@ errcode_t uapi_timer_stop_high_precision(timer_index_t index)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [TIMER_INDEX_0](#enum_timer_index_t)：0 / [TIMER_INDEX_1](#enum_timer_index_t)：1 / [TIMER_INDEX_2](#enum_timer_index_t)：2（CONFIG_TIMER_MAX_NUM > 2 时存在） |
+| index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [timer_index_t](#enum_timer_index_t) 全体成员 |
 
 **返回值**
 

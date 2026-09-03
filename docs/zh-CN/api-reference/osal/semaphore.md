@@ -182,7 +182,7 @@ int osal_sem_down_timeout(osal_semaphore *sem, unsigned int timeout)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | sem | [osal_semaphore](#struct_osal_semaphore) * | 待获取的信号量 | 不为NULL |
-| timeout | unsigned int | 等待超时时间（单位 ms） | [OSAL_SEM_WAIT_FOREVER](#OSAL_SEM_WAIT_FOREVER)(-1) / 0 ~ 0xFFFFFFFE |
+| timeout | unsigned int | 等待超时时间（单位 ms） | [OSAL_SEM_WAIT_FOREVER](#OSAL_SEM_WAIT_FOREVER)(-1)；<br>0 ~ 0xFFFFFFFE。 |
 
 **返回值**
 

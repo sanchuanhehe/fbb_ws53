@@ -127,7 +127,7 @@ errcode_t uapi_drv_keyslot_create(uint32_t *keyslot_handle, uapi_drv_keyslot_typ
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| keyslot_type | [uapi_drv_keyslot_type_t](#enum_uapi_drv_keyslot_type_t) | keyslot 的用途类型 | UAPI_DRV_KEYSLOT_TYPE_MCIPHER(0) / UAPI_DRV_KEYSLOT_TYPE_HMAC(1) / UAPI_DRV_KEYSLOT_TYPE_FLASH(2) |
+| keyslot_type | [uapi_drv_keyslot_type_t](#enum_uapi_drv_keyslot_type_t) | keyslot 的用途类型 | UAPI_DRV_KEYSLOT_TYPE_MCIPHER(0)；<br>UAPI_DRV_KEYSLOT_TYPE_HMAC(1)；<br>UAPI_DRV_KEYSLOT_TYPE_FLASH(2)。 |
 
 **出参**
 
@@ -306,7 +306,7 @@ errcode_t uapi_drv_klad_attach(uint32_t klad_handle, uapi_drv_klad_dest_t klad_t
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | klad_handle | uint32_t | 要关联的 Key Ladder 通道句柄 | 由 uapi_drv_klad_create 返回的有效句柄 |
-| klad_type | [uapi_drv_klad_dest_t](#enum_uapi_drv_klad_dest_t) | klad 目标模块类型 | [UAPI_DRV_KLAD_DEST_MCIPHER](#enum_uapi_drv_klad_dest_t)：0 / [UAPI_DRV_KLAD_DEST_HMAC](#enum_uapi_drv_klad_dest_t)：1 / [UAPI_DRV_KLAD_DEST_FLASH](#enum_uapi_drv_klad_dest_t)：2 / [UAPI_DRV_KLAD_DEST_NPU](#enum_uapi_drv_klad_dest_t)：3 / [UAPI_DRV_KLAD_DEST_AIDSP](#enum_uapi_drv_klad_dest_t)：4 / [UAPI_DRV_KLAD_DEST_MAX](#enum_uapi_drv_klad_dest_t)：5 |
+| klad_type | [uapi_drv_klad_dest_t](#enum_uapi_drv_klad_dest_t) | klad 目标模块类型 | [uapi_drv_klad_dest_t](#enum_uapi_drv_klad_dest_t) 全体成员 |
 | keyslot_handle | uint32_t | 要关联的 keyslot 通道句柄 | 由 uapi_drv_keyslot_create 返回的有效句柄 |
 
 **返回值**
@@ -351,7 +351,7 @@ errcode_t uapi_drv_klad_detach(uint32_t klad_handle, uapi_drv_klad_dest_t klad_t
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | klad_handle | uint32_t | 要解关联的 Key Ladder 通道句柄 | 由 uapi_drv_klad_create 返回的有效句柄 |
-| klad_type | [uapi_drv_klad_dest_t](#enum_uapi_drv_klad_dest_t) | klad 目标模块类型 | [UAPI_DRV_KLAD_DEST_MCIPHER](#enum_uapi_drv_klad_dest_t)：0 / [UAPI_DRV_KLAD_DEST_HMAC](#enum_uapi_drv_klad_dest_t)：1 / [UAPI_DRV_KLAD_DEST_FLASH](#enum_uapi_drv_klad_dest_t)：2 / [UAPI_DRV_KLAD_DEST_NPU](#enum_uapi_drv_klad_dest_t)：3 / [UAPI_DRV_KLAD_DEST_AIDSP](#enum_uapi_drv_klad_dest_t)：4 / [UAPI_DRV_KLAD_DEST_MAX](#enum_uapi_drv_klad_dest_t)：5 |
+| klad_type | [uapi_drv_klad_dest_t](#enum_uapi_drv_klad_dest_t) | klad 目标模块类型 | [uapi_drv_klad_dest_t](#enum_uapi_drv_klad_dest_t) 全体成员 |
 | keyslot_handle | uint32_t | 要解关联的 keyslot 通道句柄 | 由 uapi_drv_keyslot_create 返回的有效句柄 |
 
 **返回值**
@@ -574,8 +574,8 @@ errcode_t uapi_drv_kdf_update(uapi_drv_kdf_otp_key_t otp_key, uapi_drv_kdf_updat
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| otp_key | [uapi_drv_kdf_otp_key_t](#enum_uapi_drv_kdf_otp_key_t) | 要更新的 OTP 根密钥类型 | UAPI_DRV_KDF_OTP_KEY_MRK1(0) / UAPI_DRV_KDF_OTP_KEY_MRK0(1) / UAPI_DRV_KDF_OTP_KEY_RUSK(2) / UAPI_DRV_KDF_OTP_KEY_USK(3) |
-| alg | [uapi_drv_kdf_update_alg_t](#enum_uapi_drv_kdf_update_alg_t) | 更新时使用的对称算法类型 | UAPI_DRV_KDF_UPDATE_ALG_AES(0) / UAPI_DRV_KDF_UPDATE_ALG_SM4(1) |
+| otp_key | [uapi_drv_kdf_otp_key_t](#enum_uapi_drv_kdf_otp_key_t) | 要更新的 OTP 根密钥类型 | UAPI_DRV_KDF_OTP_KEY_MRK1(0)；<br>UAPI_DRV_KDF_OTP_KEY_MRK0(1)；<br>UAPI_DRV_KDF_OTP_KEY_RUSK(2)；<br>UAPI_DRV_KDF_OTP_KEY_USK(3)。 |
+| alg | [uapi_drv_kdf_update_alg_t](#enum_uapi_drv_kdf_update_alg_t) | 更新时使用的对称算法类型 | UAPI_DRV_KDF_UPDATE_ALG_AES(0)；<br>UAPI_DRV_KDF_UPDATE_ALG_SM4(1)。 |
 
 **返回值**
 

@@ -139,7 +139,7 @@ errcode_t uapi_watchdog_enable(wdt_mode_t mode)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mode | [wdt_mode_t](#enum_wdt_mode_t) | 看门狗触发模式 | [WDT_MODE_RESET](#enum_wdt_mode_t)：0 / [WDT_MODE_INTERRUPT](#enum_wdt_mode_t)：1 |
+| mode | [wdt_mode_t](#enum_wdt_mode_t) | 看门狗触发模式 | [wdt_mode_t](#enum_wdt_mode_t) 全体成员 |
 
 **返回值**
 

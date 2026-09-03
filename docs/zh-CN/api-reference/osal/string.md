@@ -757,7 +757,7 @@ unsigned long long osal_strtoull(const char *cp, char **endp, unsigned int base)
 | ---- | ---- | ---- | ---- |
 | cp | const char * | 待转换的字符串指针 | 有效字符串指针 |
 | endp | char ** | 用于存储第一个无效字符地址的指针，可为 NULL | NULL 或有效的二级指针 |
-| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)：10 / [OSAL_BASE_HEX](#OSAL_BASE_HEX)：16 / 0 / 2~36 |
+| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)：10；<br>[OSAL_BASE_HEX](#OSAL_BASE_HEX)：16；<br>0；<br>2~36。 |
 
 **出参**
 
@@ -798,7 +798,7 @@ unsigned long osal_strtoul(const char *cp, char **endp, unsigned int base)
 | ---- | ---- | ---- | ---- |
 | cp | const char * | 待转换的字符串指针 | 有效字符串指针 |
 | endp | char ** | 用于存储第一个无效字符地址的指针，可为 NULL | NULL 或有效的二级指针 |
-| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)：10 / [OSAL_BASE_HEX](#OSAL_BASE_HEX)：16 / 0 / 2~36 |
+| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)：10；<br>[OSAL_BASE_HEX](#OSAL_BASE_HEX)：16；<br>0；<br>2~36。 |
 
 **出参**
 
@@ -843,7 +843,7 @@ long osal_strtol(const char *cp, char **endp, unsigned int base)
 | ---- | ---- | ---- | ---- |
 | cp | const char * | 待转换的字符串指针 | 有效字符串指针 |
 | endp | char ** | 用于存储第一个无效字符地址的指针，可为 NULL | NULL 或有效的二级指针 |
-| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)：10 / [OSAL_BASE_HEX](#OSAL_BASE_HEX)：16 / 0 / 2~36 |
+| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)：10；<br>[OSAL_BASE_HEX](#OSAL_BASE_HEX)：16；<br>0；<br>2~36。 |
 
 **出参**
 
@@ -892,7 +892,7 @@ long long osal_strtoll(const char *cp, char **endp, unsigned int base)
 | ---- | ---- | ---- | ---- |
 | cp | const char * | 待转换的字符串指针 | 有效字符串指针 |
 | endp | char ** | 用于存储第一个无效字符地址的指针，可为 NULL | NULL 或有效的二级指针 |
-| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)：10 / [OSAL_BASE_HEX](#OSAL_BASE_HEX)：16 / 0 / 2~36 |
+| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)：10；<br>[OSAL_BASE_HEX](#OSAL_BASE_HEX)：16；<br>0；<br>2~36。 |
 
 **出参**
 

@@ -146,7 +146,7 @@ errcode_t gatts_add_service(uint8_t server_id, bt_uuid_t *service_uuid, bool is_
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
 | service_uuid | bt_uuid_t * | 服务的 UUID | 不为NULL |
-| is_primary | bool | 是否为主服务 | true / false |
+| is_primary | bool | 是否为主服务 | true；<br>false。 |
 
 **返回值**
 
@@ -263,7 +263,7 @@ errcode_t gatts_add_service_sync(uint8_t server_id, bt_uuid_t *service_uuid, boo
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
 | service_uuid | bt_uuid_t * | 服务的 UUID | 不为NULL |
-| is_primary | bool | 是否为主服务 | true / false |
+| is_primary | bool | 是否为主服务 | true；<br>false。 |
 
 **出参**
 
@@ -312,7 +312,7 @@ errcode_t gatts_add_characteristic_sync(uint8_t server_id, uint16_t service_hand
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
-| service_handle | uint16_t | 所属服务的属性句柄 | gatts_add_service / gatts_add_service_sync 返回的有效服务句柄 |
+| service_handle | uint16_t | 所属服务的属性句柄 | gatts_add_service；<br>gatts_add_service_sync 返回的有效服务句柄。 |
 | character | [gatts_add_chara_info_t](#struct_gatts_add_chara_info_t) * | 特征信息 | 不为NULL |
 
 **出参**
@@ -362,7 +362,7 @@ errcode_t gatts_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
-| service_handle | uint16_t | 所属服务的属性句柄 | gatts_add_service / gatts_add_service_sync 返回的有效服务句柄 |
+| service_handle | uint16_t | 所属服务的属性句柄 | gatts_add_service；<br>gatts_add_service_sync 返回的有效服务句柄。 |
 | descriptor | [gatts_add_desc_info_t](#struct_gatts_add_desc_info_t) * | 特征描述符信息 | 不为NULL |
 
 **出参**
@@ -412,7 +412,7 @@ errcode_t gatts_start_service(uint8_t server_id, uint16_t service_handle)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
-| service_handle | uint16_t | 待启动服务的属性句柄 | gatts_add_service / gatts_add_service_sync 返回的有效服务句柄 |
+| service_handle | uint16_t | 待启动服务的属性句柄 | gatts_add_service；<br>gatts_add_service_sync 返回的有效服务句柄。 |
 
 **返回值**
 

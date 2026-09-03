@@ -1545,7 +1545,7 @@ errcode_t wifi_send_custom_pkt(const wifi_if_type_enum iftype, const uint8_t *da
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | IFTYPE_STA/IFTYPE_AP/IFTYPE_P2P_CLIENT/IFTYPE_P2P_GO/IFTYPE_P2P_DEVICE |
 | data | const uint8_t* | 待发送帧的内容 | 非NULL，须按802.11协议格式封装 |
-| len | uint32_t | 待发送报文的长度 | 10 ~ 1400（实现边界 WIFI_SENDPKT_MIN_LEN = 10 / WIFI_SENDPKT_MAX_LEN = 1400） |
+| len | uint32_t | 待发送报文的长度 | 10 ~ 1400（实现边界 WIFI_SENDPKT_MIN_LEN = 10；<br>WIFI_SENDPKT_MAX_LEN = 1400）。 |
 
 **返回值**
 
@@ -1852,7 +1852,7 @@ errcode_t wifi_set_low_current_boot_mode(uint8_t flag)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| flag | uint8_t | 模式设置 | 0:关闭 / 1:开启 |
+| flag | uint8_t | 模式设置 | 0:关闭；<br>1:开启。 |
 
 **返回值**
 
@@ -1960,7 +1960,7 @@ errcode_t wifi_sta_set_pm(uint8_t ps_switch)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| ps_switch | uint8_t | 低功耗模式 | 0:关闭 / 1:开启 |
+| ps_switch | uint8_t | 低功耗模式 | 0:关闭；<br>1:开启。 |
 
 **返回值**
 
@@ -1994,7 +1994,7 @@ errcode_t wifi_set_sdp_mode(wifi_if_type_enum iftype, int32_t enable, int32_t ra
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | IFTYPE_STA/IFTYPE_AP/IFTYPE_P2P_CLIENT/IFTYPE_P2P_GO/IFTYPE_P2P_DEVICE |
-| enable | int32_t | 使能开关 | 0:关闭 / 1:开启 |
+| enable | int32_t | 使能开关 | 0:关闭；<br>1:开启。 |
 | ratio | int32_t | 比例 | 大于0 |
 
 **返回值**
@@ -2303,7 +2303,7 @@ typedef unsigned int(*wifi_mac_derivation_ptr)(unsigned char *origin_mac, unsign
 | ---- | ---- | ---- | ---- |
 | origin_mac | unsigned char* | 输入MAC地址 | 非NULL |
 | num | unsigned char | 输入MAC地址长度 | WIFI_MAC_LEN(6) |
-| type | unsigned char | 派生类型 | 2:STA / 3:SoftAP / 7~10:P2P (Peer-to-Peer) |
+| type | unsigned char | 派生类型 | 2:STA；<br>3:SoftAP；<br>7~10:P2P (Peer-to-Peer)。 |
 | output_mac | unsigned char* | 输出MAC地址 | 非NULL |
 | out_put_num | unsigned char | 输出MAC地址长度 | WIFI_MAC_LEN(6) |
 

@@ -572,7 +572,7 @@ errcode_t uapi_upg_request_upgrade(bool reset)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| reset | bool | 申请流程结束后是否重启系统 | true / false |
+| reset | bool | 申请流程结束后是否重启系统 | true；<br>false。 |
 
 **返回值**
 
@@ -677,7 +677,7 @@ errcode_t uapi_upg_verify_file_image(const upg_image_header_t *img_header, const
 | img_header | [upg_image_header_t](#struct_upg_image_header)* | 指向升级镜像头结构的指针 | 非NULL |
 | hash | const uint8_t* | 升级镜像的哈希值 | 非NULL |
 | hash_len | uint32_t | 哈希的长度（单位：字节） | SHA_256_LENGTH(32) |
-| verify_old | bool | 是否校验旧镜像 | true / false |
+| verify_old | bool | 是否校验旧镜像 | true；<br>false。 |
 
 **返回值**
 

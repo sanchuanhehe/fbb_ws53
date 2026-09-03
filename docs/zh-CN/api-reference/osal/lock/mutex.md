@@ -139,7 +139,7 @@ int osal_mutex_lock_timeout(osal_mutex *mutex, unsigned int timeout)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | mutex | [osal_mutex](#osal_mutex) * | 待获取的互斥锁指针 | 不为NULL，且已通过 osal_mutex_init() 初始化 |
-| timeout | unsigned int | 超时等待时间（毫秒） | [OSAL_MUTEX_WAIT_FOREVER](#OSAL_MUTEX_WAIT_FOREVER)(-1) 表示永久等待 / 其他数值为超时毫秒数 |
+| timeout | unsigned int | 超时等待时间（毫秒） | [OSAL_MUTEX_WAIT_FOREVER](#OSAL_MUTEX_WAIT_FOREVER)(-1) 表示永久等待；<br>其他数值为超时毫秒数。 |
 
 **返回值**
 

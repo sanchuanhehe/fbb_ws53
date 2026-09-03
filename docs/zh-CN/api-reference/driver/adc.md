@@ -54,7 +54,7 @@ errcode_t uapi_adc_init(adc_clock_t clock)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| clock | [adc_clock_t](#enum_adc_clock) | 采样时钟参数。当前芯片版本上此参数不影响实际采样时钟配置 | [ADC_CLOCK_500KHZ](#enum_adc_clock)：0 / [ADC_CLOCK_250KHZ](#enum_adc_clock)：1 / [ADC_CLOCK_125KHZ](#enum_adc_clock)：2 / [ADC_CLOCK_015KHZ](#enum_adc_clock)：3 / [ADC_CLOCK_MAX](#enum_adc_clock)：4 / [ADC_CLOCK_NONE](#enum_adc_clock)：4 |
+| clock | [adc_clock_t](#enum_adc_clock) | 采样时钟参数。当前芯片版本上此参数不影响实际采样时钟配置 | [adc_clock_t](#enum_adc_clock) 全体成员 |
 
 **返回值**
 
@@ -135,8 +135,8 @@ void uapi_adc_power_en(afe_scan_mode_t afe_scan_mode, bool en)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| afe_scan_mode | [afe_scan_mode_t](#enum_afe_scan_mode) | AFE 模拟前端精度模式 | [AFE_GADC_MODE](#enum_afe_scan_mode)：0 / [AFE_HADC_MODE](#enum_afe_scan_mode)：1 / [AFE_AMIC_MODE](#enum_afe_scan_mode)：1 / [AFE_BIO_MODE](#enum_afe_scan_mode)：2 / [AFE_SCAN_MODE_MAX_NUM](#enum_afe_scan_mode)（受 CONFIG_ADC_SUPPORT_HAFE/CONFIG_ADC_SUPPORT_AMIC 条件编译控制，实际可用成员随构建配置而定） |
-| en | bool | 上电或下电标志，true 表示上电，false 表示下电 | true / false |
+| afe_scan_mode | [afe_scan_mode_t](#enum_afe_scan_mode) | AFE 模拟前端精度模式 | [afe_scan_mode_t](#enum_afe_scan_mode) 全体成员 |
+| en | bool | 上电或下电标志，true 表示上电，false 表示下电 | true；<br>false。 |
 
 **参考案例**
 

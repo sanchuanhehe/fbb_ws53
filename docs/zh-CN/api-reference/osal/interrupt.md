@@ -229,7 +229,7 @@ int osal_irq_set_affinity(unsigned int irq, const char *name, int cpu_mask)
 | ---- | ---- | ---- | ---- |
 | irq | unsigned int | 中断线编号 | 0 ~ 4294967295 |
 | name | const char * | 中断名称 | - |
-| cpu_mask | int | CPU 掩码，指定目标 CPU | [OSAL_CPU_ALL](#OSAL_CPU_ALL)：0 / [OSAL_CPU_0](#OSAL_CPU_0)：2 / [OSAL_CPU_1](#OSAL_CPU_1)：4 / [OSAL_CPU_2](#OSAL_CPU_2)：8 / [OSAL_CPU_3](#OSAL_CPU_3)：16 |
+| cpu_mask | int | CPU 掩码，指定目标 CPU | [OSAL_CPU_ALL](#OSAL_CPU_ALL)：0；<br>[OSAL_CPU_0](#OSAL_CPU_0)：2；<br>[OSAL_CPU_1](#OSAL_CPU_1)：4；<br>[OSAL_CPU_2](#OSAL_CPU_2)：8；<br>[OSAL_CPU_3](#OSAL_CPU_3)：16。 |
 
 **返回值**
 

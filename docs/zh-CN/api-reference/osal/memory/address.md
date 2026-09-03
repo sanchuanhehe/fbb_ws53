@@ -69,7 +69,7 @@ void *osal_kmalloc(unsigned long size, unsigned int osal_gfp_flag)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | size | unsigned long | 需要分配的内存字节数 | > 0 |
-| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)：2 / [OSAL_GFP_DMA](#OSAL_GFP_DMA)：4 / [OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)：8，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)：1 |
+| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)：2；<br>[OSAL_GFP_DMA](#OSAL_GFP_DMA)：4；<br>[OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)：8，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)：1。 |
 
 **返回值**
 
@@ -112,7 +112,7 @@ void *osal_kzalloc(unsigned long size, unsigned int osal_gfp_flag)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | size | unsigned long | 需要分配的内存字节数 | > 0 |
-| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)：2 / [OSAL_GFP_DMA](#OSAL_GFP_DMA)：4 / [OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)：8，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)：1 |
+| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)：2；<br>[OSAL_GFP_DMA](#OSAL_GFP_DMA)：4；<br>[OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)：8，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)：1。 |
 
 **返回值**
 
@@ -146,7 +146,7 @@ void *osal_kmalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | size | unsigned int | 需要分配的内存字节数 | > 0 |
-| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)：2 / [OSAL_GFP_DMA](#OSAL_GFP_DMA)：4 / [OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)：8，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)：1 |
+| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)：2；<br>[OSAL_GFP_DMA](#OSAL_GFP_DMA)：4；<br>[OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)：8，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)：1。 |
 | boundary | unsigned int | 内存对齐边界（单位：字节） | 2 的幂，≥ 4 |
 
 **返回值**
@@ -181,7 +181,7 @@ void *osal_kzalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | size | unsigned int | 需要分配的内存字节数 | > 0 |
-| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)：2 / [OSAL_GFP_DMA](#OSAL_GFP_DMA)：4 / [OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)：8，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)：1 |
+| osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)：2；<br>[OSAL_GFP_DMA](#OSAL_GFP_DMA)：4；<br>[OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)：8，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)：1。 |
 | boundary | unsigned int | 内存对齐边界（单位：字节） | 2 的幂，≥ 4 |
 
 **返回值**
@@ -966,7 +966,7 @@ int osal_access_ok(int type, const void *addr, unsigned long size)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| type | int | 访问类型 | [OSAL_VERIFY_READ](#OSAL_VERIFY_READ)：0 / [OSAL_VERIFY_WRITE](#OSAL_VERIFY_WRITE)：1 |
+| type | int | 访问类型 | [OSAL_VERIFY_READ](#OSAL_VERIFY_READ)：0；<br>[OSAL_VERIFY_WRITE](#OSAL_VERIFY_WRITE)：1。 |
 | addr | const void * | 用户空间内存块起始地址 | 不为NULL |
 | size | unsigned long | 需要检查的内存块大小 | > 0 |
 

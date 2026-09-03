@@ -149,7 +149,7 @@ errcode_t ssaps_add_service(uint8_t server_id, sle_uuid_t *service_uuid, bool is
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 已通过 [ssaps_register_server](#ssaps_register_server) 获得的有效 ID |
 | service_uuid | [sle_uuid_t](#struct_sle_uuid_t) * | 服务 UUID | 不为NULL |
-| is_primary | bool | 是否为首要服务 | true / false |
+| is_primary | bool | 是否为首要服务 | true；<br>false。 |
 
 **返回值**
 
@@ -274,7 +274,7 @@ errcode_t ssaps_add_service_sync(uint8_t server_id, sle_uuid_t *service_uuid, bo
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 已通过 [ssaps_register_server](#ssaps_register_server) 获得的有效 ID |
 | service_uuid | [sle_uuid_t](#struct_sle_uuid_t) * | 服务 UUID | 不为NULL |
-| is_primary | bool | 是否为首要服务 | true / false |
+| is_primary | bool | 是否为首要服务 | true；<br>false。 |
 
 **出参**
 
