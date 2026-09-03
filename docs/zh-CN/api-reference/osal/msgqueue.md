@@ -50,9 +50,9 @@ int osal_msg_queue_create(const char *name, unsigned short queue_len, unsigned l
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | name | const char * | 消息队列名称（保留参数，暂未使用） | 可为 NULL |
-| queue_len | unsigned short | 队列长度 | 1 ~ 0xffff |
+| queue_len | unsigned short | 队列长度 | 1 ~ 0xFFFF |
 | flags | unsigned int | 队列模式（保留参数，暂未使用） | 保留参数 |
-| max_msgsize | unsigned short | 单个消息节点大小 | 1 ~ 0xffff |
+| max_msgsize | unsigned short | 单个消息节点大小 | 1 ~ 0xFFFF |
 
 **出参**
 
@@ -215,7 +215,7 @@ int osal_msg_queue_write_head_copy(unsigned long queue_id, void *buffer_addr, un
 | ---- | ---- | ---- | ---- |
 | queue_id | unsigned long | 由 osal_msg_queue_create 创建的队列 ID | 由 osal_msg_queue_create 创建 |
 | buffer_addr | void * | 存储待写入数据的缓冲区起始地址 | 不为 NULL |
-| buffer_size | unsigned int | 待写入数据的缓冲区大小 | 1 ~ 0xffffffff |
+| buffer_size | unsigned int | 待写入数据的缓冲区大小 | 1 ~ 0xFFFFFFFF |
 | timeout | unsigned int | 超时时间（单位：Tick） | [OSAL_MSGQ_NO_WAIT](#OSAL_MSGQ_NO_WAIT)：0 ~ [OSAL_MSGQ_WAIT_FOREVER](#OSAL_MSGQ_WAIT_FOREVER)(0xFFFFFFFF) |
 
 **返回值**

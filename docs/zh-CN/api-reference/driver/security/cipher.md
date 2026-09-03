@@ -1346,7 +1346,7 @@ typedef enum {
 | UAPI_DRV_CIPHER_SYMC_TYPE_NORMAL | 0 | 普通通道类型 |
 | UAPI_DRV_CIPHER_SYMC_TYPE_REG | 1 | 寄存器通道类型 |
 | UAPI_DRV_CIPHER_SYMC_TYPE_MAX | 2 | 通道类型上限值 |
-| UAPI_DRV_CIPHER_SYMC_TYPE_INVALID | 0xffffffff | 无效通道类型 |
+| UAPI_DRV_CIPHER_SYMC_TYPE_INVALID | 0xFFFFFFFF | 无效通道类型 |
 
 ### uapi_drv_cipher_symc_alg_t <a id="enum_uapi_drv_cipher_symc_alg_t"></a>
 
@@ -1371,7 +1371,7 @@ typedef enum {
 | UAPI_DRV_CIPHER_SYMC_ALG_LEA | 3 | LEA（Lightweight Encryption Algorithm）算法 |
 | UAPI_DRV_CIPHER_SYMC_ALG_DMA | 4 | DMA（Direct Memory Access）模式 |
 | UAPI_DRV_CIPHER_SYMC_ALG_MAX | 5 | 算法类型上限值 |
-| UAPI_DRV_CIPHER_SYMC_ALG_INVALID | 0xffffffff | 无效算法类型 |
+| UAPI_DRV_CIPHER_SYMC_ALG_INVALID | 0xFFFFFFFF | 无效算法类型 |
 
 ### uapi_drv_cipher_symc_work_mode_t <a id="enum_uapi_drv_cipher_symc_work_mode_t"></a>
 
@@ -1404,7 +1404,7 @@ typedef enum {
 | UAPI_DRV_CIPHER_SYMC_WORK_MODE_CBC_MAC | 7 | CBC-MAC模式 |
 | UAPI_DRV_CIPHER_SYMC_WORK_MODE_CMAC | 8 | CMAC模式 |
 | UAPI_DRV_CIPHER_SYMC_WORK_MODE_MAX | 9 | 工作模式上限值 |
-| UAPI_DRV_CIPHER_SYMC_WORK_MODE_INVALID | 0xffffffff | 无效工作模式 |
+| UAPI_DRV_CIPHER_SYMC_WORK_MODE_INVALID | 0xFFFFFFFF | 无效工作模式 |
 
 ### uapi_drv_cipher_symc_key_length_t <a id="enum_uapi_drv_cipher_symc_key_length_t"></a>
 
@@ -1426,7 +1426,7 @@ typedef enum {
 | UAPI_DRV_CIPHER_SYMC_KEY_192BIT | 2 | 192位密钥长度 |
 | UAPI_DRV_CIPHER_SYMC_KEY_256BIT | 3 | 256位密钥长度 |
 | UAPI_DRV_CIPHER_SYMC_KEY_LENGTH_MAX | 4 | 密钥长度上限值 |
-| UAPI_DRV_CIPHER_SYMC_KEY_LENGTH_INVALID | 0xffffffff | 无效密钥长度 |
+| UAPI_DRV_CIPHER_SYMC_KEY_LENGTH_INVALID | 0xFFFFFFFF | 无效密钥长度 |
 
 ### uapi_drv_cipher_symc_key_parity_t <a id="enum_uapi_drv_cipher_symc_key_parity_t"></a>
 
@@ -1444,7 +1444,7 @@ typedef enum {
 | UAPI_DRV_CIPHER_SYMC_KEY_EVEN | 0 | 偶密钥 |
 | UAPI_DRV_CIPHER_SYMC_KEY_ODD | 1 | 奇密钥 |
 | UAPI_DRV_CIPHER_SYMC_KEY_PARITY_MAX | 2 | 密钥奇偶性上限值 |
-| UAPI_DRV_CIPHER_SYMC_KEY_PARITY_INVALID | 0xffffffff | 无效密钥奇偶性 |
+| UAPI_DRV_CIPHER_SYMC_KEY_PARITY_INVALID | 0xFFFFFFFF | 无效密钥奇偶性 |
 
 ### uapi_drv_cipher_symc_bit_width_t <a id="enum_uapi_drv_cipher_symc_bit_width_t"></a>
 
@@ -1466,7 +1466,7 @@ typedef enum {
 | UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_64BIT | 2 | 64位宽 |
 | UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_128BIT | 3 | 128位宽 |
 | UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_MAX | 4 | 位宽上限值 |
-| UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_INVALID | 0xffffffff | 无效位宽 |
+| UAPI_DRV_CIPHER_SYMC_BIT_WIDTH_INVALID | 0xFFFFFFFF | 无效位宽 |
 
 ### uapi_drv_cipher_symc_iv_change_type_t <a id="enum_uapi_drv_cipher_symc_iv_change_type_t"></a>
 
@@ -1504,7 +1504,7 @@ typedef enum {
 | UAPI_DRV_CIPHER_SYMC_CCM_IV_CHANGE_UPDATE | 9 | CCM模式IV更新变化 |
 | UAPI_DRV_CIPHER_SYMC_CCM_IV_CHANGE_FINISH | 10 | CCM模式IV结束变化 |
 | UAPI_DRV_CIPHER_SYMC_IV_CHANGE_MAX | 11 | IV变化标志上限值 |
-| UAPI_DRV_CIPHER_SYMC_IV_CHANGE_INVALID | 0xffffffff | 无效IV变化标志 |
+| UAPI_DRV_CIPHER_SYMC_IV_CHANGE_INVALID | 0xFFFFFFFF | 无效IV变化标志 |
 
 ### uapi_drv_cipher_buffer_secure_t <a id="enum_uapi_drv_cipher_buffer_secure_t"></a>
 
@@ -1542,19 +1542,19 @@ typedef enum uapi_drv_hash_type {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| UAPI_DRV_CIPHER_HASH_TYPE_SHA1 | 0xf690a0 | SHA1（Secure Hash Algorithm 1）算法，不建议使用 |
-| UAPI_DRV_CIPHER_HASH_TYPE_SHA224 | 0x10690e0 | SHA224（Secure Hash Algorithm 224-bit）算法，不建议使用 |
+| UAPI_DRV_CIPHER_HASH_TYPE_SHA1 | 0xF690A0 | SHA1（Secure Hash Algorithm 1）算法，不建议使用 |
+| UAPI_DRV_CIPHER_HASH_TYPE_SHA224 | 0x10690E0 | SHA224（Secure Hash Algorithm 224-bit）算法，不建议使用 |
 | UAPI_DRV_CIPHER_HASH_TYPE_SHA256 | 0x1169100 | SHA256（Secure Hash Algorithm 256-bit）算法 |
-| UAPI_DRV_CIPHER_HASH_TYPE_SHA384 | 0x127a180 | SHA384（Secure Hash Algorithm 384-bit）算法 |
-| UAPI_DRV_CIPHER_HASH_TYPE_SHA512 | 0x137a200 | SHA512（Secure Hash Algorithm 512-bit）算法 |
+| UAPI_DRV_CIPHER_HASH_TYPE_SHA384 | 0x127A180 | SHA384（Secure Hash Algorithm 384-bit）算法 |
+| UAPI_DRV_CIPHER_HASH_TYPE_SHA512 | 0x137A200 | SHA512（Secure Hash Algorithm 512-bit）算法 |
 | UAPI_DRV_CIPHER_HASH_TYPE_SM3 | 0x2169100 | SM3（SM3 Cryptographic Hash Algorithm）算法 |
-| UAPI_DRV_CIPHER_HASH_TYPE_HMAC_SHA1 | 0x10f690a0 | HMAC-SHA1算法，不建议使用 |
-| UAPI_DRV_CIPHER_HASH_TYPE_HMAC_SHA224 | 0x110690e0 | HMAC-SHA224算法，不建议使用 |
+| UAPI_DRV_CIPHER_HASH_TYPE_HMAC_SHA1 | 0x10F690A0 | HMAC-SHA1算法，不建议使用 |
+| UAPI_DRV_CIPHER_HASH_TYPE_HMAC_SHA224 | 0x110690E0 | HMAC-SHA224算法，不建议使用 |
 | UAPI_DRV_CIPHER_HASH_TYPE_HMAC_SHA256 | 0x11169100 | HMAC-SHA256算法 |
-| UAPI_DRV_CIPHER_HASH_TYPE_HMAC_SHA384 | 0x1127a180 | HMAC-SHA384算法 |
-| UAPI_DRV_CIPHER_HASH_TYPE_HMAC_SHA512 | 0x1137a200 | HMAC-SHA512算法 |
+| UAPI_DRV_CIPHER_HASH_TYPE_HMAC_SHA384 | 0x1127A180 | HMAC-SHA384算法 |
+| UAPI_DRV_CIPHER_HASH_TYPE_HMAC_SHA512 | 0x1137A200 | HMAC-SHA512算法 |
 | UAPI_DRV_CIPHER_HASH_TYPE_HMAC_SM3 | 0x12169100 | HMAC-SM3算法 |
-| UAPI_DRV_CIPHER_HASH_TYPE_INVALID | 0xffffffff | 无效hash算法类型 |
+| UAPI_DRV_CIPHER_HASH_TYPE_INVALID | 0xFFFFFFFF | 无效hash算法类型 |
 
 ## Structures
 

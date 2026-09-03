@@ -534,7 +534,7 @@ errcode_t ssaps_notify_indicate(uint8_t server_id, uint16_t conn_id, ssaps_ntf_i
 
 - 按特征句柄向对端发送通知或指示。
 - 具体发送状态取决于特征描述符：客户端特征配置（value=0 不允许通知与指示；value=1 允许通知；value=2 允许指示）。
-- 通过指定 conn_id = 0xffff 可向全部对端发送。
+- 通过指定 conn_id = 0xFFFF 可向全部对端发送。
 
 **前置条件**
 
@@ -546,7 +546,7 @@ errcode_t ssaps_notify_indicate(uint8_t server_id, uint16_t conn_id, ssaps_ntf_i
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 已通过 [ssaps_register_server](#ssaps_register_server) 获得的有效 ID |
-| conn_id | uint16_t | 连接 ID，向全部对端发送时填 0xffff | 有效连接 ID 或 0xffff |
+| conn_id | uint16_t | 连接 ID，向全部对端发送时填 0xFFFF | 有效连接 ID 或 0xFFFF |
 | param | [ssaps_ntf_ind_t](#struct_ssaps_ntf_ind_t) * | 通知或指示参数 | 不为NULL |
 
 **返回值**
@@ -578,7 +578,7 @@ errcode_t ssaps_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, ssa
 
 - 按特征 UUID 向对端发送通知或指示。
 - 具体发送状态取决于客户端特征配置描述符值（value=0 不允许通知与指示；value=1 允许通知；value=2 允许指示）。
-- 通过指定 conn_id = 0xffff 可向全部对端发送。
+- 通过指定 conn_id = 0xFFFF 可向全部对端发送。
 
 **前置条件**
 
@@ -590,7 +590,7 @@ errcode_t ssaps_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, ssa
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 已通过 [ssaps_register_server](#ssaps_register_server) 获得的有效 ID |
-| conn_id | uint16_t | 连接 ID，向全部对端发送时填 0xffff | 有效连接 ID 或 0xffff |
+| conn_id | uint16_t | 连接 ID，向全部对端发送时填 0xFFFF | 有效连接 ID 或 0xFFFF |
 | param | [ssaps_ntf_ind_by_uuid_t](#struct_ssaps_ntf_ind_by_uuid_t) * | 通知或指示参数 | 不为NULL |
 
 **返回值**

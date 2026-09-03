@@ -47,7 +47,7 @@ errcode_t uapi_efuse_user_read_buffer(uint32_t offset, uint8_t *buffer, uint16_t
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| offset | uint32_t | 待读取区域在用户预留 eFuse 区域中的起始字节偏移地址 | offset 与 length 之和对应位宽不超出用户预留区域位长度，即（offset + length） * 8 ≤ CUSTOMER_RSVD_EFUSE_BIT_LEN |
+| offset | uint32_t | 待读取区域在用户预留 eFuse 区域中的起始字节偏移地址 | offset 与 length 之和对应位宽不超出用户预留区域位长度，即(offset + length) * 8 ≤ CUSTOMER_RSVD_EFUSE_BIT_LEN |
 | length | uint16_t | 待读取数据的长度，以字节为单位 | length ≥ 1 |
 
 **出参**
@@ -93,7 +93,7 @@ errcode_t uapi_efuse_user_write_buffer(uint32_t offset, const uint8_t *buffer, u
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| offset | uint32_t | 待写入区域在用户预留 eFuse 区域中的起始字节偏移地址 | offset 与 length 之和对应位宽不超出用户预留区域位长度，即（offset + length） * 8 ≤ CUSTOMER_RSVD_EFUSE_BIT_LEN |
+| offset | uint32_t | 待写入区域在用户预留 eFuse 区域中的起始字节偏移地址 | offset 与 length 之和对应位宽不超出用户预留区域位长度，即(offset + length) * 8 ≤ CUSTOMER_RSVD_EFUSE_BIT_LEN |
 | buffer | const uint8_t * | 包含待写入数据的缓冲区，由调用方提供 | 不为NULL |
 | length | uint16_t | 待写入数据的长度，以字节为单位 | length ≥ 1 |
 

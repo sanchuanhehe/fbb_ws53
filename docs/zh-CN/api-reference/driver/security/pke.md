@@ -28,8 +28,8 @@ PKE（Public Key Engine）提供公钥密码运算能力，覆盖 ECC（Elliptic
 | [uapi_drv_cipher_pke_rsa_private_decrypt](#uapi_drv_cipher_pke_rsa_private_decrypt) | 使用 RSA 私钥对密文解密 |
 | [uapi_drv_cipher_pke_dh_gen_key](#uapi_drv_cipher_pke_dh_gen_key) | 生成 DH 公私钥对或由私钥推导公钥 |
 | [uapi_drv_cipher_pke_dh_compute_key](#uapi_drv_cipher_pke_dh_compute_key) | 基于 DH 算法计算共享密钥 |
-| [uapi_drv_cipher_pke_add_mod](#uapi_drv_cipher_pke_add_mod) | 大数模加运算 c =（a + b） mod p |
-| [uapi_drv_cipher_pke_sub_mod](#uapi_drv_cipher_pke_sub_mod) | 大数模减运算 c =（a - b） mod p |
+| [uapi_drv_cipher_pke_add_mod](#uapi_drv_cipher_pke_add_mod) | 大数模加运算 c =(a + b) mod p |
+| [uapi_drv_cipher_pke_sub_mod](#uapi_drv_cipher_pke_sub_mod) | 大数模减运算 c =(a - b) mod p |
 | [uapi_drv_cipher_pke_mul_mod](#uapi_drv_cipher_pke_mul_mod) | 大数模乘运算 c = (a * b) mod p |
 | [uapi_drv_cipher_pke_inv_mod](#uapi_drv_cipher_pke_inv_mod) | 大数模逆运算 c = (a^-1) mod p |
 | [uapi_drv_cipher_pke_mod](#uapi_drv_cipher_pke_mod) | 大数取模运算 c = a mod p |
@@ -68,7 +68,7 @@ errcode_t uapi_drv_cipher_pke_ecc_gen_key(uapi_drv_cipher_pke_ecc_curve_type_t c
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P256](#uapi_drv_cipher_pke_ecc_curve_type_t)：0 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P384](#uapi_drv_cipher_pke_ecc_curve_type_t)：1 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P512](#uapi_drv_cipher_pke_ecc_curve_type_t)：2 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256K](#uapi_drv_cipher_pke_ecc_curve_type_t)：3 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P192R](#uapi_drv_cipher_pke_ecc_curve_type_t)：4 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P224R](#uapi_drv_cipher_pke_ecc_curve_type_t)：5 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256R](#uapi_drv_cipher_pke_ecc_curve_type_t)：6 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P384R](#uapi_drv_cipher_pke_ecc_curve_type_t)：7 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P521R](#uapi_drv_cipher_pke_ecc_curve_type_t)：8 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748](#uapi_drv_cipher_pke_ecc_curve_type_t)：9 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748_448](#uapi_drv_cipher_pke_ecc_curve_type_t)：10 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032](#uapi_drv_cipher_pke_ecc_curve_type_t)：11 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2](#uapi_drv_cipher_pke_ecc_curve_type_t)：12 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX](#uapi_drv_cipher_pke_ecc_curve_type_t)：13 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID](#uapi_drv_cipher_pke_ecc_curve_type_t)：0xffffffff |
+| curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P256](#uapi_drv_cipher_pke_ecc_curve_type_t)：0 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P384](#uapi_drv_cipher_pke_ecc_curve_type_t)：1 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P512](#uapi_drv_cipher_pke_ecc_curve_type_t)：2 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256K](#uapi_drv_cipher_pke_ecc_curve_type_t)：3 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P192R](#uapi_drv_cipher_pke_ecc_curve_type_t)：4 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P224R](#uapi_drv_cipher_pke_ecc_curve_type_t)：5 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256R](#uapi_drv_cipher_pke_ecc_curve_type_t)：6 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P384R](#uapi_drv_cipher_pke_ecc_curve_type_t)：7 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P521R](#uapi_drv_cipher_pke_ecc_curve_type_t)：8 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748](#uapi_drv_cipher_pke_ecc_curve_type_t)：9 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748_448](#uapi_drv_cipher_pke_ecc_curve_type_t)：10 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032](#uapi_drv_cipher_pke_ecc_curve_type_t)：11 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2](#uapi_drv_cipher_pke_ecc_curve_type_t)：12 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX](#uapi_drv_cipher_pke_ecc_curve_type_t)：13 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID](#uapi_drv_cipher_pke_ecc_curve_type_t)：0xFFFFFFFF |
 | input_priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入私钥，可为空指针；非空时作为生成私钥的输入 | 可为NULL |
 
 **出参**
@@ -123,7 +123,7 @@ errcode_t uapi_drv_cipher_pke_ecdsa_sign(uapi_drv_cipher_pke_ecc_curve_type_t cu
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P256](#uapi_drv_cipher_pke_ecc_curve_type_t)：0 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P384](#uapi_drv_cipher_pke_ecc_curve_type_t)：1 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P512](#uapi_drv_cipher_pke_ecc_curve_type_t)：2 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256K](#uapi_drv_cipher_pke_ecc_curve_type_t)：3 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P192R](#uapi_drv_cipher_pke_ecc_curve_type_t)：4 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P224R](#uapi_drv_cipher_pke_ecc_curve_type_t)：5 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256R](#uapi_drv_cipher_pke_ecc_curve_type_t)：6 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P384R](#uapi_drv_cipher_pke_ecc_curve_type_t)：7 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P521R](#uapi_drv_cipher_pke_ecc_curve_type_t)：8 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748](#uapi_drv_cipher_pke_ecc_curve_type_t)：9 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748_448](#uapi_drv_cipher_pke_ecc_curve_type_t)：10 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032](#uapi_drv_cipher_pke_ecc_curve_type_t)：11 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2](#uapi_drv_cipher_pke_ecc_curve_type_t)：12 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX](#uapi_drv_cipher_pke_ecc_curve_type_t)：13 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID](#uapi_drv_cipher_pke_ecc_curve_type_t)：0xffffffff |
+| curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P256](#uapi_drv_cipher_pke_ecc_curve_type_t)：0 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P384](#uapi_drv_cipher_pke_ecc_curve_type_t)：1 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P512](#uapi_drv_cipher_pke_ecc_curve_type_t)：2 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256K](#uapi_drv_cipher_pke_ecc_curve_type_t)：3 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P192R](#uapi_drv_cipher_pke_ecc_curve_type_t)：4 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P224R](#uapi_drv_cipher_pke_ecc_curve_type_t)：5 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256R](#uapi_drv_cipher_pke_ecc_curve_type_t)：6 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P384R](#uapi_drv_cipher_pke_ecc_curve_type_t)：7 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P521R](#uapi_drv_cipher_pke_ecc_curve_type_t)：8 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748](#uapi_drv_cipher_pke_ecc_curve_type_t)：9 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748_448](#uapi_drv_cipher_pke_ecc_curve_type_t)：10 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032](#uapi_drv_cipher_pke_ecc_curve_type_t)：11 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2](#uapi_drv_cipher_pke_ecc_curve_type_t)：12 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX](#uapi_drv_cipher_pke_ecc_curve_type_t)：13 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID](#uapi_drv_cipher_pke_ecc_curve_type_t)：0xFFFFFFFF |
 | priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入 ECC 私钥 | 不为NULL |
 | hash | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待签名的摘要数据 | 不为NULL |
 
@@ -172,7 +172,7 @@ errcode_t uapi_drv_cipher_pke_ecdsa_verify(uapi_drv_cipher_pke_ecc_curve_type_t 
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P256](#uapi_drv_cipher_pke_ecc_curve_type_t)：0 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P384](#uapi_drv_cipher_pke_ecc_curve_type_t)：1 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P512](#uapi_drv_cipher_pke_ecc_curve_type_t)：2 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256K](#uapi_drv_cipher_pke_ecc_curve_type_t)：3 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P192R](#uapi_drv_cipher_pke_ecc_curve_type_t)：4 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P224R](#uapi_drv_cipher_pke_ecc_curve_type_t)：5 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256R](#uapi_drv_cipher_pke_ecc_curve_type_t)：6 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P384R](#uapi_drv_cipher_pke_ecc_curve_type_t)：7 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P521R](#uapi_drv_cipher_pke_ecc_curve_type_t)：8 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748](#uapi_drv_cipher_pke_ecc_curve_type_t)：9 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748_448](#uapi_drv_cipher_pke_ecc_curve_type_t)：10 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032](#uapi_drv_cipher_pke_ecc_curve_type_t)：11 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2](#uapi_drv_cipher_pke_ecc_curve_type_t)：12 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX](#uapi_drv_cipher_pke_ecc_curve_type_t)：13 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID](#uapi_drv_cipher_pke_ecc_curve_type_t)：0xffffffff |
+| curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P256](#uapi_drv_cipher_pke_ecc_curve_type_t)：0 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P384](#uapi_drv_cipher_pke_ecc_curve_type_t)：1 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P512](#uapi_drv_cipher_pke_ecc_curve_type_t)：2 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256K](#uapi_drv_cipher_pke_ecc_curve_type_t)：3 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P192R](#uapi_drv_cipher_pke_ecc_curve_type_t)：4 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P224R](#uapi_drv_cipher_pke_ecc_curve_type_t)：5 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256R](#uapi_drv_cipher_pke_ecc_curve_type_t)：6 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P384R](#uapi_drv_cipher_pke_ecc_curve_type_t)：7 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P521R](#uapi_drv_cipher_pke_ecc_curve_type_t)：8 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748](#uapi_drv_cipher_pke_ecc_curve_type_t)：9 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748_448](#uapi_drv_cipher_pke_ecc_curve_type_t)：10 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032](#uapi_drv_cipher_pke_ecc_curve_type_t)：11 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2](#uapi_drv_cipher_pke_ecc_curve_type_t)：12 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX](#uapi_drv_cipher_pke_ecc_curve_type_t)：13 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID](#uapi_drv_cipher_pke_ecc_curve_type_t)：0xFFFFFFFF |
 | pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入 ECC 公钥 | 不为NULL |
 | hash | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待验签的摘要数据 | 不为NULL |
 | sig | [uapi_drv_cipher_pke_ecc_sig_t](#uapi_drv_cipher_pke_ecc_sig_t) | 输入待验证的签名值 | 不为NULL |
@@ -220,7 +220,7 @@ errcode_t uapi_drv_cipher_pke_eddsa_sign(uapi_drv_cipher_pke_ecc_curve_type_t cu
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P256](#uapi_drv_cipher_pke_ecc_curve_type_t)：0 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P384](#uapi_drv_cipher_pke_ecc_curve_type_t)：1 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P512](#uapi_drv_cipher_pke_ecc_curve_type_t)：2 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256K](#uapi_drv_cipher_pke_ecc_curve_type_t)：3 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P192R](#uapi_drv_cipher_pke_ecc_curve_type_t)：4 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P224R](#uapi_drv_cipher_pke_ecc_curve_type_t)：5 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256R](#uapi_drv_cipher_pke_ecc_curve_type_t)：6 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P384R](#uapi_drv_cipher_pke_ecc_curve_type_t)：7 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P521R](#uapi_drv_cipher_pke_ecc_curve_type_t)：8 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748](#uapi_drv_cipher_pke_ecc_curve_type_t)：9 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748_448](#uapi_drv_cipher_pke_ecc_curve_type_t)：10 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032](#uapi_drv_cipher_pke_ecc_curve_type_t)：11 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2](#uapi_drv_cipher_pke_ecc_curve_type_t)：12 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX](#uapi_drv_cipher_pke_ecc_curve_type_t)：13 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID](#uapi_drv_cipher_pke_ecc_curve_type_t)：0xffffffff |
+| curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P256](#uapi_drv_cipher_pke_ecc_curve_type_t)：0 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P384](#uapi_drv_cipher_pke_ecc_curve_type_t)：1 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P512](#uapi_drv_cipher_pke_ecc_curve_type_t)：2 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256K](#uapi_drv_cipher_pke_ecc_curve_type_t)：3 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P192R](#uapi_drv_cipher_pke_ecc_curve_type_t)：4 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P224R](#uapi_drv_cipher_pke_ecc_curve_type_t)：5 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256R](#uapi_drv_cipher_pke_ecc_curve_type_t)：6 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P384R](#uapi_drv_cipher_pke_ecc_curve_type_t)：7 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P521R](#uapi_drv_cipher_pke_ecc_curve_type_t)：8 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748](#uapi_drv_cipher_pke_ecc_curve_type_t)：9 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748_448](#uapi_drv_cipher_pke_ecc_curve_type_t)：10 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032](#uapi_drv_cipher_pke_ecc_curve_type_t)：11 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2](#uapi_drv_cipher_pke_ecc_curve_type_t)：12 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX](#uapi_drv_cipher_pke_ecc_curve_type_t)：13 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID](#uapi_drv_cipher_pke_ecc_curve_type_t)：0xFFFFFFFF |
 | priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入 Edwards 曲线私钥 | 不为NULL |
 | msg | [uapi_drv_cipher_pke_msg_t](#uapi_drv_cipher_pke_msg_t) | 输入待签名消息 | 不为NULL |
 
@@ -275,7 +275,7 @@ errcode_t uapi_drv_cipher_pke_eddsa_verify(uapi_drv_cipher_pke_ecc_curve_type_t 
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P256](#uapi_drv_cipher_pke_ecc_curve_type_t)：0 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P384](#uapi_drv_cipher_pke_ecc_curve_type_t)：1 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P512](#uapi_drv_cipher_pke_ecc_curve_type_t)：2 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256K](#uapi_drv_cipher_pke_ecc_curve_type_t)：3 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P192R](#uapi_drv_cipher_pke_ecc_curve_type_t)：4 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P224R](#uapi_drv_cipher_pke_ecc_curve_type_t)：5 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256R](#uapi_drv_cipher_pke_ecc_curve_type_t)：6 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P384R](#uapi_drv_cipher_pke_ecc_curve_type_t)：7 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P521R](#uapi_drv_cipher_pke_ecc_curve_type_t)：8 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748](#uapi_drv_cipher_pke_ecc_curve_type_t)：9 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748_448](#uapi_drv_cipher_pke_ecc_curve_type_t)：10 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032](#uapi_drv_cipher_pke_ecc_curve_type_t)：11 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2](#uapi_drv_cipher_pke_ecc_curve_type_t)：12 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX](#uapi_drv_cipher_pke_ecc_curve_type_t)：13 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID](#uapi_drv_cipher_pke_ecc_curve_type_t)：0xffffffff |
+| curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P256](#uapi_drv_cipher_pke_ecc_curve_type_t)：0 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P384](#uapi_drv_cipher_pke_ecc_curve_type_t)：1 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P512](#uapi_drv_cipher_pke_ecc_curve_type_t)：2 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256K](#uapi_drv_cipher_pke_ecc_curve_type_t)：3 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P192R](#uapi_drv_cipher_pke_ecc_curve_type_t)：4 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P224R](#uapi_drv_cipher_pke_ecc_curve_type_t)：5 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256R](#uapi_drv_cipher_pke_ecc_curve_type_t)：6 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P384R](#uapi_drv_cipher_pke_ecc_curve_type_t)：7 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P521R](#uapi_drv_cipher_pke_ecc_curve_type_t)：8 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748](#uapi_drv_cipher_pke_ecc_curve_type_t)：9 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748_448](#uapi_drv_cipher_pke_ecc_curve_type_t)：10 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032](#uapi_drv_cipher_pke_ecc_curve_type_t)：11 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2](#uapi_drv_cipher_pke_ecc_curve_type_t)：12 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX](#uapi_drv_cipher_pke_ecc_curve_type_t)：13 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID](#uapi_drv_cipher_pke_ecc_curve_type_t)：0xFFFFFFFF |
 | pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入 Edwards 曲线公钥 | 不为NULL |
 | msg | [uapi_drv_cipher_pke_msg_t](#uapi_drv_cipher_pke_msg_t) | 输入待验签消息 | 不为NULL |
 | sig | [uapi_drv_cipher_pke_ecc_sig_t](#uapi_drv_cipher_pke_ecc_sig_t) | 输入待验证的签名值 | 不为NULL |
@@ -325,7 +325,7 @@ errcode_t uapi_drv_cipher_pke_ecc_gen_ecdh_key(uapi_drv_cipher_pke_ecc_curve_typ
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P256](#uapi_drv_cipher_pke_ecc_curve_type_t)：0 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P384](#uapi_drv_cipher_pke_ecc_curve_type_t)：1 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P512](#uapi_drv_cipher_pke_ecc_curve_type_t)：2 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256K](#uapi_drv_cipher_pke_ecc_curve_type_t)：3 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P192R](#uapi_drv_cipher_pke_ecc_curve_type_t)：4 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P224R](#uapi_drv_cipher_pke_ecc_curve_type_t)：5 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256R](#uapi_drv_cipher_pke_ecc_curve_type_t)：6 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P384R](#uapi_drv_cipher_pke_ecc_curve_type_t)：7 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P521R](#uapi_drv_cipher_pke_ecc_curve_type_t)：8 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748](#uapi_drv_cipher_pke_ecc_curve_type_t)：9 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748_448](#uapi_drv_cipher_pke_ecc_curve_type_t)：10 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032](#uapi_drv_cipher_pke_ecc_curve_type_t)：11 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2](#uapi_drv_cipher_pke_ecc_curve_type_t)：12 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX](#uapi_drv_cipher_pke_ecc_curve_type_t)：13 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID](#uapi_drv_cipher_pke_ecc_curve_type_t)：0xffffffff |
+| curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P256](#uapi_drv_cipher_pke_ecc_curve_type_t)：0 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P384](#uapi_drv_cipher_pke_ecc_curve_type_t)：1 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P512](#uapi_drv_cipher_pke_ecc_curve_type_t)：2 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256K](#uapi_drv_cipher_pke_ecc_curve_type_t)：3 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P192R](#uapi_drv_cipher_pke_ecc_curve_type_t)：4 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P224R](#uapi_drv_cipher_pke_ecc_curve_type_t)：5 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256R](#uapi_drv_cipher_pke_ecc_curve_type_t)：6 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P384R](#uapi_drv_cipher_pke_ecc_curve_type_t)：7 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P521R](#uapi_drv_cipher_pke_ecc_curve_type_t)：8 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748](#uapi_drv_cipher_pke_ecc_curve_type_t)：9 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748_448](#uapi_drv_cipher_pke_ecc_curve_type_t)：10 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032](#uapi_drv_cipher_pke_ecc_curve_type_t)：11 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2](#uapi_drv_cipher_pke_ecc_curve_type_t)：12 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX](#uapi_drv_cipher_pke_ecc_curve_type_t)：13 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID](#uapi_drv_cipher_pke_ecc_curve_type_t)：0xFFFFFFFF |
 | input_pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入对端 ECC 公钥 | 不为NULL |
 | input_priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入本地 ECC 私钥 | 不为NULL |
 
@@ -378,7 +378,7 @@ errcode_t uapi_drv_cipher_pke_check_dot_on_curve(uapi_drv_cipher_pke_ecc_curve_t
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P256](#uapi_drv_cipher_pke_ecc_curve_type_t)：0 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P384](#uapi_drv_cipher_pke_ecc_curve_type_t)：1 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P512](#uapi_drv_cipher_pke_ecc_curve_type_t)：2 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256K](#uapi_drv_cipher_pke_ecc_curve_type_t)：3 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P192R](#uapi_drv_cipher_pke_ecc_curve_type_t)：4 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P224R](#uapi_drv_cipher_pke_ecc_curve_type_t)：5 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256R](#uapi_drv_cipher_pke_ecc_curve_type_t)：6 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P384R](#uapi_drv_cipher_pke_ecc_curve_type_t)：7 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P521R](#uapi_drv_cipher_pke_ecc_curve_type_t)：8 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748](#uapi_drv_cipher_pke_ecc_curve_type_t)：9 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748_448](#uapi_drv_cipher_pke_ecc_curve_type_t)：10 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032](#uapi_drv_cipher_pke_ecc_curve_type_t)：11 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2](#uapi_drv_cipher_pke_ecc_curve_type_t)：12 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX](#uapi_drv_cipher_pke_ecc_curve_type_t)：13 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID](#uapi_drv_cipher_pke_ecc_curve_type_t)：0xffffffff |
+| curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P256](#uapi_drv_cipher_pke_ecc_curve_type_t)：0 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P384](#uapi_drv_cipher_pke_ecc_curve_type_t)：1 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC5639_P512](#uapi_drv_cipher_pke_ecc_curve_type_t)：2 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256K](#uapi_drv_cipher_pke_ecc_curve_type_t)：3 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P192R](#uapi_drv_cipher_pke_ecc_curve_type_t)：4 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P224R](#uapi_drv_cipher_pke_ecc_curve_type_t)：5 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P256R](#uapi_drv_cipher_pke_ecc_curve_type_t)：6 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P384R](#uapi_drv_cipher_pke_ecc_curve_type_t)：7 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_FIPS_P521R](#uapi_drv_cipher_pke_ecc_curve_type_t)：8 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748](#uapi_drv_cipher_pke_ecc_curve_type_t)：9 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC7748_448](#uapi_drv_cipher_pke_ecc_curve_type_t)：10 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032](#uapi_drv_cipher_pke_ecc_curve_type_t)：11 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2](#uapi_drv_cipher_pke_ecc_curve_type_t)：12 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX](#uapi_drv_cipher_pke_ecc_curve_type_t)：13 / [UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID](#uapi_drv_cipher_pke_ecc_curve_type_t)：0xFFFFFFFF |
 | pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入待检查的 ECC 点 | 不为NULL |
 
 **出参**
@@ -923,7 +923,7 @@ errcode_t uapi_drv_cipher_pke_add_mod(const uapi_drv_cipher_pke_data_t *a, const
 
 **功能说明**
 
-- 执行大数模加运算，计算 c =（a + b） mod p。
+- 执行大数模加运算，计算 c =(a + b) mod p。
 - 模数 p 支持多种比特长度规格。
 - 输出结果长度应与模数长度相同。
 
@@ -976,7 +976,7 @@ errcode_t uapi_drv_cipher_pke_sub_mod(const uapi_drv_cipher_pke_data_t *a, const
 
 **功能说明**
 
-- 执行大数模减运算，计算 c =（a - b） mod p。
+- 执行大数模减运算，计算 c =(a - b) mod p。
 - 模数 p 支持多种比特长度规格。
 - 输出结果长度应与模数长度相同。
 
@@ -1326,7 +1326,7 @@ typedef enum {
 | UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032 | 11 | RFC 8032 ED25519 |
 | UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2 | 12 | GMT 0003.2-2012 SM2 曲线 |
 | UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX | 13 | 曲线类型上限 |
-| UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID | 0xffffffff | 无效曲线类型 |
+| UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID | 0xFFFFFFFF | 无效曲线类型 |
 
 ### uapi_drv_cipher_pke_rsa_scheme_t <a id="uapi_drv_cipher_pke_rsa_scheme_t"></a>
 
@@ -1344,7 +1344,7 @@ typedef enum {
 | UAPI_DRV_CIPHER_PKE_RSA_SCHEME_PKCS1_V15 | 0 | PKCS1 v1.5 填充方式（不安全，不建议使用） |
 | UAPI_DRV_CIPHER_PKE_RSA_SCHEME_PKCS1_V21 | 1 | PKCS1 v2.1 填充方式 |
 | UAPI_DRV_CIPHER_PKE_RSA_SCHEME_MAX | 2 | 填充方式上限 |
-| UAPI_DRV_CIPHER_PKE_RSA_SCHEME_INVALID | 0xffffffff | 无效填充方式 |
+| UAPI_DRV_CIPHER_PKE_RSA_SCHEME_INVALID | 0xFFFFFFFF | 无效填充方式 |
 
 ### uapi_drv_cipher_pke_hash_type_t <a id="uapi_drv_cipher_pke_hash_type_t"></a>
 
@@ -1370,7 +1370,7 @@ typedef enum {
 | UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA512 | 4 | SHA512 摘要算法 |
 | UAPI_DRV_CIPHER_PKE_HASH_TYPE_SM3 | 5 | SM3 摘要算法 |
 | UAPI_DRV_CIPHER_PKE_HASH_TYPE_MAX | 6 | 摘要算法上限 |
-| UAPI_DRV_CIPHER_PKE_HASH_TYPE_INVALID | 0xffffffff | 无效摘要算法 |
+| UAPI_DRV_CIPHER_PKE_HASH_TYPE_INVALID | 0xFFFFFFFF | 无效摘要算法 |
 
 ### uapi_drv_cipher_pke_buffer_secure_t <a id="uapi_drv_cipher_pke_buffer_secure_t"></a>
 
@@ -1386,7 +1386,7 @@ typedef enum {
 | ------- | ---- | ---- |
 | UAPI_DRV_CIPHER_PKE_BUF_NONSECURE | 0 | 非安全缓冲区属性 |
 | UAPI_DRV_CIPHER_PKE_BUF_SECURE | 1 | 安全缓冲区属性 |
-| UAPI_DRV_CIPHER_PKE_BUF_INVALID | 0xffffffff | 无效缓冲区属性 |
+| UAPI_DRV_CIPHER_PKE_BUF_INVALID | 0xFFFFFFFF | 无效缓冲区属性 |
 
 ## Structures
 
@@ -1494,16 +1494,16 @@ typedef struct {
 | d | uint8_t * | RSA 私钥参数 d（私钥指数） |
 | p | uint8_t * | RSA 第一素数因子 p |
 | q | uint8_t * | RSA 第二素数因子 q |
-| dp | uint8_t * | D %（P - 1）的结果 |
-| dq | uint8_t * | D %（Q - 1）的结果 |
+| dp | uint8_t * | D %(P - 1)的结果 |
+| dq | uint8_t * | D %(Q - 1)的结果 |
 | qp | uint8_t * | 1 / (Q % P) 的结果 |
 | n_len | uint16_t | RSA 公钥参数 n 的长度 |
 | e_len | uint16_t | RSA 公钥参数 e 的长度 |
 | d_len | uint16_t | RSA 私钥参数 d 的长度 |
 | p_len | uint16_t | RSA 第一素因子 p 的长度，应为 n_len 的一半 |
 | q_len | uint16_t | RSA 第二素因子 q 的长度，应为 n_len 的一半 |
-| dp_len | uint16_t | D %（P - 1）结果的长度，应为 n_len 的一半 |
-| dq_len | uint16_t | D %（Q - 1）结果的长度，应为 n_len 的一半 |
+| dp_len | uint16_t | D %(P - 1)结果的长度，应为 n_len 的一半 |
+| dq_len | uint16_t | D %(Q - 1)结果的长度，应为 n_len 的一半 |
 | qp_len | uint16_t | 1 / (Q % P) 结果的长度，应为 n_len 的一半 |
 
 ### uapi_drv_cipher_pke_rsa_pub_key_t <a id="uapi_drv_cipher_pke_rsa_pub_key_t"></a>

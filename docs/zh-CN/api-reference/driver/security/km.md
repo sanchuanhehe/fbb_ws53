@@ -808,7 +808,7 @@ typedef enum {
 | UAPI_DRV_KLAD_KEY_SIZE_128BIT | 0 | 128 位对称密钥 |
 | UAPI_DRV_KLAD_KEY_SIZE_192BIT | 1 | 192 位对称密钥 |
 | UAPI_DRV_KLAD_KEY_SIZE_256BIT | 2 | 256 位对称密钥 |
-| UAPI_DRV_KLAD_KEY_SIZE_INVALID | 0xffffffff | 无效密钥长度 |
+| UAPI_DRV_KLAD_KEY_SIZE_INVALID | 0xFFFFFFFF | 无效密钥长度 |
 
 ### enum_uapi_drv_klad_hmac_type_t <a id="enum_uapi_drv_klad_hmac_type_t"></a>
 
@@ -835,7 +835,7 @@ typedef enum {
 | UAPI_DRV_KLAD_HMAC_TYPE_SHA512 | 0x24 | HMAC 使用 SHA512 算法 |
 | UAPI_DRV_KLAD_HMAC_TYPE_SM3 | 0x30 | HMAC 使用 SM3 算法 |
 | UAPI_DRV_KLAD_HMAC_TYPE_MAX | 0x31 | 算法类型上限，无效值 |
-| UAPI_DRV_KLAD_HMAC_TYPE_INVALID | 0xffffffff | 无效 HMAC 算法类型 |
+| UAPI_DRV_KLAD_HMAC_TYPE_INVALID | 0xFFFFFFFF | 无效 HMAC 算法类型 |
 
 ## Structures
 

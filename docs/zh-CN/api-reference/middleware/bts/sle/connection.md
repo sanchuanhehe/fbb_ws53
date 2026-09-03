@@ -2612,8 +2612,8 @@ typedef struct sle_announce_param {
 | announce_mode | uint8_t | 设备公开类型，参考 [sle_announce_mode_t](#enum_sle_announce_mode_t) |
 | announce_gt_role | uint8_t | G/T 角色协商指示，参考 [sle_announce_gt_role_t](#enum_sle_announce_gt_role_t) |
 | announce_level | uint8_t | 发现等级，参考 [sle_announce_level_t](#enum_sle_announce_level_t) |
-| announce_interval_min | uint32_t | 最小设备公开周期，取值范围 0x000020~0xffffff，单位 125us |
-| announce_interval_max | uint32_t | 最大设备公开周期，取值范围 0x000020~0xffffff，单位 125us |
+| announce_interval_min | uint32_t | 最小设备公开周期，取值范围 0x000020~0xFFFFFF，单位 125us |
+| announce_interval_max | uint32_t | 最大设备公开周期，取值范围 0x000020~0xFFFFFF，单位 125us |
 | announce_channel_map | uint8_t | 设备公开信道，0:76，1:77，2:78 |
 | announce_tx_power | int8_t | 广播发射功率，单位 dbm，取值范围 [-127, 20]，0x7F 表示不设置特定发送功率 |
 | own_addr | [sle_addr_t](#struct_sle_addr_t) | 本端地址 |
