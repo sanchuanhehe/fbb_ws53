@@ -20,7 +20,7 @@ flowchart LR
     W --- F[路由/转发/NAT/DNS]
 ```
 
-基础无线接口的完整实现分别参见 [STA 连接](./sta/sta-connect.md)和 [SoftAP](./softap/softap.md)。
+基础无线接口的完整实现分别参见 [STA 连接与重连](./sta/sta-connect.md)和 [SoftAP 热点](./softap/softap.md)。
 
 ## 关键配置
 

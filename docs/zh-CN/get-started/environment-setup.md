@@ -113,7 +113,7 @@ HiSpark Studio 插件编译工程需要依赖工具链、Python 和 pip 依赖�
 >
 > - 如果自动安装工具链时 Python 安装失败，通常是网络或本地代理问题，请更换网络或修改代理后重试。
 > - 如果提示依赖下载失败，可重复执行“下载工具链”。
-> - 多次尝试仍然失败时，请参阅[完整环境搭建手册](environment-setup/manual/index.md)中的命令行环境搭建说明。
+> - 多次尝试仍然失败时，请参阅[开发环境搭建](environment-setup/manual/index.md)中的命令行环境搭建说明。
 
 ## 获取 SDK
 
@@ -163,4 +163,4 @@ A：按以下顺序检查：
 
 ---
 
-> 如需了解 Linux 命令行环境、Menuconfig 和组件编译方式，请阅读[完整环境搭建手册](environment-setup/manual/index.md)。
+> 如需了解 Linux 命令行环境、Menuconfig 和组件编译方式，请阅读[开发环境搭建](environment-setup/manual/index.md)。

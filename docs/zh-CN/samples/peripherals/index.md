@@ -22,10 +22,10 @@ hide:
 ### 数据采集与计时
 
 - [ADC（Analog-to-Digital Converter）采样](./adc/adc.md)
-- [RTC（Real-Time Clock）计时](./rtc/rtc.md)
+- [RTC 软件定时器](./rtc/rtc.md)
 - [SysTick 时间戳与延时](./systick/systick.md)
 - [TCXO 时间戳与延时](./tcxo/tcxo.md)
-- [Timer 硬件定时器](./timer-hw/timer-hw.md)
+- [Timer](./timer-hw/timer-hw.md)
 
 ### 数据搬运、总线与存储
 
@@ -45,4 +45,4 @@ hide:
 
 以下页面用于说明 WS53 当前的驱动 API 和案例缺口，不提供可执行的 Sample 操作步骤：
 
-- [PMP（Physical Memory Protection）](./pmp/pmp.md)（占位）
+- [PMP 内存保护](./pmp/pmp.md)（占位）

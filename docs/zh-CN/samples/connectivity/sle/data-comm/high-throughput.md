@@ -2,7 +2,7 @@
 
 > 使用技术：SLE、SSAP Notification、MTU 与链路数据长度、连接参数、PHY/MCS、发送流控、TCXO 吞吐统计
 
-> 前置阅读：必须了解 [Hello Connect](../basics/hello-connect.md) 的扫描与连接流程，建议先完成 [Hello Notify](../basics/hello-notify.md) 的 Notification 实验。
+> 前置阅读：必须了解 [Hello SLE](../basics/hello-connect.md) 的扫描与连接流程，建议先完成 [Hello Notify](../basics/hello-notify.md) 的 Notification 实验。
 
 本案例的意图是使用两块 WS53 建立持续 Notification 链路：Server 请求较大的 MTU 和链路数据长度，设置 PHY/MCS，并根据发送余量连续提交 1450 字节数据；Client 使用 TCXO 时间戳计算应用层接收速率，并周期读取 RSSI。
 

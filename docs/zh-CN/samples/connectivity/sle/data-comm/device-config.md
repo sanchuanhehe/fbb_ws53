@@ -2,7 +2,7 @@
 
 > 使用技术：SLE、SSAP（SLE Service Access Protocol）属性读写、应用层校验、NV（Non-Volatile Storage）持久化
 
-> 前置阅读：必须了解 [Hello Connect](../basics/hello-connect.md) 的扫描与连接流程，建议先完成 [Hello Read/Write](../basics/hello-readwrite.md) 的属性读写实验。
+> 前置阅读：必须了解 [Hello SLE](../basics/hello-connect.md) 的扫描与连接流程，建议先完成 [属性读写](../basics/hello-readwrite.md) 的属性读写实验。
 
 本案例使用两块 WS53 演示设备配置链路：Client 先读取 Server 当前配置，再写入合法配置、回读比对，并写入一组非法配置验证拒绝路径；Server 对候选值进行校验并保存到 NV，复位后重新加载。案例中的配置字段只用于验证读写和持久化流程，尚未接入实际业务模块。
 
