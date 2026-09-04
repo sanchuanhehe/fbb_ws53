@@ -110,7 +110,7 @@ void osal_remove_proc_entry(const char *name, osal_proc_entry *parent)
 
 **前置条件**
 
-- 调用时序约束：当前接口应在 osal_create_proc_entry 成功创建 proc 文件后调用。
+- 调用时序约束：当前接口应在 osal_create_proc_entry 创建成功 proc 文件后调用。
 - 依赖关系：当前接口依赖 osal_proc_init 已成功执行。
 
 **入参**
@@ -192,7 +192,7 @@ void osal_seq_printf(void *seqfile, const char *fmt, ...)
 **前置条件**
 
 - 调用时序约束：当前接口应在 proc 文件的 read 回调执行期间调用，seqfile 取自回调入参 entry 的 seqfile 字段。
-- 依赖关系：当前接口依赖 osal_create_proc_entry 已成功创建 proc 文件并设置了 read 回调。
+- 依赖关系：当前接口依赖 osal_create_proc_entry 已创建成功 proc 文件并设置了 read 回调。
 
 **入参**
 

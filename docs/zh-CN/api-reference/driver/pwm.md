@@ -50,7 +50,7 @@ errcode_t uapi_pwm_init(void)
 
 - 初始化 PWM 驱动模块。
 - 已初始化时重复调用直接返回成功，不重复执行初始化动作。
-- 初始化成功后本模块其他接口方可使用。
+- 成功初始化后本模块其他接口方可使用。
 
 **前置条件**
 
@@ -63,7 +63,7 @@ errcode_t uapi_pwm_init(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 驱动已初始化或本次初始化成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 驱动已初始化或本次初始化成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层 HAL 初始化返回失败 |
 
 **参考案例**
@@ -134,7 +134,7 @@ errcode_t uapi_pwm_open(uint8_t channel, const pwm_config_t *cfg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 通道配置成功写入并打开 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道配置写入并打开成功 |
 | ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围、cfg->cycles 大于最大值或 porting 层参数校验失败 |
 | ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
 
@@ -178,7 +178,7 @@ errcode_t uapi_pwm_close(uint8_t channel)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 通道成功关闭 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道关闭成功 |
 | ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围或该通道未归属任何分组（V151） |
 | ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
 | ERRCODE_PWM_NOT_OPEN：0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
@@ -223,7 +223,7 @@ errcode_t uapi_pwm_start(uint8_t channel)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 通道成功启动 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道启动成功 |
 | ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围或该通道未归属任何分组（V151） |
 | ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
 | ERRCODE_PWM_NOT_OPEN：0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
@@ -305,7 +305,7 @@ errcode_t uapi_pwm_stop(uint8_t channel)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 通道成功停止 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道停止成功 |
 | ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围 |
 | ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
 | ERRCODE_PWM_NOT_OPEN：0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
@@ -354,7 +354,7 @@ errcode_t uapi_pwm_update_duty_ratio(uint8_t channel, uint32_t low_time, uint32_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 占空比更新成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 占空比更新成功 |
 | ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围 |
 | ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
 | ERRCODE_PWM_NOT_OPEN：0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
@@ -400,7 +400,7 @@ errcode_t uapi_pwm_isr(uint8_t channel)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 中断标志成功清除 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 中断标志成功清除 |
 | ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围 |
 
 ### uapi_pwm_register_interrupt <a id="uapi_pwm_register_interrupt"></a>
@@ -440,7 +440,7 @@ errcode_t uapi_pwm_register_interrupt(uint8_t channel, pwm_callback_t callback)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 回调注册成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 回调注册成功 |
 | ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围 |
 | ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
 | ERRCODE_PWM_NOT_OPEN：0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
@@ -485,7 +485,7 @@ errcode_t uapi_pwm_unregister_interrupt(uint8_t channel)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 回调注销成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 回调注销成功 |
 | ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围 |
 | ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
 | ERRCODE_PWM_NOT_OPEN：0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
@@ -528,7 +528,7 @@ errcode_t uapi_pwm_set_group(uint8_t group, const uint8_t *channel_set, uint32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 通道集合成功归入分组 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道集合成功归入分组 |
 | ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | group 超出有效范围、channel_set 为 NULL、channel_set_len 为 0 或目标通道已存在于其他分组 |
 
 **Kconfig配置**
@@ -577,7 +577,7 @@ errcode_t uapi_pwm_clear_group(uint8_t group)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 分组成员成功清空 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 分组成员成功清空 |
 | ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | group 超出有效范围 |
 
 **Kconfig配置**
@@ -622,7 +622,7 @@ errcode_t uapi_pwm_start_group(uint8_t group)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 分组内通道成功启动 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 分组内通道启动成功 |
 | ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | group 超出有效范围 |
 
 **Kconfig配置**
@@ -671,7 +671,7 @@ errcode_t uapi_pwm_stop_group(uint8_t group)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 分组内通道成功停止 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 分组内通道停止成功 |
 | ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | group 超出有效范围 |
 
 **Kconfig配置**
@@ -721,7 +721,7 @@ errcode_t uapi_pwm_update_cfg(uint8_t channel, const pwm_config_t *cfg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 通道配置成功更新 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道配置更新成功 |
 | ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围、cfg->cycles 大于最大值或 porting 层参数校验失败 |
 | ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
 | ERRCODE_PWM_NOT_OPEN：0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
@@ -774,7 +774,7 @@ errcode_t uapi_pwm_config_preload(uint8_t group, uint8_t channel, const pwm_conf
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 预加载参数成功写入 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 预加载参数写入成功 |
 | ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 或 group 超出有效范围、cfg 为 NULL 或 cfg->cycles 大于最大值 |
 | ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
 
@@ -820,7 +820,7 @@ errcode_t uapi_pwm_suspend(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 任意调用均返回成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 任意调用均返回成功 |
 
 **Kconfig配置**
 
@@ -868,7 +868,7 @@ errcode_t uapi_pwm_resume(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 驱动状态与通道配置成功恢复或驱动未初始化时直接返回成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 驱动状态与通道配置恢复或驱动未成功初始化时直接返回成功 |
 
 **Kconfig配置**
 

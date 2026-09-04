@@ -77,7 +77,7 @@ void *osal_kmalloc(unsigned long size, unsigned int osal_gfp_flag)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 分配成功的内存块指针 | 内存分配成功 |
+| 非NULL | 成功分配的内存块指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足 |
 
 **参考案例**
@@ -120,7 +120,7 @@ void *osal_kzalloc(unsigned long size, unsigned int osal_gfp_flag)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 分配成功且已清零的内存块指针 | 内存分配成功 |
+| 非NULL | 成功分配且已清零的内存块指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足 |
 
 ### osal_kmalloc_align <a id="osal_kmalloc_align"></a>
@@ -155,7 +155,7 @@ void *osal_kmalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 分配成功且对齐的内存块指针 | 内存分配成功 |
+| 非NULL | 成功分配且对齐的内存块指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足或对齐参数无效 |
 
 ### osal_kzalloc_align <a id="osal_kzalloc_align"></a>
@@ -190,7 +190,7 @@ void *osal_kzalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 分配成功且对齐并清零的内存块指针 | 内存分配成功 |
+| 非NULL | 成功分配且对齐并清零的内存块指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足或对齐参数无效 |
 
 ### osal_kfree <a id="osal_kfree"></a>
@@ -256,7 +256,7 @@ void *osal_vmalloc(unsigned long size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 分配成功的虚拟内存指针 | 内存分配成功 |
+| 非NULL | 成功分配的虚拟内存指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足 |
 
 **参考案例**
@@ -293,7 +293,7 @@ void *osal_vzalloc(unsigned long size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 分配成功且已清零的虚拟内存指针 | 内存分配成功 |
+| 非NULL | 成功分配且已清零的虚拟内存指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足 |
 
 ### osal_vfree <a id="osal_vfree"></a>
@@ -401,7 +401,7 @@ void *osal_pool_mem_alloc(void *pool, unsigned int size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 分配成功的内存块指针 | 内存分配成功 |
+| 非NULL | 成功分配的内存块指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足 |
 
 ### osal_pool_mem_alloc_align <a id="osal_pool_mem_alloc_align"></a>
@@ -440,7 +440,7 @@ void *osal_pool_mem_alloc_align(void *pool, unsigned int size, unsigned int boun
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 分配成功且对齐的内存块指针 | 内存分配成功 |
+| 非NULL | 成功分配且对齐的内存块指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足或对齐参数无效 |
 
 ### osal_pool_mem_free <a id="osal_pool_mem_free"></a>

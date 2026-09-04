@@ -347,7 +347,7 @@ protocol_mode_enum wifi_sta_get_protocol_mode(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| protocol_mode_enum | STA协议模式 | 成功获取 |
+| protocol_mode_enum | STA协议模式 | 获取成功 |
 
 ### wifi_sta_scan <a id="wifi_sta_scan"></a>
 
@@ -977,7 +977,7 @@ wifi_pmf_option_enum wifi_sta_get_pmf_mode(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [wifi_pmf_option_enum](#enum_wifi_pmf_option_enum)枚举值 | PMF模式 | 成功获取 |
+| [wifi_pmf_option_enum](#enum_wifi_pmf_option_enum)枚举值 | PMF模式 | 获取成功 |
 | WIFI_MGMT_FRAME_PROTECTION_BUTT(3) | 获取失败 | 执行失败 |
 
 ### wifi_sta_get_connect_status_code <a id="wifi_sta_get_connect_status_code"></a>
@@ -1006,7 +1006,7 @@ int16_t wifi_sta_get_connect_status_code(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| Status Codes value | 状态码值 | 成功获取 |
+| Status Codes value | 状态码值 | 获取成功 |
 | -1 | 执行失败 | 获取失败 |
 
 ### wifi_set_mgmt_frame_rx_cb <a id="wifi_set_mgmt_frame_rx_cb"></a>

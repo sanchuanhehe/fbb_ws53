@@ -51,7 +51,7 @@ errcode_t uapi_dma_init(void)
 **前置条件**
 
 - 调用时序约束：在使用任何 DMA 通道传输接口之前，必须先调用本接口完成模块初始化。
-- 依赖关系：当前接口依赖底层 HAL 函数表已可获取且初始化成功。
+- 依赖关系：当前接口依赖底层 HAL 函数表已可获取且成功初始化。
 
 **返回值**
 
@@ -59,7 +59,7 @@ errcode_t uapi_dma_init(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 初始化成功或模块已初始化 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功初始化或模块已初始化 |
 | ERRCODE_DMA_NOT_INIT：0x80001100 | DMA 未初始化 | 底层 HAL 函数表获取失败 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层 HAL 初始化返回失败 |
 
@@ -123,7 +123,7 @@ errcode_t uapi_dma_open(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 模块开启成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 模块开启成功 |
 | ERRCODE_DMA_NOT_INIT：0x80001100 | DMA 未初始化 | 模块未初始化即调用本接口 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
@@ -189,7 +189,7 @@ errcode_t uapi_dma_start_transfer(uint8_t channel)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 通道传输启动成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 通道传输启动成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### uapi_dma_end_transfer <a id="uapi_dma_end_transfer"></a>
@@ -227,7 +227,7 @@ errcode_t uapi_dma_end_transfer(uint8_t channel)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 通道传输停止成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 通道传输停止成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -308,7 +308,7 @@ errcode_t uapi_dma_transfer_memory_single(const dma_ch_user_memory_config_t *use
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 内存到内存单次传输配置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 内存到内存单次传输配置成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -359,7 +359,7 @@ errcode_t uapi_dma_configure_peripheral_transfer_single(const dma_ch_user_periph
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 内存到外设或外设到内存单次传输配置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 内存到外设或外设到内存单次传输配置成功 |
 | ERRCODE_DMA_NOT_INIT：0x80001100 | DMA 未初始化 | 模块未初始化即调用本接口 |
 | ERRCODE_DMA_INVALID_PARAMETER：0x80001102 | 参数无效 | user_cfg 为空或其字段未通过合法性校验 |
 | ERRCODE_DMA_RET_NO_AVAIL_CH：0x80001103 | 无可用通道 | 未找到满足握手号与 burst 长度要求的空闲 DMA 通道 |
@@ -447,7 +447,7 @@ errcode_t uapi_dma_transfer_memory_lli(uint8_t channel, const dma_ch_user_memory
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 内存到内存链表传输配置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 内存到内存链表传输配置成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -497,7 +497,7 @@ errcode_t uapi_dma_configure_peripheral_transfer_lli(uint8_t channel, const dma_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 内存到外设或外设到内存链表传输配置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 内存到外设或外设到内存链表传输配置成功 |
 | ERRCODE_DMA_INVALID_PARAMETER：0x80001102 | 参数无效 | channel 超出范围、user_cfg 为空或其字段未通过合法性校验 |
 | ERRCODE_DMA_NOT_INIT：0x80001100 | DMA 未初始化 | 模块未初始化即调用本接口 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层链表配置返回其他失败 |
@@ -545,7 +545,7 @@ errcode_t uapi_dma_enable_lli(uint8_t channel, dma_transfer_cb_t callback, uintp
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 链表传输启用成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 链表传输启用成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -593,7 +593,7 @@ errcode_t uapi_dma_resume(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 模块恢复成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 模块恢复成功 |
 | ERRCODE_DMA_NOT_INIT：0x80001100 | DMA 未初始化 | 模块未初始化即调用本接口 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
@@ -638,7 +638,7 @@ errcode_t uapi_dma_suspend(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 模块挂起成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 模块挂起成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**

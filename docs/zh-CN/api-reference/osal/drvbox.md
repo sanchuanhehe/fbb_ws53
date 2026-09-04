@@ -52,7 +52,7 @@ unsigned int osal_drvmgr_switch_to_drvbox(unsigned int drv_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| LOS_OK：0 | 区域切换成功 | 切换操作成功完成 |
+| LOS_OK：0 | 区域切换成功 | 切换操作完成成功 |
 | Other | 其他错误码，参考源码头文件注释中的 DRV_BOX_INVALID_SWITCH / DRV_BOX_SWITCH_FAIL | 执行失败 |
 
 **Kconfig配置**

@@ -190,7 +190,7 @@ int osal_sem_down_timeout(osal_semaphore *sem, unsigned int timeout)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 在超时时间内成功获取信号量 |
+| [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 在超时时间内获取信号量成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE)(-1) | 执行失败 | 参数无效（sem 为 NULL）、超时未获取或获取失败 |
 
 **参考案例**

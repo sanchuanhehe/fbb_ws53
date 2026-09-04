@@ -43,7 +43,7 @@ errcode_t uapi_drv_km_init(void)
 **功能说明**
 
 - 初始化 KM（Key Manager）模块运行所需的内部资源与状态。
-- 初始化成功后本模块 Keyslot、KLAD（Key Ladder）、KDF（Key Derivation Function）接口方可使用。
+- 成功初始化后本模块 Keyslot、KLAD（Key Ladder）、KDF（Key Derivation Function）接口方可使用。
 - 返回执行结果状态码。
 
 **前置条件**
@@ -57,7 +57,7 @@ errcode_t uapi_drv_km_init(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 初始化成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 初始化失败 |
 
 **参考案例**
@@ -93,7 +93,7 @@ errcode_t uapi_drv_km_deinit(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 去初始化成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功去初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 去初始化失败 |
 
 **参考案例**
@@ -115,7 +115,7 @@ errcode_t uapi_drv_keyslot_create(uint32_t *keyslot_handle, uapi_drv_keyslot_typ
 **功能说明**
 
 - 按指定用途类型创建一个 keyslot 句柄，用于保存密钥。
-- 创建成功后通过出参返回句柄，供后续 KLAD 关联或销毁使用。
+- 成功创建后通过出参返回句柄，供后续 KLAD 关联或销毁使用。
 - 返回执行结果状态码。
 
 **前置条件**
@@ -133,7 +133,7 @@ errcode_t uapi_drv_keyslot_create(uint32_t *keyslot_handle, uapi_drv_keyslot_typ
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| keyslot_handle | uint32_t * | 创建成功的 keyslot 句柄，由调用方分配内存、函数填充 |
+| keyslot_handle | uint32_t * | 成功创建的 keyslot 句柄，由调用方分配内存、函数填充 |
 
 **返回值**
 
@@ -141,7 +141,7 @@ errcode_t uapi_drv_keyslot_create(uint32_t *keyslot_handle, uapi_drv_keyslot_typ
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | keyslot 创建成功 |
+| ERRCODE_SUCC：0 | 成功执行 | keyslot 成功创建 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 创建失败 |
 
 **参考案例**
@@ -184,7 +184,7 @@ errcode_t uapi_drv_keyslot_destroy(uint32_t keyslot_handle)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | keyslot 销毁成功 |
+| ERRCODE_SUCC：0 | 成功执行 | keyslot 成功销毁 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 销毁失败 |
 
 **参考案例**
@@ -207,7 +207,7 @@ errcode_t uapi_drv_klad_create(uint32_t *klad_handle)
 **功能说明**
 
 - 创建一个 Key Ladder 通道句柄，用于后续密钥派生与下发。
-- 创建成功后通过出参返回句柄。
+- 成功创建后通过出参返回句柄。
 - 返回执行结果状态码。
 
 **前置条件**
@@ -219,7 +219,7 @@ errcode_t uapi_drv_klad_create(uint32_t *klad_handle)
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| klad_handle | uint32_t * | 创建成功的 Key Ladder 通道句柄，由调用方分配内存、函数填充 |
+| klad_handle | uint32_t * | 成功创建的 Key Ladder 通道句柄，由调用方分配内存、函数填充 |
 
 **返回值**
 
@@ -227,7 +227,7 @@ errcode_t uapi_drv_klad_create(uint32_t *klad_handle)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | Key Ladder 通道创建成功 |
+| ERRCODE_SUCC：0 | 成功执行 | Key Ladder 通道创建成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 创建失败 |
 
 **参考案例**
@@ -270,7 +270,7 @@ errcode_t uapi_drv_klad_destroy(uint32_t klad_handle)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | Key Ladder 通道销毁成功 |
+| ERRCODE_SUCC：0 | 成功执行 | Key Ladder 通道销毁成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 销毁失败 |
 
 **参考案例**
@@ -315,7 +315,7 @@ errcode_t uapi_drv_klad_attach(uint32_t klad_handle, uapi_drv_klad_dest_t klad_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 关联成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 关联成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 关联失败 |
 
 **参考案例**
@@ -360,7 +360,7 @@ errcode_t uapi_drv_klad_detach(uint32_t klad_handle, uapi_drv_klad_dest_t klad_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 解关联成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 解关联成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 解关联失败 |
 
 **参考案例**
@@ -403,7 +403,7 @@ errcode_t uapi_drv_klad_set_attr(uint32_t klad_handle, const uapi_drv_klad_attr_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 属性设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 属性设置成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | attr 为 NULL |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设置失败 |
 
@@ -453,7 +453,7 @@ errcode_t uapi_drv_klad_get_attr(uint32_t klad_handle, uapi_drv_klad_attr_t *att
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 属性获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 属性获取成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | attr 为 NULL |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 获取失败 |
 
@@ -493,7 +493,7 @@ errcode_t uapi_drv_klad_set_effective_key(uint32_t klad_handle, const uapi_drv_k
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 硬件派生密钥设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 硬件派生密钥设置成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | key 为 NULL |
 | [ERRCODE_FAIL](#ERRCODE_FAIL)：0xFFFFFFFF | 执行失败 | salt 拷贝失败 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设置失败 |
@@ -538,7 +538,7 @@ errcode_t uapi_drv_klad_set_clear_key(uint32_t klad_handle, const uapi_drv_klad_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 明文密钥设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 明文密钥设置成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | key 为 NULL |
 | [ERRCODE_FAIL](#ERRCODE_FAIL)：0xFFFFFFFF | 执行失败 | 明文密钥拷贝失败 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设置失败 |
@@ -583,7 +583,7 @@ errcode_t uapi_drv_kdf_update(uapi_drv_kdf_otp_key_t otp_key, uapi_drv_kdf_updat
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 根密钥更新成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 根密钥更新成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 更新失败 |
 
 ## Type definitions

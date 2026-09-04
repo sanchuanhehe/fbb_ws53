@@ -61,7 +61,7 @@ errcode_t uapi_watchdog_init(uint32_t timeout)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 初始化成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -105,7 +105,7 @@ errcode_t uapi_watchdog_deinit(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 去初始化成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功去初始化 |
 
 **参考案例**
 
@@ -147,7 +147,7 @@ errcode_t uapi_watchdog_enable(wdt_mode_t mode)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 使能成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 使能成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 看门狗未初始化或模式超出有效范围 |
 
 **参考案例**
@@ -191,7 +191,7 @@ errcode_t uapi_watchdog_disable(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 去使能成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 去使能成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 看门狗未初始化 |
 
 ### uapi_watchdog_kick <a id="uapi_watchdog_kick"></a>
@@ -224,7 +224,7 @@ errcode_t uapi_watchdog_kick(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 喂狗成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 喂狗成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 看门狗未使能 |
 
 **参考案例**
@@ -273,7 +273,7 @@ errcode_t uapi_watchdog_set_time(uint32_t timeout)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 设置成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 看门狗未初始化或设置失败 |
 
 **Kconfig配置**
@@ -318,7 +318,7 @@ errcode_t uapi_watchdog_get_left_time(uint32_t *timeout)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 获取成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功获取 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 看门狗未使能或剩余时间为 0 |
 
 ### uapi_register_watchdog_callback <a id="uapi_register_watchdog_callback"></a>
@@ -357,7 +357,7 @@ errcode_t uapi_register_watchdog_callback(watchdog_callback_t callback)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 注册成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功注册 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 看门狗未初始化或回调为 NULL |
 
 **参考案例**
@@ -400,7 +400,7 @@ errcode_t uapi_watchdog_resume(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 恢复成功或看门狗未初始化 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 恢复成功或看门狗未初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设置超时属性失败 |
 
 **Kconfig配置**
@@ -444,7 +444,7 @@ errcode_t uapi_watchdog_suspend(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 挂起成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 挂起成功 |
 
 **Kconfig配置**
 

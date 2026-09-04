@@ -116,7 +116,7 @@ errcode_t uapi_gpio_set_dir(pin_t pin, gpio_direction_t dir)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 方向设置成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 方向设置成功 |
 | [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | [ERRCODE_GPIO_DIR_SET_FAIL](#ERRCODE_GPIO_DIR_SET_FAIL)：0x80001000 | 方向设置失败 | dir 超出有效范围（≥ 2） |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层设置失败 |
@@ -218,7 +218,7 @@ errcode_t uapi_gpio_set_val(pin_t pin, gpio_level_t level)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 电平设置成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 电平设置成功 |
 | [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层输出失败 |
 
@@ -356,7 +356,7 @@ errcode_t uapi_gpio_toggle(pin_t pin)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 电平翻转成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 电平翻转成功 |
 | [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层翻转失败 |
 
@@ -406,7 +406,7 @@ errcode_t uapi_gpio_set_isr_mode(pin_t pin, uint32_t trigger)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 中断模式设置成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 中断模式设置成功 |
 | [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层设置失败 |
 
@@ -458,7 +458,7 @@ errcode_t uapi_gpio_register_isr_func(pin_t pin, uint32_t trigger, gpio_callback
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 中断注册成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 中断注册成功 |
 | [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层注册失败 |
 
@@ -507,7 +507,7 @@ errcode_t uapi_gpio_unregister_isr_func(pin_t pin)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 去注册成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 去成功注册 |
 | [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层去注册失败 |
 
@@ -552,7 +552,7 @@ errcode_t uapi_gpio_enable_interrupt(pin_t pin)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 中断使能成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 中断使能成功 |
 | [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层使能失败 |
 
@@ -601,7 +601,7 @@ errcode_t uapi_gpio_disable_interrupt(pin_t pin)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 中断去使能成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 中断去使能成功 |
 | [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层去使能失败 |
 
@@ -650,7 +650,7 @@ errcode_t uapi_gpio_clear_interrupt(pin_t pin)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 中断清除成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 中断清除成功 |
 | [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层清除失败 |
 
@@ -689,7 +689,7 @@ errcode_t uapi_gpio_suspend(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 挂起成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 挂起成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层挂起失败 |
 
 **参考案例**
@@ -731,7 +731,7 @@ errcode_t uapi_gpio_resume(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 恢复成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 恢复成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层恢复失败 |
 
 **参考案例**

@@ -89,7 +89,7 @@ errcode_t uapi_diag_unregister_cmd(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t c
 
 **前置条件**
 
-- 调用时序约束：待解注册的命令表必须已通过 uapi_diag_register_cmd 成功注册。
+- 调用时序约束：待解注册的命令表必须已通过 uapi_diag_register_cmd 注册成功。
 - 依赖关系：传入的 cmd_tbl 与 cmd_num 必须与注册时完全一致，否则无法匹配。
 - 上下文限制：内部通过关中断保护命令表写入，调用方应避免在中断上下文中长时间持表操作。
 

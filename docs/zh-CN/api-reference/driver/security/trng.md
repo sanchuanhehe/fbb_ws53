@@ -51,7 +51,7 @@ errcode_t uapi_drv_cipher_trng_get_random(uint32_t *randnum)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 成功获取硬件随机数 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功获取硬件随机数 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -98,7 +98,7 @@ errcode_t uapi_drv_cipher_trng_get_random_bytes(uint8_t *randnum, uint32_t size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 成功获取指定长度的硬件随机数 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功获取指定长度的硬件随机数 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**

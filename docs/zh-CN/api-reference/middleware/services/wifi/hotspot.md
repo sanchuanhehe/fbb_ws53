@@ -137,7 +137,7 @@ int32_t wifi_is_softap_enabled(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 1 | SoftAP 已使能 | SoftAP 已成功启动 |
+| 1 | SoftAP 已使能 | SoftAP 已启动成功 |
 | 0 | SoftAP 未使能 | SoftAP 未启动或 Wi-Fi 未初始化 |
 
 ### wifi_set_softap_config_advance <a id="wifi_set_softap_config_advance"></a>
@@ -305,7 +305,7 @@ errcode_t wifi_softap_get_sta_list(wifi_sta_info_stru *result, uint32_t *size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 成功获取 STA 列表 |
+| ERRCODE_SUCC：0 | 执行成功 | 获取成功 STA 列表 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | Wi-Fi 未初始化、SoftAP 未使能或参数无效 |
 
 **参考案例**

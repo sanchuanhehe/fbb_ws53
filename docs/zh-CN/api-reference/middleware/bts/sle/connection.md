@@ -96,7 +96,7 @@ errcode_t sle_connect_remote_device(const sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 连接请求成功发起 |
+| ERRCODE_SUCC：0 | 成功执行 | 连接请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -133,7 +133,7 @@ errcode_t sle_create_connection_cancel(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 取消连接创建成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 取消连接创建成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_connect_rssi <a id="sle_set_connect_rssi"></a>
@@ -171,7 +171,7 @@ errcode_t sle_set_connect_rssi(int8_t rssi)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_disconnect_remote_device <a id="sle_disconnect_remote_device"></a>
@@ -210,7 +210,7 @@ errcode_t sle_disconnect_remote_device(const sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 断开连接请求成功发起 |
+| ERRCODE_SUCC：0 | 成功执行 | 断开连接请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_disconnect_all_remote_device <a id="sle_disconnect_all_remote_device"></a>
@@ -243,7 +243,7 @@ errcode_t sle_disconnect_all_remote_device(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 断开所有连接成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 断开所有连接成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_update_connect_param <a id="sle_update_connect_param"></a>
@@ -282,7 +282,7 @@ errcode_t sle_update_connect_param(sle_connection_param_update_t *params)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 更新请求成功发起 |
+| ERRCODE_SUCC：0 | 成功执行 | 更新请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -325,7 +325,7 @@ errcode_t sle_pair_remote_device(const sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 配对请求成功发起 |
+| ERRCODE_SUCC：0 | 成功执行 | 配对请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -368,7 +368,7 @@ errcode_t sle_remove_paired_remote_device(const sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 删除配对成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 删除配对成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_remove_all_pairs <a id="sle_remove_all_pairs"></a>
@@ -399,7 +399,7 @@ errcode_t sle_remove_all_pairs(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 删除所有配对成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 删除所有配对成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_get_paired_devices_num <a id="sle_get_paired_devices_num"></a>
@@ -437,7 +437,7 @@ errcode_t sle_get_paired_devices_num(uint16_t *number)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功获取 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_get_connect_role <a id="sle_get_connect_role"></a>
@@ -482,7 +482,7 @@ errcode_t sle_get_connect_role(uint16_t conn_id, uint8_t *role)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功获取 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_get_paired_devices <a id="sle_get_paired_devices"></a>
@@ -521,7 +521,7 @@ errcode_t sle_get_paired_devices(sle_addr_t *addr, uint16_t *number)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功获取 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_get_bonded_devices <a id="sle_get_bonded_devices"></a>
@@ -560,7 +560,7 @@ errcode_t sle_get_bonded_devices(sle_addr_t *addr, uint16_t *number)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功获取 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_nv_smp_keys <a id="sle_set_nv_smp_keys"></a>
@@ -602,7 +602,7 @@ errcode_t sle_set_nv_smp_keys(sle_auth_info_evt_t *keys, sle_addr_t *own_addr, s
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_get_pair_state <a id="sle_get_pair_state"></a>
@@ -646,7 +646,7 @@ errcode_t sle_get_pair_state(const sle_addr_t *addr, uint8_t *state)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功获取 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_read_remote_device_rssi <a id="sle_read_remote_device_rssi"></a>
@@ -685,7 +685,7 @@ errcode_t sle_read_remote_device_rssi(uint16_t conn_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 读取请求成功发起 |
+| ERRCODE_SUCC：0 | 成功执行 | 读取请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -729,7 +729,7 @@ errcode_t sle_set_acb_evt_param(uint16_t conn_id, uint16_t evt_intv, uint8_t evt
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_read_access_filter_list_size <a id="sle_read_access_filter_list_size"></a>
@@ -767,7 +767,7 @@ errcode_t sle_read_access_filter_list_size(uint8_t *size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 查询成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 查询成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_clear_access_filter_list <a id="sle_clear_access_filter_list"></a>
@@ -798,7 +798,7 @@ errcode_t sle_clear_access_filter_list(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 清空成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 清空成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_add_device_to_access_filter_list <a id="sle_add_device_to_access_filter_list"></a>
@@ -835,7 +835,7 @@ errcode_t sle_add_device_to_access_filter_list(sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 添加成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 添加成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_remove_device_from_access_filter_list <a id="sle_remove_device_from_access_filter_list"></a>
@@ -872,7 +872,7 @@ errcode_t sle_remove_device_from_access_filter_list(sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 移除成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 移除成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_phy_param <a id="sle_set_phy_param"></a>
@@ -912,7 +912,7 @@ errcode_t sle_set_phy_param(uint16_t conn_id, sle_set_phy_t *param)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置请求成功发起 |
+| ERRCODE_SUCC：0 | 成功执行 | 设置请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -953,7 +953,7 @@ errcode_t sle_set_save_pair_keys_mode(uint8_t is_available)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_mcs <a id="sle_set_mcs"></a>
@@ -992,7 +992,7 @@ errcode_t sle_set_mcs(uint16_t conn_id, uint8_t mcs)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1035,7 +1035,7 @@ errcode_t sle_set_data_len(uint16_t conn_id, uint16_t tx_octets)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1077,7 +1077,7 @@ errcode_t sle_default_connection_param_set(sle_default_connect_param_t *set_para
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1121,7 +1121,7 @@ errcode_t sle_connection_register_callbacks(sle_connection_callbacks_t *func)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 注册成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功注册 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1164,7 +1164,7 @@ errcode_t sle_customize_max_pwr(int8_t ble_pwr, int8_t sle_pwr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 配置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功配置 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_local_addr <a id="sle_set_local_addr"></a>
@@ -1202,7 +1202,7 @@ errcode_t sle_set_local_addr(sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1245,7 +1245,7 @@ errcode_t sle_get_local_addr(sle_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功获取 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_local_name <a id="sle_set_local_name"></a>
@@ -1284,7 +1284,7 @@ errcode_t sle_set_local_name(const uint8_t *name, uint8_t len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_get_local_name <a id="sle_get_local_name"></a>
@@ -1323,7 +1323,7 @@ errcode_t sle_get_local_name(uint8_t *name, uint8_t *len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功获取 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_announce_data <a id="sle_set_announce_data"></a>
@@ -1362,7 +1362,7 @@ errcode_t sle_set_announce_data(uint8_t announce_id, const sle_announce_data_t *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1404,7 +1404,7 @@ errcode_t sle_remove_announce(uint8_t announce_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 删除成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功删除 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_announce_param <a id="sle_set_announce_param"></a>
@@ -1443,7 +1443,7 @@ errcode_t sle_set_announce_param(uint8_t announce_id, const sle_announce_param_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1486,7 +1486,7 @@ errcode_t sle_start_announce(uint8_t announce_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 启动请求成功发起 |
+| ERRCODE_SUCC：0 | 成功执行 | 启动请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1530,7 +1530,7 @@ errcode_t sle_stop_announce(uint8_t announce_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 停止请求成功发起 |
+| ERRCODE_SUCC：0 | 成功执行 | 停止请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_set_seek_param <a id="sle_set_seek_param"></a>
@@ -1568,7 +1568,7 @@ errcode_t sle_set_seek_param(sle_seek_param_t *param)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1606,7 +1606,7 @@ errcode_t sle_start_seek(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 启动扫描成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 启动扫描成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1642,7 +1642,7 @@ errcode_t sle_stop_seek(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 停止扫描成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 停止扫描成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1685,7 +1685,7 @@ errcode_t sle_announce_seek_register_callbacks(sle_announce_seek_callbacks_t *fu
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 注册成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功注册 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 **参考案例**
@@ -1730,7 +1730,7 @@ errcode_t sle_transmission_signal_capability_req(uint16_t conn_id, sle_transmiss
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 查询请求成功发起 |
+| ERRCODE_SUCC：0 | 成功执行 | 查询请求成功发起 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ### sle_transmission_register_callbacks <a id="sle_transmission_register_callbacks"></a>
@@ -1769,7 +1769,7 @@ errcode_t sle_transmission_register_callbacks(sle_transmission_callbacks_t *func
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 注册成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功注册 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
 ## Type definitions

@@ -46,7 +46,7 @@ errcode_t uapi_i2c_master_init(i2c_bus_t bus, uint32_t baudrate, uint8_t hscode)
 
 - 按指定参数将所选 I2C 总线初始化为主机模式。
 - 配置 I2C 波特率与高速模式主机码。
-- 初始化成功后总线即可进行主机数据收发。
+- 成功初始化后总线即可进行主机数据收发。
 
 **前置条件**
 
@@ -68,7 +68,7 @@ errcode_t uapi_i2c_master_init(i2c_bus_t bus, uint32_t baudrate, uint8_t hscode)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 参数合法，初始化成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 参数合法，成功初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -122,7 +122,7 @@ errcode_t uapi_i2c_master_write(i2c_bus_t bus, uint16_t dev_addr, i2c_data_t *da
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 发送成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功发送 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -182,7 +182,7 @@ errcode_t uapi_i2c_master_read(i2c_bus_t bus, uint16_t dev_addr, i2c_data_t *dat
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 接收成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功接收 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -242,7 +242,7 @@ errcode_t uapi_i2c_master_writeread(i2c_bus_t bus, uint16_t dev_addr, i2c_data_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 写读成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 写读成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -273,7 +273,7 @@ errcode_t uapi_i2c_slave_init(i2c_bus_t bus, uint32_t baudrate, uint16_t addr)
 
 - 按指定参数将所选 I2C 总线初始化为从机模式。
 - 配置 I2C 波特率与从机地址。
-- 初始化成功后总线即可进行从机数据收发。
+- 成功初始化后总线即可进行从机数据收发。
 
 **前置条件**
 
@@ -295,7 +295,7 @@ errcode_t uapi_i2c_slave_init(i2c_bus_t bus, uint32_t baudrate, uint16_t addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 参数合法，初始化成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 参数合法，成功初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -348,7 +348,7 @@ errcode_t uapi_i2c_slave_write(i2c_bus_t bus, i2c_data_t *data)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 发送成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功发送 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -407,7 +407,7 @@ errcode_t uapi_i2c_slave_read(i2c_bus_t bus, i2c_data_t *data)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 接收成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功接收 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -460,7 +460,7 @@ errcode_t uapi_i2c_set_irq_mode(i2c_bus_t bus, bool irq_en)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 参数合法，模式设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 参数合法，模式设置成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -511,7 +511,7 @@ errcode_t uapi_i2c_register_irq_callback(i2c_bus_t bus, i2c_irq_callback_t callb
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 回调注册成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 回调注册成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -556,7 +556,7 @@ errcode_t uapi_i2c_unregister_irq_callback(i2c_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 回调取消注册成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 回调取消注册成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -602,7 +602,7 @@ errcode_t uapi_i2c_set_dma_mode(i2c_bus_t bus, bool en)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 参数合法，模式设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 参数合法，模式设置成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -652,7 +652,7 @@ errcode_t uapi_i2c_deinit(i2c_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 去初始化成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功去初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -699,7 +699,7 @@ errcode_t uapi_i2c_set_baudrate(i2c_bus_t bus, uint32_t baudrate)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 参数合法，波特率重置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 参数合法，波特率重置成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -744,7 +744,7 @@ errcode_t uapi_i2c_suspend(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 挂起成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 挂起成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -793,7 +793,7 @@ errcode_t uapi_i2c_resume(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 恢复成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 恢复成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**

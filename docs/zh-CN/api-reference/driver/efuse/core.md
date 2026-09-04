@@ -55,7 +55,7 @@ errcode_t uapi_efuse_init(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 底层初始化成功返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 底层初始化返回成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层初始化失败 |
 
 **参考案例**
@@ -79,7 +79,7 @@ errcode_t uapi_efuse_deinit(void)
 
 - 去初始化 eFuse 驱动。
 - 释放驱动占用的资源。
-- 无论 eFuse 是否已初始化均返回执行成功。
+- 无论 eFuse 是否已初始化均返回成功执行。
 
 **前置条件**
 
@@ -92,7 +92,7 @@ errcode_t uapi_efuse_deinit(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 去初始化流程执行完成 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 去初始化流程执行完成 |
 
 ### uapi_efuse_read_bit <a id="uapi_efuse_read_bit"></a>
 
@@ -137,7 +137,7 @@ errcode_t uapi_efuse_read_bit(uint8_t *value, uint32_t byte_number, uint8_t bit_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 字节读取成功并取位完成 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 字节读取并取位完成成功 |
 | ERRCODE_FAIL：0xFFFFFFFF | 执行失败 | 参数非法或字节读取失败 |
 
 **Kconfig配置**
@@ -193,7 +193,7 @@ errcode_t uapi_efuse_read_buffer(uint8_t *buffer, uint32_t byte_number, uint16_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 全部字节读取成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 全部字节读取成功 |
 | ERRCODE_FAIL：0xFFFFFFFF | 执行失败 | 参数非法或任一字节读取失败 |
 
 **参考案例**
@@ -238,7 +238,7 @@ errcode_t uapi_efuse_write_bit(uint32_t byte_number, uint8_t bit_pos)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 位写入成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 位成功写入 |
 | ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | 目标位当前值非 0 |
 | ERRCODE_FAIL：0xFFFFFFFF | 执行失败 | 参数非法、字节读取失败或位写入失败 |
 
@@ -290,7 +290,7 @@ errcode_t uapi_efuse_write_bit_with_flag(uint32_t byte_number, uint8_t bit_pos, 
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 位写入成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 位成功写入 |
 | ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | 目标位当前值非 0 |
 | ERRCODE_EFUSE_INVALID_PARAM：0x80001390 | 参数无效 | 保护标志不正确 |
 | ERRCODE_FAIL：0xFFFFFFFF | 执行失败 | 参数非法、字节读取失败或位写入失败 |
@@ -339,7 +339,7 @@ errcode_t uapi_efuse_write_buffer(uint32_t byte_number, const uint8_t *buffer, u
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 缓冲区写入成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 缓冲区写入成功 |
 | ERRCODE_EFUSE_INVALID_PARAM：0x80001390 | 参数无效 | 参数合法性校验未通过 |
 | ERRCODE_FAIL：0xFFFFFFFF | 执行失败 | 缓冲区写入操作失败 |
 
@@ -386,7 +386,7 @@ errcode_t uapi_efuse_write_buffer_with_flag(uint32_t byte_number, const uint8_t 
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 缓冲区写入成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 缓冲区写入成功 |
 | ERRCODE_EFUSE_INVALID_PARAM：0x80001390 | 参数无效 | 保护标志不正确或参数合法性校验未通过 |
 | ERRCODE_FAIL：0xFFFFFFFF | 执行失败 | 缓冲区写入操作失败 |
 
@@ -431,7 +431,7 @@ errcode_t uapi_efuse_get_die_id(uint8_t *buffer, uint16_t length)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | Die-ID 获取成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | Die-ID 成功获取 |
 | ERRCODE_FAIL：0xFFFFFFFF | 执行失败 | 参数非法 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层获取失败 |
 
@@ -481,7 +481,7 @@ errcode_t uapi_efuse_calc_crc(const uint8_t *buffer, uint8_t length, uint8_t *cr
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | CRC 计算完成 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | CRC 计算完成 |
 | ERRCODE_EFUSE_INVALID_PARAM：0x80001390 | 参数无效 | buffer 或 crc 为空，或长度超过上限 |
 
 ### uapi_soc_read_id <a id="uapi_soc_read_id"></a>
@@ -525,7 +525,7 @@ errcode_t uapi_soc_read_id(uint8_t *id, uint16_t id_length)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | SoC-ID 获取成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | SoC-ID 成功获取 |
 | ERRCODE_FAIL：0xFFFFFFFF | 执行失败 | 参数非法 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层获取失败 |
 

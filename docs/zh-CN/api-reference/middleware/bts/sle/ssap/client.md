@@ -40,7 +40,7 @@ errcode_t ssapc_register_client(sle_uuid_t *app_uuid, uint8_t *client_id)
 
 - 注册 SSAP 客户端，向上层应用分配并返回客户端 ID。
 - 以应用 UUID 标识上层应用身份。
-- 注册成功后该客户端 ID 可用于后续查找、读写、交换信息等请求。
+- 成功注册后该客户端 ID 可用于后续查找、读写、交换信息等请求。
 
 **前置条件**
 

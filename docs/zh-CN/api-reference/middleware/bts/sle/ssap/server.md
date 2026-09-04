@@ -46,7 +46,7 @@ errcode_t ssaps_register_server(sle_uuid_t *app_uuid, uint8_t *server_id)
 
 - 注册 SSAP 服务端，向上层应用分配并返回服务端 ID。
 - 以应用 UUID 标识上层应用身份。
-- 注册成功后该服务端 ID 可用于后续添加服务、特征、启动服务等操作。
+- 成功注册后该服务端 ID 可用于后续添加服务、特征、启动服务等操作。
 
 **前置条件**
 
@@ -707,7 +707,7 @@ typedef void (*ssaps_add_service_callback)(uint8_t server_id, sle_uuid_t *uuid, 
 
 **使用说明**
 
-服务注册的回调函数类型。回调说明：调用时机为异步添加服务产生结果时由 SLE service 调用，运行于 SLE service 线程，不应阻塞或长时间等待；参数 uuid 指向服务 UUID，由 SLE service 申请内存并释放，回调中不应释放；参数 handle 为注册成功时返回的服务属性句柄；参数 status 为执行结果错误码。
+服务注册的回调函数类型。回调说明：调用时机为异步添加服务产生结果时由 SLE service 调用，运行于 SLE service 线程，不应阻塞或长时间等待；参数 uuid 指向服务 UUID，由 SLE service 申请内存并释放，回调中不应释放；参数 handle 为成功注册时返回的服务属性句柄；参数 status 为执行结果错误码。
 
 ### ssaps_add_property_callback <a id="typedef_ssaps_add_property_callback"></a>
 
@@ -718,7 +718,7 @@ typedef void (*ssaps_add_property_callback)(uint8_t server_id, sle_uuid_t *uuid,
 
 **使用说明**
 
-特征注册的回调函数类型。回调说明：调用时机为异步添加特征产生结果时由 SLE service 调用，运行于 SLE service 线程，不应阻塞或长时间等待；参数 uuid 指向特征 UUID，由 SLE service 申请内存并释放，回调中不应释放；参数 service_handle 为所属服务属性句柄；参数 handle 为注册成功时返回的特征属性句柄；参数 status 为执行结果错误码。
+特征注册的回调函数类型。回调说明：调用时机为异步添加特征产生结果时由 SLE service 调用，运行于 SLE service 线程，不应阻塞或长时间等待；参数 uuid 指向特征 UUID，由 SLE service 申请内存并释放，回调中不应释放；参数 service_handle 为所属服务属性句柄；参数 handle 为成功注册时返回的特征属性句柄；参数 status 为执行结果错误码。
 
 ### ssaps_add_descriptor_callback <a id="typedef_ssaps_add_descriptor_callback"></a>
 

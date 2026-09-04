@@ -119,7 +119,7 @@ errcode_t uapi_pin_set_mode(pin_t pin, pin_mode_t mode)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 设置引脚复用模式成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 设置引脚复用模式成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
 | [ERRCODE_PIN_MODE_NO_FUNC](#ERRCODE_PIN_MODE_NO_FUNC)：0x80001191 | 模式无效 | 引脚不支持指定的复用模式 |
 
@@ -205,7 +205,7 @@ errcode_t uapi_pin_set_ds(pin_t pin, pin_drive_strength_t ds)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 设置引脚驱动能力成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 设置引脚驱动能力成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
 
 **参考案例**
@@ -290,7 +290,7 @@ errcode_t uapi_pin_set_pull(pin_t pin, pin_pull_t pull_type)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 设置引脚上下拉状态成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 设置引脚上下拉状态成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
 
 **参考案例**
@@ -375,7 +375,7 @@ errcode_t uapi_pin_set_ie(pin_t pin, pin_input_enable_t ie)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 设置引脚输入使能状态成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 设置引脚输入使能状态成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
 
 **参考案例**
@@ -470,7 +470,7 @@ errcode_t uapi_pin_set_st(pin_t pin, pin_schmitt_trigger_t st)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 设置引脚施密特触发状态成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 设置引脚施密特触发状态成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 参数无效或模块未初始化 |
 
 **参考案例**
@@ -562,7 +562,7 @@ errcode_t uapi_pin_suspend(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 挂起操作成功，或 HAL 引脚操作接口未注册时直接返回成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 挂起操作成功，或 HAL 引脚操作接口未注册时直接返回成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 挂起接口执行失败 |
 
 **参考案例**
@@ -610,7 +610,7 @@ errcode_t uapi_pin_resume(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 恢复操作成功，或 HAL 引脚操作接口未注册时直接返回成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 恢复操作成功，或 HAL 引脚操作接口未注册时直接返回成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 恢复接口执行失败 |
 
 **参考案例**

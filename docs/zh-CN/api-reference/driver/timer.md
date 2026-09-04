@@ -59,7 +59,7 @@ errcode_t uapi_timer_init(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 初始化成功或模块已初始化 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功初始化或模块已初始化 |
 | ERRCODE_MEMSET：0x80000003 | 内存设置失败 | 软件定时器链表清零失败 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 软件定时器链表初始化失败 |
 
@@ -111,7 +111,7 @@ errcode_t uapi_timer_adapter(timer_index_t index, uint32_t int_id, uint16_t int_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 适配成功或该索引已适配 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 适配成功或该索引已适配 |
 | ERRCODE_TIMER_NOT_INIT：0x80001324 | 定时器模块未初始化 | 模块尚未调用 uapi_timer_init |
 | ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | index >= TIMER_MAX_NUM |
 | ERRCODE_TIMER_USING：0x80001325 | 定时器被占用 | 该索引已被高精度定时器占用 |
@@ -157,7 +157,7 @@ errcode_t uapi_timer_deinit(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 去初始化成功或模块未初始化 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功去初始化或模块未初始化 |
 
 **参考案例**
 
@@ -203,7 +203,7 @@ errcode_t uapi_timer_create(timer_index_t index, timer_handle_t *timer)
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| timer | [timer_handle_t](#typedef_timer_handle_t) * | 创建成功的软件定时器句柄；无空闲表项时输出 NULL |
+| timer | [timer_handle_t](#typedef_timer_handle_t) * | 成功创建的软件定时器句柄；无空闲表项时输出 NULL |
 
 **返回值**
 
@@ -211,7 +211,7 @@ errcode_t uapi_timer_create(timer_index_t index, timer_handle_t *timer)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 成功分配软件定时器表项 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功分配软件定时器表项 |
 | ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | timer 为 NULL 或 index >= TIMER_MAX_NUM |
 | ERRCODE_TIMER_NO_ENOUGH：0x80001320 | 软件定时器表项已满 | 该索引下软件定时器链表无空闲表项 |
 
@@ -254,7 +254,7 @@ errcode_t uapi_timer_delete(timer_handle_t timer)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 成功删除软件定时器 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功删除软件定时器 |
 | ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | timer 为 NULL |
 
 **参考案例**
@@ -330,7 +330,7 @@ errcode_t uapi_timer_start(timer_handle_t timer, uint32_t time_us, timer_callbac
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 成功启动软件定时器 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功启动软件定时器 |
 | ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | timer 或 callback 为 NULL、time_us 为 0 或超过最大值 |
 | ERRCODE_TIEMR_NOT_CREATED：0x80001321 | 定时器未创建 | 该句柄对应表项未使能 |
 
@@ -380,7 +380,7 @@ errcode_t uapi_timer_stop(timer_handle_t timer)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 成功停止软件定时器，或该定时器本未运行 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功停止软件定时器，或该定时器本未运行 |
 | ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | timer 为 NULL |
 | ERRCODE_TIEMR_NOT_CREATED：0x80001321 | 定时器未创建 | 该句柄对应表项未使能 |
 
@@ -434,7 +434,7 @@ errcode_t uapi_timer_get_current_time_us(timer_index_t index, uint32_t *current_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 成功获取当前时间 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功获取当前时间 |
 | ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | index >= TIMER_MAX_NUM 或 current_time_us 为 NULL |
 
 ### uapi_timer_start_high_precision <a id="uapi_timer_start_high_precision"></a>
@@ -478,7 +478,7 @@ errcode_t uapi_timer_start_high_precision(timer_index_t index, timer_trigger_mod
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 成功启动高精度定时器 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功启动高精度定时器 |
 | ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | index 越界、irq_info 或 callback 为 NULL、mode 越界、time_us 为 0 或超过最大值 |
 | ERRCODE_TIMER_USING：0x80001325 | 定时器被占用 | 该索引已被标准定时器占用 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 定时器初始化失败 |
@@ -527,7 +527,7 @@ errcode_t uapi_timer_reset_high_precision(timer_index_t index, timer_trigger_mod
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 成功重启高精度定时器 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功重启高精度定时器 |
 | ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | index 越界、mode 越界、time_us 为 0 或超过最大值 |
 | ERRCODE_TIMER_USING：0x80001325 | 定时器被占用 | 该索引不处于高精度定时模式 |
 
@@ -572,7 +572,7 @@ errcode_t uapi_timer_stop_high_precision(timer_index_t index)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 成功停止高精度定时器 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功停止高精度定时器 |
 | ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | index >= TIMER_MAX_NUM |
 | ERRCODE_TIMER_USING：0x80001325 | 定时器被占用 | 该索引不处于高精度定时模式 |
 
@@ -618,7 +618,7 @@ errcode_t uapi_timer_suspend(uintptr_t val)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 成功挂起定时器模块 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功挂起定时器模块 |
 
 **Kconfig配置**
 
@@ -660,7 +660,7 @@ errcode_t uapi_timer_resume(uintptr_t val)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 成功恢复定时器模块 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 成功恢复定时器模块 |
 
 **Kconfig配置**
 

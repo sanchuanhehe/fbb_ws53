@@ -43,7 +43,7 @@ int osal_completion_init(osal_completion *com)
 **前置条件**
 
 - com 必须指向调用方已分配的有效 osal_completion 结构体内存。
-- 初始化成功后的 completion 必须通过 osal_complete_destory 释放。
+- 成功初始化后的 completion 必须通过 osal_complete_destory 释放。
 
 **出参**
 

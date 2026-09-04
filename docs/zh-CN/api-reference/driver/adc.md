@@ -42,7 +42,7 @@ errcode_t uapi_adc_init(adc_clock_t clock)
 
 - 初始化 ADC 模块。
 - ADC 已完成初始化时再次调用直接返回成功。
-- 初始化成功后本模块其他接口方可使用。
+- 成功初始化后本模块其他接口方可使用。
 
 **前置条件**
 
@@ -62,7 +62,7 @@ errcode_t uapi_adc_init(adc_clock_t clock)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 操作成功，或 ADC 已完成初始化 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 操作成功，或 ADC 已完成初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 初始化失败 |
 
 **参考案例**
@@ -100,7 +100,7 @@ errcode_t uapi_adc_deinit(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 操作成功，或 ADC 尚未初始化 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 操作成功，或 ADC 尚未初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 去初始化失败 |
 
 **参考案例**
@@ -211,7 +211,7 @@ errcode_t uapi_adc_open_channel(uint8_t channel)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 通道打开成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道打开成功 |
 | [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER)：0x80001141 | 参数无效 | channel 大于等于 ADC_CHANNEL_MAX_NUM |
 | [ERRCODE_ADC_SCAN_NOT_DISABLE](#ERRCODE_ADC_SCAN_NOT_DISABLE)：0x80001142 | 自动扫描未禁用 | 自动扫描已使能时调用（CONFIG_ADC_SUPPORT_AUTO_SCAN 启用时） |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 通道设置失败 |
@@ -252,7 +252,7 @@ errcode_t uapi_adc_close_channel(uint8_t channel)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 通道关闭成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道关闭成功 |
 | [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER)：0x80001141 | 参数无效 | channel 与当前工作通道不一致 |
 | [ERRCODE_ADC_SCAN_NOT_DISABLE](#ERRCODE_ADC_SCAN_NOT_DISABLE)：0x80001142 | 自动扫描未禁用 | 自动扫描已使能时调用（CONFIG_ADC_SUPPORT_AUTO_SCAN 启用时） |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 通道设置失败 |
@@ -295,7 +295,7 @@ errcode_t uapi_adc_auto_scan_ch_enable(uint8_t channel, adc_scan_config_t config
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 自动扫描通道启用成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 自动扫描通道启用成功 |
 | [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER)：0x80001141 | 参数无效 | channel、config.type、config.freq 非法或 callback 为 NULL |
 | [ERRCODE_PWM_NOT_POWER_ON](#ERRCODE_PWM_NOT_POWER_ON)：0x80001084 | ADC 未上电 | ADC 未上电（adc_is_power_on 为 false）时调用 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 通道扫描配置失败 |
@@ -342,7 +342,7 @@ errcode_t uapi_adc_auto_scan_ch_disable(uint8_t channel)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 自动扫描通道禁用成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 自动扫描通道禁用成功 |
 | [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER)：0x80001141 | 参数无效 | channel 大于等于 ADC_CHANNEL_MAX_NUM |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 通道禁用失败 |
 

@@ -71,7 +71,7 @@ errcode_t uapi_spi_init(spi_bus_t bus, spi_attr_t *attr, spi_extra_attr_t *extra
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且初始化成功，或总线已初始化 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且初始化成功，或总线已初始化 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 attr 为空 |
 | Other | 其他错误码，参考errcode_t | HAL 初始化失败 |
 
@@ -114,7 +114,7 @@ errcode_t uapi_spi_deinit(spi_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且去初始化成功，或总线未初始化 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且去初始化成功，或总线未初始化 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
 | Other | 其他错误码，参考errcode_t | HAL 去初始化失败 |
 
@@ -155,7 +155,7 @@ errcode_t uapi_spi_set_tmod(spi_bus_t bus, hal_spi_trans_mode_t tmod, uint8_t da
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且设置成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且设置成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 tmod 大于等于 HAL_SPI_TRANS_MODE_MAX |
 | Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
 
@@ -195,7 +195,7 @@ errcode_t uapi_spi_set_attr(spi_bus_t bus, spi_attr_t *attr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且设置成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且设置成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 attr 为空 |
 | Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
 
@@ -240,7 +240,7 @@ errcode_t uapi_spi_get_attr(spi_bus_t bus, spi_attr_t *attr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且读取成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且读取成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 attr 为空 |
 | Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
 
@@ -280,7 +280,7 @@ errcode_t uapi_spi_set_extra_attr(spi_bus_t bus, spi_extra_attr_t *extra_attr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且设置成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且设置成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 extra_attr 为空 |
 | Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
 
@@ -325,7 +325,7 @@ errcode_t uapi_spi_get_extra_attr(spi_bus_t bus, spi_extra_attr_t *extra_attr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且读取成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且读取成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 extra_attr 为空 |
 | Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
 
@@ -366,7 +366,7 @@ errcode_t uapi_spi_select_slave(spi_bus_t bus, spi_slave_t cs)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且选择成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且选择成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 cs 大于等于 SPI_SLAVE_MAX_NUM |
 | [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为主机模式 |
 | Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
@@ -415,7 +415,7 @@ errcode_t uapi_spi_master_write(spi_bus_t bus, const spi_xfer_data_t *data, uint
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且写入成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且写入成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 越界、data 为空、DMA 下发送缓冲区为空或字节数对齐不合法 |
 | [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为主机模式 |
 | [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE)：0x8000133E | 传输模式无效 | 当前传输模式与读取模式相同 |
@@ -473,7 +473,7 @@ errcode_t uapi_spi_master_read(spi_bus_t bus, const spi_xfer_data_t *data, uint3
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且读取成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且读取成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 越界、data 为空、rx_buff 为空、rx_bytes 为 0，或 DMA 下字节数对齐不合法 |
 | [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为主机模式 |
 | [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE)：0x8000133E | 传输模式无效 | 当前传输模式与发送模式相同 |
@@ -531,7 +531,7 @@ errcode_t uapi_spi_master_writeread(spi_bus_t bus, const spi_xfer_data_t *data, 
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且写入读取成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且写入读取成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 越界、data 为空、rx_buff 为空、rx_bytes 为 0，或 DMA 下发送缓冲区为空、字节数对齐不合法 |
 | [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为主机模式 |
 | [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE)：0x8000133E | 传输模式无效 | 当前传输模式与发送模式相同 |
@@ -588,7 +588,7 @@ errcode_t uapi_spi_slave_write(spi_bus_t bus, const spi_xfer_data_t *data, uint3
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且写入成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且写入成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | data 为空、tx_buff 为空、tx_bytes 为 0，或 DMA 下字节数对齐不合法 |
 | [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为从机模式 |
 | [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE)：0x8000133E | 传输模式无效 | 当前传输模式与读取模式相同 |
@@ -646,7 +646,7 @@ errcode_t uapi_spi_slave_read(spi_bus_t bus, const spi_xfer_data_t *data, uint32
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且读取成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且读取成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 越界、data 为空、rx_buff 为空、rx_bytes 为 0，或 DMA 下字节数对齐不合法 |
 | [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为从机模式 |
 | [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE)：0x8000133E | 传输模式无效 | 当前传输模式与发送模式相同 |
@@ -703,7 +703,7 @@ errcode_t uapi_spi_slave_writeread(spi_bus_t bus, const spi_xfer_data_t *data, u
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且写入读取成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且写入读取成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 越界、data 为空、rx_buff 为空、rx_bytes 为 0，或 DMA 下字节数对齐不合法 |
 | [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为从机模式 |
 | [ERRCODE_SPI_INVALID_TMODE](#ERRCODE_SPI_INVALID_TMODE)：0x8000133E | 传输模式无效 | 当前传输模式与发送模式相同 |
@@ -760,7 +760,7 @@ errcode_t uapi_spi_set_dma_mode(spi_bus_t bus, bool en, const spi_dma_config_t *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且设置成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且设置成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
 | [ERRCODE_SPI_DMA_IRQ_MODE_MUTEX](#ERRCODE_SPI_DMA_IRQ_MODE_MUTEX)：0x8000133C | DMA 与中断模式互斥 | 中断模式已使能时使能 DMA |
 
@@ -815,7 +815,7 @@ errcode_t uapi_spi_set_irq_mode(spi_bus_t bus, bool irq_en, spi_rx_callback_t rx
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 参数合法且设置成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且设置成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
 | [ERRCODE_SPI_DMA_IRQ_MODE_MUTEX](#ERRCODE_SPI_DMA_IRQ_MODE_MUTEX)：0x8000133C | DMA 与中断模式互斥 | DMA 模式已使能时使能中断 |
 
@@ -868,7 +868,7 @@ errcode_t uapi_spi_set_loop_back_mode(spi_bus_t bus, bool loopback_en)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 调用即返回成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 调用即返回成功 |
 
 **Kconfig配置**
 
@@ -914,7 +914,7 @@ errcode_t uapi_spi_set_crc_mode(spi_bus_t bus, const spi_crc_config_t *crc_confi
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 调用即返回成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 调用即返回成功 |
 
 **Kconfig配置**
 
@@ -958,7 +958,7 @@ errcode_t uapi_spi_suspend(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 总线未初始化或挂起成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 总线未初始化或挂起成功 |
 | [ERRCODE_FAIL](#ERRCODE_FAIL)：0xFFFFFFFF | 执行失败 | HAL 挂起控制接口执行失败 |
 
 **Kconfig配置**
@@ -1003,7 +1003,7 @@ errcode_t uapi_spi_resume(uintptr_t arg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 总线未初始化或恢复成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 总线未初始化或恢复成功 |
 | [ERRCODE_FAIL](#ERRCODE_FAIL)：0xFFFFFFFF | 执行失败 | HAL 恢复控制接口执行失败 |
 
 **Kconfig配置**

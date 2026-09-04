@@ -57,7 +57,7 @@ errcode_t uapi_drv_cipher_symc_init(void)
 **功能说明**
 
 - 初始化对称加密（SYMC）模块，完成安全引擎通道资源分配。
-- 初始化成功后本模块 symc 接口方可使用。
+- 成功初始化后本模块 symc 接口方可使用。
 - 支持后续创建与管理加解密通道。
 
 **前置条件**
@@ -70,7 +70,7 @@ errcode_t uapi_drv_cipher_symc_init(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 初始化成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -107,7 +107,7 @@ errcode_t uapi_drv_cipher_symc_deinit(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 去初始化成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功去初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -132,7 +132,7 @@ errcode_t uapi_drv_cipher_symc_create(uint32_t *symc_handle, const uapi_drv_ciph
 **功能说明**
 
 - 创建symc通道，并根据传入的属性参数设置通道类型、算法、工作模式及通道占用周期。
-- 创建成功后返回通道句柄，后续加解密操作均通过该句柄进行。
+- 成功创建后返回通道句柄，后续加解密操作均通过该句柄进行。
 - 支持长期通道与短期通道，长期通道占用资源直到显式销毁。
 
 **前置条件**
@@ -226,7 +226,7 @@ errcode_t uapi_drv_cipher_symc_set_config(uint32_t symc_handle, const uapi_drv_c
 
 - 设置指定symc通道的算法参数，包括算法类型、工作模式、密钥长度、IV（Initialization Vector）等。
 - 对于CCM/GCM工作模式，还需通过param字段配置附加参数。
-- 配置成功后通道按所设参数执行加解密。
+- 成功配置后通道按所设参数执行加解密。
 
 **前置条件**
 
@@ -245,7 +245,7 @@ errcode_t uapi_drv_cipher_symc_set_config(uint32_t symc_handle, const uapi_drv_c
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -295,7 +295,7 @@ errcode_t uapi_drv_cipher_symc_get_config(uint32_t symc_handle, const uapi_drv_c
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功获取 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -570,7 +570,7 @@ errcode_t uapi_drv_cipher_mac_start(uint32_t *symc_handle, const uapi_drv_cipher
 
 - 创建symc通道并设置MAC算法参数，启动MAC计算流程。
 - 支持CBC-MAC和CMAC（Cipher-based Message Authentication Code）工作模式。
-- 创建成功后返回通道句柄，后续通过uapi_drv_cipher_mac_update输入数据，通过uapi_drv_cipher_mac_finish获取结果。
+- 成功创建后返回通道句柄，后续通过uapi_drv_cipher_mac_update输入数据，通过uapi_drv_cipher_mac_finish获取结果。
 
 **前置条件**
 
@@ -716,7 +716,7 @@ errcode_t uapi_drv_cipher_hash_init(void)
 **功能说明**
 
 - Hash计算模块初始化，完成Hash通道资源分配。
-- 初始化成功后本模块 Hash 接口方可使用。
+- 成功初始化后本模块 Hash 接口方可使用。
 - 支持后续创建与管理 Hash 通道。
 
 **前置条件**
@@ -728,7 +728,7 @@ errcode_t uapi_drv_cipher_hash_init(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 初始化成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -765,7 +765,7 @@ errcode_t uapi_drv_cipher_hash_deinit(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 去初始化成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功去初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**

@@ -49,7 +49,7 @@ errcode_t gatts_register_server(bt_uuid_t *app_uuid, uint8_t *server_id)
 
 - 注册一个 GATT 服务端，向上层应用分配唯一的服务端 ID。
 - 服务端 ID 是后续添加服务、特征、描述符及收发数据等操作的关键标识。
-- 注册成功后服务端进入可用状态，可继续调用服务/特征注册相关接口。
+- 成功注册后服务端进入可用状态，可继续调用服务/特征注册相关接口。
 
 **前置条件**
 
@@ -65,7 +65,7 @@ errcode_t gatts_register_server(bt_uuid_t *app_uuid, uint8_t *server_id)
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| server_id | uint8_t * | 注册成功后分配的服务端 ID，由调用方分配内存、函数填充 |
+| server_id | uint8_t * | 成功注册后分配的服务端 ID，由调用方分配内存、函数填充 |
 
 **返回值**
 
@@ -73,7 +73,7 @@ errcode_t gatts_register_server(bt_uuid_t *app_uuid, uint8_t *server_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 注册成功 | 服务端注册成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功注册 | 服务端注册成功 |
 | Other | 其他错误码，参考 errcode_t | 注册失败 |
 
 **参考案例**
@@ -115,7 +115,7 @@ errcode_t gatts_unregister_server(uint8_t server_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 注销成功 | 服务端注销成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功注销 | 服务端注销成功 |
 | Other | 其他错误码，参考 errcode_t | 注销失败 |
 
 ### gatts_add_service <a id="gatts_add_service"></a>
@@ -577,7 +577,7 @@ errcode_t gatts_send_response(uint8_t server_id, uint16_t conn_id, gatts_send_rs
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 发送成功 | 响应发送成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功发送 | 响应发送成功 |
 | Other | 其他错误码，参考 errcode_t | 响应发送失败 |
 
 ### gatts_notify_indicate <a id="gatts_notify_indicate"></a>
@@ -616,7 +616,7 @@ errcode_t gatts_notify_indicate(uint8_t server_id, uint16_t conn_id, gatts_ntf_i
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 发送成功 | 通知/指示发送成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功发送 | 通知/指示发送成功 |
 | Other | 其他错误码，参考 errcode_t | 通知/指示发送失败 |
 
 **参考案例**
@@ -660,7 +660,7 @@ errcode_t gatts_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, gat
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 发送成功 | 通过 UUID 发送通知/指示成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功发送 | 通过 UUID 发送通知/指示成功 |
 | Other | 其他错误码，参考 errcode_t | 通过 UUID 发送通知/指示失败 |
 
 **参考案例**
@@ -702,7 +702,7 @@ errcode_t gatts_set_mtu_size(uint8_t server_id, uint16_t mtu_size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 设置成功 | MTU 大小设置成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功设置 | MTU 大小设置成功 |
 | Other | 其他错误码，参考 errcode_t | MTU 大小设置失败 |
 
 ### gatts_register_callbacks <a id="gatts_register_callbacks"></a>
@@ -739,7 +739,7 @@ errcode_t gatts_register_callbacks(gatts_callbacks_t *func)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 注册成功 | 回调函数注册成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功注册 | 回调函数注册成功 |
 | Other | 其他错误码，参考 errcode_t | 回调函数注册失败 |
 
 **参考案例**

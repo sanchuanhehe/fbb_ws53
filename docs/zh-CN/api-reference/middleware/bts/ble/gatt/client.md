@@ -63,7 +63,7 @@ errcode_t gattc_register_client(bt_uuid_t *app_uuid, uint8_t *client_id)
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| client_id | uint8_t * | 注册成功后由 BTS（Bluetooth Stack）填充的客户端 ID |
+| client_id | uint8_t * | 成功注册后由 BTS（Bluetooth Stack）填充的客户端 ID |
 
 **返回值**
 

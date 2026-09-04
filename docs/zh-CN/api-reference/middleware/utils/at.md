@@ -108,7 +108,7 @@ errcode_t uapi_at_cmd_abort_register(at_abort_func_t func, void *arg)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | func | [at_abort_func_t](#at_abort_func_t) | AT 命令打断处理函数指针，框架在打断当前命令时回调，回调返回 at_ret_t 表示打断结果 | 不为NULL |
-| arg | void * | 打断处理函数的入参，原样透传给回调函数 | 调用方自定义 |
+| arg | void * | 将打断处理函数的入参直接透传给回调函数 | 调用方自定义 |
 
 **返回值**
 
@@ -161,7 +161,7 @@ errcode_t uapi_at_send_async_result(uint16_t err)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 结果消息成功写入消息队列 |
+| ERRCODE_SUCC：0 | 执行成功 | 结果消息写入消息队列成功 |
 | ERRCODE_AT_MSG_SEND_ERROR：0x80003024 | 消息发送失败 | 结果消息写入消息队列失败 |
 
 **Kconfig配置**

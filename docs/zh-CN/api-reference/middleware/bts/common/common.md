@@ -47,7 +47,7 @@ errcode_t enable_ble(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 请求发起成功 | 使能 BLE 请求成功提交 |
+| ERRCODE_SUCC：0 | 请求发起成功 | 使能 BLE 请求提交成功 |
 | Other | 其他错误码，参考 errcode_t | 请求发起失败 |
 
 **参考案例**
@@ -84,7 +84,7 @@ errcode_t disable_ble(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 去使能 BLE 请求成功提交 |
+| ERRCODE_SUCC：0 | 成功执行 | 去使能 BLE 请求提交成功 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 ### bts_dev_manager_register_callbacks <a id="bts_dev_manager_register_callbacks"></a>
@@ -123,7 +123,7 @@ errcode_t bts_dev_manager_register_callbacks(bts_dev_manager_callbacks_t *func)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 回调注册成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 回调注册成功 |
 | Other | 其他错误码，参考 errcode_t | 执行失败 |
 
 **参考案例**

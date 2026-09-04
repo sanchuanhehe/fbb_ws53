@@ -77,7 +77,7 @@ errcode_t uapi_sdio_slave_init(sdio_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 初始化成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -150,7 +150,7 @@ errcode_t uapi_sdio_slave_reinit(sdio_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 重新初始化成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 重新初始化成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -225,7 +225,7 @@ errcode_t uapi_sdio_slave_register_callback(sdio_bus_t bus, const sdio_callback_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 注册成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功注册 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -267,7 +267,7 @@ errcode_t uapi_sdio_slave_complete_send(uint8_t *adma_tab, uint32_t adma_index)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 配置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功配置 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### uapi_sdio_slave_set_pad_admatab <a id="uapi_sdio_slave_set_pad_admatab"></a>
@@ -306,7 +306,7 @@ errcode_t uapi_sdio_slave_set_pad_admatab(uint8_t *adma_tab, uint32_t adma_index
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 配置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功配置 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### uapi_sdio_slave_write_extend_info <a id="uapi_sdio_slave_write_extend_info"></a>
@@ -344,7 +344,7 @@ errcode_t uapi_sdio_slave_write_extend_info(sdio_bus_t bus, sdio_extendfunc_t* e
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 写入成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功写入 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -387,7 +387,7 @@ sdio_extendfunc_t* uapi_sdio_slave_get_extend_info(sdio_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非 NULL | 扩展区配置信息指针，参考 [sdio_extendfunc_t](#sdio_extendfunc_t) | 获取成功 |
+| 非 NULL | 扩展区配置信息指针，参考 [sdio_extendfunc_t](#sdio_extendfunc_t) | 成功获取 |
 | NULL | 获取失败 | 扩展信息不可用 |
 
 **Kconfig配置**
@@ -432,7 +432,7 @@ errcode_t uapi_sdio_slave_prepare_send_data(sdio_bus_t bus, uint32_t data_len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 启动发送成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功启动发送 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### uapi_sdio_slave_set_admatab <a id="uapi_sdio_slave_set_admatab"></a>
@@ -472,7 +472,7 @@ errcode_t uapi_sdio_slave_set_admatab(uint8_t *adma_tab, uint32_t adma_index, co
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### uapi_sdio_slave_sched_msg <a id="uapi_sdio_slave_sched_msg"></a>
@@ -490,7 +490,7 @@ errcode_t uapi_sdio_slave_sched_msg(sdio_bus_t bus)
 **功能说明**
 
 - 调度指定 SDIO 通道的挂起消息。
-- 没有挂起消息或挂起消息发送成功时返回成功。
+- 没有挂起消息或挂起消息成功发送时返回成功。
 - 返回执行结果状态码。
 
 **前置条件**
@@ -511,7 +511,7 @@ errcode_t uapi_sdio_slave_sched_msg(sdio_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 没有挂起的消息，或将挂起的消息发送成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 没有挂起的消息，或将挂起的消息发送成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | SDIO 不在工作状态，或 SDIO 正在发送消息 |
 
 ### uapi_sdio_slave_sync_msg <a id="uapi_sdio_slave_sync_msg"></a>
@@ -550,7 +550,7 @@ errcode_t uapi_sdio_slave_sync_msg(sdio_bus_t bus, uint32_t msg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 消息加入队列并发送成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 消息加入队列并发送成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### uapi_sdio_slave_send_msg_ack <a id="uapi_sdio_slave_send_msg_ack"></a>
@@ -589,7 +589,7 @@ errcode_t uapi_sdio_slave_send_msg_ack(sdio_bus_t bus, uint32_t msg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 发送成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功发送 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### uapi_sdio_slave_process_msg <a id="uapi_sdio_slave_process_msg"></a>
@@ -629,7 +629,7 @@ errcode_t uapi_sdio_slave_process_msg(sdio_bus_t bus, uint32_t send_msg, uint32_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 清除并发送成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 清除并发送成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### uapi_sdio_slave_is_pending_msg <a id="uapi_sdio_slave_is_pending_msg"></a>
@@ -871,7 +871,7 @@ errcode_t uapi_sdio_slave_get_status(sdio_bus_t bus, sdio_status_info_t* satus_i
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功获取 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -914,7 +914,7 @@ errcode_t uapi_sdio_slave_set_status(sdio_bus_t bus, const sdio_status_info_t* s
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -986,7 +986,7 @@ sdio_info_t* uapi_sdio_slave_get_info(sdio_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非 NULL | SDIO 信息结构体指针，参考 [sdio_info_t](#sdio_info_t) | 获取成功 |
+| 非 NULL | SDIO 信息结构体指针，参考 [sdio_info_t](#sdio_info_t) | 成功获取 |
 | NULL | 获取失败 | 信息不可用 |
 
 ### uapi_sdio_slave_set_extend_val_info <a id="uapi_sdio_slave_set_extend_val_info"></a>
@@ -1059,7 +1059,7 @@ uint32_t uapi_sdio_slave_get_extend_val_info(sdio_bus_t bus, uint32_t offset)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 扩展信息地址的值 | 获取成功 | 读取扩展信息偏移对应的值 |
+| 扩展信息地址的值 | 成功获取 | 读取扩展信息偏移对应的值 |
 
 **Kconfig配置**
 

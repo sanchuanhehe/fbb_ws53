@@ -64,7 +64,7 @@ errcode_t uapi_i2s_init(sio_bus_t bus, i2s_callback_t callback)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设备初始化成功或设备已初始化 |
+| ERRCODE_SUCC：0 | 成功执行 | 设备初始化或设备已初始成功化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 总线编号超出有效范围 |
 
 **Kconfig配置**
@@ -113,7 +113,7 @@ errcode_t uapi_i2s_deinit(sio_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 去初始化成功或设备未初始化 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功去初始化或设备未初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 总线编号超出有效范围 |
 
 ### uapi_i2s_set_config <a id="uapi_i2s_set_config"></a>
@@ -151,7 +151,7 @@ errcode_t uapi_i2s_set_config(sio_bus_t bus, const i2s_config_t *config)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 配置下发成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 配置下发成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围或 config 为 NULL |
 
 **参考案例**
@@ -199,7 +199,7 @@ errcode_t uapi_i2s_get_config(sio_bus_t bus, i2s_config_t *config)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 配置获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功配置获取 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围或 config 为 NULL |
 
 ### uapi_i2s_write_data <a id="uapi_i2s_write_data"></a>
@@ -237,7 +237,7 @@ errcode_t uapi_i2s_write_data(sio_bus_t bus, i2s_tx_data_t *data)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 数据写入成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 数据写入成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围或 data 及其缓冲区为 NULL |
 
 **参考案例**
@@ -278,7 +278,7 @@ errcode_t uapi_i2s_read_start(sio_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 接收启动成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功接收启动 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化或总线编号超出有效范围 |
 
 **参考案例**
@@ -348,7 +348,7 @@ errcode_t uapi_i2s_loop_trans(sio_bus_t bus, i2s_tx_data_t *data)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 回路自测发送成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 回路自测发送成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围或 data 及其缓冲区为 NULL |
 
 ### uapi_i2s_get_data <a id="uapi_i2s_get_data"></a>
@@ -391,7 +391,7 @@ errcode_t uapi_i2s_get_data(sio_bus_t bus, i2s_rx_data_t *data)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 数据获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 数据获取成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围或 data 为 NULL |
 
 ### uapi_i2s_loopback <a id="uapi_i2s_loopback"></a>
@@ -429,7 +429,7 @@ errcode_t uapi_i2s_loopback(sio_bus_t bus, bool en)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 回环模式设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 回环模式设置成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化或总线编号超出有效范围 |
 
 **Kconfig配置**
@@ -473,7 +473,7 @@ int32_t uapi_i2s_dma_config(sio_bus_t bus, i2s_dma_attr_t *i2s_dma_cfg)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | DMA 传输参数配置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | DMA 传输参数配置成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化或总线编号超出有效范围 |
 
 **Kconfig配置**
@@ -522,7 +522,7 @@ int32_t uapi_i2s_merge_write_by_dma(sio_bus_t bus, const void *buffer, uint32_t 
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 非阻塞模式发起传输成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 非阻塞模式发起传输成功 |
 | 正整数 | 实际传输的数据块大小 | 阻塞模式传输成功，返回 DMA 实际传输的 block_ts |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围、dma_cfg/buffer 为 NULL、length 为 0、DMA 握手号不支持、或 DMA 配置/启动失败 |
 
@@ -572,7 +572,7 @@ int32_t uapi_i2s_merge_read_by_dma(sio_bus_t bus, const void *buffer, uint32_t l
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 非阻塞模式发起传输成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 非阻塞模式发起传输成功 |
 | 正整数 | 实际传输的数据块大小 | 阻塞模式传输成功，返回 DMA 实际传输的 block_ts |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 设备未初始化、总线编号超出有效范围、dma_cfg/buffer 为 NULL、length 为 0、DMA 握手号不支持、或 DMA 配置/启动失败 |
 

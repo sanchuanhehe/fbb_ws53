@@ -86,7 +86,7 @@ errcode_t gap_ble_set_local_addr(const bd_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 地址设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 地址设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
@@ -128,7 +128,7 @@ errcode_t gap_ble_get_local_addr(bd_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 地址获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 地址获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_local_appearance <a id="gap_ble_set_local_appearance"></a>
@@ -166,7 +166,7 @@ errcode_t gap_ble_set_local_appearance(uint16_t appearance)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 外观类型设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 外观类型设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_local_name <a id="gap_ble_set_local_name"></a>
@@ -205,7 +205,7 @@ errcode_t gap_ble_set_local_name(const uint8_t *name, const uint8_t len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设备名称设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 设备名称设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_get_local_name <a id="gap_ble_get_local_name"></a>
@@ -250,7 +250,7 @@ errcode_t gap_ble_get_local_name(uint8_t *name, uint8_t *len)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 设备名称获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 设备名称获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_adv_data <a id="gap_ble_set_adv_data"></a>
@@ -289,7 +289,7 @@ errcode_t gap_ble_set_adv_data(uint8_t adv_id, const gap_ble_config_adv_data_t *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 数据设置请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 数据设置请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
@@ -333,7 +333,7 @@ errcode_t gap_ble_set_adv_param(uint8_t adv_id, const gap_ble_adv_params_t *para
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 参数设置请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 参数设置请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
@@ -375,7 +375,7 @@ errcode_t gap_ble_start_adv(uint8_t adv_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 启动请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 启动请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
@@ -418,7 +418,7 @@ errcode_t gap_ble_stop_adv(uint8_t adv_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 停止请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 停止请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_scan_parameters <a id="gap_ble_set_scan_parameters"></a>
@@ -456,7 +456,7 @@ errcode_t gap_ble_set_scan_parameters(const gap_ble_scan_params_t *param)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 参数设置请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 参数设置请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_scan_extern_parameters <a id="gap_ble_set_scan_extern_parameters"></a>
@@ -494,7 +494,7 @@ errcode_t gap_ble_set_scan_extern_parameters(const gap_ble_extern_scan_params_t 
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 扩展参数设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 扩展参数设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_start_scan <a id="gap_ble_start_scan"></a>
@@ -525,7 +525,7 @@ errcode_t gap_ble_start_scan(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 启动请求成功发起，扫描结果通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 启动请求成功发起，扫描结果通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_stop_scan <a id="gap_ble_stop_scan"></a>
@@ -555,7 +555,7 @@ errcode_t gap_ble_stop_scan(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 停止扫描成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 停止扫描成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_phy <a id="gap_ble_set_phy"></a>
@@ -593,7 +593,7 @@ errcode_t gap_ble_set_phy(gap_le_set_phy_t *param)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | PHY 参数设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | PHY 参数设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
@@ -635,7 +635,7 @@ errcode_t gap_ble_set_data_length(gap_le_set_data_length_t *param)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 发包参数设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 发包参数设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
@@ -677,7 +677,7 @@ errcode_t gap_ble_pair_remote_device(const bd_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 配对请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 配对请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_get_paired_devices_num <a id="gap_ble_get_paired_devices_num"></a>
@@ -715,7 +715,7 @@ errcode_t gap_ble_get_paired_devices_num(uint16_t *number)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 数量获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 数量获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_get_paired_devices <a id="gap_ble_get_paired_devices"></a>
@@ -760,7 +760,7 @@ errcode_t gap_ble_get_paired_devices(bd_addr_t *addr, uint16_t *number)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 地址列表获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 地址列表获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_get_pair_state <a id="gap_ble_get_pair_state"></a>
@@ -804,7 +804,7 @@ errcode_t gap_ble_get_pair_state(const bd_addr_t *addr, gap_ble_pair_state_t *st
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 配对状态获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 配对状态获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_remove_pair <a id="gap_ble_remove_pair"></a>
@@ -842,7 +842,7 @@ errcode_t gap_ble_remove_pair(const bd_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 取消配对成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 取消配对成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_add_white_list <a id="gap_ble_add_white_list"></a>
@@ -880,7 +880,7 @@ errcode_t gap_ble_add_white_list(const bd_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 添加白名单成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 添加白名单成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_remove_white_list <a id="gap_ble_remove_white_list"></a>
@@ -918,7 +918,7 @@ errcode_t gap_ble_remove_white_list(const bd_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 移除白名单成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 移除白名单成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_get_white_list <a id="gap_ble_get_white_list"></a>
@@ -950,7 +950,7 @@ errcode_t gap_ble_get_white_list(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 获取请求成功发起，结果通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 获取请求成功发起，结果通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_remove_all_pairs <a id="gap_ble_remove_all_pairs"></a>
@@ -982,7 +982,7 @@ errcode_t gap_ble_remove_all_pairs(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 删除所有配对成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 删除所有配对成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_get_bonded_devices <a id="gap_ble_get_bonded_devices"></a>
@@ -1027,7 +1027,7 @@ errcode_t gap_ble_get_bonded_devices(bd_addr_t *addr, uint16_t *number)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 地址列表获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 地址列表获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_connect_param_update <a id="gap_ble_connect_param_update"></a>
@@ -1065,7 +1065,7 @@ errcode_t gap_ble_connect_param_update(gap_conn_param_update_t *params)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 连接参数更新成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 连接参数更新成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
@@ -1107,7 +1107,7 @@ errcode_t gap_ble_connect_remote_device(const bd_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 连接请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 连接请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_disconnect_remote_device <a id="gap_ble_disconnect_remote_device"></a>
@@ -1145,7 +1145,7 @@ errcode_t gap_ble_disconnect_remote_device(const bd_addr_t *addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 断连请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 断连请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_sec_param <a id="gap_ble_set_sec_param"></a>
@@ -1183,7 +1183,7 @@ errcode_t gap_ble_set_sec_param(gap_ble_sec_params_t *params)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 安全参数设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 安全参数设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_read_remote_device_rssi <a id="gap_ble_read_remote_device_rssi"></a>
@@ -1221,7 +1221,7 @@ errcode_t gap_ble_read_remote_device_rssi(uint16_t conn_id)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 读取请求成功发起，RSSI 结果通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 读取请求成功发起，RSSI 结果通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_register_callbacks <a id="gap_ble_register_callbacks"></a>
@@ -1259,7 +1259,7 @@ errcode_t gap_ble_register_callbacks(gap_ble_callbacks_t *func)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 回调函数注册成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 回调函数注册成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
@@ -1295,7 +1295,7 @@ errcode_t bth_ota_init(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | OTA 通道初始化成功 |
+| ERRCODE_SUCC：0 | 成功执行 | OTA 通道初始化成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### ble_customize_max_pwr <a id="ble_customize_max_pwr"></a>
@@ -1334,7 +1334,7 @@ errcode_t ble_customize_max_pwr(int8_t ble_pwr, int8_t sle_pwr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 定制化功率配置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 定制化功率配置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### ble_set_nv_pair_keys <a id="ble_set_nv_pair_keys"></a>
@@ -1375,7 +1375,7 @@ errcode_t ble_set_nv_pair_keys(ble_auth_info_evt_t *key, bd_addr_t *own_addr, bd
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 密钥写入 Flash 成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 密钥写入 Flash 成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_save_smp_keys_mode <a id="gap_ble_set_save_smp_keys_mode"></a>
@@ -1413,7 +1413,7 @@ errcode_t gap_ble_set_save_smp_keys_mode(uint8_t is_available)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 保存模式设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 保存模式设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_pair_info_available <a id="gap_ble_set_pair_info_available"></a>
@@ -1451,7 +1451,7 @@ errcode_t gap_ble_set_pair_info_available(uint8_t is_available)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 开关设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 开关设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ## Type definitions

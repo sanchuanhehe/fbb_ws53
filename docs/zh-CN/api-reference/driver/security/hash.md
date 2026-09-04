@@ -47,7 +47,7 @@ errcode_t uapi_drv_cipher_sha256_start(uint32_t *hash_handle)
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| hash_handle | uint32_t * | 由调用方分配内存，函数填充创建成功的 SHA-256 通道句柄，供后续 update/finish 接口使用 |
+| hash_handle | uint32_t * | 由调用方分配内存，函数填充创建的成功 SHA-256 通道句柄，供后续 update/finish 接口使用 |
 
 **返回值**
 
@@ -55,7 +55,7 @@ errcode_t uapi_drv_cipher_sha256_start(uint32_t *hash_handle)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 通道创建成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 通道创建成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -106,7 +106,7 @@ errcode_t uapi_drv_cipher_sha256_update(uint32_t hash_handle, const uint8_t *buf
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 数据追加成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 数据追加成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -162,7 +162,7 @@ errcode_t uapi_drv_cipher_sha256_finish(uint32_t hash_handle, uint8_t *out, uint
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 计算成功并销毁通道句柄 |
+| ERRCODE_SUCC：0 | 成功执行 | 计算成功并销毁通道句柄 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -219,7 +219,7 @@ errcode_t uapi_drv_cipher_sha256(const uint8_t *buf, uint32_t len, uint8_t *out,
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 单次计算成功并输出摘要 |
+| ERRCODE_SUCC：0 | 成功执行 | 单次计算成功并输出摘要 |
 | ERRCODE_INVALID_PARAM：0x80000001 | 参数无效 | out_len 不等于 SHA256_HASH_SIZE(32) |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 

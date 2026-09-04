@@ -105,7 +105,7 @@ errcode_t sle_dev_manager_register_callbacks(sle_dev_manager_callbacks_t *func)
 **功能说明**
 
 - 向 SLE 设备管理模块注册上电、使能、去使能事件回调函数集合。
-- 注册成功后，SLE 设备上电结果及协议栈使能/去使能结果将通过对应回调异步上报。
+- 成功注册后，SLE 设备上电结果及协议栈使能/去使能结果将通过对应回调异步上报。
 - 回调函数集合由 [sle_dev_manager_callbacks_t](#sle_dev_manager_callbacks_t) 组织，包含上电、使能、去使能三个回调。
 
 **前置条件**

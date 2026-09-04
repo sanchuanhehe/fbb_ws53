@@ -73,7 +73,7 @@ errcode_t uapi_uart_init(uart_bus_t bus, const uart_pin_config_t *pins, const ua
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 初始化成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功初始化 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 初始化失败 |
 
 **参考案例**
@@ -121,7 +121,7 @@ errcode_t uapi_uart_deinit(uart_bus_t bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 去初始化成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功去初始化 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 去初始化失败 |
 
 **参考案例**
@@ -171,7 +171,7 @@ errcode_t uapi_uart_get_attr(uart_bus_t bus, const uart_attr_t *attr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 获取成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功获取 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 获取失败 |
 
 ### uapi_uart_has_pending_transmissions <a id="uapi_uart_has_pending_transmissions"></a>
@@ -312,7 +312,7 @@ errcode_t uapi_uart_set_attr(uart_bus_t bus, const uart_attr_t *attr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC(0) | 成功 | 设置成功 |
+| ERRCODE_SUCC(0) | 成功 | 成功设置 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 设置失败 |
 
 ### uapi_uart_register_rx_callback <a id="uapi_uart_register_rx_callback"></a>
@@ -351,7 +351,7 @@ errcode_t uapi_uart_register_rx_callback(uart_bus_t bus, uart_rx_condition_t con
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 注册成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功注册 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 注册失败 |
 
 **参考案例**
@@ -431,7 +431,7 @@ errcode_t uapi_uart_register_parity_error_callback(uart_bus_t bus, uart_error_ca
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 注册成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功注册 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 注册失败 |
 
 **Kconfig配置**
@@ -473,7 +473,7 @@ errcode_t uapi_uart_register_frame_error_callback(uart_bus_t bus, uart_error_cal
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 注册成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功注册 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 注册失败 |
 
 **Kconfig配置**
@@ -515,7 +515,7 @@ errcode_t uapi_uart_register_overrun_error_callback(uart_bus_t bus, uart_error_c
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 注册成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功注册 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 注册失败 |
 
 **Kconfig配置**
@@ -654,7 +654,7 @@ errcode_t uapi_uart_write_int(uart_bus_t bus, const uint8_t *buffer, uint32_t le
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 发送成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功发送 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 发送失败 |
 
 **参考案例**
@@ -797,7 +797,7 @@ errcode_t uapi_uart_register_read_by_dma_callback(uart_bus_t bus, uart_write_dma
 
 | 返回值 | 文字含义 | 触发场景 |
 | ---- | ---- | ---- |
-| ERRCODE_SUCC：0 | 成功 | 注册成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功注册 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 注册失败 |
 
 **Kconfig配置**
@@ -866,7 +866,7 @@ errcode_t uapi_uart_recv_raw_data_end_transfer(uart_bus_t uart_bus)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 成功结束 DMA 不定长接收 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功结束 DMA 不定长接收 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | uart_bus 越界 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
@@ -908,7 +908,7 @@ errcode_t uapi_uart_dma_recv_raw_data(uart_bus_t uart_bus, uart_idle_int_receive
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | DMA 不定长接收启动成功 |
+| ERRCODE_SUCC：0 | 成功执行 | DMA 不定长接收启动成功 |
 | [ERRCODE_FAIL](#ERRCODE_FAIL)：0xFFFFFFFF | 执行失败 | 配置或启动 DMA 接收失败 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 执行失败 |
 
@@ -1003,7 +1003,7 @@ errcode_t uapi_uart_update_rx_buff(uart_bus_t bus, uint8_t *rx_buffer, uint16_t 
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 成功 | 更新成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功更新 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 更新失败 |
 
 **Kconfig配置**
@@ -1123,7 +1123,7 @@ errcode_t uapi_uart_register_write_by_dma_callback(uart_bus_t bus, uart_tx_by_dm
 
 | 返回值 | 文字含义 | 触发场景 |
 | ---- | ---- | ---- |
-| ERRCODE_SUCC：0 | 成功 | 注册成功 |
+| ERRCODE_SUCC：0 | 成功 | 成功注册 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 注册失败 |
 
 **Kconfig配置**

@@ -62,7 +62,7 @@ errcode_t uapi_efuse_user_read_buffer(uint32_t offset, uint8_t *buffer, uint16_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 读取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功读取 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### uapi_efuse_user_write_buffer <a id="uapi_efuse_user_write_buffer"></a>
@@ -103,7 +103,7 @@ errcode_t uapi_efuse_user_write_buffer(uint32_t offset, const uint8_t *buffer, u
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 写入成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功写入 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### uapi_efuse_user_write_bit <a id="uapi_efuse_user_write_bit"></a>
@@ -143,7 +143,7 @@ errcode_t uapi_efuse_user_write_bit(uint32_t byte_offset, uint8_t bit_pos)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 写 1 成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 写 1 成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -195,7 +195,7 @@ errcode_t uapi_efuse_user_read_bit(uint32_t byte_offset, uint8_t bit_pos, uint8_
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | 读取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功读取 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**

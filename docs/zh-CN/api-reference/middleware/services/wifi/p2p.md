@@ -508,7 +508,7 @@ errcode_t wifi_p2p_go_get_gc_info(p2p_client_info_stru *client_list, uint32_t *c
 
 **前置条件**
 
-- 调用时序约束：需在 P2P 以 GO 模式连接成功后调用。
+- 调用时序约束：需在 P2P 以 GO 模式成功连接后调用。
 - 上下文限制：需在主线程调用，禁止在中断上下文调用。
 
 **入参**

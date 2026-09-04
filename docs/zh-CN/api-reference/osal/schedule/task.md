@@ -196,7 +196,7 @@ int osal_kthread_set_priority(osal_task *task, unsigned int priority)
 **前置条件**
 
 - 调用时序约束：task 参数及其内部 task 指针不可为 NULL。
-- 依赖关系：目标线程需已通过 osal_kthread_create 成功创建。
+- 依赖关系：目标线程需已通过 osal_kthread_create 创建成功。
 
 **入参**
 
@@ -240,7 +240,7 @@ void osal_kthread_set_affinity(osal_task *task, int cpu_mask)
 **前置条件**
 
 - 调用时序约束：task 参数不可为 NULL。
-- 依赖关系：目标线程需已通过 osal_kthread_create 成功创建。
+- 依赖关系：目标线程需已通过 osal_kthread_create 创建成功。
 
 **入参**
 
@@ -307,7 +307,7 @@ int osal_kthread_wakeup_process(osal_task *task)
 **前置条件**
 
 - 调用时序约束：task 参数不可为 NULL，否则返回 -1。
-- 依赖关系：目标线程需已通过 osal_kthread_create 成功创建。
+- 依赖关系：目标线程需已通过 osal_kthread_create 创建成功。
 
 **入参**
 
@@ -345,7 +345,7 @@ void osal_kthread_bind(osal_task *task, unsigned int cpu)
 **前置条件**
 
 - 调用时序约束：task 参数不可为 NULL。
-- 依赖关系：目标线程需已通过 osal_kthread_create 成功创建。
+- 依赖关系：目标线程需已通过 osal_kthread_create 创建成功。
 
 **入参**
 
@@ -908,7 +908,7 @@ void osal_kthread_suspend(osal_task *task)
 **前置条件**
 
 - 调用时序约束：task 参数不可为 NULL。
-- 依赖关系：目标线程需已通过 osal_kthread_create 成功创建。
+- 依赖关系：目标线程需已通过 osal_kthread_create 创建成功。
 
 **入参**
 
