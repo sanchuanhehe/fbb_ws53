@@ -358,7 +358,7 @@ errcode_t uapi_spi_select_slave(spi_bus_t bus, spi_slave_t cs)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待操作的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| cs | [spi_slave_t](#spi_slave_t) | 被选中的从机设备 | [SPI_SLAVE0](#spi_slave_t)：0（有效值小于 [SPI_SLAVE_MAX_NUM](#spi_slave_t)：1） |
+| cs | [spi_slave_t](#spi_slave_t) | 被选中的从机设备 | [spi_slave_t](#spi_slave_t) 全体成员 |
 
 **返回值**
 

@@ -47,7 +47,7 @@ errcode_t uapi_drv_cipher_sha256_start(uint32_t *hash_handle)
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| hash_handle | uint32_t * | 由调用方分配内存，函数填充创建的成功 SHA-256 通道句柄，供后续 update/finish 接口使用 |
+| hash_handle | uint32_t * | 由调用方分配内存，函数填充成功创建的 SHA-256 通道句柄，供后续 update/finish 接口使用 |
 
 **返回值**
 

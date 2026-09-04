@@ -69,7 +69,7 @@ errcode_t uapi_sdio_slave_init(sdio_bus_t bus)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 
 **返回值**
 
@@ -109,7 +109,7 @@ void uapi_sdio_slave_deinit(sdio_bus_t bus)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 
 **参考案例**
 
@@ -142,7 +142,7 @@ errcode_t uapi_sdio_slave_reinit(sdio_bus_t bus)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 
 **返回值**
 
@@ -182,7 +182,7 @@ void uapi_sdio_slave_soft_reset(sdio_bus_t bus)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 
 **参考案例**
 
@@ -216,7 +216,7 @@ errcode_t uapi_sdio_slave_register_callback(sdio_bus_t bus, const sdio_callback_
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 | fun | [sdio_callback_func_t](#sdio_callback_func_t) * | SDIO 中断回调函数结构体指针，参考 [sdio_callback_func_t](#sdio_callback_func_t) | 不为NULL |
 
 **返回值**
@@ -335,7 +335,7 @@ errcode_t uapi_sdio_slave_write_extend_info(sdio_bus_t bus, sdio_extendfunc_t* e
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 | extfunc | [sdio_extendfunc_t](#sdio_extendfunc_t) * | 扩展信息结构体指针，参考 [sdio_extendfunc_t](#sdio_extendfunc_t) | 不为NULL |
 
 **返回值**
@@ -379,7 +379,7 @@ sdio_extendfunc_t* uapi_sdio_slave_get_extend_info(sdio_bus_t bus)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 
 **返回值**
 
@@ -423,7 +423,7 @@ errcode_t uapi_sdio_slave_prepare_send_data(sdio_bus_t bus, uint32_t data_len)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 | data_len | uint32_t | 发送数据长度 | 0 ~ 4294967295 |
 
 **返回值**
@@ -503,7 +503,7 @@ errcode_t uapi_sdio_slave_sched_msg(sdio_bus_t bus)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 
 **返回值**
 
@@ -541,7 +541,7 @@ errcode_t uapi_sdio_slave_sync_msg(sdio_bus_t bus, uint32_t msg)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 | msg | uint32_t | 给定消息号 | 0 ~ 31 |
 
 **返回值**
@@ -580,7 +580,7 @@ errcode_t uapi_sdio_slave_send_msg_ack(sdio_bus_t bus, uint32_t msg)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 | msg | uint32_t | 用于覆盖当前正在发送消息的指定消息号 | 0 ~ 31 |
 
 **返回值**
@@ -619,7 +619,7 @@ errcode_t uapi_sdio_slave_process_msg(sdio_bus_t bus, uint32_t send_msg, uint32_
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 | send_msg | uint32_t | 指定发送的消息号 | 0 ~ 31 |
 | clear_msg | uint32_t | 指定清除的消息号 | 0 ~ 31 |
 
@@ -658,7 +658,7 @@ bool uapi_sdio_slave_is_pending_msg(sdio_bus_t bus, uint32_t msg)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 | msg | uint32_t | 给定消息号 | 0 ~ 31 |
 
 **返回值**
@@ -696,7 +696,7 @@ bool uapi_sdio_slave_is_sending_msg(sdio_bus_t bus, uint32_t msg)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 | msg | uint32_t | 给定消息号 | 0 ~ 31 |
 
 **返回值**
@@ -762,7 +762,7 @@ void uapi_sdio_slave_read_retry_when_read_err(sdio_bus_t bus, uint32_t read_byte
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 | read_bytes | uint32_t | 读取的数据长度 | 0 ~ 4294967295 |
 
 ### uapi_sdio_slave_init_no_wait <a id="uapi_sdio_slave_init_no_wait"></a>
@@ -791,7 +791,7 @@ void uapi_sdio_slave_init_no_wait(sdio_bus_t bus)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 
 ### uapi_sdio_slave_host_clk_ready <a id="uapi_sdio_slave_host_clk_ready"></a>
 
@@ -819,7 +819,7 @@ bool uapi_sdio_slave_host_clk_ready(sdio_bus_t bus)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 
 **返回值**
 
@@ -857,7 +857,7 @@ errcode_t uapi_sdio_slave_get_status(sdio_bus_t bus, sdio_status_info_t* satus_i
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 
 **出参**
 
@@ -905,7 +905,7 @@ errcode_t uapi_sdio_slave_set_status(sdio_bus_t bus, const sdio_status_info_t* s
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 | satus_info | const [sdio_status_info_t](#sdio_status_info_t) * | 指向存储状态信息缓冲区的指针，参考 [sdio_status_info_t](#sdio_status_info_t) | 不为NULL |
 
 **返回值**
@@ -946,7 +946,7 @@ void uapi_sdio_slave_memory_init(sdio_bus_t bus)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 
 **参考案例**
 
@@ -978,7 +978,7 @@ sdio_info_t* uapi_sdio_slave_get_info(sdio_bus_t bus)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 
 **返回值**
 
@@ -1014,7 +1014,7 @@ void uapi_sdio_slave_set_extend_val_info(sdio_bus_t bus, uint32_t offset, uint32
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 | offset | uint32_t | 地址偏移量 | 0 ~ 4294967295 |
 | val | uint32_t | 设置的值 | 0 ~ 4294967295 |
 
@@ -1050,7 +1050,7 @@ uint32_t uapi_sdio_slave_get_extend_val_info(sdio_bus_t bus, uint32_t offset)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [SDIO_BUS_0](#sdio_bus_t)：0 |
+| bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
 | offset | uint32_t | 地址偏移量 | 0 ~ 4294967295 |
 
 **返回值**

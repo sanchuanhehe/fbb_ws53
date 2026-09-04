@@ -58,7 +58,7 @@ errcode_t uapi_i2c_master_init(i2c_bus_t bus, uint32_t baudrate, uint8_t hscode)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [i2c_bus_t](#i2c_bus_t) | 待初始化的 I2C 总线编号 | [I2C_BUS_0](#i2c_bus_t)：0；<br>[I2C_BUS_1](#i2c_bus_t)：1；<br>[I2C_BUS_NONE](#i2c_bus_t)：2。 |
+| bus | [i2c_bus_t](#i2c_bus_t) | 待初始化的 I2C 总线编号 | [i2c_bus_t](#i2c_bus_t) 全体成员 |
 | baudrate | uint32_t | I2C 波特率，受 IP 上限约束 | 1 ~ [I2C_HS_MODE_BAUDRATE_HIGH_LIMIT](#I2C_HS_MODE_BAUDRATE_HIGH_LIMIT)：3400000（实现拒绝 baudrate 为 0） |
 | hscode | uint8_t | 高速模式主机码，每个主机有唯一主机码，仅在高速模式下需配置 | 0 ~ [I2C_HS_MODE_MASTER_CODE_MAX](#I2C_HS_MODE_MASTER_CODE_MAX)：7 |
 
@@ -112,7 +112,7 @@ errcode_t uapi_i2c_master_write(i2c_bus_t bus, uint16_t dev_addr, i2c_data_t *da
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [i2c_bus_t](#i2c_bus_t) | 待执行写操作的 I2C 总线编号 | [I2C_BUS_0](#i2c_bus_t)：0；<br>[I2C_BUS_1](#i2c_bus_t)：1；<br>[I2C_BUS_NONE](#i2c_bus_t)：2。 |
+| bus | [i2c_bus_t](#i2c_bus_t) | 待执行写操作的 I2C 总线编号 | [i2c_bus_t](#i2c_bus_t) 全体成员 |
 | dev_addr | uint16_t | 主机发送数据的目标从机地址 | 0 ~ 0x7F（7 位从机地址；实现未做额外边界校验） |
 | data | [i2c_data_t](#struct_i2c_data_t) * | 发送数据的信息指针，包含发送缓冲区及长度 | 不为 NULL |
 
@@ -166,7 +166,7 @@ errcode_t uapi_i2c_master_read(i2c_bus_t bus, uint16_t dev_addr, i2c_data_t *dat
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [i2c_bus_t](#i2c_bus_t) | 待执行读操作的 I2C 总线编号 | [I2C_BUS_0](#i2c_bus_t)：0；<br>[I2C_BUS_1](#i2c_bus_t)：1；<br>[I2C_BUS_NONE](#i2c_bus_t)：2。 |
+| bus | [i2c_bus_t](#i2c_bus_t) | 待执行读操作的 I2C 总线编号 | [i2c_bus_t](#i2c_bus_t) 全体成员 |
 | dev_addr | uint16_t | 主机接收数据的目标从机地址 | 0 ~ 0x7F（7 位从机地址；实现未做额外边界校验） |
 | data | [i2c_data_t](#struct_i2c_data_t) * | 接收数据的信息指针，包含接收缓冲区及长度 | 不为 NULL |
 
@@ -226,7 +226,7 @@ errcode_t uapi_i2c_master_writeread(i2c_bus_t bus, uint16_t dev_addr, i2c_data_t
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [i2c_bus_t](#i2c_bus_t) | 待执行写读操作的 I2C 总线编号 | [I2C_BUS_0](#i2c_bus_t)：0；<br>[I2C_BUS_1](#i2c_bus_t)：1；<br>[I2C_BUS_NONE](#i2c_bus_t)：2。 |
+| bus | [i2c_bus_t](#i2c_bus_t) | 待执行写读操作的 I2C 总线编号 | [i2c_bus_t](#i2c_bus_t) 全体成员 |
 | dev_addr | uint16_t | 主机写读数据的目标从机地址 | 0 ~ 0x7F（7 位从机地址；实现未做额外边界校验） |
 | data | [i2c_data_t](#struct_i2c_data_t) * | 收发数据的信息指针，同时包含发送缓冲区与接收缓冲区 | 不为 NULL |
 
@@ -285,7 +285,7 @@ errcode_t uapi_i2c_slave_init(i2c_bus_t bus, uint32_t baudrate, uint16_t addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [i2c_bus_t](#i2c_bus_t) | 待初始化的 I2C 总线编号 | [I2C_BUS_0](#i2c_bus_t)：0；<br>[I2C_BUS_1](#i2c_bus_t)：1；<br>[I2C_BUS_NONE](#i2c_bus_t)：2。 |
+| bus | [i2c_bus_t](#i2c_bus_t) | 待初始化的 I2C 总线编号 | [i2c_bus_t](#i2c_bus_t) 全体成员 |
 | baudrate | uint32_t | I2C 波特率，需与主机保持一致，受 IP 上限约束 | 1 ~ [I2C_HS_MODE_BAUDRATE_HIGH_LIMIT](#I2C_HS_MODE_BAUDRATE_HIGH_LIMIT)：3400000（实现拒绝 baudrate 为 0） |
 | addr | uint16_t | I2C 作为从机工作时的从机地址 | 7 比特地址 [8, 0x77]；<br>10 比特地址 [0x7800, 0x7BFF]。 |
 
@@ -339,7 +339,7 @@ errcode_t uapi_i2c_slave_write(i2c_bus_t bus, i2c_data_t *data)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [i2c_bus_t](#i2c_bus_t) | 待执行写操作的 I2C 总线编号 | [I2C_BUS_0](#i2c_bus_t)：0；<br>[I2C_BUS_1](#i2c_bus_t)：1；<br>[I2C_BUS_NONE](#i2c_bus_t)：2。 |
+| bus | [i2c_bus_t](#i2c_bus_t) | 待执行写操作的 I2C 总线编号 | [i2c_bus_t](#i2c_bus_t) 全体成员 |
 | data | [i2c_data_t](#struct_i2c_data_t) * | 发送数据的信息指针，包含发送缓冲区及长度 | 不为 NULL |
 
 **返回值**
@@ -392,7 +392,7 @@ errcode_t uapi_i2c_slave_read(i2c_bus_t bus, i2c_data_t *data)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [i2c_bus_t](#i2c_bus_t) | 待执行读操作的 I2C 总线编号 | [I2C_BUS_0](#i2c_bus_t)：0；<br>[I2C_BUS_1](#i2c_bus_t)：1；<br>[I2C_BUS_NONE](#i2c_bus_t)：2。 |
+| bus | [i2c_bus_t](#i2c_bus_t) | 待执行读操作的 I2C 总线编号 | [i2c_bus_t](#i2c_bus_t) 全体成员 |
 | data | [i2c_data_t](#struct_i2c_data_t) * | 接收数据的信息指针，包含接收缓冲区及长度 | 不为 NULL |
 
 **出参**
@@ -451,7 +451,7 @@ errcode_t uapi_i2c_set_irq_mode(i2c_bus_t bus, bool irq_en)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [i2c_bus_t](#i2c_bus_t) | 待配置的 I2C 总线编号 | [I2C_BUS_0](#i2c_bus_t)：0；<br>[I2C_BUS_1](#i2c_bus_t)：1；<br>[I2C_BUS_NONE](#i2c_bus_t)：2。 |
+| bus | [i2c_bus_t](#i2c_bus_t) | 待配置的 I2C 总线编号 | [i2c_bus_t](#i2c_bus_t) 全体成员 |
 | irq_en | bool | 是否使用中断模式传输数据 | true；<br>false。 |
 
 **返回值**
@@ -502,7 +502,7 @@ errcode_t uapi_i2c_register_irq_callback(i2c_bus_t bus, i2c_irq_callback_t callb
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [i2c_bus_t](#i2c_bus_t) | 待注册回调的 I2C 总线编号 | [I2C_BUS_0](#i2c_bus_t)：0；<br>[I2C_BUS_1](#i2c_bus_t)：1；<br>[I2C_BUS_NONE](#i2c_bus_t)：2。 |
+| bus | [i2c_bus_t](#i2c_bus_t) | 待注册回调的 I2C 总线编号 | [i2c_bus_t](#i2c_bus_t) 全体成员 |
 | callback | [i2c_irq_callback_t](#typedef_i2c_irq_callback_t) | I2C 中断事件回调函数指针，回调在中断上下文中执行 | 不为 NULL |
 
 **返回值**
@@ -548,7 +548,7 @@ errcode_t uapi_i2c_unregister_irq_callback(i2c_bus_t bus)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [i2c_bus_t](#i2c_bus_t) | 待取消注册回调的 I2C 总线编号 | [I2C_BUS_0](#i2c_bus_t)：0；<br>[I2C_BUS_1](#i2c_bus_t)：1；<br>[I2C_BUS_NONE](#i2c_bus_t)：2。 |
+| bus | [i2c_bus_t](#i2c_bus_t) | 待取消注册回调的 I2C 总线编号 | [i2c_bus_t](#i2c_bus_t) 全体成员 |
 
 **返回值**
 
@@ -593,7 +593,7 @@ errcode_t uapi_i2c_set_dma_mode(i2c_bus_t bus, bool en)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [i2c_bus_t](#i2c_bus_t) | 待配置的 I2C 总线编号 | [I2C_BUS_0](#i2c_bus_t)：0；<br>[I2C_BUS_1](#i2c_bus_t)：1；<br>[I2C_BUS_NONE](#i2c_bus_t)：2。 |
+| bus | [i2c_bus_t](#i2c_bus_t) | 待配置的 I2C 总线编号 | [i2c_bus_t](#i2c_bus_t) 全体成员 |
 | en | bool | 是否使能 DMA 模式传输 | true；<br>false。 |
 
 **返回值**
@@ -644,7 +644,7 @@ errcode_t uapi_i2c_deinit(i2c_bus_t bus)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [i2c_bus_t](#i2c_bus_t) | 待去初始化的 I2C 总线编号 | [I2C_BUS_0](#i2c_bus_t)：0；<br>[I2C_BUS_1](#i2c_bus_t)：1；<br>[I2C_BUS_NONE](#i2c_bus_t)：2。 |
+| bus | [i2c_bus_t](#i2c_bus_t) | 待去初始化的 I2C 总线编号 | [i2c_bus_t](#i2c_bus_t) 全体成员 |
 
 **返回值**
 
@@ -690,7 +690,7 @@ errcode_t uapi_i2c_set_baudrate(i2c_bus_t bus, uint32_t baudrate)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| bus | [i2c_bus_t](#i2c_bus_t) | 待重置波特率的 I2C 总线编号 | [I2C_BUS_0](#i2c_bus_t)：0；<br>[I2C_BUS_1](#i2c_bus_t)：1；<br>[I2C_BUS_NONE](#i2c_bus_t)：2。 |
+| bus | [i2c_bus_t](#i2c_bus_t) | 待重置波特率的 I2C 总线编号 | [i2c_bus_t](#i2c_bus_t) 全体成员 |
 | baudrate | uint32_t | 重置后的 I2C 波特率，受 IP 上限约束 | 1 ~ [I2C_HS_MODE_BAUDRATE_HIGH_LIMIT](#I2C_HS_MODE_BAUDRATE_HIGH_LIMIT)：3400000（实现拒绝 baudrate 为 0） |
 
 **返回值**
