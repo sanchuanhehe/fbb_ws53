@@ -1,6 +1,6 @@
 # Wi-Fi STA 省电模式
 
-> 本文介绍如何在 WS53 STA 连接流程中使用 `wifi_sta_set_pm()`，并给出业务动态切换、断线恢复和功耗验证方法。当前 SDK 没有独立的 Wi-Fi 省电 sample，可在 [STA 连接与重连](../sta/sta-connect.md)基础上集成。
+> 本文介绍如何在 WS53 STA 连接流程中使用 `wifi_sta_set_pm()`，并给出业务动态切换、断线恢复和功耗验证方法。当前 SDK 没有独立的 Wi-Fi 省电 Sample，可在 [STA 连接与重连](../sta/sta-connect.md)基础上集成。
 
 ## 学习目标
 
@@ -165,7 +165,7 @@ OTA 或大文件传输开始前调用 `wifi_pm_enter_high_performance()`，传�
 
 ## 运行与验证
 
-当前没有独立 sample，需在 `sta_sample` 或产品 STA 工程中加入上述控制逻辑。
+当前没有独立 Sample，需在 `sta_sample` 或产品 STA 工程中加入上述控制逻辑。
 
 1. 使用同一固件版本、板卡、供电、AP、信道、RSSI 和业务流量建立基线。
 2. STA 稳定关联并获得 IP 后，先调用 `wifi_sta_set_pm(0)`，记录足够长时间的平均电流和峰值。

@@ -59,7 +59,7 @@ SoftAP 无线接口、IPv4 地址和 DHCP Server 是三个独立环节。`wifi_s
 
 ### 等待 Wi-Fi 初始化
 
-SoftAP sample 由独立任务运行。任务首先等待系统完成 Wi-Fi 初始化，再进入热点配置流程：
+SoftAP Sample 由独立任务运行。任务首先等待系统完成 Wi-Fi 初始化，再进入热点配置流程：
 
 ```c
 while (wifi_is_wifi_inited() == 0) {
@@ -76,7 +76,7 @@ if (example_softap_function() != 0) {
 
 ### 配置 SoftAP 基本参数
 
-`softap_config_stru` 保存 SSID、预共享密钥、安全类型和信道。下面使用枚举名表示当前 sample 中的数字配置：
+`softap_config_stru` 保存 SSID、预共享密钥、安全类型和信道。下面使用枚举名表示当前 Sample 中的数字配置：
 
 ```c
 int8_t ssid[WIFI_MAX_SSID_LEN] = "my_softAP";

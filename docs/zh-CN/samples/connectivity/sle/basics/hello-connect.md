@@ -53,7 +53,7 @@ Server 与 Client 使用同一个 `sle_hello` 工程，通过 Kconfig 选择角�
 
 Hello SLE 覆盖这四个阶段：Server 广播、Client 扫描和连接属于发现与连接阶段；配对后的服务发现、通知和属性读写属于服务交互阶段；断开后的重新广播和重新扫描属于持续维护阶段。
 
-### 广播：让别人知道“我在这里”
+### 广播：发布设备信息
 
 **广播（Announce）**是 Server 端周期性向周围发送的数据包，类似一个人站在广场上每隔几秒喊一声自己的名字。
 
@@ -121,7 +121,7 @@ WS53 案例将 `seek_interval[0]` 和 `seek_window[0]` 都设置为 `100`，优�
 
 但这不是绝对的。一块板子可以同时是 Server 和 Client，但一次连接中只能是一种 G/T 角色。
 
-本案例 Server 使用 `SLE_ANNOUNCE_ROLE_T_CAN_NEGO`，意思是"我最好做终端，但如果对方不同意，也可以协商"，然后由Client 主动发起连接。
+本案例 Server 使用 `SLE_ANNOUNCE_ROLE_T_CAN_NEGO`，表示设备优先协商为终端角色；若对端不接受，则允许协商为其他角色。随后由 Client 主动发起连接。
 
 ### 广播模式：可见性和可连接性的组合
 

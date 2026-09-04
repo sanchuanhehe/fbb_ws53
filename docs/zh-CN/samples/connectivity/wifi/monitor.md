@@ -11,7 +11,7 @@
 
 ## 案例说明
 
-WS53 当前没有 `src/application/samples/wifi/` 下的独立监听模式案例工程。本页基于 [Wi-Fi Device API](../../../api-reference/middleware/services/wifi/device.md) 给出集成方法，代码需要加入产品的诊断任务或自定义 sample。
+WS53 当前没有 `src/application/samples/wifi/` 下的独立监听模式案例工程。本页基于 [Wi-Fi Device API](../../../api-reference/middleware/services/wifi/device.md) 给出集成方法，代码需要加入产品的诊断任务或自定义 Sample。
 
 开启混杂模式后，符合过滤条件的帧会通过接收回调上报。回调运行频率取决于当前信道的空口流量，不能在回调中逐帧打印、动态分配大块内存或执行阻塞操作。
 

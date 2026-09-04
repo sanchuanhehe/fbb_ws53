@@ -47,7 +47,7 @@ HiSpark Studio 插件的“从 HiSpark 下载 SDK”功能依赖 Git 命令工�
 
 以下步骤以 Windows 11 为例，界面以实际显示为准。安装完成后，需要将 Git 安装路径添加到系统环境变量 `PATH` 中。
 
-1. 找到 Git 安装目录，默认为 `C:\Program Files\Git\cmd`。点击文件夹地址栏并复制实际路径。
+1. 找到 Git 安装目录，默认为 `C:\Program Files\Git\cmd`。单击文件夹地址栏并复制实际路径。
 
     ![Git 安装路径](figures/git-安装路径.png)
 
@@ -59,11 +59,11 @@ HiSpark Studio 插件的“从 HiSpark 下载 SDK”功能依赖 Git 命令工�
 
     ![高级系统设置](figures/PC-高级系统设置.png)
 
-4. 打开“环境变量”配置窗口，选择 `Path` 后点击“编辑”。
+4. 打开“环境变量”配置窗口，选择 `Path` 后单击“编辑”。
 
     ![环境变量](figures/PC-环境变量.png)
 
-5. 点击“新建”，粘贴 Git 安装路径，点击“确定”完成配置。
+5. 单击“新建”，粘贴 Git 安装路径，单击“确定”完成配置。
 
     ![配置 Git 路径](figures/PC-配置git路径.png)
 
@@ -85,7 +85,7 @@ WS53 开发推荐使用 `HiSpark Studio for VS Code` 插件，该插件提供代
 
     ![VS Code 插件市场搜索](figures/扩展市场搜索安装HiSparkStudio.png)
 
-3. 安装完成后，左侧活动栏会出现 HiSpark Studio 图标，点击即可进入插件界面。
+3. 安装完成后，左侧活动栏会出现 HiSpark Studio 图标，单击即可进入插件界面。
 
     ![HiSpark Studio 插件界面](figures/HiSparkStudio-插件界面.png)
 
@@ -93,7 +93,7 @@ WS53 开发推荐使用 `HiSpark Studio for VS Code` 插件，该插件提供代
 
 HiSpark Studio 插件编译工程需要依赖工具链、Python 和 pip 依赖环境，可通过以下步骤下载安装。
 
-1. 点击左侧 HiSpark Studio 图标进入插件界面，点击“下载工具链”。在弹出的窗口中选择保存目录，目录层级不要过深且不要包含中文字符，然后点击“选择保存位置”开始下载。
+1. 单击左侧 HiSpark Studio 图标进入插件界面，单击“下载工具链”。在弹出的窗口中选择保存目录，目录层级不要过深且不要包含中文字符，然后单击“选择保存位置”开始下载。
 
     ![下载工具链](figures/下载工具链.png)
 
@@ -121,7 +121,7 @@ HiSpark Studio 插件编译工程需要依赖工具链、Python 和 pip 依赖�
 
 > 使用此方法前需要先完成本页前述的 Git 安装和环境变量配置。
 
-1. 在 HiSpark Studio 插件页面点击“从 HiSpark 下载 SDK”，在下载列表中选择 `WS53 SDK`。
+1. 在 HiSpark Studio 插件页面单击“从 HiSpark 下载 SDK”，在下载列表中选择 `WS53 SDK`。
 
     ![从 HiSpark 下载 SDK](figures/下载SDK-插件下载.png)
 
@@ -135,7 +135,7 @@ HiSpark Studio 插件编译工程需要依赖工具链、Python 和 pip 依赖�
 
 ### 方法二：手动下载
 
-1. 访问 [fbb_ws53](https://gitcode.com/HiSpark/fbb_ws53){ target=_blank } 代码仓页面，点击“下载 ZIP”直接下载 SDK 压缩包。
+1. 访问 [fbb_ws53](https://gitcode.com/HiSpark/fbb_ws53){ target=_blank } 代码仓页面，单击“下载 ZIP”直接下载 SDK 压缩包。
 
     ![从 GitCode 下载 SDK](figures/download_sdk_from_gitcode.png)
 
@@ -163,4 +163,4 @@ A：按以下顺序检查：
 
 ---
 
-> 如需了解 Linux 命令行环境、Menuconfig 和组件编译方式，请阅读[开发环境搭建](environment-setup/manual/index.md)。
+> 如需了解 Linux 命令行环境、menuconfig 和组件编译方式，请阅读[开发环境搭建](environment-setup/manual/index.md)。

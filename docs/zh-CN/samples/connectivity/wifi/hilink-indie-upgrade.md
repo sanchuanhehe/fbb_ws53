@@ -24,8 +24,8 @@ hilink_indie_upgrade/
 flowchart LR
     A[WS53 Application] -->|g_app_call_tbl| H[HiLink SDK]
     H -->|g_hilink_call_tbl| A
-    I[.hilink_info entry] --> A
-    I --> H
+    I[.hilink_info entry] --> H
+    I --> A
     F[func_call_list.h] --> A
     F --> H
 ```
@@ -34,7 +34,7 @@ flowchart LR
 
 ## 关键配置
 
-- Wi-Fi sample 构建脚本仅在 `DEFINES` 包含 `CONFIG_SUPPORT_HILINK_INDIE_UPGRADE` 时加入该目录。
+- Wi-Fi Sample 构建脚本仅在 `DEFINES` 包含 `CONFIG_SUPPORT_HILINK_INDIE_UPGRADE` 时加入该目录。
 - `hilinksdk/CMakeLists.txt` 依赖 `application/samples/wifi/libhilink/` 下的 `libhilinkdevicesdk.a`、`libhilinkota.a` 和 `libhilinkbtsdk.a`。当前源码树未包含 `libhilink/` 目录，必须由匹配的 HiLink SDK 或产品工程提供。
 - `app_addr_map` 和 `hilink_addr_map` 组件输出到 `${BIN_DIR}/${CHIP}/libs/wifi/${TARGET_COMMAND}`，并以 whole-link 方式参与链接。
 - 链接脚本必须正确放置 `.hilink_tbl`、`.hilink_info` 以及 HiLink 独立镜像的 SRAM text、data 和 bss 段。

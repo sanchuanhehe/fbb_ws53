@@ -12,6 +12,7 @@
 源码位于 `src/application/samples/wifi/sta_sample/`。案例启用 STA 后执行扫描，在结果中查找目标 BSS，使用扫描结果中的安全类型发起连接，关联成功后为 `wlan0` 启动 DHCP Client。
 
 ```mermaid
+%%{init: {"sequence": {"messageAlign": "right"}}}%%
 sequenceDiagram
     participant A as STA Sample
     participant W as WS53 Wi-Fi
@@ -95,7 +96,7 @@ wifi_register_event_cb(&g_wifi_event);
 
 `wifi_sta_scan()` 和 `wifi_sta_connect()` 的返回值只表示请求是否成功提交，真正的扫描或连接结果由事件回调更新。回调只切换状态，扫描结果读取、重试和 DHCP 等耗时操作均在 STA 任务中执行。
 
-当前 sample 使用 `0` 和 `1` 判断连接状态，代码中可改用 `WIFI_STATE_NOT_AVALIABLE` 和 `WIFI_STATE_AVALIABLE` 提高可读性。若改用协议栈自动重连，断开分支应进入单独的“重连中”状态，而不是返回 `WIFI_STA_SAMPLE_INIT`。
+当前 Sample 使用 `0` 和 `1` 判断连接状态，代码中可改用 `WIFI_STATE_NOT_AVALIABLE` 和 `WIFI_STATE_AVALIABLE` 提高可读性。若改用协议栈自动重连，断开分支应进入单独的“重连中”状态，而不是返回 `WIFI_STA_SAMPLE_INIT`。
 
 ### 扫描并匹配目标 AP
 

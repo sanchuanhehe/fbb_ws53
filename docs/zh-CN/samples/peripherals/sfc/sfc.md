@@ -44,7 +44,7 @@ NOR Flash 通常提供扇区、块或全片等不同擦除粒度，但具体大�
 | `uapi_sfc_reg_write(addr, buf, len)` | 通过寄存器接口写入 Flash（须先擦除） | `sfc.h` |
 | `uapi_sfc_reg_erase(addr, size)` | 擦除 Flash 指定区域 | `sfc.h` |
 
-> sample 中使用的是 SFC 寄存器接口（`sfc_reg_*`），而非更高层的 `sfc_*` API。两者区别：`sfc_reg_*` 直接操作 SFC 控制寄存器，提供更细粒度的控制；高层 API 内部封装了指令编码和等待逻辑。
+> Sample 中使用的是 SFC 寄存器接口（`sfc_reg_*`），而非更高层的 `sfc_*` API。两者区别：`sfc_reg_*` 直接操作 SFC 控制寄存器，提供更细粒度的控制；高层 API 内部封装了指令编码和等待逻辑。
 
 ## 案例说明
 
@@ -198,6 +198,6 @@ static void sfc_sample_start_api_test(void)
 }
 ```
 
-> 本 sample 通过串口打印两轮数据进行人工对比。在量产代码中，应使用 `memcmp()` 自动验证并在写入前检查 Flash 忙状态。
+> 本 Sample 通过串口打印两轮数据进行人工对比。在量产代码中，应使用 `memcmp()` 自动验证并在写入前检查 Flash 忙状态。
 
 ---
