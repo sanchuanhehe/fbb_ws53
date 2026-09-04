@@ -1,6 +1,6 @@
-# cipher
+# Cipher
 
-cipher 提供 security_unified 模块下对称加解密、消息认证码、哈希与 KDF（Key Derivation Function）的统一密码服务接口。支持 AES（Advanced Encryption Standard）/SM4/TDES（Triple Data Encryption Standard）等对称算法的 ECB/CBC/CTR/CCM/GCM 等工作模式，以及 SHA（Secure Hash Algorithm）/SM3 哈希与 PBKDF2/HKDF 密钥派生。
+Cipher 提供 security_unified 模块下对称加解密、消息认证码、哈希与 KDF（Key Derivation Function）的统一密码服务接口。支持 AES（Advanced Encryption Standard）/SM4/TDES（Triple Data Encryption Standard）等对称算法的 ECB/CBC/CTR/CCM/GCM 等工作模式，以及 SHA（Secure Hash Algorithm）/SM3 哈希与 PBKDF2/HKDF 密钥派生。
 
 **模块公共头文件**
 

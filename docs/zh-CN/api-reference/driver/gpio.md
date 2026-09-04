@@ -965,7 +965,7 @@ typedef enum {
 | CORES_BT_CORE | 0 | BT 核心 |
 | CORES_PROTOCOL_CORE | 1 | 协议核心（Hifi） |
 | CORES_APPS_CORE | 2 | 应用核心 |
-| CORES_EXTERN0_CORE | 3 | 外部核心 0（Gnss或Hifi） |
+| CORES_EXTERN0_CORE | 3 | 外部核心 0（GNSS或Hifi） |
 | CORES_GNSS_CORE | 3 | GNSS 核心（GNSS_EXIST 启用时，等同 CORES_EXTERN0_CORE） |
 | CORES_HIFI1_CORE | 3 | HIFI1 核心（GNSS_EXIST 未启用时，等同 CORES_EXTERN0_CORE） |
 | CORES_EXTERN1_CORE | 4 | 外部核心 1（Sec或Sensor） |

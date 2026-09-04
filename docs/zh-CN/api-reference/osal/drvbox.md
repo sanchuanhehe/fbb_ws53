@@ -1,6 +1,6 @@
 # Drvbox
 
-drvbox 提供驱动盒子（Driver Box）与用户盒子（User Box）之间的运行区域切换功能，支持在安全核心（Secure Core）场景下切换 PMP（Physical Memory Protection） / MPU（Memory Protection Unit）配置。
+Drvbox 提供驱动盒子（Driver Box）与用户盒子（User Box）之间的运行区域切换功能，支持在安全核心（Secure Core）场景下切换 PMP（Physical Memory Protection） / MPU（Memory Protection Unit）配置。
 
 **模块公共头文件**
 

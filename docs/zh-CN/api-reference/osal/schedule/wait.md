@@ -1,6 +1,6 @@
 # Wait
 
-wait 提供 OSAL（Operating System Abstraction Layer）的等待队列机制，支持线程在指定条件满足前阻塞睡眠、超时自动唤醒以及主动唤醒等待队列上的线程，用于线程间同步与事件等待。
+Wait 提供 OSAL（Operating System Abstraction Layer）的等待队列机制，支持线程在指定条件满足前阻塞睡眠、超时自动唤醒以及主动唤醒等待队列上的线程，用于线程间同步与事件等待。
 
 **模块公共头文件**
 

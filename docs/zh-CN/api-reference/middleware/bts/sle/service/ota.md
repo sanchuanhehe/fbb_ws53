@@ -1,6 +1,6 @@
 # Service OTA
 
-OTA (Over-The-Air) 基于 SLE（Star Flash Low Energy）通信提供设备固件升级数据的服务端接收与确认能力。本模块对外提供 OTA 服务器初始化、升级数据确认发送以及接收数据回调注册三类接口。
+Service OTA（Over-The-Air）基于 SLE（Star Flash Low Energy）通信提供设备固件升级数据的服务端接收与确认能力。本模块对外提供 OTA 服务器初始化、升级数据确认发送以及接收数据回调注册三类接口。
 
 **模块公共头文件**
 

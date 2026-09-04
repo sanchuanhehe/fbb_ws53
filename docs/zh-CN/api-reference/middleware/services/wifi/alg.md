@@ -1,6 +1,6 @@
 # Algorithm
 
-ALG (Algorithm) 提供 Wi-Fi 算法配置能力，包括固定速率设置、协商速率查询、TPC（Transmit Power Control）模式配置、RTS（Request To Send）模式配置、CCA（Clear Channel Assessment）门限设置及抗干扰模式配置。
+Algorithm（ALG）提供 Wi-Fi 算法配置能力，包括固定速率设置、协商速率查询、TPC（Transmit Power Control）模式配置、RTS（Request To Send）模式配置、CCA（Clear Channel Assessment）门限设置及抗干扰模式配置。
 
 **模块公共头文件**
 

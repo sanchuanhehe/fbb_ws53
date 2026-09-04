@@ -1,6 +1,6 @@
-# debug
+# Debug
 
-OSAL（OS Abstract Layer） debug 模块提供内核调试与诊断功能，包括格式化日志打印、内核 panic 触发、调用栈回溯打印与 CPU（Central Processing Unit） D-Cache（Data Cache）刷新能力，用于系统运行时调试与异常诊断。该模块面向 linux、liteos、seliteos、freertos、nonos 等多种操作系统环境提供统一的调试接口抽象。
+Debug 模块提供 OSAL（OS Abstract Layer）内核调试与诊断功能，包括格式化日志打印、内核 panic 触发、调用栈回溯打印与 CPU（Central Processing Unit） D-Cache（Data Cache）刷新能力，用于系统运行时调试与异常诊断。该模块面向 linux、liteos、seliteos、freertos、nonos 等多种操作系统环境提供统一的调试接口抽象。
 
 **模块公共头文件**
 

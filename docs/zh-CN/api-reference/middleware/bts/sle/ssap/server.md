@@ -1,6 +1,6 @@
 # SSAP Server
 
-SSAP（Service Access Protocol） server 提供 SLE（Star Flash Low Energy）协议中服务接入协议服务端侧的能力，支持注册与注销服务端、注册回调函数、异步与同步添加服务/特征/描述符、启动与删除服务、回复读写响应以及按句柄或 UUID（Universally Unique Identifier）向对端发送通知或指示。
+SSAP Server（Service Access Protocol）提供 SLE（Star Flash Low Energy）协议中服务接入协议服务端侧的能力，支持注册与注销服务端、注册回调函数、异步与同步添加服务/特征/描述符、启动与删除服务、回复读写响应以及按句柄或 UUID（Universally Unique Identifier）向对端发送通知或指示。
 
 **模块公共头文件**
 
@@ -749,7 +749,7 @@ typedef void (*ssaps_delete_all_service_callback)(uint8_t server_id, errcode_t s
 
 **使用说明**
 
-删除全部服务的回调函数类型。回调说明：调用时机为删除全部服务产生结果时由 bts 调用，运行于 bts 线程，不应阻塞或长时间等待；参数 server_id 为服务端 ID；参数 status 为执行结果错误码。
+删除全部服务的回调函数类型。回调说明：调用时机为删除全部服务产生结果时由 BTS 调用，运行于 BTS 线程，不应阻塞或长时间等待；参数 server_id 为服务端 ID；参数 status 为执行结果错误码。
 
 ### ssaps_read_request_callback <a id="typedef_ssaps_read_request_callback"></a>
 

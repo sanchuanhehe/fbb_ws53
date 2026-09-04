@@ -1,6 +1,6 @@
-# security_init
+# Security Init
 
-security_hw_security_init 子模块提供硬件安全子系统（security_unified）的环境初始化、去初始化、深睡挂起与唤醒恢复能力，以及安全驱动中断等待模式的开关控制；并向第三方 mbedtls（mbed Transport Layer Security / Cryptography）密码库注册本芯片硬件加速密码接口的对接适配函数，使 mbedtls 通过安全驱动完成加解密运算。
+Security Init 子模块提供硬件安全子系统（security_unified）的环境初始化、去初始化、深睡挂起与唤醒恢复能力，以及安全驱动中断等待模式的开关控制；并向第三方 mbedtls（mbed Transport Layer Security / Cryptography）密码库注册本芯片硬件加速密码接口的对接适配函数，使 mbedtls 通过安全驱动完成加解密运算。
 
 **模块公共头文件**
 

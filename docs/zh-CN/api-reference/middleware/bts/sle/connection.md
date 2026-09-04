@@ -1,6 +1,6 @@
 # Connection
 
-connection 提供 SLE（Star Flash Low Energy）连接管理、设备发现与传输管理能力，覆盖连接/断开、配对、连接参数更新、PHY/MCS 设置、设备公开（announce）、扫描（seek）以及传输繁忙回调等接口。
+Connection 提供 SLE（Star Flash Low Energy）连接管理、设备发现与传输管理能力，覆盖连接/断开、配对、连接参数更新、PHY/MCS 设置、设备公开（announce）、扫描（seek）以及传输繁忙回调等接口。
 
 **模块公共头文件**
 
@@ -2748,7 +2748,7 @@ typedef struct {
 | measurement_capability | uint32_t:1 | 测量能力 |
 | access_slb | uint32_t:1 | slb 接入 |
 | access_sle | uint32_t:1 | sle 接入 |
-| mtu | uint32_t:1 | 最大支持 mtu |
+| mtu | uint32_t:1 | 最大支持 MTU |
 | mps | uint32_t:1 | 最大支持 mps |
 | reverse | uint32_t:25 | 保留比特位 |
 

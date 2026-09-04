@@ -1,4 +1,4 @@
-# trng
+# TRNG
 
 TRNG（True Random Number Generator）提供硬件真随机数生成能力，支持获取单个 uint32_t 随机数和指定字节长度的随机数据，供加密运算、密钥派生等安全场景使用。
 

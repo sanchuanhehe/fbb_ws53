@@ -1,6 +1,6 @@
-# km
+# KM
 
-security_unified KM（Key Manager）子模块提供 Keyslot、KLAD（Key Ladder）、KDF（Key Derivation Function）三类密钥管理能力，包括密钥槽句柄的创建与销毁、Key Ladder 通道的创建、属性配置与密钥派生下发、根密钥更新等接口。该模块通过统一的对外句柄抽象，由应用层发起调用，完成对称密钥与 HMAC（Hash-based Message Authentication Code）密钥的安全派生与下发。
+KM（Key Manager）子模块提供 Keyslot、KLAD（Key Ladder）、KDF（Key Derivation Function）三类密钥管理能力，包括密钥槽句柄的创建与销毁、Key Ladder 通道的创建、属性配置与密钥派生下发、根密钥更新等接口。该模块通过统一的对外句柄抽象，由应用层发起调用，完成对称密钥与 HMAC（Hash-based Message Authentication Code）密钥的安全派生与下发。
 
 **模块公共头文件**
 

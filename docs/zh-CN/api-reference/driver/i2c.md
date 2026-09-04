@@ -1,4 +1,4 @@
-# i2c
+# I2C
 
 I2C（Inter-Integrated Circuit）提供集成电路间串行总线的初始化、去初始化、波特率配置与主从机数据收发能力，支持轮询、中断和 DMA（Direct Memory Access）三种传输模式以及低功耗挂起/恢复。来源 `include/driver/i2c.h`。
 

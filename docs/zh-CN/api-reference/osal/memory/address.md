@@ -1,6 +1,6 @@
 # Address
 
-address 提供动态内存分配与释放、虚拟内存管理、内存池管理、I/O 地址映射与地址转换功能，支持 linux、LiteOS 和 FreeRTOS 多系统适配。
+Address 提供动态内存分配与释放、虚拟内存管理、内存池管理、I/O 地址映射与地址转换功能，支持 linux、LiteOS 和 FreeRTOS 多系统适配。
 
 **模块公共头文件**
 

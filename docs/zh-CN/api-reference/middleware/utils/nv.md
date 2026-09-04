@@ -1,6 +1,6 @@
 # NV
 
-NV（Non-Volatile storage）提供基于 key-value 的非易失性数据存储能力，支持按 key ID 写入、读取、备份与恢复 NV 数据项，可配置加密、永久、不可升级等属性，并支持 NV 键值变更通知回调。模块源自 `include/middleware/utils/nv.h`。
+NV（Non-Volatile storage）提供基于 key-value 的非易失性数据存储能力，支持按 key ID 写入、读取、备份与恢复 NV 数据项，可配置加密、永久、不可升级等属性，并支持 NV 键值变更通知回调。模块源自 `include/middleware/utils/NV.h`。
 
 **模块公共头文件**
 
@@ -102,7 +102,7 @@ errcode_t uapi_nv_write(uint16_t key, const uint8_t *kvalue, uint16_t kvalue_len
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_ERRCODE_SUPPORT_REPORT | 特性宏 | 支持错误码上报分支（分支级，dfx Kconfig 声明） | n |
+| CONFIG_ERRCODE_SUPPORT_REPORT | 特性宏 | 支持错误码上报分支（分支级，DFX Kconfig 声明） | n |
 
 ### uapi_nv_write_with_attr <a id="uapi_nv_write_with_attr"></a>
 
@@ -217,7 +217,7 @@ errcode_t uapi_nv_read(uint16_t key, uint16_t kvalue_max_length, uint16_t *kvalu
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_ERRCODE_SUPPORT_REPORT | 特性宏 | 支持错误码上报分支（分支级，dfx Kconfig 声明） | n |
+| CONFIG_ERRCODE_SUPPORT_REPORT | 特性宏 | 支持错误码上报分支（分支级，DFX Kconfig 声明） | n |
 
 ### uapi_nv_read_with_attr <a id="uapi_nv_read_with_attr"></a>
 

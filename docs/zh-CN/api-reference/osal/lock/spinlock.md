@@ -1,6 +1,6 @@
 # Spinlock
 
-spinlock 提供 OSAL（OS Abstract Layer）自旋锁的初始化、加锁、解锁、尝试加锁与销毁功能，支持普通加锁、禁用软中断加锁、保存并禁用 IRQ（Interrupt Request）状态加锁等多种中断处理模式。
+Spinlock 提供 OSAL（OS Abstract Layer）自旋锁的初始化、加锁、解锁、尝试加锁与销毁功能，支持普通加锁、禁用软中断加锁、保存并禁用 IRQ（Interrupt Request）状态加锁等多种中断处理模式。
 
 **模块公共头文件**
 
@@ -171,7 +171,7 @@ int osal_spin_trylock(osal_spinlock *lock)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| true （非0） | 获取锁成功 | 锁可立即获取 |
+| true（非0） | 获取锁成功 | 锁可立即获取 |
 | false (0) | 获取锁失败 | 锁已被占用或参数无效 |
 
 ### osal_spin_trylock_irq <a id="osal_spin_trylock_irq"></a>
@@ -209,7 +209,7 @@ int osal_spin_trylock_irq(osal_spinlock *lock)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| true （非0） | 获取锁成功 | 锁可立即获取 |
+| true（非0） | 获取锁成功 | 锁可立即获取 |
 | false (0) | 获取锁失败 | 锁已被占用 |
 | -1 | 参数无效 | lock 为空或未初始化 |
 

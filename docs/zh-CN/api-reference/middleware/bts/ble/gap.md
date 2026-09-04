@@ -72,7 +72,7 @@ errcode_t gap_ble_set_local_addr(const bd_addr_t *addr)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成、广播或扫描发起之前调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -114,7 +114,7 @@ errcode_t gap_ble_get_local_addr(bd_addr_t *addr)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **出参**
 
@@ -152,7 +152,7 @@ errcode_t gap_ble_set_local_appearance(uint16_t appearance)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成、广播发起之前调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -190,7 +190,7 @@ errcode_t gap_ble_set_local_name(const uint8_t *name, const uint8_t len)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成、广播发起之前调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -229,7 +229,7 @@ errcode_t gap_ble_get_local_name(uint8_t *name, uint8_t *len)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -274,7 +274,7 @@ errcode_t gap_ble_set_adv_data(uint8_t adv_id, const gap_ble_config_adv_data_t *
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后、启动广播之前调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -318,7 +318,7 @@ errcode_t gap_ble_set_adv_param(uint8_t adv_id, const gap_ble_adv_params_t *para
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后、启动广播之前调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -361,7 +361,7 @@ errcode_t gap_ble_start_adv(uint8_t adv_id)
 **前置条件**
 
 - 调用时序约束：需在 [gap_ble_set_adv_param](#gap_ble_set_adv_param) 与 [gap_ble_set_adv_data](#gap_ble_set_adv_data) 成功设置后调用。
-- 依赖关系：依赖 bts 协议栈已就绪、广播参数已配置。
+- 依赖关系：依赖 BTS 协议栈已就绪、广播参数已配置。
 
 **入参**
 
@@ -404,7 +404,7 @@ errcode_t gap_ble_stop_adv(uint8_t adv_id)
 **前置条件**
 
 - 调用时序约束：需在 [gap_ble_start_adv](#gap_ble_start_adv) 成功启动广播后调用。
-- 依赖关系：依赖 bts 协议栈已就绪、广播处于运行状态。
+- 依赖关系：依赖 BTS 协议栈已就绪、广播处于运行状态。
 
 **入参**
 
@@ -442,7 +442,7 @@ errcode_t gap_ble_set_scan_parameters(const gap_ble_scan_params_t *param)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后、启动扫描之前调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -480,7 +480,7 @@ errcode_t gap_ble_set_scan_extern_parameters(const gap_ble_extern_scan_params_t 
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后、启动扫描之前调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -517,7 +517,7 @@ errcode_t gap_ble_start_scan(void)
 **前置条件**
 
 - 调用时序约束：需在 [gap_ble_set_scan_parameters](#gap_ble_set_scan_parameters) 成功设置扫描参数后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **返回值**
 
@@ -547,7 +547,7 @@ errcode_t gap_ble_stop_scan(void)
 **前置条件**
 
 - 调用时序约束：需在 [gap_ble_start_scan](#gap_ble_start_scan) 成功启动扫描后调用。
-- 依赖关系：依赖 bts 协议栈已就绪、扫描处于运行状态。
+- 依赖关系：依赖 BTS 协议栈已就绪、扫描处于运行状态。
 
 **返回值**
 
@@ -579,7 +579,7 @@ errcode_t gap_ble_set_phy(gap_le_set_phy_t *param)
 **前置条件**
 
 - 调用时序约束：需在 ACL（Asynchronous Connection-Oriented Link）链路建立成功后调用。
-- 依赖关系：依赖 bts 协议栈已就绪、连接已建立。
+- 依赖关系：依赖 BTS 协议栈已就绪、连接已建立。
 
 **入参**
 
@@ -621,7 +621,7 @@ errcode_t gap_ble_set_data_length(gap_le_set_data_length_t *param)
 **前置条件**
 
 - 调用时序约束：需在 ACL 链路建立成功后调用。
-- 依赖关系：依赖 bts 协议栈已就绪、连接已建立。
+- 依赖关系：依赖 BTS 协议栈已就绪、连接已建立。
 
 **入参**
 
@@ -663,7 +663,7 @@ errcode_t gap_ble_pair_remote_device(const bd_addr_t *addr)
 **前置条件**
 
 - 调用时序约束：需在 ACL 链路建立成功之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪、连接已建立。
+- 依赖关系：依赖 BTS 协议栈已就绪、连接已建立。
 
 **入参**
 
@@ -701,7 +701,7 @@ errcode_t gap_ble_get_paired_devices_num(uint16_t *number)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **出参**
 
@@ -739,7 +739,7 @@ errcode_t gap_ble_get_paired_devices(bd_addr_t *addr, uint16_t *number)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -784,7 +784,7 @@ errcode_t gap_ble_get_pair_state(const bd_addr_t *addr, gap_ble_pair_state_t *st
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -828,7 +828,7 @@ errcode_t gap_ble_remove_pair(const bd_addr_t *addr)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -866,7 +866,7 @@ errcode_t gap_ble_add_white_list(const bd_addr_t *addr)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -904,7 +904,7 @@ errcode_t gap_ble_remove_white_list(const bd_addr_t *addr)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪、设备已存在于白名单。
+- 依赖关系：依赖 BTS 协议栈已就绪、设备已存在于白名单。
 
 **入参**
 
@@ -942,7 +942,7 @@ errcode_t gap_ble_get_white_list(void)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **返回值**
 
@@ -974,7 +974,7 @@ errcode_t gap_ble_remove_all_pairs(void)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **返回值**
 
@@ -1006,7 +1006,7 @@ errcode_t gap_ble_get_bonded_devices(bd_addr_t *addr, uint16_t *number)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -1051,7 +1051,7 @@ errcode_t gap_ble_connect_param_update(gap_conn_param_update_t *params)
 **前置条件**
 
 - 调用时序约束：需在 ACL 链路建立成功后调用。
-- 依赖关系：依赖 bts 协议栈已就绪、连接已建立。
+- 依赖关系：依赖 BTS 协议栈已就绪、连接已建立。
 
 **入参**
 
@@ -1093,7 +1093,7 @@ errcode_t gap_ble_connect_remote_device(const bd_addr_t *addr)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -1131,7 +1131,7 @@ errcode_t gap_ble_disconnect_remote_device(const bd_addr_t *addr)
 **前置条件**
 
 - 调用时序约束：需在与远端设备建立 ACL 连接之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪、连接处于已建立状态。
+- 依赖关系：依赖 BTS 协议栈已就绪、连接处于已建立状态。
 
 **入参**
 
@@ -1169,7 +1169,7 @@ errcode_t gap_ble_set_sec_param(gap_ble_sec_params_t *params)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成、发起配对之前调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -1207,7 +1207,7 @@ errcode_t gap_ble_read_remote_device_rssi(uint16_t conn_id)
 **前置条件**
 
 - 调用时序约束：需在 ACL 链路建立成功后调用。
-- 依赖关系：依赖 bts 协议栈已就绪、连接已建立。
+- 依赖关系：依赖 BTS 协议栈已就绪、连接已建立。
 
 **入参**
 
@@ -1245,7 +1245,7 @@ errcode_t gap_ble_register_callbacks(gap_ble_callbacks_t *func)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后、发起广播/扫描/连接之前调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -1281,13 +1281,13 @@ errcode_t bth_ota_init(void)
 
 **功能说明**
 
-- 初始化 bth OTA (Over-The-Air) 通道。
+- 初始化 bth OTA（Over-The-Air） 通道。
 - 用于建立 OTA 升级所需的底层通道资源。
 
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **返回值**
 
@@ -1319,7 +1319,7 @@ errcode_t ble_customize_max_pwr(int8_t ble_pwr, int8_t sle_pwr)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成、发起射频业务之前调用。
-- 依赖关系：依赖 nv (Non-Volatile) 定制化配置模块已就绪。
+- 依赖关系：依赖 NV（Non-Volatile） 定制化配置模块已就绪。
 
 **入参**
 
@@ -1358,7 +1358,7 @@ errcode_t ble_set_nv_pair_keys(ble_auth_info_evt_t *key, bd_addr_t *own_addr, bd
 **前置条件**
 
 - 调用时序约束：需在配对完成、获得认证信息之后调用。
-- 依赖关系：依赖 bts 协议栈与 Flash 存储已就绪。
+- 依赖关系：依赖 BTS 协议栈与 Flash 存储已就绪。
 
 **入参**
 
@@ -1399,7 +1399,7 @@ errcode_t gap_ble_set_save_smp_keys_mode(uint8_t is_available)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -1437,7 +1437,7 @@ errcode_t gap_ble_set_pair_info_available(uint8_t is_available)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成之后调用。
-- 依赖关系：依赖 bts 协议栈已就绪。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
@@ -1467,7 +1467,7 @@ typedef void (*gap_ble_start_adv_callback)(uint8_t adv_id, adv_status_t status);
 启动广播结果回调函数指针类型，BTS 在每次启动广播后调用该回调向应用层上报启动结果。
 
 回调说明：
-- 调用时机：广播启动完成后在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：广播启动完成后在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 adv_id：广播 ID。
 - 参数 status：当前广播状态，参考 [adv_status_t](#enum_adv_status_t)。
 - 返回值处理：无返回值。
@@ -1483,7 +1483,7 @@ typedef void (*gap_ble_stop_adv_callback)(uint8_t adv_id, adv_status_t status);
 停止广播结果回调函数指针类型，BTS 在每次停止广播后调用该回调向应用层上报停止结果。
 
 回调说明：
-- 调用时机：广播停止完成后在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：广播停止完成后在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 adv_id：广播 ID。
 - 参数 status：当前广播状态，参考 [adv_status_t](#enum_adv_status_t)。
 - 返回值处理：无返回值。
@@ -1499,7 +1499,7 @@ typedef void (*gap_ble_set_adv_data_callback)(uint8_t adv_id, errcode_t status);
 设置广播数据结果回调函数指针类型，BTS 在每次设置广播数据后调用该回调向应用层上报设置结果。
 
 回调说明：
-- 调用时机：广播数据设置完成后在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：广播数据设置完成后在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 adv_id：广播 ID。
 - 参数 status：执行结果错误码。
 - 返回值处理：无返回值。
@@ -1515,7 +1515,7 @@ typedef void (*gap_ble_set_adv_param_callback)(uint8_t adv_id, errcode_t status)
 设置广播参数结果回调函数指针类型，BTS 在每次设置广播参数后调用该回调向应用层上报更新结果。
 
 回调说明：
-- 调用时机：广播参数设置完成后在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：广播参数设置完成后在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 adv_id：广播 ID。
 - 参数 status：执行结果错误码。
 - 返回值处理：无返回值。
@@ -1531,8 +1531,8 @@ typedef void (*gap_ble_scan_result_callback)(gap_scan_result_data_t *scan_result
 扫描结果回调函数指针类型，BTS 在每次收到扫描结果后调用该回调向应用层上报扫描结果数据。
 
 回调说明：
-- 调用时机：收到扫描结果后在 bts 线程被调用，不应阻塞或长时间等待。
-- 参数 scan_result_data：扫描结果数据，参考 [gap_scan_result_data_t](#struct_gap_scan_result_data_t)，内存由 bts 申请与释放，回调中不应释放。
+- 调用时机：收到扫描结果后在 BTS 线程被调用，不应阻塞或长时间等待。
+- 参数 scan_result_data：扫描结果数据，参考 [gap_scan_result_data_t](#struct_gap_scan_result_data_t)，内存由 BTS 申请与释放，回调中不应释放。
 - 返回值处理：无返回值。
 
 ### typedef_gap_ble_set_scan_param_callback <a id="typedef_gap_ble_set_scan_param_callback"></a>
@@ -1546,7 +1546,7 @@ typedef void (*gap_ble_set_scan_param_callback)(errcode_t status);
 扫描参数设置完成回调函数指针类型，BTS 在扫描参数设置完成后调用该回调向应用层上报设置状态。
 
 回调说明：
-- 调用时机：扫描参数设置完成后在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：扫描参数设置完成后在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 status：执行结果错误码。
 - 返回值处理：无返回值。
 
@@ -1562,7 +1562,7 @@ typedef void (*gap_ble_connect_state_changed_callback)(uint16_t conn_id, bd_addr
 连接状态改变回调函数指针类型，BTS 在连接完成后调用该回调向应用层上报连接状态信息。
 
 回调说明：
-- 调用时机：连接状态改变时在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：连接状态改变时在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 conn_id：连接 ID。
 - 参数 addr：对端设备地址，参考 [bd_addr_t](#struct_bd_addr_t)。
 - 参数 conn_state：连接状态，参考 [gap_ble_conn_state_t](#enum_gap_ble_conn_state_t)。
@@ -1581,7 +1581,7 @@ typedef void (*gap_ble_paired_complete_callback)(uint16_t conn_id, const bd_addr
 配对完成回调函数指针类型，BTS 在配对后调用该回调向应用层上报配对状态信息。
 
 回调说明：
-- 调用时机：配对完成后在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：配对完成后在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 conn_id：连接 ID。
 - 参数 addr：对端设备地址，参考 [bd_addr_t](#struct_bd_addr_t)。
 - 参数 status：执行结果错误码。
@@ -1598,7 +1598,7 @@ typedef void (*gap_ble_terminate_adv_callback)(uint8_t adv_id, adv_status_t stat
 被动中止广播回调函数指针类型，BTS 在广播被中止时调用该回调向应用层上报广播状态。
 
 回调说明：
-- 调用时机：广播被中止时在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：广播被中止时在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 adv_id：广播 ID。
 - 参数 status：广播状态，参考 [adv_status_t](#enum_adv_status_t)。
 - 返回值处理：无返回值。

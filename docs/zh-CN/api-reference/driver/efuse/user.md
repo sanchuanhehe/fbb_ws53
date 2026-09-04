@@ -1,6 +1,6 @@
 # eFuse User
 
-efuse_user 提供 eFuse（Electrically Programmable Read-Only Memory）用户预留区域的读写访问接口，支持按字节缓冲区的批量读取与写入，以及按位读取与按位写 1 操作。位操作接口的可用性受构建系统注入宏 EFUSE_BIT_OPERATION 控制。
+eFuse User（Electronic Fuse）提供用户预留区域的读写访问接口，支持按字节缓冲区的批量读取与写入，以及按位读取与按位写 1 操作。位操作接口的可用性受构建系统注入宏 EFUSE_BIT_OPERATION 控制。
 
 **模块公共头文件**
 

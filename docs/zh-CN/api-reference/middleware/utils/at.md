@@ -1,6 +1,6 @@
-# at
+# AT
 
-at (Attention) 提供 Hayes AT 命令集解析与处理服务，支持注册自定义 AT 命令表、命令执行/设置/读取/测试/查询回调、异步命令结果上报、命令交互处理以及向默认或指定通道输出 AT 响应信息与 URC（Unsolicited Result Code）主动上报。
+AT（Attention） 提供 Hayes AT 命令集解析与处理服务，支持注册自定义 AT 命令表、命令执行/设置/读取/测试/查询回调、异步命令结果上报、命令交互处理以及向默认或指定通道输出 AT 响应信息与 URC（Unsolicited Result Code）主动上报。
 
 **模块公共头文件**
 

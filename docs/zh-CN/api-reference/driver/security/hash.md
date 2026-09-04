@@ -1,6 +1,6 @@
-# hash
+# Hash
 
-security_hash 提供 SHA-256（Secure Hash Algorithm 256-bit）哈希计算接口，基于安全硬件加速器对外提供单次计算与流式（start/update/finish）分块计算两种使用方式，输出 256 位（32 字节）摘要。
+Hash 提供 SHA-256（Secure Hash Algorithm 256-bit）哈希计算接口，基于安全硬件加速器对外提供单次计算与流式（start/update/finish）分块计算两种使用方式，输出 256 位（32 字节）摘要。
 
 **模块公共头文件**
 

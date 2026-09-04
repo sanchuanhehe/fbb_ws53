@@ -1,6 +1,6 @@
 # Task
 
-task 提供操作系统抽象层（OSAL，Operating System Abstraction Layer）的任务调度与管理功能，支持线程创建与销毁、优先级设置、CPU（Central Processing Unit）亲和性绑定、调度锁定与解锁、线程状态控制、延时等待以及内核初始化与状态查询。
+Task 提供操作系统抽象层（OSAL，Operating System Abstraction Layer）的任务调度与管理功能，支持线程创建与销毁、优先级设置、CPU（Central Processing Unit）亲和性绑定、调度锁定与解锁、线程状态控制、延时等待以及内核初始化与状态查询。
 
 **模块公共头文件**
 

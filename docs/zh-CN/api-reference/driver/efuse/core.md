@@ -1,6 +1,6 @@
 # eFuse Core
 
-eFuse（electronic Fuse）提供一次性可编程（One-Time Programmable, OTP）熔丝的读写访问能力，支持按位与按字节的数据读取和烧写，并可用于获取 Die-ID、SoC-ID（System on Chip ID）等芯片标识。本子模块为 efuse 核心接口集，来源头文件 include/driver/efuse.h。
+eFuse Core（Electronic Fuse）提供一次性可编程（One-Time Programmable, OTP）熔丝的读写访问能力，支持按位与按字节的数据读取和烧写，并可用于获取 Die-ID、SoC-ID（System on Chip ID）等芯片标识。本子模块为 efuse 核心接口集，来源头文件 include/driver/efuse.h。
 
 **模块公共头文件**
 

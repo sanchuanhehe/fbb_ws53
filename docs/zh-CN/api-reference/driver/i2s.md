@@ -1,4 +1,4 @@
-# i2s
+# I2S
 
 I2S（Inter-IC Sound）提供集成电路间数字音频总线的数据收发能力，支持主从模式、多种数据位宽与通道数的配置，可工作在轮询、中断以及 DMA（Direct Memory Access）传输模式下。本模块对外接口以 SIO（Serial Input/Output）总线编号为索引对硬件 I2S 控制器进行操作。
 

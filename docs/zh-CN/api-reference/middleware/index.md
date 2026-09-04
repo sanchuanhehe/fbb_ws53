@@ -5,13 +5,13 @@ hide:
 
 # 中间件
 
-- BLE (Bluetooth Low Energy)
+- BLE（Bluetooth Low Energy）
     - [Factory](bts/ble/factory.md)
-    - [GAP (Generic Access Profile)](bts/ble/gap.md)
+    - [GAP（Generic Access Profile）](bts/ble/gap.md)
     - [GATT Client（当前 WS53 方案不支持）](bts/ble/gatt/client.md)
     - [GATT Server](bts/ble/gatt/server.md)
 - [BTS Common](bts/common/common.md) — 蓝牙子系统公共接口
-- SLE (SparkLink Low Energy)
+- SLE（Star Flash Low Energy）
     - [Connection](bts/sle/connection.md)
     - [Device](bts/sle/device.md)
     - [Service Factory](bts/sle/service/factory.md)
@@ -27,8 +27,8 @@ hide:
     - [Platform](services/wifi/platform.md)
 - Utils
     - [AT](utils/at.md)
-    - [CRC (Cyclic Redundancy Check)](utils/crc.md)
-    - [DFX (Design for X)](utils/dfx.md)
-    - [NV (Non-Volatile)](utils/nv.md)
+    - [CRC（Cyclic Redundancy Check）](utils/crc.md)
+    - [DFX（Design for X）](utils/dfx.md)
+    - [NV（Non-Volatile）](utils/nv.md)
     - [Partition](utils/partition.md)
     - [Update](utils/update.md)

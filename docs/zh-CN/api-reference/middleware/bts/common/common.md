@@ -1,6 +1,6 @@
 # BTS Common
 
-bts common 提供蓝牙基础设备管理能力，包括 BLE（Bluetooth Low Energy）协议栈的使能与去使能，以及设备上电、BLE 使能/去使能结果的回调通知注册。该模块基于 errcode_t 统一错误码返回执行结果，并通过回调机制异步上报协议栈运行状态。
+BTS Common 提供蓝牙基础设备管理能力，包括 BLE（Bluetooth Low Energy）协议栈的使能与去使能，以及设备上电、BLE 使能/去使能结果的回调通知注册。该模块基于 errcode_t 统一错误码返回执行结果，并通过回调机制异步上报协议栈运行状态。
 
 **模块公共头文件**
 

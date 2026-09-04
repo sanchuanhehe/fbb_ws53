@@ -1,6 +1,6 @@
 # Hotspot
 
-hotspot 提供 WiFi SoftAP（Software Access Point）功能，支持开启/关闭热点、配置基本与扩展参数、查询已连接 STA (Station) 信息以及断开指定 STA 连接。
+Hotspot 提供 Wi-Fi SoftAP（Software Access Point）功能，支持开启/关闭热点、配置基本与扩展参数、查询已连接 STA（Station） 信息以及断开指定 STA 连接。
 
 **模块公共头文件**
 
@@ -43,7 +43,7 @@ errcode_t wifi_softap_enable(const softap_config_stru *config)
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 WiFi 初始化完成（wifi_init 成功返回）后调用。
+- 调用时序约束：当前接口必须在 Wi-Fi 初始化完成（wifi_init 成功返回）后调用。
 - 依赖关系：当前接口依赖 SoftAP 未处于使能状态，且 P2P 未使能。
 
 **入参**
@@ -91,7 +91,7 @@ errcode_t wifi_softap_disable(void)
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 WiFi 初始化完成且 SoftAP 已使能后调用。
+- 调用时序约束：当前接口必须在 Wi-Fi 初始化完成且 SoftAP 已使能后调用。
 - 依赖关系：当前接口依赖 SoftAP 处于使能状态。
 
 **返回值**
@@ -101,7 +101,7 @@ errcode_t wifi_softap_disable(void)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC：0 | 执行成功 | SoftAP 正常关闭 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | WiFi 未初始化或 SoftAP 未使能 |
+| Other | 其他错误码，参考[errcode_t](#errcode_t) | Wi-Fi 未初始化或 SoftAP 未使能 |
 
 **参考案例**
 
@@ -129,7 +129,7 @@ int32_t wifi_is_softap_enabled(void)
 
 - 查询 SoftAP 是否已使能。
 - 返回值 1 表示已使能，0 表示未使能。
-- WiFi 未初始化时返回 0。
+- Wi-Fi 未初始化时返回 0。
 
 **返回值**
 
@@ -138,7 +138,7 @@ int32_t wifi_is_softap_enabled(void)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | 1 | SoftAP 已使能 | SoftAP 已成功启动 |
-| 0 | SoftAP 未使能 | SoftAP 未启动或 WiFi 未初始化 |
+| 0 | SoftAP 未使能 | SoftAP 未启动或 Wi-Fi 未初始化 |
 
 ### wifi_set_softap_config_advance <a id="wifi_set_softap_config_advance"></a>
 
@@ -159,7 +159,7 @@ errcode_t wifi_set_softap_config_advance(const softap_config_advance_stru *confi
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 WiFi 初始化完成且 SoftAP 未使能时调用。
+- 调用时序约束：当前接口必须在 Wi-Fi 初始化完成且 SoftAP 未使能时调用。
 - 依赖关系：当前接口依赖 SoftAP 处于未使能状态。
 
 **入参**
@@ -283,7 +283,7 @@ errcode_t wifi_softap_get_sta_list(wifi_sta_info_stru *result, uint32_t *size)
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 WiFi 初始化完成且 SoftAP 已使能后调用。
+- 调用时序约束：当前接口必须在 Wi-Fi 初始化完成且 SoftAP 已使能后调用。
 - 依赖关系：当前接口依赖 SoftAP 处于使能状态。
 
 **入参**
@@ -306,7 +306,7 @@ errcode_t wifi_softap_get_sta_list(wifi_sta_info_stru *result, uint32_t *size)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC：0 | 执行成功 | 成功获取 STA 列表 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | WiFi 未初始化、SoftAP 未使能或参数无效 |
+| Other | 其他错误码，参考[errcode_t](#errcode_t) | Wi-Fi 未初始化、SoftAP 未使能或参数无效 |
 
 **参考案例**
 
@@ -331,7 +331,7 @@ errcode_t wifi_softap_deauth_sta(const uint8_t *mac, int32_t mac_len)
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 WiFi 初始化完成且 SoftAP 已使能后调用。
+- 调用时序约束：当前接口必须在 Wi-Fi 初始化完成且 SoftAP 已使能后调用。
 - 依赖关系：当前接口依赖 SoftAP 处于使能状态。
 
 **入参**
@@ -348,7 +348,7 @@ errcode_t wifi_softap_deauth_sta(const uint8_t *mac, int32_t mac_len)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC：0 | 执行成功 | 成功断开指定 STA |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | WiFi 未初始化、SoftAP 未使能、MAC 地址无效或断开失败 |
+| Other | 其他错误码，参考[errcode_t](#errcode_t) | Wi-Fi 未初始化、SoftAP 未使能、MAC 地址无效或断开失败 |
 
 **参考案例**
 
@@ -400,7 +400,7 @@ typedef enum wifi_security_enum {
 | WIFI_SEC_TYPE_WPAPSK | 4 | WPA-Personal |
 | WIFI_SEC_TYPE_WPA | 5 | WPA-Enterprise |
 | WIFI_SEC_TYPE_WPA2 | 6 | WPA2-Enterprise |
-| WIFI_SEC_TYPE_SAE | 7 | SAE （Simultaneous Authentication of Equals，WPA3 个人级） |
+| WIFI_SEC_TYPE_SAE | 7 | SAE（Simultaneous Authentication of Equals，WPA3 个人级） |
 | WIFI_SEC_TYPE_WPA3_WPA2_PSK_MIX | 8 | WPA2-Personal 和 WPA3-Personal 混合 |
 | WIFI_SEC_TYPE_WPA3 | 9 | WPA3-Enterprise |
 | WIFI_SEC_TYPE_OWE | 10 | OWE（Opportunistic Wireless Encryption） |

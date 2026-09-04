@@ -1,6 +1,6 @@
 # FileOps
 
-fileops 提供内核态文件操作抽象接口，支持文件的打开、关闭、读写、同步与定位操作，屏蔽 Linux、LiteOS、FreeRTOS 等多操作系统底层差异。
+FileOps 提供内核态文件操作抽象接口，支持文件的打开、关闭、读写、同步与定位操作，屏蔽 Linux、LiteOS、FreeRTOS 等多操作系统底层差异。
 
 **模块公共头文件**
 
