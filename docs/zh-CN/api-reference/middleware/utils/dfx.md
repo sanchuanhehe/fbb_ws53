@@ -13,15 +13,15 @@ DFX（Design For eXcellence）提供 DIAG（Diagnosis） 诊断通道的命令�
 
 | 接口名称 | 功能简述 |
 | -------- | -------- |
-| [uapi_diag_register_cmd](#uapi_diag_register_cmd) | 注册 diag 命令处理函数表 |
-| [uapi_diag_unregister_cmd](#uapi_diag_unregister_cmd) | 解注册已注册的 diag 命令处理函数表 |
-| [uapi_diag_report_packet](#uapi_diag_report_packet) | 上报单个 diag 报文给 DIAG 客户端 |
-| [uapi_diag_report_packets_critical](#uapi_diag_report_packets_critical) | 上报多个关键级别 diag 报文给 DIAG 客户端 |
-| [uapi_diag_report_packets_normal](#uapi_diag_report_packets_normal) | 上报多个普通级别 diag 报文给 DIAG 客户端 |
+| [uapi_diag_register_cmd](#uapi_diag_register_cmd) | 注册 DIAG 命令处理函数表 |
+| [uapi_diag_unregister_cmd](#uapi_diag_unregister_cmd) | 解注册已注册的 DIAG 命令处理函数表 |
+| [uapi_diag_report_packet](#uapi_diag_report_packet) | 上报单个 DIAG 报文给 DIAG 客户端 |
+| [uapi_diag_report_packets_critical](#uapi_diag_report_packets_critical) | 上报多个关键级别 DIAG 报文给 DIAG 客户端 |
+| [uapi_diag_report_packets_normal](#uapi_diag_report_packets_normal) | 上报多个普通级别 DIAG 报文给 DIAG 客户端 |
 | [uapi_diag_report_sys_msg](#uapi_diag_report_sys_msg) | 上报系统消息给 DIAG 客户端 |
-| [uapi_diag_register_ind](#uapi_diag_register_ind) | 注册 diag 应答（ind）处理函数表 |
-| [uapi_diag_run_cmd](#uapi_diag_run_cmd) | 按 cmd_id 触发执行已注册的 diag 命令处理函数 |
-| [uapi_diag_register_stat_obj](#uapi_diag_register_stat_obj) | 注册 diag 统计量对象表 |
+| [uapi_diag_register_ind](#uapi_diag_register_ind) | 注册 DIAG 应答（ind）处理函数表 |
+| [uapi_diag_run_cmd](#uapi_diag_run_cmd) | 按 cmd_id 触发执行已注册的 DIAG 命令处理函数 |
+| [uapi_diag_register_stat_obj](#uapi_diag_register_stat_obj) | 注册 DIAG 统计量对象表 |
 
 ## Functions
 
@@ -39,7 +39,7 @@ errcode_t uapi_diag_register_cmd(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t cmd
 
 **功能说明**
 
-- 向 DIAG 子系统注册一组 diag 命令处理函数表，使后续到来的 cmd_id 命中该表区间时能够分发到对应的处理函数。
+- 向 DIAG 子系统注册一组 DIAG 命令处理函数表，使后续到来的 cmd_id 命中该表区间时能够分发到对应的处理函数。
 - 注册时按命令表中最小/最大命令 ID 区间进行索引，DIAG 子系统在分发命令时按区间匹配查找处理函数。
 - 命令表必须以常量数组形式提供，命令条数由调用方显式传入。
 
@@ -52,7 +52,7 @@ errcode_t uapi_diag_register_cmd(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t cmd
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| cmd_tbl | [diag_cmd_reg_obj_t](#diag_cmd_reg_obj_t) | diag 命令注册表，需声明为常量数组后传入 | 不为NULL |
+| cmd_tbl | [diag_cmd_reg_obj_t](#diag_cmd_reg_obj_t) | DIAG 命令注册表，需声明为常量数组后传入 | 不为NULL |
 | cmd_num | uint16_t | 命令条数 | 不为0 |
 
 **返回值**
@@ -97,7 +97,7 @@ errcode_t uapi_diag_unregister_cmd(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t c
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| cmd_tbl | [diag_cmd_reg_obj_t](#diag_cmd_reg_obj_t) | 待解注册的 diag 命令注册表，需与注册时传入的指针一致 | 不为NULL |
+| cmd_tbl | [diag_cmd_reg_obj_t](#diag_cmd_reg_obj_t) | 待解注册的 DIAG 命令注册表，需与注册时传入的指针一致 | 不为NULL |
 | cmd_num | uint16_t | 待解注册的命令条数，需与注册时传入的条数一致 | 不为0 |
 
 **返回值**
@@ -123,7 +123,7 @@ errcode_t uapi_diag_report_packet(uint16_t cmd_id, diag_option_t *option, const 
 
 **功能说明**
 
-- 向 DIAG 客户端上报单个 diag 通道报文，cmd_id 用于标识报文 ID。
+- 向 DIAG 客户端上报单个 DIAG 通道报文，cmd_id 用于标识报文 ID。
 - 通过 option 参数指示报文是本地报文还是远端报文（携带对端地址）。
 - 支持同步（sync 为 true，阻塞上报）与异步（sync 为 false，经 OS 队列缓存后非阻塞上报）两种上报方式。
 
@@ -174,7 +174,7 @@ errcode_t uapi_diag_report_packets_critical(uint16_t cmd_id, diag_option_t *opti
 
 **功能说明**
 
-- 向 DIAG 客户端上报多个关键级别（critical）的 diag 通道报文。
+- 向 DIAG 客户端上报多个关键级别（critical）的 DIAG 通道报文。
 - 通过 packet 指针数组与 packet_size 数组联合描述多个数据包，pkt_cnt 指定数据包个数。
 - 关键级别报文在 DIAG 路由处理中按 critical 标记优先处理。
 
@@ -222,7 +222,7 @@ errcode_t uapi_diag_report_packets_normal(uint16_t cmd_id, diag_option_t *option
 
 **功能说明**
 
-- 向 DIAG 客户端上报多个普通级别（normal）的 diag 通道报文。
+- 向 DIAG 客户端上报多个普通级别（normal）的 DIAG 通道报文。
 - 通过 packet 指针数组与 packet_size 数组联合描述多个数据包，pkt_cnt 指定数据包个数。
 - 普通级别报文不携带 critical 标记，按常规 DIAG 路由流程处理。
 
@@ -287,7 +287,7 @@ errcode_t uapi_diag_report_sys_msg(uint32_t module_id, uint32_t msg_id, const ui
 | msg_id | uint32_t | 打印日志的消息 ID | 0 ~ 4294967295 |
 | buf | const uint8_t * | 打印内容缓冲区 | 不为NULL（buf_size 非 0 时） |
 | buf_size | uint16_t | 内容大小（单位 Bytes） | 0 ~ 65535 |
-| level | uint8_t | 日志级别 | DIAG_LEVEL_DEBUG/DIAG_LEVEL_NOTICE/DIAG_LEVEL_WARNING/DIAG_LEVEL_ERROR/DIAG_LEVEL_FATAL 中有效值（由 diag 定义的日志级别枚举决定） |
+| level | uint8_t | 日志级别 | DIAG_LEVEL_DEBUG/DIAG_LEVEL_NOTICE/DIAG_LEVEL_WARNING/DIAG_LEVEL_ERROR/DIAG_LEVEL_FATAL 中有效值（由 DIAG 定义的日志级别枚举决定） |
 
 **返回值**
 
@@ -366,7 +366,7 @@ errcode_t uapi_diag_run_cmd(uint16_t cmd_id, uint8_t *data, uint16_t data_size, 
 
 **功能说明**
 
-- 按 cmd_id 构造 diag 命令请求报文，并异步投递至 DIAG 路由处理流程。
+- 按 cmd_id 构造 DIAG 命令请求报文，并异步投递至 DIAG 路由处理流程。
 - 通过 option 参数携带对端地址，用于指示命令的目标。
 - 数据内容由 data 缓冲区与 data_size 联合描述。
 
@@ -380,7 +380,7 @@ errcode_t uapi_diag_run_cmd(uint16_t cmd_id, uint8_t *data, uint16_t data_size, 
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| cmd_id | uint16_t | diag 命令请求 ID | 0 ~ 65535 |
+| cmd_id | uint16_t | DIAG 命令请求 ID | 0 ~ 65535 |
 | data | uint8_t * | 数据内容缓冲区地址 | 不为NULL |
 | data_size | uint16_t | 数据大小（单位 Bytes） | 0 ~ 65535 |
 | option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址 | 不为NULL |
@@ -444,7 +444,7 @@ typedef uint8_t diag_addr;
 
 **使用说明**
 
-diag 通道地址类型，用于标识报文的对端地址，作为 [diag_option_t](#diag_option_t) 的成员被本模块对外接口使用。
+DIAG 通道地址类型，用于标识报文的对端地址，作为 [diag_option_t](#diag_option_t) 的成员被本模块对外接口使用。
 
 ### diag_cmd_f <a id="diag_cmd_f"></a>
 
@@ -454,11 +454,11 @@ typedef errcode_t (*diag_cmd_f)(uint16_t cmd_id, void *cmd_param, uint16_t cmd_p
 
 **使用说明**
 
-diag 命令行处理函数指针类型，作为 [diag_cmd_reg_obj_t](#diag_cmd_reg_obj_t) 的成员被 uapi_diag_register_cmd / uapi_diag_register_ind 接口注册。
+DIAG 命令行处理函数指针类型，作为 [diag_cmd_reg_obj_t](#diag_cmd_reg_obj_t) 的成员被 uapi_diag_register_cmd / uapi_diag_register_ind 接口注册。
 
 回调说明：
 - 调用时机：DIAG 子系统在分发命令时，按注册表中的命令 ID 区间匹配命中后调用该处理函数。
-- 参数 cmd_id：触发本次处理的 diag 命令 ID。
+- 参数 cmd_id：触发本次处理的 DIAG 命令 ID。
 - 参数 cmd_param：命令参数数据指针，内容来源于命令请求报文。
 - 参数 cmd_param_size：命令参数数据大小（单位 Bytes）。
 - 参数 option：option 选项，携带对端地址信息。
