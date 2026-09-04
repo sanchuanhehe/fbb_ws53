@@ -147,7 +147,7 @@ void *osal_kmalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 | ---- | ---- | ---- | ---- |
 | size | unsigned int | 需要分配的内存字节数 | > 0 |
 | osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)：2；<br>[OSAL_GFP_DMA](#OSAL_GFP_DMA)：4；<br>[OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)：8，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)：1。 |
-| boundary | unsigned int | 内存对齐边界（单位：字节） | 2 的幂，≥ 4 |
+| boundary | unsigned int | 内存对齐边界（单位 Bytes） | 2 的幂，≥ 4 |
 
 **返回值**
 
@@ -182,7 +182,7 @@ void *osal_kzalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 | ---- | ---- | ---- | ---- |
 | size | unsigned int | 需要分配的内存字节数 | > 0 |
 | osal_gfp_flag | unsigned int | 内存分配标志，指定分配类型；在 LiteOS 和 FreeRTOS 下不使用 | [OSAL_GFP_ATOMIC](#OSAL_GFP_ATOMIC)：2；<br>[OSAL_GFP_DMA](#OSAL_GFP_DMA)：4；<br>[OSAL_GFP_KERNEL](#OSAL_GFP_KERNEL)：8，可按位或 [OSAL_GFP_ZERO](#OSAL_GFP_ZERO)：1。 |
-| boundary | unsigned int | 内存对齐边界（单位：字节） | 2 的幂，≥ 4 |
+| boundary | unsigned int | 内存对齐边界（单位 Bytes） | 2 的幂，≥ 4 |
 
 **返回值**
 
@@ -354,8 +354,8 @@ int osal_pool_mem_init(void *pool, unsigned int size)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| pool | void * | 内存池起始地址 | 4 或 8 字节对齐的非空指针 |
-| size | unsigned int | 内存池大小（单位：字节） | 大于系统最小池大小，小于等于内存池总大小 |
+| pool | void * | 内存池起始地址 | 4 或 8 Bytes对齐的非空指针 |
+| size | unsigned int | 内存池大小（单位 Bytes） | 大于系统最小池大小，小于等于内存池总大小 |
 
 **返回值**
 
@@ -393,7 +393,7 @@ void *osal_pool_mem_alloc(void *pool, unsigned int size)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pool | void * | 已初始化的内存池指针 | 由 osal_pool_mem_init 初始化的合法指针 |
-| size | unsigned int | 需要分配的内存字节数 | 4 字节对齐，小于等于内存池大小 |
+| size | unsigned int | 需要分配的内存字节数 | 4 Bytes对齐，小于等于内存池大小 |
 
 **返回值**
 
@@ -432,7 +432,7 @@ void *osal_pool_mem_alloc_align(void *pool, unsigned int size, unsigned int boun
 | ---- | ---- | ---- | ---- |
 | pool | void * | 已初始化的内存池指针 | 由 osal_pool_mem_init 初始化的合法指针 |
 | size | unsigned int | 需要分配的内存字节数 | 小于等于内存池大小 |
-| boundary | unsigned int | 内存对齐边界（单位：字节） | 2 的幂，≥ 4 |
+| boundary | unsigned int | 内存对齐边界（单位 Bytes） | 2 的幂，≥ 4 |
 
 **返回值**
 
@@ -531,7 +531,7 @@ osal_blockmem_status osal_blockmem_get_status(unsigned long phyaddr, unsigned in
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | phyaddr | unsigned long | 物理地址 | 有效的物理地址 |
-| size | unsigned int | 需要检查的内存大小（单位：字节） | > 0 |
+| size | unsigned int | 需要检查的内存大小（单位 Bytes） | > 0 |
 
 **返回值**
 
@@ -566,7 +566,7 @@ void *osal_ioremap(unsigned long phys_addr, unsigned long size)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | phys_addr | unsigned long | 需要映射的总线物理地址 | 有效的物理地址 |
-| size | unsigned long | 需要映射的资源大小（单位：字节） | > 0 |
+| size | unsigned long | 需要映射的资源大小（单位 Bytes） | > 0 |
 
 **返回值**
 
@@ -604,7 +604,7 @@ void *osal_ioremap_nocache(unsigned long phys_addr, unsigned long size)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | phys_addr | unsigned long | 需要映射的总线物理地址 | 有效的物理地址 |
-| size | unsigned long | 需要映射的资源大小（单位：字节） | > 0 |
+| size | unsigned long | 需要映射的资源大小（单位 Bytes） | > 0 |
 
 **返回值**
 
@@ -638,7 +638,7 @@ void *osal_ioremap_cached(unsigned long phys_addr, unsigned long size)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | phys_addr | unsigned long | 需要映射的总线物理地址 | 有效的物理地址 |
-| size | unsigned long | 需要映射的资源大小（单位：字节） | > 0 |
+| size | unsigned long | 需要映射的资源大小（单位 Bytes） | > 0 |
 
 **返回值**
 
@@ -676,7 +676,7 @@ void osal_iounmap(void *addr, unsigned long size)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | addr | void * | ioremap 系列接口返回的虚拟地址 | 由 ioremap 系列接口映射的合法虚拟地址 |
-| size | unsigned long | 映射的资源大小（单位：字节） | > 0 |
+| size | unsigned long | 映射的资源大小（单位 Bytes） | > 0 |
 
 ### osal_ioremap_wc <a id="osal_ioremap_wc"></a>
 
@@ -705,7 +705,7 @@ void *osal_ioremap_wc(unsigned long phys_addr, unsigned long size)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | phys_addr | unsigned long | 需要映射的总线物理地址 | 有效的物理地址 |
-| size | unsigned long | 需要映射的资源大小（单位：字节） | > 0 |
+| size | unsigned long | 需要映射的资源大小（单位 Bytes） | > 0 |
 
 **返回值**
 
@@ -805,7 +805,7 @@ void *osal_blockmem_vmap(unsigned long phys_addr, unsigned long size)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | phys_addr | unsigned long | 物理地址 | 不为 0（实现仅对 size 判上界） |
-| size | unsigned long | 需要映射的内存大小（单位：字节） | > 0，不超过 OSAL_ADDR_RESERVED_SIZE_MAX |
+| size | unsigned long | 需要映射的内存大小（单位 Bytes） | > 0，不超过 OSAL_ADDR_RESERVED_SIZE_MAX |
 
 **返回值**
 
@@ -866,7 +866,7 @@ void osal_blockmem_free(unsigned long phys_addr, unsigned long size)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | phys_addr | unsigned long | 预留内存的物理地址 | 不为 0 |
-| size | unsigned long | 需要释放的内存大小（单位：字节） | > 0 |
+| size | unsigned long | 需要释放的内存大小（单位 Bytes） | > 0 |
 
 ### osal_copy_from_user <a id="osal_copy_from_user"></a>
 
@@ -892,7 +892,7 @@ unsigned long osal_copy_from_user(void *to, const void *from, unsigned long n)
 | ---- | ---- | ---- | ---- |
 | to | void * | 内核空间目标地址 | 不为NULL |
 | from | const void * | 用户空间源地址 | 不为NULL |
-| n | unsigned long | 需要拷贝的数据长度（单位：字节） | > 0 |
+| n | unsigned long | 需要拷贝的数据长度（单位 Bytes） | > 0 |
 
 **出参**
 
@@ -933,7 +933,7 @@ unsigned long osal_copy_to_user(void *to, const void *from, unsigned long n)
 | ---- | ---- | ---- | ---- |
 | to | void * | 用户空间目标地址 | 不为NULL |
 | from | const void * | 内核空间源地址 | 不为NULL |
-| n | unsigned long | 需要拷贝的数据长度（单位：字节） | > 0 |
+| n | unsigned long | 需要拷贝的数据长度（单位 Bytes） | > 0 |
 
 **返回值**
 

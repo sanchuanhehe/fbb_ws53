@@ -53,7 +53,7 @@ errcode_t uapi_watchdog_init(uint32_t timeout)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| timeout | uint32_t | 看门狗超时时间，单位秒 | 0 ~ 4294967295 |
+| timeout | uint32_t | 看门狗超时时间，单位 s | 0 ~ 4294967295 |
 
 **返回值**
 
@@ -265,7 +265,7 @@ errcode_t uapi_watchdog_set_time(uint32_t timeout)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| timeout | uint32_t | 看门狗超时时间，单位秒 | 0 ~ 4294967295 |
+| timeout | uint32_t | 看门狗超时时间，单位 s | 0 ~ 4294967295 |
 
 **返回值**
 
@@ -298,7 +298,7 @@ errcode_t uapi_watchdog_get_left_time(uint32_t *timeout)
 
 - 获取看门狗计数器剩余时间。
 - 调用硬件抽象层读取剩余时间。
-- 输出剩余时间值，单位秒。
+- 输出剩余时间值，单位 s。
 
 **前置条件**
 
@@ -310,7 +310,7 @@ errcode_t uapi_watchdog_get_left_time(uint32_t *timeout)
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| timeout | uint32_t * | 剩余时间值，单位秒，由调用方分配内存、函数填充 |
+| timeout | uint32_t * | 剩余时间值，单位 s，由调用方分配内存、函数填充 |
 
 **返回值**
 

@@ -686,7 +686,7 @@ typedef struct {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | tasklet | void * | 底层 tasklet 实现指针，初始化前需置空 |
-| handler | void (*)（unsigned long data） | tasklet 处理函数指针 |
+| handler | void (\*)(unsigned long data) | tasklet 处理函数指针 |
 | data | unsigned long | 传递给处理函数的数据 |
 
 ## Macros

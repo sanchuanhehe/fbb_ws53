@@ -1,6 +1,6 @@
 # CRC
 
-CRC（Cyclic Redundancy Check）提供 16 位与 32 位 CRC 校验值计算能力，用于对数据缓冲区进行完整性校验。模块基于固定多项式（CRC-16 采用 x16 + x12 + x5 + 1，即 0x1021；CRC-32 符合 IEEE 802.3 标准，即 0x04C11DB7）实现逐段计算，前一段计算结果可作为后一段计算的初始值传入，支持分段连续校验。
+CRC（Cyclic Redundancy Check）提供 16 位与 32 位 CRC 校验值计算能力，用于对数据缓冲区进行完整性校验。模块基于固定多项式（CRC-16 采用 x<sup>16</sup> + x<sup>12</sup> + x<sup>5</sup> + 1，即 0x1021；CRC-32 符合 IEEE 802.3 标准，即 0x04C11DB7）实现逐段计算，前一段计算结果可作为后一段计算的初始值传入，支持分段连续校验。
 
 **模块公共头文件**
 
@@ -12,7 +12,7 @@ CRC（Cyclic Redundancy Check）提供 16 位与 32 位 CRC 校验值计算能�
 
 | 接口名称 | 功能简述 |
 | -------- | -------- |
-| [uapi_crc16](#uapi_crc16) | 基于多项式 x16 + x12 + x5 + 1（0x1021）计算 16 位 CRC 校验值 |
+| [uapi_crc16](#uapi_crc16) | 基于多项式 x<sup>16</sup> + x<sup>12</sup> + x<sup>5</sup> + 1（0x1021）计算 16 位 CRC 校验值 |
 | [uapi_crc32](#uapi_crc32) | 基于 IEEE 802.3 标准（0x04C11DB7）计算 32 位 CRC 校验值（含补码） |
 | [uapi_crc32_no_comp](#uapi_crc32_no_comp) | 基于 IEEE 802.3 标准（0x04C11DB7）计算 32 位 CRC 校验值（无补码） |
 
@@ -32,7 +32,7 @@ uint16_t uapi_crc16(uint16_t crc_start, const uint8_t *buf, uint32_t length)
 
 **功能说明**
 
-- 基于多项式 x16 + x12 + x5 + 1（0x1021）计算输入数据缓冲区的 16 位 CRC 校验值。
+- 基于多项式 x<sup>16</sup> + x<sup>12</sup> + x<sup>5</sup> + 1（0x1021）计算输入数据缓冲区的 16 位 CRC 校验值。
 - 支持分段计算：前一段计算结果作为后一段计算的初始值传入，实现连续多段数据的累积校验。
 - 输入缓冲区指针为 NULL 时，直接返回传入的初始值。
 
@@ -48,7 +48,7 @@ uint16_t uapi_crc16(uint16_t crc_start, const uint8_t *buf, uint32_t length)
 | ---- | ---- | ---- | ---- |
 | crc_start | uint16_t | CRC 计算初始值；分段计算时传入前一段计算结果 | 0 ~ 65535 |
 | buf | const uint8_t * | 指向待计算数据缓冲区的指针，由调用方分配 | 不为NULL（为NULL时函数直接返回crc_start） |
-| length | uint32_t | 待计算数据长度，单位字节 | 0 ~ 4294967295 |
+| length | uint32_t | 待计算数据长度，单位 Bytes | 0 ~ 4294967295 |
 
 **返回值**
 
@@ -93,7 +93,7 @@ uint32_t uapi_crc32(uint32_t crc_start, const uint8_t *buf, uint32_t length)
 | ---- | ---- | ---- | ---- |
 | crc_start | uint32_t | CRC 计算初始值；分段计算时传入前一段计算结果 | 0 ~ 4294967295 |
 | buf | const uint8_t * | 指向待计算数据缓冲区的指针，由调用方分配 | 不为NULL（为NULL时函数直接返回对crc_start处理后的结果） |
-| length | uint32_t | 待计算数据长度，单位字节 | 0 ~ 4294967295 |
+| length | uint32_t | 待计算数据长度，单位 Bytes | 0 ~ 4294967295 |
 
 **返回值**
 
@@ -139,7 +139,7 @@ uint32_t uapi_crc32_no_comp(uint32_t crc_start, const uint8_t *buf, uint32_t len
 | ---- | ---- | ---- | ---- |
 | crc_start | uint32_t | CRC 计算初始值；分段计算时传入前一段计算结果 | 0 ~ 4294967295 |
 | buf | const uint8_t * | 指向待计算数据缓冲区的指针，由调用方分配 | 不为NULL（为NULL时函数直接返回crc_start） |
-| length | uint32_t | 待计算数据长度，单位字节 | 0 ~ 4294967295 |
+| length | uint32_t | 待计算数据长度，单位 Bytes | 0 ~ 4294967295 |
 
 **返回值**
 

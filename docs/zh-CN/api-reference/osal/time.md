@@ -661,7 +661,7 @@ typedef struct {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | timer | void * | 定时器内部资源指针 |
-| handler | void (*)（unsigned long） | 定时器超时回调函数指针 |
+| handler | void (\*)(unsigned long) | 定时器超时回调函数指针 |
 | data | unsigned long | 回调函数的参数数据 |
 | interval | unsigned int | 定时器定时时长，单位 ms |
 
@@ -696,7 +696,7 @@ typedef struct osal_hrtimer {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | timer | void * | 高精度定时器内部资源指针 |
-| handler | [osal_hrtimer_restart](#enum_osal_hrtimer_restart) (*)(void *) | 高精度定时器超时回调函数指针，返回值决定是否重启定时器 |
+| handler | [osal_hrtimer_restart](#enum_osal_hrtimer_restart) (\*)(void \*) |
 | interval | unsigned long | 定时器定时间隔，单位 ms |
 
 ## Macros

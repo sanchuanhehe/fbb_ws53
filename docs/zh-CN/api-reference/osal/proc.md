@@ -224,7 +224,7 @@ typedef struct osal_proc_cmd_ {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | name | char[OSAL_PROC_NAME_LENGTH] | 命令名称字符串 |
-| handler | int (*)(unsigned int, char (*)[PROC_CMD_SINGEL_LENGTH_MAX], void *) | 命令处理函数指针，被调用时传入参数个数 argc、参数字符串数组 argv 与私有数据 private_data |
+| handler | int (\*)(unsigned int, char (\*)[PROC_CMD_SINGEL_LENGTH_MAX], void \*) | 命令处理函数指针，被调用时传入参数个数 argc、参数字符串数组 argv 与私有数据 private_data |
 
 ### osal_proc_entry <a id="osal_proc_entry"></a>
 
@@ -251,9 +251,9 @@ typedef struct osal_proc_dir_entry {
 | cmd_cnt | unsigned int | 命令列表中的命令数量 |
 | cmd_list | [osal_proc_cmd](#osal_proc_cmd) * | 命令列表指针，指向 osal_proc_cmd 数组 |
 | proc_dir_entry | void * | proc 目录项指针 |
-| open | int (*)(struct osal_proc_dir_entry *) | 文件打开回调函数指针 |
-| read | int (*)(struct osal_proc_dir_entry *) | 文件读取回调函数指针 |
-| write | int (*)(struct osal_proc_dir_entry *, const char *, int, long long *) | 文件写入回调函数指针 |
+| open | int (\*)(struct osal_proc_dir_entry \*) | 文件打开回调函数指针 |
+| read | int (\*)(struct osal_proc_dir_entry \*) | 文件读取回调函数指针 |
+| write | int (\*)(struct osal_proc_dir_entry \*, const char \*, int, long long \*) | 文件写入回调函数指针 |
 | private_data | void * | 调用方私有数据指针，在回调中透传 |
 | seqfile | void * | 顺序文件指针，在 read 回调中传给 osal_seq_printf |
 | node | struct osal_list_head | 链表节点，用于模块内部管理 |

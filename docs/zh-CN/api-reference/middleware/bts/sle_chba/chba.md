@@ -250,7 +250,7 @@ errcode_t sle_chba_netdev_driver_send(uint8_t *data, uint16_t len)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | data | uint8_t * | 待发送数据缓冲区指针 | 不为 NULL |
-| len | uint16_t | 待发送数据长度，单位字节 | 0 ~ 65535 |
+| len | uint16_t | 待发送数据长度，单位 Bytes | 0 ~ 65535 |
 
 **返回值**
 

@@ -832,7 +832,7 @@ typedef struct dma_ch_user_memory_config {
 | dest | uint32_t | 传输目的地址 |
 | transfer_num | uint16_t | 传输数据量 |
 | priority | uint8_t | 传输通道优先级，最低为 0、最高为 3 |
-| width | uint8_t | 传输数据宽度：0 表示 1 字节、1 表示 2 字节、2 表示 4 字节 |
+| width | uint8_t | 传输数据宽度：0 表示 1 Bytes；<br>1 表示 2 Bytes；<br>2 表示 4 Bytes。 |
 
 ### dma_ch_user_peripheral_config_t <a id="dma_ch_user_peripheral_config_t"></a>
 
@@ -967,15 +967,15 @@ typedef struct dma_ch_user_peripheral_config {
 | transfer_num | uint16_t | 传输数据量 |
 | src_handshaking | uint16_t | 源端硬件握手号，参考 [hal_dma_handshaking_source_t](#hal_dma_handshaking_source_t) |
 | dest_handshaking | uint16_t | 目的端硬件握手号，参考 [hal_dma_handshaking_source_t](#hal_dma_handshaking_source_t) |
-| trans_type | uint8_t | 传输类型：0 表示内存到内存且由 DMA 流控、1 表示内存到外设且由 DMA 流控、2 表示外设到内存且由 DMA 流控、3 表示外设到外设且由 DMA 流控、4 表示外设到内存且由外设流控、5 表示外设到外设且由源端外设流控、6 表示内存到外设且由外设流控、7 表示外设到外设且由目的端外设流控 |
-| trans_dir | uint8_t | 传输方向：0 表示内存到外设、1 表示外设到内存、2 表示外设到外设 |
+| trans_type | uint8_t | 传输类型：0 表示内存到内存且由 DMA 流控；<br>1 表示内存到外设且由 DMA 流控；<br>2 表示外设到内存且由 DMA 流控；<br>3 表示外设到外设且由 DMA 流控；<br>4 表示外设到内存且由外设流控；<br>5 表示外设到外设且由源端外设流控；<br>6 表示内存到外设且由外设流控；<br>7 表示外设到外设且由目的端外设流控。 |
+| trans_dir | uint8_t | 传输方向：0 表示内存到外设；<br>1 表示外设到内存；<br>2 表示外设到外设。 |
 | priority | uint8_t | 传输通道优先级，最低为 0、最高为 3 |
-| src_width | uint8_t | 源端传输数据宽度：0 表示 1 字节、1 表示 2 字节、2 表示 4 字节 |
-| dest_width | uint8_t | 目的端传输数据宽度：0 表示 1 字节、1 表示 2 字节、2 表示 4 字节 |
-| burst_length | uint8_t | 传输 burst 长度：0 表示 burst 长度为 1、1 表示 4、2 表示 8、3 表示 16 |
-| src_increment | uint8_t | 源端地址增量模式：0 表示递增、1 表示递减、2 表示不变 |
-| dest_increment | uint8_t | 目的端地址增量模式：0 表示递增、1 表示递减、2 表示不变 |
-| protection | uint8_t | DMA 保护控制位，用于驱动 AHB HPROT[3:1] 总线：0 表示 HPROT[1]、1 表示 HPROT[2]、2 表示 HPROT[3] |
+| src_width | uint8_t | 源端传输数据宽度：0 表示 1 Bytes；<br>1 表示 2 Bytes；<br>2 表示 4 Bytes。 |
+| dest_width | uint8_t | 目的端传输数据宽度：0 表示 1 Bytes；<br>1 表示 2 Bytes；<br>2 表示 4 Bytes。 |
+| burst_length | uint8_t | 传输 burst 长度：0 表示 burst 长度为 1；<br>1 表示 4；<br>2 表示 8；<br>3 表示 16。 |
+| src_increment | uint8_t | 源端地址增量模式：0 表示递增；<br>1 表示递减；<br>2 表示不变。 |
+| dest_increment | uint8_t | 目的端地址增量模式：0 表示递增；<br>1 表示递减；<br>2 表示不变。 |
+| protection | uint8_t | DMA 保护控制位，用于驱动 AHB HPROT[3:1] 总线：0 表示 HPROT[1]；<br>1 表示 HPROT[2]；<br>2 表示 HPROT[3]。 |
 
 ## Macros
 

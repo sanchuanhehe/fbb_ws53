@@ -1326,13 +1326,13 @@ typedef struct sdio_callback_func {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| read_start_callback | uint32_t (*)(uint32_t len, uint8_t *dma_tbl) | DEVICE 感知到 HOST 发起读操作时调用，参数为读取长度与 DMA 表 |
-| read_over_callback | uint32_t (*)(void) | DEVICE 感知到 HOST 读操作结束时调用 |
-| read_err_callback | void (*)(void) | DEVICE 感知到 HOST 读数据错误时调用 |
-| write_start_callback | uint32_t (*)(uint32_t len, uint8_t *dma_tbl) | DEVICE 感知到 HOST 发起写操作时调用，参数为写入长度与 DMA 表 |
-| write_over_callback | uint32_t (*)(void) | DEVICE 感知到 HOST 写操作结束时调用 |
-| process_msg_callback | void (*)(uint32_t) | DEVICE 接收到 HOST 发来的消息时调用，参数为消息号 |
-| soft_rst_callback | void (*)(void) | DEVICE 接收到 HOST 发来的软复位时调用 |
+| read_start_callback | uint32_t (\*)(uint32_t len, uint8_t \*dma_tbl) | DEVICE 感知到 HOST 发起读操作时调用，参数为读取长度与 DMA 表 |
+| read_over_callback | uint32_t (\*)(void) | DEVICE 感知到 HOST 读操作结束时调用 |
+| read_err_callback | void (\*)(void) | DEVICE 感知到 HOST 读数据错误时调用 |
+| write_start_callback | uint32_t (\*)(uint32_t len, uint8_t \*dma_tbl) | DEVICE 感知到 HOST 发起写操作时调用，参数为写入长度与 DMA 表 |
+| write_over_callback | uint32_t (\*)(void) | DEVICE 感知到 HOST 写操作结束时调用 |
+| process_msg_callback | void (\*)(uint32_t) | DEVICE 接收到 HOST 发来的消息时调用，参数为消息号 |
+| soft_rst_callback | void (\*)(void) | DEVICE 接收到 HOST 发来的软复位时调用 |
 
 ## Macros
 

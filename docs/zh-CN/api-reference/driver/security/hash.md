@@ -1,6 +1,6 @@
 # Hash
 
-Hash 提供 SHA-256（Secure Hash Algorithm 256-bit）哈希计算接口，基于安全硬件加速器对外提供单次计算与流式（start/update/finish）分块计算两种使用方式，输出 256 位（32 字节）摘要。
+Hash 提供 SHA-256（Secure Hash Algorithm 256-bit）哈希计算接口，基于安全硬件加速器对外提供单次计算与流式（start/update/finish）分块计算两种使用方式，输出 256 位（32 Bytes）摘要。
 
 **模块公共头文件**
 
@@ -98,7 +98,7 @@ errcode_t uapi_drv_cipher_sha256_update(uint32_t hash_handle, const uint8_t *buf
 | ---- | ---- | ---- | ---- |
 | hash_handle | uint32_t | 已创建的 SHA-256 通道句柄 | 由 uapi_drv_cipher_sha256_start 返回的有效句柄 |
 | buf | const uint8_t * | 待追加计算的源数据缓冲区指针 | 不为NULL |
-| len | uint32_t | 待追加计算的源数据缓冲区大小，单位字节 | 0 ~ 0xFFFFFFFF |
+| len | uint32_t | 待追加计算的源数据缓冲区大小，单位 Bytes | 0 ~ 0xFFFFFFFF |
 
 **返回值**
 
@@ -191,7 +191,7 @@ errcode_t uapi_drv_cipher_sha256(const uint8_t *buf, uint32_t len, uint8_t *out,
 
 - 对一段完整数据一次性完成 SHA-256 计算并输出摘要。
 - 调用方无需自行管理通道句柄。
-- 摘要固定写入 32 字节。
+- 摘要固定写入 32 Bytes。
 
 **前置条件**
 
@@ -204,14 +204,14 @@ errcode_t uapi_drv_cipher_sha256(const uint8_t *buf, uint32_t len, uint8_t *out,
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | buf | const uint8_t * | 待计算摘要的源数据缓冲区指针 | 不为NULL |
-| len | uint32_t | 待计算摘要的源数据缓冲区大小，单位字节 | 0 ~ 0xFFFFFFFF |
-| out_len | uint32_t | 存储摘要的缓冲区容量，单位字节；实际写入固定为 32 字节摘要 | [SHA256_HASH_SIZE](#SHA256_HASH_SIZE)：32 |
+| len | uint32_t | 待计算摘要的源数据缓冲区大小，单位 Bytes | 0 ~ 0xFFFFFFFF |
+| out_len | uint32_t | 存储摘要的缓冲区容量，单位 Bytes；实际写入固定为 32 Bytes摘要 | [SHA256_HASH_SIZE](#SHA256_HASH_SIZE)：32 |
 
 **出参**
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| out | uint8_t * | 计算得到的 32 字节摘要，由函数写入调用方分配的缓冲区 |
+| out | uint8_t * | 计算得到的 32 Bytes摘要，由函数写入调用方分配的缓冲区 |
 
 **返回值**
 

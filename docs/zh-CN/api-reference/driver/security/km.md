@@ -858,8 +858,8 @@ typedef struct {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| key | uint8_t * | 明文密钥内容指针，对称算法仅可取 16 / 24 / 32 字节；HMAC-SHA1/SHA224/SHA256/SM3 不超过 64；HMAC-SHA384/SHA512 不超过 128 |
-| key_length | uint32_t | 明文密钥长度，单位为字节 |
+| key | uint8_t * | 明文密钥内容指针，对称算法仅可取 16 / 24 / 32 Bytes；HMAC-SHA1/SHA224/SHA256/SM3 不超过 64；HMAC-SHA384/SHA512 不超过 128 |
+| key_length | uint32_t | 明文密钥长度，单位 Bytes |
 | key_parity | bool | 密钥奇偶属性，当目标为对称算法引擎且 key_length 为 16 时生效 |
 | hmac_type | uapi_drv_klad_hmac_type_t | HMAC 算法类型，仅当目标为 HMAC 算法引擎时生效 |
 
@@ -967,7 +967,7 @@ typedef struct {
 | key_parity | bool | 密钥奇偶属性，当目标为对称算法引擎且 key_length 为 16 时生效 |
 | key_size | uapi_drv_klad_key_size_t | 需要派生的密钥长度 |
 | salt | uint8_t * | 盐值内容指针，作为用户输入材料参与密钥派生，盐值不同最终工作密钥不同 |
-| salt_length | uint32_t | 盐值长度，单位为字节，只能为 28 |
+| salt_length | uint32_t | 盐值长度，单位 Bytes，只能为 28 |
 | oneway | bool | 密钥派生单向性，默认为 0；设置为 1 时即使使用相同派生材料也无法派生出相同密钥 |
 
 ## Macros

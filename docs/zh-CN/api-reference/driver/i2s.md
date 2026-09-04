@@ -717,12 +717,12 @@ typedef struct i2s_config {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| drive_mode | uint8_t | I2S 设备模式，取值 0 表示从模式、1 表示主模式 |
-| transfer_mode | uint8_t | I2S 传输路径模式，取值 0 表示标准模式、1 表示多路模式 |
-| data_width | uint8_t | I2S 数据宽度，取值 0 保留、1 表示 16 位、2 表示 18 位、3 表示 20 位、4 表示 24 位、5 表示 32 位 |
-| channels_num | uint8_t | I2S 传输通道数，取值 0 表示 2 通道、1 表示 4 通道、2 表示 8 通道、3 表示 16 通道 |
-| timing | uint8_t | I2S 时序模式，取值 0 表示标准时序模式、1 表示自定义时序模式 |
-| clk_edge | uint8_t | I2S 时钟边沿模式，取值 0 表示下降沿、1 表示上升沿 |
+| drive_mode | uint8_t | I2S 设备模式，取值 0 表示从模式；<br>1 表示主模式。 |
+| transfer_mode | uint8_t | I2S 传输路径模式，取值 0 表示标准模式；<br>1 表示多路模式。 |
+| data_width | uint8_t | I2S 数据宽度，取值 0 保留；<br>1 表示 16 位；<br>2 表示 18 位；<br>3 表示 20 位；<br>4 表示 24 位；<br>5 表示 32 位。 |
+| channels_num | uint8_t | I2S 传输通道数，取值 0 表示 2 通道；<br>1 表示 4 通道；<br>2 表示 8 通道；<br>3 表示 16 通道。 |
+| timing | uint8_t | I2S 时序模式，取值 0 表示标准时序模式；<br>1 表示自定义时序模式。 |
+| clk_edge | uint8_t | I2S 时钟边沿模式，取值 0 表示下降沿；<br>1 表示上升沿。 |
 | div_number | uint8_t | 分频系数 |
 | number_of_channels | uint8_t | 通道数 |
 
@@ -770,9 +770,9 @@ typedef struct i2s_dma_config {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| src_width | uint8_t | 源端传输数据宽度，取值 0 表示 1 字节、1 表示 2 字节、2 表示 4 字节 |
-| dest_width | uint8_t | 目的端传输数据宽度，取值 0 表示 1 字节、1 表示 2 字节、2 表示 4 字节 |
-| burst_length | uint8_t | 每次目的 burst 请求写入目的端的数据量，取值 0 表示 1、1 表示 4、2 表示 8、3 表示 16 |
+| src_width | uint8_t | 源端传输数据宽度，取值 0 表示 1 Bytes；<br>1 表示 2 Bytes；<br>2 表示 4 Bytes。 |
+| dest_width | uint8_t | 目的端传输数据宽度，取值 0 表示 1 Bytes；<br>1 表示 2 Bytes；<br>2 表示 4 Bytes。 |
+| burst_length | uint8_t | 每次目的 burst 请求写入目的端的数据量，取值 0 表示 1；<br>1 表示 4；<br>2 表示 8；<br>3 表示 16。 |
 | priority | uint8_t | 传输通道优先级，取值范围 0 ~ 3 |
 
 ### struct_i2s_dma_attr_t <a id="struct_i2s_dma_attr_t"></a>

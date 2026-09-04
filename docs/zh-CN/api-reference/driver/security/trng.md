@@ -31,7 +31,7 @@ errcode_t uapi_drv_cipher_trng_get_random(uint32_t *randnum)
 
 **功能说明**
 
-- 获取单个 uint32_t（4 字节）大小的硬件随机数。
+- 获取单个 uint32_t（4 Bytes）大小的硬件随机数。
 - 将生成的随机数写入调用方提供的缓冲区。
 - 用于需要单个随机数的场景。
 
@@ -84,7 +84,7 @@ errcode_t uapi_drv_cipher_trng_get_random_bytes(uint8_t *randnum, uint32_t size)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| size | uint32_t | 待生成的随机数字节长度，randnum 缓冲区容量需不小于该值 | 按需指定，单位字节 |
+| size | uint32_t | 待生成的随机数字节长度，randnum 缓冲区容量需不小于该值 | 按需指定，单位 Bytes |
 
 **出参**
 

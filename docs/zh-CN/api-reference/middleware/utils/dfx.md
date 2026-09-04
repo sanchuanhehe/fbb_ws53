@@ -140,7 +140,7 @@ errcode_t uapi_diag_report_packet(uint16_t cmd_id, diag_option_t *option, const 
 | cmd_id | uint16_t | 报文上报 ID，与命令回调函数中的 cmd_id 一致时复用该值 | 0 ~ 65535 |
 | option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址，用于识别报文是本地报文还是远端报文；为 NULL 时按本地默认地址处理 | 可为NULL |
 | packet | const uint8_t * | 数据包缓冲区地址 | 不为NULL |
-| packet_size | uint16_t | 数据包大小（单位：字节） | 0 ~ 65535 |
+| packet_size | uint16_t | 数据包大小（单位 Bytes） | 0 ~ 65535 |
 | sync | bool | 上报方式，true 表示同步阻塞上报，false 表示异步非阻塞上报 | true；<br>false。 |
 
 **返回值**
@@ -191,7 +191,7 @@ errcode_t uapi_diag_report_packets_critical(uint16_t cmd_id, diag_option_t *opti
 | cmd_id | uint16_t | 报文上报 ID | 0 ~ 65535 |
 | option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址；为 NULL 时按本地默认地址处理 | 可为NULL |
 | packet | uint8_t ** | 指向数据包指针数组的指针，每个元素为一个数据包缓冲区地址 | 不为NULL |
-| packet_size | uint16_t * | 指向数据包大小数组的指针，每个元素与 packet 数组元素一一对应（单位：字节） | 不为NULL |
+| packet_size | uint16_t * | 指向数据包大小数组的指针，每个元素与 packet 数组元素一一对应（单位 Bytes） | 不为NULL |
 | pkt_cnt | uint8_t | 数据包个数 | 0 ~ DIAG_PKT_DATA_ID_USR_MAX-1（实现仅拒绝超出上界的值） |
 
 **返回值**
@@ -239,7 +239,7 @@ errcode_t uapi_diag_report_packets_normal(uint16_t cmd_id, diag_option_t *option
 | cmd_id | uint16_t | 报文上报 ID | 0 ~ 65535 |
 | option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址；为 NULL 时按本地默认地址处理 | 可为NULL |
 | packet | uint8_t ** | 指向数据包指针数组的指针，每个元素为一个数据包缓冲区地址 | 不为NULL |
-| packet_size | uint16_t * | 指向数据包大小数组的指针，每个元素与 packet 数组元素一一对应（单位：字节） | 不为NULL |
+| packet_size | uint16_t * | 指向数据包大小数组的指针，每个元素与 packet 数组元素一一对应（单位 Bytes） | 不为NULL |
 | pkt_cnt | uint8_t | 数据包个数 | 0 ~ DIAG_PKT_DATA_ID_USR_MAX-1（实现仅拒绝超出上界的值） |
 
 **返回值**
@@ -286,7 +286,7 @@ errcode_t uapi_diag_report_sys_msg(uint32_t module_id, uint32_t msg_id, const ui
 | module_id | uint32_t | 打印日志的源模块 ID | 0 ~ 4294967295 |
 | msg_id | uint32_t | 打印日志的消息 ID | 0 ~ 4294967295 |
 | buf | const uint8_t * | 打印内容缓冲区 | 不为NULL（buf_size 非 0 时） |
-| buf_size | uint16_t | 内容大小（单位：字节） | 0 ~ 65535 |
+| buf_size | uint16_t | 内容大小（单位 Bytes） | 0 ~ 65535 |
 | level | uint8_t | 日志级别 | DIAG_LEVEL_DEBUG/DIAG_LEVEL_NOTICE/DIAG_LEVEL_WARNING/DIAG_LEVEL_ERROR/DIAG_LEVEL_FATAL 中有效值（由 diag 定义的日志级别枚举决定） |
 
 **返回值**
@@ -382,7 +382,7 @@ errcode_t uapi_diag_run_cmd(uint16_t cmd_id, uint8_t *data, uint16_t data_size, 
 | ---- | ---- | ---- | ---- |
 | cmd_id | uint16_t | diag 命令请求 ID | 0 ~ 65535 |
 | data | uint8_t * | 数据内容缓冲区地址 | 不为NULL |
-| data_size | uint16_t | 数据大小（单位：字节） | 0 ~ 65535 |
+| data_size | uint16_t | 数据大小（单位 Bytes） | 0 ~ 65535 |
 | option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址 | 不为NULL |
 
 **返回值**
@@ -460,7 +460,7 @@ diag 命令行处理函数指针类型，作为 [diag_cmd_reg_obj_t](#diag_cmd_r
 - 调用时机：DIAG 子系统在分发命令时，按注册表中的命令 ID 区间匹配命中后调用该处理函数。
 - 参数 cmd_id：触发本次处理的 diag 命令 ID。
 - 参数 cmd_param：命令参数数据指针，内容来源于命令请求报文。
-- 参数 cmd_param_size：命令参数数据大小（单位：字节）。
+- 参数 cmd_param_size：命令参数数据大小（单位 Bytes）。
 - 参数 option：option 选项，携带对端地址信息。
 - 返回值处理：处理函数返回的 errcode_t 由 DIAG 命令分发流程接收。
 
@@ -517,7 +517,7 @@ typedef struct {
 | ------- | ------- | ---- |
 | id | uint16_t | 统计量 ID |
 | array_cnt | uint16_t | 统计量数量 |
-| stat_packet_size | uint32_t | 每个统计量的大小（单位：字节） |
+| stat_packet_size | uint32_t | 每个统计量的大小（单位 Bytes） |
 | stat_packet | void * | 指向统计量的指针 |
 
 ## Macros

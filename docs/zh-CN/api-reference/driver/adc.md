@@ -562,7 +562,7 @@ typedef struct adc_scan_config {
 | threshold_l | float | 阈值扫描电压（v）下限 |
 | threshold_h | float | 阈值扫描电压（v）上限 |
 | freq | uint8_t | ADC 扫描频率，用于所有通道（取值范围 0 ~ 7） |
-| long_sample_time | uint32_t | ADC 长采样上报周期（单位：毫秒），仅在 CONFIG_ADC_SUPPORT_LONG_SAMPLE 启用时存在 |
+| long_sample_time | uint32_t | ADC 长采样上报周期（单位 ms），仅在 CONFIG_ADC_SUPPORT_LONG_SAMPLE 启用时存在 |
 
 ## Macros
 

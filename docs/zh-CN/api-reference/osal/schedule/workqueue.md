@@ -206,7 +206,7 @@ typedef struct osal_workqueue_ {
 | ------- | ------- | ---- |
 | queue_flag | int | 工作队列标志位 |
 | work | void * | 内部工作结构体指针 |
-| handler | void (*)(struct osal_workqueue_ *workqueue) | 工作队列回调处理函数指针，在工作被调度执行时调用 |
+| handler | void (\*)(struct osal_workqueue_ \*workqueue) | 工作队列回调处理函数指针，在工作被调度执行时调用 |
 
 ## Macros
 

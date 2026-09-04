@@ -81,7 +81,7 @@ errcode_t uapi_nv_write(uint16_t key, const uint8_t *kvalue, uint16_t kvalue_len
 | ---- | ---- | ---- | ---- |
 | key | uint16_t | 要写入的 NV 项的 key ID，用于索引 | KEY_ID_REGION0(1, 0x1000) ~ KEY_ID_REGION15(0xF000, 0xFFFF) 区域内合法 key ID |
 | kvalue | const uint8_t * | 指向待写入 NV 项值的指针 | 不为NULL |
-| kvalue_length | uint16_t | 写入数据的长度，单位字节 | 大于 0，普通 NV 不超过 NV_NORMAL_KVALUE_MAX_LEN(4060)，加密 NV 不超过 NV_ENCRYPTED_KVALUE_MAX_LEN(4032) |
+| kvalue_length | uint16_t | 写入数据的长度，单位 Bytes | 大于 0，普通 NV 不超过 NV_NORMAL_KVALUE_MAX_LEN(4060)，加密 NV 不超过 NV_ENCRYPTED_KVALUE_MAX_LEN(4032) |
 
 **返回值**
 
@@ -135,7 +135,7 @@ errcode_t uapi_nv_write_with_attr(uint16_t key, const uint8_t *kvalue, uint16_t 
 | ---- | ---- | ---- | ---- |
 | key | uint16_t | 要写入的 NV 项的 key ID，用于索引 | KEY_ID_REGION0(1, 0x1000) ~ KEY_ID_REGION15(0xF000, 0xFFFF) 区域内合法 key ID |
 | kvalue | const uint8_t * | 指向待写入 NV 项值的指针 | 不为NULL |
-| kvalue_length | uint16_t | 写入数据的长度，单位字节 | 大于 0，普通 NV 不超过 NV_NORMAL_KVALUE_MAX_LEN(4060)，加密 NV 不超过 NV_ENCRYPTED_KVALUE_MAX_LEN(4032) |
+| kvalue_length | uint16_t | 写入数据的长度，单位 Bytes | 大于 0，普通 NV 不超过 NV_NORMAL_KVALUE_MAX_LEN(4060)，加密 NV 不超过 NV_ENCRYPTED_KVALUE_MAX_LEN(4032) |
 | attr | [nv_key_attr_t](#struct_nv_key_attr_t) * | 指向 NV 项属性配置的指针，传入 NULL 表示使用默认属性 Normal | NULL 或合法属性结构指针 |
 | func | [nv_storage_completed_callback](#typedef_nv_storage_completed_callback) | kvalue 写入 flash 完成后调用的回调函数，传入 NULL 表示不注册回调 | NULL 或合法回调函数指针 |
 
@@ -189,13 +189,13 @@ errcode_t uapi_nv_read(uint16_t key, uint16_t kvalue_max_length, uint16_t *kvalu
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | key | uint16_t | 要读取的 NV 项的 key ID，用于索引 | KEY_ID_REGION0(1, 0x1000) ~ KEY_ID_REGION15(0xF000, 0xFFFF) 区域内合法 key ID |
-| kvalue_max_length | uint16_t | 允许拷贝到 kvalue 缓冲区的最大长度，单位字节 | 大于等于实际读取数据长度 |
+| kvalue_max_length | uint16_t | 允许拷贝到 kvalue 缓冲区的最大长度，单位 Bytes | 大于等于实际读取数据长度 |
 
 **出参**
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| kvalue_length | uint16_t * | 实际读取到的 NV 数据长度，单位字节，由调用方分配内存、函数填充 |
+| kvalue_length | uint16_t * | 实际读取到的 NV 数据长度，单位 Bytes，由调用方分配内存、函数填充 |
 | kvalue | uint8_t * | 指向保存读取数据的缓冲区指针，由调用方分配内存、函数填充 |
 
 **返回值**
@@ -248,13 +248,13 @@ errcode_t uapi_nv_read_with_attr(uint16_t key, uint16_t kvalue_max_length, uint1
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | key | uint16_t | 要读取的 NV 项的 key ID，用于索引 | KEY_ID_REGION0(1, 0x1000) ~ KEY_ID_REGION15(0xF000, 0xFFFF) 区域内合法 key ID |
-| kvalue_max_length | uint16_t | 允许拷贝到 kvalue 缓冲区的最大长度，单位字节 | 大于等于实际读取数据长度 |
+| kvalue_max_length | uint16_t | 允许拷贝到 kvalue 缓冲区的最大长度，单位 Bytes | 大于等于实际读取数据长度 |
 
 **出参**
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| kvalue_length | uint16_t * | 实际读取到的 NV 数据长度，单位字节，由调用方分配内存、函数填充 |
+| kvalue_length | uint16_t * | 实际读取到的 NV 数据长度，单位 Bytes，由调用方分配内存、函数填充 |
 | kvalue | uint8_t * | 指向保存读取数据的缓冲区指针，由调用方分配内存、函数填充 |
 | attr | [nv_key_attr_t](#struct_nv_key_attr_t) * | 获取到的 NV 项属性，由调用方分配内存、函数填充 |
 
@@ -648,11 +648,11 @@ typedef struct {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| total_space | uint32_t | 当前核的 NV 总空间，单位字节 |
-| used_space | uint32_t | 当前核已使用的 NV 空间，单位字节 |
-| reclaimable_space | uint32_t | 当前核的 NV 可回收空间，擦除后可复用，单位字节 |
-| corrupted_space | uint32_t | 当前核已损坏的 NV 空间，数据有效但异常，擦除后可复用，单位字节 |
-| max_key_space | uint32_t | 可存储的最大单 NV 项空间，单位字节 |
+| total_space | uint32_t | 当前核的 NV 总空间，单位 Bytes |
+| used_space | uint32_t | 当前核已使用的 NV 空间，单位 Bytes |
+| reclaimable_space | uint32_t | 当前核的 NV 可回收空间，擦除后可复用，单位 Bytes |
+| corrupted_space | uint32_t | 当前核已损坏的 NV 空间，数据有效但异常，擦除后可复用，单位 Bytes |
+| max_key_space | uint32_t | 可存储的最大单 NV 项空间，单位 Bytes |
 
 ### struct_nv_restore_mode_t <a id="struct_nv_restore_mode_t"></a>
 

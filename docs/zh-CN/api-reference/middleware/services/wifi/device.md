@@ -3145,18 +3145,18 @@ typedef struct {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| wifi_event_connection_changed | void(*)(int32_t, const wifi_linked_info_stru*, int32_t) | 连接状态改变回调 |
-| wifi_event_scan_state_changed | void(*)(int32_t, int32_t) | 扫描状态改变回调 |
-| wifi_event_softap_state_changed | void(*)(int32_t) | Hotspot状态改变回调 |
-| wifi_event_softap_sta_join | void(*)(const wifi_sta_info_stru*) | Station连接回调 |
-| wifi_event_softap_sta_leave | void(*)(const wifi_sta_info_stru*) | Station断连回调 |
-| wifi_event_p2p_receive_connect | void(*)(const uint8_t*, int8_t) | P2P接收连接请求回调 |
-| wifi_event_p2p_go_neg_result | void(*)(int32_t, int32_t) | P2P GO协商结果回调 |
-| wifi_event_p2p_go_start | void(*)(int32_t) | P2P GO建立结果回调 |
-| wifi_event_p2p_invitation_result | void(*)(int32_t) | P2P邀请结果回调 |
-| wifi_event_p2p_gc_connection_changed | void(*)(int32_t, const p2p_status_info_stru*) | P2P GC（Group Client）关联结果回调 |
-| wifi_event_p2p_go_connection_changed | void(*)(int32_t, const p2p_client_info_stru*) | P2P GO关联结果回调 |
-| wifi_event_wps_result | void(*)(int32_t, wifi_if_type_enum) | WPS关联结果回调 |
+| wifi_event_connection_changed | void(\*)(int32_t, const wifi_linked_info_stru\*, int32_t) | 连接状态改变回调 |
+| wifi_event_scan_state_changed | void(\*)(int32_t, int32_t) | 扫描状态改变回调 |
+| wifi_event_softap_state_changed | void(\*)(int32_t) | Hotspot状态改变回调 |
+| wifi_event_softap_sta_join | void(\*)(const wifi_sta_info_stru\*) | Station连接回调 |
+| wifi_event_softap_sta_leave | void(\*)(const wifi_sta_info_stru\*) | Station断连回调 |
+| wifi_event_p2p_receive_connect | void(\*)(const uint8_t\*, int8_t) | P2P接收连接请求回调 |
+| wifi_event_p2p_go_neg_result | void(\*)(int32_t, int32_t) | P2P GO协商结果回调 |
+| wifi_event_p2p_go_start | void(\*)(int32_t) | P2P GO建立结果回调 |
+| wifi_event_p2p_invitation_result | void(\*)(int32_t) | P2P邀请结果回调 |
+| wifi_event_p2p_gc_connection_changed | void(\*)(int32_t, const p2p_status_info_stru\*) | P2P GC（Group Client）关联结果回调 |
+| wifi_event_p2p_go_connection_changed | void(\*)(int32_t, const p2p_client_info_stru\*) | P2P GO关联结果回调 |
+| wifi_event_wps_result | void(\*)(int32_t, wifi_if_type_enum) | WPS关联结果回调 |
 
 ### wifi_sta_info_stru <a id="struct_wifi_sta_info_stru"></a>
 

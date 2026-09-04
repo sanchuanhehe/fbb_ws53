@@ -56,7 +56,7 @@ int osal_event_init(osal_event *event_obj)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 事件控制块初始化成功 |
-| [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 执行失败 | event_obj 为 NULL、event 成员非 NULL 或内存分配失败 |
+| [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 执行失败 | event_obj 为 NULL、event 成员非 NULL 或内存分配失败 |
 | Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
 
 **参考案例**
@@ -79,7 +79,7 @@ int osal_event_write(osal_event *event_obj, unsigned int mask)
 
 - 向事件控制块写入指定事件掩码。
 - 写入后等待该事件的任务将被唤醒。
-- 支持 bit 0 ~ bit 30 的事件位写入。
+- 支持 bit[0:30] 的事件位写入。
 
 **前置条件**
 
@@ -91,7 +91,7 @@ int osal_event_write(osal_event *event_obj, unsigned int mask)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | event_obj | [osal_event](#osal_event) * | 指向目标事件控制块 | 不为NULL |
-| mask | unsigned int | 待写入的事件掩码 | bit 0 ~ bit 30，禁止使用 bit 31 |
+| mask | unsigned int | 待写入的事件掩码 | bit[0:30]，禁止使用 bit[31] |
 
 **返回值**
 
@@ -100,7 +100,7 @@ int osal_event_write(osal_event *event_obj, unsigned int mask)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 事件写入成功 |
-| [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 执行失败 | event_obj 为 NULL 或 mask 使用了 bit 31 |
+| [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 执行失败 | event_obj 为 NULL 或 mask 使用了 bit[31] |
 | Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
 
 **参考案例**
@@ -135,8 +135,8 @@ int osal_event_read(osal_event *event_obj, unsigned int mask, unsigned int timeo
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | event_obj | [osal_event](#osal_event) * | 指向目标事件控制块 | 不为NULL |
-| mask | unsigned int | 期望读取的事件掩码 | bit 0 ~ bit 30，禁止使用 bit 31；liteos 上禁止使用 bit 25 |
-| timeout_ms | unsigned int | 读取超时时间，单位为毫秒；[OSAL_EVENT_FOREVER](#OSAL_EVENT_FOREVER)(0xFFFFFFFF) 表示永久等待 | 0 ~ 0xFFFFFFFF |
+| mask | unsigned int | 期望读取的事件掩码 | bit[0:30]，禁止使用 bit[31]；liteos 上禁止使用 bit[25] |
+| timeout_ms | unsigned int | 读取超时时间，单位 ms；[OSAL_EVENT_FOREVER](#OSAL_EVENT_FOREVER)(0xFFFFFFFF) 表示永久等待 | 0 ~ 0xFFFFFFFF |
 | mode | unsigned int | 事件读取模式，可组合使用 | [OSAL_WAITMODE_AND](#OSAL_WAITMODE_AND)(4U)；<br>[OSAL_WAITMODE_OR](#OSAL_WAITMODE_OR)(2U)；<br>[OSAL_WAITMODE_CLR](#OSAL_WAITMODE_CLR)(1U)。 |
 
 **返回值**
@@ -147,7 +147,7 @@ int osal_event_read(osal_event *event_obj, unsigned int mask, unsigned int timeo
 | -------- | -------- | -------- |
 | 非零位掩码 | 成功读取到的事件位 | 等待条件满足，返回实际读取到的事件位 |
 | 0 | 未读取到事件 | 超时或事件已被消费 |
-| [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 参数无效 | event_obj 为 NULL |
+| [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 参数无效 | event_obj 为 NULL |
 | Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码（含 LOS_ERRTYPE_ERROR 标志） |
 
 **参考案例**
@@ -191,7 +191,7 @@ int osal_event_clear(osal_event *event_obj, unsigned int mask)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 事件清除成功 |
-| [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 执行失败 | event_obj 为 NULL |
+| [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 执行失败 | event_obj 为 NULL |
 | Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
 
 **参考案例**
@@ -234,7 +234,7 @@ int osal_event_destroy(osal_event *event_obj)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 事件控制块销毁成功 |
-| [OSAL_FAILURE](#OSAL_FAILURE):(-1) | 执行失败 | event_obj 为 NULL |
+| [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 执行失败 | event_obj 为 NULL |
 | Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
 
 **参考案例**

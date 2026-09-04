@@ -1351,9 +1351,9 @@ typedef struct spi_dma_config {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| src_width | uint8_t | 源端传输数据宽度，0 为 1 字节、1 为 2 字节、2 为 4 字节 |
-| dest_width | uint8_t | 目的端传输数据宽度，0 为 1 字节、1 为 2 字节、2 为 4 字节 |
-| burst_length | uint8_t | 每次目的 burst 请求写入的数据量，0 为 1、1 为 4、2 为 8、3 为 16 |
+| src_width | uint8_t | 源端传输数据宽度，0 为 1 Bytes；<br>1 为 2 Bytes；<br>2 为 4 Bytes。 |
+| dest_width | uint8_t | 目的端传输数据宽度，0 为 1 Bytes；<br>1 为 2 Bytes；<br>2 为 4 Bytes。 |
+| burst_length | uint8_t | 每次目的 burst 请求写入的数据量，0 为 1；<br>1 为 4；<br>2 为 8；<br>3 为 16。 |
 | priority | uint8_t | 传输通道优先级，范围为 0 ~ 3 |
 
 ### spi_crc_config_t <a id="spi_crc_config_t"></a>

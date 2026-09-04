@@ -115,7 +115,7 @@ int osal_delayedwork_schedule(osal_delayedwork *work, int timeout)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | work | [osal_delayedwork](#osal_delayedwork) * | 待调度的延迟工作对象指针 | 不为NULL，且 work->work 不为 NULL |
-| timeout | int | 延迟执行的超时时间，单位毫秒 | 0 表示立即执行，大于 0 为延迟毫秒数 |
+| timeout | int | 延迟执行的超时时间，单位 ms | 0 表示立即执行，大于 0 为延迟毫秒数 |
 
 **返回值**
 
@@ -192,7 +192,7 @@ typedef struct osal_delayedwork_ {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | work | void * | 内核延迟工作对象指针，由初始化接口填充 |
-| handler | void (*)(struct osal_delayedwork_ *) | 延迟工作超时回调处理函数指针 |
+| handler | void (\*)(struct osal_delayedwork_ \*) | 延迟工作超时回调处理函数指针 |
 
 ## Macros
 

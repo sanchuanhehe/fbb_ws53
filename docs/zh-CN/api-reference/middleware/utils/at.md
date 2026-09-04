@@ -343,7 +343,7 @@ errcode_t uapi_at_urc_to_channel(at_channel_id_t channel_id, const char *msg, ui
 | ---- | ---- | ---- | ---- |
 | channel_id | at_channel_id_t | AT 通道号，取值由 at_config.h 中 at_channel_id_t 枚举定义 | AT_UART_PORT(0)；<br>AT_ZDIAG_PORT(1)（仅开启 CONFIG_AT_SUPPORT_ZDIAG 时存在）；<br>AT_MAX_PORT_NUMBER 之前的合法值。 |
 | msg | const char * | 主动上报消息内容起始地址 | 不为NULL |
-| msg_len | uint32_t | 主动上报消息长度，单位字节 | 大于0 |
+| msg_len | uint32_t | 主动上报消息长度，单位 Bytes | 大于0 |
 
 **返回值**
 

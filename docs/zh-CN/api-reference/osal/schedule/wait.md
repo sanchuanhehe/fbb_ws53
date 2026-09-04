@@ -181,7 +181,7 @@ int osal_wait_timeout_interruptible(osal_wait *wait, osal_wait_condition_func fu
 | wait | [osal_wait](#osal_wait) * | 等待的等待队列句柄 | 不为NULL 且 wait->wait 已初始化 |
 | func | [osal_wait_condition_func](#osal_wait_condition_func) | 条件判断回调函数，每次唤醒时调用；为 NULL 时按永真条件等待并默认返回超时 | 为 NULL 或指向有效的条件判断函数 |
 | param | const void * | 传递给条件判断回调函数的参数 | - |
-| ms | unsigned long | 超时时间，单位毫秒 | 0 ~ 0xFFFFFFFF；[OSAL_WAIT_FOREVER](#OSAL_WAIT_FOREVER)(0xFFFFFFFF) 表示永久等待 |
+| ms | unsigned long | 超时时间，单位 ms | 0 ~ 0xFFFFFFFF；[OSAL_WAIT_FOREVER](#OSAL_WAIT_FOREVER)(0xFFFFFFFF) 表示永久等待 |
 
 **返回值**
 
@@ -228,7 +228,7 @@ int osal_wait_timeout_uninterruptible(osal_wait *wait, osal_wait_condition_func 
 | wait | [osal_wait](#osal_wait) * | 等待的等待队列句柄 | 不为NULL 且 wait->wait 已初始化 |
 | func | [osal_wait_condition_func](#osal_wait_condition_func) | 条件判断回调函数，每次唤醒时调用；为 NULL 时按永真条件等待 | 为 NULL 或指向有效的条件判断函数 |
 | param | const void * | 传递给条件判断回调函数的参数 | - |
-| ms | unsigned long | 超时时间，单位毫秒 | 0 ~ 0xFFFFFFFF；[OSAL_WAIT_FOREVER](#OSAL_WAIT_FOREVER)(0xFFFFFFFF) 表示永久等待 |
+| ms | unsigned long | 超时时间，单位 ms | 0 ~ 0xFFFFFFFF；[OSAL_WAIT_FOREVER](#OSAL_WAIT_FOREVER)(0xFFFFFFFF) 表示永久等待 |
 
 **返回值**
 

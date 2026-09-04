@@ -500,7 +500,7 @@ errcode_t uapi_soc_read_id(uint8_t *id, uint16_t id_length)
 
 - 获取 SoC-ID。
 - 将 SoC-ID 字节序列写入调用方提供的缓冲区。
-- SoC-ID 固定为 20 字节序列。
+- SoC-ID 固定为 20 Bytes序列。
 
 **前置条件**
 
@@ -511,13 +511,13 @@ errcode_t uapi_soc_read_id(uint8_t *id, uint16_t id_length)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| id_length | uint16_t | id 缓冲区的容量，以字节为单位 | 容量 ≥ 20（实际写入固定 20 字节） |
+| id_length | uint16_t | id 缓冲区的容量，以字节为单位 | 容量 ≥ 20（实际写入固定 20 Bytes） |
 
 **出参**
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| id | uint8_t * | SoC-ID 字节序列（长度 20 字节），由调用方分配内存、函数填充 |
+| id | uint8_t * | SoC-ID 字节序列（长度 20 Bytes），由调用方分配内存、函数填充 |
 
 **返回值**
 

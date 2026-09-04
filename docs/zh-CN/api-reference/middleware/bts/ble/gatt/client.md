@@ -681,7 +681,7 @@ typedef struct {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | handle | uint16_t | 属性句柄，作为读写操作的目标句柄或读取结果的来源句柄 |
-| data_len | uint16_t | 数据长度，单位字节 |
+| data_len | uint16_t | 数据长度，单位 Bytes |
 | data | uint8_t * | 数据指针，指向句柄对应的数据内容 |
 
 ### gattc_discovery_character_param_t <a id="struct_gattc_discovery_character_param_t"></a>
