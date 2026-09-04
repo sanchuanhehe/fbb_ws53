@@ -459,7 +459,7 @@ WS53总共有3个UART，SDK默认配置如下。
     ![](figures/zh-cn_image_0000002247600772.png)
 
 -   支持AT、DEBUG串口功能合一到HSO口上，可以用HSO工具完成AT命令及回显、DEBUG日志、HSO日志功能。需要先打开**CONFIG\_AT\_SUPPORT\_ZDIAG**宏，再通过menuconfig配置HSO/AT/DEBUG为同一串口，波特率一致，可以选择是否打开HSO心跳功能。以下是将AT、DEBUG功能都合一到HSO上，并使用L0作为串口的配置示例如下。
--   ![](figures/zh-cn_image_0000002298050126.png)
+    ![](figures/zh-cn_image_0000002298050126.png)
 
     ![](figures/zh-cn_image_0000002247763860.png)
 
