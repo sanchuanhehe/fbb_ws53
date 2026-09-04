@@ -13,7 +13,7 @@ Wi-Fi 案例位于 `src/application/samples/wifi/`。网络案例除构建和烧
 | --- | --- | --- | --- |
 | [STA 连接](sta/sta-connect.md) | 扫描并连接无线接入点，通过 DHCP 获取地址 | `wifi/sta_sample/` | `SAMPLE_SUPPORT_STA_SAMPLE` |
 | [SoftAP](softap/softap.md) | 创建无线接入点和 DHCP Server | `wifi/softap_sample/` | `SAMPLE_SUPPORT_SOFTAP_SAMPLE` |
-| [BLE Wi-Fi 配网](../ble/verticals/wifi-config.md) | 通过 BLE 获取 AP 列表和 Wi-Fi 配置 | `wifi/ble_wifi_cfg_sample/` | `SAMPLE_SUPPORT_BLE_WIFI_CFG_SAMPLE` |
+| [Wi-Fi 配网](../ble/verticals/wifi-config.md) | 通过 BLE 获取 AP 列表和 Wi-Fi 配置 | `wifi/ble_wifi_cfg_sample/` | `SAMPLE_SUPPORT_BLE_WIFI_CFG_SAMPLE` |
 | [SysChannel](syschannel.md) | WS53 Device 与 Linux Host 间的数据通道 | `wifi/syschannel_dev/`、`syschannel_host/` | `SAMPLE_SUPPORT_SYSCHANNEL_DEV` |
 
 ## 集成与适配专题
