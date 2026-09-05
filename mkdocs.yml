@@ -284,5 +284,4 @@ nav:
           - GUI指南: zh-CN/tools/HiSparkStudioforVSCodeUserGuide/GUIProjectCreationAndUsage.md
       - BurnTool: zh-CN/tools/BurnToolUserGuide/BurnToolUserGuide.md
   - FAQ:
-      - 常见问题: zh-CN/FAQ/index.md
-      - 产测 FAQ: zh-CN/FAQ/manufacturing/index.md
+      - 常见问题: zh-CN/FAQ/manufacturing/index.md
