@@ -543,12 +543,12 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SSAP_FIND_TYPE_SERVICE_STRUCTURE | 0 | 服务结构 |
-| SSAP_FIND_TYPE_PRIMARY_SERVICE | 1 | 首要服务 |
-| SSAP_FIND_TYPE_REFERENCE_SERVICE | 2 | 引用服务 |
-| SSAP_FIND_TYPE_PROPERTY | 3 | 属性 |
-| SSAP_FIND_TYPE_METHOD | 4 | 方法 |
-| SSAP_FIND_TYPE_EVENT | 5 | 事件 |
+| SSAP_FIND_TYPE_SERVICE_STRUCTURE | 0x00 | 服务结构 |
+| SSAP_FIND_TYPE_PRIMARY_SERVICE | 0x01 | 首要服务 |
+| SSAP_FIND_TYPE_REFERENCE_SERVICE | 0x02 | 引用服务 |
+| SSAP_FIND_TYPE_PROPERTY | 0x03 | 属性 |
+| SSAP_FIND_TYPE_METHOD | 0x04 | 方法 |
+| SSAP_FIND_TYPE_EVENT | 0x05 | 事件 |
 
 ### ssap_property_type_t <a id="enum_ssap_property_type_t"></a>
 
@@ -566,12 +566,12 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SSAP_PROPERTY_TYPE_VALUE | 0 | 特征值 |
-| SSAP_DESCRIPTOR_USER_DESCRIPTION | 1 | 属性说明描述符 |
-| SSAP_DESCRIPTOR_CLIENT_CONFIGURATION | 2 | 客户端配置描述符 |
-| SSAP_DESCRIPTOR_SERVER_CONFIGURATION | 3 | 服务端配置描述符 |
-| SSAP_DESCRIPTOR_PRESENTATION_FORMAT | 4 | 格式描述符 |
-| SSAP_DESCRIPTOR_RFU | 5 | 服务管理保留描述符，5 – 0x1F |
+| SSAP_PROPERTY_TYPE_VALUE | 0x00 | 特征值 |
+| SSAP_DESCRIPTOR_USER_DESCRIPTION | 0x01 | 属性说明描述符 |
+| SSAP_DESCRIPTOR_CLIENT_CONFIGURATION | 0x02 | 客户端配置描述符 |
+| SSAP_DESCRIPTOR_SERVER_CONFIGURATION | 0x03 | 服务端配置描述符 |
+| SSAP_DESCRIPTOR_PRESENTATION_FORMAT | 0x04 | 格式描述符 |
+| SSAP_DESCRIPTOR_RFU | 0x05 | 服务管理保留描述符，5 – 0x1F |
 | SSAP_DESCRIPTOR_CUSTOM | 0xFF | 厂商自定义描述符 |
 
 ## Structures

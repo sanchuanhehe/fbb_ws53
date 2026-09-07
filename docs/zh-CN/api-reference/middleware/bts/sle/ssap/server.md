@@ -819,8 +819,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_INDICATION_CFM_FAIL | 0 | 指示接收失败 |
-| SLE_INDICATION_CFM_SUCESS | 1 | 指示接收成功 |
+| SLE_INDICATION_CFM_FAIL | 0x00 | 指示接收失败 |
+| SLE_INDICATION_CFM_SUCESS | 0x01 | 指示接收成功 |
 
 ## Structures
 

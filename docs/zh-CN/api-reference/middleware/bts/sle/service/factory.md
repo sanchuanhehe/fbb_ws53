@@ -297,12 +297,12 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_RF_POWER_LEVEL_0 | 0 | 射频功率0等级:-14dbm |
-| SLE_RF_POWER_LEVEL_1 | 1 | 射频功率1等级:-10dbm |
-| SLE_RF_POWER_LEVEL_2 | 2 | 射频功率2等级:-6dbm |
-| SLE_RF_POWER_LEVEL_3 | 3 | 射频功率3等级:-2dbm |
-| SLE_RF_POWER_LEVEL_4 | 4 | 射频功率4等级:2dbm |
-| SLE_RF_POWER_LEVEL_5 | 5 | 射频功率5等级:6dbm |
+| SLE_RF_POWER_LEVEL_0 | 0x00 | 射频功率0等级:-14dbm |
+| SLE_RF_POWER_LEVEL_1 | 0x01 | 射频功率1等级:-10dbm |
+| SLE_RF_POWER_LEVEL_2 | 0x02 | 射频功率2等级:-6dbm |
+| SLE_RF_POWER_LEVEL_3 | 0x03 | 射频功率3等级:-2dbm |
+| SLE_RF_POWER_LEVEL_4 | 0x04 | 射频功率4等级:2dbm |
+| SLE_RF_POWER_LEVEL_5 | 0x05 | 射频功率5等级:6dbm |
 
 ### sle_rf_payload_type_t <a id="enum_sle_rf_payload_type_t"></a>
 
@@ -322,14 +322,14 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_RF_PATLOAD_TYPE_0 | 0 | 射频信息体类型:PRBS9 |
-| SLE_RF_PATLOAD_TYPE_1 | 1 | 射频信息体类型:11110000 |
-| SLE_RF_PATLOAD_TYPE_2 | 2 | 射频信息体类型:10101010 |
-| SLE_RF_PATLOAD_TYPE_3 | 3 | 射频信息体类型:PRBS15 |
-| SLE_RF_PATLOAD_TYPE_4 | 4 | 射频信息体类型:11111111 |
-| SLE_RF_PATLOAD_TYPE_5 | 5 | 射频信息体类型:00000000 |
-| SLE_RF_PATLOAD_TYPE_6 | 6 | 射频信息体类型:00001111 |
-| SLE_RF_PATLOAD_TYPE_7 | 7 | 射频信息体类型:01010101 |
+| SLE_RF_PATLOAD_TYPE_0 | 0x00 | 射频信息体类型:PRBS9 |
+| SLE_RF_PATLOAD_TYPE_1 | 0x01 | 射频信息体类型:11110000 |
+| SLE_RF_PATLOAD_TYPE_2 | 0x02 | 射频信息体类型:10101010 |
+| SLE_RF_PATLOAD_TYPE_3 | 0x03 | 射频信息体类型:PRBS15 |
+| SLE_RF_PATLOAD_TYPE_4 | 0x04 | 射频信息体类型:11111111 |
+| SLE_RF_PATLOAD_TYPE_5 | 0x05 | 射频信息体类型:00000000 |
+| SLE_RF_PATLOAD_TYPE_6 | 0x06 | 射频信息体类型:00001111 |
+| SLE_RF_PATLOAD_TYPE_7 | 0x07 | 射频信息体类型:01010101 |
 
 ### sle_rf_phy_t <a id="enum_sle_rf_phy_t"></a>
 
@@ -344,9 +344,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_RF_PHY_1M | 0 | 射频物理层1M |
-| SLE_RF_PHY_2M | 1 | 射频物理层2M |
-| SLE_RF_PHY_4M | 4 | 射频物理层4M |
+| SLE_RF_PHY_1M | 0x00 | 射频物理层1M |
+| SLE_RF_PHY_2M | 0x01 | 射频物理层2M |
+| SLE_RF_PHY_4M | 0x04 | 射频物理层4M |
 
 ### sle_rf_format_t <a id="enum_sle_rf_format_t"></a>
 
@@ -360,8 +360,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_RF_FORMAT_FRAME_TYPE_1 | 0 | 射频格式:无线帧类型1 |
-| SLE_RF_FORMAT_FRAME_TYPE_2 | 1 | 射频格式:无线帧类型2 |
+| SLE_RF_FORMAT_FRAME_TYPE_1 | 0x00 | 射频格式:无线帧类型1 |
+| SLE_RF_FORMAT_FRAME_TYPE_2 | 0x01 | 射频格式:无线帧类型2 |
 
 ### sle_rf_tx_rate_t <a id="enum_sle_rf_tx_rate_t"></a>
 
@@ -376,9 +376,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_RF_TX_RATE_GFSK | 0 | 射频长发速率:GFSK |
-| SLE_RF_TX_RATE_QPSK | 2 | 射频长发速率:QPSK |
-| SLE_RF_TX_RATE_8PSK | 3 | 射频长发速率:8PSK |
+| SLE_RF_TX_RATE_GFSK | 0x00 | 射频长发速率:GFSK |
+| SLE_RF_TX_RATE_QPSK | 0x02 | 射频长发速率:QPSK |
+| SLE_RF_TX_RATE_8PSK | 0x03 | 射频长发速率:8PSK |
 
 ### sle_rf_pilot_ratio_t <a id="enum_sle_rf_pilot_ratio_t"></a>
 
@@ -394,10 +394,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_RF_PILOT_RATIO_NO | 0 | 射频导频比:No |
-| SLE_RF_PILOT_RATIO_1_1 | 1 | 射频导频比:1:1 |
-| SLE_RF_PILOT_RATIO_4_1 | 2 | 射频导频比:4:1 |
-| SLE_RF_PILOT_RATIO_16_1 | 3 | 射频导频比:16:1 |
+| SLE_RF_PILOT_RATIO_NO | 0x00 | 射频导频比:No |
+| SLE_RF_PILOT_RATIO_1_1 | 0x01 | 射频导频比:1:1 |
+| SLE_RF_PILOT_RATIO_4_1 | 0x02 | 射频导频比:4:1 |
+| SLE_RF_PILOT_RATIO_16_1 | 0x03 | 射频导频比:16:1 |
 
 ### sle_rf_tx_polar_t <a id="enum_sle_rf_tx_polar_t"></a>
 
@@ -413,10 +413,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_RF_TX_POLAR_NO | 0 | 射频发射极化编码:No |
-| SLE_RF_TX_POLAR_2_3 | 1 | 射频发射极化编码:2/3 |
-| SLE_RF_TX_POLAR_3_4 | 2 | 射频发射极化编码:3/4 |
-| SLE_RF_TX_POLAR_5_6 | 3 | 射频发射极化编码:5/6 |
+| SLE_RF_TX_POLAR_NO | 0x00 | 射频发射极化编码:No |
+| SLE_RF_TX_POLAR_2_3 | 0x01 | 射频发射极化编码:2/3 |
+| SLE_RF_TX_POLAR_3_4 | 0x02 | 射频发射极化编码:3/4 |
+| SLE_RF_TX_POLAR_5_6 | 0x03 | 射频发射极化编码:5/6 |
 
 ## Structures
 

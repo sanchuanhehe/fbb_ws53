@@ -2072,9 +2072,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_PAIR_NONE | 1 | 未配对状态 |
-| SLE_PAIR_PAIRING | 2 | 正在配对 |
-| SLE_PAIR_PAIRED | 3 | 已完成配对 |
+| SLE_PAIR_NONE | 0x01 | 未配对状态 |
+| SLE_PAIR_PAIRING | 0x02 | 正在配对 |
+| SLE_PAIR_PAIRED | 0x03 | 已完成配对 |
 
 ### sle_disc_reason_t <a id="enum_sle_disc_reason_t"></a>
 
@@ -2102,9 +2102,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_ACB_STATE_NONE | 0 | SLE ACB 未连接状态 |
-| SLE_ACB_STATE_CONNECTED | 1 | SLE ACB 已连接 |
-| SLE_ACB_STATE_DISCONNECTED | 2 | SLE ACB 已断接 |
+| SLE_ACB_STATE_NONE | 0x00 | SLE ACB 未连接状态 |
+| SLE_ACB_STATE_CONNECTED | 0x01 | SLE ACB 已连接 |
+| SLE_ACB_STATE_DISCONNECTED | 0x02 | SLE ACB 已断接 |
 
 ### sle_crypto_algo_t <a id="enum_sle_crypto_algo_t"></a>
 
@@ -2119,10 +2119,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_CRYTO_ALGO_AC1 | 1 | AC1 加密算法类型 |
-| SLE_CRYTO_ALGO_AC2 | 2 | AC2 加密算法类型 |
-| SLE_CRYTO_ALGO_EA1 | 3 | EA1 加密算法类型 |
-| SLE_CRYTO_ALGO_EA2 | 4 | EA2 加密算法类型 |
+| SLE_CRYTO_ALGO_AC1 | 0x01 | AC1 加密算法类型 |
+| SLE_CRYTO_ALGO_AC2 | 0x02 | AC2 加密算法类型 |
+| SLE_CRYTO_ALGO_EA1 | 0x03 | EA1 加密算法类型 |
+| SLE_CRYTO_ALGO_EA2 | 0x04 | EA2 加密算法类型 |
 
 ### sle_key_deriv_algo_t <a id="enum_sle_key_deriv_algo_t"></a>
 
@@ -2135,8 +2135,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_KEY_DERIV_ALGO_HA1 | 1 | HA1 秘钥分发算法类型 |
-| SLE_KEY_DERIV_ALGO_HA2 | 2 | HA2 秘钥分发算法类型 |
+| SLE_KEY_DERIV_ALGO_HA1 | 0x01 | HA1 秘钥分发算法类型 |
+| SLE_KEY_DERIV_ALGO_HA2 | 0x02 | HA2 秘钥分发算法类型 |
 
 ### sle_integr_chk_ind_t <a id="enum_sle_integr_chk_ind_t"></a>
 
@@ -2151,10 +2151,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_ENCRYPTION_ENABLE_INTEGRITY_CHK_ENABLE | 0 | 加密和完整性保护同时启动 |
-| SLE_ENCRYPTION_DISABLE_INTEGRITY_CHK_ENABLE | 1 | 不启动加密，启动完整性保护 |
-| SLE_ENCRYPTION_ENABLE_INTEGRITY_CHK_DISABLE | 2 | 启动加密，不启动完整性保护 |
-| SLE_ENCRYPTION_DISABLE_INTEGRITY_CHK_DISABLE | 3 | 不启动加密，不启动完整性保护 |
+| SLE_ENCRYPTION_ENABLE_INTEGRITY_CHK_ENABLE | 0x00 | 加密和完整性保护同时启动 |
+| SLE_ENCRYPTION_DISABLE_INTEGRITY_CHK_ENABLE | 0x01 | 不启动加密，启动完整性保护 |
+| SLE_ENCRYPTION_ENABLE_INTEGRITY_CHK_DISABLE | 0x02 | 启动加密，不启动完整性保护 |
+| SLE_ENCRYPTION_DISABLE_INTEGRITY_CHK_DISABLE | 0x03 | 不启动加密，不启动完整性保护 |
 
 ### sle_bond_ind_t <a id="enum_sle_bond_ind_t"></a>
 
@@ -2167,8 +2167,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_PAIR_NO_BOND | 0 | 星闪配对不需要绑定 |
-| SLE_PAIR_NEED_BOND | 1 | 星闪配对需要绑定 |
+| SLE_PAIR_NO_BOND | 0x00 | 星闪配对不需要绑定 |
+| SLE_PAIR_NEED_BOND | 0x01 | 星闪配对需要绑定 |
 
 ### sle_link_role_t <a id="enum_sle_link_role_t"></a>
 
@@ -2237,9 +2237,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_PHY_1M | 0 | 1M PHY |
-| SLE_PHY_2M | 1 | 2M PHY |
-| SLE_PHY_4M | 2 | 4M PHY |
+| SLE_PHY_1M | 0x0 | 1M PHY |
+| SLE_PHY_2M | 0x1 | 2M PHY |
+| SLE_PHY_4M | 0x2 | 4M PHY |
 | SLE_PHY_SUPPORT_NUM | 3 | PHY 支持数量 |
 
 ### sle_phy_tx_rx_pilot_density_t <a id="enum_sle_phy_tx_rx_pilot_density_t"></a>
@@ -2256,10 +2256,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_PHY_PILOT_DENSITY_4_TO_1 | 0 | 导频密度为4:1 |
-| SLE_PHY_PILOT_DENSITY_8_TO_1 | 1 | 导频密度为8:1 |
-| SLE_PHY_PILOT_DENSITY_16_TO_1 | 2 | 导频密度为16:1 |
-| SLE_PHY_PILOT_DENSITY_NO | 3 | 无导频 |
+| SLE_PHY_PILOT_DENSITY_4_TO_1 | 0x0 | 导频密度为4:1 |
+| SLE_PHY_PILOT_DENSITY_8_TO_1 | 0x1 | 导频密度为8:1 |
+| SLE_PHY_PILOT_DENSITY_16_TO_1 | 0x2 | 导频密度为16:1 |
+| SLE_PHY_PILOT_DENSITY_NO | 0x3 | 无导频 |
 | SLE_PHY_PILOT_DENSITY_NUM | 4 | 导频密度数量 |
 
 ### sle_save_smp_keys_mode_switch_t <a id="enum_sle_save_smp_keys_mode_switch_t"></a>
@@ -2273,8 +2273,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_SAVE_SMP_KEYS_AUTO | 0 | 秘钥自动保存 |
-| SLE_SAVE_SMP_KEYS_MANU | 1 | 秘钥用户手动保存 |
+| SLE_SAVE_SMP_KEYS_AUTO | 0x00 | 秘钥自动保存 |
+| SLE_SAVE_SMP_KEYS_MANU | 0x01 | 秘钥用户手动保存 |
 
 ### sle_announce_level_t <a id="enum_sle_announce_level_t"></a>
 
@@ -2328,11 +2328,11 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_ANNOUNCE_MODE_NONCONN_NONSCAN | 0 | 不可连接不可扫描 |
-| SLE_ANNOUNCE_MODE_CONNECTABLE_NONSCAN | 1 | 可连接不可扫描 |
-| SLE_ANNOUNCE_MODE_NONCONN_SCANABLE | 2 | 不可连接可扫描 |
-| SLE_ANNOUNCE_MODE_CONNECTABLE_SCANABLE | 3 | 可连接可扫描 |
-| SLE_ANNOUNCE_MODE_CONNECTABLE_DIRECTED | 7 | 可连接可扫描定向 |
+| SLE_ANNOUNCE_MODE_NONCONN_NONSCAN | 0x00 | 不可连接不可扫描 |
+| SLE_ANNOUNCE_MODE_CONNECTABLE_NONSCAN | 0x01 | 可连接不可扫描 |
+| SLE_ANNOUNCE_MODE_NONCONN_SCANABLE | 0x02 | 不可连接可扫描 |
+| SLE_ANNOUNCE_MODE_CONNECTABLE_SCANABLE | 0x03 | 可连接可扫描 |
+| SLE_ANNOUNCE_MODE_CONNECTABLE_DIRECTED | 0x07 | 可连接可扫描定向 |
 
 ### sle_seek_phy_t <a id="enum_sle_seek_phy_t"></a>
 
@@ -2346,9 +2346,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_SEEK_PHY_1M | 1 | 1M PHY |
-| SLE_SEEK_PHY_2M | 2 | 2M PHY |
-| SLE_SEEK_PHY_4M | 4 | 4M PHY |
+| SLE_SEEK_PHY_1M | 0x1 | 1M PHY |
+| SLE_SEEK_PHY_2M | 0x2 | 2M PHY |
+| SLE_SEEK_PHY_4M | 0x4 | 4M PHY |
 
 ### sle_seek_type_t <a id="enum_sle_seek_type_t"></a>
 
@@ -2361,8 +2361,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_SEEK_PASSIVE | 0 | 被动扫描 |
-| SLE_SEEK_ACTIVE | 1 | 主动扫描 |
+| SLE_SEEK_PASSIVE | 0x00 | 被动扫描 |
+| SLE_SEEK_ACTIVE | 0x01 | 主动扫描 |
 
 ### sle_seek_filter_t <a id="enum_sle_seek_filter_t"></a>
 
@@ -2375,8 +2375,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_SEEK_FILTER_ALLOW_ALL | 0 | 允许来自任何人的设备发现数据包 |
-| SLE_SEEK_FILTER_ALLOW_WLST | 1 | 允许来自白名单设备的设备发现数据包，预留 |
+| SLE_SEEK_FILTER_ALLOW_ALL | 0x00 | 允许来自任何人的设备发现数据包 |
+| SLE_SEEK_FILTER_ALLOW_WLST | 0x01 | 允许来自白名单设备的设备发现数据包，预留 |
 
 ### sle_link_qos_state_t <a id="enum_sle_link_qos_state_t"></a>
 
@@ -2390,9 +2390,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_QOS_IDLE | 0 | 空闲状态 |
-| SLE_QOS_FLOWCTRL | 1 | 流控状态 |
-| SLE_QOS_BUSY | 2 | 繁忙状态 |
+| SLE_QOS_IDLE | 0x00 | 空闲状态 |
+| SLE_QOS_FLOWCTRL | 0x01 | 流控状态 |
+| SLE_QOS_BUSY | 0x02 | 繁忙状态 |
 
 ### sle_addr_type_t <a id="enum_sle_addr_type_t"></a>
 

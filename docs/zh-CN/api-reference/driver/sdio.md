@@ -1125,7 +1125,7 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SDIO_CHANNEL_ERR | 0 | SDIO 错误 |
+| SDIO_CHANNEL_ERR | 0x0 | SDIO 错误 |
 | SDIO_CHANNEL_RESET | 1 | 重置 SDIO |
 | SDIO_CHANNEL_INIT | 2 | 初始化 SDIO |
 | SDIO_CHANNEL_SLEEP | 3 | SDIO 睡眠状态 |

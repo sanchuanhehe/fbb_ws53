@@ -1326,7 +1326,7 @@ typedef enum {
 | UAPI_DRV_CIPHER_PKE_ECC_TYPE_RFC8032 | 11 | RFC 8032 ED25519 |
 | UAPI_DRV_CIPHER_PKE_ECC_TYPE_SM2 | 12 | GMT 0003.2-2012 SM2 曲线 |
 | UAPI_DRV_CIPHER_PKE_ECC_TYPE_MAX | 13 | 曲线类型上限 |
-| UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID | 0xFFFFFFFF | 无效曲线类型 |
+| UAPI_DRV_CIPHER_PKE_ECC_TYPE_INVALID | 0xffffffff | 无效曲线类型 |
 
 ### uapi_drv_cipher_pke_rsa_scheme_t <a id="uapi_drv_cipher_pke_rsa_scheme_t"></a>
 
@@ -1341,10 +1341,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| UAPI_DRV_CIPHER_PKE_RSA_SCHEME_PKCS1_V15 | 0 | PKCS1 v1.5 填充方式（不安全，不建议使用） |
+| UAPI_DRV_CIPHER_PKE_RSA_SCHEME_PKCS1_V15 | 0x00 | PKCS1 v1.5 填充方式（不安全，不建议使用） |
 | UAPI_DRV_CIPHER_PKE_RSA_SCHEME_PKCS1_V21 | 1 | PKCS1 v2.1 填充方式 |
 | UAPI_DRV_CIPHER_PKE_RSA_SCHEME_MAX | 2 | 填充方式上限 |
-| UAPI_DRV_CIPHER_PKE_RSA_SCHEME_INVALID | 0xFFFFFFFF | 无效填充方式 |
+| UAPI_DRV_CIPHER_PKE_RSA_SCHEME_INVALID | 0xffffffff | 无效填充方式 |
 
 ### uapi_drv_cipher_pke_hash_type_t <a id="uapi_drv_cipher_pke_hash_type_t"></a>
 
@@ -1363,14 +1363,14 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA1 | 0 | SHA1 摘要算法 |
+| UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA1 | 0x00 | SHA1 摘要算法 |
 | UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA224 | 1 | SHA224 摘要算法 |
 | UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA256 | 2 | SHA256 摘要算法 |
 | UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA384 | 3 | SHA384 摘要算法 |
 | UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA512 | 4 | SHA512 摘要算法 |
 | UAPI_DRV_CIPHER_PKE_HASH_TYPE_SM3 | 5 | SM3 摘要算法 |
 | UAPI_DRV_CIPHER_PKE_HASH_TYPE_MAX | 6 | 摘要算法上限 |
-| UAPI_DRV_CIPHER_PKE_HASH_TYPE_INVALID | 0xFFFFFFFF | 无效摘要算法 |
+| UAPI_DRV_CIPHER_PKE_HASH_TYPE_INVALID | 0xffffffff | 无效摘要算法 |
 
 ### uapi_drv_cipher_pke_buffer_secure_t <a id="uapi_drv_cipher_pke_buffer_secure_t"></a>
 
@@ -1384,9 +1384,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| UAPI_DRV_CIPHER_PKE_BUF_NONSECURE | 0 | 非安全缓冲区属性 |
+| UAPI_DRV_CIPHER_PKE_BUF_NONSECURE | 0x00 | 非安全缓冲区属性 |
 | UAPI_DRV_CIPHER_PKE_BUF_SECURE | 1 | 安全缓冲区属性 |
-| UAPI_DRV_CIPHER_PKE_BUF_INVALID | 0xFFFFFFFF | 无效缓冲区属性 |
+| UAPI_DRV_CIPHER_PKE_BUF_INVALID | 0xffffffff | 无效缓冲区属性 |
 
 ## Structures
 

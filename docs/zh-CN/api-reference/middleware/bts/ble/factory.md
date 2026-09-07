@@ -440,10 +440,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| BLE_RF_PHY_1M | 1 | 射频物理层 1M |
-| BLE_RF_PHY_2M | 2 | 射频物理层 2M |
-| BLE_RF_PHY_S8 | 3 | 射频物理层 S=8 数据编码的编码 PHY |
-| BLE_RF_PHY_S2 | 4 | 射频物理层 S=2 数据编码的编码 PHY |
+| BLE_RF_PHY_1M | 0x01 | 射频物理层 1M |
+| BLE_RF_PHY_2M | 0x02 | 射频物理层 2M |
+| BLE_RF_PHY_S8 | 0x03 | 射频物理层 S=8 数据编码的编码 PHY |
+| BLE_RF_PHY_S2 | 0x04 | 射频物理层 S=2 数据编码的编码 PHY |
 
 ### ble_rf_payload_type_t <a id="enum_ble_rf_payload_type_t"></a>
 
@@ -462,14 +462,14 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| BLE_RF_PATLOAD_TYPE_0 | 0 | 射频信息体类型 PRBS9 |
-| BLE_RF_PATLOAD_TYPE_1 | 1 | 射频信息体类型 11110000 |
-| BLE_RF_PATLOAD_TYPE_2 | 2 | 射频信息体类型 10101010 |
-| BLE_RF_PATLOAD_TYPE_3 | 3 | 射频信息体类型 PRBS15 |
-| BLE_RF_PATLOAD_TYPE_4 | 4 | 射频信息体类型 11111111 |
-| BLE_RF_PATLOAD_TYPE_5 | 5 | 射频信息体类型 00000000 |
-| BLE_RF_PATLOAD_TYPE_6 | 6 | 射频信息体类型 00001111 |
-| BLE_RF_PATLOAD_TYPE_7 | 7 | 射频信息体类型 01010101 |
+| BLE_RF_PATLOAD_TYPE_0 | 0x00 | 射频信息体类型 PRBS9 |
+| BLE_RF_PATLOAD_TYPE_1 | 0x01 | 射频信息体类型 11110000 |
+| BLE_RF_PATLOAD_TYPE_2 | 0x02 | 射频信息体类型 10101010 |
+| BLE_RF_PATLOAD_TYPE_3 | 0x03 | 射频信息体类型 PRBS15 |
+| BLE_RF_PATLOAD_TYPE_4 | 0x04 | 射频信息体类型 11111111 |
+| BLE_RF_PATLOAD_TYPE_5 | 0x05 | 射频信息体类型 00000000 |
+| BLE_RF_PATLOAD_TYPE_6 | 0x06 | 射频信息体类型 00001111 |
+| BLE_RF_PATLOAD_TYPE_7 | 0x07 | 射频信息体类型 01010101 |
 
 ### ble_pdl_sub_opcode_t <a id="enum_ble_pdl_sub_opcode_t"></a>
 
@@ -492,15 +492,15 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| BTH_PRODUCTLINE_XO_TRIM | 1 | 设置频偏校准值，寄存器控制 |
-| BTH_PRODUCTLINE_XO_TRIM_RD_VAL | 2 | 读取频偏校准寄存器值 |
-| BTH_PRODUCTLINE_GET_TSENSOR_TEMPERATURE | 3 | 获取芯片温度 |
-| BTH_PRODUCTLINE_EFUSE_WRITE_XO_TRIM | 4 | 将频偏校准值写入 EFUSE |
-| BTH_PRODUCTLINE_EFUSE_READ_XO_TRIM | 5 | 从 EFUSE 读取频偏校准值 |
-| BTH_PRODUCTLINE_EFUSE_WRITE_TEMPERATURE | 6 | 将产测时的芯片温度写入 EFUSE |
-| BTH_PRODUCTLINE_EFUSE_READ_TEMPERATURE | 7 | 从 EFUSE 读取产测温度 |
-| BTH_PRODUCTLINE_PWR_CALI_SET_MEASSURED_PWR | 8 | 将实测发送功率发送给驱动 |
-| BTH_PRODUCTLINE_PWR_CALI_GET_COMP_RESULT | 9 | 获取功率校准结果 |
+| BTH_PRODUCTLINE_XO_TRIM | 0x01 | 设置频偏校准值，寄存器控制 |
+| BTH_PRODUCTLINE_XO_TRIM_RD_VAL | 0x02 | 读取频偏校准寄存器值 |
+| BTH_PRODUCTLINE_GET_TSENSOR_TEMPERATURE | 0x03 | 获取芯片温度 |
+| BTH_PRODUCTLINE_EFUSE_WRITE_XO_TRIM | 0x04 | 将频偏校准值写入 EFUSE |
+| BTH_PRODUCTLINE_EFUSE_READ_XO_TRIM | 0x05 | 从 EFUSE 读取频偏校准值 |
+| BTH_PRODUCTLINE_EFUSE_WRITE_TEMPERATURE | 0x06 | 将产测时的芯片温度写入 EFUSE |
+| BTH_PRODUCTLINE_EFUSE_READ_TEMPERATURE | 0x07 | 从 EFUSE 读取产测温度 |
+| BTH_PRODUCTLINE_PWR_CALI_SET_MEASSURED_PWR | 0x08 | 将实测发送功率发送给驱动 |
+| BTH_PRODUCTLINE_PWR_CALI_GET_COMP_RESULT | 0x09 | 获取功率校准结果 |
 | BTH_BTH_PRODUCTLINE_PWR_CALI_APPLY_COMP | 0x0A | 应用功率校准结果 |
 | BTH_PRODUCTLINE_EFUSE_WRITE_PWR_COMP | 0x0B | 将功率校准结果写入 EFUSE |
 | BTH_PRODUCTLINE_EFUSE_READ_PWR_COMP | 0x0C | 从 EFUSE 读取功率校准结果 |

@@ -805,10 +805,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| AT_SYNTAX_ATTR_NOT_SUPPORTED | 1 | 标识该参数当前不支持 |
-| AT_SYNTAX_ATTR_OPTIONAL | 2 | 标识该参数可缺省 |
-| AT_SYNTAX_ATTR_AT_MIN_VALUE | 4 | 校验方式为最小值校验 |
-| AT_SYNTAX_ATTR_AT_MAX_VALUE | 8 | 校验方式为最大值校验 |
+| AT_SYNTAX_ATTR_NOT_SUPPORTED | 0x0001 | 标识该参数当前不支持 |
+| AT_SYNTAX_ATTR_OPTIONAL | 0x0002 | 标识该参数可缺省 |
+| AT_SYNTAX_ATTR_AT_MIN_VALUE | 0x0004 | 校验方式为最小值校验 |
+| AT_SYNTAX_ATTR_AT_MAX_VALUE | 0x0008 | 校验方式为最大值校验 |
 | AT_SYNTAX_ATTR_LIST_VALUE | 0x0010 | 校验方式为白名单校验 |
 | AT_SYNTAX_ATTR_MAX_LENGTH | 0x0020 | 校验方式为长度校验 |
 | AT_SYNTAX_ATTR_ADD_LENGTH | 0x0040 | 为该参数新增长度字段 |

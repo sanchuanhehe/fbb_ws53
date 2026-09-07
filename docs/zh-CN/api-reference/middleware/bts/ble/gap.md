@@ -1709,7 +1709,7 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| GAP_BLE_APPEARANCE_TYPE_UNKNOWN | 0 | 未知类型 |
+| GAP_BLE_APPEARANCE_TYPE_UNKNOWN | 00 | 未知类型 |
 | GAP_BLE_APPEARANCE_TYPE_GENERIC_PHONE | 64 | 通用手机 |
 | GAP_BLE_APPEARANCE_TYPE_GENERIC_COMPUTER | 128 | 通用电脑 |
 | GAP_BLE_APPEARANCE_TYPE_GENERIC_WATCH | 192 | 通用手表 |
@@ -1732,10 +1732,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| GAP_BLE_ADV_FILTER_ALLOW_SCAN_ANY_CON_ANY | 0 | 处理所有设备的扫描和连接请求 |
-| GAP_BLE_ADV_FILTER_ALLOW_SCAN_WLST_CON_ANY | 1 | 处理所有连接请求，仅处理白名单的扫描请求 |
-| GAP_BLE_ADV_FILTER_ALLOW_SCAN_ANY_CON_WLST | 2 | 处理所有扫描请求，仅处理白名单的连接请求 |
-| GAP_BLE_ADV_FILTER_ALLOW_SCAN_WLST_CON_WLST | 3 | 仅处理白名单中扫描请求和连接请求 |
+| GAP_BLE_ADV_FILTER_ALLOW_SCAN_ANY_CON_ANY | 0x00 | 处理所有设备的扫描和连接请求 |
+| GAP_BLE_ADV_FILTER_ALLOW_SCAN_WLST_CON_ANY | 0x01 | 处理所有连接请求，仅处理白名单的扫描请求 |
+| GAP_BLE_ADV_FILTER_ALLOW_SCAN_ANY_CON_WLST | 0x02 | 处理所有扫描请求，仅处理白名单的连接请求 |
+| GAP_BLE_ADV_FILTER_ALLOW_SCAN_WLST_CON_WLST | 0x03 | 仅处理白名单中扫描请求和连接请求 |
 
 ### enum_gap_ble_adv_type_t <a id="enum_gap_ble_adv_type_t"></a>
 
@@ -1768,7 +1768,7 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| GAP_BLE_SCAN_TYPE_PASSIVE | 0 | 被动扫描 |
+| GAP_BLE_SCAN_TYPE_PASSIVE | 0x00 | 被动扫描 |
 | GAP_BLE_SCAN_TYPE_ACTIVE | 1 | 主动扫描 |
 
 ### enum_gap_ble_scan_filter_policy_t <a id="enum_gap_ble_scan_filter_policy_t"></a>
@@ -1797,7 +1797,7 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| GAP_BLE_SCAN_FILTER_POLICY_ACCEPT_ALL | 0 | 接收所有广播，不接收目标地址不是本设备地址的定向广播（默认） |
+| GAP_BLE_SCAN_FILTER_POLICY_ACCEPT_ALL | 0x00 | 接收所有广播，不接收目标地址不是本设备地址的定向广播（默认） |
 | GAP_BLE_SCAN_FILTER_POLICY_ONLY_WHITE_LIST | 1 | 只接收白名单里设备的广播，不接收目标地址不是本设备地址的定向广播 |
 | GAP_BLE_SCAN_FILTER_POLICY_ACCEPT_ALL_AND_RPA | 2 | 接收所有的非定向广播、地址是可解析私有地址的广播方发送的定向广播、发给该设备的定向广播 |
 | GAP_BLE_SCAN_FILTER_POLICY_ONLY_WHITE_LIST_AND_RPA | 3 | 接收白名单中的所有非定向广播、地址是可解析私有地址的广播方发送的定向广播、发给该设备的定向广播 |
@@ -1826,12 +1826,12 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| GAP_BLE_EVT_NON_CONNECTABLE_NON_SCANNABLE | 0 | 扩展的不可连接不可扫描非定向 |
-| GAP_BLE_EVT_NON_CONNECTABLE_NON_SCANNABLE_DIRECTED | 4 | 扩展的不可连接不可扫描定向 |
-| GAP_BLE_EVT_CONNECTABLE | 1 | 扩展的可连接非定向 |
-| GAP_BLE_EVT_CONNECTABLE_DIRECTED | 5 | 扩展的可连接定向 |
-| GAP_BLE_EVT_SCANNABLE | 2 | 扩展的可扫描非定向 |
-| GAP_BLE_EVT_SCANNABLE_DIRECTED | 6 | 扩展的可扫描定向 |
+| GAP_BLE_EVT_NON_CONNECTABLE_NON_SCANNABLE | 0x00 | 扩展的不可连接不可扫描非定向 |
+| GAP_BLE_EVT_NON_CONNECTABLE_NON_SCANNABLE_DIRECTED | 0x04 | 扩展的不可连接不可扫描定向 |
+| GAP_BLE_EVT_CONNECTABLE | 0x01 | 扩展的可连接非定向 |
+| GAP_BLE_EVT_CONNECTABLE_DIRECTED | 0x05 | 扩展的可连接定向 |
+| GAP_BLE_EVT_SCANNABLE | 0x02 | 扩展的可扫描非定向 |
+| GAP_BLE_EVT_SCANNABLE_DIRECTED | 0x06 | 扩展的可扫描定向 |
 | GAP_BLE_EVT_LEGACY_NON_CONNECTABLE | 0x10 | 传统的不可连接非定向 |
 | GAP_BLE_EVT_LEGACY_SCANNABLE | 0x12 | 传统的可扫描非定向 |
 | GAP_BLE_EVT_LEGACY_CONNECTABLE | 0x13 | 传统的可连接可扫描非定向 |
@@ -1850,8 +1850,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| GAP_BLE_PAIR_INFO_UNAVAILABLE | 0 | 配对信息不可获取 |
-| GAP_BLE_PAIR_INFO_AVAILABLE | 1 | 配对信息可获取 |
+| GAP_BLE_PAIR_INFO_UNAVAILABLE | 0x00 | 配对信息不可获取 |
+| GAP_BLE_PAIR_INFO_AVAILABLE | 0x01 | 配对信息可获取 |
 
 ### enum_gap_ble_save_pair_keys_mode_switch_t <a id="enum_gap_ble_save_pair_keys_mode_switch_t"></a>
 
@@ -1864,8 +1864,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| GAP_BLE_SAVE_SMP_KEYS_AUTO | 0 | 秘钥自动保存 |
-| GAP_BLE_SAVE_SMP_KEYS_MANU | 1 | 秘钥用户手动保存 |
+| GAP_BLE_SAVE_SMP_KEYS_AUTO | 0x00 | 秘钥自动保存 |
+| GAP_BLE_SAVE_SMP_KEYS_MANU | 0x01 | 秘钥用户手动保存 |
 
 ### enum_gap_ble_scan_result_data_status_t <a id="enum_gap_ble_scan_result_data_status_t"></a>
 
@@ -1879,9 +1879,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| GAP_BLE_DATA_COMPLETE | 0 | 完整数据或最后一个片段 |
-| GAP_BLE_DATA_INCOMPLETE_MORE_TO_COME | 1 | 不完整的数据 |
-| GAP_BLE_DATA_INCOMPLETE_TRUNCATED | 2 | 被截断不完整的数据 |
+| GAP_BLE_DATA_COMPLETE | 0x00 | 完整数据或最后一个片段 |
+| GAP_BLE_DATA_INCOMPLETE_MORE_TO_COME | 0x01 | 不完整的数据 |
+| GAP_BLE_DATA_INCOMPLETE_TRUNCATED | 0x02 | 被截断不完整的数据 |
 
 ### enum_gap_ble_phy_type_t <a id="enum_gap_ble_phy_type_t"></a>
 
@@ -1896,10 +1896,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| GAP_BLE_PHY_NO_PACKET | 0 | 无广播包 |
-| GAP_BLE_PHY_1M | 1 | 1M PHY |
-| GAP_BLE_PHY_2M | 2 | 2M PHY |
-| GAP_BLE_PHY_CODED | 3 | Coded PHY |
+| GAP_BLE_PHY_NO_PACKET | 0x00 | 无广播包 |
+| GAP_BLE_PHY_1M | 0x01 | 1M PHY |
+| GAP_BLE_PHY_2M | 0x02 | 2M PHY |
+| GAP_BLE_PHY_CODED | 0x03 | Coded PHY |
 
 ### enum_adv_status_t <a id="enum_adv_status_t"></a>
 
@@ -1912,7 +1912,7 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| ADV_STATUS_STOPPED | 0 | 广播停止 |
+| ADV_STATUS_STOPPED | 0x00 | 广播停止 |
 | ADV_STATUS_ADVERTISING | 1 | 正在广播 |
 
 ### enum_gap_ble_sec_mode_t <a id="enum_gap_ble_sec_mode_t"></a>
@@ -1986,9 +1986,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| GAP_BLE_PAIR_NONE | 1 | 未配对状态 |
-| GAP_BLE_PAIR_PAIRING | 2 | 正在配对 |
-| GAP_BLE_PAIR_PAIRED | 3 | 已完成配对 |
+| GAP_BLE_PAIR_NONE | 0x01 | 未配对状态 |
+| GAP_BLE_PAIR_PAIRING | 0x02 | 正在配对 |
+| GAP_BLE_PAIR_PAIRED | 0x03 | 已完成配对 |
 
 ### enum_gap_ble_disc_reason_t <a id="enum_gap_ble_disc_reason_t"></a>
 
@@ -2003,8 +2003,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| GAP_BLE_DISCONN_UNKNOWN | 0 | 未知原因断链 |
-| GAP_BLE_ERR_CONN_TIMEOUT | 8 | 连接超时断链 |
+| GAP_BLE_DISCONN_UNKNOWN | 0x00 | 未知原因断链 |
+| GAP_BLE_ERR_CONN_TIMEOUT | 0x8 | 连接超时断链 |
 | GAP_BLE_DICSCONNECT_BY_REMOTE_USER | 0x13 | 远端用户断链 |
 | GAP_BLE_CONN_TERMINATE_BY_LOCAL_HOST | 0x16 | 本端 HOST 断链 |
 
