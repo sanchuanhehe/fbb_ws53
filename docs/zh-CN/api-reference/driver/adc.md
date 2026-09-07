@@ -542,11 +542,8 @@ typedef enum afe_scan_mode {
 // 源码原始定义，保留注释
 typedef struct adc_scan_config {
     uint8_t type;                       /*!< FIFO全扫描或阈值扫描。 */
-
     float threshold_l;                  /*!< 阈值扫描电压（v）下限。 */
-
     float threshold_h;                  /*!< 阈值扫描电压（v）上限。 */
-
     uint8_t freq;                       /*!< ADC扫描频率，用于所有频道。 */
 #if defined(CONFIG_ADC_SUPPORT_LONG_SAMPLE)
     uint32_t long_sample_time;           /*!< ADC长采样上报周期（单位：毫秒）。 */

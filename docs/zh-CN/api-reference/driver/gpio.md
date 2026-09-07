@@ -862,7 +862,6 @@ typedef enum {
     // 29 S_MGPIO29 not pin out
     S_MGPIO30 = 30,
     S_MGPIO31 = 31,
-
     S_AGPIO0  = S_MGPIO6, // 32
     S_AGPIO1  = 33,
     S_AGPIO2  = 34,
@@ -876,11 +875,9 @@ typedef enum {
     S_AGPIO10 = 42, // RTC_IN
     S_AGPIO11 = 43, // RTC_OUT
     S_AGPIO12 = 44, // RST_N (不能作为GPIO,不能配置pinmux,但可以配置padctrl)
-
     S_SGPIO0  = S_MGPIO14, // 45 same as MGPIO14
     S_SGPIO1  = S_MGPIO15, // 46 same as MGPIO15
     S_SGPIO2  = S_MGPIO21, // 47 same as MGPIO21
-
     PIN_NONE  = 48, // used as invalid/unused PIN number
 } pin_t;
 ```

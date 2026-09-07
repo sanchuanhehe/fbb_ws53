@@ -1282,9 +1282,7 @@ typedef struct sdio_chan_info {
 // 源码原始定义
 typedef struct sdio_info {
     uint8_t                 volt_switch_flag;
-
     uint8_t                 host_to_device_msg_flag;
-
     uint16_t                reinit_times;
     uint16_t                gpio_int_times;
     uint16_t                pad;
