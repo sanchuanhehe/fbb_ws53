@@ -1,6 +1,6 @@
 # Wi-Fi 中继设计
 
-> 本文说明如何在 WS53 上组合 STA 和 SoftAP 构建中继产品。当前 SDK 没有独立的中继示例，也没有可直接复用的 NAT/转发应用；仅同时开启两个无线接口不能使下游设备访问上游网络。
+> 本页说明 STA (Station) 与 SoftAP 组合时的架构约束。当前 `src/application/samples` 和 `vendor` 中没有可直接构建的中继案例工程。
 
 ## 学习目标
 

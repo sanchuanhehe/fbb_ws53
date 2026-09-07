@@ -157,7 +157,7 @@ nav:
               - 省电模式: zh-CN/samples/connectivity/wifi/power-save/power-save.md
               - P2P: zh-CN/samples/connectivity/wifi/p2p.md
               - 监听模式: zh-CN/samples/connectivity/wifi/monitor.md
-              - 中继设计: zh-CN/samples/connectivity/wifi/repeater.md
+              # - 中继设计: zh-CN/samples/connectivity/wifi/repeater.md
               - SysChannel: zh-CN/samples/connectivity/wifi/syschannel.md
               - HiLink 独立升级: zh-CN/samples/connectivity/wifi/hilink-indie-upgrade.md
       - 外设驱动:
