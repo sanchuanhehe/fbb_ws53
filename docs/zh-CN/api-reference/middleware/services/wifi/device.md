@@ -900,7 +900,7 @@ errcode_t wifi_sta_set_reconnect_policy(int32_t enable, uint32_t seconds, uint32
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| enable | int32_t | 使能重连网络 | 0:关闭，1:开启 |
+| enable | int32_t | 使能重连网络 | 0：关闭，1：开启 |
 | seconds | uint32_t | 单次重连超时时间（秒） | 2~65535 |
 | period | uint32_t | 重连间隔周期（秒） | 1~65535 |
 | max_try_count | uint32_t | 最大重连次数 | 1~65535 |
@@ -1074,7 +1074,7 @@ errcode_t wifi_set_promis_mode(wifi_if_type_enum iftype, int32_t enable, const w
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | [wifi_if_type_enum](#enum_wifi_if_type_enum) 全体成员 |
-| enable | int32_t | 开启/关闭 | 0:关闭，1:开启 |
+| enable | int32_t | 开启/关闭 | 0：关闭，1：开启 |
 | filter | const [wifi_ptype_filter_stru](#struct_wifi_ptype_filter_stru) * | 帧类型过滤列表 | 开启时非 NULL |
 
 **返回值**
@@ -1377,7 +1377,7 @@ errcode_t wifi_set_wow_sleep_mode(uint8_t en)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| en | uint8_t | 使能/去使能 WoW 休眠 | 0:去使能，1:使能 |
+| en | uint8_t | 使能/去使能 WoW 休眠 | 0：去使能，1：使能 |
 
 **Kconfig配置**
 
@@ -1852,7 +1852,7 @@ errcode_t wifi_set_low_current_boot_mode(uint8_t flag)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| flag | uint8_t | 模式设置 | 0:关闭；<br>1:开启。 |
+| flag | uint8_t | 模式设置 | 0：关闭；<br>1：开启。 |
 
 **返回值**
 
@@ -1960,7 +1960,7 @@ errcode_t wifi_sta_set_pm(uint8_t ps_switch)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| ps_switch | uint8_t | 低功耗模式 | 0:关闭；<br>1:开启。 |
+| ps_switch | uint8_t | 低功耗模式 | 0：关闭；<br>1：开启。 |
 
 **返回值**
 
@@ -1994,7 +1994,7 @@ errcode_t wifi_set_sdp_mode(wifi_if_type_enum iftype, int32_t enable, int32_t ra
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | [wifi_if_type_enum](#enum_wifi_if_type_enum) 全体成员 |
-| enable | int32_t | 使能开关 | 0:关闭；<br>1:开启。 |
+| enable | int32_t | 使能开关 | 0：关闭；<br>1：开启。 |
 | ratio | int32_t | 比例 | 大于 0 |
 
 **返回值**
@@ -2303,7 +2303,7 @@ typedef unsigned int(*wifi_mac_derivation_ptr)(unsigned char *origin_mac, unsign
 | ---- | ---- | ---- | ---- |
 | origin_mac | unsigned char* | 输入 MAC 地址 | 非 NULL |
 | num | unsigned char | 输入 MAC 地址长度 | WIFI_MAC_LEN(6) |
-| type | unsigned char | 派生类型 | 2:STA；<br>3:SoftAP；<br>7~10:P2P（Peer-to-Peer）。 |
+| type | unsigned char | 派生类型 | 2：STA；<br>3：SoftAP；<br>7~10：P2P（Peer-to-Peer）。 |
 | output_mac | unsigned char* | 输出 MAC 地址 | 非 NULL |
 | out_put_num | unsigned char | 输出 MAC 地址长度 | WIFI_MAC_LEN(6) |
 
@@ -2909,7 +2909,7 @@ typedef struct {
 | ------- | ------- | ---- |
 | user_index | uint8_t | 用户 ID，取值范围 0~3，最多 4 个用户 |
 | enable | uint8_t | CSI 白名单用户开关 |
-| match_ta_ra_select | uint8_t | CSI 白名单地址过滤类型，0:RA / 1:TA |
+| match_ta_ra_select | uint8_t | CSI 白名单地址过滤类型，0：RA / 1：TA。|
 | resv | uint8_t | 保留 1 字节对齐 |
 | mac_addr | uint8_t[WIFI_MAC_LEN] | MAC 地址 |
 | frame_filter_bitmap | uint8_t | 帧类型过滤具体参数 |
@@ -3035,7 +3035,7 @@ typedef struct {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| enable | uint8_t | PSD 使能标记，0:关 / 1:开 |
+| enable | uint8_t | PSD 使能标记，0：关 / 1：开。|
 | resv | uint8_t | 保留 |
 | duration | uint16_t | 采样时长，取值 1~65535，单位 min |
 | cycle | uint32_t | 采样间隔，单位 ms，取值 100~1000 |

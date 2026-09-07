@@ -543,7 +543,7 @@ typedef struct {
 | ------- | ------- | ---- |
 | rx_freq | uint8_t | 接收频率，范围 0~0x27，对应载波频率 2402+x*2 MHz |
 | rx_phy | uint8_t | 射频物理层，取值为 [ble_rf_phy_t](#enum_ble_rf_phy_t) 枚举成员 |
-| modulation_index | uint8_t | 调制指数，0:标准，1:稳定 |
+| modulation_index | uint8_t | 调制指数，0：标准；<br>1：稳定。|
 
 ### ble_rf_single_tone_t <a id="struct_ble_rf_single_tone_t"></a>
 
@@ -559,7 +559,7 @@ typedef struct {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | rf_freq | uint8_t | 射频频率，范围 0~0x4E，对应载波频率 2402+x*2 MHz |
-| rf_mode | uint8_t | 单音模式开关，0:开启，0xFF:关闭 |
+| rf_mode | uint8_t | 单音模式开关，0：开启；<br>0xFF：关闭。|
 
 ### pdl_xo_trim_t <a id="struct_pdl_xo_trim_t"></a>
 
