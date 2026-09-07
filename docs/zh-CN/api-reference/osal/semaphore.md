@@ -55,7 +55,7 @@ int osal_sem_init(osal_semaphore *sem, int val)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -99,7 +99,7 @@ int osal_sem_binary_sem_init(osal_semaphore *sem, int val)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -142,7 +142,7 @@ int osal_sem_down(osal_semaphore *sem)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -186,7 +186,7 @@ int osal_sem_down_timeout(osal_semaphore *sem, unsigned int timeout)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -229,7 +229,7 @@ int osal_sem_down_interruptible(osal_semaphore *sem)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -268,7 +268,7 @@ int osal_sem_trydown(osal_semaphore *sem)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

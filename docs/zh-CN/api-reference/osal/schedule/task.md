@@ -81,7 +81,7 @@ osal_task *osal_kthread_create(osal_kthread_handler handler, void *data, const c
 
 **返回值**
 
-- 返回类型：osal_task *
+返回类型：osal_task *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -124,7 +124,7 @@ osal_task *osal_kthread_create_static_ext(osal_kthread_init *init_handle, void *
 
 **返回值**
 
-- 返回类型：osal_task *
+返回类型：osal_task *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -168,7 +168,7 @@ osal_task *osal_kthread_create_ext(osal_kthread_init *init_handle)
 
 **返回值**
 
-- 返回类型：osal_task *
+返回类型：osal_task *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -207,7 +207,7 @@ int osal_kthread_set_priority(osal_task *task, unsigned int priority)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -278,7 +278,7 @@ int osal_kthread_should_stop(void)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -317,7 +317,7 @@ int osal_kthread_wakeup_process(osal_task *task)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -663,7 +663,7 @@ long osal_get_current_pid(void)
 
 **返回值**
 
-- 返回类型：long
+返回类型：long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -689,7 +689,7 @@ long osal_get_current_tid(void)
 
 **返回值**
 
-- 返回类型：long
+返回类型：long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -720,7 +720,7 @@ int osal_get_current_tgid(void)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -746,7 +746,7 @@ char *osal_get_current_taskname(void)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -783,7 +783,7 @@ unsigned long osal_msleep(unsigned int msecs)
 
 **返回值**
 
-- 返回类型：unsigned long
+返回类型：unsigned long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -969,7 +969,7 @@ unsigned int osal_kernel_init(void)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1001,7 +1001,7 @@ unsigned int osal_kernel_start(void)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1028,7 +1028,7 @@ osal_kernel_status osal_kernel_get_state(void)
 
 **返回值**
 
-- 返回类型：[osal_kernel_status](#osal_kernel_status)
+返回类型：[osal_kernel_status](#osal_kernel_status)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

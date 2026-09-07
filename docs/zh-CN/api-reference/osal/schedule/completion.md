@@ -53,7 +53,7 @@ int osal_completion_init(osal_completion *com)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -180,7 +180,7 @@ unsigned long osal_wait_for_completion_timeout(osal_completion *com, unsigned lo
 
 **返回值**
 
-- 返回类型：unsigned long
+返回类型：unsigned long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

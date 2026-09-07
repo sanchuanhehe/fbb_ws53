@@ -62,7 +62,7 @@ int osal_msg_queue_create(const char *name, unsigned short queue_len, unsigned l
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -117,7 +117,7 @@ int osal_msg_queue_write_copy(unsigned long queue_id, void *buffer_addr, unsigne
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -171,7 +171,7 @@ int osal_msg_queue_read_copy(unsigned long queue_id, void *buffer_addr, unsigned
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -220,7 +220,7 @@ int osal_msg_queue_write_head_copy(unsigned long queue_id, void *buffer_addr, un
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -286,7 +286,7 @@ int osal_msg_queue_is_full(unsigned long queue_id)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -325,7 +325,7 @@ unsigned int osal_msg_queue_get_msg_num(unsigned long queue_id)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

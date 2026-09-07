@@ -57,7 +57,7 @@ int osal_spin_lock_init(osal_spinlock *lock)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -167,7 +167,7 @@ int osal_spin_trylock(osal_spinlock *lock)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -205,7 +205,7 @@ int osal_spin_trylock_irq(osal_spinlock *lock)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

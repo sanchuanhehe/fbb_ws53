@@ -73,7 +73,7 @@ void *osal_kmalloc(unsigned long size, unsigned int osal_gfp_flag)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -116,7 +116,7 @@ void *osal_kzalloc(unsigned long size, unsigned int osal_gfp_flag)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -151,7 +151,7 @@ void *osal_kmalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -186,7 +186,7 @@ void *osal_kzalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -252,7 +252,7 @@ void *osal_vmalloc(unsigned long size)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -289,7 +289,7 @@ void *osal_vzalloc(unsigned long size)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -359,7 +359,7 @@ int osal_pool_mem_init(void *pool, unsigned int size)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -397,7 +397,7 @@ void *osal_pool_mem_alloc(void *pool, unsigned int size)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -436,7 +436,7 @@ void *osal_pool_mem_alloc_align(void *pool, unsigned int size, unsigned int boun
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -502,7 +502,7 @@ int osal_pool_mem_deinit(void *pool)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -535,7 +535,7 @@ osal_blockmem_status osal_blockmem_get_status(unsigned long phyaddr, unsigned in
 
 **返回值**
 
-- 返回类型：[osal_blockmem_status](#enum_osal_blockmem_status)
+返回类型：[osal_blockmem_status](#enum_osal_blockmem_status)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -570,7 +570,7 @@ void *osal_ioremap(unsigned long phys_addr, unsigned long size)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -608,7 +608,7 @@ void *osal_ioremap_nocache(unsigned long phys_addr, unsigned long size)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -642,7 +642,7 @@ void *osal_ioremap_cached(unsigned long phys_addr, unsigned long size)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -709,7 +709,7 @@ void *osal_ioremap_wc(unsigned long phys_addr, unsigned long size)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -741,7 +741,7 @@ void *osal_phys_to_virt(unsigned long addr)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -772,7 +772,7 @@ unsigned long osal_virt_to_phys(const void *virt_addr)
 
 **返回值**
 
-- 返回类型：unsigned long
+返回类型：unsigned long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -809,7 +809,7 @@ void *osal_blockmem_vmap(unsigned long phys_addr, unsigned long size)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -902,7 +902,7 @@ unsigned long osal_copy_from_user(void *to, const void *from, unsigned long n)
 
 **返回值**
 
-- 返回类型：unsigned long
+返回类型：unsigned long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -937,7 +937,7 @@ unsigned long osal_copy_to_user(void *to, const void *from, unsigned long n)
 
 **返回值**
 
-- 返回类型：unsigned long
+返回类型：unsigned long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -972,7 +972,7 @@ int osal_access_ok(int type, const void *addr, unsigned long size)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

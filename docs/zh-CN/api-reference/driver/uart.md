@@ -69,7 +69,7 @@ errcode_t uapi_uart_init(uart_bus_t bus, const uart_pin_config_t *pins, const ua
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -117,7 +117,7 @@ errcode_t uapi_uart_deinit(uart_bus_t bus)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -167,7 +167,7 @@ errcode_t uapi_uart_get_attr(uart_bus_t bus, const uart_attr_t *attr)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -202,7 +202,7 @@ bool uapi_uart_has_pending_transmissions(uart_bus_t bus)
 
 **返回值**
 
-- 返回类型：bool
+返回类型：bool
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -237,7 +237,7 @@ bool uapi_uart_rx_fifo_is_empty(uart_bus_t bus)
 
 **返回值**
 
-- 返回类型：bool
+返回类型：bool
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -272,7 +272,7 @@ bool uapi_uart_tx_fifo_is_empty(uart_bus_t bus)
 
 **返回值**
 
-- 返回类型：bool
+返回类型：bool
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -308,7 +308,7 @@ errcode_t uapi_uart_set_attr(uart_bus_t bus, const uart_attr_t *attr)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -347,7 +347,7 @@ errcode_t uapi_uart_register_rx_callback(uart_bus_t bus, uart_rx_condition_t con
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -427,7 +427,7 @@ errcode_t uapi_uart_register_parity_error_callback(uart_bus_t bus, uart_error_ca
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -469,7 +469,7 @@ errcode_t uapi_uart_register_frame_error_callback(uart_bus_t bus, uart_error_cal
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -511,7 +511,7 @@ errcode_t uapi_uart_register_overrun_error_callback(uart_bus_t bus, uart_error_c
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -555,7 +555,7 @@ int32_t uapi_uart_write(uart_bus_t bus, const uint8_t *buffer, uint32_t length, 
 
 **返回值**
 
-- 返回类型：int32_t
+返回类型：int32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -604,7 +604,7 @@ int32_t uapi_uart_write_nolock(uart_bus_t bus, const uint8_t *buffer, uint32_t l
 
 **返回值**
 
-- 返回类型：int32_t
+返回类型：int32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -650,7 +650,7 @@ errcode_t uapi_uart_write_int(uart_bus_t bus, const uint8_t *buffer, uint32_t le
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -700,7 +700,7 @@ int32_t uapi_uart_write_by_dma(uart_bus_t bus, const void *buffer, uint32_t leng
 
 **返回值**
 
-- 返回类型：int32_t
+返回类型：int32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -750,7 +750,7 @@ int32_t uapi_uart_read_by_dma(uart_bus_t bus, const void *buffer, uint32_t lengt
 
 **返回值**
 
-- 返回类型：int32_t
+返回类型：int32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -793,7 +793,7 @@ errcode_t uapi_uart_register_read_by_dma_callback(uart_bus_t bus, uart_write_dma
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | ---- | ---- | ---- |
@@ -862,7 +862,7 @@ errcode_t uapi_uart_recv_raw_data_end_transfer(uart_bus_t uart_bus)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -904,7 +904,7 @@ errcode_t uapi_uart_dma_recv_raw_data(uart_bus_t uart_bus, uart_idle_int_receive
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -952,7 +952,7 @@ int32_t uapi_uart_read(uart_bus_t bus, const uint8_t *buffer, uint32_t length, u
 
 **返回值**
 
-- 返回类型：int32_t
+返回类型：int32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -999,7 +999,7 @@ errcode_t uapi_uart_update_rx_buff(uart_bus_t bus, uint8_t *rx_buffer, uint16_t 
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1040,7 +1040,7 @@ errcode_t uapi_uart_suspend(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1081,7 +1081,7 @@ errcode_t uapi_uart_resume(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1119,7 +1119,7 @@ errcode_t uapi_uart_register_write_by_dma_callback(uart_bus_t bus, uart_tx_by_dm
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | ---- | ---- | ---- |

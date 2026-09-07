@@ -455,7 +455,7 @@ static INLINE__ int osal_list_is_last(const struct osal_list_head *list, const s
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -492,7 +492,7 @@ static INLINE__ int osal_list_empty(const struct osal_list_head *head)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -536,7 +536,7 @@ static INLINE__ int osal_list_empty_careful(const struct osal_list_head *head)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -600,7 +600,7 @@ static INLINE__ int osal_list_is_singular(const struct osal_list_head *head)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -875,7 +875,7 @@ static INLINE__ int osal_hlist_unhashed(const struct osal_hlist_node *h)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -911,7 +911,7 @@ static INLINE__ int osal_hlist_empty(const struct osal_hlist_head *h)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

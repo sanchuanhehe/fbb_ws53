@@ -54,7 +54,7 @@ errcode_t sle_chba_netdev_create(uint8_t chba_role, uint8_t chba_mode)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -89,7 +89,7 @@ errcode_t sle_chba_netdev_destroy(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -127,7 +127,7 @@ errcode_t sle_chba_netdev_add_link(uint16_t conn_id, const sle_addr_t *remote_ad
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -169,7 +169,7 @@ errcode_t sle_chba_netdev_del_link(uint16_t conn_id, const sle_addr_t *remote_ad
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -216,7 +216,7 @@ errcode_t sle_chba_netdev_get_linkinfo(uint16_t conn_id, sle_ip_link_info *link)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -254,7 +254,7 @@ errcode_t sle_chba_netdev_driver_send(uint8_t *data, uint16_t len)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -296,7 +296,7 @@ errcode_t sle_chba_netdev_register_callbacks(sle_chba_netdev_callbacks_t *func)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

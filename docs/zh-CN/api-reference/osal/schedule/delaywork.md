@@ -51,7 +51,7 @@ int osal_delayedwork_init(osal_delayedwork *work, osal_delayedwork_handler handl
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -119,7 +119,7 @@ int osal_delayedwork_schedule(osal_delayedwork *work, int timeout)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -157,7 +157,7 @@ int osal_delayedwork_cancel_sync(osal_delayedwork *work)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

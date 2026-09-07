@@ -58,7 +58,7 @@ errcode_t uapi_efuse_user_read_buffer(uint32_t offset, uint8_t *buffer, uint16_t
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -99,7 +99,7 @@ errcode_t uapi_efuse_user_write_buffer(uint32_t offset, const uint8_t *buffer, u
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -139,7 +139,7 @@ errcode_t uapi_efuse_user_write_bit(uint32_t byte_offset, uint8_t bit_pos)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -191,7 +191,7 @@ errcode_t uapi_efuse_user_read_bit(uint32_t byte_offset, uint8_t bit_pos, uint8_
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

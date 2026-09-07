@@ -63,7 +63,7 @@ errcode_t uapi_upg_init(const upg_func_t *func_list)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -108,7 +108,7 @@ errcode_t uapi_upg_start(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -158,7 +158,7 @@ errcode_t uapi_upg_register_progress_callback(uapi_upg_progress_cb func)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -212,7 +212,7 @@ errcode_t uapi_upg_get_result(upg_result_t *result, uint32_t *last_image_index)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -250,7 +250,7 @@ upg_status_t uapi_upg_get_status(void)
 
 **返回值**
 
-- 返回类型：[upg_status_t](#enum_upg_status)
+返回类型：[upg_status_t](#enum_upg_status)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -298,7 +298,7 @@ errcode_t uapi_upg_prepare(upg_prepare_info_t *prepare_info)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -339,7 +339,7 @@ errcode_t uapi_upg_reset_upgrade_flag(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -392,7 +392,7 @@ errcode_t uapi_upg_write_package_async(uint32_t offset, const uint8_t *buff, uin
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -442,7 +442,7 @@ errcode_t uapi_upg_write_package_sync(uint32_t offset, const uint8_t *buff, uint
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -492,7 +492,7 @@ errcode_t uapi_upg_read_package(uint32_t offset, uint8_t *buff, uint32_t len)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -532,7 +532,7 @@ uint32_t uapi_upg_get_storage_size(void)
 
 **返回值**
 
-- 返回类型：uint32_t
+返回类型：uint32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -576,7 +576,7 @@ errcode_t uapi_upg_request_upgrade(bool reset)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -625,7 +625,7 @@ errcode_t uapi_upg_verify_file_head(const upg_package_header_t *pkg_header)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -681,7 +681,7 @@ errcode_t uapi_upg_verify_file_image(const upg_image_header_t *img_header, const
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -731,7 +731,7 @@ errcode_t uapi_upg_verify_file(const upg_package_header_t *pkg_header)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

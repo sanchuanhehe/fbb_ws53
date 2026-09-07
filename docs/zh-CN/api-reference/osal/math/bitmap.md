@@ -166,7 +166,7 @@ int osal_bitmap_test_bit(int nr, unsigned long *addr)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -212,7 +212,7 @@ int osal_bitmap_test_and_set_bit(int nr, unsigned long *addr)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -258,7 +258,7 @@ int osal_bitmap_test_and_clear_bit(int nr, unsigned long *addr)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -304,7 +304,7 @@ int osal_bitmap_test_and_change_bit(int nr, unsigned long *addr)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -344,7 +344,7 @@ int osal_bitmap_find_first_zero_bit(const unsigned long *name, unsigned size)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -383,7 +383,7 @@ int osal_bitmap_find_first_bit(const unsigned long *name, unsigned size)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -423,7 +423,7 @@ int osal_bitmap_find_next_zero_bit(const unsigned long *name, int size, int offs
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -463,7 +463,7 @@ int osal_bitmap_find_next_bit(const unsigned long *name, unsigned size, int offs
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

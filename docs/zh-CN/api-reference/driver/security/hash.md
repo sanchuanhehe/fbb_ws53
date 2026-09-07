@@ -51,7 +51,7 @@ errcode_t uapi_drv_cipher_sha256_start(uint32_t *hash_handle)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -102,7 +102,7 @@ errcode_t uapi_drv_cipher_sha256_update(uint32_t hash_handle, const uint8_t *buf
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -158,7 +158,7 @@ errcode_t uapi_drv_cipher_sha256_finish(uint32_t hash_handle, uint8_t *out, uint
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -215,7 +215,7 @@ errcode_t uapi_drv_cipher_sha256(const uint8_t *buf, uint32_t len, uint8_t *out,
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

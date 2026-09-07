@@ -47,7 +47,7 @@ errcode_t sle_ota_service_init(uint8_t server_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -84,7 +84,7 @@ errcode_t sle_ota_data_ack(uint16_t value_len, uint8_t *value)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

@@ -49,7 +49,7 @@ int32_t mbedtls_adapt_register_func(void)
 
 **返回值**
 
-- 返回类型：int32_t
+返回类型：int32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

@@ -112,7 +112,7 @@ errcode_t uapi_gpio_set_dir(pin_t pin, gpio_direction_t dir)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -165,7 +165,7 @@ gpio_direction_t uapi_gpio_get_dir(pin_t pin)
 
 **返回值**
 
-- 返回类型：gpio_direction_t
+返回类型：gpio_direction_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -214,7 +214,7 @@ errcode_t uapi_gpio_set_val(pin_t pin, gpio_level_t level)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -262,7 +262,7 @@ gpio_level_t uapi_gpio_get_output_val(pin_t pin)
 
 **返回值**
 
-- 返回类型：gpio_level_t
+返回类型：gpio_level_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -304,7 +304,7 @@ gpio_level_t uapi_gpio_get_val(pin_t pin)
 
 **返回值**
 
-- 返回类型：gpio_level_t
+返回类型：gpio_level_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -352,7 +352,7 @@ errcode_t uapi_gpio_toggle(pin_t pin)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -402,7 +402,7 @@ errcode_t uapi_gpio_set_isr_mode(pin_t pin, uint32_t trigger)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -454,7 +454,7 @@ errcode_t uapi_gpio_register_isr_func(pin_t pin, uint32_t trigger, gpio_callback
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -503,7 +503,7 @@ errcode_t uapi_gpio_unregister_isr_func(pin_t pin)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -548,7 +548,7 @@ errcode_t uapi_gpio_enable_interrupt(pin_t pin)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -597,7 +597,7 @@ errcode_t uapi_gpio_disable_interrupt(pin_t pin)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -646,7 +646,7 @@ errcode_t uapi_gpio_clear_interrupt(pin_t pin)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -685,7 +685,7 @@ errcode_t uapi_gpio_suspend(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -727,7 +727,7 @@ errcode_t uapi_gpio_resume(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

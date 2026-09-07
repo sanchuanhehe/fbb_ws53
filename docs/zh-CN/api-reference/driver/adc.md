@@ -58,7 +58,7 @@ errcode_t uapi_adc_init(adc_clock_t clock)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -96,7 +96,7 @@ errcode_t uapi_adc_deinit(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -168,7 +168,7 @@ bool uapi_adc_is_using(void)
 
 **返回值**
 
-- 返回类型：bool
+返回类型：bool
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -207,7 +207,7 @@ errcode_t uapi_adc_open_channel(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -248,7 +248,7 @@ errcode_t uapi_adc_close_channel(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -291,7 +291,7 @@ errcode_t uapi_adc_auto_scan_ch_enable(uint8_t channel, adc_scan_config_t config
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -338,7 +338,7 @@ errcode_t uapi_adc_auto_scan_ch_disable(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -407,7 +407,7 @@ bool uapi_adc_auto_scan_is_enabled(void)
 
 **返回值**
 
-- 返回类型：bool
+返回类型：bool
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -452,7 +452,7 @@ int32_t uapi_adc_manual_sample(uint8_t channel)
 
 **返回值**
 
-- 返回类型：int32_t
+返回类型：int32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

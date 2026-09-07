@@ -51,7 +51,7 @@ int osal_event_init(osal_event *event_obj)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -95,7 +95,7 @@ int osal_event_write(osal_event *event_obj, unsigned int mask)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -141,7 +141,7 @@ int osal_event_read(osal_event *event_obj, unsigned int mask, unsigned int timeo
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -186,7 +186,7 @@ int osal_event_clear(osal_event *event_obj, unsigned int mask)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -229,7 +229,7 @@ int osal_event_destroy(osal_event *event_obj)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

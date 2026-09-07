@@ -85,7 +85,7 @@ errcode_t uapi_nv_write(uint16_t key, const uint8_t *kvalue, uint16_t kvalue_len
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -141,7 +141,7 @@ errcode_t uapi_nv_write_with_attr(uint16_t key, const uint8_t *kvalue, uint16_t 
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -200,7 +200,7 @@ errcode_t uapi_nv_read(uint16_t key, uint16_t kvalue_max_length, uint16_t *kvalu
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -260,7 +260,7 @@ errcode_t uapi_nv_read_with_attr(uint16_t key, uint16_t kvalue_max_length, uint1
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -304,7 +304,7 @@ errcode_t uapi_nv_get_store_status(nv_store_status_t *status)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -344,7 +344,7 @@ errcode_t uapi_nv_backup(const nv_backup_mode_t *backup_mode)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -388,7 +388,7 @@ errcode_t uapi_nv_set_restore_mode_all(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -434,7 +434,7 @@ errcode_t uapi_nv_set_restore_mode_partitial(const nv_restore_mode_t *restore_mo
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -474,7 +474,7 @@ errcode_t uapi_nv_flush(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -522,7 +522,7 @@ errcode_t uapi_nv_register_change_notify_proc(uint16_t min_key, uint16_t max_key
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

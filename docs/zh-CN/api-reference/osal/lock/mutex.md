@@ -54,7 +54,7 @@ int osal_mutex_init(osal_mutex *mutex)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -98,7 +98,7 @@ int osal_mutex_lock(osal_mutex *mutex)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -143,7 +143,7 @@ int osal_mutex_lock_timeout(osal_mutex *mutex, unsigned int timeout)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -186,7 +186,7 @@ int osal_mutex_lock_interruptible(osal_mutex *mutex)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -225,7 +225,7 @@ int osal_mutex_trylock(osal_mutex *mutex)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -298,7 +298,7 @@ int osal_mutex_is_locked(osal_mutex *mutex)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

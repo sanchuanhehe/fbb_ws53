@@ -60,7 +60,7 @@ errcode_t uapi_i2s_init(sio_bus_t bus, i2s_callback_t callback)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -109,7 +109,7 @@ errcode_t uapi_i2s_deinit(sio_bus_t bus)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -147,7 +147,7 @@ errcode_t uapi_i2s_set_config(sio_bus_t bus, const i2s_config_t *config)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -195,7 +195,7 @@ errcode_t uapi_i2s_get_config(sio_bus_t bus, i2s_config_t *config)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -233,7 +233,7 @@ errcode_t uapi_i2s_write_data(sio_bus_t bus, i2s_tx_data_t *data)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -274,7 +274,7 @@ errcode_t uapi_i2s_read_start(sio_bus_t bus)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -344,7 +344,7 @@ errcode_t uapi_i2s_loop_trans(sio_bus_t bus, i2s_tx_data_t *data)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -387,7 +387,7 @@ errcode_t uapi_i2s_get_data(sio_bus_t bus, i2s_rx_data_t *data)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -425,7 +425,7 @@ errcode_t uapi_i2s_loopback(sio_bus_t bus, bool en)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -469,7 +469,7 @@ int32_t uapi_i2s_dma_config(sio_bus_t bus, i2s_dma_attr_t *i2s_dma_cfg)
 
 **返回值**
 
-- 返回类型：int32_t
+返回类型：int32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -518,7 +518,7 @@ int32_t uapi_i2s_merge_write_by_dma(sio_bus_t bus, const void *buffer, uint32_t 
 
 **返回值**
 
-- 返回类型：int32_t
+返回类型：int32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -568,7 +568,7 @@ int32_t uapi_i2s_merge_read_by_dma(sio_bus_t bus, const void *buffer, uint32_t l
 
 **返回值**
 
-- 返回类型：int32_t
+返回类型：int32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

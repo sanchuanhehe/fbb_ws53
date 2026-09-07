@@ -55,7 +55,7 @@ errcode_t uapi_timer_init(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -107,7 +107,7 @@ errcode_t uapi_timer_adapter(timer_index_t index, uint32_t int_id, uint16_t int_
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -153,7 +153,7 @@ errcode_t uapi_timer_deinit(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -207,7 +207,7 @@ errcode_t uapi_timer_create(timer_index_t index, timer_handle_t *timer)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -250,7 +250,7 @@ errcode_t uapi_timer_delete(timer_handle_t timer)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -285,7 +285,7 @@ uint32_t uapi_timer_get_max_us(void)
 
 **返回值**
 
-- 返回类型：uint32_t
+返回类型：uint32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -326,7 +326,7 @@ errcode_t uapi_timer_start(timer_handle_t timer, uint32_t time_us, timer_callbac
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -376,7 +376,7 @@ errcode_t uapi_timer_stop(timer_handle_t timer)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -430,7 +430,7 @@ errcode_t uapi_timer_get_current_time_us(timer_index_t index, uint32_t *current_
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -474,7 +474,7 @@ errcode_t uapi_timer_start_high_precision(timer_index_t index, timer_trigger_mod
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -523,7 +523,7 @@ errcode_t uapi_timer_reset_high_precision(timer_index_t index, timer_trigger_mod
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -568,7 +568,7 @@ errcode_t uapi_timer_stop_high_precision(timer_index_t index)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -614,7 +614,7 @@ errcode_t uapi_timer_suspend(uintptr_t val)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -656,7 +656,7 @@ errcode_t uapi_timer_resume(uintptr_t val)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

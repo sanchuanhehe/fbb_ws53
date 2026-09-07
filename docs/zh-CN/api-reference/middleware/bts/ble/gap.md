@@ -82,7 +82,7 @@ errcode_t gap_ble_set_local_addr(const bd_addr_t *addr)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -124,7 +124,7 @@ errcode_t gap_ble_get_local_addr(bd_addr_t *addr)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -162,7 +162,7 @@ errcode_t gap_ble_set_local_appearance(uint16_t appearance)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -201,7 +201,7 @@ errcode_t gap_ble_set_local_name(const uint8_t *name, const uint8_t len)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -246,7 +246,7 @@ errcode_t gap_ble_get_local_name(uint8_t *name, uint8_t *len)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -285,7 +285,7 @@ errcode_t gap_ble_set_adv_data(uint8_t adv_id, const gap_ble_config_adv_data_t *
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -329,7 +329,7 @@ errcode_t gap_ble_set_adv_param(uint8_t adv_id, const gap_ble_adv_params_t *para
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -371,7 +371,7 @@ errcode_t gap_ble_start_adv(uint8_t adv_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -414,7 +414,7 @@ errcode_t gap_ble_stop_adv(uint8_t adv_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -452,7 +452,7 @@ errcode_t gap_ble_set_scan_parameters(const gap_ble_scan_params_t *param)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -490,7 +490,7 @@ errcode_t gap_ble_set_scan_extern_parameters(const gap_ble_extern_scan_params_t 
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -521,7 +521,7 @@ errcode_t gap_ble_start_scan(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -551,7 +551,7 @@ errcode_t gap_ble_stop_scan(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -589,7 +589,7 @@ errcode_t gap_ble_set_phy(gap_le_set_phy_t *param)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -631,7 +631,7 @@ errcode_t gap_ble_set_data_length(gap_le_set_data_length_t *param)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -673,7 +673,7 @@ errcode_t gap_ble_pair_remote_device(const bd_addr_t *addr)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -711,7 +711,7 @@ errcode_t gap_ble_get_paired_devices_num(uint16_t *number)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -756,7 +756,7 @@ errcode_t gap_ble_get_paired_devices(bd_addr_t *addr, uint16_t *number)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -800,7 +800,7 @@ errcode_t gap_ble_get_pair_state(const bd_addr_t *addr, gap_ble_pair_state_t *st
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -838,7 +838,7 @@ errcode_t gap_ble_remove_pair(const bd_addr_t *addr)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -876,7 +876,7 @@ errcode_t gap_ble_add_white_list(const bd_addr_t *addr)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -914,7 +914,7 @@ errcode_t gap_ble_remove_white_list(const bd_addr_t *addr)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -946,7 +946,7 @@ errcode_t gap_ble_get_white_list(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -978,7 +978,7 @@ errcode_t gap_ble_remove_all_pairs(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1023,7 +1023,7 @@ errcode_t gap_ble_get_bonded_devices(bd_addr_t *addr, uint16_t *number)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1061,7 +1061,7 @@ errcode_t gap_ble_connect_param_update(gap_conn_param_update_t *params)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1103,7 +1103,7 @@ errcode_t gap_ble_connect_remote_device(const bd_addr_t *addr)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1141,7 +1141,7 @@ errcode_t gap_ble_disconnect_remote_device(const bd_addr_t *addr)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1179,7 +1179,7 @@ errcode_t gap_ble_set_sec_param(gap_ble_sec_params_t *params)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1217,7 +1217,7 @@ errcode_t gap_ble_read_remote_device_rssi(uint16_t conn_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1255,7 +1255,7 @@ errcode_t gap_ble_register_callbacks(gap_ble_callbacks_t *func)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1291,7 +1291,7 @@ errcode_t bth_ota_init(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1330,7 +1330,7 @@ errcode_t ble_customize_max_pwr(int8_t ble_pwr, int8_t sle_pwr)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1371,7 +1371,7 @@ errcode_t ble_set_nv_pair_keys(ble_auth_info_evt_t *key, bd_addr_t *own_addr, bd
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1409,7 +1409,7 @@ errcode_t gap_ble_set_save_smp_keys_mode(uint8_t is_available)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1447,7 +1447,7 @@ errcode_t gap_ble_set_pair_info_available(uint8_t is_available)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

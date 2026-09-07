@@ -63,7 +63,7 @@ int osal_timer_init(osal_timer *timer)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -106,7 +106,7 @@ int osal_timer_start(osal_timer *timer)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -145,7 +145,7 @@ int osal_timer_mod(osal_timer *timer, unsigned int interval)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -183,7 +183,7 @@ int osal_timer_start_on(osal_timer *timer, unsigned long delay, int cpu)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -215,7 +215,7 @@ int osal_timer_stop(osal_timer *timer)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -253,7 +253,7 @@ int osal_timer_destroy(osal_timer *timer)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -290,7 +290,7 @@ unsigned long osal_timer_get_private_data(const void *sys_data)
 
 **返回值**
 
-- 返回类型：unsigned long
+返回类型：unsigned long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -329,7 +329,7 @@ int osal_timer_destroy_sync(osal_timer *timer)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -355,7 +355,7 @@ unsigned long long osal_sched_clock(void)
 
 **返回值**
 
-- 返回类型：unsigned long long
+返回类型：unsigned long long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -380,7 +380,7 @@ unsigned long long osal_get_jiffies(void)
 
 **返回值**
 
-- 返回类型：unsigned long long
+返回类型：unsigned long long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -415,7 +415,7 @@ unsigned long osal_msecs_to_jiffies(const unsigned int m)
 
 **返回值**
 
-- 返回类型：unsigned long
+返回类型：unsigned long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -447,7 +447,7 @@ unsigned int osal_jiffies_to_msecs(const unsigned int n)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -472,7 +472,7 @@ unsigned int osal_get_cycle_per_tick(void)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -537,7 +537,7 @@ int osal_hrtimer_create(osal_hrtimer *hrtimer)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -575,7 +575,7 @@ int osal_hrtimer_start(osal_hrtimer *hrtimer)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -614,7 +614,7 @@ int osal_hrtimer_destroy(osal_hrtimer *hrtimer)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

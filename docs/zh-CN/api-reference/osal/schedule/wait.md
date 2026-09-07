@@ -54,7 +54,7 @@ int osal_wait_init(osal_wait *wait)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -99,7 +99,7 @@ int osal_wait_interruptible(osal_wait *wait, osal_wait_condition_func func, cons
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -144,7 +144,7 @@ int osal_wait_uninterruptible(osal_wait *wait, osal_wait_condition_func func, co
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -185,7 +185,7 @@ int osal_wait_timeout_interruptible(osal_wait *wait, osal_wait_condition_func fu
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -232,7 +232,7 @@ int osal_wait_timeout_uninterruptible(osal_wait *wait, osal_wait_condition_func 
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

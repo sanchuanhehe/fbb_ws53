@@ -62,7 +62,7 @@ errcode_t ssapc_register_client(sle_uuid_t *app_uuid, uint8_t *client_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -104,7 +104,7 @@ errcode_t ssapc_unregister_client(uint8_t client_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -144,7 +144,7 @@ errcode_t ssapc_find_structure(uint8_t client_id, uint16_t conn_id, ssapc_find_s
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -193,7 +193,7 @@ errcode_t ssapc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, ssapc_read
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -235,7 +235,7 @@ errcode_t ssapc_read_req(uint8_t client_id, uint16_t conn_id, uint16_t handle, u
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -281,7 +281,7 @@ errcode_t ssapc_write_req(uint8_t client_id, uint16_t conn_id, ssapc_write_param
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -322,7 +322,7 @@ errcode_t ssapc_write_cmd(uint8_t client_id, uint16_t conn_id, ssapc_write_param
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -362,7 +362,7 @@ errcode_t ssapc_exchange_info_req(uint8_t client_id, uint16_t conn_id, ssap_exch
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -405,7 +405,7 @@ errcode_t ssapc_register_callbacks(ssapc_callbacks_t *func)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

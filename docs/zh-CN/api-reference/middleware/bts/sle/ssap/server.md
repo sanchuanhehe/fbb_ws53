@@ -67,7 +67,7 @@ errcode_t ssaps_register_server(sle_uuid_t *app_uuid, uint8_t *server_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -109,7 +109,7 @@ errcode_t ssaps_unregister_server(uint8_t server_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -153,7 +153,7 @@ errcode_t ssaps_add_service(uint8_t server_id, sle_uuid_t *service_uuid, bool is
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -194,7 +194,7 @@ errcode_t ssaps_add_property(uint8_t server_id, uint16_t service_handle, ssaps_p
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -237,7 +237,7 @@ errcode_t ssaps_add_descriptor(uint8_t server_id, uint16_t service_handle, uint1
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -284,7 +284,7 @@ errcode_t ssaps_add_service_sync(uint8_t server_id, sle_uuid_t *service_uuid, bo
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -335,7 +335,7 @@ errcode_t ssaps_add_property_sync(uint8_t server_id, uint16_t service_handle, ss
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -381,7 +381,7 @@ errcode_t ssaps_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -424,7 +424,7 @@ errcode_t ssaps_start_service(uint8_t server_id, uint16_t service_handle)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -467,7 +467,7 @@ errcode_t ssaps_delete_all_services(uint8_t server_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -511,7 +511,7 @@ errcode_t ssaps_send_response(uint8_t server_id, uint16_t conn_id, ssaps_send_rs
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -551,7 +551,7 @@ errcode_t ssaps_notify_indicate(uint8_t server_id, uint16_t conn_id, ssaps_ntf_i
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -595,7 +595,7 @@ errcode_t ssaps_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, ssa
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -634,7 +634,7 @@ errcode_t ssaps_set_info(uint8_t server_id, ssap_exchange_info_t *info)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -676,7 +676,7 @@ errcode_t ssaps_register_callbacks(ssaps_callbacks_t *func)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

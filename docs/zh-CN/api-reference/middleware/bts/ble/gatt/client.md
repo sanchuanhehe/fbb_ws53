@@ -67,7 +67,7 @@ errcode_t gattc_register_client(bt_uuid_t *app_uuid, uint8_t *client_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -104,7 +104,7 @@ errcode_t gattc_unregister_client(uint8_t client_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -144,7 +144,7 @@ errcode_t gattc_discovery_service(uint8_t client_id, uint16_t conn_id, bt_uuid_t
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -184,7 +184,7 @@ errcode_t gattc_discovery_character(uint8_t client_id, uint16_t conn_id, gattc_d
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -223,7 +223,7 @@ errcode_t gattc_discovery_descriptor(uint8_t client_id, uint16_t conn_id, uint16
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -262,7 +262,7 @@ errcode_t gattc_read_req_by_handle(uint8_t client_id, uint16_t conn_id, uint16_t
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -301,7 +301,7 @@ errcode_t gattc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, gattc_read
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -340,7 +340,7 @@ errcode_t gattc_write_req(uint8_t client_id, uint16_t conn_id, gattc_handle_valu
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -379,7 +379,7 @@ errcode_t gattc_write_cmd(uint8_t client_id, uint16_t conn_id, gattc_handle_valu
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -418,7 +418,7 @@ errcode_t gattc_exchange_mtu_req(uint8_t client_id, uint16_t conn_id, uint16_t m
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -455,7 +455,7 @@ errcode_t gattc_register_callbacks(gattc_callbacks_t *func)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

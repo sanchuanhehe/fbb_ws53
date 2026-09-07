@@ -52,7 +52,7 @@ int osal_rwlock_init(osal_rwlock *rw_lock)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

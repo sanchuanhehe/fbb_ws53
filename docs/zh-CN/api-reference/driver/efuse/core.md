@@ -51,7 +51,7 @@ errcode_t uapi_efuse_init(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -88,7 +88,7 @@ errcode_t uapi_efuse_deinit(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -133,7 +133,7 @@ errcode_t uapi_efuse_read_bit(uint8_t *value, uint32_t byte_number, uint8_t bit_
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -189,7 +189,7 @@ errcode_t uapi_efuse_read_buffer(uint8_t *buffer, uint32_t byte_number, uint16_t
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -234,7 +234,7 @@ errcode_t uapi_efuse_write_bit(uint32_t byte_number, uint8_t bit_pos)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -286,7 +286,7 @@ errcode_t uapi_efuse_write_bit_with_flag(uint32_t byte_number, uint8_t bit_pos, 
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -335,7 +335,7 @@ errcode_t uapi_efuse_write_buffer(uint32_t byte_number, const uint8_t *buffer, u
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -382,7 +382,7 @@ errcode_t uapi_efuse_write_buffer_with_flag(uint32_t byte_number, const uint8_t 
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -427,7 +427,7 @@ errcode_t uapi_efuse_get_die_id(uint8_t *buffer, uint16_t length)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -477,7 +477,7 @@ errcode_t uapi_efuse_calc_crc(const uint8_t *buffer, uint8_t length, uint8_t *cr
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -521,7 +521,7 @@ errcode_t uapi_soc_read_id(uint8_t *id, uint16_t id_length)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

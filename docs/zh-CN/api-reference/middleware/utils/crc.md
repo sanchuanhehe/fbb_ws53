@@ -52,7 +52,7 @@ uint16_t uapi_crc16(uint16_t crc_start, const uint8_t *buf, uint32_t length)
 
 **返回值**
 
-- 返回类型：uint16_t
+返回类型：uint16_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -97,7 +97,7 @@ uint32_t uapi_crc32(uint32_t crc_start, const uint8_t *buf, uint32_t length)
 
 **返回值**
 
-- 返回类型：uint32_t
+返回类型：uint32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -143,7 +143,7 @@ uint32_t uapi_crc32_no_comp(uint32_t crc_start, const uint8_t *buf, uint32_t len
 
 **返回值**
 
-- 返回类型：uint32_t
+返回类型：uint32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

@@ -58,7 +58,7 @@ errcode_t uapi_at_cmd_table_register(const at_cmd_entry_t *table, uint32_t len,
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -112,7 +112,7 @@ errcode_t uapi_at_cmd_abort_register(at_abort_func_t func, void *arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -157,7 +157,7 @@ errcode_t uapi_at_send_async_result(uint16_t err)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -202,7 +202,7 @@ errcode_t uapi_at_interactivity_func_register(at_interactivity_func_t func)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -347,7 +347,7 @@ errcode_t uapi_at_urc_to_channel(at_channel_id_t channel_id, const char *msg, ui
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

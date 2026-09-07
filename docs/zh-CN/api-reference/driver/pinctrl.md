@@ -115,7 +115,7 @@ errcode_t uapi_pin_set_mode(pin_t pin, pin_mode_t mode)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -158,7 +158,7 @@ pin_mode_t uapi_pin_get_mode(pin_t pin)
 
 **返回值**
 
-- 返回类型：pin_mode_t
+返回类型：pin_mode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -201,7 +201,7 @@ errcode_t uapi_pin_set_ds(pin_t pin, pin_drive_strength_t ds)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -243,7 +243,7 @@ pin_drive_strength_t uapi_pin_get_ds(pin_t pin)
 
 **返回值**
 
-- 返回类型：pin_drive_strength_t
+返回类型：pin_drive_strength_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -286,7 +286,7 @@ errcode_t uapi_pin_set_pull(pin_t pin, pin_pull_t pull_type)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -328,7 +328,7 @@ pin_pull_t uapi_pin_get_pull(pin_t pin)
 
 **返回值**
 
-- 返回类型：pin_pull_t
+返回类型：pin_pull_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -371,7 +371,7 @@ errcode_t uapi_pin_set_ie(pin_t pin, pin_input_enable_t ie)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -421,7 +421,7 @@ pin_input_enable_t uapi_pin_get_ie(pin_t pin)
 
 **返回值**
 
-- 返回类型：pin_input_enable_t
+返回类型：pin_input_enable_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -466,7 +466,7 @@ errcode_t uapi_pin_set_st(pin_t pin, pin_schmitt_trigger_t st)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -514,7 +514,7 @@ pin_schmitt_trigger_t uapi_pin_get_st(pin_t pin)
 
 **返回值**
 
-- 返回类型：pin_schmitt_trigger_t
+返回类型：pin_schmitt_trigger_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -558,7 +558,7 @@ errcode_t uapi_pin_suspend(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -606,7 +606,7 @@ errcode_t uapi_pin_resume(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

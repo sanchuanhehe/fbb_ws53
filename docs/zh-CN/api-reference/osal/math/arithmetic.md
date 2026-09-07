@@ -54,7 +54,7 @@ unsigned long long osal_div_u64(unsigned long long dividend, unsigned int diviso
 
 **返回值**
 
-- 返回类型：unsigned long long
+返回类型：unsigned long long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -91,7 +91,7 @@ long long osal_div_s64(long long dividend, int divisor)
 
 **返回值**
 
-- 返回类型：long long
+返回类型：long long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -128,7 +128,7 @@ unsigned long long osal_div64_u64(unsigned long long dividend, unsigned long lon
 
 **返回值**
 
-- 返回类型：unsigned long long
+返回类型：unsigned long long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -165,7 +165,7 @@ long long osal_div64_s64(long long dividend, long long divisor)
 
 **返回值**
 
-- 返回类型：long long
+返回类型：long long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -202,7 +202,7 @@ unsigned long long osal_div_u64_rem(unsigned long long dividend, unsigned int di
 
 **返回值**
 
-- 返回类型：unsigned long long
+返回类型：unsigned long long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -239,7 +239,7 @@ long long osal_div_s64_rem(long long dividend, int divisor)
 
 **返回值**
 
-- 返回类型：long long
+返回类型：long long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -276,7 +276,7 @@ unsigned long long osal_div64_u64_rem(unsigned long long dividend, unsigned long
 
 **返回值**
 
-- 返回类型：unsigned long long
+返回类型：unsigned long long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -307,7 +307,7 @@ unsigned int osal_get_random_int(void)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

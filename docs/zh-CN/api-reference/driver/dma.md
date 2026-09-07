@@ -55,7 +55,7 @@ errcode_t uapi_dma_init(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -119,7 +119,7 @@ errcode_t uapi_dma_open(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -185,7 +185,7 @@ errcode_t uapi_dma_start_transfer(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -223,7 +223,7 @@ errcode_t uapi_dma_end_transfer(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -265,7 +265,7 @@ uint32_t uapi_dma_get_block_ts(uint8_t channel)
 
 **返回值**
 
-- 返回类型：uint32_t
+返回类型：uint32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -304,7 +304,7 @@ errcode_t uapi_dma_transfer_memory_single(const dma_ch_user_memory_config_t *use
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -355,7 +355,7 @@ errcode_t uapi_dma_configure_peripheral_transfer_single(const dma_ch_user_periph
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -397,7 +397,7 @@ uint8_t uapi_dma_get_lli_channel(uint8_t burst_length, uint8_t handshaking)
 
 **返回值**
 
-- 返回类型：uint8_t
+返回类型：uint8_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -443,7 +443,7 @@ errcode_t uapi_dma_transfer_memory_lli(uint8_t channel, const dma_ch_user_memory
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -493,7 +493,7 @@ errcode_t uapi_dma_configure_peripheral_transfer_lli(uint8_t channel, const dma_
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -541,7 +541,7 @@ errcode_t uapi_dma_enable_lli(uint8_t channel, dma_transfer_cb_t callback, uintp
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -589,7 +589,7 @@ errcode_t uapi_dma_resume(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -634,7 +634,7 @@ errcode_t uapi_dma_suspend(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

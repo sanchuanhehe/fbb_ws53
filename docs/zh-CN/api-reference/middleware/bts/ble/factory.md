@@ -53,7 +53,7 @@ errcode_t ble_factory_register_callbacks(ble_factory_callbacks_t *func)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -90,7 +90,7 @@ errcode_t ble_factory_rf_tx_start(ble_rf_tx_start_t* param)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -127,7 +127,7 @@ errcode_t ble_factory_rf_rx_start(ble_rf_rx_start_t* param)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -158,7 +158,7 @@ errcode_t ble_factory_rf_trx_end(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -189,7 +189,7 @@ errcode_t ble_factory_rf_reset(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -220,7 +220,7 @@ errcode_t ble_factory_rf_cali_nv(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -257,7 +257,7 @@ errcode_t ble_factory_rf_single_tone(ble_rf_single_tone_t* param)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -294,7 +294,7 @@ errcode_t ble_factory_vendor_productline_cmd(ble_vendor_productline_cmd_t* param
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

@@ -69,7 +69,7 @@ errcode_t gatts_register_server(bt_uuid_t *app_uuid, uint8_t *server_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -111,7 +111,7 @@ errcode_t gatts_unregister_server(uint8_t server_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -150,7 +150,7 @@ errcode_t gatts_add_service(uint8_t server_id, bt_uuid_t *service_uuid, bool is_
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -189,7 +189,7 @@ errcode_t gatts_add_characteristic(uint8_t server_id, uint16_t service_handle, g
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -228,7 +228,7 @@ errcode_t gatts_add_descriptor(uint8_t server_id, uint16_t service_handle, gatts
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -273,7 +273,7 @@ errcode_t gatts_add_service_sync(uint8_t server_id, bt_uuid_t *service_uuid, boo
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -323,7 +323,7 @@ errcode_t gatts_add_characteristic_sync(uint8_t server_id, uint16_t service_hand
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -373,7 +373,7 @@ errcode_t gatts_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -416,7 +416,7 @@ errcode_t gatts_start_service(uint8_t server_id, uint16_t service_handle)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -459,7 +459,7 @@ errcode_t gatts_stop_service(uint8_t server_id, uint16_t service_handle)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -497,7 +497,7 @@ errcode_t gatts_delete_service(uint8_t server_id, uint16_t service_handle)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -534,7 +534,7 @@ errcode_t gatts_delete_all_services(uint8_t server_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -573,7 +573,7 @@ errcode_t gatts_send_response(uint8_t server_id, uint16_t conn_id, gatts_send_rs
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -612,7 +612,7 @@ errcode_t gatts_notify_indicate(uint8_t server_id, uint16_t conn_id, gatts_ntf_i
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -656,7 +656,7 @@ errcode_t gatts_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, gat
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -698,7 +698,7 @@ errcode_t gatts_set_mtu_size(uint8_t server_id, uint16_t mtu_size)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -735,7 +735,7 @@ errcode_t gatts_register_callbacks(gatts_callbacks_t *func)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -777,7 +777,7 @@ errcode_t gatts_exchange_mtu_req(uint16_t conn_id, uint16_t mtu_size)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

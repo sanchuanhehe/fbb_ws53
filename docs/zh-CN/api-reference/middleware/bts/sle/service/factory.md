@@ -52,7 +52,7 @@ errcode_t sle_rf_tx_start(sle_rf_tx_start_t* rf_tx_start)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -90,7 +90,7 @@ errcode_t sle_rf_rx_start(sle_rf_rx_start_t* rf_rx_start)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -122,7 +122,7 @@ errcode_t sle_rf_trx_end(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -154,7 +154,7 @@ errcode_t sle_rf_reset(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -191,7 +191,7 @@ errcode_t sle_factory_register_callbacks(sle_factory_callbacks_t *func)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

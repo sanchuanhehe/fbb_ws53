@@ -66,7 +66,7 @@ int osal_memncmp(const void *buf1, const void *buf2, unsigned long size)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -100,7 +100,7 @@ int osal_strcmp(const char *s1, const char *s2)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -141,7 +141,7 @@ int osal_strncmp(const char *s1, const char *s2, unsigned long size)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -175,7 +175,7 @@ int osal_strcasecmp(const char *s1, const char *s2)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -210,7 +210,7 @@ int osal_strncasecmp(const char *s1, const char *s2, unsigned long size)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -244,7 +244,7 @@ char *osal_strchr(const char *s, int n)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -278,7 +278,7 @@ char *osal_strnchr(const char *s, int count, int c)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -311,7 +311,7 @@ char *osal_strrchr(const char *s, int c)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -344,7 +344,7 @@ char *osal_strstr(const char *s1, const char *s2)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -382,7 +382,7 @@ char *osal_strnstr(const char *s1, const char *s2, int n)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -413,7 +413,7 @@ unsigned int osal_strlen(const char *s)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -451,7 +451,7 @@ unsigned int osal_strnlen(const char *s, unsigned int size)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -483,7 +483,7 @@ char *osal_strpbrk(const char *s1, const char *s2)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -522,7 +522,7 @@ char *osal_strsep(char **s, const char *ct)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -554,7 +554,7 @@ unsigned int osal_strspn(const char *s, const char *accept)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -585,7 +585,7 @@ unsigned int osal_strcspn(const char *s, const char *reject)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -618,7 +618,7 @@ void *osal_memscan(void *addr, int c, int size)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -651,7 +651,7 @@ int osal_memcmp(const void *cs, const void *ct, int count)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -692,7 +692,7 @@ void *osal_memchr(const void *s, int c, int n)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -726,7 +726,7 @@ void *osal_memchr_inv(const void *s, int c, int n)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -767,7 +767,7 @@ unsigned long long osal_strtoull(const char *cp, char **endp, unsigned int base)
 
 **返回值**
 
-- 返回类型：unsigned long long
+返回类型：unsigned long long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -808,7 +808,7 @@ unsigned long osal_strtoul(const char *cp, char **endp, unsigned int base)
 
 **返回值**
 
-- 返回类型：unsigned long
+返回类型：unsigned long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -853,7 +853,7 @@ long osal_strtol(const char *cp, char **endp, unsigned int base)
 
 **返回值**
 
-- 返回类型：long
+返回类型：long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -902,7 +902,7 @@ long long osal_strtoll(const char *cp, char **endp, unsigned int base)
 
 **返回值**
 
-- 返回类型：long long
+返回类型：long long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

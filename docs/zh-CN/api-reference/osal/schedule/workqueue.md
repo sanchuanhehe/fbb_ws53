@@ -57,7 +57,7 @@ int osal_workqueue_init(osal_workqueue *work, osal_workqueue_handler handler)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -95,7 +95,7 @@ int osal_workqueue_schedule(osal_workqueue *work)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -168,7 +168,7 @@ int osal_workqueue_flush(osal_workqueue *work)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

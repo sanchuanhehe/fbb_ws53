@@ -73,7 +73,7 @@ errcode_t uapi_sdio_slave_init(sdio_bus_t bus)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -146,7 +146,7 @@ errcode_t uapi_sdio_slave_reinit(sdio_bus_t bus)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -221,7 +221,7 @@ errcode_t uapi_sdio_slave_register_callback(sdio_bus_t bus, const sdio_callback_
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -263,7 +263,7 @@ errcode_t uapi_sdio_slave_complete_send(uint8_t *adma_tab, uint32_t adma_index)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -302,7 +302,7 @@ errcode_t uapi_sdio_slave_set_pad_admatab(uint8_t *adma_tab, uint32_t adma_index
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -340,7 +340,7 @@ errcode_t uapi_sdio_slave_write_extend_info(sdio_bus_t bus, sdio_extendfunc_t* e
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -383,7 +383,7 @@ sdio_extendfunc_t* uapi_sdio_slave_get_extend_info(sdio_bus_t bus)
 
 **返回值**
 
-- 返回类型：sdio_extendfunc_t *
+返回类型：sdio_extendfunc_t *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -428,7 +428,7 @@ errcode_t uapi_sdio_slave_prepare_send_data(sdio_bus_t bus, uint32_t data_len)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -468,7 +468,7 @@ errcode_t uapi_sdio_slave_set_admatab(uint8_t *adma_tab, uint32_t adma_index, co
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -507,7 +507,7 @@ errcode_t uapi_sdio_slave_sched_msg(sdio_bus_t bus)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -546,7 +546,7 @@ errcode_t uapi_sdio_slave_sync_msg(sdio_bus_t bus, uint32_t msg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -585,7 +585,7 @@ errcode_t uapi_sdio_slave_send_msg_ack(sdio_bus_t bus, uint32_t msg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -625,7 +625,7 @@ errcode_t uapi_sdio_slave_process_msg(sdio_bus_t bus, uint32_t send_msg, uint32_
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -663,7 +663,7 @@ bool uapi_sdio_slave_is_pending_msg(sdio_bus_t bus, uint32_t msg)
 
 **返回值**
 
-- 返回类型：bool
+返回类型：bool
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -701,7 +701,7 @@ bool uapi_sdio_slave_is_sending_msg(sdio_bus_t bus, uint32_t msg)
 
 **返回值**
 
-- 返回类型：bool
+返回类型：bool
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -823,7 +823,7 @@ bool uapi_sdio_slave_host_clk_ready(sdio_bus_t bus)
 
 **返回值**
 
-- 返回类型：bool
+返回类型：bool
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -867,7 +867,7 @@ errcode_t uapi_sdio_slave_get_status(sdio_bus_t bus, sdio_status_info_t* satus_i
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -910,7 +910,7 @@ errcode_t uapi_sdio_slave_set_status(sdio_bus_t bus, const sdio_status_info_t* s
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -982,7 +982,7 @@ sdio_info_t* uapi_sdio_slave_get_info(sdio_bus_t bus)
 
 **返回值**
 
-- 返回类型：sdio_info_t *
+返回类型：sdio_info_t *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -1055,7 +1055,7 @@ uint32_t uapi_sdio_slave_get_extend_val_info(sdio_bus_t bus, uint32_t offset)
 
 **返回值**
 
-- 返回类型：uint32_t
+返回类型：uint32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

@@ -158,7 +158,7 @@ osal_proc_entry *osal_create_proc_entry(const char *name, osal_proc_entry *paren
 
 **返回值**
 
-- 返回类型：osal_proc_entry *
+返回类型：osal_proc_entry *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

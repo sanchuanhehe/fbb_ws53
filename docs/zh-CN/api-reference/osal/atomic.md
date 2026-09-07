@@ -53,7 +53,7 @@ int osal_atomic_read(osal_atomic *atomic)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -119,7 +119,7 @@ int osal_atomic_inc_return(osal_atomic *atomic)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -153,7 +153,7 @@ int osal_atomic_add_return(osal_atomic *atomic, int count)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -185,7 +185,7 @@ int osal_atomic_dec_return(osal_atomic *atomic)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -320,7 +320,7 @@ int osal_atomic_dec_and_test(osal_atomic *atomic)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -354,7 +354,7 @@ int osal_atomic_inc_and_test(osal_atomic *atomic)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -388,7 +388,7 @@ int osal_atomic_inc_not_zero(osal_atomic *atomic)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

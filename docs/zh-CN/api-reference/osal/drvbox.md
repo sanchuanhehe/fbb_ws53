@@ -48,7 +48,7 @@ unsigned int osal_drvmgr_switch_to_drvbox(unsigned int drv_id)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

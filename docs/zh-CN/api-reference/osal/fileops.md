@@ -52,7 +52,7 @@ void *osal_klib_fopen(const char *file, int flags, int mode)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -120,7 +120,7 @@ int osal_klib_fwrite(const char *buf, unsigned long size, void *filp)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -165,7 +165,7 @@ int osal_klib_fread(char *buf, unsigned long size, void *filp)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -233,7 +233,7 @@ int osal_klib_fseek(long long offset, int whence, void *filp)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

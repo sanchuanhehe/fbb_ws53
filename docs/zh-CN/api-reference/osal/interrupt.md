@@ -62,7 +62,7 @@ void *osal_irq_get_private_dev(void *param_dev)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -105,7 +105,7 @@ int osal_irq_request(unsigned int irq, osal_irq_handler handler, osal_irq_handle
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -188,7 +188,7 @@ int osal_irq_set_priority(unsigned int irq, unsigned short priority)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -233,7 +233,7 @@ int osal_irq_set_affinity(unsigned int irq, const char *name, int cpu_mask)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -335,7 +335,7 @@ unsigned int osal_irq_lock(void)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -373,7 +373,7 @@ unsigned int osal_irq_unlock(void)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -447,7 +447,7 @@ unsigned int osal_irq_clear(unsigned int vector)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -483,7 +483,7 @@ int osal_in_interrupt(void)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -519,7 +519,7 @@ int osal_tasklet_init(osal_tasklet *tasklet)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -557,7 +557,7 @@ int osal_tasklet_schedule(osal_tasklet *tasklet)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -595,7 +595,7 @@ int osal_tasklet_kill(osal_tasklet *tasklet)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -632,7 +632,7 @@ int osal_tasklet_update(osal_tasklet *tasklet)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

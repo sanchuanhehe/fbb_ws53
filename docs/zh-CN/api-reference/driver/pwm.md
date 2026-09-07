@@ -59,7 +59,7 @@ errcode_t uapi_pwm_init(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -130,7 +130,7 @@ errcode_t uapi_pwm_open(uint8_t channel, const pwm_config_t *cfg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -174,7 +174,7 @@ errcode_t uapi_pwm_close(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -219,7 +219,7 @@ errcode_t uapi_pwm_start(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -263,7 +263,7 @@ uint32_t uapi_pwm_get_frequency(uint8_t channel)
 
 **返回值**
 
-- 返回类型：uint32_t
+返回类型：uint32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -301,7 +301,7 @@ errcode_t uapi_pwm_stop(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -350,7 +350,7 @@ errcode_t uapi_pwm_update_duty_ratio(uint8_t channel, uint32_t low_time, uint32_
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -396,7 +396,7 @@ errcode_t uapi_pwm_isr(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -436,7 +436,7 @@ errcode_t uapi_pwm_register_interrupt(uint8_t channel, pwm_callback_t callback)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -481,7 +481,7 @@ errcode_t uapi_pwm_unregister_interrupt(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -524,7 +524,7 @@ errcode_t uapi_pwm_set_group(uint8_t group, const uint8_t *channel_set, uint32_t
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -573,7 +573,7 @@ errcode_t uapi_pwm_clear_group(uint8_t group)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -618,7 +618,7 @@ errcode_t uapi_pwm_start_group(uint8_t group)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -667,7 +667,7 @@ errcode_t uapi_pwm_stop_group(uint8_t group)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -717,7 +717,7 @@ errcode_t uapi_pwm_update_cfg(uint8_t channel, const pwm_config_t *cfg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -770,7 +770,7 @@ errcode_t uapi_pwm_config_preload(uint8_t group, uint8_t channel, const pwm_conf
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -816,7 +816,7 @@ errcode_t uapi_pwm_suspend(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -864,7 +864,7 @@ errcode_t uapi_pwm_resume(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
