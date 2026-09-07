@@ -56,7 +56,7 @@ errcode_t uapi_i2s_init(sio_bus_t bus, i2s_callback_t callback)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
-| callback | [i2s_callback_t](#typedef_i2s_callback_t) | I2S 设备的接收数据回调函数 | 不为NULL |
+| callback | [i2s_callback_t](#typedef_i2s_callback_t) | I2S 设备的接收数据回调函数 | 不为 NULL |
 
 **返回值**
 
@@ -143,7 +143,7 @@ errcode_t uapi_i2s_set_config(sio_bus_t bus, const i2s_config_t *config)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
-| config | [i2s_config_t](#struct_i2s_config_t) * | I2S 设备的配置参数指针 | 不为NULL |
+| config | [i2s_config_t](#struct_i2s_config_t) * | I2S 设备的配置参数指针 | 不为 NULL |
 
 **返回值**
 
@@ -229,7 +229,7 @@ errcode_t uapi_i2s_write_data(sio_bus_t bus, i2s_tx_data_t *data)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
-| data | [i2s_tx_data_t](#struct_i2s_tx_data_t) * | 发送数据指针，含左右声道缓冲区与长度 | 不为NULL；data->left_buff 与 data->right_buff 不为NULL |
+| data | [i2s_tx_data_t](#struct_i2s_tx_data_t) * | 发送数据指针，含左右声道缓冲区与长度 | 不为 NULL；data->left_buff 与 data->right_buff 不为 NULL |
 
 **返回值**
 
@@ -340,7 +340,7 @@ errcode_t uapi_i2s_loop_trans(sio_bus_t bus, i2s_tx_data_t *data)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
-| data | [i2s_tx_data_t](#struct_i2s_tx_data_t) * | 自测发送数据指针，含左右声道缓冲区与长度 | 不为NULL；data->left_buff 与 data->right_buff 不为NULL |
+| data | [i2s_tx_data_t](#struct_i2s_tx_data_t) * | 自测发送数据指针，含左右声道缓冲区与长度 | 不为 NULL；data->left_buff 与 data->right_buff 不为 NULL |
 
 **返回值**
 
@@ -465,7 +465,7 @@ int32_t uapi_i2s_dma_config(sio_bus_t bus, i2s_dma_attr_t *i2s_dma_cfg)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
-| i2s_dma_cfg | [i2s_dma_attr_t](#struct_i2s_dma_attr_t) * | I2S 使用 DMA 传输时的配置参数指针 | 不为NULL |
+| i2s_dma_cfg | [i2s_dma_attr_t](#struct_i2s_dma_attr_t) * | I2S 使用 DMA 传输时的配置参数指针 | 不为 NULL |
 
 **返回值**
 
@@ -510,9 +510,9 @@ int32_t uapi_i2s_merge_write_by_dma(sio_bus_t bus, const void *buffer, uint32_t 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
-| buffer | const void * | 待写入的数据缓冲区指针 | 不为NULL |
-| length | uint32_t | 需要写入的数据长度 | 大于0 |
-| dma_cfg | [i2s_dma_config_t](#struct_i2s_dma_config_t) * | DMA 传输配置参数指针 | 不为NULL |
+| buffer | const void * | 待写入的数据缓冲区指针 | 不为 NULL |
+| length | uint32_t | 需要写入的数据长度 | 大于 0 |
+| dma_cfg | [i2s_dma_config_t](#struct_i2s_dma_config_t) * | DMA 传输配置参数指针 | 不为 NULL |
 | arg | uintptr_t | 自定义参数，可被传递到中断处理函数 | 无约束 |
 | block | bool | 是否阻塞传输 | - true<br>- false |
 
@@ -560,9 +560,9 @@ int32_t uapi_i2s_merge_read_by_dma(sio_bus_t bus, const void *buffer, uint32_t l
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | sio_bus_t | 指定的 SIO 总线编号，参考 sio_bus_t | SIO_BUS_0：0 |
-| buffer | const void * | 存储读取数据的缓冲区指针 | 不为NULL |
-| length | uint32_t | 需要读取的数据长度 | 大于0 |
-| dma_cfg | [i2s_dma_config_t](#struct_i2s_dma_config_t) * | DMA 传输配置参数指针 | 不为NULL |
+| buffer | const void * | 存储读取数据的缓冲区指针 | 不为 NULL |
+| length | uint32_t | 需要读取的数据长度 | 大于 0 |
+| dma_cfg | [i2s_dma_config_t](#struct_i2s_dma_config_t) * | DMA 传输配置参数指针 | 不为 NULL |
 | arg | uintptr_t | 自定义参数，可被传递到中断处理函数 | 无约束 |
 | block | bool | 是否阻塞传输 | - true<br>- false |
 

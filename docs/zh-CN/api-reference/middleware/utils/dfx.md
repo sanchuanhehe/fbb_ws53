@@ -52,8 +52,8 @@ errcode_t uapi_diag_register_cmd(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t cmd
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| cmd_tbl | [diag_cmd_reg_obj_t](#diag_cmd_reg_obj_t) | DIAG 命令注册表，需声明为常量数组后传入 | 不为NULL |
-| cmd_num | uint16_t | 命令条数 | 不为0 |
+| cmd_tbl | [diag_cmd_reg_obj_t](#diag_cmd_reg_obj_t) | DIAG 命令注册表，需声明为常量数组后传入 | 不为 NULL |
+| cmd_num | uint16_t | 命令条数 | 不为 0 |
 
 **返回值**
 
@@ -97,8 +97,8 @@ errcode_t uapi_diag_unregister_cmd(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t c
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| cmd_tbl | [diag_cmd_reg_obj_t](#diag_cmd_reg_obj_t) | 待解注册的 DIAG 命令注册表，需与注册时传入的指针一致 | 不为NULL |
-| cmd_num | uint16_t | 待解注册的命令条数，需与注册时传入的条数一致 | 不为0 |
+| cmd_tbl | [diag_cmd_reg_obj_t](#diag_cmd_reg_obj_t) | 待解注册的 DIAG 命令注册表，需与注册时传入的指针一致 | 不为 NULL |
+| cmd_num | uint16_t | 待解注册的命令条数，需与注册时传入的条数一致 | 不为 0 |
 
 **返回值**
 
@@ -138,8 +138,8 @@ errcode_t uapi_diag_report_packet(uint16_t cmd_id, diag_option_t *option, const 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | cmd_id | uint16_t | 报文上报 ID，与命令回调函数中的 cmd_id 一致时复用该值 | 0 ~ 65535 |
-| option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址，用于识别报文是本地报文还是远端报文；为 NULL 时按本地默认地址处理 | 可为NULL |
-| packet | const uint8_t * | 数据包缓冲区地址 | 不为NULL |
+| option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址，用于识别报文是本地报文还是远端报文；为 NULL 时按本地默认地址处理 | 可为 NULL |
+| packet | const uint8_t * | 数据包缓冲区地址 | 不为 NULL |
 | packet_size | uint16_t | 数据包大小（单位 Bytes） | 0 ~ 65535 |
 | sync | bool | 上报方式，true 表示同步阻塞上报，false 表示异步非阻塞上报 | true；<br>false。 |
 
@@ -189,9 +189,9 @@ errcode_t uapi_diag_report_packets_critical(uint16_t cmd_id, diag_option_t *opti
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | cmd_id | uint16_t | 报文上报 ID | 0 ~ 65535 |
-| option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址；为 NULL 时按本地默认地址处理 | 可为NULL |
-| packet | uint8_t ** | 指向数据包指针数组的指针，每个元素为一个数据包缓冲区地址 | 不为NULL |
-| packet_size | uint16_t * | 指向数据包大小数组的指针，每个元素与 packet 数组元素一一对应（单位 Bytes） | 不为NULL |
+| option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址；为 NULL 时按本地默认地址处理 | 可为 NULL |
+| packet | uint8_t ** | 指向数据包指针数组的指针，每个元素为一个数据包缓冲区地址 | 不为 NULL |
+| packet_size | uint16_t * | 指向数据包大小数组的指针，每个元素与 packet 数组元素一一对应（单位 Bytes） | 不为 NULL |
 | pkt_cnt | uint8_t | 数据包个数 | 0 ~ DIAG_PKT_DATA_ID_USR_MAX-1（实现仅拒绝超出上界的值） |
 
 **返回值**
@@ -237,9 +237,9 @@ errcode_t uapi_diag_report_packets_normal(uint16_t cmd_id, diag_option_t *option
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | cmd_id | uint16_t | 报文上报 ID | 0 ~ 65535 |
-| option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址；为 NULL 时按本地默认地址处理 | 可为NULL |
-| packet | uint8_t ** | 指向数据包指针数组的指针，每个元素为一个数据包缓冲区地址 | 不为NULL |
-| packet_size | uint16_t * | 指向数据包大小数组的指针，每个元素与 packet 数组元素一一对应（单位 Bytes） | 不为NULL |
+| option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址；为 NULL 时按本地默认地址处理 | 可为 NULL |
+| packet | uint8_t ** | 指向数据包指针数组的指针，每个元素为一个数据包缓冲区地址 | 不为 NULL |
+| packet_size | uint16_t * | 指向数据包大小数组的指针，每个元素与 packet 数组元素一一对应（单位 Bytes） | 不为 NULL |
 | pkt_cnt | uint8_t | 数据包个数 | 0 ~ DIAG_PKT_DATA_ID_USR_MAX-1（实现仅拒绝超出上界的值） |
 
 **返回值**
@@ -285,7 +285,7 @@ errcode_t uapi_diag_report_sys_msg(uint32_t module_id, uint32_t msg_id, const ui
 | ---- | ---- | ---- | ---- |
 | module_id | uint32_t | 打印日志的源模块 ID | 0 ~ 4294967295 |
 | msg_id | uint32_t | 打印日志的消息 ID | 0 ~ 4294967295 |
-| buf | const uint8_t * | 打印内容缓冲区 | 不为NULL（buf_size 非 0 时） |
+| buf | const uint8_t * | 打印内容缓冲区 | 不为 NULL（buf_size 非 0 时） |
 | buf_size | uint16_t | 内容大小（单位 Bytes） | 0 ~ 65535 |
 | level | uint8_t | 日志级别 | DIAG_LEVEL_DEBUG/DIAG_LEVEL_NOTICE/DIAG_LEVEL_WARNING/DIAG_LEVEL_ERROR/DIAG_LEVEL_FATAL 中有效值（由 DIAG 定义的日志级别枚举决定） |
 
@@ -340,8 +340,8 @@ errcode_t uapi_diag_register_ind(const diag_cmd_reg_obj_t *cmd_tbl, uint16_t cmd
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| cmd_tbl | [diag_cmd_reg_obj_t](#diag_cmd_reg_obj_t) | 注册应答表，需声明为常量数组后传入 | 不为NULL |
-| cmd_num | uint16_t | 应答个数 | 不为0 |
+| cmd_tbl | [diag_cmd_reg_obj_t](#diag_cmd_reg_obj_t) | 注册应答表，需声明为常量数组后传入 | 不为 NULL |
+| cmd_num | uint16_t | 应答个数 | 不为 0 |
 
 **返回值**
 
@@ -381,9 +381,9 @@ errcode_t uapi_diag_run_cmd(uint16_t cmd_id, uint8_t *data, uint16_t data_size, 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | cmd_id | uint16_t | DIAG 命令请求 ID | 0 ~ 65535 |
-| data | uint8_t * | 数据内容缓冲区地址 | 不为NULL |
+| data | uint8_t * | 数据内容缓冲区地址 | 不为 NULL |
 | data_size | uint16_t | 数据大小（单位 Bytes） | 0 ~ 65535 |
-| option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址 | 不为NULL |
+| option | [diag_option_t](#diag_option_t) | option 选项，携带对端地址 | 不为 NULL |
 
 **返回值**
 
@@ -422,8 +422,8 @@ errcode_t uapi_diag_register_stat_obj(const diag_sys_stat_obj_t *stat_obj_tbl, u
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| stat_obj_tbl | [diag_sys_stat_obj_t](#diag_sys_stat_obj_t) | 统计量注册表，需声明为常量数组后传入 | 不为NULL |
-| obj_num | uint16_t | 统计量个数 | 不为0 |
+| stat_obj_tbl | [diag_sys_stat_obj_t](#diag_sys_stat_obj_t) | 统计量注册表，需声明为常量数组后传入 | 不为 NULL |
+| obj_num | uint16_t | 统计量个数 | 不为 0 |
 
 **返回值**
 

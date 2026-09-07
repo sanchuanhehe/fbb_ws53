@@ -57,7 +57,7 @@ errcode_t ssaps_register_server(sle_uuid_t *app_uuid, uint8_t *server_id)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| app_uuid | [sle_uuid_t](#struct_sle_uuid_t) * | 上层应用 UUID | 不为NULL |
+| app_uuid | [sle_uuid_t](#struct_sle_uuid_t) * | 上层应用 UUID | 不为 NULL |
 
 **出参**
 
@@ -148,7 +148,7 @@ errcode_t ssaps_add_service(uint8_t server_id, sle_uuid_t *service_uuid, bool is
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 已通过 [ssaps_register_server](#ssaps_register_server) 获得的有效 ID |
-| service_uuid | [sle_uuid_t](#struct_sle_uuid_t) * | 服务 UUID | 不为NULL |
+| service_uuid | [sle_uuid_t](#struct_sle_uuid_t) * | 服务 UUID | 不为 NULL |
 | is_primary | bool | 是否为首要服务 | true；<br>false。 |
 
 **返回值**
@@ -190,7 +190,7 @@ errcode_t ssaps_add_property(uint8_t server_id, uint16_t service_handle, ssaps_p
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 已通过 [ssaps_register_server](#ssaps_register_server) 获得的有效 ID |
 | service_handle | uint16_t | 服务句柄 | 已通过 [ssaps_add_service](#ssaps_add_service) 回调或 [ssaps_add_service_sync](#ssaps_add_service_sync) 出参获得的有效句柄 |
-| property | [ssaps_property_info_t](#struct_ssaps_property_info_t) * | SSAP 特征信息 | 不为NULL |
+| property | [ssaps_property_info_t](#struct_ssaps_property_info_t) * | SSAP 特征信息 | 不为 NULL |
 
 **返回值**
 
@@ -233,7 +233,7 @@ errcode_t ssaps_add_descriptor(uint8_t server_id, uint16_t service_handle, uint1
 | server_id | uint8_t | 服务端 ID | 已通过 [ssaps_register_server](#ssaps_register_server) 获得的有效 ID |
 | service_handle | uint16_t | 服务句柄 | 已通过 [ssaps_add_service](#ssaps_add_service) 回调或 [ssaps_add_service_sync](#ssaps_add_service_sync) 出参获得的有效句柄 |
 | property_handle | uint16_t | 特征句柄 | 已通过 [ssaps_add_property](#ssaps_add_property) 回调或 [ssaps_add_property_sync](#ssaps_add_property_sync) 出参获得的有效句柄 |
-| descriptor | [ssaps_desc_info_t](#struct_ssaps_desc_info_t) * | SSAP 特征描述符 | 不为NULL |
+| descriptor | [ssaps_desc_info_t](#struct_ssaps_desc_info_t) * | SSAP 特征描述符 | 不为 NULL |
 
 **返回值**
 
@@ -273,7 +273,7 @@ errcode_t ssaps_add_service_sync(uint8_t server_id, sle_uuid_t *service_uuid, bo
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 已通过 [ssaps_register_server](#ssaps_register_server) 获得的有效 ID |
-| service_uuid | [sle_uuid_t](#struct_sle_uuid_t) * | 服务 UUID | 不为NULL |
+| service_uuid | [sle_uuid_t](#struct_sle_uuid_t) * | 服务 UUID | 不为 NULL |
 | is_primary | bool | 是否为首要服务 | true；<br>false。 |
 
 **出参**
@@ -325,7 +325,7 @@ errcode_t ssaps_add_property_sync(uint8_t server_id, uint16_t service_handle, ss
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 已通过 [ssaps_register_server](#ssaps_register_server) 获得的有效 ID |
 | service_handle | uint16_t | 服务句柄 | 已通过 [ssaps_add_service](#ssaps_add_service) 回调或 [ssaps_add_service_sync](#ssaps_add_service_sync) 出参获得的有效句柄 |
-| property | [ssaps_property_info_t](#struct_ssaps_property_info_t) * | SSAP 特征信息 | 不为NULL |
+| property | [ssaps_property_info_t](#struct_ssaps_property_info_t) * | SSAP 特征信息 | 不为 NULL |
 
 **出参**
 
@@ -377,7 +377,7 @@ errcode_t ssaps_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 | server_id | uint8_t | 服务端 ID | 已通过 [ssaps_register_server](#ssaps_register_server) 获得的有效 ID |
 | service_handle | uint16_t | 服务句柄 | 已通过 [ssaps_add_service](#ssaps_add_service) 回调或 [ssaps_add_service_sync](#ssaps_add_service_sync) 出参获得的有效句柄 |
 | property_handle | uint16_t | 描述符所属特征句柄 | 已通过 [ssaps_add_property](#ssaps_add_property) 回调或 [ssaps_add_property_sync](#ssaps_add_property_sync) 出参获得的有效句柄 |
-| descriptor | [ssaps_desc_info_t](#struct_ssaps_desc_info_t) * | 特征描述符 | 不为NULL |
+| descriptor | [ssaps_desc_info_t](#struct_ssaps_desc_info_t) * | 特征描述符 | 不为 NULL |
 
 **返回值**
 
@@ -503,7 +503,7 @@ errcode_t ssaps_send_response(uint8_t server_id, uint16_t conn_id, ssaps_send_rs
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 已通过 [ssaps_register_server](#ssaps_register_server) 获得的有效 ID |
 | conn_id | uint16_t | 连接 ID | 有效的连接 ID |
-| param | [ssaps_send_rsp_t](#struct_ssaps_send_rsp_t) * | 响应参数 | 不为NULL |
+| param | [ssaps_send_rsp_t](#struct_ssaps_send_rsp_t) * | 响应参数 | 不为 NULL |
 
 **参考案例**
 
@@ -547,7 +547,7 @@ errcode_t ssaps_notify_indicate(uint8_t server_id, uint16_t conn_id, ssaps_ntf_i
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 已通过 [ssaps_register_server](#ssaps_register_server) 获得的有效 ID |
 | conn_id | uint16_t | 连接 ID，向全部对端发送时填 0xFFFF | 有效连接 ID 或 0xFFFF |
-| param | [ssaps_ntf_ind_t](#struct_ssaps_ntf_ind_t) * | 通知或指示参数 | 不为NULL |
+| param | [ssaps_ntf_ind_t](#struct_ssaps_ntf_ind_t) * | 通知或指示参数 | 不为 NULL |
 
 **返回值**
 
@@ -591,7 +591,7 @@ errcode_t ssaps_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, ssa
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 已通过 [ssaps_register_server](#ssaps_register_server) 获得的有效 ID |
 | conn_id | uint16_t | 连接 ID，向全部对端发送时填 0xFFFF | 有效连接 ID 或 0xFFFF |
-| param | [ssaps_ntf_ind_by_uuid_t](#struct_ssaps_ntf_ind_by_uuid_t) * | 通知或指示参数 | 不为NULL |
+| param | [ssaps_ntf_ind_by_uuid_t](#struct_ssaps_ntf_ind_by_uuid_t) * | 通知或指示参数 | 不为 NULL |
 
 **返回值**
 
@@ -630,7 +630,7 @@ errcode_t ssaps_set_info(uint8_t server_id, ssap_exchange_info_t *info)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 已通过 [ssaps_register_server](#ssaps_register_server) 获得的有效 ID |
-| info | [ssap_exchange_info_t](#struct_ssap_exchange_info_t) * | 服务端交换信息 | 不为NULL |
+| info | [ssap_exchange_info_t](#struct_ssap_exchange_info_t) * | 服务端交换信息 | 不为 NULL |
 
 **返回值**
 
@@ -672,7 +672,7 @@ errcode_t ssaps_register_callbacks(ssaps_callbacks_t *func)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [ssaps_callbacks_t](#struct_ssaps_callbacks_t) * | 回调函数集合 | 不为NULL |
+| func | [ssaps_callbacks_t](#struct_ssaps_callbacks_t) * | 回调函数集合 | 不为 NULL |
 
 **返回值**
 

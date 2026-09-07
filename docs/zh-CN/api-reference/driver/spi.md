@@ -62,7 +62,7 @@ errcode_t uapi_spi_init(spi_bus_t bus, spi_attr_t *attr, spi_extra_attr_t *extra
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待初始化的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| attr | spi_attr_t * | SPI 基础配置参数指针 | 不为NULL |
+| attr | spi_attr_t * | SPI 基础配置参数指针 | 不为 NULL |
 | extra_attr | spi_extra_attr_t * | SPI 高级配置参数指针 | - |
 
 **返回值**
@@ -73,7 +73,7 @@ errcode_t uapi_spi_init(spi_bus_t bus, spi_attr_t *attr, spi_extra_attr_t *extra
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且初始化成功，或总线已初始化 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 attr 为空 |
-| Other | 其他错误码，参考errcode_t | HAL 初始化失败 |
+| Other | 其他错误码，参考 errcode_t | HAL 初始化失败 |
 
 **参考案例**
 
@@ -116,7 +116,7 @@ errcode_t uapi_spi_deinit(spi_bus_t bus)
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且去初始化成功，或总线未初始化 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| Other | 其他错误码，参考errcode_t | HAL 去初始化失败 |
+| Other | 其他错误码，参考 errcode_t | HAL 去初始化失败 |
 
 ### uapi_spi_set_tmod <a id="uapi_spi_set_tmod"></a>
 
@@ -157,7 +157,7 @@ errcode_t uapi_spi_set_tmod(spi_bus_t bus, hal_spi_trans_mode_t tmod, uint8_t da
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且设置成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 tmod 大于等于 HAL_SPI_TRANS_MODE_MAX |
-| Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
+| Other | 其他错误码，参考 errcode_t | HAL 控制接口执行失败 |
 
 ### uapi_spi_set_attr <a id="uapi_spi_set_attr"></a>
 
@@ -187,7 +187,7 @@ errcode_t uapi_spi_set_attr(spi_bus_t bus, spi_attr_t *attr)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待设置的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| attr | spi_attr_t * | SPI 基础配置参数指针 | 不为NULL |
+| attr | spi_attr_t * | SPI 基础配置参数指针 | 不为 NULL |
 
 **返回值**
 
@@ -197,7 +197,7 @@ errcode_t uapi_spi_set_attr(spi_bus_t bus, spi_attr_t *attr)
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且设置成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 attr 为空 |
-| Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
+| Other | 其他错误码，参考 errcode_t | HAL 控制接口执行失败 |
 
 ### uapi_spi_get_attr <a id="uapi_spi_get_attr"></a>
 
@@ -242,7 +242,7 @@ errcode_t uapi_spi_get_attr(spi_bus_t bus, spi_attr_t *attr)
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且读取成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 attr 为空 |
-| Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
+| Other | 其他错误码，参考 errcode_t | HAL 控制接口执行失败 |
 
 ### uapi_spi_set_extra_attr <a id="uapi_spi_set_extra_attr"></a>
 
@@ -272,7 +272,7 @@ errcode_t uapi_spi_set_extra_attr(spi_bus_t bus, spi_extra_attr_t *extra_attr)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待设置的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| extra_attr | spi_extra_attr_t * | SPI 高级配置参数指针 | 不为NULL |
+| extra_attr | spi_extra_attr_t * | SPI 高级配置参数指针 | 不为 NULL |
 
 **返回值**
 
@@ -282,7 +282,7 @@ errcode_t uapi_spi_set_extra_attr(spi_bus_t bus, spi_extra_attr_t *extra_attr)
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且设置成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 extra_attr 为空 |
-| Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
+| Other | 其他错误码，参考 errcode_t | HAL 控制接口执行失败 |
 
 ### uapi_spi_get_extra_attr <a id="uapi_spi_get_extra_attr"></a>
 
@@ -327,7 +327,7 @@ errcode_t uapi_spi_get_extra_attr(spi_bus_t bus, spi_extra_attr_t *extra_attr)
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且读取成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 extra_attr 为空 |
-| Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
+| Other | 其他错误码，参考 errcode_t | HAL 控制接口执行失败 |
 
 ### uapi_spi_select_slave <a id="uapi_spi_select_slave"></a>
 
@@ -369,7 +369,7 @@ errcode_t uapi_spi_select_slave(spi_bus_t bus, spi_slave_t cs)
 | [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 参数合法且选择成功 |
 | [ERRCODE_INVALID_PARAM](#ERRCODE_INVALID_PARAM)：0x80000001 | 参数无效 | bus 大于等于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) 或 cs 大于等于 SPI_SLAVE_MAX_NUM |
 | [ERRCODE_SPI_MODE_MISMATCH](#ERRCODE_SPI_MODE_MISMATCH)：0x80001332 | 模式不匹配 | 总线未配置为主机模式 |
-| Other | 其他错误码，参考errcode_t | HAL 控制接口执行失败 |
+| Other | 其他错误码，参考 errcode_t | HAL 控制接口执行失败 |
 
 **Kconfig配置**
 
@@ -406,7 +406,7 @@ errcode_t uapi_spi_master_write(spi_bus_t bus, const spi_xfer_data_t *data, uint
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待操作的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| data | const spi_xfer_data_t * | 数据传输结构体指针，包含发送缓冲区与字节数 | 不为NULL |
+| data | const spi_xfer_data_t * | 数据传输结构体指针，包含发送缓冲区与字节数 | 不为 NULL |
 | timeout | uint32_t | 当前传输的超时时间，轮询模式下为轮询次数，DMA 模式下为超时时间，单位 ms，中断模式下不生效 | - |
 
 **返回值**
@@ -423,7 +423,7 @@ errcode_t uapi_spi_master_write(spi_bus_t bus, const spi_xfer_data_t *data, uint
 | [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR)：0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
 | [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR)：0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
 | [ERRCODE_SPI_ADD_QUEUE_FAIL](#ERRCODE_SPI_ADD_QUEUE_FAIL)：0x8000133B | 入队失败 | 中断模式下发送片段队列已满 |
-| Other | 其他错误码，参考errcode_t | HAL 写入接口执行失败 |
+| Other | 其他错误码，参考 errcode_t | HAL 写入接口执行失败 |
 
 **参考案例**
 
@@ -464,7 +464,7 @@ errcode_t uapi_spi_master_read(spi_bus_t bus, const spi_xfer_data_t *data, uint3
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待操作的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| data | const spi_xfer_data_t * | 数据传输结构体指针，包含接收缓冲区与字节数 | 不为NULL，且 rx_buff 不为NULL、rx_bytes 大于0 |
+| data | const spi_xfer_data_t * | 数据传输结构体指针，包含接收缓冲区与字节数 | 不为 NULL，且 rx_buff 不为 NULL、rx_bytes 大于 0 |
 | timeout | uint32_t | 当前传输的超时时间，轮询模式下为轮询次数，DMA 模式下为超时时间，单位 ms，中断模式下不生效 | - |
 
 **返回值**
@@ -481,7 +481,7 @@ errcode_t uapi_spi_master_read(spi_bus_t bus, const spi_xfer_data_t *data, uint3
 | [ERRCODE_SPI_CONFIG_FAIL](#ERRCODE_SPI_CONFIG_FAIL)：0x80001330 | 配置失败 | DMA 读路径下帧字节数为 0 或属性设置失败 |
 | [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR)：0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
 | [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR)：0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
-| Other | 其他错误码，参考errcode_t | HAL 读取接口执行失败 |
+| Other | 其他错误码，参考 errcode_t | HAL 读取接口执行失败 |
 
 **参考案例**
 
@@ -522,7 +522,7 @@ errcode_t uapi_spi_master_writeread(spi_bus_t bus, const spi_xfer_data_t *data, 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待操作的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| data | const spi_xfer_data_t * | 数据传输结构体指针，同时承载发送与接收缓冲区及字节数 | 不为NULL，且 rx_buff 不为NULL、rx_bytes 大于0 |
+| data | const spi_xfer_data_t * | 数据传输结构体指针，同时承载发送与接收缓冲区及字节数 | 不为 NULL，且 rx_buff 不为 NULL、rx_bytes 大于 0 |
 | timeout | uint32_t | 当前传输的超时时间，轮询模式下为轮询次数，DMA 模式下为超时时间，单位 ms，中断模式下不生效 | - |
 
 **返回值**
@@ -538,7 +538,7 @@ errcode_t uapi_spi_master_writeread(spi_bus_t bus, const spi_xfer_data_t *data, 
 | [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT)：0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
 | [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR)：0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
 | [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR)：0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
-| Other | 其他错误码，参考errcode_t | HAL 写入或读取接口执行失败 |
+| Other | 其他错误码，参考 errcode_t | HAL 写入或读取接口执行失败 |
 
 **参考案例**
 
@@ -579,7 +579,7 @@ errcode_t uapi_spi_slave_write(spi_bus_t bus, const spi_xfer_data_t *data, uint3
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待操作的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| data | const spi_xfer_data_t * | 数据传输结构体指针，包含发送缓冲区与字节数 | 不为NULL，且 tx_buff 不为NULL、tx_bytes 大于0 |
+| data | const spi_xfer_data_t * | 数据传输结构体指针，包含发送缓冲区与字节数 | 不为 NULL，且 tx_buff 不为 NULL、tx_bytes 大于 0 |
 | timeout | uint32_t | 当前传输的超时时间，轮询模式下为轮询次数，DMA 模式下为超时时间，单位 ms，中断模式下不生效 | - |
 
 **返回值**
@@ -596,7 +596,7 @@ errcode_t uapi_spi_slave_write(spi_bus_t bus, const spi_xfer_data_t *data, uint3
 | [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR)：0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
 | [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR)：0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
 | [ERRCODE_SPI_ADD_QUEUE_FAIL](#ERRCODE_SPI_ADD_QUEUE_FAIL)：0x8000133B | 入队失败 | 中断模式下发送片段队列已满 |
-| Other | 其他错误码，参考errcode_t | HAL 写入接口执行失败 |
+| Other | 其他错误码，参考 errcode_t | HAL 写入接口执行失败 |
 
 **参考案例**
 
@@ -637,7 +637,7 @@ errcode_t uapi_spi_slave_read(spi_bus_t bus, const spi_xfer_data_t *data, uint32
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待操作的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| data | const spi_xfer_data_t * | 数据传输结构体指针，包含接收缓冲区与字节数 | 不为NULL，且 rx_buff 不为NULL、rx_bytes 大于0 |
+| data | const spi_xfer_data_t * | 数据传输结构体指针，包含接收缓冲区与字节数 | 不为 NULL，且 rx_buff 不为 NULL、rx_bytes 大于 0 |
 | timeout | uint32_t | 当前传输的超时时间，轮询模式下为轮询次数，DMA 模式下为超时时间，单位 ms，中断模式下不生效 | - |
 
 **返回值**
@@ -653,7 +653,7 @@ errcode_t uapi_spi_slave_read(spi_bus_t bus, const spi_xfer_data_t *data, uint32
 | [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT)：0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
 | [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR)：0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
 | [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR)：0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
-| Other | 其他错误码，参考errcode_t | HAL 读取接口执行失败 |
+| Other | 其他错误码，参考 errcode_t | HAL 读取接口执行失败 |
 
 **参考案例**
 
@@ -694,7 +694,7 @@ errcode_t uapi_spi_slave_writeread(spi_bus_t bus, const spi_xfer_data_t *data, u
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待操作的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
-| data | const spi_xfer_data_t * | 数据传输结构体指针，同时承载发送与接收缓冲区及字节数 | 不为NULL，且 rx_buff 不为NULL、rx_bytes 大于0 |
+| data | const spi_xfer_data_t * | 数据传输结构体指针，同时承载发送与接收缓冲区及字节数 | 不为 NULL，且 rx_buff 不为 NULL、rx_bytes 大于 0 |
 | timeout | uint32_t | 当前传输的超时时间，轮询模式下为轮询次数，DMA 模式下为超时时间，单位 ms，中断模式下不生效 | - |
 
 **返回值**
@@ -710,7 +710,7 @@ errcode_t uapi_spi_slave_writeread(spi_bus_t bus, const spi_xfer_data_t *data, u
 | [ERRCODE_SPI_TIMEOUT](#ERRCODE_SPI_TIMEOUT)：0x80001333 | 传输超时 | FIFO 忙碌检查或并发锁等待超时 |
 | [ERRCODE_SPI_DMA_CONFIG_ERROR](#ERRCODE_SPI_DMA_CONFIG_ERROR)：0x80001336 | DMA 配置错误 | DMA 通道配置或握手选择失败 |
 | [ERRCODE_SPI_DMA_TRANSFER_ERROR](#ERRCODE_SPI_DMA_TRANSFER_ERROR)：0x80001337 | DMA 传输错误 | DMA 传输超时或传输未成功 |
-| Other | 其他错误码，参考errcode_t | HAL 写入或读取接口执行失败 |
+| Other | 其他错误码，参考 errcode_t | HAL 写入或读取接口执行失败 |
 
 **参考案例**
 
@@ -752,7 +752,7 @@ errcode_t uapi_spi_set_dma_mode(spi_bus_t bus, bool en, const spi_dma_config_t *
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待设置的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
 | en | bool | 是否使能 DMA 传输 | true；<br>false。 |
-| dma_cfg | const spi_dma_config_t * | DMA 配置结构体指针，去使能时配置为 NULL | 使能时不为NULL |
+| dma_cfg | const spi_dma_config_t * | DMA 配置结构体指针，去使能时配置为 NULL | 使能时不为 NULL |
 
 **返回值**
 
@@ -806,8 +806,8 @@ errcode_t uapi_spi_set_irq_mode(spi_bus_t bus, bool irq_en, spi_rx_callback_t rx
 | ---- | ---- | ---- | ---- |
 | bus | [spi_bus_t](#spi_bus_t) | 指定待设置的 SPI 总线编号 | 小于 [SPI_BUS_MAX_NUM](#SPI_BUS_MAX_NUM) |
 | irq_en | bool | 是否使用中断模式 | true；<br>false。 |
-| rx_callback | spi_rx_callback_t | 接收完成回调函数，在中断上下文中调用 | 使能时不为NULL |
-| tx_callback | spi_tx_callback_t | 发送完成回调函数，在中断上下文中调用 | 使能时不为NULL |
+| rx_callback | spi_rx_callback_t | 接收完成回调函数，在中断上下文中调用 | 使能时不为 NULL |
+| tx_callback | spi_tx_callback_t | 发送完成回调函数，在中断上下文中调用 | 使能时不为 NULL |
 
 **返回值**
 
@@ -1221,7 +1221,7 @@ typedef enum hal_spi_frame_size {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| HAL_SPI_FRAME_SIZE_8 | 7 | 8 位串行数据传输 |
+| HAL_SPI_FRAME_SIZE_8 | 0x07 | 8 位串行数据传输 |
 | HAL_SPI_FRAME_SIZE_16 | 0x0F | 16 位串行数据传输，当前暂不支持 |
 | HAL_SPI_FRAME_SIZE_24 | 0x17 | 24 位串行数据传输，当前暂不支持 |
 | HAL_SPI_FRAME_SIZE_32 | 0x1F | 32 位串行数据传输 |

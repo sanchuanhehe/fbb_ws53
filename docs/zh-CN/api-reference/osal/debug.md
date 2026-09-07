@@ -34,15 +34,15 @@ void osal_printk(const char *fmt, ...)
 **功能说明**
 
 - 提供内核日志打印功能，支持可变参数格式化输出。
-- 支持linux、liteos、seliteos、freertos系统。
-- 当fmt为NULL时，函数直接返回，不执行打印操作。
+- 支持 linux、liteos、seliteos、freertos 系统。
+- 当 fmt 为 NULL 时，函数直接返回，不执行打印操作。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| fmt | const char * | 格式化字符串指针 | 非NULL，指向有效的格式化字符串 |
-| ... | ... | 可变参数列表 | 与fmt中的格式说明符匹配 |
+| fmt | const char * | 格式化字符串指针 | 非 NULL，指向有效的格式化字符串 |
+| ... | ... | 可变参数列表 | 与 fmt 中的格式说明符匹配 |
 
 **参考案例**
 
@@ -63,23 +63,23 @@ void osal_panic(const char *fmt, const char *fun, int line, const char *cond)
 
 **功能说明**
 
-- 内核panic函数，打印内核panic信息及调用栈后系统停止响应。
-- 支持linux、liteos系统。
+- 内核 panic 函数，打印内核 panic 信息及调用栈后系统停止响应。
+- 支持 linux、liteos 系统。
 - 调用后系统将无法继续运行，属于致命错误处理接口。
 
 **前置条件**
 
-- 仅在linux、liteos系统下可用。
+- 仅在 linux、liteos 系统下可用。
 - 仅在发生不可恢复的致命错误时调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| fmt | const char * | 格式化字符串指针 | 非NULL |
-| fun | const char * | 发生panic的函数名 | 非NULL |
-| line | int | 发生panic的行号 | 有效源码行号 |
-| cond | const char * | 触发panic的条件表达式 | 非NULL |
+| fmt | const char * | 格式化字符串指针 | 非 NULL |
+| fun | const char * | 发生 panic 的函数名 | 非 NULL |
+| line | int | 发生 panic 的行号 | 有效源码行号 |
+| cond | const char * | 触发 panic 的条件表达式 | 非 NULL |
 
 ### osal_dump_stack <a id="osal_dump_stack"></a>
 
@@ -96,12 +96,12 @@ void osal_dump_stack(void)
 **功能说明**
 
 - 内核回溯函数，打印当前运行任务的调用栈信息。
-- 支持linux、liteos系统。
+- 支持 linux、liteos 系统。
 - 用于调试定位问题时的调用链追踪。
 
 **前置条件**
 
-- 仅在linux、liteos系统下可用。
+- 仅在 linux、liteos 系统下可用。
 
 **Kconfig配置**
 
@@ -123,10 +123,10 @@ void osal_flush_cache(void)
 
 **功能说明**
 
-- 刷新CPU DCache，将数据缓存写回内存。
-- 支持liteos系统。
-- 在DMA（Direct Memory Access）传输等需要Cache一致性操作的场景下调用。
+- 刷新 CPU DCache，将数据缓存写回内存。
+- 支持 liteos 系统。
+- 在 DMA（Direct Memory Access）传输等需要 Cache 一致性操作的场景下调用。
 
 **前置条件**
 
-- 仅在liteos系统下可用。
+- 仅在 liteos 系统下可用。

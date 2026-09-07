@@ -118,7 +118,7 @@ errcode_t sle_dev_manager_register_callbacks(sle_dev_manager_callbacks_t *func)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [sle_dev_manager_callbacks_t](#sle_dev_manager_callbacks_t) * | 回调函数集合指针，回调在 SLE service 线程被调用，不能阻塞或长时间等待；指针所指内存的生命周期需覆盖整个使用周期 | 不为NULL |
+| func | [sle_dev_manager_callbacks_t](#sle_dev_manager_callbacks_t) * | 回调函数集合指针，回调在 SLE service 线程被调用，不能阻塞或长时间等待；指针所指内存的生命周期需覆盖整个使用周期 | 不为 NULL |
 
 **返回值**
 

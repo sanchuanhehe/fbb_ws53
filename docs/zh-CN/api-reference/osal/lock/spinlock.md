@@ -53,7 +53,7 @@ int osal_spin_lock_init(osal_spinlock *lock)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| lock | [osal_spinlock](#struct_osal_spinlock) * | 待初始化的自旋锁结构体指针 | 非NULL; lock->lock 为 NULL |
+| lock | [osal_spinlock](#struct_osal_spinlock) * | 待初始化的自旋锁结构体指针 | 非 NULL; lock->lock 为 NULL |
 
 **返回值**
 
@@ -96,7 +96,7 @@ void osal_spin_lock(osal_spinlock *lock)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| lock | [osal_spinlock](#struct_osal_spinlock) * | 待获取的自旋锁结构体指针，须由 osal_spin_lock_init 初始化 | 非NULL; lock->lock 非 NULL |
+| lock | [osal_spinlock](#struct_osal_spinlock) * | 待获取的自旋锁结构体指针，须由 osal_spin_lock_init 初始化 | 非 NULL; lock->lock 非 NULL |
 
 **参考案例**
 
@@ -130,7 +130,7 @@ void osal_spin_lock_bh(osal_spinlock *lock)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| lock | [osal_spinlock](#struct_osal_spinlock) * | 待获取的自旋锁结构体指针，须由 osal_spin_lock_init 初始化 | 非NULL; lock->lock 非 NULL |
+| lock | [osal_spinlock](#struct_osal_spinlock) * | 待获取的自旋锁结构体指针，须由 osal_spin_lock_init 初始化 | 非 NULL; lock->lock 非 NULL |
 
 **参考案例**
 
@@ -163,7 +163,7 @@ int osal_spin_trylock(osal_spinlock *lock)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| lock | [osal_spinlock](#struct_osal_spinlock) * | 待获取的自旋锁结构体指针 | 非NULL; lock->lock 非 NULL |
+| lock | [osal_spinlock](#struct_osal_spinlock) * | 待获取的自旋锁结构体指针 | 非 NULL; lock->lock 非 NULL |
 
 **返回值**
 
@@ -171,7 +171,7 @@ int osal_spin_trylock(osal_spinlock *lock)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| true（非0） | 获取锁成功 | 锁可立即获取 |
+| true（非 0） | 获取锁成功 | 锁可立即获取 |
 | false (0) | 获取锁失败 | 锁已被占用或参数无效 |
 
 ### osal_spin_trylock_irq <a id="osal_spin_trylock_irq"></a>
@@ -201,7 +201,7 @@ int osal_spin_trylock_irq(osal_spinlock *lock)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| lock | [osal_spinlock](#struct_osal_spinlock) * | 待获取的自旋锁结构体指针 | 非NULL; lock->lock 非 NULL |
+| lock | [osal_spinlock](#struct_osal_spinlock) * | 待获取的自旋锁结构体指针 | 非 NULL; lock->lock 非 NULL |
 
 **返回值**
 
@@ -209,7 +209,7 @@ int osal_spin_trylock_irq(osal_spinlock *lock)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| true（非0） | 获取锁成功 | 锁可立即获取 |
+| true（非 0） | 获取锁成功 | 锁可立即获取 |
 | false (0) | 获取锁失败 | 锁已被占用 |
 | -1 | 参数无效 | lock 为空或未初始化 |
 
@@ -240,7 +240,7 @@ void osal_spin_trylock_irqsave(osal_spinlock *lock, unsigned long *flags)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| lock | [osal_spinlock](#struct_osal_spinlock) * | 待获取的自旋锁结构体指针 | 非NULL; lock->lock 非 NULL |
+| lock | [osal_spinlock](#struct_osal_spinlock) * | 待获取的自旋锁结构体指针 | 非 NULL; lock->lock 非 NULL |
 
 **出参**
 
@@ -275,7 +275,7 @@ void osal_spin_unlock(osal_spinlock *lock)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| lock | [osal_spinlock](#struct_osal_spinlock) * | 待释放的自旋锁结构体指针 | 非NULL; lock->lock 非 NULL |
+| lock | [osal_spinlock](#struct_osal_spinlock) * | 待释放的自旋锁结构体指针 | 非 NULL; lock->lock 非 NULL |
 
 **参考案例**
 
@@ -309,7 +309,7 @@ void osal_spin_unlock_bh(osal_spinlock *lock)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| lock | [osal_spinlock](#struct_osal_spinlock) * | 待释放的自旋锁结构体指针 | 非NULL; lock->lock 非 NULL |
+| lock | [osal_spinlock](#struct_osal_spinlock) * | 待释放的自旋锁结构体指针 | 非 NULL; lock->lock 非 NULL |
 
 **参考案例**
 
@@ -342,7 +342,7 @@ void osal_spin_lock_irqsave(osal_spinlock *lock, unsigned long *flags)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| lock | [osal_spinlock](#struct_osal_spinlock) * | 待获取的自旋锁结构体指针 | 非NULL; lock->lock 非 NULL |
+| lock | [osal_spinlock](#struct_osal_spinlock) * | 待获取的自旋锁结构体指针 | 非 NULL; lock->lock 非 NULL |
 
 **出参**
 
@@ -382,8 +382,8 @@ void osal_spin_unlock_irqrestore(osal_spinlock *lock, unsigned long *flags)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| lock | [osal_spinlock](#struct_osal_spinlock) * | 待释放的自旋锁结构体指针 | 非NULL; lock->lock 非 NULL |
-| flags | unsigned long * | 加锁时保存的中断状态值 | 非NULL |
+| lock | [osal_spinlock](#struct_osal_spinlock) * | 待释放的自旋锁结构体指针 | 非 NULL; lock->lock 非 NULL |
+| flags | unsigned long * | 加锁时保存的中断状态值 | 非 NULL |
 
 **参考案例**
 
@@ -416,7 +416,7 @@ void osal_spin_lock_destroy(osal_spinlock *lock)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| lock | [osal_spinlock](#struct_osal_spinlock) * | 待销毁的自旋锁结构体指针 | 非NULL; lock->lock 非 NULL |
+| lock | [osal_spinlock](#struct_osal_spinlock) * | 待销毁的自旋锁结构体指针 | 非 NULL; lock->lock 非 NULL |
 
 **参考案例**
 

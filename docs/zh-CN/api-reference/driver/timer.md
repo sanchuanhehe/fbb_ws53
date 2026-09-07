@@ -246,7 +246,7 @@ errcode_t uapi_timer_delete(timer_handle_t timer)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| timer | [timer_handle_t](#typedef_timer_handle_t) | 待删除的软件定时器句柄 | 不为NULL |
+| timer | [timer_handle_t](#typedef_timer_handle_t) | 待删除的软件定时器句柄 | 不为 NULL |
 
 **返回值**
 
@@ -319,9 +319,9 @@ errcode_t uapi_timer_start(timer_handle_t timer, uint32_t time_us, timer_callbac
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| timer | [timer_handle_t](#typedef_timer_handle_t) | 待启动的软件定时器句柄 | 不为NULL |
+| timer | [timer_handle_t](#typedef_timer_handle_t) | 待启动的软件定时器句柄 | 不为 NULL |
 | time_us | uint32_t | 定时器超时时间，单位 us | 大于 0 且不超过 [uapi_timer_get_max_us](#uapi_timer_get_max_us) 返回值 |
-| callback | [timer_callback_t](#typedef_timer_callback_t) | 定时器超时回调函数指针；超时触发时在硬件定时器中断上下文中被调用，data 为透传参数 | 不为NULL |
+| callback | [timer_callback_t](#typedef_timer_callback_t) | 定时器超时回调函数指针；超时触发时在硬件定时器中断上下文中被调用，data 为透传参数 | 不为 NULL |
 | data | uintptr_t | 定时器回调函数的透传参数 | 任意值 |
 
 **返回值**
@@ -372,7 +372,7 @@ errcode_t uapi_timer_stop(timer_handle_t timer)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| timer | [timer_handle_t](#typedef_timer_handle_t) | 待停止的软件定时器句柄 | 不为NULL |
+| timer | [timer_handle_t](#typedef_timer_handle_t) | 待停止的软件定时器句柄 | 不为 NULL |
 
 **返回值**
 
@@ -469,8 +469,8 @@ errcode_t uapi_timer_start_high_precision(timer_index_t index, timer_trigger_mod
 | index | [timer_index_t](#enum_timer_index_t) | 硬件定时器索引，须小于 TIMER_MAX_NUM | [timer_index_t](#enum_timer_index_t) 全体成员 |
 | mode | [timer_trigger_mode_t](#enum_timer_trigger_mode_t) | 定时器触发模式 | [timer_trigger_mode_t](#enum_timer_trigger_mode_t) 全体成员 |
 | time_us | uint32_t | 定时器超时时间，单位 us | 大于 0 且不超过 [uapi_timer_get_max_us](#uapi_timer_get_max_us) 返回值 |
-| irq_info | [timer_irq_info_t](#struct_timer_irq_info_t) * | 中断信息结构体指针，包含中断号与优先级 | 不为NULL |
-| callback | [high_precision_timer_callback_t](#typedef_high_precision_timer_callback_t) | 高精度定时器超时回调函数指针；超时触发时在硬件定时器中断上下文中调用，index 为触发的硬件定时器索引 | 不为NULL |
+| irq_info | [timer_irq_info_t](#struct_timer_irq_info_t) * | 中断信息结构体指针，包含中断号与优先级 | 不为 NULL |
+| callback | [high_precision_timer_callback_t](#typedef_high_precision_timer_callback_t) | 高精度定时器超时回调函数指针；超时触发时在硬件定时器中断上下文中调用，index 为触发的硬件定时器索引 | 不为 NULL |
 
 **返回值**
 
@@ -652,7 +652,7 @@ errcode_t uapi_timer_resume(uintptr_t val)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| val | uintptr_t | 恢复参数，指向 uint64_t 类型的补偿计数值 | 不为NULL |
+| val | uintptr_t | 恢复参数，指向 uint64_t 类型的补偿计数值 | 不为 NULL |
 
 **返回值**
 

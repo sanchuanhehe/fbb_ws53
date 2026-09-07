@@ -58,7 +58,7 @@ void *osal_irq_get_private_dev(void *param_dev)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param_dev | void * | 传递给中断回调函数的参数指针 | 不为NULL |
+| param_dev | void * | 传递给中断回调函数的参数指针 | 不为 NULL |
 
 **返回值**
 
@@ -66,7 +66,7 @@ void *osal_irq_get_private_dev(void *param_dev)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 私有设备标识指针 | 参数有效，成功提取设备标识 |
+| 非 NULL | 私有设备标识指针 | 参数有效，成功提取设备标识 |
 | NULL | 参数无效 | param_dev 为 NULL |
 
 ### osal_irq_request <a id="osal_irq_request"></a>
@@ -98,9 +98,9 @@ int osal_irq_request(unsigned int irq, osal_irq_handler handler, osal_irq_handle
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | irq | unsigned int | 要申请的中断线编号 | 0 ~ 4294967295 |
-| handler | [osal_irq_handler](#osal_irq_handler) | 中断主处理函数，中断发生时调用 | 不为NULL |
+| handler | [osal_irq_handler](#osal_irq_handler) | 中断主处理函数，中断发生时调用 | 不为 NULL |
 | thread_fn | [osal_irq_handler](#osal_irq_handler) | 线程化中断处理函数，为 NULL 时不创建中断线程 | - |
-| name | const char * | 申请设备的 ASCII 名称 | 不为NULL |
+| name | const char * | 申请设备的 ASCII 名称 | 不为 NULL |
 | dev | void * | 传递给处理函数的设备标识 | - |
 
 **返回值**
@@ -339,7 +339,7 @@ unsigned int osal_irq_lock(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| CPSR值 | 禁用中断前的 CPSR 寄存器值 | 操作成功 |
+| CPSR 值 | 禁用中断前的 CPSR 寄存器值 | 操作成功 |
 
 **参考案例**
 
@@ -377,7 +377,7 @@ unsigned int osal_irq_unlock(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| CPSR值 | 使能中断后的 CPSR 寄存器值 | 操作成功 |
+| CPSR 值 | 使能中断后的 CPSR 寄存器值 | 操作成功 |
 
 ### osal_irq_restore <a id="osal_irq_restore"></a>
 
@@ -515,7 +515,7 @@ int osal_tasklet_init(osal_tasklet *tasklet)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| tasklet | [osal_tasklet](#osal_tasklet) * | 待初始化的 tasklet 指针 | 不为NULL，handler 和 data 成员已赋值，tasklet 成员为空 |
+| tasklet | [osal_tasklet](#osal_tasklet) * | 待初始化的 tasklet 指针 | 不为 NULL，handler 和 data 成员已赋值，tasklet 成员为空 |
 
 **返回值**
 
@@ -553,7 +553,7 @@ int osal_tasklet_schedule(osal_tasklet *tasklet)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| tasklet | [osal_tasklet](#osal_tasklet) * | 待调度的 tasklet 指针 | 不为NULL，已通过 osal_tasklet_init 初始化 |
+| tasklet | [osal_tasklet](#osal_tasklet) * | 待调度的 tasklet 指针 | 不为 NULL，已通过 osal_tasklet_init 初始化 |
 
 **返回值**
 
@@ -591,7 +591,7 @@ int osal_tasklet_kill(osal_tasklet *tasklet)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| tasklet | [osal_tasklet](#osal_tasklet) * | 待销毁的 tasklet 指针 | 不为NULL，已通过 osal_tasklet_init 初始化 |
+| tasklet | [osal_tasklet](#osal_tasklet) * | 待销毁的 tasklet 指针 | 不为 NULL，已通过 osal_tasklet_init 初始化 |
 
 **返回值**
 
@@ -628,7 +628,7 @@ int osal_tasklet_update(osal_tasklet *tasklet)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| tasklet | [osal_tasklet](#osal_tasklet) * | 待更新的 tasklet 指针 | 不为NULL，handler 和 data 成员已赋新值 |
+| tasklet | [osal_tasklet](#osal_tasklet) * | 待更新的 tasklet 指针 | 不为 NULL，handler 和 data 成员已赋新值 |
 
 **返回值**
 

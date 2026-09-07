@@ -76,7 +76,7 @@ static INLINE__ void OSAL_INIT_LIST_HEAD(struct osal_list_head *list)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| list | struct [osal_list_head](#osal_list_head) * | 指向待初始化的链表头节点 | 不为NULL |
+| list | struct [osal_list_head](#osal_list_head) * | 指向待初始化的链表头节点 | 不为 NULL |
 
 **参考案例**
 
@@ -110,9 +110,9 @@ static INLINE__ void osal___list_add(struct osal_list_head *_new, struct osal_li
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| _new | struct [osal_list_head](#osal_list_head) * | 指向待插入的新节点 | 不为NULL |
-| prev | struct [osal_list_head](#osal_list_head) * | 指向新节点的前驱节点 | 不为NULL |
-| next | struct [osal_list_head](#osal_list_head) * | 指向新节点的后继节点 | 不为NULL |
+| _new | struct [osal_list_head](#osal_list_head) * | 指向待插入的新节点 | 不为 NULL |
+| prev | struct [osal_list_head](#osal_list_head) * | 指向新节点的前驱节点 | 不为 NULL |
+| next | struct [osal_list_head](#osal_list_head) * | 指向新节点的后继节点 | 不为 NULL |
 
 ### osal_list_add <a id="osal_list_add"></a>
 
@@ -141,8 +141,8 @@ static INLINE__ void osal_list_add(struct osal_list_head *cur, struct osal_list_
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| cur | struct [osal_list_head](#osal_list_head) * | 指向待添加的新节点 | 不为NULL |
-| head | struct [osal_list_head](#osal_list_head) * | 指向链表头节点 | 不为NULL，且已初始化 |
+| cur | struct [osal_list_head](#osal_list_head) * | 指向待添加的新节点 | 不为 NULL |
+| head | struct [osal_list_head](#osal_list_head) * | 指向链表头节点 | 不为 NULL，且已初始化 |
 
 **参考案例**
 
@@ -176,8 +176,8 @@ static INLINE__ void osal_list_add_tail(struct osal_list_head *cur, struct osal_
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| cur | struct [osal_list_head](#osal_list_head) * | 指向待添加的新节点 | 不为NULL |
-| head | struct [osal_list_head](#osal_list_head) * | 指向链表头节点 | 不为NULL，且已初始化 |
+| cur | struct [osal_list_head](#osal_list_head) * | 指向待添加的新节点 | 不为 NULL |
+| head | struct [osal_list_head](#osal_list_head) * | 指向链表头节点 | 不为 NULL，且已初始化 |
 
 **参考案例**
 
@@ -212,8 +212,8 @@ static INLINE__ void osal___list_del(struct osal_list_head *prev, struct osal_li
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| prev | struct [osal_list_head](#osal_list_head) * | 指向待删除节点的前驱节点 | 不为NULL |
-| next | struct [osal_list_head](#osal_list_head) * | 指向待删除节点的后继节点 | 不为NULL |
+| prev | struct [osal_list_head](#osal_list_head) * | 指向待删除节点的前驱节点 | 不为 NULL |
+| next | struct [osal_list_head](#osal_list_head) * | 指向待删除节点的后继节点 | 不为 NULL |
 
 ### osal___list_del_entry <a id="osal___list_del_entry"></a>
 
@@ -242,7 +242,7 @@ static INLINE__ void osal___list_del_entry(struct osal_list_head *entry)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| entry | struct [osal_list_head](#osal_list_head) * | 指向待删除的链表节点 | 不为NULL |
+| entry | struct [osal_list_head](#osal_list_head) * | 指向待删除的链表节点 | 不为 NULL |
 
 ### osal_list_del <a id="osal_list_del"></a>
 
@@ -271,7 +271,7 @@ static INLINE__ void osal_list_del(struct osal_list_head *entry)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| entry | struct [osal_list_head](#osal_list_head) * | 指向待删除的链表节点 | 不为NULL |
+| entry | struct [osal_list_head](#osal_list_head) * | 指向待删除的链表节点 | 不为 NULL |
 
 **参考案例**
 
@@ -306,8 +306,8 @@ static INLINE__ void osal_list_replace(struct osal_list_head *old, struct osal_l
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| old | struct [osal_list_head](#osal_list_head) * | 指向被替换的旧节点 | 不为NULL |
-| _new | struct [osal_list_head](#osal_list_head) * | 指向替换用的新节点 | 不为NULL |
+| old | struct [osal_list_head](#osal_list_head) * | 指向被替换的旧节点 | 不为 NULL |
+| _new | struct [osal_list_head](#osal_list_head) * | 指向替换用的新节点 | 不为 NULL |
 
 ### osal_list_replace_init <a id="osal_list_replace_init"></a>
 
@@ -335,8 +335,8 @@ static INLINE__ void osal_list_replace_init(struct osal_list_head *old, struct o
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| old | struct [osal_list_head](#osal_list_head) * | 指向被替换的旧节点 | 不为NULL |
-| _new | struct [osal_list_head](#osal_list_head) * | 指向替换用的新节点 | 不为NULL |
+| old | struct [osal_list_head](#osal_list_head) * | 指向被替换的旧节点 | 不为 NULL |
+| _new | struct [osal_list_head](#osal_list_head) * | 指向替换用的新节点 | 不为 NULL |
 
 ### osal_list_del_init <a id="osal_list_del_init"></a>
 
@@ -364,7 +364,7 @@ static INLINE__ void osal_list_del_init(struct osal_list_head *entry)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| entry | struct [osal_list_head](#osal_list_head) * | 指向待删除并重新初始化的链表节点 | 不为NULL |
+| entry | struct [osal_list_head](#osal_list_head) * | 指向待删除并重新初始化的链表节点 | 不为 NULL |
 
 ### osal_list_move <a id="osal_list_move"></a>
 
@@ -392,8 +392,8 @@ static INLINE__ void osal_list_move(struct osal_list_head *list, struct osal_lis
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| list | struct [osal_list_head](#osal_list_head) * | 指向待移动的节点 | 不为NULL |
-| head | struct [osal_list_head](#osal_list_head) * | 指向目标链表头节点 | 不为NULL，且已初始化 |
+| list | struct [osal_list_head](#osal_list_head) * | 指向待移动的节点 | 不为 NULL |
+| head | struct [osal_list_head](#osal_list_head) * | 指向目标链表头节点 | 不为 NULL，且已初始化 |
 
 ### osal_list_move_tail <a id="osal_list_move_tail"></a>
 
@@ -421,8 +421,8 @@ static INLINE__ void osal_list_move_tail(struct osal_list_head *list, struct osa
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| list | struct [osal_list_head](#osal_list_head) * | 指向待移动的节点 | 不为NULL |
-| head | struct [osal_list_head](#osal_list_head) * | 指向目标链表头节点 | 不为NULL，且已初始化 |
+| list | struct [osal_list_head](#osal_list_head) * | 指向待移动的节点 | 不为 NULL |
+| head | struct [osal_list_head](#osal_list_head) * | 指向目标链表头节点 | 不为 NULL，且已初始化 |
 
 ### osal_list_is_last <a id="osal_list_is_last"></a>
 
@@ -450,8 +450,8 @@ static INLINE__ int osal_list_is_last(const struct osal_list_head *list, const s
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| list | const struct [osal_list_head](#osal_list_head) * | 指向待判断的节点 | 不为NULL |
-| head | const struct [osal_list_head](#osal_list_head) * | 指向链表头节点 | 不为NULL，且已初始化 |
+| list | const struct [osal_list_head](#osal_list_head) * | 指向待判断的节点 | 不为 NULL |
+| head | const struct [osal_list_head](#osal_list_head) * | 指向链表头节点 | 不为 NULL，且已初始化 |
 
 **返回值**
 
@@ -488,7 +488,7 @@ static INLINE__ int osal_list_empty(const struct osal_list_head *head)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| head | const struct [osal_list_head](#osal_list_head) * | 指向链表头节点 | 不为NULL，且已初始化 |
+| head | const struct [osal_list_head](#osal_list_head) * | 指向链表头节点 | 不为 NULL，且已初始化 |
 
 **返回值**
 
@@ -532,7 +532,7 @@ static INLINE__ int osal_list_empty_careful(const struct osal_list_head *head)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| head | const struct [osal_list_head](#osal_list_head) * | 指向链表头节点 | 不为NULL，且已初始化 |
+| head | const struct [osal_list_head](#osal_list_head) * | 指向链表头节点 | 不为 NULL，且已初始化 |
 
 **返回值**
 
@@ -569,7 +569,7 @@ static INLINE__ void osal_list_rotate_left(struct osal_list_head *head)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| head | struct [osal_list_head](#osal_list_head) * | 指向链表头节点 | 不为NULL，且已初始化 |
+| head | struct [osal_list_head](#osal_list_head) * | 指向链表头节点 | 不为 NULL，且已初始化 |
 
 ### osal_list_is_singular <a id="osal_list_is_singular"></a>
 
@@ -596,7 +596,7 @@ static INLINE__ int osal_list_is_singular(const struct osal_list_head *head)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| head | const struct [osal_list_head](#osal_list_head) * | 指向链表头节点 | 不为NULL，且已初始化 |
+| head | const struct [osal_list_head](#osal_list_head) * | 指向链表头节点 | 不为 NULL，且已初始化 |
 
 **返回值**
 
@@ -633,9 +633,9 @@ static INLINE__ void osal___list_cut_position(struct osal_list_head *list, struc
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| list | struct [osal_list_head](#osal_list_head) * | 指向接收被切出节点的新链表头 | 不为NULL，且已初始化为空 |
-| head | struct [osal_list_head](#osal_list_head) * | 指向被切割的源链表头节点 | 不为NULL，且已初始化 |
-| entry | struct [osal_list_head](#osal_list_head) * | 指向切割位置节点，含此节点及之前的节点移入 list | 不为NULL，必须在 head 链表中 |
+| list | struct [osal_list_head](#osal_list_head) * | 指向接收被切出节点的新链表头 | 不为 NULL，且已初始化为空 |
+| head | struct [osal_list_head](#osal_list_head) * | 指向被切割的源链表头节点 | 不为 NULL，且已初始化 |
+| entry | struct [osal_list_head](#osal_list_head) * | 指向切割位置节点，含此节点及之前的节点移入 list | 不为 NULL，必须在 head 链表中 |
 
 ### osal_list_cut_position <a id="osal_list_cut_position"></a>
 
@@ -665,9 +665,9 @@ static INLINE__ void osal_list_cut_position(struct osal_list_head *list, struct 
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| list | struct [osal_list_head](#osal_list_head) * | 指向接收被切出节点的新链表头 | 不为NULL，且已初始化为空 |
-| head | struct [osal_list_head](#osal_list_head) * | 指向被切割的源链表头节点 | 不为NULL，且已初始化 |
-| entry | struct [osal_list_head](#osal_list_head) * | 指向切割位置节点 | 不为NULL，必须在 head 链表中或等于 head |
+| list | struct [osal_list_head](#osal_list_head) * | 指向接收被切出节点的新链表头 | 不为 NULL，且已初始化为空 |
+| head | struct [osal_list_head](#osal_list_head) * | 指向被切割的源链表头节点 | 不为 NULL，且已初始化 |
+| entry | struct [osal_list_head](#osal_list_head) * | 指向切割位置节点 | 不为 NULL，必须在 head 链表中或等于 head |
 
 ### osal___list_splice <a id="osal___list_splice"></a>
 
@@ -695,9 +695,9 @@ static INLINE__ void osal___list_splice(const struct osal_list_head *list, struc
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| list | const struct [osal_list_head](#osal_list_head) * | 指向待拼接的源链表头节点 | 不为NULL，且链表不为空 |
-| prev | struct [osal_list_head](#osal_list_head) * | 指向拼接位置的前驱节点 | 不为NULL |
-| next | struct [osal_list_head](#osal_list_head) * | 指向拼接位置的后继节点 | 不为NULL |
+| list | const struct [osal_list_head](#osal_list_head) * | 指向待拼接的源链表头节点 | 不为 NULL，且链表不为空 |
+| prev | struct [osal_list_head](#osal_list_head) * | 指向拼接位置的前驱节点 | 不为 NULL |
+| next | struct [osal_list_head](#osal_list_head) * | 指向拼接位置的后继节点 | 不为 NULL |
 
 ### osal_list_splice <a id="osal_list_splice"></a>
 
@@ -726,8 +726,8 @@ static INLINE__ void osal_list_splice(const struct osal_list_head *list, struct 
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| list | const struct [osal_list_head](#osal_list_head) * | 指向待拼接的源链表头节点 | 不为NULL，且已初始化 |
-| head | struct [osal_list_head](#osal_list_head) * | 指向目标链表头节点 | 不为NULL，且已初始化 |
+| list | const struct [osal_list_head](#osal_list_head) * | 指向待拼接的源链表头节点 | 不为 NULL，且已初始化 |
+| head | struct [osal_list_head](#osal_list_head) * | 指向目标链表头节点 | 不为 NULL，且已初始化 |
 
 ### osal_list_splice_tail <a id="osal_list_splice_tail"></a>
 
@@ -756,8 +756,8 @@ static INLINE__ void osal_list_splice_tail(struct osal_list_head *list, struct o
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| list | struct [osal_list_head](#osal_list_head) * | 指向待拼接的源链表头节点 | 不为NULL，且已初始化 |
-| head | struct [osal_list_head](#osal_list_head) * | 指向目标链表头节点 | 不为NULL，且已初始化 |
+| list | struct [osal_list_head](#osal_list_head) * | 指向待拼接的源链表头节点 | 不为 NULL，且已初始化 |
+| head | struct [osal_list_head](#osal_list_head) * | 指向目标链表头节点 | 不为 NULL，且已初始化 |
 
 ### osal_list_splice_init <a id="osal_list_splice_init"></a>
 
@@ -786,8 +786,8 @@ static INLINE__ void osal_list_splice_init(struct osal_list_head *list, struct o
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| list | struct [osal_list_head](#osal_list_head) * | 指向待拼接的源链表头节点 | 不为NULL，且已初始化 |
-| head | struct [osal_list_head](#osal_list_head) * | 指向目标链表头节点 | 不为NULL，且已初始化 |
+| list | struct [osal_list_head](#osal_list_head) * | 指向待拼接的源链表头节点 | 不为 NULL，且已初始化 |
+| head | struct [osal_list_head](#osal_list_head) * | 指向目标链表头节点 | 不为 NULL，且已初始化 |
 
 ### osal_list_splice_tail_init <a id="osal_list_splice_tail_init"></a>
 
@@ -816,8 +816,8 @@ static INLINE__ void osal_list_splice_tail_init(struct osal_list_head *list, str
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| list | struct [osal_list_head](#osal_list_head) * | 指向待拼接的源链表头节点 | 不为NULL，且已初始化 |
-| head | struct [osal_list_head](#osal_list_head) * | 指向目标链表头节点 | 不为NULL，且已初始化 |
+| list | struct [osal_list_head](#osal_list_head) * | 指向待拼接的源链表头节点 | 不为 NULL，且已初始化 |
+| head | struct [osal_list_head](#osal_list_head) * | 指向目标链表头节点 | 不为 NULL，且已初始化 |
 
 ### INIT_OSAL_HLIST_NODE <a id="INIT_OSAL_HLIST_NODE"></a>
 
@@ -844,7 +844,7 @@ static INLINE__ void INIT_OSAL_HLIST_NODE(struct osal_hlist_node *h)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| h | struct [osal_hlist_node](#osal_hlist_node) * | 指向待初始化的哈希链表节点 | 不为NULL |
+| h | struct [osal_hlist_node](#osal_hlist_node) * | 指向待初始化的哈希链表节点 | 不为 NULL |
 
 ### osal_hlist_unhashed <a id="osal_hlist_unhashed"></a>
 
@@ -871,7 +871,7 @@ static INLINE__ int osal_hlist_unhashed(const struct osal_hlist_node *h)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| h | const struct [osal_hlist_node](#osal_hlist_node) * | 指向待判断的哈希链表节点 | 不为NULL |
+| h | const struct [osal_hlist_node](#osal_hlist_node) * | 指向待判断的哈希链表节点 | 不为 NULL |
 
 **返回值**
 
@@ -907,7 +907,7 @@ static INLINE__ int osal_hlist_empty(const struct osal_hlist_head *h)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| h | const struct [osal_hlist_head](#osal_hlist_head) * | 指向哈希链表头 | 不为NULL |
+| h | const struct [osal_hlist_head](#osal_hlist_head) * | 指向哈希链表头 | 不为 NULL |
 
 **返回值**
 
@@ -944,7 +944,7 @@ static INLINE__ void osal___hlist_del(struct osal_hlist_node *n)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| n | struct [osal_hlist_node](#osal_hlist_node) * | 指向待删除的哈希链表节点 | 不为NULL，且已在哈希链表中 |
+| n | struct [osal_hlist_node](#osal_hlist_node) * | 指向待删除的哈希链表节点 | 不为 NULL，且已在哈希链表中 |
 
 ### osal_hlist_del <a id="osal_hlist_del"></a>
 
@@ -972,7 +972,7 @@ static INLINE__ void osal_hlist_del(struct osal_hlist_node *n)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| n | struct [osal_hlist_node](#osal_hlist_node) * | 指向待删除的哈希链表节点 | 不为NULL，且已在哈希链表中 |
+| n | struct [osal_hlist_node](#osal_hlist_node) * | 指向待删除的哈希链表节点 | 不为 NULL，且已在哈希链表中 |
 
 ### osal_hlist_del_init <a id="osal_hlist_del_init"></a>
 
@@ -1000,7 +1000,7 @@ static INLINE__ void osal_hlist_del_init(struct osal_hlist_node *n)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| n | struct [osal_hlist_node](#osal_hlist_node) * | 指向待删除并重新初始化的哈希链表节点 | 不为NULL |
+| n | struct [osal_hlist_node](#osal_hlist_node) * | 指向待删除并重新初始化的哈希链表节点 | 不为 NULL |
 
 ### osal_hlist_add_head <a id="osal_hlist_add_head"></a>
 
@@ -1028,8 +1028,8 @@ static INLINE__ void osal_hlist_add_head(struct osal_hlist_node *n, struct osal_
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| n | struct [osal_hlist_node](#osal_hlist_node) * | 指向待添加的哈希链表节点 | 不为NULL |
-| h | struct [osal_hlist_head](#osal_hlist_head) * | 指向哈希链表头 | 不为NULL |
+| n | struct [osal_hlist_node](#osal_hlist_node) * | 指向待添加的哈希链表节点 | 不为 NULL |
+| h | struct [osal_hlist_head](#osal_hlist_head) * | 指向哈希链表头 | 不为 NULL |
 
 ### osal_hlist_add_before <a id="osal_hlist_add_before"></a>
 
@@ -1057,8 +1057,8 @@ static INLINE__ void osal_hlist_add_before(struct osal_hlist_node *n, struct osa
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| n | struct [osal_hlist_node](#osal_hlist_node) * | 指向待插入的新节点 | 不为NULL |
-| next | struct [osal_hlist_node](#osal_hlist_node) * | 指向参照节点，n 插入其前 | 不为NULL |
+| n | struct [osal_hlist_node](#osal_hlist_node) * | 指向待插入的新节点 | 不为 NULL |
+| next | struct [osal_hlist_node](#osal_hlist_node) * | 指向参照节点，n 插入其前 | 不为 NULL |
 
 ### osal_hlist_add_after <a id="osal_hlist_add_after"></a>
 
@@ -1087,8 +1087,8 @@ static INLINE__ void osal_hlist_add_after(struct osal_hlist_node *n, struct osal
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| n | struct [osal_hlist_node](#osal_hlist_node) * | 指向参照节点，next 插入其后 | 不为NULL |
-| next | struct [osal_hlist_node](#osal_hlist_node) * | 指向待插入的新节点 | 不为NULL |
+| n | struct [osal_hlist_node](#osal_hlist_node) * | 指向参照节点，next 插入其后 | 不为 NULL |
+| next | struct [osal_hlist_node](#osal_hlist_node) * | 指向待插入的新节点 | 不为 NULL |
 
 ### osal_hlist_add_fake <a id="osal_hlist_add_fake"></a>
 
@@ -1115,7 +1115,7 @@ static INLINE__ void osal_hlist_add_fake(struct osal_hlist_node *n)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| n | struct [osal_hlist_node](#osal_hlist_node) * | 指向待伪添加的哈希链表节点 | 不为NULL |
+| n | struct [osal_hlist_node](#osal_hlist_node) * | 指向待伪添加的哈希链表节点 | 不为 NULL |
 
 ### osal_hlist_move_list <a id="osal_hlist_move_list"></a>
 
@@ -1143,8 +1143,8 @@ static INLINE__ void osal_hlist_move_list(struct osal_hlist_head *old, struct os
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| old | struct [osal_hlist_head](#osal_hlist_head) * | 指向源哈希链表头 | 不为NULL |
-| cur | struct [osal_hlist_head](#osal_hlist_head) * | 指向目标哈希链表头 | 不为NULL |
+| old | struct [osal_hlist_head](#osal_hlist_head) * | 指向源哈希链表头 | 不为 NULL |
+| cur | struct [osal_hlist_head](#osal_hlist_head) * | 指向目标哈希链表头 | 不为 NULL |
 
 ## Structures
 

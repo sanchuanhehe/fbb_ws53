@@ -77,7 +77,7 @@ void *osal_kmalloc(unsigned long size, unsigned int osal_gfp_flag)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 成功分配的内存块指针 | 内存分配成功 |
+| 非 NULL | 成功分配的内存块指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足 |
 
 **参考案例**
@@ -120,7 +120,7 @@ void *osal_kzalloc(unsigned long size, unsigned int osal_gfp_flag)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 成功分配且已清零的内存块指针 | 内存分配成功 |
+| 非 NULL | 成功分配且已清零的内存块指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足 |
 
 ### osal_kmalloc_align <a id="osal_kmalloc_align"></a>
@@ -155,7 +155,7 @@ void *osal_kmalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 成功分配且对齐的内存块指针 | 内存分配成功 |
+| 非 NULL | 成功分配且对齐的内存块指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足或对齐参数无效 |
 
 ### osal_kzalloc_align <a id="osal_kzalloc_align"></a>
@@ -190,7 +190,7 @@ void *osal_kzalloc_align(unsigned int size, unsigned int osal_gfp_flag, unsigned
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 成功分配且对齐并清零的内存块指针 | 内存分配成功 |
+| 非 NULL | 成功分配且对齐并清零的内存块指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足或对齐参数无效 |
 
 ### osal_kfree <a id="osal_kfree"></a>
@@ -256,7 +256,7 @@ void *osal_vmalloc(unsigned long size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 成功分配的虚拟内存指针 | 内存分配成功 |
+| 非 NULL | 成功分配的虚拟内存指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足 |
 
 **参考案例**
@@ -293,7 +293,7 @@ void *osal_vzalloc(unsigned long size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 成功分配且已清零的虚拟内存指针 | 内存分配成功 |
+| 非 NULL | 成功分配且已清零的虚拟内存指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足 |
 
 ### osal_vfree <a id="osal_vfree"></a>
@@ -354,7 +354,7 @@ int osal_pool_mem_init(void *pool, unsigned int size)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| pool | void * | 内存池起始地址 | 4 或 8 Bytes对齐的非空指针 |
+| pool | void * | 内存池起始地址 | 4 或 8 Bytes 对齐的非空指针 |
 | size | unsigned int | 内存池大小（单位 Bytes） | 大于系统最小池大小，小于等于内存池总大小 |
 
 **返回值**
@@ -393,7 +393,7 @@ void *osal_pool_mem_alloc(void *pool, unsigned int size)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pool | void * | 已初始化的内存池指针 | 由 osal_pool_mem_init 初始化的合法指针 |
-| size | unsigned int | 需要分配的内存字节数 | 4 Bytes对齐，小于等于内存池大小 |
+| size | unsigned int | 需要分配的内存字节数 | 4 Bytes 对齐，小于等于内存池大小 |
 
 **返回值**
 
@@ -401,7 +401,7 @@ void *osal_pool_mem_alloc(void *pool, unsigned int size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 成功分配的内存块指针 | 内存分配成功 |
+| 非 NULL | 成功分配的内存块指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足 |
 
 ### osal_pool_mem_alloc_align <a id="osal_pool_mem_alloc_align"></a>
@@ -440,7 +440,7 @@ void *osal_pool_mem_alloc_align(void *pool, unsigned int size, unsigned int boun
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 成功分配且对齐的内存块指针 | 内存分配成功 |
+| 非 NULL | 成功分配且对齐的内存块指针 | 内存分配成功 |
 | NULL | 分配失败 | 内存不足或对齐参数无效 |
 
 ### osal_pool_mem_free <a id="osal_pool_mem_free"></a>
@@ -574,7 +574,7 @@ void *osal_ioremap(unsigned long phys_addr, unsigned long size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 映射成功的虚拟地址 | 地址映射成功 |
+| 非 NULL | 映射成功的虚拟地址 | 地址映射成功 |
 | NULL | 映射失败 | 地址映射失败 |
 
 ### osal_ioremap_nocache <a id="osal_ioremap_nocache"></a>
@@ -612,7 +612,7 @@ void *osal_ioremap_nocache(unsigned long phys_addr, unsigned long size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 映射成功的虚拟地址 | 地址映射成功 |
+| 非 NULL | 映射成功的虚拟地址 | 地址映射成功 |
 | NULL | 映射失败 | 地址映射失败 |
 
 ### osal_ioremap_cached <a id="osal_ioremap_cached"></a>
@@ -646,7 +646,7 @@ void *osal_ioremap_cached(unsigned long phys_addr, unsigned long size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 映射成功的虚拟地址 | 地址映射成功 |
+| 非 NULL | 映射成功的虚拟地址 | 地址映射成功 |
 | NULL | 映射失败 | 地址映射失败 |
 
 ### osal_iounmap <a id="osal_iounmap"></a>
@@ -713,7 +713,7 @@ void *osal_ioremap_wc(unsigned long phys_addr, unsigned long size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 映射成功的虚拟地址 | 地址映射成功 |
+| 非 NULL | 映射成功的虚拟地址 | 地址映射成功 |
 | NULL | 映射失败 | 地址映射失败 |
 
 ### osal_phys_to_virt <a id="osal_phys_to_virt"></a>
@@ -745,7 +745,7 @@ void *osal_phys_to_virt(unsigned long addr)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 转换后的虚拟地址 | 地址转换成功 |
+| 非 NULL | 转换后的虚拟地址 | 地址转换成功 |
 
 ### osal_virt_to_phys <a id="osal_virt_to_phys"></a>
 
@@ -813,7 +813,7 @@ void *osal_blockmem_vmap(unsigned long phys_addr, unsigned long size)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 映射成功的虚拟地址 | 地址映射成功 |
+| 非 NULL | 映射成功的虚拟地址 | 地址映射成功 |
 | NULL | 映射失败 | 物理地址为 0、大小为 0、大小超限或内存不足 |
 
 ### osal_blockmem_vunmap <a id="osal_blockmem_vunmap"></a>
@@ -890,8 +890,8 @@ unsigned long osal_copy_from_user(void *to, const void *from, unsigned long n)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| to | void * | 内核空间目标地址 | 不为NULL |
-| from | const void * | 用户空间源地址 | 不为NULL |
+| to | void * | 内核空间目标地址 | 不为 NULL |
+| from | const void * | 用户空间源地址 | 不为 NULL |
 | n | unsigned long | 需要拷贝的数据长度（单位 Bytes） | > 0 |
 
 **出参**
@@ -931,8 +931,8 @@ unsigned long osal_copy_to_user(void *to, const void *from, unsigned long n)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| to | void * | 用户空间目标地址 | 不为NULL |
-| from | const void * | 内核空间源地址 | 不为NULL |
+| to | void * | 用户空间目标地址 | 不为 NULL |
+| from | const void * | 内核空间源地址 | 不为 NULL |
 | n | unsigned long | 需要拷贝的数据长度（单位 Bytes） | > 0 |
 
 **返回值**
@@ -967,7 +967,7 @@ int osal_access_ok(int type, const void *addr, unsigned long size)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | type | int | 访问类型 | [OSAL_VERIFY_READ](#OSAL_VERIFY_READ)：0；<br>[OSAL_VERIFY_WRITE](#OSAL_VERIFY_WRITE)：1。 |
-| addr | const void * | 用户空间内存块起始地址 | 不为NULL |
+| addr | const void * | 用户空间内存块起始地址 | 不为 NULL |
 | size | unsigned long | 需要检查的内存块大小 | > 0 |
 
 **返回值**

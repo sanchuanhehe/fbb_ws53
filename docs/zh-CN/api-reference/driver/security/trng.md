@@ -43,7 +43,7 @@ errcode_t uapi_drv_cipher_trng_get_random(uint32_t *randnum)
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| randnum | uint32_t * | 调用方分配内存，接口写入生成的 uint32_t 硬件随机数，约束：不为NULL |
+| randnum | uint32_t * | 调用方分配内存，接口写入生成的 uint32_t 硬件随机数，约束：不为 NULL |
 
 **返回值**
 
@@ -90,7 +90,7 @@ errcode_t uapi_drv_cipher_trng_get_random_bytes(uint8_t *randnum, uint32_t size)
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| randnum | uint8_t * | 调用方分配内存，接口写入 size 字节的硬件随机数序列，约束：不为NULL |
+| randnum | uint8_t * | 调用方分配内存，接口写入 size 字节的硬件随机数序列，约束：不为 NULL |
 
 **返回值**
 

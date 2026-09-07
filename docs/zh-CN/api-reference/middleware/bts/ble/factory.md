@@ -49,7 +49,7 @@ errcode_t ble_factory_register_callbacks(ble_factory_callbacks_t *func)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [ble_factory_callbacks_t](#struct_ble_factory_callbacks_t) * | 指向回调函数集合结构体的指针，注册后由 BLE service 在对应事件发生时回调 | 不为NULL |
+| func | [ble_factory_callbacks_t](#struct_ble_factory_callbacks_t) * | 指向回调函数集合结构体的指针，注册后由 BLE service 在对应事件发生时回调 | 不为 NULL |
 
 **返回值**
 
@@ -86,7 +86,7 @@ errcode_t ble_factory_rf_tx_start(ble_rf_tx_start_t* param)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [ble_rf_tx_start_t](#struct_ble_rf_tx_start_t) * | 指向射频长发参数结构体的指针，包含发送频率、测试数据长度、数据包类型与射频物理层 | 不为NULL |
+| param | [ble_rf_tx_start_t](#struct_ble_rf_tx_start_t) * | 指向射频长发参数结构体的指针，包含发送频率、测试数据长度、数据包类型与射频物理层 | 不为 NULL |
 
 **返回值**
 
@@ -123,7 +123,7 @@ errcode_t ble_factory_rf_rx_start(ble_rf_rx_start_t* param)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [ble_rf_rx_start_t](#struct_ble_rf_rx_start_t) * | 指向射频长收参数结构体的指针，包含接收频率、射频物理层与调制指数 | 不为NULL |
+| param | [ble_rf_rx_start_t](#struct_ble_rf_rx_start_t) * | 指向射频长收参数结构体的指针，包含接收频率、射频物理层与调制指数 | 不为 NULL |
 
 **返回值**
 
@@ -253,7 +253,7 @@ errcode_t ble_factory_rf_single_tone(ble_rf_single_tone_t* param)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [ble_rf_single_tone_t](#struct_ble_rf_single_tone_t) * | 指向射频单音参数结构体的指针，包含射频频率与单音模式开关 | 不为NULL |
+| param | [ble_rf_single_tone_t](#struct_ble_rf_single_tone_t) * | 指向射频单音参数结构体的指针，包含射频频率与单音模式开关 | 不为 NULL |
 
 **返回值**
 
@@ -290,7 +290,7 @@ errcode_t ble_factory_vendor_productline_cmd(ble_vendor_productline_cmd_t* param
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [ble_vendor_productline_cmd_t](#struct_ble_vendor_productline_cmd_t) * | 指向产线校准命令结构体的指针，包含子操作码及按子操作码生效的联合体参数 | 不为NULL |
+| param | [ble_vendor_productline_cmd_t](#struct_ble_vendor_productline_cmd_t) * | 指向产线校准命令结构体的指针，包含子操作码及按子操作码生效的联合体参数 | 不为 NULL |
 
 **返回值**
 

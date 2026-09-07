@@ -115,7 +115,7 @@ errcode_t bts_dev_manager_register_callbacks(bts_dev_manager_callbacks_t *func)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [bts_dev_manager_callbacks_t](#bts_dev_manager_callbacks_t) * | 指向回调函数结构体的指针，结构体内含设备上电回调、BLE 使能回调、BLE 去使能回调 | 不为NULL |
+| func | [bts_dev_manager_callbacks_t](#bts_dev_manager_callbacks_t) * | 指向回调函数结构体的指针，结构体内含设备上电回调、BLE 使能回调、BLE 去使能回调 | 不为 NULL |
 
 **返回值**
 

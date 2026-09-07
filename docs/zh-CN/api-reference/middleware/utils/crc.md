@@ -47,7 +47,7 @@ uint16_t uapi_crc16(uint16_t crc_start, const uint8_t *buf, uint32_t length)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | crc_start | uint16_t | CRC 计算初始值；分段计算时传入前一段计算结果 | 0 ~ 65535 |
-| buf | const uint8_t * | 指向待计算数据缓冲区的指针，由调用方分配 | 不为NULL（为NULL时函数直接返回crc_start） |
+| buf | const uint8_t * | 指向待计算数据缓冲区的指针，由调用方分配 | 不为 NULL（为 NULL 时函数直接返回 crc_start） |
 | length | uint32_t | 待计算数据长度，单位 Bytes | 0 ~ 4294967295 |
 
 **返回值**
@@ -92,7 +92,7 @@ uint32_t uapi_crc32(uint32_t crc_start, const uint8_t *buf, uint32_t length)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | crc_start | uint32_t | CRC 计算初始值；分段计算时传入前一段计算结果 | 0 ~ 4294967295 |
-| buf | const uint8_t * | 指向待计算数据缓冲区的指针，由调用方分配 | 不为NULL（为NULL时函数直接返回对crc_start处理后的结果） |
+| buf | const uint8_t * | 指向待计算数据缓冲区的指针，由调用方分配 | 不为 NULL（为 NULL 时函数直接返回对 crc_start 处理后的结果） |
 | length | uint32_t | 待计算数据长度，单位 Bytes | 0 ~ 4294967295 |
 
 **返回值**
@@ -138,7 +138,7 @@ uint32_t uapi_crc32_no_comp(uint32_t crc_start, const uint8_t *buf, uint32_t len
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | crc_start | uint32_t | CRC 计算初始值；分段计算时传入前一段计算结果 | 0 ~ 4294967295 |
-| buf | const uint8_t * | 指向待计算数据缓冲区的指针，由调用方分配 | 不为NULL（为NULL时函数直接返回crc_start） |
+| buf | const uint8_t * | 指向待计算数据缓冲区的指针，由调用方分配 | 不为 NULL（为 NULL 时函数直接返回 crc_start） |
 | length | uint32_t | 待计算数据长度，单位 Bytes | 0 ~ 4294967295 |
 
 **返回值**

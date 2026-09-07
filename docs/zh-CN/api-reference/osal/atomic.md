@@ -49,7 +49,7 @@ int osal_atomic_read(osal_atomic *atomic)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| atomic | [osal_atomic *](#osal_atomic) | 指向待读取的原子变量 | 不为NULL |
+| atomic | [osal_atomic *](#osal_atomic) | 指向待读取的原子变量 | 不为 NULL |
 
 **返回值**
 
@@ -86,7 +86,7 @@ void osal_atomic_set(osal_atomic *atomic, int i)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| atomic | [osal_atomic *](#osal_atomic) | 指向待设置的原子变量 | 不为NULL |
+| atomic | [osal_atomic *](#osal_atomic) | 指向待设置的原子变量 | 不为 NULL |
 | i | int | 待设置的整数值 | int 类型取值范围 |
 
 **参考案例**
@@ -115,7 +115,7 @@ int osal_atomic_inc_return(osal_atomic *atomic)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| atomic | [osal_atomic *](#osal_atomic) | 指向待自增的原子变量 | 不为NULL |
+| atomic | [osal_atomic *](#osal_atomic) | 指向待自增的原子变量 | 不为 NULL |
 
 **返回值**
 
@@ -148,7 +148,7 @@ int osal_atomic_add_return(osal_atomic *atomic, int count)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| atomic | [osal_atomic *](#osal_atomic) | 指向待操作的原子变量 | 不为NULL |
+| atomic | [osal_atomic *](#osal_atomic) | 指向待操作的原子变量 | 不为 NULL |
 | count | int | 增加的数量值 | int 类型取值范围 |
 
 **返回值**
@@ -181,7 +181,7 @@ int osal_atomic_dec_return(osal_atomic *atomic)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| atomic | [osal_atomic *](#osal_atomic) | 指向待自减的原子变量 | 不为NULL |
+| atomic | [osal_atomic *](#osal_atomic) | 指向待自减的原子变量 | 不为 NULL |
 
 **返回值**
 
@@ -214,7 +214,7 @@ void osal_atomic_inc(osal_atomic *atomic)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| atomic | [osal_atomic *](#osal_atomic) | 指向待自增的原子变量 | 不为NULL |
+| atomic | [osal_atomic *](#osal_atomic) | 指向待自增的原子变量 | 不为 NULL |
 
 **参考案例**
 
@@ -242,7 +242,7 @@ void osal_atomic_sub(osal_atomic *atomic, unsigned int count)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| atomic | [osal_atomic *](#osal_atomic) | 指向待操作的原子变量 | 不为NULL |
+| atomic | [osal_atomic *](#osal_atomic) | 指向待操作的原子变量 | 不为 NULL |
 | count | unsigned int | 减少的数量值 | unsigned int 类型取值范围 |
 
 ### osal_atomic_dec <a id="osal_atomic_dec"></a>
@@ -267,7 +267,7 @@ void osal_atomic_dec(osal_atomic *atomic)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| atomic | [osal_atomic *](#osal_atomic) | 指向待自减的原子变量 | 不为NULL |
+| atomic | [osal_atomic *](#osal_atomic) | 指向待自减的原子变量 | 不为 NULL |
 
 ### osal_atomic_add <a id="osal_atomic_add"></a>
 
@@ -291,7 +291,7 @@ void osal_atomic_add(osal_atomic *atomic, int count)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| atomic | [osal_atomic *](#osal_atomic) | 指向待操作的原子变量 | 不为NULL |
+| atomic | [osal_atomic *](#osal_atomic) | 指向待操作的原子变量 | 不为 NULL |
 | count | int | 增加的数量值 | int 类型取值范围 |
 
 ### osal_atomic_dec_and_test <a id="osal_atomic_dec_and_test"></a>
@@ -316,7 +316,7 @@ int osal_atomic_dec_and_test(osal_atomic *atomic)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| atomic | [osal_atomic *](#osal_atomic) | 指向待自减并测试的原子变量 | 不为NULL |
+| atomic | [osal_atomic *](#osal_atomic) | 指向待自减并测试的原子变量 | 不为 NULL |
 
 **返回值**
 
@@ -350,7 +350,7 @@ int osal_atomic_inc_and_test(osal_atomic *atomic)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| atomic | [osal_atomic *](#osal_atomic) | 指向待自增并测试的原子变量 | 不为NULL |
+| atomic | [osal_atomic *](#osal_atomic) | 指向待自增并测试的原子变量 | 不为 NULL |
 
 **返回值**
 
@@ -384,7 +384,7 @@ int osal_atomic_inc_not_zero(osal_atomic *atomic)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| atomic | [osal_atomic *](#osal_atomic) | 指向待条件自增的原子变量 | 不为NULL |
+| atomic | [osal_atomic *](#osal_atomic) | 指向待条件自增的原子变量 | 不为 NULL |
 
 **返回值**
 

@@ -74,10 +74,10 @@ osal_task *osal_kthread_create(osal_kthread_handler handler, void *data, const c
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| handler | [osal_kthread_handler](#osal_kthread_handler) | 线程入口处理函数 | 不为NULL |
+| handler | [osal_kthread_handler](#osal_kthread_handler) | 线程入口处理函数 | 不为 NULL |
 | data | void * | 传递给线程入口函数的参数数据 | - |
 | name | const char * | 线程名称，用于标识和调试 | - |
-| stack_size | unsigned int | 线程栈空间大小（字节） | 大于0 |
+| stack_size | unsigned int | 线程栈空间大小（字节） | 大于 0 |
 
 **返回值**
 
@@ -85,7 +85,7 @@ osal_task *osal_kthread_create(osal_kthread_handler handler, void *data, const c
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL指针 | 线程创建成功 | 线程创建并启动成功 |
+| 非 NULL 指针 | 线程创建成功 | 线程创建并启动成功 |
 | NULL | 线程创建失败 | handler 为 NULL 或内存分配失败或内核创建线程失败 |
 
 **参考案例**
@@ -119,7 +119,7 @@ osal_task *osal_kthread_create_static_ext(osal_kthread_init *init_handle, void *
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| init_handle | [osal_kthread_init](#osal_kthread_init) * | 线程初始化配置结构体 | 不为NULL |
+| init_handle | [osal_kthread_init](#osal_kthread_init) * | 线程初始化配置结构体 | 不为 NULL |
 | topStack | void * | 静态分配的栈空间指针 | - |
 
 **返回值**
@@ -128,7 +128,7 @@ osal_task *osal_kthread_create_static_ext(osal_kthread_init *init_handle, void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL指针 | 线程创建成功 | 静态栈线程创建成功 |
+| 非 NULL 指针 | 线程创建成功 | 静态栈线程创建成功 |
 | NULL | 线程创建失败 | init_handle 为 NULL 或未启用静态栈分配或内存分配失败或 LOS_TaskCreateStatic 失败 |
 
 **Kconfig配置**
@@ -164,7 +164,7 @@ osal_task *osal_kthread_create_ext(osal_kthread_init *init_handle)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| init_handle | [osal_kthread_init](#osal_kthread_init) * | 线程初始化配置结构体 | 不为NULL |
+| init_handle | [osal_kthread_init](#osal_kthread_init) * | 线程初始化配置结构体 | 不为 NULL |
 
 **返回值**
 
@@ -172,7 +172,7 @@ osal_task *osal_kthread_create_ext(osal_kthread_init *init_handle)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL指针 | 线程创建成功 | 线程创建成功 |
+| 非 NULL 指针 | 线程创建成功 | 线程创建成功 |
 | NULL | 线程创建失败 | init_handle 为 NULL 或内存分配失败或 LOS_TaskCreate 失败 |
 
 ### osal_kthread_set_priority <a id="osal_kthread_set_priority"></a>
@@ -202,7 +202,7 @@ int osal_kthread_set_priority(osal_task *task, unsigned int priority)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| task | [osal_task](#osal_task) * | 目标线程指针 | 不为NULL |
+| task | [osal_task](#osal_task) * | 目标线程指针 | 不为 NULL |
 | priority | unsigned int | 线程优先级 | [OSAL_TASK_PRIORITY_ABOVE_HIGH](#OSAL_TASK_PRIORITY_ABOVE_HIGH)；<br>[OSAL_TASK_PRIORITY_HIGH](#OSAL_TASK_PRIORITY_HIGH)；<br>[OSAL_TASK_PRIORITY_BELOW_HIGH](#OSAL_TASK_PRIORITY_BELOW_HIGH)；<br>[OSAL_TASK_PRIORITY_ABOVE_MIDDLE](#OSAL_TASK_PRIORITY_ABOVE_MIDDLE)；<br>[OSAL_TASK_PRIORITY_MIDDLE](#OSAL_TASK_PRIORITY_MIDDLE)；<br>[OSAL_TASK_PRIORITY_BELOW_MIDDLE](#OSAL_TASK_PRIORITY_BELOW_MIDDLE)；<br>[OSAL_TASK_PRIORITY_ABOVE_LOW](#OSAL_TASK_PRIORITY_ABOVE_LOW)；<br>[OSAL_TASK_PRIORITY_LOW](#OSAL_TASK_PRIORITY_LOW)；<br>[OSAL_TASK_PRIORITY_BELOW_LOW](#OSAL_TASK_PRIORITY_BELOW_LOW)。 |
 
 **返回值**
@@ -246,7 +246,7 @@ void osal_kthread_set_affinity(osal_task *task, int cpu_mask)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| task | [osal_task](#osal_task) * | 目标线程指针 | 不为NULL |
+| task | [osal_task](#osal_task) * | 目标线程指针 | 不为 NULL |
 | cpu_mask | int | CPU 核心掩码 | OSAL_CPU_ALL：0；<br>OSAL_CPU_0：2；<br>OSAL_CPU_1：4；<br>OSAL_CPU_2：8；<br>OSAL_CPU_3：16。 |
 
 **参考案例**
@@ -313,7 +313,7 @@ int osal_kthread_wakeup_process(osal_task *task)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| task | [osal_task](#osal_task) * | 待唤醒的目标线程指针 | 不为NULL |
+| task | [osal_task](#osal_task) * | 待唤醒的目标线程指针 | 不为 NULL |
 
 **返回值**
 
@@ -351,8 +351,8 @@ void osal_kthread_bind(osal_task *task, unsigned int cpu)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| task | [osal_task](#osal_task) * | 目标线程指针 | 不为NULL |
-| cpu | unsigned int | 绑定的 CPU 核心编号 | 0 ~ 系统最大CPU核心数-1 |
+| task | [osal_task](#osal_task) * | 目标线程指针 | 不为 NULL |
+| cpu | unsigned int | 绑定的 CPU 核心编号 | 0 ~ 系统最大 CPU 核心数-1 |
 
 ### osal_kthread_lock <a id="osal_kthread_lock"></a>
 
@@ -433,7 +433,7 @@ void osal_kthread_destroy(osal_task *task, unsigned int stop_flag)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| task | [osal_task](#osal_task) * | 待销毁的线程指针 | 不为NULL |
+| task | [osal_task](#osal_task) * | 待销毁的线程指针 | 不为 NULL |
 | stop_flag | unsigned int | 线程停止标志，0 表示不停止线程，非 0 表示停止线程 | - |
 
 
@@ -464,7 +464,7 @@ void osal_kthread_schedule(unsigned int sleep_ns)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| sleep_ns | unsigned int | 睡眠时长（纳秒） | 大于0 |
+| sleep_ns | unsigned int | 睡眠时长（纳秒） | 大于 0 |
 
 ### osal_kthread_set_uninterrupt <a id="osal_kthread_set_uninterrupt"></a>
 
@@ -750,7 +750,7 @@ char *osal_get_current_taskname(void)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL指针 | 当前线程名称字符串 | 正常获取 |
+| 非 NULL 指针 | 当前线程名称字符串 | 正常获取 |
 
 ### osal_msleep <a id="osal_msleep"></a>
 
@@ -779,7 +779,7 @@ unsigned long osal_msleep(unsigned int msecs)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| msecs | unsigned int | 休眠时长（毫秒） | 大于0 |
+| msecs | unsigned int | 休眠时长（毫秒） | 大于 0 |
 
 **返回值**
 
@@ -821,7 +821,7 @@ void osal_msleep_uninterruptible(unsigned int msecs)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| msecs | unsigned int | 休眠时长（毫秒） | 大于0 |
+| msecs | unsigned int | 休眠时长（毫秒） | 大于 0 |
 
 
 ### osal_udelay <a id="osal_udelay"></a>
@@ -851,7 +851,7 @@ void osal_udelay(unsigned int usecs)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| usecs | unsigned int | 延时时长（微秒） | 大于0 |
+| usecs | unsigned int | 延时时长（微秒） | 大于 0 |
 
 **参考案例**
 
@@ -884,7 +884,7 @@ void osal_mdelay(unsigned int msecs)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| msecs | unsigned int | 延时时长（毫秒） | 大于0 |
+| msecs | unsigned int | 延时时长（毫秒） | 大于 0 |
 
 
 ### osal_kthread_suspend <a id="osal_kthread_suspend"></a>
@@ -914,7 +914,7 @@ void osal_kthread_suspend(osal_task *task)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| task | [osal_task](#osal_task) * | 待挂起的目标线程指针 | 不为NULL |
+| task | [osal_task](#osal_task) * | 待挂起的目标线程指针 | 不为 NULL |
 
 ### osal_kthread_resume <a id="osal_kthread_resume"></a>
 
@@ -943,7 +943,7 @@ void osal_kthread_resume(osal_task *task)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| task | [osal_task](#osal_task) * | 待恢复的目标线程指针 | 不为NULL |
+| task | [osal_task](#osal_task) * | 待恢复的目标线程指针 | 不为 NULL |
 
 ### osal_kernel_init <a id="osal_kernel_init"></a>
 

@@ -88,7 +88,7 @@ errcode_t sle_connect_remote_device(const sle_addr_t *addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [sle_addr_t](#struct_sle_addr_t) * | 对端设备地址 | 不为NULL |
+| addr | [sle_addr_t](#struct_sle_addr_t) * | 对端设备地址 | 不为 NULL |
 
 **返回值**
 
@@ -202,7 +202,7 @@ errcode_t sle_disconnect_remote_device(const sle_addr_t *addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [sle_addr_t](#struct_sle_addr_t) * | 对端设备地址 | 不为NULL |
+| addr | [sle_addr_t](#struct_sle_addr_t) * | 对端设备地址 | 不为 NULL |
 
 **返回值**
 
@@ -274,7 +274,7 @@ errcode_t sle_update_connect_param(sle_connection_param_update_t *params)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| params | [sle_connection_param_update_t](#struct_sle_connection_param_update_t) * | 连接参数更新请求 | 不为NULL |
+| params | [sle_connection_param_update_t](#struct_sle_connection_param_update_t) * | 连接参数更新请求 | 不为 NULL |
 
 **返回值**
 
@@ -317,7 +317,7 @@ errcode_t sle_pair_remote_device(const sle_addr_t *addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [sle_addr_t](#struct_sle_addr_t) * | 对端设备地址 | 不为NULL |
+| addr | [sle_addr_t](#struct_sle_addr_t) * | 对端设备地址 | 不为 NULL |
 
 **返回值**
 
@@ -360,7 +360,7 @@ errcode_t sle_remove_paired_remote_device(const sle_addr_t *addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [sle_addr_t](#struct_sle_addr_t) * | 对端设备地址 | 不为NULL |
+| addr | [sle_addr_t](#struct_sle_addr_t) * | 对端设备地址 | 不为 NULL |
 
 **返回值**
 
@@ -454,7 +454,7 @@ errcode_t sle_get_connect_role(uint16_t conn_id, uint8_t *role)
 
 **功能说明**
 
-- 获取指定连接的链路角色（G 节点或T 节点）。
+- 获取指定连接的链路角色（G 节点或 T 节点）。
 - 角色结果通过出参返回。
 - 调用结果以错误码形式返回。
 
@@ -591,9 +591,9 @@ errcode_t sle_set_nv_smp_keys(sle_auth_info_evt_t *keys, sle_addr_t *own_addr, s
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| keys | [sle_auth_info_evt_t](#struct_sle_auth_info_evt_t) * | 链路密钥与算法信息 | 不为NULL |
-| own_addr | [sle_addr_t](#struct_sle_addr_t) * | 本端设备地址 | 不为NULL |
-| peer_addr | [sle_addr_t](#struct_sle_addr_t) * | 对端设备地址 | 不为NULL |
+| keys | [sle_auth_info_evt_t](#struct_sle_auth_info_evt_t) * | 链路密钥与算法信息 | 不为 NULL |
+| own_addr | [sle_addr_t](#struct_sle_addr_t) * | 本端设备地址 | 不为 NULL |
+| peer_addr | [sle_addr_t](#struct_sle_addr_t) * | 对端设备地址 | 不为 NULL |
 | index | uint8_t | 密钥索引下标 | 0 ~ 255 |
 
 **返回值**
@@ -632,7 +632,7 @@ errcode_t sle_get_pair_state(const sle_addr_t *addr, uint8_t *state)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [sle_addr_t](#struct_sle_addr_t) * | 设备地址 | 不为NULL |
+| addr | [sle_addr_t](#struct_sle_addr_t) * | 设备地址 | 不为 NULL |
 
 **出参**
 
@@ -827,7 +827,7 @@ errcode_t sle_add_device_to_access_filter_list(sle_addr_t *addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [sle_addr_t](#struct_sle_addr_t) * | 待加入地址 | 不为NULL |
+| addr | [sle_addr_t](#struct_sle_addr_t) * | 待加入地址 | 不为 NULL |
 
 **返回值**
 
@@ -864,7 +864,7 @@ errcode_t sle_remove_device_from_access_filter_list(sle_addr_t *addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [sle_addr_t](#struct_sle_addr_t) * | 待移除地址 | 不为NULL |
+| addr | [sle_addr_t](#struct_sle_addr_t) * | 待移除地址 | 不为 NULL |
 
 **返回值**
 
@@ -904,7 +904,7 @@ errcode_t sle_set_phy_param(uint16_t conn_id, sle_set_phy_t *param)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | conn_id | uint16_t | 连接 ID | 有效连接 ID |
-| param | [sle_set_phy_t](#struct_sle_set_phy_t) * | PHY 参数 | 不为NULL |
+| param | [sle_set_phy_t](#struct_sle_set_phy_t) * | PHY 参数 | 不为 NULL |
 
 **返回值**
 
@@ -1069,7 +1069,7 @@ errcode_t sle_default_connection_param_set(sle_default_connect_param_t *set_para
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| set_param | [sle_default_connect_param_t](#struct_sle_default_connect_param_t) * | 默认连接参数 | 不为NULL |
+| set_param | [sle_default_connect_param_t](#struct_sle_default_connect_param_t) * | 默认连接参数 | 不为 NULL |
 
 **返回值**
 
@@ -1113,7 +1113,7 @@ errcode_t sle_connection_register_callbacks(sle_connection_callbacks_t *func)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [sle_connection_callbacks_t](#struct_sle_connection_callbacks_t) * | 连接管理回调函数集合 | 不为NULL |
+| func | [sle_connection_callbacks_t](#struct_sle_connection_callbacks_t) * | 连接管理回调函数集合 | 不为 NULL |
 
 **返回值**
 
@@ -1194,7 +1194,7 @@ errcode_t sle_set_local_addr(sle_addr_t *addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [sle_addr_t](#struct_sle_addr_t) * | 本地设备地址 | 不为NULL |
+| addr | [sle_addr_t](#struct_sle_addr_t) * | 本地设备地址 | 不为 NULL |
 
 **返回值**
 
@@ -1275,7 +1275,7 @@ errcode_t sle_set_local_name(const uint8_t *name, uint8_t len)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| name | const uint8_t * | 本地设备名称 | 不为NULL |
+| name | const uint8_t * | 本地设备名称 | 不为 NULL |
 | len | uint8_t | 设备名称长度，包括结束符 \0 | 0 ~ 255 |
 
 **返回值**
@@ -1354,7 +1354,7 @@ errcode_t sle_set_announce_data(uint8_t announce_id, const sle_announce_data_t *
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX)：16 |
-| data | [sle_announce_data_t](#struct_sle_announce_data_t) * | 设备公开数据 | 不为NULL |
+| data | [sle_announce_data_t](#struct_sle_announce_data_t) * | 设备公开数据 | 不为 NULL |
 
 **返回值**
 
@@ -1435,7 +1435,7 @@ errcode_t sle_set_announce_param(uint8_t announce_id, const sle_announce_param_t
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | announce_id | uint8_t | 设备公开 ID | 0 ~ [SLE_ANNOUNCE_ID_MAX](#SLE_ANNOUNCE_ID_MAX)：16 |
-| param | [sle_announce_param_t](#struct_sle_announce_param_t) * | 设备公开参数 | 不为NULL |
+| param | [sle_announce_param_t](#struct_sle_announce_param_t) * | 设备公开参数 | 不为 NULL |
 
 **返回值**
 
@@ -1560,7 +1560,7 @@ errcode_t sle_set_seek_param(sle_seek_param_t *param)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [sle_seek_param_t](#struct_sle_seek_param_t) * | 设备发现扫描参数 | 不为NULL |
+| param | [sle_seek_param_t](#struct_sle_seek_param_t) * | 设备发现扫描参数 | 不为 NULL |
 
 **返回值**
 
@@ -1677,7 +1677,7 @@ errcode_t sle_announce_seek_register_callbacks(sle_announce_seek_callbacks_t *fu
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [sle_announce_seek_callbacks_t](#struct_sle_announce_seek_callbacks_t) * | 设备公开与扫描回调函数集合 | 不为NULL |
+| func | [sle_announce_seek_callbacks_t](#struct_sle_announce_seek_callbacks_t) * | 设备公开与扫描回调函数集合 | 不为 NULL |
 
 **返回值**
 
@@ -1722,7 +1722,7 @@ errcode_t sle_transmission_signal_capability_req(uint16_t conn_id, sle_transmiss
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | conn_id | uint16_t | 连接 ID | 有效连接 ID |
-| param | [sle_transmission_signal_capability_bit_t](#struct_sle_transmission_signal_capability_bit_t) * | 查询的能力信息 | 不为NULL |
+| param | [sle_transmission_signal_capability_bit_t](#struct_sle_transmission_signal_capability_bit_t) * | 查询的能力信息 | 不为 NULL |
 
 **返回值**
 
@@ -1761,7 +1761,7 @@ errcode_t sle_transmission_register_callbacks(sle_transmission_callbacks_t *func
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [sle_transmission_callbacks_t](#struct_sle_transmission_callbacks_t) * | 传输管理回调函数集合 | 不为NULL |
+| func | [sle_transmission_callbacks_t](#struct_sle_transmission_callbacks_t) * | 传输管理回调函数集合 | 不为 NULL |
 
 **返回值**
 
@@ -2208,20 +2208,20 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_RADIO_FRAME_1 | 0 | 无线帧类型1 |
-| SLE_RADIO_FRAME_2 | 1 | 无线帧类型2 |
-| SLE_RADIO_FRAME_3_M0 | 2 | 无线帧类型3，m序列0 |
-| SLE_RADIO_FRAME_3_M1 | 3 | 无线帧类型3，m序列1 |
-| SLE_RADIO_FRAME_3_M2 | 4 | 无线帧类型3，m序列2 |
-| SLE_RADIO_FRAME_3_M3 | 5 | 无线帧类型3，m序列3 |
-| SLE_RADIO_FRAME_3_M4 | 6 | 无线帧类型3，m序列4 |
-| SLE_RADIO_FRAME_3_M5 | 7 | 无线帧类型3，m序列5 |
-| SLE_RADIO_FRAME_4_M0 | 8 | 无线帧类型4，m序列0 |
-| SLE_RADIO_FRAME_4_M1 | 9 | 无线帧类型4，m序列1 |
-| SLE_RADIO_FRAME_4_M2 | 10 | 无线帧类型4，m序列2 |
-| SLE_RADIO_FRAME_4_M3 | 11 | 无线帧类型4，m序列3 |
-| SLE_RADIO_FRAME_4_M4 | 12 | 无线帧类型4，m序列4 |
-| SLE_RADIO_FRAME_4_M5 | 13 | 无线帧类型4，m序列5 |
+| SLE_RADIO_FRAME_1 | 0 | 无线帧类型 1 |
+| SLE_RADIO_FRAME_2 | 1 | 无线帧类型 2 |
+| SLE_RADIO_FRAME_3_M0 | 2 | 无线帧类型 3，m 序列 0 |
+| SLE_RADIO_FRAME_3_M1 | 3 | 无线帧类型 3，m 序列 1 |
+| SLE_RADIO_FRAME_3_M2 | 4 | 无线帧类型 3，m 序列 2 |
+| SLE_RADIO_FRAME_3_M3 | 5 | 无线帧类型 3，m 序列 3 |
+| SLE_RADIO_FRAME_3_M4 | 6 | 无线帧类型 3，m 序列 4 |
+| SLE_RADIO_FRAME_3_M5 | 7 | 无线帧类型 3，m 序列 5 |
+| SLE_RADIO_FRAME_4_M0 | 8 | 无线帧类型 4，m 序列 0 |
+| SLE_RADIO_FRAME_4_M1 | 9 | 无线帧类型 4，m 序列 1 |
+| SLE_RADIO_FRAME_4_M2 | 10 | 无线帧类型 4，m 序列 2 |
+| SLE_RADIO_FRAME_4_M3 | 11 | 无线帧类型 4，m 序列 3 |
+| SLE_RADIO_FRAME_4_M4 | 12 | 无线帧类型 4，m 序列 4 |
+| SLE_RADIO_FRAME_4_M5 | 13 | 无线帧类型 4，m 序列 5 |
 | SLE_RADIO_FRAME_END | 14 | 无线帧类型结束标志 |
 
 ### sle_phy_tx_rx_t <a id="enum_sle_phy_tx_rx_t"></a>
@@ -2240,7 +2240,7 @@ typedef enum {
 | SLE_PHY_1M | 0x0 | 1M PHY |
 | SLE_PHY_2M | 0x1 | 2M PHY |
 | SLE_PHY_4M | 0x2 | 4M PHY |
-| SLE_PHY_SUPPORT_NUM | 3 | PHY 支持数量 |
+| SLE_PHY_SUPPORT_NUM | 0x3 | PHY 支持数量 |
 
 ### sle_phy_tx_rx_pilot_density_t <a id="enum_sle_phy_tx_rx_pilot_density_t"></a>
 
@@ -2256,11 +2256,11 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_PHY_PILOT_DENSITY_4_TO_1 | 0x0 | 导频密度为4:1 |
-| SLE_PHY_PILOT_DENSITY_8_TO_1 | 0x1 | 导频密度为8:1 |
-| SLE_PHY_PILOT_DENSITY_16_TO_1 | 0x2 | 导频密度为16:1 |
+| SLE_PHY_PILOT_DENSITY_4_TO_1 | 0x0 | 导频密度为 4:1 |
+| SLE_PHY_PILOT_DENSITY_8_TO_1 | 0x1 | 导频密度为 8:1 |
+| SLE_PHY_PILOT_DENSITY_16_TO_1 | 0x2 | 导频密度为 16:1 |
 | SLE_PHY_PILOT_DENSITY_NO | 0x3 | 无导频 |
-| SLE_PHY_PILOT_DENSITY_NUM | 4 | 导频密度数量 |
+| SLE_PHY_PILOT_DENSITY_NUM | 0x4 | 导频密度数量 |
 
 ### sle_save_smp_keys_mode_switch_t <a id="enum_sle_save_smp_keys_mode_switch_t"></a>
 
@@ -2309,10 +2309,10 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_ANNOUNCE_ROLE_T_CAN_NEGO | 0 | 期望做T可协商 |
-| SLE_ANNOUNCE_ROLE_G_CAN_NEGO | 1 | 期望做G可协商 |
-| SLE_ANNOUNCE_ROLE_T_NO_NEGO | 2 | 期望做T不可协商 |
-| SLE_ANNOUNCE_ROLE_G_NO_NEGO | 3 | 期望做G不可协商 |
+| SLE_ANNOUNCE_ROLE_T_CAN_NEGO | 0 | 期望做 T 可协商 |
+| SLE_ANNOUNCE_ROLE_G_CAN_NEGO | 1 | 期望做 G 可协商 |
+| SLE_ANNOUNCE_ROLE_T_NO_NEGO | 2 | 期望做 T 不可协商 |
+| SLE_ANNOUNCE_ROLE_G_NO_NEGO | 3 | 期望做 G 不可协商 |
 
 ### sle_announce_mode_t <a id="enum_sle_announce_mode_t"></a>
 

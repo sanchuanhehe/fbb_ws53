@@ -330,7 +330,7 @@ errcode_t uapi_efuse_write_buffer(uint32_t byte_number, const uint8_t *buffer, u
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | byte_number | uint32_t | 写入数据的起始目的字节地址 | 0 ~ 255 |
-| buffer | const uint8_t * | 包含待写入数据的缓冲区 | 不为NULL |
+| buffer | const uint8_t * | 包含待写入数据的缓冲区 | 不为 NULL |
 | length | uint16_t | 写入数据的长度，以字节为单位 | 1 ~ 256，且 byte_number + length ≤ 256 |
 
 **返回值**
@@ -376,7 +376,7 @@ errcode_t uapi_efuse_write_buffer_with_flag(uint32_t byte_number, const uint8_t 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | byte_number | uint32_t | 写入数据的起始目的字节地址 | 0 ~ 255 |
-| buffer | const uint8_t * | 包含待写入数据的缓冲区 | 不为NULL |
+| buffer | const uint8_t * | 包含待写入数据的缓冲区 | 不为 NULL |
 | length | uint16_t | 写入数据的长度，以字节为单位 | 1 ~ 256，且 byte_number + length ≤ 256 |
 | flag | uint32_t | 写入保护标志 | [EFUSE_WRITE_PROTECT_FLAG](#EFUSE_WRITE_PROTECT_FLAG)：0x5A5A5A5A |
 
@@ -417,7 +417,7 @@ errcode_t uapi_efuse_get_die_id(uint8_t *buffer, uint16_t length)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| length | uint16_t | Die-ID 数据的长度，以字节为单位 | 不为0 |
+| length | uint16_t | Die-ID 数据的长度，以字节为单位 | 不为 0 |
 
 **出参**
 
@@ -466,7 +466,7 @@ errcode_t uapi_efuse_calc_crc(const uint8_t *buffer, uint8_t length, uint8_t *cr
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| buffer | const uint8_t * | 待计算 CRC 的数据缓冲区 | 不为NULL |
+| buffer | const uint8_t * | 待计算 CRC 的数据缓冲区 | 不为 NULL |
 | length | uint8_t | 数据长度，以字节为单位 | 0 ~ 32 |
 
 **出参**
@@ -500,7 +500,7 @@ errcode_t uapi_soc_read_id(uint8_t *id, uint16_t id_length)
 
 - 获取 SoC-ID。
 - 将 SoC-ID 字节序列写入调用方提供的缓冲区。
-- SoC-ID 固定为 20 Bytes序列。
+- SoC-ID 固定为 20 Bytes 序列。
 
 **前置条件**
 

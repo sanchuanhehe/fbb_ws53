@@ -48,7 +48,7 @@ errcode_t sle_rf_tx_start(sle_rf_tx_start_t* rf_tx_start)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| rf_tx_start | [sle_rf_tx_start_t](#struct_sle_rf_tx_start_t)* | 射频长发参数结构体指针 | 不为NULL |
+| rf_tx_start | [sle_rf_tx_start_t](#struct_sle_rf_tx_start_t)* | 射频长发参数结构体指针 | 不为 NULL |
 
 **返回值**
 
@@ -86,7 +86,7 @@ errcode_t sle_rf_rx_start(sle_rf_rx_start_t* rf_rx_start)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| rf_rx_start | [sle_rf_rx_start_t](#struct_sle_rf_rx_start_t)* | 射频长收参数结构体指针 | 不为NULL |
+| rf_rx_start | [sle_rf_rx_start_t](#struct_sle_rf_rx_start_t)* | 射频长收参数结构体指针 | 不为 NULL |
 
 **返回值**
 
@@ -187,7 +187,7 @@ errcode_t sle_factory_register_callbacks(sle_factory_callbacks_t *func)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [sle_factory_callbacks_t](#struct_sle_factory_callbacks_t)* | 回调函数结构体指针，包含射频长发、长收、收发结束、复位四类回调 | 不为NULL |
+| func | [sle_factory_callbacks_t](#struct_sle_factory_callbacks_t)* | 回调函数结构体指针，包含射频长发、长收、收发结束、复位四类回调 | 不为 NULL |
 
 **返回值**
 
@@ -297,12 +297,12 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_RF_POWER_LEVEL_0 | 0x00 | 射频功率0等级:-14dbm |
-| SLE_RF_POWER_LEVEL_1 | 0x01 | 射频功率1等级:-10dbm |
-| SLE_RF_POWER_LEVEL_2 | 0x02 | 射频功率2等级:-6dbm |
-| SLE_RF_POWER_LEVEL_3 | 0x03 | 射频功率3等级:-2dbm |
-| SLE_RF_POWER_LEVEL_4 | 0x04 | 射频功率4等级:2dbm |
-| SLE_RF_POWER_LEVEL_5 | 0x05 | 射频功率5等级:6dbm |
+| SLE_RF_POWER_LEVEL_0 | 0x00 | 射频功率 0 等级:-14dbm |
+| SLE_RF_POWER_LEVEL_1 | 0x01 | 射频功率 1 等级:-10dbm |
+| SLE_RF_POWER_LEVEL_2 | 0x02 | 射频功率 2 等级:-6dbm |
+| SLE_RF_POWER_LEVEL_3 | 0x03 | 射频功率 3 等级:-2dbm |
+| SLE_RF_POWER_LEVEL_4 | 0x04 | 射频功率 4 等级:2dbm |
+| SLE_RF_POWER_LEVEL_5 | 0x05 | 射频功率 5 等级:6dbm |
 
 ### sle_rf_payload_type_t <a id="enum_sle_rf_payload_type_t"></a>
 
@@ -344,9 +344,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_RF_PHY_1M | 0x00 | 射频物理层1M |
-| SLE_RF_PHY_2M | 0x01 | 射频物理层2M |
-| SLE_RF_PHY_4M | 0x04 | 射频物理层4M |
+| SLE_RF_PHY_1M | 0x00 | 射频物理层 1M |
+| SLE_RF_PHY_2M | 0x01 | 射频物理层 2M |
+| SLE_RF_PHY_4M | 0x04 | 射频物理层 4M |
 
 ### sle_rf_format_t <a id="enum_sle_rf_format_t"></a>
 
@@ -360,8 +360,8 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| SLE_RF_FORMAT_FRAME_TYPE_1 | 0x00 | 射频格式:无线帧类型1 |
-| SLE_RF_FORMAT_FRAME_TYPE_2 | 0x01 | 射频格式:无线帧类型2 |
+| SLE_RF_FORMAT_FRAME_TYPE_1 | 0x00 | 射频格式:无线帧类型 1 |
+| SLE_RF_FORMAT_FRAME_TYPE_2 | 0x01 | 射频格式:无线帧类型 2 |
 
 ### sle_rf_tx_rate_t <a id="enum_sle_rf_tx_rate_t"></a>
 

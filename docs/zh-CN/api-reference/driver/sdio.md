@@ -217,7 +217,7 @@ errcode_t uapi_sdio_slave_register_callback(sdio_bus_t bus, const sdio_callback_
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
-| fun | [sdio_callback_func_t](#sdio_callback_func_t) * | SDIO 中断回调函数结构体指针，参考 [sdio_callback_func_t](#sdio_callback_func_t) | 不为NULL |
+| fun | [sdio_callback_func_t](#sdio_callback_func_t) * | SDIO 中断回调函数结构体指针，参考 [sdio_callback_func_t](#sdio_callback_func_t) | 不为 NULL |
 
 **返回值**
 
@@ -258,7 +258,7 @@ errcode_t uapi_sdio_slave_complete_send(uint8_t *adma_tab, uint32_t adma_index)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| adma_tab | uint8_t * | ADMA 表首地址 | 不为NULL |
+| adma_tab | uint8_t * | ADMA 表首地址 | 不为 NULL |
 | adma_index | uint32_t | ADMA 传输通道号 | 0 ~ 4294967295 |
 
 **返回值**
@@ -296,7 +296,7 @@ errcode_t uapi_sdio_slave_set_pad_admatab(uint8_t *adma_tab, uint32_t adma_index
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| adma_tab | uint8_t * | ADMA 表首地址 | 不为NULL |
+| adma_tab | uint8_t * | ADMA 表首地址 | 不为 NULL |
 | adma_index | uint32_t | ADMA 传输通道号 | 0 ~ 4294967295 |
 | padlen | uint32_t | 数据对齐后要发送的数据长度 | 0 ~ 4294967295 |
 
@@ -336,7 +336,7 @@ errcode_t uapi_sdio_slave_write_extend_info(sdio_bus_t bus, sdio_extendfunc_t* e
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
-| extfunc | [sdio_extendfunc_t](#sdio_extendfunc_t) * | 扩展信息结构体指针，参考 [sdio_extendfunc_t](#sdio_extendfunc_t) | 不为NULL |
+| extfunc | [sdio_extendfunc_t](#sdio_extendfunc_t) * | 扩展信息结构体指针，参考 [sdio_extendfunc_t](#sdio_extendfunc_t) | 不为 NULL |
 
 **返回值**
 
@@ -461,9 +461,9 @@ errcode_t uapi_sdio_slave_set_admatab(uint8_t *adma_tab, uint32_t adma_index, co
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| adma_tab | uint8_t * | ADMA 表首地址 | 不为NULL |
+| adma_tab | uint8_t * | ADMA 表首地址 | 不为 NULL |
 | adma_index | uint32_t | ADMA 传输通道号 | 0 ~ 4294967295 |
-| data_addr | const uint32_t * | ADMA 传输目的地址 | 不为NULL |
+| data_addr | const uint32_t * | ADMA 传输目的地址 | 不为 NULL |
 | data_len | uint32_t | ADMA 传输数据长度 | 0 ~ 4294967295 |
 
 **返回值**
@@ -734,7 +734,7 @@ void uapi_sdio_slave_register_notify_message_callback(notify_host_event_t event_
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| event_callback | [notify_host_event_t](#notify_host_event_t) | 消息或数据发送时调用的回调函数，参考 [notify_host_event_t](#notify_host_event_t) | 不为NULL |
+| event_callback | [notify_host_event_t](#notify_host_event_t) | 消息或数据发送时调用的回调函数，参考 [notify_host_event_t](#notify_host_event_t) | 不为 NULL |
 
 ### uapi_sdio_slave_read_retry_when_read_err <a id="uapi_sdio_slave_read_retry_when_read_err"></a>
 
@@ -906,7 +906,7 @@ errcode_t uapi_sdio_slave_set_status(sdio_bus_t bus, const sdio_status_info_t* s
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | bus | [sdio_bus_t](#sdio_bus_t) | SDIO 通道号，参考 [sdio_bus_t](#sdio_bus_t) | [sdio_bus_t](#sdio_bus_t) 全体成员 |
-| satus_info | const [sdio_status_info_t](#sdio_status_info_t) * | 指向存储状态信息缓冲区的指针，参考 [sdio_status_info_t](#sdio_status_info_t) | 不为NULL |
+| satus_info | const [sdio_status_info_t](#sdio_status_info_t) * | 指向存储状态信息缓冲区的指针，参考 [sdio_status_info_t](#sdio_status_info_t) | 不为 NULL |
 
 **返回值**
 
@@ -1126,12 +1126,12 @@ typedef enum {
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
 | SDIO_CHANNEL_ERR | 0x0 | SDIO 错误 |
-| SDIO_CHANNEL_RESET | 1 | 重置 SDIO |
-| SDIO_CHANNEL_INIT | 2 | 初始化 SDIO |
-| SDIO_CHANNEL_SLEEP | 3 | SDIO 睡眠状态 |
-| SDIO_CHANNEL_WAKE | 4 | 唤醒 SDIO |
-| SDIO_CHANNEL_WORK | 5 | SDIO 工作状态 |
-| SDIO_CHANNEL_BUTT | 6 | SDIO 状态枚举数 |
+| SDIO_CHANNEL_RESET | 0x1 | 重置 SDIO |
+| SDIO_CHANNEL_INIT | 0x2 | 初始化 SDIO |
+| SDIO_CHANNEL_SLEEP | 0x3 | SDIO 睡眠状态 |
+| SDIO_CHANNEL_WAKE | 0x4 | 唤醒 SDIO |
+| SDIO_CHANNEL_WORK | 0x5 | SDIO 工作状态 |
+| SDIO_CHANNEL_BUTT | 0x6 | SDIO 状态枚举数 |
 
 ## Structures
 

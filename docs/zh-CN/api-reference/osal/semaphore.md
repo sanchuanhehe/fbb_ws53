@@ -60,7 +60,7 @@ int osal_sem_init(osal_semaphore *sem, int val)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 信号量创建并初始化成功 |
-| [OSAL_FAILURE](#OSAL_FAILURE)(-1) | 执行失败 | 参数无效（sem 为 NULL、sem 已初始化或val 为负数）或内存分配失败 |
+| [OSAL_FAILURE](#OSAL_FAILURE)(-1) | 执行失败 | 参数无效（sem 为 NULL、sem 已初始化或 val 为负数）或内存分配失败 |
 
 **参考案例**
 
@@ -104,7 +104,7 @@ int osal_sem_binary_sem_init(osal_semaphore *sem, int val)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 二值信号量创建并初始化成功 |
-| [OSAL_FAILURE](#OSAL_FAILURE)(-1) | 执行失败 | 参数无效（sem 为 NULL或val 不在 0~1 范围）或创建失败 |
+| [OSAL_FAILURE](#OSAL_FAILURE)(-1) | 执行失败 | 参数无效（sem 为 NULL 或 val 不在 0~1 范围）或创建失败 |
 
 **参考案例**
 
@@ -138,7 +138,7 @@ int osal_sem_down(osal_semaphore *sem)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| sem | [osal_semaphore](#struct_osal_semaphore) * | 待获取的信号量 | 不为NULL |
+| sem | [osal_semaphore](#struct_osal_semaphore) * | 待获取的信号量 | 不为 NULL |
 
 **返回值**
 
@@ -181,7 +181,7 @@ int osal_sem_down_timeout(osal_semaphore *sem, unsigned int timeout)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| sem | [osal_semaphore](#struct_osal_semaphore) * | 待获取的信号量 | 不为NULL |
+| sem | [osal_semaphore](#struct_osal_semaphore) * | 待获取的信号量 | 不为 NULL |
 | timeout | unsigned int | 等待超时时间（单位 ms） | [OSAL_SEM_WAIT_FOREVER](#OSAL_SEM_WAIT_FOREVER)(-1)；<br>0 ~ 0xFFFFFFFE。 |
 
 **返回值**
@@ -225,7 +225,7 @@ int osal_sem_down_interruptible(osal_semaphore *sem)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| sem | [osal_semaphore](#struct_osal_semaphore) * | 待获取的信号量 | 不为NULL |
+| sem | [osal_semaphore](#struct_osal_semaphore) * | 待获取的信号量 | 不为 NULL |
 
 **返回值**
 
@@ -264,7 +264,7 @@ int osal_sem_trydown(osal_semaphore *sem)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| sem | [osal_semaphore](#struct_osal_semaphore) * | 待获取的信号量 | 不为NULL |
+| sem | [osal_semaphore](#struct_osal_semaphore) * | 待获取的信号量 | 不为 NULL |
 
 **返回值**
 
@@ -302,7 +302,7 @@ void osal_sem_up(osal_semaphore *sem)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| sem | [osal_semaphore](#struct_osal_semaphore) * | 待释放的信号量 | 不为NULL |
+| sem | [osal_semaphore](#struct_osal_semaphore) * | 待释放的信号量 | 不为 NULL |
 
 **参考案例**
 
@@ -336,7 +336,7 @@ void osal_sem_destroy(osal_semaphore *sem)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| sem | [osal_semaphore](#struct_osal_semaphore) * | 待销毁的信号量 | 不为NULL |
+| sem | [osal_semaphore](#struct_osal_semaphore) * | 待销毁的信号量 | 不为 NULL |
 
 **参考案例**
 
@@ -366,19 +366,19 @@ typedef struct {
 #define OSAL_SEM_WAIT_FOREVER (-1)
 ```
 
-### OSAL_SUCCESS <a id="OSAL_SUCCESS"></a> [SDK公共共享宏]
+### OSAL_SUCCESS <a id="OSAL_SUCCESS"></a> [SDK 公共共享宏]
 
 ```c
 #define OSAL_SUCCESS 0
 ```
 
-### OSAL_FAILURE <a id="OSAL_FAILURE"></a> [SDK公共共享宏]
+### OSAL_FAILURE <a id="OSAL_FAILURE"></a> [SDK 公共共享宏]
 
 ```c
 #define OSAL_FAILURE (-1)
 ```
 
-### OSAL_EINTR <a id="OSAL_EINTR"></a> [SDK公共共享宏]
+### OSAL_EINTR <a id="OSAL_EINTR"></a> [SDK 公共共享宏]
 
 ```c
 #define OSAL_EINTR (-4)  /* Interrupted system call */

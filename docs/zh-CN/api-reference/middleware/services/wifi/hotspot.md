@@ -50,7 +50,7 @@ errcode_t wifi_softap_enable(const softap_config_stru *config)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| config | const [softap_config_stru](#softap_config_stru)* | SoftAP 基本配置参数 | 不为NULL |
+| config | const [softap_config_stru](#softap_config_stru)* | SoftAP 基本配置参数 | 不为 NULL |
 
 **返回值**
 
@@ -111,7 +111,7 @@ errcode_t wifi_softap_disable(void)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| LWIP_DHCPS | 特性宏 | 支持DHCP服务器资源清理分支（分支级，无前缀注入宏） | 由构建目标决定 |
+| LWIP_DHCPS | 特性宏 | 支持 DHCP 服务器资源清理分支（分支级，无前缀注入宏） | 由构建目标决定 |
 
 ### wifi_is_softap_enabled <a id="wifi_is_softap_enabled"></a>
 
@@ -166,7 +166,7 @@ errcode_t wifi_set_softap_config_advance(const softap_config_advance_stru *confi
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| config | const [softap_config_advance_stru](#softap_config_advance_stru)* | SoftAP 扩展配置参数 | 不为NULL |
+| config | const [softap_config_advance_stru](#softap_config_advance_stru)* | SoftAP 扩展配置参数 | 不为 NULL |
 
 **返回值**
 
@@ -290,7 +290,7 @@ errcode_t wifi_softap_get_sta_list(wifi_sta_info_stru *result, uint32_t *size)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| size | uint32_t* | 输入时为缓冲区可容纳 STA 数量，输出时为实际 STA 数量 | 不为NULL，*size > 0 |
+| size | uint32_t* | 输入时为缓冲区可容纳 STA 数量，输出时为实际 STA 数量 | 不为 NULL，*size > 0 |
 
 **出参**
 
@@ -338,7 +338,7 @@ errcode_t wifi_softap_deauth_sta(const uint8_t *mac, int32_t mac_len)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mac | const uint8_t* | 目标 STA 的 MAC 地址 | 不为NULL，长度为 [WIFI_MAC_LEN](#WIFI_MAC_LEN)：6 |
+| mac | const uint8_t* | 目标 STA 的 MAC 地址 | 不为 NULL，长度为 [WIFI_MAC_LEN](#WIFI_MAC_LEN)：6 |
 | mac_len | int32_t | MAC 地址长度 | 6 |
 
 **返回值**

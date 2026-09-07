@@ -62,7 +62,7 @@ errcode_t uapi_tsensor_get_current_temp(int8_t *temp)
 
 **功能说明**
 
-- 获取Tsensor当前温度值。
+- 获取 Tsensor 当前温度值。
 - 温度通过输出参数返回，单位为 ℃。
 - 温度值可能无效，需通过返回值判断是否成功获取。
 

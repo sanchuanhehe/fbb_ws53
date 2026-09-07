@@ -46,8 +46,8 @@ int osal_delayedwork_init(osal_delayedwork *work, osal_delayedwork_handler handl
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| work | [osal_delayedwork](#osal_delayedwork) * | 待初始化的延迟工作对象指针 | 不为NULL，且 work->work 为 NULL |
-| handler | [osal_delayedwork_handler](#osal_delayedwork_handler) | 延迟工作超时回调处理函数 | 不为NULL |
+| work | [osal_delayedwork](#osal_delayedwork) * | 待初始化的延迟工作对象指针 | 不为 NULL，且 work->work 为 NULL |
+| handler | [osal_delayedwork_handler](#osal_delayedwork_handler) | 延迟工作超时回调处理函数 | 不为 NULL |
 
 **返回值**
 
@@ -85,7 +85,7 @@ void osal_delayedwork_destroy(osal_delayedwork *work)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| work | [osal_delayedwork](#osal_delayedwork) * | 待销毁的延迟工作对象指针 | 不为NULL，且 work->work 不为 NULL |
+| work | [osal_delayedwork](#osal_delayedwork) * | 待销毁的延迟工作对象指针 | 不为 NULL，且 work->work 不为 NULL |
 
 ### osal_delayedwork_schedule <a id="osal_delayedwork_schedule"></a>
 
@@ -114,7 +114,7 @@ int osal_delayedwork_schedule(osal_delayedwork *work, int timeout)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| work | [osal_delayedwork](#osal_delayedwork) * | 待调度的延迟工作对象指针 | 不为NULL，且 work->work 不为 NULL |
+| work | [osal_delayedwork](#osal_delayedwork) * | 待调度的延迟工作对象指针 | 不为 NULL，且 work->work 不为 NULL |
 | timeout | int | 延迟执行的超时时间，单位 ms | 0 表示立即执行，大于 0 为延迟毫秒数 |
 
 **返回值**
@@ -153,7 +153,7 @@ int osal_delayedwork_cancel_sync(osal_delayedwork *work)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| work | [osal_delayedwork](#osal_delayedwork) * | 待取消的延迟工作对象指针 | 不为NULL，且 work->work 不为 NULL |
+| work | [osal_delayedwork](#osal_delayedwork) * | 待取消的延迟工作对象指针 | 不为 NULL，且 work->work 不为 NULL |
 
 **返回值**
 

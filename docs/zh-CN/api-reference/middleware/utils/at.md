@@ -52,9 +52,9 @@ errcode_t uapi_at_cmd_table_register(const at_cmd_entry_t *table, uint32_t len,
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| table | [at_cmd_entry_t](#at_cmd_entry_t) * | AT 命令实体表起始地址，表中每个元素描述一条 AT 命令的名称、命令 ID、属性、参数校验语法及各类型回调 | 不为NULL，表内各命令 name 成员不为NULL |
-| len | uint32_t | AT 命令实体表中命令条目的数量 | 大于0 |
-| struct_max_size | uint32_t | 命令设置函数入参结构体的最大尺寸，框架会保留历史最大值 | 大于0 |
+| table | [at_cmd_entry_t](#at_cmd_entry_t) * | AT 命令实体表起始地址，表中每个元素描述一条 AT 命令的名称、命令 ID、属性、参数校验语法及各类型回调 | 不为 NULL，表内各命令 name 成员不为 NULL |
+| len | uint32_t | AT 命令实体表中命令条目的数量 | 大于 0 |
+| struct_max_size | uint32_t | 命令设置函数入参结构体的最大尺寸，框架会保留历史最大值 | 大于 0 |
 
 **返回值**
 
@@ -107,7 +107,7 @@ errcode_t uapi_at_cmd_abort_register(at_abort_func_t func, void *arg)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [at_abort_func_t](#at_abort_func_t) | AT 命令打断处理函数指针，框架在打断当前命令时回调，回调返回 at_ret_t 表示打断结果 | 不为NULL |
+| func | [at_abort_func_t](#at_abort_func_t) | AT 命令打断处理函数指针，框架在打断当前命令时回调，回调返回 at_ret_t 表示打断结果 | 不为 NULL |
 | arg | void * | 将打断处理函数的入参直接透传给回调函数 | 调用方自定义 |
 
 **返回值**
@@ -198,7 +198,7 @@ errcode_t uapi_at_interactivity_func_register(at_interactivity_func_t func)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [at_interactivity_func_t](#at_interactivity_func_t) | AT 交互命令处理函数指针，框架在交互过程中回调，回调入参为字符串数据及其长度，回调返回 at_ret_t 表示处理结果 | 不为NULL |
+| func | [at_interactivity_func_t](#at_interactivity_func_t) | AT 交互命令处理函数指针，框架在交互过程中回调，回调入参为字符串数据及其长度，回调返回 at_ret_t 表示处理结果 | 不为 NULL |
 
 **返回值**
 
@@ -237,7 +237,7 @@ void uapi_at_report(const char *str)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| str | const char * | AT 打印信息字符串，需携带字符串结束符 | 不为NULL |
+| str | const char * | AT 打印信息字符串，需携带字符串结束符 | 不为 NULL |
 
 **参考案例**
 
@@ -268,7 +268,7 @@ void uapi_at_print(const char* str, ...)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| str | const char * | 格式化打印信息字符串，需携带字符串结束符 | 不为NULL |
+| str | const char * | 格式化打印信息字符串，需携带字符串结束符 | 不为 NULL |
 | ... | 可变参数 | 与 str 中格式说明符一一对应的可变参数 | 与格式串匹配 |
 
 **参考案例**
@@ -306,7 +306,7 @@ void uapi_at_report_to_single_channel(at_channel_id_t channel_id, const char *st
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | channel_id | at_channel_id_t | AT 通道号，取值由 at_config.h 中 at_channel_id_t 枚举定义 | AT_UART_PORT(0)；<br>AT_ZDIAG_PORT(1)（仅开启 CONFIG_AT_SUPPORT_ZDIAG 时存在）；<br>AT_MAX_PORT_NUMBER 之前的合法值。 |
-| str | const char * | AT 打印信息字符串，需携带字符串结束符 | 不为NULL |
+| str | const char * | AT 打印信息字符串，需携带字符串结束符 | 不为 NULL |
 
 **参考案例**
 
@@ -342,8 +342,8 @@ errcode_t uapi_at_urc_to_channel(at_channel_id_t channel_id, const char *msg, ui
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | channel_id | at_channel_id_t | AT 通道号，取值由 at_config.h 中 at_channel_id_t 枚举定义 | AT_UART_PORT(0)；<br>AT_ZDIAG_PORT(1)（仅开启 CONFIG_AT_SUPPORT_ZDIAG 时存在）；<br>AT_MAX_PORT_NUMBER 之前的合法值。 |
-| msg | const char * | 主动上报消息内容起始地址 | 不为NULL |
-| msg_len | uint32_t | 主动上报消息长度，单位 Bytes | 大于0 |
+| msg | const char * | 主动上报消息内容起始地址 | 不为 NULL |
+| msg_len | uint32_t | 主动上报消息长度，单位 Bytes | 大于 0 |
 
 **返回值**
 

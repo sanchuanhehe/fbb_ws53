@@ -47,7 +47,7 @@ int osal_event_init(osal_event *event_obj)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| event_obj | [osal_event](#osal_event) * | 指向待初始化的事件控制块 | 不为NULL，且 event 成员为 NULL |
+| event_obj | [osal_event](#osal_event) * | 指向待初始化的事件控制块 | 不为 NULL，且 event 成员为 NULL |
 
 **返回值**
 
@@ -90,7 +90,7 @@ int osal_event_write(osal_event *event_obj, unsigned int mask)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| event_obj | [osal_event](#osal_event) * | 指向目标事件控制块 | 不为NULL |
+| event_obj | [osal_event](#osal_event) * | 指向目标事件控制块 | 不为 NULL |
 | mask | unsigned int | 待写入的事件掩码 | bit[0:30]，禁止使用 bit[31] |
 
 **返回值**
@@ -134,7 +134,7 @@ int osal_event_read(osal_event *event_obj, unsigned int mask, unsigned int timeo
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| event_obj | [osal_event](#osal_event) * | 指向目标事件控制块 | 不为NULL |
+| event_obj | [osal_event](#osal_event) * | 指向目标事件控制块 | 不为 NULL |
 | mask | unsigned int | 期望读取的事件掩码 | bit[0:30]，禁止使用 bit[31]；liteos 上禁止使用 bit[25] |
 | timeout_ms | unsigned int | 读取超时时间，单位 ms；[OSAL_EVENT_FOREVER](#OSAL_EVENT_FOREVER)(0xFFFFFFFF) 表示永久等待 | 0 ~ 0xFFFFFFFF |
 | mode | unsigned int | 事件读取模式，可组合使用 | [OSAL_WAITMODE_AND](#OSAL_WAITMODE_AND)(4U)；<br>[OSAL_WAITMODE_OR](#OSAL_WAITMODE_OR)(2U)；<br>[OSAL_WAITMODE_CLR](#OSAL_WAITMODE_CLR)(1U)。 |
@@ -181,7 +181,7 @@ int osal_event_clear(osal_event *event_obj, unsigned int mask)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| event_obj | [osal_event](#osal_event) * | 指向目标事件控制块 | 不为NULL |
+| event_obj | [osal_event](#osal_event) * | 指向目标事件控制块 | 不为 NULL |
 | mask | unsigned int | 待清除的事件掩码 | 0 ~ 0xFFFFFFFF |
 
 **返回值**
@@ -225,7 +225,7 @@ int osal_event_destroy(osal_event *event_obj)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| event_obj | [osal_event](#osal_event) * | 指向待销毁的事件控制块 | 不为NULL |
+| event_obj | [osal_event](#osal_event) * | 指向待销毁的事件控制块 | 不为 NULL |
 
 **返回值**
 

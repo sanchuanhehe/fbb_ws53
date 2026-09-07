@@ -50,7 +50,7 @@ int osal_mutex_init(osal_mutex *mutex)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mutex | [osal_mutex](#osal_mutex) * | 待初始化的互斥锁指针 | 不为NULL，且未被初始化过 |
+| mutex | [osal_mutex](#osal_mutex) * | 待初始化的互斥锁指针 | 不为 NULL，且未被初始化过 |
 
 **返回值**
 
@@ -94,7 +94,7 @@ int osal_mutex_lock(osal_mutex *mutex)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mutex | [osal_mutex](#osal_mutex) * | 待获取的互斥锁指针 | 不为NULL，且已通过 osal_mutex_init() 初始化 |
+| mutex | [osal_mutex](#osal_mutex) * | 待获取的互斥锁指针 | 不为 NULL，且已通过 osal_mutex_init() 初始化 |
 
 **返回值**
 
@@ -138,7 +138,7 @@ int osal_mutex_lock_timeout(osal_mutex *mutex, unsigned int timeout)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mutex | [osal_mutex](#osal_mutex) * | 待获取的互斥锁指针 | 不为NULL，且已通过 osal_mutex_init() 初始化 |
+| mutex | [osal_mutex](#osal_mutex) * | 待获取的互斥锁指针 | 不为 NULL，且已通过 osal_mutex_init() 初始化 |
 | timeout | unsigned int | 超时等待时间（毫秒） | [OSAL_MUTEX_WAIT_FOREVER](#OSAL_MUTEX_WAIT_FOREVER)(-1) 表示永久等待；<br>其他数值为超时毫秒数。 |
 
 **返回值**
@@ -182,7 +182,7 @@ int osal_mutex_lock_interruptible(osal_mutex *mutex)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mutex | [osal_mutex](#osal_mutex) * | 待获取的互斥锁指针 | 不为NULL，且已通过 osal_mutex_init() 初始化 |
+| mutex | [osal_mutex](#osal_mutex) * | 待获取的互斥锁指针 | 不为 NULL，且已通过 osal_mutex_init() 初始化 |
 
 **返回值**
 
@@ -221,7 +221,7 @@ int osal_mutex_trylock(osal_mutex *mutex)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mutex | [osal_mutex](#osal_mutex) * | 待获取的互斥锁指针 | 不为NULL，且已通过 osal_mutex_init() 初始化 |
+| mutex | [osal_mutex](#osal_mutex) * | 待获取的互斥锁指针 | 不为 NULL，且已通过 osal_mutex_init() 初始化 |
 
 **返回值**
 
@@ -259,7 +259,7 @@ void osal_mutex_unlock(osal_mutex *mutex)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mutex | [osal_mutex](#osal_mutex) * | 待释放的互斥锁指针 | 不为NULL，且已通过 osal_mutex_init() 初始化 |
+| mutex | [osal_mutex](#osal_mutex) * | 待释放的互斥锁指针 | 不为 NULL，且已通过 osal_mutex_init() 初始化 |
 
 **参考案例**
 
@@ -294,7 +294,7 @@ int osal_mutex_is_locked(osal_mutex *mutex)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mutex | [osal_mutex](#osal_mutex) * | 待查询的互斥锁指针 | 不为NULL，且已通过 osal_mutex_init() 初始化 |
+| mutex | [osal_mutex](#osal_mutex) * | 待查询的互斥锁指针 | 不为 NULL，且已通过 osal_mutex_init() 初始化 |
 
 **返回值**
 
@@ -333,7 +333,7 @@ void osal_mutex_destroy(osal_mutex *mutex)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mutex | [osal_mutex](#osal_mutex) * | 待销毁的互斥锁指针 | 不为NULL，且已通过 osal_mutex_init() 初始化 |
+| mutex | [osal_mutex](#osal_mutex) * | 待销毁的互斥锁指针 | 不为 NULL，且已通过 osal_mutex_init() 初始化 |
 
 **参考案例**
 

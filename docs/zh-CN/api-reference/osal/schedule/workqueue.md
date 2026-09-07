@@ -46,8 +46,8 @@ int osal_workqueue_init(osal_workqueue *work, osal_workqueue_handler handler)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| work | [osal_workqueue](#osal_workqueue) * | 待初始化的工作队列结构体指针 | 不为NULL，且 work->work 为NULL |
-| handler | [osal_workqueue_handler](#osal_workqueue_handler) | 工作队列回调处理函数，在工作被调度执行时调用 | 有效函数指针或NULL |
+| work | [osal_workqueue](#osal_workqueue) * | 待初始化的工作队列结构体指针 | 不为 NULL，且 work->work 为 NULL |
+| handler | [osal_workqueue_handler](#osal_workqueue_handler) | 工作队列回调处理函数，在工作被调度执行时调用 | 有效函数指针或 NULL |
 
 **出参**
 
@@ -91,7 +91,7 @@ int osal_workqueue_schedule(osal_workqueue *work)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| work | [osal_workqueue](#osal_workqueue) * | 待调度的工作队列结构体指针 | 不为NULL，且 work->work 不为NULL |
+| work | [osal_workqueue](#osal_workqueue) * | 待调度的工作队列结构体指针 | 不为 NULL，且 work->work 不为 NULL |
 
 **返回值**
 
@@ -129,7 +129,7 @@ void osal_workqueue_destroy(osal_workqueue *work)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| work | [osal_workqueue](#osal_workqueue) * | 待销毁的工作队列结构体指针 | 不为NULL，且 work->work 不为NULL |
+| work | [osal_workqueue](#osal_workqueue) * | 待销毁的工作队列结构体指针 | 不为 NULL，且 work->work 不为 NULL |
 
 **出参**
 
@@ -164,7 +164,7 @@ int osal_workqueue_flush(osal_workqueue *work)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| work | [osal_workqueue](#osal_workqueue) * | 待刷新的工作队列结构体指针 | 不为NULL，且 work->work 不为NULL |
+| work | [osal_workqueue](#osal_workqueue) * | 待刷新的工作队列结构体指针 | 不为 NULL，且 work->work 不为 NULL |
 
 **返回值**
 
@@ -210,13 +210,13 @@ typedef struct osal_workqueue_ {
 
 ## Macros
 
-### OSAL_SUCCESS <a id="OSAL_SUCCESS"></a> [SDK公共共享宏]
+### OSAL_SUCCESS <a id="OSAL_SUCCESS"></a> [SDK 公共共享宏]
 
 ```c
 #define OSAL_SUCCESS 0
 ```
 
-### OSAL_FAILURE <a id="OSAL_FAILURE"></a> [SDK公共共享宏]
+### OSAL_FAILURE <a id="OSAL_FAILURE"></a> [SDK 公共共享宏]
 
 ```c
 #define OSAL_FAILURE (-1)

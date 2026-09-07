@@ -52,7 +52,7 @@ errcode_t ssapc_register_client(sle_uuid_t *app_uuid, uint8_t *client_id)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| app_uuid | [sle_uuid_t](#struct_sle_uuid_t) * | 上层应用 UUID | 不为NULL |
+| app_uuid | [sle_uuid_t](#struct_sle_uuid_t) * | 上层应用 UUID | 不为 NULL |
 
 **出参**
 
@@ -140,7 +140,7 @@ errcode_t ssapc_find_structure(uint8_t client_id, uint16_t conn_id, ssapc_find_s
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 由 ssapc_register_client 分配 |
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
-| param | [ssapc_find_structure_param_t](#struct_ssapc_find_structure_param_t) * | 查找参数，传 NULL 表示发现全部结构 | 为NULL 或指向有效的查找参数结构体 |
+| param | [ssapc_find_structure_param_t](#struct_ssapc_find_structure_param_t) * | 查找参数，传 NULL 表示发现全部结构 | 为 NULL 或指向有效的查找参数结构体 |
 
 **返回值**
 
@@ -185,7 +185,7 @@ errcode_t ssapc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, ssapc_read
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 由 ssapc_register_client 分配 |
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
-| param | [ssapc_read_req_by_uuid_param_t](#struct_ssapc_read_req_by_uuid_param_t) * | 按 UUID 读取请求参数 | 不为NULL |
+| param | [ssapc_read_req_by_uuid_param_t](#struct_ssapc_read_req_by_uuid_param_t) * | 按 UUID 读取请求参数 | 不为 NULL |
 
 **参考案例**
 
@@ -277,7 +277,7 @@ errcode_t ssapc_write_req(uint8_t client_id, uint16_t conn_id, ssapc_write_param
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 由 ssapc_register_client 分配 |
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
-| param | [ssapc_write_param_t](#struct_ssapc_handle_value_t) * | 写请求参数 | 不为NULL |
+| param | [ssapc_write_param_t](#struct_ssapc_handle_value_t) * | 写请求参数 | 不为 NULL |
 
 **返回值**
 
@@ -318,7 +318,7 @@ errcode_t ssapc_write_cmd(uint8_t client_id, uint16_t conn_id, ssapc_write_param
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 由 ssapc_register_client 分配 |
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
-| param | [ssapc_write_param_t](#struct_ssapc_handle_value_t) * | 写命令参数 | 不为NULL |
+| param | [ssapc_write_param_t](#struct_ssapc_handle_value_t) * | 写命令参数 | 不为 NULL |
 
 **返回值**
 
@@ -358,7 +358,7 @@ errcode_t ssapc_exchange_info_req(uint8_t client_id, uint16_t conn_id, ssap_exch
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 由 ssapc_register_client 分配 |
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
-| param | [ssap_exchange_info_t](#struct_ssap_exchange_info_t) * | 客户端交换信息 | 不为NULL |
+| param | [ssap_exchange_info_t](#struct_ssap_exchange_info_t) * | 客户端交换信息 | 不为 NULL |
 
 **返回值**
 
@@ -401,7 +401,7 @@ errcode_t ssapc_register_callbacks(ssapc_callbacks_t *func)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [ssapc_callbacks_t](#struct_ssapc_callbacks_t) * | 回调函数集合 | 不为NULL |
+| func | [ssapc_callbacks_t](#struct_ssapc_callbacks_t) * | 回调函数集合 | 不为 NULL |
 
 **返回值**
 

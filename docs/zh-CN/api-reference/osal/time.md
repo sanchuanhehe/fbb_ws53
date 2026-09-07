@@ -59,7 +59,7 @@ int osal_timer_init(osal_timer *timer)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| timer | [osal_timer](#struct_osal_timer) * | 输入输出参数。要初始化的定时器，调用前需设置 handler 和 data 字段，函数填充内部定时器资源 | 不为NULL；timer->handler 不为NULL；timer->timer 为 NULL |
+| timer | [osal_timer](#struct_osal_timer) * | 输入输出参数。要初始化的定时器，调用前需设置 handler 和 data 字段，函数填充内部定时器资源 | 不为 NULL；timer->handler 不为 NULL；timer->timer 为 NULL |
 
 **返回值**
 
@@ -102,7 +102,7 @@ int osal_timer_start(osal_timer *timer)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| timer | [osal_timer](#struct_osal_timer) * | 要启动的定时器 | 不为NULL |
+| timer | [osal_timer](#struct_osal_timer) * | 要启动的定时器 | 不为 NULL |
 
 **返回值**
 
@@ -140,7 +140,7 @@ int osal_timer_mod(osal_timer *timer, unsigned int interval)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| timer | [osal_timer](#struct_osal_timer) * | 要修改的定时器 | 不为NULL |
+| timer | [osal_timer](#struct_osal_timer) * | 要修改的定时器 | 不为 NULL |
 | interval | unsigned int | 新的超时时间，单位 ms | > 0 |
 
 **返回值**
@@ -177,7 +177,7 @@ int osal_timer_start_on(osal_timer *timer, unsigned long delay, int cpu)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| timer | [osal_timer](#struct_osal_timer) * | 要启动的定时器 | 不为NULL |
+| timer | [osal_timer](#struct_osal_timer) * | 要启动的定时器 | 不为 NULL |
 | delay | unsigned long | 延迟时间，单位 ms | - |
 | cpu | int | 启动定时器的 CPU 编号 | 有效 CPU 编号 |
 
@@ -211,7 +211,7 @@ int osal_timer_stop(osal_timer *timer)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| timer | [osal_timer](#struct_osal_timer) * | 要停止的定时器 | 不为NULL |
+| timer | [osal_timer](#struct_osal_timer) * | 要停止的定时器 | 不为 NULL |
 
 **返回值**
 
@@ -249,7 +249,7 @@ int osal_timer_destroy(osal_timer *timer)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| timer | [osal_timer](#struct_osal_timer) * | 要销毁的定时器 | 不为NULL |
+| timer | [osal_timer](#struct_osal_timer) * | 要销毁的定时器 | 不为 NULL |
 
 **返回值**
 
@@ -286,7 +286,7 @@ unsigned long osal_timer_get_private_data(const void *sys_data)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| sys_data | const void * | 传给回调函数的参数 | 不为NULL |
+| sys_data | const void * | 传给回调函数的参数 | 不为 NULL |
 
 **返回值**
 
@@ -325,7 +325,7 @@ int osal_timer_destroy_sync(osal_timer *timer)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| timer | [osal_timer](#struct_osal_timer) * | 要同步销毁的定时器 | 不为NULL |
+| timer | [osal_timer](#struct_osal_timer) * | 要同步销毁的定时器 | 不为 NULL |
 
 **返回值**
 
@@ -533,7 +533,7 @@ int osal_hrtimer_create(osal_hrtimer *hrtimer)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| hrtimer | [osal_hrtimer](#struct_osal_hrtimer) * | 输入输出参数。要创建的高精度定时器，调用前需设置 handler 和 interval 字段，函数填充内部定时器资源 | 不为NULL |
+| hrtimer | [osal_hrtimer](#struct_osal_hrtimer) * | 输入输出参数。要创建的高精度定时器，调用前需设置 handler 和 interval 字段，函数填充内部定时器资源 | 不为 NULL |
 
 **返回值**
 
@@ -571,7 +571,7 @@ int osal_hrtimer_start(osal_hrtimer *hrtimer)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| hrtimer | [osal_hrtimer](#struct_osal_hrtimer) * | 要启动的高精度定时器 | 不为NULL |
+| hrtimer | [osal_hrtimer](#struct_osal_hrtimer) * | 要启动的高精度定时器 | 不为 NULL |
 
 **返回值**
 
@@ -610,7 +610,7 @@ int osal_hrtimer_destroy(osal_hrtimer *hrtimer)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| hrtimer | [osal_hrtimer](#struct_osal_hrtimer) * | 要删除的高精度定时器 | 不为NULL |
+| hrtimer | [osal_hrtimer](#struct_osal_hrtimer) * | 要删除的高精度定时器 | 不为 NULL |
 
 **返回值**
 

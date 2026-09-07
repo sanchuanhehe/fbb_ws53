@@ -97,7 +97,7 @@ errcode_t uapi_drv_cipher_sha256_update(uint32_t hash_handle, const uint8_t *buf
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | hash_handle | uint32_t | 已创建的 SHA-256 通道句柄 | 由 uapi_drv_cipher_sha256_start 返回的有效句柄 |
-| buf | const uint8_t * | 待追加计算的源数据缓冲区指针 | 不为NULL |
+| buf | const uint8_t * | 待追加计算的源数据缓冲区指针 | 不为 NULL |
 | len | uint32_t | 待追加计算的源数据缓冲区大小，单位 Bytes | 0 ~ 0xFFFFFFFF |
 
 **返回值**
@@ -203,15 +203,15 @@ errcode_t uapi_drv_cipher_sha256(const uint8_t *buf, uint32_t len, uint8_t *out,
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| buf | const uint8_t * | 待计算摘要的源数据缓冲区指针 | 不为NULL |
+| buf | const uint8_t * | 待计算摘要的源数据缓冲区指针 | 不为 NULL |
 | len | uint32_t | 待计算摘要的源数据缓冲区大小，单位 Bytes | 0 ~ 0xFFFFFFFF |
-| out_len | uint32_t | 存储摘要的缓冲区容量，单位 Bytes；实际写入固定为 32 Bytes摘要 | [SHA256_HASH_SIZE](#SHA256_HASH_SIZE)：32 |
+| out_len | uint32_t | 存储摘要的缓冲区容量，单位 Bytes；实际写入固定为 32 Bytes 摘要 | [SHA256_HASH_SIZE](#SHA256_HASH_SIZE)：32 |
 
 **出参**
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| out | uint8_t * | 计算得到的 32 Bytes摘要，由函数写入调用方分配的缓冲区 |
+| out | uint8_t * | 计算得到的 32 Bytes 摘要，由函数写入调用方分配的缓冲区 |
 
 **返回值**
 

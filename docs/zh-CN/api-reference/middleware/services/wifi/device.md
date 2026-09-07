@@ -1,6 +1,6 @@
 # Device
 
-Device 提供 Wi-Fi（Wireless Fidelity）STA 模式的初始化、扫描、连接、断连等基础能力，支持协议模式配置、PMF（Protected Management Frames）设置、CSI（Channel State Information）数据采集、管理帧收包回调注册、混杂模式报文接收、WoW（Wake on Wireless）模式配置、MAC地址管理、国家码设置、PSD（Power Spectral Density）数据采集等功能。
+Device 提供 Wi-Fi（Wireless Fidelity）STA 模式的初始化、扫描、连接、断连等基础能力，支持协议模式配置、PMF（Protected Management Frames）设置、CSI（Channel State Information）数据采集、管理帧收包回调注册、混杂模式报文接收、WoW（Wake on Wireless）模式配置、MAC 地址管理、国家码设置、PSD（Power Spectral Density）数据采集等功能。
 
 **模块公共头文件**
 
@@ -12,65 +12,65 @@ Device 提供 Wi-Fi（Wireless Fidelity）STA 模式的初始化、扫描、连�
 
 | 接口名称 | 功能简述 |
 | -------- | -------- |
-| [wifi_init](#wifi_init) | WiFi初始化 |
-| [wifi_deinit](#wifi_deinit) | WiFi去初始化 |
-| [wifi_is_wifi_inited](#wifi_is_wifi_inited) | 获取WiFi初始化状态 |
-| [wifi_sta_enable](#wifi_sta_enable) | 开启STA |
-| [wifi_sta_disable](#wifi_sta_disable) | 关闭STA |
-| [wifi_is_sta_enabled](#wifi_is_sta_enabled) | 获取STA使能状态 |
-| [wifi_get_dev](#wifi_get_dev) | 获取WiFi设备结构体指针 |
-| [wifi_sta_set_protocol_mode](#wifi_sta_set_protocol_mode) | 设置STA协议模式 |
-| [wifi_sta_get_protocol_mode](#wifi_sta_get_protocol_mode) | 获取STA协议模式 |
-| [wifi_sta_scan](#wifi_sta_scan) | STA全信道基础扫描 |
-| [wifi_sta_scan_advance](#wifi_sta_scan_advance) | STA带特定参数的扫描 |
-| [wifi_sta_set_scan_policy](#wifi_sta_set_scan_policy) | 设置STA扫描策略 |
-| [wifi_raw_scan](#wifi_raw_scan) | STA带特定参数的原始扫描 |
-| [wifi_sta_scan_stop](#wifi_sta_scan_stop) | 强制停止STA扫描 |
-| [wifi_sta_get_scan_info](#wifi_sta_get_scan_info) | 获取STA扫描结果 |
-| [wifi_sta_scan_result_clear](#wifi_sta_scan_result_clear) | 清空STA扫描结果 |
-| [wifi_set_channel](#wifi_set_channel) | 设置WiFi信道 |
-| [wifi_get_channel](#wifi_get_channel) | 获取WiFi信道 |
-| [wifi_sta_wnm_bss_query](#wifi_sta_wnm_bss_query) | 发送BSS查询报文 |
-| [wifi_sta_wnm_notify](#wifi_sta_wnm_notify) | 发送WNM通知报文 |
-| [wifi_sta_connect](#wifi_sta_connect) | STA连接网络 |
-| [wifi_sta_disconnect](#wifi_sta_disconnect) | STA断开网络连接 |
-| [wifi_sta_get_ap_info](#wifi_sta_get_ap_info) | 获取STA连接的AP信息 |
-| [wifi_sta_set_reconnect_policy](#wifi_sta_set_reconnect_policy) | 设置STA重连策略 |
-| [wifi_sta_set_pmf_mode](#wifi_sta_set_pmf_mode) | 设置STA的PMF模式 |
-| [wifi_sta_get_pmf_mode](#wifi_sta_get_pmf_mode) | 获取STA的PMF模式 |
-| [wifi_sta_get_connect_status_code](#wifi_sta_get_connect_status_code) | 获取STA连接状态码 |
+| [wifi_init](#wifi_init) | WiFi 初始化 |
+| [wifi_deinit](#wifi_deinit) | WiFi 去初始化 |
+| [wifi_is_wifi_inited](#wifi_is_wifi_inited) | 获取 WiFi 初始化状态 |
+| [wifi_sta_enable](#wifi_sta_enable) | 开启 STA |
+| [wifi_sta_disable](#wifi_sta_disable) | 关闭 STA |
+| [wifi_is_sta_enabled](#wifi_is_sta_enabled) | 获取 STA 使能状态 |
+| [wifi_get_dev](#wifi_get_dev) | 获取 WiFi 设备结构体指针 |
+| [wifi_sta_set_protocol_mode](#wifi_sta_set_protocol_mode) | 设置 STA 协议模式 |
+| [wifi_sta_get_protocol_mode](#wifi_sta_get_protocol_mode) | 获取 STA 协议模式 |
+| [wifi_sta_scan](#wifi_sta_scan) | STA 全信道基础扫描 |
+| [wifi_sta_scan_advance](#wifi_sta_scan_advance) | STA 带特定参数的扫描 |
+| [wifi_sta_set_scan_policy](#wifi_sta_set_scan_policy) | 设置 STA 扫描策略 |
+| [wifi_raw_scan](#wifi_raw_scan) | STA 带特定参数的原始扫描 |
+| [wifi_sta_scan_stop](#wifi_sta_scan_stop) | 强制停止 STA 扫描 |
+| [wifi_sta_get_scan_info](#wifi_sta_get_scan_info) | 获取 STA 扫描结果 |
+| [wifi_sta_scan_result_clear](#wifi_sta_scan_result_clear) | 清空 STA 扫描结果 |
+| [wifi_set_channel](#wifi_set_channel) | 设置 WiFi 信道 |
+| [wifi_get_channel](#wifi_get_channel) | 获取 WiFi 信道 |
+| [wifi_sta_wnm_bss_query](#wifi_sta_wnm_bss_query) | 发送 BSS 查询报文 |
+| [wifi_sta_wnm_notify](#wifi_sta_wnm_notify) | 发送 WNM 通知报文 |
+| [wifi_sta_connect](#wifi_sta_connect) | STA 连接网络 |
+| [wifi_sta_disconnect](#wifi_sta_disconnect) | STA 断开网络连接 |
+| [wifi_sta_get_ap_info](#wifi_sta_get_ap_info) | 获取 STA 连接的 AP 信息 |
+| [wifi_sta_set_reconnect_policy](#wifi_sta_set_reconnect_policy) | 设置 STA 重连策略 |
+| [wifi_sta_set_pmf_mode](#wifi_sta_set_pmf_mode) | 设置 STA 的 PMF 模式 |
+| [wifi_sta_get_pmf_mode](#wifi_sta_get_pmf_mode) | 获取 STA 的 PMF 模式 |
+| [wifi_sta_get_connect_status_code](#wifi_sta_get_connect_status_code) | 获取 STA 连接状态码 |
 | [wifi_set_mgmt_frame_rx_cb](#wifi_set_mgmt_frame_rx_cb) | 注册管理帧收包回调 |
 | [wifi_set_promis_mode](#wifi_set_promis_mode) | 设置混杂模式 |
 | [wifi_set_promis_rx_pkt_cb](#wifi_set_promis_rx_pkt_cb) | 注册混杂模式收包回调 |
-| [wifi_sta_fast_connect](#wifi_sta_fast_connect) | STA快速连接网络 |
-| [wifi_register_event_cb](#wifi_register_event_cb) | 注册WiFi事件回调 |
-| [wifi_unregister_event_cb](#wifi_unregister_event_cb) | 去注册WiFi事件回调 |
-| [wifi_set_app_ie](#wifi_set_app_ie) | 在管理帧中添加用户IE |
-| [wifi_del_app_ie](#wifi_del_app_ie) | 在管理帧中删除用户IE |
-| [wifi_set_wow_pattern](#wifi_set_wow_pattern) | 设置WoW Pattern模式 |
-| [wifi_set_wow_sleep_mode](#wifi_set_wow_sleep_mode) | 设置WoW休眠使能 |
-| [wifi_csi_start](#wifi_csi_start) | 开启CSI上报 |
-| [wifi_csi_stop](#wifi_csi_stop) | 关闭CSI上报 |
-| [wifi_set_csi_config](#wifi_set_csi_config) | 配置CSI参数 |
-| [wifi_register_csi_report_cb](#wifi_register_csi_report_cb) | 注册CSI数据上报回调 |
+| [wifi_sta_fast_connect](#wifi_sta_fast_connect) | STA 快速连接网络 |
+| [wifi_register_event_cb](#wifi_register_event_cb) | 注册 WiFi 事件回调 |
+| [wifi_unregister_event_cb](#wifi_unregister_event_cb) | 去注册 WiFi 事件回调 |
+| [wifi_set_app_ie](#wifi_set_app_ie) | 在管理帧中添加用户 IE |
+| [wifi_del_app_ie](#wifi_del_app_ie) | 在管理帧中删除用户 IE |
+| [wifi_set_wow_pattern](#wifi_set_wow_pattern) | 设置 WoW Pattern 模式 |
+| [wifi_set_wow_sleep_mode](#wifi_set_wow_sleep_mode) | 设置 WoW 休眠使能 |
+| [wifi_csi_start](#wifi_csi_start) | 开启 CSI 上报 |
+| [wifi_csi_stop](#wifi_csi_stop) | 关闭 CSI 上报 |
+| [wifi_set_csi_config](#wifi_set_csi_config) | 配置 CSI 参数 |
+| [wifi_register_csi_report_cb](#wifi_register_csi_report_cb) | 注册 CSI 数据上报回调 |
 | [wifi_send_custom_pkt](#wifi_send_custom_pkt) | 发送用户定制报文 |
 | [wifi_set_pkt_retry_policy](#wifi_set_pkt_retry_policy) | 设置帧最大软件重传次数 |
-| [wifi_reset_mac_phy](#wifi_reset_mac_phy) | 复位MAC和PHY接口 |
-| [wifi_set_linkloss_config](#wifi_set_linkloss_config) | 设置Linkloss参数 |
-| [wifi_set_base_mac_addr](#wifi_set_base_mac_addr) | 设置基础MAC地址 |
-| [wifi_get_base_mac_addr](#wifi_get_base_mac_addr) | 获取基础MAC地址 |
-| [wifi_softap_set_mac_addr](#wifi_softap_set_mac_addr) | 设置SoftAP MAC地址 |
-| [wifi_softap_get_mac_addr](#wifi_softap_get_mac_addr) | 获取SoftAP MAC地址 |
-| [wifi_set_mac_derivation_ptr](#wifi_set_mac_derivation_ptr) | 设置MAC派生策略回调 |
+| [wifi_reset_mac_phy](#wifi_reset_mac_phy) | 复位 MAC 和 PHY 接口 |
+| [wifi_set_linkloss_config](#wifi_set_linkloss_config) | 设置 Linkloss 参数 |
+| [wifi_set_base_mac_addr](#wifi_set_base_mac_addr) | 设置基础 MAC 地址 |
+| [wifi_get_base_mac_addr](#wifi_get_base_mac_addr) | 获取基础 MAC 地址 |
+| [wifi_softap_set_mac_addr](#wifi_softap_set_mac_addr) | 设置 SoftAP MAC 地址 |
+| [wifi_softap_get_mac_addr](#wifi_softap_get_mac_addr) | 获取 SoftAP MAC 地址 |
+| [wifi_set_mac_derivation_ptr](#wifi_set_mac_derivation_ptr) | 设置 MAC 派生策略回调 |
 | [wifi_set_low_current_boot_mode](#wifi_set_low_current_boot_mode) | 设置低启动电流模式 |
 | [wifi_get_country_code](#wifi_get_country_code) | 获取国家码 |
 | [wifi_set_country_code](#wifi_set_country_code) | 设置国家码 |
-| [wifi_sta_set_pm](#wifi_sta_set_pm) | 设置STA低功耗模式 |
-| [wifi_set_sdp_mode](#wifi_set_sdp_mode) | 设置SDP模式 |
-| [wifi_set_sdp_subscribe](#wifi_set_sdp_subscribe) | 设置SDP订阅 |
-| [wifi_set_psd_mode](#wifi_set_psd_mode) | 设置PSD模式 |
-| [wifi_set_psd_cb](#wifi_set_psd_cb) | 设置PSD数据上报回调 |
-| [wifi_sta_config_probe_req_max_times](#wifi_sta_config_probe_req_max_times) | 配置STA beacon miss后probe request最大发送次数 |
+| [wifi_sta_set_pm](#wifi_sta_set_pm) | 设置 STA 低功耗模式 |
+| [wifi_set_sdp_mode](#wifi_set_sdp_mode) | 设置 SDP 模式 |
+| [wifi_set_sdp_subscribe](#wifi_set_sdp_subscribe) | 设置 SDP 订阅 |
+| [wifi_set_psd_mode](#wifi_set_psd_mode) | 设置 PSD 模式 |
+| [wifi_set_psd_cb](#wifi_set_psd_cb) | 设置 PSD 数据上报回调 |
+| [wifi_sta_config_probe_req_max_times](#wifi_sta_config_probe_req_max_times) | 配置 STA beacon miss 后 probe request 最大发送次数 |
 
 ## Functions
 
@@ -88,19 +88,19 @@ errcode_t wifi_init(void)
 
 **功能说明**
 
-- Wi-Fi模块初始化，完成Wi-Fi子系统资源分配与底层驱动加载。
+- Wi-Fi 模块初始化，完成 Wi-Fi 子系统资源分配与底层驱动加载。
 - 重复调用返回错误码。
 
 **前置条件**
 
-- Wi-Fi硬件已上电就绪。
-- 系统内核及OSAL（Operating System Abstraction Layer）模块已初始化完成。
+- Wi-Fi 硬件已上电就绪。
+- 系统内核及 OSAL（Operating System Abstraction Layer）模块已初始化完成。
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | Wi-Fi初始化成功 |
+| ERRCODE_SUCC：0 | 执行成功 | Wi-Fi 初始化成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_deinit <a id="wifi_deinit"></a>
@@ -117,19 +117,19 @@ errcode_t wifi_deinit(void)
 
 **功能说明**
 
-- Wi-Fi去初始化，释放Wi-Fi子系统资源。
-- 需在Wi-Fi模块不再使用时调用。
+- Wi-Fi 去初始化，释放 Wi-Fi 子系统资源。
+- 需在 Wi-Fi 模块不再使用时调用。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA/AP接口已关闭。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA/AP 接口已关闭。
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | Wi-Fi去初始化成功 |
+| ERRCODE_SUCC：0 | 执行成功 | Wi-Fi 去初始化成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_is_wifi_inited <a id="wifi_is_wifi_inited"></a>
@@ -146,15 +146,15 @@ int32_t wifi_is_wifi_inited(void)
 
 **功能说明**
 
-- 查询Wi-Fi模块是否已初始化。
-- 用于其他模块判断Wi-Fi初始化状态。
+- 查询 Wi-Fi 模块是否已初始化。
+- 用于其他模块判断 Wi-Fi 初始化状态。
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 1 | WiFi已初始化 | wifi_init()已成功调用 |
-| 0 | WiFi未初始化 | wifi_init()未调用或未成功 |
+| 1 | WiFi 已初始化 | wifi_init() 已成功调用 |
+| 0 | WiFi 未初始化 | wifi_init() 未调用或未成功 |
 
 **参考案例**
 
@@ -174,19 +174,19 @@ errcode_t wifi_sta_enable(void)
 
 **功能说明**
 
-- 开启STA模式。
-- 使能后可进行扫描、连接等STA操作。
+- 开启 STA 模式。
+- 使能后可进行扫描、连接等 STA 操作。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA未使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 未使能。
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | STA使能成功 |
+| ERRCODE_SUCC：0 | 执行成功 | STA 使能成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -207,19 +207,19 @@ errcode_t wifi_sta_disable(void)
 
 **功能说明**
 
-- 关闭STA模式。
-- 关闭后STA相关功能不可用。
+- 关闭 STA 模式。
+- 关闭后 STA 相关功能不可用。
 
 **前置条件**
 
-- STA已通过wifi_sta_enable()使能。
-- STA已断开与AP的连接。
+- STA 已通过 wifi_sta_enable() 使能。
+- STA 已断开与 AP 的连接。
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | STA关闭成功 |
+| ERRCODE_SUCC：0 | 执行成功 | STA 关闭成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -240,15 +240,15 @@ int32_t wifi_is_sta_enabled(void)
 
 **功能说明**
 
-- 查询STA是否已使能。
-- 用于判断STA模式当前状态。
+- 查询 STA 是否已使能。
+- 用于判断 STA 模式当前状态。
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 1 | STA已使能 | wifi_sta_enable()已成功调用 |
-| 0 | STA未使能 | wifi_sta_enable()未调用或未成功 |
+| 1 | STA 已使能 | wifi_sta_enable() 已成功调用 |
+| 0 | STA 未使能 | wifi_sta_enable() 未调用或未成功 |
 
 ### wifi_get_dev <a id="wifi_get_dev"></a>
 
@@ -264,25 +264,25 @@ wifi_dev_t *wifi_get_dev(wifi_iftype_t iftype)
 
 **功能说明**
 
-- 根据接口类型获取Wi-Fi设备结构体指针。
-- 返回NULL表示设备未使能。
+- 根据接口类型获取 Wi-Fi 设备结构体指针。
+- 返回 NULL 表示设备未使能。
 - 用于获取设备信息及操作句柄。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| iftype | [wifi_iftype_t](#enum_wifi_iftype_t) | Wi-Fi接口类型 | [wifi_iftype_t](#enum_wifi_iftype_t) 全体成员 |
+| iftype | [wifi_iftype_t](#enum_wifi_iftype_t) | Wi-Fi 接口类型 | [wifi_iftype_t](#enum_wifi_iftype_t) 全体成员 |
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | WiFi设备结构体指针 | 设备已使能 |
+| 非 NULL | WiFi 设备结构体指针 | 设备已使能 |
 | NULL | 设备未使能 | 设备未初始化 |
 
 ### wifi_sta_set_protocol_mode <a id="wifi_sta_set_protocol_mode"></a>
@@ -299,14 +299,14 @@ errcode_t wifi_sta_set_protocol_mode(protocol_mode_enum mode)
 
 **功能说明**
 
-- 设置STA的协议模式。
-- 协议模式决定STA支持的802.11协议标准。
-- 需在STA使能前设置。
+- 设置 STA 的协议模式。
+- 协议模式决定 STA 支持的 802.11 协议标准。
+- 需在 STA 使能前设置。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
 
 **入参**
 
@@ -335,19 +335,19 @@ protocol_mode_enum wifi_sta_get_protocol_mode(void)
 
 **功能说明**
 
-- 获取STA当前协议模式。
+- 获取 STA 当前协议模式。
 - 返回值对应[protocol_mode_enum](#enum_protocol_mode_enum)枚举成员。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| protocol_mode_enum | STA协议模式 | 获取成功 |
+| protocol_mode_enum | STA 协议模式 | 获取成功 |
 
 ### wifi_sta_scan <a id="wifi_sta_scan"></a>
 
@@ -363,14 +363,14 @@ errcode_t wifi_sta_scan(void)
 
 **功能说明**
 
-- 启动STA全信道基础扫描。
-- 扫描结果通过事件回调或wifi_sta_get_scan_info()获取。
-- 扫描完成触发WIFI_STATE_AVALIABLE事件。
+- 启动 STA 全信道基础扫描。
+- 扫描结果通过事件回调或 wifi_sta_get_scan_info() 获取。
+- 扫描完成触发 WIFI_STATE_AVALIABLE 事件。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已通过wifi_sta_enable()使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已通过 wifi_sta_enable() 使能。
 
 **返回值**
 
@@ -397,20 +397,20 @@ errcode_t wifi_sta_scan_advance(const wifi_scan_params_stru *scan_param)
 
 **功能说明**
 
-- 启动STA带特定参数的扫描。
-- 支持指定SSID（Service Set Identifier）、BSSID（Basic Service Set Identifier）、信道等过滤条件。
-- 扫描结果通过事件回调或wifi_sta_get_scan_info()获取。
+- 启动 STA 带特定参数的扫描。
+- 支持指定 SSID（Service Set Identifier）、BSSID（Basic Service Set Identifier）、信道等过滤条件。
+- 扫描结果通过事件回调或 wifi_sta_get_scan_info() 获取。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已通过wifi_sta_enable()使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已通过 wifi_sta_enable() 使能。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| scan_param | const [wifi_scan_params_stru](#struct_wifi_scan_params_stru) * | 扫描网络参数设置 | 非NULL，指向有效扫描参数结构体 |
+| scan_param | const [wifi_scan_params_stru](#struct_wifi_scan_params_stru) * | 扫描网络参数设置 | 非 NULL，指向有效扫描参数结构体 |
 
 **返回值**
 
@@ -437,20 +437,20 @@ errcode_t wifi_sta_set_scan_policy(wifi_if_type_enum iftype, wifi_scan_strategy_
 
 **功能说明**
 
-- 设置STA扫描策略参数。
-- 可配置每个信道停留时间、扫描slot数、probe req发送次数等。
+- 设置 STA 扫描策略参数。
+- 可配置每个信道停留时间、扫描 slot 数、probe req 发送次数等。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已通过wifi_sta_enable()使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已通过 wifi_sta_enable() 使能。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | [wifi_if_type_enum](#enum_wifi_if_type_enum) 全体成员 |
-| scan_strategy | [wifi_scan_strategy_stru](#struct_wifi_scan_strategy_stru) * | 扫描策略参数配置 | 非NULL，指向有效策略结构体 |
+| scan_strategy | [wifi_scan_strategy_stru](#struct_wifi_scan_strategy_stru) * | 扫描策略参数配置 | 非 NULL，指向有效策略结构体 |
 
 **返回值**
 
@@ -473,21 +473,21 @@ errcode_t wifi_raw_scan(wifi_scan_params_stru *scan_param, wifi_scan_no_save_cb 
 
 **功能说明**
 
-- 启动STA带特定参数的原始扫描，不经过wpa，回调由用户指定。
+- 启动 STA 带特定参数的原始扫描，不经过 wpa，回调由用户指定。
 - 扫描结果通过回调函数直接返回，不保存到扫描缓存。
-- 回调入参为wifi_scan_info_stru类型。
+- 回调入参为 wifi_scan_info_stru 类型。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已通过wifi_sta_enable()使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已通过 wifi_sta_enable() 使能。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| scan_param | [wifi_scan_params_stru](#struct_wifi_scan_params_stru) * | 扫描网络参数设置 | 非NULL |
-| cb | [wifi_scan_no_save_cb](#typedef_wifi_scan_no_save_cb) | 扫描完成回调函数 | 非NULL |
+| scan_param | [wifi_scan_params_stru](#struct_wifi_scan_params_stru) * | 扫描网络参数设置 | 非 NULL |
+| cb | [wifi_scan_no_save_cb](#typedef_wifi_scan_no_save_cb) | 扫描完成回调函数 | 非 NULL |
 
 **返回值**
 
@@ -510,13 +510,13 @@ errcode_t wifi_sta_scan_stop(void)
 
 **功能说明**
 
-- 强制停止STA全信道扫描。
+- 强制停止 STA 全信道扫描。
 - 扫描正在进行时调用此接口可中止扫描。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已通过wifi_sta_enable()使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已通过 wifi_sta_enable() 使能。
 - 扫描正在进行中。
 
 **返回值**
@@ -540,19 +540,19 @@ errcode_t wifi_sta_get_scan_info(wifi_scan_info_stru *result, uint32_t *size)
 
 **功能说明**
 
-- 获取STA扫描结果。
-- 扫描结果存入result数组，size返回扫描到的网络数目。
+- 获取 STA 扫描结果。
+- 扫描结果存入 result 数组，size 返回扫描到的网络数目。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能且扫描已完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能且扫描已完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| size | uint32_t * | 扫描到的网络数目 | 非NULL，输入时为缓冲区最大容量，输出时为实际数目 |
+| size | uint32_t * | 扫描到的网络数目 | 非 NULL，输入时为缓冲区最大容量，输出时为实际数目 |
 
 **出参**
 
@@ -586,13 +586,13 @@ errcode_t wifi_sta_scan_result_clear(void)
 
 **功能说明**
 
-- 清空STA扫描结果缓存。
-- 清空后无法再通过wifi_sta_get_scan_info()获取上次扫描结果。
+- 清空 STA 扫描结果缓存。
+- 清空后无法再通过 wifi_sta_get_scan_info() 获取上次扫描结果。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
 
 **返回值**
 
@@ -615,12 +615,12 @@ errcode_t wifi_set_channel(wifi_if_type_enum iftype, int32_t channel)
 
 **功能说明**
 
-- 设置Wi-Fi工作信道。
-- 根据接口类型指定STA或AP的信道。
+- 设置 Wi-Fi 工作信道。
+- 根据接口类型指定 STA 或 AP 的信道。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
@@ -650,12 +650,12 @@ errcode_t wifi_get_channel(wifi_if_type_enum iftype, int32_t *channel)
 
 **功能说明**
 
-- 获取Wi-Fi当前工作信道。
-- 根据接口类型获取STA或AP的信道。
+- 获取 Wi-Fi 当前工作信道。
+- 根据接口类型获取 STA 或 AP 的信道。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
@@ -690,26 +690,26 @@ errcode_t wifi_sta_wnm_bss_query(int32_t reason_code, int32_t candidate_list)
 
 **功能说明**
 
-- 发送BSS query报文。
-- 用于WNMBSS转换管理。
+- 发送 BSS query 报文。
+- 用于 WNMBSS 转换管理。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| reason_code | int32_t | 原因码 | 有效reason code值 |
-| candidate_list | int32_t | 候选列表标记 | 0或1 |
+| reason_code | int32_t | 原因码 | 有效 reason code 值 |
+| candidate_list | int32_t | 候选列表标记 | 0 或 1 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_WNM | 特性宏 | 支持WNM BSS转换管理功能 | 由构建目标决定 |
+| CONFIG_WNM | 特性宏 | 支持 WNM BSS 转换管理功能 | 由构建目标决定 |
 
 **返回值**
 
@@ -732,26 +732,26 @@ errcode_t wifi_sta_wnm_notify(const char *param, uint32_t len)
 
 **功能说明**
 
-- 发送WNM notify报文。
-- 用于WNM通知交互。
+- 发送 WNM notify 报文。
+- 用于 WNM 通知交互。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | const char * | WNM notify参数 | 非NULL |
-| len | uint32_t | 参数长度 | 大于0 |
+| param | const char * | WNM notify 参数 | 非 NULL |
+| len | uint32_t | 参数长度 | 大于 0 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| CONFIG_WNM | 特性宏 | 支持WNM BSS转换管理功能 | 由构建目标决定 |
+| CONFIG_WNM | 特性宏 | 支持 WNM BSS 转换管理功能 | 由构建目标决定 |
 
 **返回值**
 
@@ -774,21 +774,21 @@ errcode_t wifi_sta_connect(const wifi_sta_config_stru *config)
 
 **功能说明**
 
-- STA发起连接网络请求。
-- 根据配置参数连接指定AP。
+- STA 发起连接网络请求。
+- 根据配置参数连接指定 AP。
 - 连接结果通过事件回调通知。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已通过wifi_sta_enable()使能。
-- 已完成扫描获取目标AP信息。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已通过 wifi_sta_enable() 使能。
+- 已完成扫描获取目标 AP 信息。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| config | const [wifi_sta_config_stru](#struct_wifi_sta_config_stru) * | 连接网络参数设置 | 非NULL，指向有效连接配置结构体 |
+| config | const [wifi_sta_config_stru](#struct_wifi_sta_config_stru) * | 连接网络参数设置 | 非 NULL，指向有效连接配置结构体 |
 
 **返回值**
 
@@ -815,13 +815,13 @@ errcode_t wifi_sta_disconnect(void)
 
 **功能说明**
 
-- STA断开与当前连接的网络。
+- STA 断开与当前连接的网络。
 - 断连结果通过事件回调通知。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能且处于已连接状态。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能且处于已连接状态。
 
 **返回值**
 
@@ -848,19 +848,19 @@ errcode_t wifi_sta_get_ap_info(wifi_linked_info_stru *result)
 
 **功能说明**
 
-- 获取STA当前连接的网络状态信息。
-- 包括SSID、BSSID、RSSI（Received Signal Strength Indicator）、连接状态等。
+- 获取 STA 当前连接的网络状态信息。
+- 包括 SSID、BSSID、RSSI（Received Signal Strength Indicator）、连接状态等。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
 
 **出参**
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| result | [wifi_linked_info_stru](#struct_wifi_linked_info_stru) | STA连接的AP信息 |
+| result | [wifi_linked_info_stru](#struct_wifi_linked_info_stru) | STA 连接的 AP 信息 |
 
 **返回值**
 
@@ -887,14 +887,14 @@ errcode_t wifi_sta_set_reconnect_policy(int32_t enable, uint32_t seconds, uint32
 
 **功能说明**
 
-- 设置STA重连网络策略。
+- 设置 STA 重连网络策略。
 - 可配置重连使能、单次超时、重连间隔、最大重连次数。
 - 断连后根据策略自动发起重连。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
 
 **入参**
 
@@ -930,19 +930,19 @@ errcode_t wifi_sta_set_pmf_mode(wifi_pmf_option_enum pmf)
 
 **功能说明**
 
-- 配置STA的PMF模式。
-- PMF用于管理帧保护，增强安全性。
+- 配置 STA 的 PMF 模式。
+- PMF 用于管理帧保护，增强安全性。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| pmf | [wifi_pmf_option_enum](#enum_wifi_pmf_option_enum) | PMF模式 | [wifi_pmf_option_enum](#enum_wifi_pmf_option_enum) 全体成员 |
+| pmf | [wifi_pmf_option_enum](#enum_wifi_pmf_option_enum) | PMF 模式 | [wifi_pmf_option_enum](#enum_wifi_pmf_option_enum) 全体成员 |
 
 **返回值**
 
@@ -965,19 +965,19 @@ wifi_pmf_option_enum wifi_sta_get_pmf_mode(void)
 
 **功能说明**
 
-- 获取STA当前PMF设置。
-- 返回PMF模式枚举值。
+- 获取 STA 当前 PMF 设置。
+- 返回 PMF 模式枚举值。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [wifi_pmf_option_enum](#enum_wifi_pmf_option_enum)枚举值 | PMF模式 | 获取成功 |
+| [wifi_pmf_option_enum](#enum_wifi_pmf_option_enum)枚举值 | PMF 模式 | 获取成功 |
 | WIFI_MGMT_FRAME_PROTECTION_BUTT(3) | 获取失败 | 执行失败 |
 
 ### wifi_sta_get_connect_status_code <a id="wifi_sta_get_connect_status_code"></a>
@@ -994,13 +994,13 @@ int16_t wifi_sta_get_connect_status_code(void)
 
 **功能说明**
 
-- 查询Authentication与Association帧的status code。
+- 查询 Authentication 与 Association 帧的 status code。
 - 用于诊断连接失败原因。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
 
 **返回值**
 
@@ -1029,14 +1029,14 @@ errcode_t wifi_set_mgmt_frame_rx_cb(wifi_rx_mgmt_cb data_cb, uint8_t mode)
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| data_cb | [wifi_rx_mgmt_cb](#typedef_wifi_rx_mgmt_cb) | 管理帧上报回调函数 | 非NULL |
+| data_cb | [wifi_rx_mgmt_cb](#typedef_wifi_rx_mgmt_cb) | 管理帧上报回调函数 | 非 NULL |
 | mode | uint8_t | 上报管理帧模式 | 有效模式值 |
 
 **返回值**
@@ -1066,8 +1066,8 @@ errcode_t wifi_set_promis_mode(wifi_if_type_enum iftype, int32_t enable, const w
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
 
 **入参**
 
@@ -1075,7 +1075,7 @@ errcode_t wifi_set_promis_mode(wifi_if_type_enum iftype, int32_t enable, const w
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | [wifi_if_type_enum](#enum_wifi_if_type_enum) 全体成员 |
 | enable | int32_t | 开启/关闭 | 0:关闭，1:开启 |
-| filter | const [wifi_ptype_filter_stru](#struct_wifi_ptype_filter_stru) * | 帧类型过滤列表 | 开启时非NULL |
+| filter | const [wifi_ptype_filter_stru](#struct_wifi_ptype_filter_stru) * | 帧类型过滤列表 | 开启时非 NULL |
 
 **返回值**
 
@@ -1103,14 +1103,14 @@ errcode_t wifi_set_promis_rx_pkt_cb(wifi_promis_cb data_cb)
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- 混杂模式已通过wifi_set_promis_mode()开启。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- 混杂模式已通过 wifi_set_promis_mode() 开启。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| data_cb | [wifi_promis_cb](#typedef_wifi_promis_cb) | 混杂模式回调函数 | 非NULL |
+| data_cb | [wifi_promis_cb](#typedef_wifi_promis_cb) | 混杂模式回调函数 | 非 NULL |
 
 **返回值**
 
@@ -1133,21 +1133,21 @@ errcode_t wifi_sta_fast_connect(const wifi_fast_connect_stru *fast_request)
 
 **功能说明**
 
-- STA快速连接网络。
-- 使用预计算的PSK（Pre-Shared Key）和信道信息加速连接。
-- 适用于已知AP信息的重连场景。
+- STA 快速连接网络。
+- 使用预计算的 PSK（Pre-Shared Key）和信道信息加速连接。
+- 适用于已知 AP 信息的重连场景。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
-- 已有目标AP的连接信息（含PSK）。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
+- 已有目标 AP 的连接信息（含 PSK）。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| fast_request | const [wifi_fast_connect_stru](#struct_wifi_fast_connect_stru) * | 快速连接网络参数 | 非NULL，指向有效快速连接参数结构体 |
+| fast_request | const [wifi_fast_connect_stru](#struct_wifi_fast_connect_stru) * | 快速连接网络参数 | 非 NULL，指向有效快速连接参数结构体 |
 
 **返回值**
 
@@ -1170,19 +1170,19 @@ errcode_t wifi_register_event_cb(const wifi_event_stru *event)
 
 **功能说明**
 
-- 注册Wi-Fi事件回调函数。
-- 包括连接状态变化、扫描状态变化、AP状态变化、STA加入/离开等事件。
+- 注册 Wi-Fi 事件回调函数。
+- 包括连接状态变化、扫描状态变化、AP 状态变化、STA 加入/离开等事件。
 - 注册后相关事件通过回调通知上层。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| event | const [wifi_event_stru](#struct_wifi_event_stru) * | 事件回调函数结构体 | 非NULL |
+| event | const [wifi_event_stru](#struct_wifi_event_stru) * | 事件回调函数结构体 | 非 NULL |
 
 **返回值**
 
@@ -1209,19 +1209,19 @@ errcode_t wifi_unregister_event_cb(const wifi_event_stru *event)
 
 **功能说明**
 
-- 去注册Wi-Fi事件回调函数。
-- 去注册后不再接收对应Wi-Fi事件通知。
+- 去注册 Wi-Fi 事件回调函数。
+- 去注册后不再接收对应 Wi-Fi 事件通知。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- 已通过wifi_register_event_cb()注册回调。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- 已通过 wifi_register_event_cb() 注册回调。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| event | const [wifi_event_stru](#struct_wifi_event_stru) * | 待撤销的回调函数结构体 | 非NULL，与注册时一致 |
+| event | const [wifi_event_stru](#struct_wifi_event_stru) * | 待撤销的回调函数结构体 | 非 NULL，与注册时一致 |
 
 **返回值**
 
@@ -1244,23 +1244,23 @@ errcode_t wifi_set_app_ie(wifi_if_type_enum iftype, ie_index_enmu ie_index, uint
 
 **功能说明**
 
-- 在管理帧中添加用户自定义IE。
-- 最多支持4个用户IE的插入。
-- 可指定插入IE的帧类型（beacon、probe request、probe response）。
+- 在管理帧中添加用户自定义 IE。
+- 最多支持 4 个用户 IE 的插入。
+- 可指定插入 IE 的帧类型（beacon、probe request、probe response）。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | [wifi_if_type_enum](#enum_wifi_if_type_enum) 全体成员 |
-| ie_index | [ie_index_enmu](#enum_ie_index_enmu) | IE索引 | [ie_index_enmu](#enum_ie_index_enmu) 全体成员 |
-| frame_type_bitmap | uint8_t | 可插入IE的帧类型位图 | bit0:beacon，bit1:probe request，bit2:probe response |
-| ie | const uint8_t * | 用户IE字段内容 | 非NULL |
-| ie_len | uint16_t | 用户IE字段内容长度 | 大于0 |
+| ie_index | [ie_index_enmu](#enum_ie_index_enmu) | IE 索引 | [ie_index_enmu](#enum_ie_index_enmu) 全体成员 |
+| frame_type_bitmap | uint8_t | 可插入 IE 的帧类型位图 | bit0:beacon，bit1:probe request，bit2:probe response |
+| ie | const uint8_t * | 用户 IE 字段内容 | 非 NULL |
+| ie_len | uint16_t | 用户 IE 字段内容长度 | 大于 0 |
 
 **返回值**
 
@@ -1283,21 +1283,21 @@ errcode_t wifi_del_app_ie(wifi_if_type_enum iftype, ie_index_enmu ie_index, uint
 
 **功能说明**
 
-- 在管理帧中删除用户自定义IE。
-- 根据索引和帧类型位图删除指定IE。
+- 在管理帧中删除用户自定义 IE。
+- 根据索引和帧类型位图删除指定 IE。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- 已通过wifi_set_app_ie()添加过IE。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- 已通过 wifi_set_app_ie() 添加过 IE。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | [wifi_if_type_enum](#enum_wifi_if_type_enum) 全体成员 |
-| ie_index | [ie_index_enmu](#enum_ie_index_enmu) | IE索引 | [ie_index_enmu](#enum_ie_index_enmu) 全体成员 |
-| frame_type_bitmap | uint8_t | 可删除IE的帧类型位图 | bit0:beacon，bit1:probe request，bit2:probe response |
+| ie_index | [ie_index_enmu](#enum_ie_index_enmu) | IE 索引 | [ie_index_enmu](#enum_ie_index_enmu) 全体成员 |
+| frame_type_bitmap | uint8_t | 可删除 IE 的帧类型位图 | bit0:beacon，bit1:probe request，bit2:probe response |
 
 **返回值**
 
@@ -1320,28 +1320,28 @@ errcode_t wifi_set_wow_pattern(int32_t type, uint8_t index, int8_t *pattern)
 
 **功能说明**
 
-- 设置WoWPattern模式。
-- 可配置TCP/UDP模式匹配pattern。
+- 设置 WoWPattern 模式。
+- 可配置 TCP/UDP 模式匹配 pattern。
 - 用于低功耗唤醒场景。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| type | int32_t | WoW Pattern模式 | 有效pattern类型值 |
+| type | int32_t | WoW Pattern 模式 | 有效 pattern 类型值 |
 | index | uint8_t | 位置索引 | 有效索引值 |
-| pattern | int8_t * | 16进制TCP/UDP pattern数据 | 非NULL |
+| pattern | int8_t * | 16 进制 TCP/UDP pattern 数据 | 非 NULL |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| _PRE_WLAN_FEATURE_WOW_OFFLOAD | 特性宏 | 支持WoW Offload功能 | 由构建目标决定 |
+| _PRE_WLAN_FEATURE_WOW_OFFLOAD | 特性宏 | 支持 WoW Offload 功能 | 由构建目标决定 |
 
 **返回值**
 
@@ -1364,26 +1364,26 @@ errcode_t wifi_set_wow_sleep_mode(uint8_t en)
 
 **功能说明**
 
-- WoW休眠使能配置。
-- 仅在STA模式下才能使能WoW休眠。
-- 0代表WoW休眠去使能，1代表WoW休眠使能。
+- WoW 休眠使能配置。
+- 仅在 STA 模式下才能使能 WoW 休眠。
+- 0 代表 WoW 休眠去使能，1 代表 WoW 休眠使能。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已使能。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| en | uint8_t | 使能/去使能WoW休眠 | 0:去使能，1:使能 |
+| en | uint8_t | 使能/去使能 WoW 休眠 | 0:去使能，1:使能 |
 
 **Kconfig配置**
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| _PRE_WLAN_FEATURE_WOW_OFFLOAD | 特性宏 | 支持WoW Offload功能 | 由构建目标决定 |
+| _PRE_WLAN_FEATURE_WOW_OFFLOAD | 特性宏 | 支持 WoW Offload 功能 | 由构建目标决定 |
 
 **返回值**
 
@@ -1406,19 +1406,19 @@ errcode_t wifi_csi_start(void)
 
 **功能说明**
 
-- 开启CSI上报。
+- 开启 CSI 上报。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- CSI已通过wifi_set_csi_config()配置完成。
-- CSI上报回调已通过wifi_register_csi_report_cb()注册。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- CSI 已通过 wifi_set_csi_config() 配置完成。
+- CSI 上报回调已通过 wifi_register_csi_report_cb() 注册。
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | CSI上报开启成功 |
+| ERRCODE_SUCC：0 | 执行成功 | CSI 上报开启成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_csi_stop <a id="wifi_csi_stop"></a>
@@ -1435,19 +1435,19 @@ errcode_t wifi_csi_stop(void)
 
 **功能说明**
 
-- 关闭CSI上报。
-- 停止后不再接收CSI数据回调。
+- 关闭 CSI 上报。
+- 停止后不再接收 CSI 数据回调。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- CSI已通过wifi_csi_start()开启。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- CSI 已通过 wifi_csi_start() 开启。
 
 **返回值**
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC：0 | 执行成功 | CSI上报关闭成功 |
+| ERRCODE_SUCC：0 | 执行成功 | CSI 上报关闭成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### wifi_set_csi_config <a id="wifi_set_csi_config"></a>
@@ -1464,19 +1464,19 @@ errcode_t wifi_set_csi_config(const int8_t *ifname, const csi_config_stru *confi
 
 **功能说明**
 
-- 配置CSI参数。
-- 包括用户ID、白名单、帧类型过滤、上报周期等。
+- 配置 CSI 参数。
+- 包括用户 ID、白名单、帧类型过滤、上报周期等。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| ifname | const int8_t * | 使能CSI的接口名 | 非NULL，如"wlan0" |
-| config | const [csi_config_stru](#struct_csi_config_stru) * | CSI配置参数 | 非NULL |
+| ifname | const int8_t * | 使能 CSI 的接口名 | 非 NULL，如"wlan0" |
+| config | const [csi_config_stru](#struct_csi_config_stru) * | CSI 配置参数 | 非 NULL |
 
 **返回值**
 
@@ -1499,18 +1499,18 @@ errcode_t wifi_register_csi_report_cb(wifi_csi_data_cb data_cb)
 
 **功能说明**
 
-- 注册CSI数据上报回调函数。
-- CSI数据通过回调函数上报给上层。
+- 注册 CSI 数据上报回调函数。
+- CSI 数据通过回调函数上报给上层。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| data_cb | [wifi_csi_data_cb](#typedef_wifi_csi_data_cb) | CSI数据上报回调函数 | 非NULL |
+| data_cb | [wifi_csi_data_cb](#typedef_wifi_csi_data_cb) | CSI 数据上报回调函数 | 非 NULL |
 
 **返回值**
 
@@ -1533,18 +1533,18 @@ errcode_t wifi_send_custom_pkt(const wifi_if_type_enum iftype, const uint8_t *da
 
 **功能说明**
 
-- 发送用户定制报文，报文须按照802.11协议格式封装。
+- 发送用户定制报文，报文须按照 802.11 协议格式封装。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | [wifi_if_type_enum](#enum_wifi_if_type_enum) 全体成员 |
-| data | const uint8_t* | 待发送帧的内容 | 非NULL，须按802.11协议格式封装 |
+| data | const uint8_t* | 待发送帧的内容 | 非 NULL，须按 802.11 协议格式封装 |
 | len | uint32_t | 待发送报文的长度 | 10 ~ 1400（实现边界 WIFI_SENDPKT_MIN_LEN = 10；<br>WIFI_SENDPKT_MAX_LEN = 1400）。 |
 
 **返回值**
@@ -1572,14 +1572,14 @@ errcode_t wifi_set_pkt_retry_policy(uint8_t type, uint8_t limit)
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | type | uint8_t | 帧类型 | 数据帧/管理帧 |
-| limit | uint8_t | 需要设置的软件最大重传次数 | 大于0 |
+| limit | uint8_t | 需要设置的软件最大重传次数 | 大于 0 |
 
 **返回值**
 
@@ -1602,11 +1602,11 @@ errcode_t wifi_reset_mac_phy(void)
 
 **功能说明**
 
-- 复位MAC和PHY接口，解决MAC、PHY挂死问题。
+- 复位 MAC 和 PHY 接口，解决 MAC、PHY 挂死问题。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **返回值**
 
@@ -1629,18 +1629,18 @@ errcode_t wifi_set_linkloss_config(linkloss_paras_stru *linkloss_paras)
 
 **功能说明**
 
-- 设置Linkloss的参数。
+- 设置 Linkloss 的参数。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已通过wifi_sta_enable()使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已通过 wifi_sta_enable() 使能。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| linkloss_paras | [linkloss_paras_stru](#struct_linkloss_paras_stru)* | 设置linkloss相关参数 | 非NULL |
+| linkloss_paras | [linkloss_paras_stru](#struct_linkloss_paras_stru)* | 设置 linkloss 相关参数 | 非 NULL |
 
 **返回值**
 
@@ -1663,18 +1663,18 @@ errcode_t wifi_set_base_mac_addr(const int8_t *mac_addr, uint8_t mac_len)
 
 **功能说明**
 
-- 设置基础MAC地址。
+- 设置基础 MAC 地址。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mac_addr | const int8_t* | MAC地址指针 | 非NULL |
-| mac_len | uint8_t | MAC地址长度 | WIFI_MAC_LEN(6) |
+| mac_addr | const int8_t* | MAC 地址指针 | 非 NULL |
+| mac_len | uint8_t | MAC 地址长度 | WIFI_MAC_LEN(6) |
 
 **返回值**
 
@@ -1697,23 +1697,23 @@ errcode_t wifi_get_base_mac_addr(int8_t *mac_addr, uint8_t mac_len)
 
 **功能说明**
 
-- 获取基础MAC地址。
+- 获取基础 MAC 地址。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mac_len | uint8_t | MAC地址长度 | WIFI_MAC_LEN(6) |
+| mac_len | uint8_t | MAC 地址长度 | WIFI_MAC_LEN(6) |
 
 **出参**
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| mac_addr | int8_t* | 基础MAC地址，由调用方分配内存、函数填充 |
+| mac_addr | int8_t* | 基础 MAC 地址，由调用方分配内存、函数填充 |
 
 **返回值**
 
@@ -1736,18 +1736,18 @@ errcode_t wifi_softap_set_mac_addr(const int8_t *mac_addr, uint8_t mac_len)
 
 **功能说明**
 
-- 设置SoftAP的MAC地址。
+- 设置 SoftAP 的 MAC 地址。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mac_addr | const int8_t* | MAC地址指针 | 非NULL |
-| mac_len | uint8_t | MAC地址长度 | WIFI_MAC_LEN(6) |
+| mac_addr | const int8_t* | MAC 地址指针 | 非 NULL |
+| mac_len | uint8_t | MAC 地址长度 | WIFI_MAC_LEN(6) |
 
 **返回值**
 
@@ -1770,23 +1770,23 @@ errcode_t wifi_softap_get_mac_addr(int8_t *mac_addr, uint8_t mac_len)
 
 **功能说明**
 
-- 获取SoftAP的MAC地址。
+- 获取 SoftAP 的 MAC 地址。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mac_len | uint8_t | MAC地址长度 | WIFI_MAC_LEN(6) |
+| mac_len | uint8_t | MAC 地址长度 | WIFI_MAC_LEN(6) |
 
 **出参**
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| mac_addr | int8_t* | SoftAP的MAC地址，由调用方分配内存、函数填充 |
+| mac_addr | int8_t* | SoftAP 的 MAC 地址，由调用方分配内存、函数填充 |
 
 **返回值**
 
@@ -1809,17 +1809,17 @@ errcode_t wifi_set_mac_derivation_ptr(wifi_mac_derivation_ptr ptr)
 
 **功能说明**
 
-- 设置MAC派生策略。
+- 设置 MAC 派生策略。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| ptr | [wifi_mac_derivation_ptr](#typedef_wifi_mac_derivation_ptr) | 派生方法指针 | 非NULL |
+| ptr | [wifi_mac_derivation_ptr](#typedef_wifi_mac_derivation_ptr) | 派生方法指针 | 非 NULL |
 
 **返回值**
 
@@ -1846,7 +1846,7 @@ errcode_t wifi_set_low_current_boot_mode(uint8_t flag)
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
@@ -1879,13 +1879,13 @@ errcode_t wifi_get_country_code(int8_t *country_code, uint8_t *len)
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| len | uint8_t* | 国家码数组长度 | 非NULL，输入时为缓冲区容量，输出时为实际长度 |
+| len | uint8_t* | 国家码数组长度 | 非 NULL，输入时为缓冲区容量，输出时为实际长度 |
 
 **出参**
 
@@ -1919,14 +1919,14 @@ errcode_t wifi_set_country_code(const int8_t* country_code, uint8_t len)
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| country_code | const int8_t* | 国家码 | 非NULL |
-| len | uint8_t | 国家码数组长度 | 大于0 |
+| country_code | const int8_t* | 国家码 | 非 NULL |
+| len | uint8_t | 国家码数组长度 | 大于 0 |
 
 **返回值**
 
@@ -1953,8 +1953,8 @@ errcode_t wifi_sta_set_pm(uint8_t ps_switch)
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
-- STA已通过wifi_sta_enable()使能。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
+- STA 已通过 wifi_sta_enable() 使能。
 
 **入参**
 
@@ -1983,11 +1983,11 @@ errcode_t wifi_set_sdp_mode(wifi_if_type_enum iftype, int32_t enable, int32_t ra
 
 **功能说明**
 
-- 设置SDP模式。
+- 设置 SDP 模式。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
@@ -1995,7 +1995,7 @@ errcode_t wifi_set_sdp_mode(wifi_if_type_enum iftype, int32_t enable, int32_t ra
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | [wifi_if_type_enum](#enum_wifi_if_type_enum) 全体成员 |
 | enable | int32_t | 使能开关 | 0:关闭；<br>1:开启。 |
-| ratio | int32_t | 比例 | 大于0 |
+| ratio | int32_t | 比例 | 大于 0 |
 
 **返回值**
 
@@ -2018,18 +2018,18 @@ errcode_t wifi_set_sdp_subscribe(wifi_if_type_enum iftype, char *sdp_subscribe, 
 
 **功能说明**
 
-- 设置SDP订阅。
+- 设置 SDP 订阅。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | [wifi_if_type_enum](#enum_wifi_if_type_enum) 全体成员 |
-| sdp_subscribe | char* | SDP订阅 | 非NULL |
+| sdp_subscribe | char* | SDP 订阅 | 非 NULL |
 | local_handle | int32_t | 当前句柄 | 有效句柄值 |
 
 **返回值**
@@ -2053,17 +2053,17 @@ errcode_t wifi_set_psd_mode(ext_psd_option_param *psd_option)
 
 **功能说明**
 
-- 设置PSD模式。
+- 设置 PSD 模式。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| psd_option | [ext_psd_option_param](#struct_ext_psd_option_param)* | PSD参数 | 非NULL |
+| psd_option | [ext_psd_option_param](#struct_ext_psd_option_param)* | PSD 参数 | 非 NULL |
 
 **返回值**
 
@@ -2086,17 +2086,17 @@ errcode_t wifi_set_psd_cb(wifi_psd_cb data_cb)
 
 **功能说明**
 
-- 设置PSD回调接口。
+- 设置 PSD 回调接口。
 
 **前置条件**
 
-- Wi-Fi已通过wifi_init()初始化完成。
+- Wi-Fi 已通过 wifi_init() 初始化完成。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| data_cb | [wifi_psd_cb](#typedef_wifi_psd_cb) | PSD回调函数 | 非NULL |
+| data_cb | [wifi_psd_cb](#typedef_wifi_psd_cb) | PSD 回调函数 | 非 NULL |
 
 **返回值**
 
@@ -2119,7 +2119,7 @@ errcode_t wifi_sta_config_probe_req_max_times(uint8_t max_times)
 
 **功能说明**
 
-- 配置STA beacon miss后probe request最大发送次数。
+- 配置 STA beacon miss 后 probe request 最大发送次数。
 
 **入参**
 
@@ -2150,14 +2150,14 @@ typedef void (*wifi_csi_data_cb)(uint8_t *csi_data, int32_t len);
 
 **功能说明**
 
-- 用户注册的回调函数，用于处理CSI上报的数据。
+- 用户注册的回调函数，用于处理 CSI 上报的数据。
 
 **使用说明**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| csi_data | uint8_t* | 4字节扩展时间戳+758字节64位小端存储格式的CSI数据 | 非NULL |
-| len | int32_t | 数据长度，固定为762字节 | 762 |
+| csi_data | uint8_t* | 4 字节扩展时间戳+758 字节 64 位小端存储格式的 CSI 数据 | 非 NULL |
+| len | int32_t | 数据长度，固定为 762 字节 | 762 |
 
 **返回值**
 
@@ -2183,8 +2183,8 @@ typedef int32_t (*wifi_promis_cb)(void* recv_buf, int32_t frame_len, int8_t rssi
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| recv_buf | void* | 帧数据 | 非NULL |
-| frame_len | int32_t | 帧长度 | 大于0 |
+| recv_buf | void* | 帧数据 | 非 NULL |
+| frame_len | int32_t | 帧长度 | 大于 0 |
 | rssi | int8_t | 信号强度 | - |
 
 **返回值**
@@ -2214,8 +2214,8 @@ typedef int32_t (*wifi_rx_mgmt_cb)(void* recv_buf, int32_t frame_len, int8_t rss
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| recv_buf | void* | 帧数据 | 非NULL |
-| frame_len | int32_t | 帧长度 | 大于0 |
+| recv_buf | void* | 帧数据 | 非 NULL |
+| frame_len | int32_t | 帧长度 | 大于 0 |
 | rssi | int8_t | 信号强度 | - |
 
 **返回值**
@@ -2239,14 +2239,14 @@ typedef int32_t (*wifi_psd_cb)(void *recv_buf, uint32_t data_len);
 
 **功能说明**
 
-- PSD数据上报回调接口定义。
+- PSD 数据上报回调接口定义。
 
 **使用说明**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| recv_buf | void* | PSD数据 | 非NULL |
-| data_len | uint32_t | PSD数据长度 | 大于0 |
+| recv_buf | void* | PSD 数据 | 非 NULL |
+| data_len | uint32_t | PSD 数据长度 | 大于 0 |
 
 **返回值**
 
@@ -2275,7 +2275,7 @@ typedef void (*wifi_scan_no_save_cb)(wifi_scan_info_stru *scan_result);
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| scan_result | [wifi_scan_info_stru](#struct_wifi_scan_info_stru)* | 扫描结果 | 非NULL |
+| scan_result | [wifi_scan_info_stru](#struct_wifi_scan_info_stru)* | 扫描结果 | 非 NULL |
 
 **返回值**
 
@@ -2295,17 +2295,17 @@ typedef unsigned int(*wifi_mac_derivation_ptr)(unsigned char *origin_mac, unsign
 
 **功能说明**
 
-- MAC派生方法指针定义。
+- MAC 派生方法指针定义。
 
 **使用说明**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| origin_mac | unsigned char* | 输入MAC地址 | 非NULL |
-| num | unsigned char | 输入MAC地址长度 | WIFI_MAC_LEN(6) |
+| origin_mac | unsigned char* | 输入 MAC 地址 | 非 NULL |
+| num | unsigned char | 输入 MAC 地址长度 | WIFI_MAC_LEN(6) |
 | type | unsigned char | 派生类型 | 2:STA；<br>3:SoftAP；<br>7~10:P2P（Peer-to-Peer）。 |
-| output_mac | unsigned char* | 输出MAC地址 | 非NULL |
-| out_put_num | unsigned char | 输出MAC地址长度 | WIFI_MAC_LEN(6) |
+| output_mac | unsigned char* | 输出 MAC 地址 | 非 NULL |
+| out_put_num | unsigned char | 输出 MAC 地址长度 | WIFI_MAC_LEN(6) |
 
 **返回值**
 
@@ -2328,7 +2328,7 @@ typedef uint32_t errcode_t;
 
 **功能说明**
 
-- 错误码定义，ERRCODE_SUCC为0，ERRCODE_FAIL为0xFFFFFFFF。
+- 错误码定义，ERRCODE_SUCC 为 0，ERRCODE_FAIL 为 0xFFFFFFFF。
 
 ## Enumerations
 
@@ -2351,7 +2351,7 @@ typedef enum {
 
 **功能说明**
 
-- PMF管理帧保护模式类型。
+- PMF 管理帧保护模式类型。
 
 **使用说明**
 
@@ -2383,7 +2383,7 @@ typedef enum {
 
 **功能说明**
 
-- Wi-Fi接口类型。
+- Wi-Fi 接口类型。
 
 **使用说明**
 
@@ -2416,16 +2416,16 @@ typedef enum ie_index_enmu {
 
 **功能说明**
 
-- IE索引，有四个索引可供选择。
+- IE 索引，有四个索引可供选择。
 
 **使用说明**
 
 | 枚举成员 | 取值 | 描述 |
 | ---- | ---- | ---- |
-| IE_FIRST | 0 | 索引1 |
-| IE_SECOND | 1 | 索引2 |
-| IE_THIRD | 2 | 索引3 |
-| IE_FORTH | 3 | 索引4 |
+| IE_FIRST | 0 | 索引 1 |
+| IE_SECOND | 1 | 索引 2 |
+| IE_THIRD | 2 | 索引 3 |
+| IE_FORTH | 3 | 索引 4 |
 | IE_BUTT | 4 | 枚举边界值，不可使用 |
 
 ### wifi_security_enum <a id="enum_wifi_security_enum"></a>
@@ -2460,7 +2460,7 @@ typedef enum wifi_security_enum {
 
 **功能说明**
 
-- Wi-Fi安全类型枚举。
+- Wi-Fi 安全类型枚举。
 
 **使用说明**
 
@@ -2470,17 +2470,17 @@ typedef enum wifi_security_enum {
 | WIFI_SEC_TYPE_OPEN | 0 | Open |
 | WIFI_SEC_TYPE_WEP | 1 | WEP（Wired Equivalent Privacy）|
 | WIFI_SEC_TYPE_WPA2PSK | 2 | WPA2-Personal |
-| WIFI_SEC_TYPE_WPA2_WPA_PSK_MIX | 3 | WPA-Personal和WPA2-Personal混合 |
+| WIFI_SEC_TYPE_WPA2_WPA_PSK_MIX | 3 | WPA-Personal 和 WPA2-Personal 混合 |
 | WIFI_SEC_TYPE_WPAPSK | 4 | WPA-Personal |
 | WIFI_SEC_TYPE_WPA | 5 | WPA-Enterprise |
 | WIFI_SEC_TYPE_WPA2 | 6 | WPA2-Enterprise |
 | WIFI_SEC_TYPE_SAE | 7 | SAE（Simultaneous Authentication of Equals）|
-| WIFI_SEC_TYPE_WPA3_WPA2_PSK_MIX | 8 | WPA2-Personal和WPA3-Personal混合 |
+| WIFI_SEC_TYPE_WPA3_WPA2_PSK_MIX | 8 | WPA2-Personal 和 WPA3-Personal 混合 |
 | WIFI_SEC_TYPE_WPA3 | 9 | WPA3-Enterprise |
 | WIFI_SEC_TYPE_OWE | 10 | OWE |
 | WIFI_SEC_TYPE_WAPI_PSK | 11 | WAPI（WLAN Authentication and Privacy Infrastructure）个人级 |
-| WIFI_SEC_TYPE_WAPI_CERT | 12 | WAPI企业级 |
-| WIFI_SEC_TYPE_WPA3_WPA2_MIX | 13 | WPA2-Enterprise和WPA3-Enterprise混合 |
+| WIFI_SEC_TYPE_WAPI_CERT | 12 | WAPI 企业级 |
+| WIFI_SEC_TYPE_WPA3_WPA2_MIX | 13 | WPA2-Enterprise 和 WPA3-Enterprise 混合 |
 | WIFI_SEC_TYPE_WEP_OPEN | 14 | WEP-OPEN |
 | WIFI_SEC_TYPE_UNKNOWN | 15 | 其它认证类型 |
 
@@ -2511,7 +2511,7 @@ typedef enum {
 
 **功能说明**
 
-- Wi-Fi接口类型。
+- Wi-Fi 接口类型。
 
 **使用说明**
 
@@ -2549,7 +2549,7 @@ typedef enum {
 
 **功能说明**
 
-- Wi-Fi的连接状态。
+- Wi-Fi 的连接状态。
 
 **使用说明**
 
@@ -2581,7 +2581,7 @@ typedef enum {
 
 **功能说明**
 
-- Wi-Fi扫描的类型。
+- Wi-Fi 扫描的类型。
 
 **使用说明**
 
@@ -2589,9 +2589,9 @@ typedef enum {
 | ---- | ---- | ---- |
 | WIFI_BASIC_SCAN | 0 | 普通扫描 |
 | WIFI_CHANNEL_SCAN | 1 | 基于指定信道的扫描 |
-| WIFI_SSID_SCAN | 2 | 基于指定SSID的扫描 |
-| WIFI_SSID_PREFIX_SCAN | 3 | 基于指定前缀SSID的扫描 |
-| WIFI_BSSID_SCAN | 4 | 基于指定BSSID的扫描 |
+| WIFI_SSID_SCAN | 2 | 基于指定 SSID 的扫描 |
+| WIFI_SSID_PREFIX_SCAN | 3 | 基于指定前缀 SSID 的扫描 |
+| WIFI_BSSID_SCAN | 4 | 基于指定 BSSID 的扫描 |
 | STA_SCAN_BUTT | 5 | 枚举边界值，不可使用 |
 
 ### protocol_mode_enum <a id="enum_protocol_mode_enum"></a>
@@ -2614,7 +2614,7 @@ typedef enum {
 
 **功能说明**
 
-- SoftAP和Station接口的协议模式。
+- SoftAP 和 Station 接口的协议模式。
 
 **使用说明**
 
@@ -2650,9 +2650,9 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ---- | ---- | ---- |
-| STATIC_IP | 0 | 静态IP地址 |
-| DHCP（Dynamic Host Configuration Protocol） | 1 | 由DHCP动态分配的IP地址 |
-| UNKNOWN | 2 | 未知的IP地址类型 |
+| STATIC_IP | 0 | 静态 IP 地址 |
+| DHCP（Dynamic Host Configuration Protocol） | 1 | 由 DHCP 动态分配的 IP 地址 |
+| UNKNOWN | 2 | 未知的 IP 地址类型 |
 
 ### wifi_wpa_psk_type_enum <a id="enum_wifi_wpa_psk_type_enum"></a>
 
@@ -2670,13 +2670,13 @@ typedef enum {
 
 **功能说明**
 
-- PSK的类型。
+- PSK 的类型。
 
 **使用说明**
 
 | 枚举成员 | 取值 | 描述 |
 | ---- | ---- | ---- |
-| WIFI_WPA_PSK_NOT_USE | 0 | 不用提前计算PSK，本情况下不使用wifi_fast_connect_stru中的psk |
+| WIFI_WPA_PSK_NOT_USE | 0 | 不用提前计算 PSK，本情况下不使用 wifi_fast_connect_stru 中的 psk |
 
 ## Structures
 
@@ -2701,7 +2701,7 @@ typedef struct {
 
 **功能说明**
 
-- WIFI_DEV的相关参数。
+- WIFI_DEV 的相关参数。
 
 **成员说明**
 
@@ -2733,16 +2733,16 @@ typedef struct {
 
 **功能说明**
 
-- IPV4的配置。
+- IPV4 的配置。
 
 **成员说明**
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| ip_address | uint32_t | Wi-Fi device的IP地址 |
-| gateway | uint32_t | Wi-Fi device的Gateway |
-| dns_servers | uint32_t[WIFI_MAX_DNS_NUM] | Wi-Fi device的DNS（Domain Name System）服务器地址 |
-| netmask | uint32_t | Wi-Fi device的子网掩码 |
+| ip_address | uint32_t | Wi-Fi device 的 IP 地址 |
+| gateway | uint32_t | Wi-Fi device 的 Gateway |
+| dns_servers | uint32_t[WIFI_MAX_DNS_NUM] | Wi-Fi device 的 DNS（Domain Name System）服务器地址 |
+| netmask | uint32_t | Wi-Fi device 的子网掩码 |
 
 ### ipv6_config_stru <a id="struct_ipv6_config_stru"></a>
 
@@ -2767,8 +2767,8 @@ typedef struct {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| ipv6_address | uint8_t[WIFI_IPV6_ADDR_LEN] | IPV6地址 |
-| ipv6_dns_servers | uint8_t[WIFI_MAX_DNS_NUM][WIFI_IPV6_DNS_LEN] | DNS服务器地址 |
+| ipv6_address | uint8_t[WIFI_IPV6_ADDR_LEN] | IPV6 地址 |
+| ipv6_dns_servers | uint8_t[WIFI_MAX_DNS_NUM][WIFI_IPV6_DNS_LEN] | DNS 服务器地址 |
 
 ### wifi_sta_config_stru <a id="struct_wifi_sta_config_stru"></a>
 
@@ -2796,7 +2796,7 @@ typedef struct wifi_sta_config_stru {
 
 **功能说明**
 
-- 连接到指定Wi-Fi device的Wi-Fi STA配置。
+- 连接到指定 Wi-Fi device 的 Wi-Fi STA 配置。
 
 **成员说明**
 
@@ -2806,13 +2806,13 @@ typedef struct wifi_sta_config_stru {
 | bssid | uint8_t[WIFI_MAC_LEN] | BSSID |
 | pre_shared_key | int8_t[WIFI_MAX_KEY_LEN] | 预共享密钥 |
 | security_type | [wifi_security_enum](#enum_wifi_security_enum) | 安全类型 |
-| wifi_psk_type | int8_t | PSK的类型 |
-| strengthen_verify | int8_t | 加强校验，非零值表示open模式下需要校验密码长度是否为0，默认为0不校验 |
+| wifi_psk_type | int8_t | PSK 的类型 |
+| strengthen_verify | int8_t | 加强校验，非零值表示 open 模式下需要校验密码长度是否为 0，默认为 0 不校验 |
 | channel | uint8_t | 关联的指定信道号，可选参数 |
-| rsv | int8_t | 保留1字节 |
-| ip_type | [ip_type_stru_enum](#enum_ip_type_stru_enum) | IP的分配类型 |
-| static_ip | [ip_config_stru](#struct_ip_config_stru) | 静态IPV4地址 |
-| static_ipv6 | [ipv6_config_stru](#struct_ipv6_config_stru) | 静态IPV6地址 |
+| rsv | int8_t | 保留 1 字节 |
+| ip_type | [ip_type_stru_enum](#enum_ip_type_stru_enum) | IP 的分配类型 |
+| static_ip | [ip_config_stru](#struct_ip_config_stru) | 静态 IPV4 地址 |
+| static_ipv6 | [ipv6_config_stru](#struct_ipv6_config_stru) | 静态 IPV6 地址 |
 
 ### wifi_scan_params_stru <a id="struct_wifi_scan_params_stru"></a>
 
@@ -2841,10 +2841,10 @@ typedef struct {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | ssid | int8_t[WIFI_MAX_SSID_LEN] | SSID |
-| ssid_len | int8_t | SSID的长度 |
+| ssid_len | int8_t | SSID 的长度 |
 | bssid | int8_t[WIFI_MAC_LEN] | BSSID |
 | channel_num | int32_t | 信道号 |
-| scan_type | [wifi_scan_type_enum](#enum_wifi_scan_type_enum) | Wi-Fi的扫描类型 |
+| scan_type | [wifi_scan_type_enum](#enum_wifi_scan_type_enum) | Wi-Fi 的扫描类型 |
 
 ### wifi_scan_strategy_stru <a id="struct_wifi_scan_strategy_stru"></a>
 
@@ -2871,9 +2871,9 @@ typedef struct {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| scan_time | uint8_t | 每个信道停留时间，单位ms，范围20~120ms，默认20ms，扫描总时间不能超过4.5s |
-| scan_cnt | uint8_t | 扫描slot数，一个slot 20ms |
-| single_probe_send_times | uint8_t | 单个probe req报文的发送次数，范围1~3，默认1 |
+| scan_time | uint8_t | 每个信道停留时间，单位 ms，范围 20~120ms，默认 20ms，扫描总时间不能超过 4.5s |
+| scan_cnt | uint8_t | 扫描 slot 数，一个 slot 20ms |
+| single_probe_send_times | uint8_t | 单个 probe req 报文的发送次数，范围 1~3，默认 1 |
 | reserved | uint8_t | 保留 |
 
 ### csi_config_stru <a id="struct_csi_config_stru"></a>
@@ -2901,22 +2901,22 @@ typedef struct {
 
 **功能说明**
 
-- CSI的配置。
+- CSI 的配置。
 
 **成员说明**
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| user_index | uint8_t | 用户ID，取值范围0~3，最多4个用户 |
-| enable | uint8_t | CSI白名单用户开关 |
-| match_ta_ra_select | uint8_t | CSI白名单地址过滤类型，0:RA / 1:TA |
-| resv | uint8_t | 保留1字节对齐 |
-| mac_addr | uint8_t[WIFI_MAC_LEN] | MAC地址 |
+| user_index | uint8_t | 用户 ID，取值范围 0~3，最多 4 个用户 |
+| enable | uint8_t | CSI 白名单用户开关 |
+| match_ta_ra_select | uint8_t | CSI 白名单地址过滤类型，0:RA / 1:TA |
+| resv | uint8_t | 保留 1 字节对齐 |
+| mac_addr | uint8_t[WIFI_MAC_LEN] | MAC 地址 |
 | frame_filter_bitmap | uint8_t | 帧类型过滤具体参数 |
 | sub_type_filter_enable | uint8_t | 帧子类型过滤开关 |
 | sub_type_filter | uint8_t | 帧子类型过滤具体参数 |
-| ppdu_filter_bitmap | uint8_t | PPDU format过滤具体参数 |
-| period | uint16_t | CSI上报时间间隔 |
+| ppdu_filter_bitmap | uint8_t | PPDU format 过滤具体参数 |
+| period | uint16_t | CSI 上报时间间隔 |
 
 ### wifi_fast_connect_stru <a id="struct_wifi_fast_connect_stru"></a>
 
@@ -2943,9 +2943,9 @@ typedef struct wifi_fast_connect_stru {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| config | [wifi_sta_config_stru](#struct_wifi_sta_config_stru) | 连接到指定Wi-Fi device的Wi-Fi STA配置 |
+| config | [wifi_sta_config_stru](#struct_wifi_sta_config_stru) | 连接到指定 Wi-Fi device 的 Wi-Fi STA 配置 |
 | psk | uint8_t[WIFI_PSK_LEN] | PSK |
-| psk_flag | [wifi_wpa_psk_type_enum](#enum_wifi_wpa_psk_type_enum) | PSK的标志，不需指定时置0 |
+| psk_flag | [wifi_wpa_psk_type_enum](#enum_wifi_wpa_psk_type_enum) | PSK 的标志，不需指定时置 0 |
 | channel_num | uint8_t | 信道号 |
 
 ### wifi_ptype_filter_stru <a id="struct_wifi_ptype_filter_stru"></a>
@@ -2979,7 +2979,7 @@ typedef struct {
 | udata_en | int8_t:1 | 使能接收单播数据包 |
 | mmngt_en | int8_t:1 | 使能接收组播（广播）管理包 |
 | umngt_en | int8_t:1 | 使能接收单播管理包 |
-| custom_en | int8_t:1 | 使能接收beacon/probe request包 |
+| custom_en | int8_t:1 | 使能接收 beacon/probe request 包 |
 | resvd | int8_t:3 | 保留字段 |
 
 ### linkloss_paras_stru <a id="struct_linkloss_paras_stru"></a>
@@ -3000,14 +3000,14 @@ typedef struct {
 
 **功能说明**
 
-- 设置linkloss相关参数。
+- 设置 linkloss 相关参数。
 
 **成员说明**
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| linkloss_threshold | uint16_t | 取值范围[50, 500]，设置为n时，表示linkloss阈值基础时间为(100*n)ms |
-| send_probe_request_ratio | uint8_t | 取值范围[1, 10]，设置为n时，表示linkloss计数达到阈值的(n/10)时，开始发送探测帧保活 |
+| linkloss_threshold | uint16_t | 取值范围[50, 500]，设置为 n 时，表示 linkloss 阈值基础时间为(100*n)ms |
+| send_probe_request_ratio | uint8_t | 取值范围[1, 10]，设置为 n 时，表示 linkloss 计数达到阈值的(n/10) 时，开始发送探测帧保活 |
 | resv | uint8_t[1] | 保留 |
 
 ### ext_psd_option_param <a id="struct_ext_psd_option_param"></a>
@@ -3029,16 +3029,16 @@ typedef struct {
 
 **功能说明**
 
-- 设置PSD状态。
+- 设置 PSD 状态。
 
 **成员说明**
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| enable | uint8_t | PSD使能标记，0:关 / 1:开 |
+| enable | uint8_t | PSD 使能标记，0:关 / 1:开 |
 | resv | uint8_t | 保留 |
-| duration | uint16_t | 采样时长，取值1~65535，单位min |
-| cycle | uint32_t | 采样间隔，单位ms，取值100~1000 |
+| duration | uint16_t | 采样时长，取值 1~65535，单位 min |
+| cycle | uint32_t | 采样间隔，单位 ms，取值 100~1000 |
 
 ### wifi_linked_info_stru <a id="struct_wifi_linked_info_stru"></a>
 
@@ -3062,7 +3062,7 @@ typedef struct {
 
 **功能说明**
 
-- 有关连接到此STA的AP信息。
+- 有关连接到此 STA 的 AP 信息。
 
 **成员说明**
 
@@ -3070,11 +3070,11 @@ typedef struct {
 | ------- | ------- | ---- |
 | ssid | int8_t[WIFI_MAX_SSID_LEN] | SSID |
 | bssid | uint8_t[WIFI_MAC_LEN] | BSSID |
-| wpa_state | int8_t | 断连时WPA（Wi-Fi Protected Access）状态 |
+| wpa_state | int8_t | 断连时 WPA（Wi-Fi Protected Access）状态 |
 | rssi | int32_t | RSSI |
-| channel_num | int32_t | AP的Wi-Fi信道信息 |
-| snr | int32_t | AP的Wi-Fi信噪比信息 |
-| conn_state | [wifi_conn_state_enum](#enum_wifi_conn_state_enum) | Wi-Fi的连接状态 |
+| channel_num | int32_t | AP 的 Wi-Fi 信道信息 |
+| snr | int32_t | AP 的 Wi-Fi 信噪比信息 |
+| conn_state | [wifi_conn_state_enum](#enum_wifi_conn_state_enum) | Wi-Fi 的连接状态 |
 
 ### wifi_scan_info_stru <a id="struct_wifi_scan_info_stru"></a>
 
@@ -3098,7 +3098,7 @@ typedef struct {
 
 **功能说明**
 
-- Wi-Fi扫描结果信息。
+- Wi-Fi 扫描结果信息。
 
 **成员说明**
 
@@ -3139,7 +3139,7 @@ typedef struct {
 
 **功能说明**
 
-- 指向用于STA和Hotspot连接、断开连接或扫描的Wi-Fi事件回调的指针。
+- 指向用于 STA 和 Hotspot 连接、断开连接或扫描的 Wi-Fi 事件回调的指针。
 
 **成员说明**
 
@@ -3147,16 +3147,16 @@ typedef struct {
 | ------- | ------- | ---- |
 | wifi_event_connection_changed | void(\*)(int32_t, const wifi_linked_info_stru\*, int32_t) | 连接状态改变回调 |
 | wifi_event_scan_state_changed | void(\*)(int32_t, int32_t) | 扫描状态改变回调 |
-| wifi_event_softap_state_changed | void(\*)(int32_t) | Hotspot状态改变回调 |
-| wifi_event_softap_sta_join | void(\*)(const wifi_sta_info_stru\*) | Station连接回调 |
-| wifi_event_softap_sta_leave | void(\*)(const wifi_sta_info_stru\*) | Station断连回调 |
-| wifi_event_p2p_receive_connect | void(\*)(const uint8_t\*, int8_t) | P2P接收连接请求回调 |
-| wifi_event_p2p_go_neg_result | void(\*)(int32_t, int32_t) | P2P GO协商结果回调 |
-| wifi_event_p2p_go_start | void(\*)(int32_t) | P2P GO建立结果回调 |
-| wifi_event_p2p_invitation_result | void(\*)(int32_t) | P2P邀请结果回调 |
+| wifi_event_softap_state_changed | void(\*)(int32_t) | Hotspot 状态改变回调 |
+| wifi_event_softap_sta_join | void(\*)(const wifi_sta_info_stru\*) | Station 连接回调 |
+| wifi_event_softap_sta_leave | void(\*)(const wifi_sta_info_stru\*) | Station 断连回调 |
+| wifi_event_p2p_receive_connect | void(\*)(const uint8_t\*, int8_t) | P2P 接收连接请求回调 |
+| wifi_event_p2p_go_neg_result | void(\*)(int32_t, int32_t) | P2P GO 协商结果回调 |
+| wifi_event_p2p_go_start | void(\*)(int32_t) | P2P GO 建立结果回调 |
+| wifi_event_p2p_invitation_result | void(\*)(int32_t) | P2P 邀请结果回调 |
 | wifi_event_p2p_gc_connection_changed | void(\*)(int32_t, const p2p_status_info_stru\*) | P2P GC（Group Client）关联结果回调 |
-| wifi_event_p2p_go_connection_changed | void(\*)(int32_t, const p2p_client_info_stru\*) | P2P GO关联结果回调 |
-| wifi_event_wps_result | void(\*)(int32_t, wifi_if_type_enum) | WPS关联结果回调 |
+| wifi_event_p2p_go_connection_changed | void(\*)(int32_t, const p2p_client_info_stru\*) | P2P GO 关联结果回调 |
+| wifi_event_wps_result | void(\*)(int32_t, wifi_if_type_enum) | WPS 关联结果回调 |
 
 ### wifi_sta_info_stru <a id="struct_wifi_sta_info_stru"></a>
 
@@ -3177,13 +3177,13 @@ typedef struct {
 
 **功能说明**
 
-- 返回与AP相连的STA信息。
+- 返回与 AP 相连的 STA 信息。
 
 **成员说明**
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| mac_addr | uint8_t[WIFI_MAC_LEN] | MAC地址 |
+| mac_addr | uint8_t[WIFI_MAC_LEN] | MAC 地址 |
 | rssi | int8_t | RSSI |
 | rsv | int8_t | 保留字段 |
-| best_rate | uint32_t | SoftAP上一次接收相连的Station报文最佳发送速率值(kbps) |
+| best_rate | uint32_t | SoftAP 上一次接收相连的 Station 报文最佳发送速率值(kbps) |

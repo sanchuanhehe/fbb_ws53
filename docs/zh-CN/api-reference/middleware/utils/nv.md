@@ -80,7 +80,7 @@ errcode_t uapi_nv_write(uint16_t key, const uint8_t *kvalue, uint16_t kvalue_len
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | key | uint16_t | 要写入的 NV 项的 key ID，用于索引 | KEY_ID_REGION0(1, 0x1000) ~ KEY_ID_REGION15(0xF000, 0xFFFF) 区域内合法 key ID |
-| kvalue | const uint8_t * | 指向待写入 NV 项值的指针 | 不为NULL |
+| kvalue | const uint8_t * | 指向待写入 NV 项值的指针 | 不为 NULL |
 | kvalue_length | uint16_t | 写入数据的长度，单位 Bytes | 大于 0，普通 NV 不超过 NV_NORMAL_KVALUE_MAX_LEN(4060)，加密 NV 不超过 NV_ENCRYPTED_KVALUE_MAX_LEN(4032) |
 
 **返回值**
@@ -134,7 +134,7 @@ errcode_t uapi_nv_write_with_attr(uint16_t key, const uint8_t *kvalue, uint16_t 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | key | uint16_t | 要写入的 NV 项的 key ID，用于索引 | KEY_ID_REGION0(1, 0x1000) ~ KEY_ID_REGION15(0xF000, 0xFFFF) 区域内合法 key ID |
-| kvalue | const uint8_t * | 指向待写入 NV 项值的指针 | 不为NULL |
+| kvalue | const uint8_t * | 指向待写入 NV 项值的指针 | 不为 NULL |
 | kvalue_length | uint16_t | 写入数据的长度，单位 Bytes | 大于 0，普通 NV 不超过 NV_NORMAL_KVALUE_MAX_LEN(4060)，加密 NV 不超过 NV_ENCRYPTED_KVALUE_MAX_LEN(4032) |
 | attr | [nv_key_attr_t](#struct_nv_key_attr_t) * | 指向 NV 项属性配置的指针，传入 NULL 表示使用默认属性 Normal | NULL 或合法属性结构指针 |
 | func | [nv_storage_completed_callback](#typedef_nv_storage_completed_callback) | kvalue 写入 flash 完成后调用的回调函数，传入 NULL 表示不注册回调 | NULL 或合法回调函数指针 |
@@ -340,7 +340,7 @@ errcode_t uapi_nv_backup(const nv_backup_mode_t *backup_mode)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| backup_mode | [nv_backup_mode_t](#struct_nv_backup_mode_t) * | 指向 NV 备份区域标志配置的指针 | 不为NULL |
+| backup_mode | [nv_backup_mode_t](#struct_nv_backup_mode_t) * | 指向 NV 备份区域标志配置的指针 | 不为 NULL |
 
 **返回值**
 
@@ -430,7 +430,7 @@ errcode_t uapi_nv_set_restore_mode_partitial(const nv_restore_mode_t *restore_mo
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| restore_mode | [nv_restore_mode_t](#struct_nv_restore_mode_t) * | 指向 NV 恢复区域标志配置的指针 | 不为NULL |
+| restore_mode | [nv_restore_mode_t](#struct_nv_restore_mode_t) * | 指向 NV 恢复区域标志配置的指针 | 不为 NULL |
 
 **返回值**
 
@@ -518,7 +518,7 @@ errcode_t uapi_nv_register_change_notify_proc(uint16_t min_key, uint16_t max_key
 | ---- | ---- | ---- | ---- |
 | min_key | uint16_t | 注册回调支持的最小 key ID | min_key 不大于 max_key |
 | max_key | uint16_t | 注册回调支持的最大 key ID | max_key 不小于 min_key |
-| func | [nv_changed_notify_func](#typedef_nv_changed_notify_func) | NV 键值变更通知回调函数指针 | 不为NULL |
+| func | [nv_changed_notify_func](#typedef_nv_changed_notify_func) | NV 键值变更通知回调函数指针 | 不为 NULL |
 
 **返回值**
 

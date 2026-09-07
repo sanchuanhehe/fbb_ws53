@@ -57,7 +57,7 @@ errcode_t gattc_register_client(bt_uuid_t *app_uuid, uint8_t *client_id)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| app_uuid | bt_uuid_t * | 上层应用 UUID | 不为NULL |
+| app_uuid | bt_uuid_t * | 上层应用 UUID | 不为 NULL |
 
 **出参**
 
@@ -140,7 +140,7 @@ errcode_t gattc_discovery_service(uint8_t client_id, uint16_t conn_id, bt_uuid_t
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 已注册的有效客户端 ID |
 | conn_id | uint16_t | 连接 ID | 已建立的 BLE 连接 ID |
-| uuid | bt_uuid_t * | 服务过滤 UUID，长度为 0 表示发现全部服务 | 不为NULL，uuid_len 取值 0 ~ 16 |
+| uuid | bt_uuid_t * | 服务过滤 UUID，长度为 0 表示发现全部服务 | 不为 NULL，uuid_len 取值 0 ~ 16 |
 
 **返回值**
 
@@ -180,7 +180,7 @@ errcode_t gattc_discovery_character(uint8_t client_id, uint16_t conn_id, gattc_d
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 已注册的有效客户端 ID |
 | conn_id | uint16_t | 连接 ID | 已建立的 BLE 连接 ID |
-| param | [gattc_discovery_character_param_t](#struct_gattc_discovery_character_param_t) * | 特征发现参数，包含服务起始句柄与过滤 uuid | 不为NULL |
+| param | [gattc_discovery_character_param_t](#struct_gattc_discovery_character_param_t) * | 特征发现参数，包含服务起始句柄与过滤 uuid | 不为 NULL |
 
 **返回值**
 
@@ -297,7 +297,7 @@ errcode_t gattc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, gattc_read
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 已注册的有效客户端 ID |
 | conn_id | uint16_t | 连接 ID | 已建立的 BLE 连接 ID |
-| param | [gattc_read_req_by_uuid_param_t](#struct_gattc_read_req_by_uuid_param_t) * | 按 UUID 读取请求参数，包含句柄范围与 uuid | 不为NULL |
+| param | [gattc_read_req_by_uuid_param_t](#struct_gattc_read_req_by_uuid_param_t) * | 按 UUID 读取请求参数，包含句柄范围与 uuid | 不为 NULL |
 
 **返回值**
 
@@ -336,7 +336,7 @@ errcode_t gattc_write_req(uint8_t client_id, uint16_t conn_id, gattc_handle_valu
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 已注册的有效客户端 ID |
 | conn_id | uint16_t | 连接 ID | 已建立的 BLE 连接 ID |
-| param | [gattc_handle_value_t](#struct_gattc_handle_value_t) * | 写请求参数，包含目标句柄、数据及数据长度 | 不为NULL |
+| param | [gattc_handle_value_t](#struct_gattc_handle_value_t) * | 写请求参数，包含目标句柄、数据及数据长度 | 不为 NULL |
 
 **返回值**
 
@@ -375,7 +375,7 @@ errcode_t gattc_write_cmd(uint8_t client_id, uint16_t conn_id, gattc_handle_valu
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 已注册的有效客户端 ID |
 | conn_id | uint16_t | 连接 ID | 已建立的 BLE 连接 ID |
-| param | [gattc_handle_value_t](#struct_gattc_handle_value_t) * | 写命令参数，包含目标句柄、数据及数据长度 | 不为NULL |
+| param | [gattc_handle_value_t](#struct_gattc_handle_value_t) * | 写命令参数，包含目标句柄、数据及数据长度 | 不为 NULL |
 
 **返回值**
 
@@ -451,7 +451,7 @@ errcode_t gattc_register_callbacks(gattc_callbacks_t *func)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [gattc_callbacks_t](#struct_gattc_callbacks_t) * | 回调函数集合 | 不为NULL |
+| func | [gattc_callbacks_t](#struct_gattc_callbacks_t) * | 回调函数集合 | 不为 NULL |
 
 **返回值**
 

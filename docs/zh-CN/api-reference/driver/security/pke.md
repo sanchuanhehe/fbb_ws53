@@ -69,7 +69,7 @@ errcode_t uapi_drv_cipher_pke_ecc_gen_key(uapi_drv_cipher_pke_ecc_curve_type_t c
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) 全体成员 |
-| input_priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入私钥，可为空指针；非空时作为生成私钥的输入 | 可为NULL |
+| input_priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入私钥，可为空指针；非空时作为生成私钥的输入 | 可为 NULL |
 
 **出参**
 
@@ -124,8 +124,8 @@ errcode_t uapi_drv_cipher_pke_ecdsa_sign(uapi_drv_cipher_pke_ecc_curve_type_t cu
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) 全体成员 |
-| priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入 ECC 私钥 | 不为NULL |
-| hash | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待签名的摘要数据 | 不为NULL |
+| priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入 ECC 私钥 | 不为 NULL |
+| hash | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待签名的摘要数据 | 不为 NULL |
 
 **出参**
 
@@ -173,9 +173,9 @@ errcode_t uapi_drv_cipher_pke_ecdsa_verify(uapi_drv_cipher_pke_ecc_curve_type_t 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) 全体成员 |
-| pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入 ECC 公钥 | 不为NULL |
-| hash | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待验签的摘要数据 | 不为NULL |
-| sig | [uapi_drv_cipher_pke_ecc_sig_t](#uapi_drv_cipher_pke_ecc_sig_t) | 输入待验证的签名值 | 不为NULL |
+| pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入 ECC 公钥 | 不为 NULL |
+| hash | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待验签的摘要数据 | 不为 NULL |
+| sig | [uapi_drv_cipher_pke_ecc_sig_t](#uapi_drv_cipher_pke_ecc_sig_t) | 输入待验证的签名值 | 不为 NULL |
 
 **返回值**
 
@@ -221,8 +221,8 @@ errcode_t uapi_drv_cipher_pke_eddsa_sign(uapi_drv_cipher_pke_ecc_curve_type_t cu
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) 全体成员 |
-| priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入 Edwards 曲线私钥 | 不为NULL |
-| msg | [uapi_drv_cipher_pke_msg_t](#uapi_drv_cipher_pke_msg_t) | 输入待签名消息 | 不为NULL |
+| priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入 Edwards 曲线私钥 | 不为 NULL |
+| msg | [uapi_drv_cipher_pke_msg_t](#uapi_drv_cipher_pke_msg_t) | 输入待签名消息 | 不为 NULL |
 
 **出参**
 
@@ -276,9 +276,9 @@ errcode_t uapi_drv_cipher_pke_eddsa_verify(uapi_drv_cipher_pke_ecc_curve_type_t 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) 全体成员 |
-| pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入 Edwards 曲线公钥 | 不为NULL |
-| msg | [uapi_drv_cipher_pke_msg_t](#uapi_drv_cipher_pke_msg_t) | 输入待验签消息 | 不为NULL |
-| sig | [uapi_drv_cipher_pke_ecc_sig_t](#uapi_drv_cipher_pke_ecc_sig_t) | 输入待验证的签名值 | 不为NULL |
+| pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入 Edwards 曲线公钥 | 不为 NULL |
+| msg | [uapi_drv_cipher_pke_msg_t](#uapi_drv_cipher_pke_msg_t) | 输入待验签消息 | 不为 NULL |
+| sig | [uapi_drv_cipher_pke_ecc_sig_t](#uapi_drv_cipher_pke_ecc_sig_t) | 输入待验证的签名值 | 不为 NULL |
 
 **返回值**
 
@@ -326,8 +326,8 @@ errcode_t uapi_drv_cipher_pke_ecc_gen_ecdh_key(uapi_drv_cipher_pke_ecc_curve_typ
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) 全体成员 |
-| input_pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入对端 ECC 公钥 | 不为NULL |
-| input_priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入本地 ECC 私钥 | 不为NULL |
+| input_pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入对端 ECC 公钥 | 不为 NULL |
+| input_priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入本地 ECC 私钥 | 不为 NULL |
 
 **出参**
 
@@ -379,7 +379,7 @@ errcode_t uapi_drv_cipher_pke_check_dot_on_curve(uapi_drv_cipher_pke_ecc_curve_t
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | curve_type | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) | ECC 曲线类型 | [uapi_drv_cipher_pke_ecc_curve_type_t](#uapi_drv_cipher_pke_ecc_curve_type_t) 全体成员 |
-| pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入待检查的 ECC 点 | 不为NULL |
+| pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入待检查的 ECC 点 | 不为 NULL |
 
 **出参**
 
@@ -432,9 +432,9 @@ errcode_t uapi_drv_cipher_pke_sm2_dsa_hash(const uapi_drv_cipher_pke_data_t *sm2
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| sm2_id | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入 SM2 用户 ID | 不为NULL |
-| pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入 SM2 公钥 | 不为NULL |
-| msg | [uapi_drv_cipher_pke_msg_t](#uapi_drv_cipher_pke_msg_t) | 输入待计算摘要的消息 | 不为NULL |
+| sm2_id | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入 SM2 用户 ID | 不为 NULL |
+| pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入 SM2 公钥 | 不为 NULL |
+| msg | [uapi_drv_cipher_pke_msg_t](#uapi_drv_cipher_pke_msg_t) | 输入待计算摘要的消息 | 不为 NULL |
 
 **出参**
 
@@ -491,8 +491,8 @@ errcode_t uapi_drv_cipher_pke_sm2_public_encrypt(const uapi_drv_cipher_pke_ecc_p
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入 SM2 公钥 | 不为NULL |
-| plain_text | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待加密的明文 | 不为NULL |
+| pub_key | [uapi_drv_cipher_pke_ecc_point_t](#uapi_drv_cipher_pke_ecc_point_t) | 输入 SM2 公钥 | 不为 NULL |
+| plain_text | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待加密的明文 | 不为 NULL |
 
 **出参**
 
@@ -544,8 +544,8 @@ errcode_t uapi_drv_cipher_pke_sm2_private_decrypt(const uapi_drv_cipher_pke_data
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入 SM2 私钥 | 不为NULL |
-| cipher_text | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待解密的密文 | 不为NULL |
+| priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入 SM2 私钥 | 不为 NULL |
+| cipher_text | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待解密的密文 | 不为 NULL |
 
 **出参**
 
@@ -599,10 +599,10 @@ errcode_t uapi_drv_cipher_pke_rsa_sign(const uapi_drv_cipher_pke_rsa_priv_key_t 
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| priv_key | [uapi_drv_cipher_pke_rsa_priv_key_t](#uapi_drv_cipher_pke_rsa_priv_key_t) | 输入 RSA 私钥 | 不为NULL |
+| priv_key | [uapi_drv_cipher_pke_rsa_priv_key_t](#uapi_drv_cipher_pke_rsa_priv_key_t) | 输入 RSA 私钥 | 不为 NULL |
 | scheme | [uapi_drv_cipher_pke_rsa_scheme_t](#uapi_drv_cipher_pke_rsa_scheme_t) | RSA 填充方式 | [uapi_drv_cipher_pke_rsa_scheme_t](#uapi_drv_cipher_pke_rsa_scheme_t) 全体成员 |
 | hash_type | [uapi_drv_cipher_pke_hash_type_t](#uapi_drv_cipher_pke_hash_type_t) | RSA 填充使用的摘要算法 | [uapi_drv_cipher_pke_hash_type_t](#uapi_drv_cipher_pke_hash_type_t) 全体成员 |
-| input_hash | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待签名的摘要 | 不为NULL |
+| input_hash | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待签名的摘要 | 不为 NULL |
 
 **出参**
 
@@ -656,11 +656,11 @@ errcode_t uapi_drv_cipher_pke_rsa_verify(const uapi_drv_cipher_pke_rsa_pub_key_t
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| pub_key | [uapi_drv_cipher_pke_rsa_pub_key_t](#uapi_drv_cipher_pke_rsa_pub_key_t) | 输入 RSA 公钥 | 不为NULL |
+| pub_key | [uapi_drv_cipher_pke_rsa_pub_key_t](#uapi_drv_cipher_pke_rsa_pub_key_t) | 输入 RSA 公钥 | 不为 NULL |
 | scheme | [uapi_drv_cipher_pke_rsa_scheme_t](#uapi_drv_cipher_pke_rsa_scheme_t) | RSA 填充方式 | [uapi_drv_cipher_pke_rsa_scheme_t](#uapi_drv_cipher_pke_rsa_scheme_t) 全体成员 |
 | hash_type | [uapi_drv_cipher_pke_hash_type_t](#uapi_drv_cipher_pke_hash_type_t) | RSA 填充使用的摘要算法 | [uapi_drv_cipher_pke_hash_type_t](#uapi_drv_cipher_pke_hash_type_t) 全体成员 |
-| input_hash | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待验签的摘要 | 不为NULL |
-| sig | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待验证的签名值 | 不为NULL |
+| input_hash | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待验签的摘要 | 不为 NULL |
+| sig | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待验证的签名值 | 不为 NULL |
 
 **返回值**
 
@@ -715,9 +715,9 @@ errcode_t uapi_drv_cipher_pke_rsa_public_encrypt(uapi_drv_cipher_pke_rsa_scheme_
 | ---- | ---- | ---- | ---- |
 | scheme | [uapi_drv_cipher_pke_rsa_scheme_t](#uapi_drv_cipher_pke_rsa_scheme_t) | RSA 填充方式 | [uapi_drv_cipher_pke_rsa_scheme_t](#uapi_drv_cipher_pke_rsa_scheme_t) 全体成员 |
 | hash_type | [uapi_drv_cipher_pke_hash_type_t](#uapi_drv_cipher_pke_hash_type_t) | RSA 填充使用的摘要算法，仅 OAEP 填充模式时使用此参数 | [uapi_drv_cipher_pke_hash_type_t](#uapi_drv_cipher_pke_hash_type_t) 全体成员 |
-| pub_key | [uapi_drv_cipher_pke_rsa_pub_key_t](#uapi_drv_cipher_pke_rsa_pub_key_t) | 输入 RSA 公钥 | 不为NULL |
-| input | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待加密的明文 | 不为NULL |
-| label | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | RSA 标签，仅 OAEP 填充模式时使用此参数 | 可为NULL |
+| pub_key | [uapi_drv_cipher_pke_rsa_pub_key_t](#uapi_drv_cipher_pke_rsa_pub_key_t) | 输入 RSA 公钥 | 不为 NULL |
+| input | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待加密的明文 | 不为 NULL |
+| label | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | RSA 标签，仅 OAEP 填充模式时使用此参数 | 可为 NULL |
 
 **出参**
 
@@ -774,9 +774,9 @@ errcode_t uapi_drv_cipher_pke_rsa_private_decrypt(uapi_drv_cipher_pke_rsa_scheme
 | ---- | ---- | ---- | ---- |
 | scheme | [uapi_drv_cipher_pke_rsa_scheme_t](#uapi_drv_cipher_pke_rsa_scheme_t) | RSA 填充方式 | [uapi_drv_cipher_pke_rsa_scheme_t](#uapi_drv_cipher_pke_rsa_scheme_t) 全体成员 |
 | hash_type | [uapi_drv_cipher_pke_hash_type_t](#uapi_drv_cipher_pke_hash_type_t) | RSA 填充使用的摘要算法，仅 OAEP 填充模式时使用此参数 | [uapi_drv_cipher_pke_hash_type_t](#uapi_drv_cipher_pke_hash_type_t) 全体成员 |
-| priv_key | [uapi_drv_cipher_pke_rsa_priv_key_t](#uapi_drv_cipher_pke_rsa_priv_key_t) | 输入 RSA 私钥 | 不为NULL |
-| input | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待解密的密文 | 不为NULL |
-| label | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | RSA 标签，仅 OAEP 填充模式时使用此参数 | 可为NULL |
+| priv_key | [uapi_drv_cipher_pke_rsa_priv_key_t](#uapi_drv_cipher_pke_rsa_priv_key_t) | 输入 RSA 私钥 | 不为 NULL |
+| input | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入待解密的密文 | 不为 NULL |
+| label | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | RSA 标签，仅 OAEP 填充模式时使用此参数 | 可为 NULL |
 
 **出参**
 
@@ -828,9 +828,9 @@ errcode_t uapi_drv_cipher_pke_dh_gen_key(const uapi_drv_cipher_pke_data_t *g_dat
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| g_data | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入公开底数，该数为质数；g_data->length 不能大于 mod_n->length | 不为NULL |
-| mod_n | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入公开模数，该数为质数；mod_n->length 支持 192/224/256/384/512/521/1024/2048/3072/4096 bits | 不为NULL |
-| input_priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入私钥，可为空；非空时 input_priv_key->length 应与 mod_n->length 相同 | 可为NULL |
+| g_data | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入公开底数，该数为质数；g_data->length 不能大于 mod_n->length | 不为 NULL |
+| mod_n | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入公开模数，该数为质数；mod_n->length 支持 192/224/256/384/512/521/1024/2048/3072/4096 bits | 不为 NULL |
+| input_priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入私钥，可为空；非空时 input_priv_key->length 应与 mod_n->length 相同 | 可为 NULL |
 
 **出参**
 
@@ -883,9 +883,9 @@ errcode_t uapi_drv_cipher_pke_dh_compute_key(const uapi_drv_cipher_pke_data_t *m
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mod_n | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入公开模数，该数为质数 | 不为NULL |
-| input_priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入本地私钥 | 不为NULL |
-| input_pub_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入对端公钥 | 不为NULL |
+| mod_n | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入公开模数，该数为质数 | 不为 NULL |
+| input_priv_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入本地私钥 | 不为 NULL |
+| input_pub_key | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入对端公钥 | 不为 NULL |
 
 **出参**
 
@@ -936,9 +936,9 @@ errcode_t uapi_drv_cipher_pke_add_mod(const uapi_drv_cipher_pke_data_t *a, const
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| a | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第一个大数，a->length 不能大于 p->length | 不为NULL |
-| b | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第二个大数，b->length 不能大于 p->length | 不为NULL |
-| p | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入模数，p->length 支持 192/224/256/384/512/521/1024/1536/2048/3072/4096 bits | 不为NULL |
+| a | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第一个大数，a->length 不能大于 p->length | 不为 NULL |
+| b | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第二个大数，b->length 不能大于 p->length | 不为 NULL |
+| p | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入模数，p->length 支持 192/224/256/384/512/521/1024/1536/2048/3072/4096 bits | 不为 NULL |
 
 **出参**
 
@@ -989,9 +989,9 @@ errcode_t uapi_drv_cipher_pke_sub_mod(const uapi_drv_cipher_pke_data_t *a, const
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| a | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第一个大数，a->length 不能大于 p->length | 不为NULL |
-| b | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第二个大数，b->length 不能大于 p->length | 不为NULL |
-| p | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入模数，p->length 支持 192/224/256/384/512/521/1024/1536/2048/3072/4096 bits | 不为NULL |
+| a | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第一个大数，a->length 不能大于 p->length | 不为 NULL |
+| b | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第二个大数，b->length 不能大于 p->length | 不为 NULL |
+| p | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入模数，p->length 支持 192/224/256/384/512/521/1024/1536/2048/3072/4096 bits | 不为 NULL |
 
 **出参**
 
@@ -1042,9 +1042,9 @@ errcode_t uapi_drv_cipher_pke_mul_mod(const uapi_drv_cipher_pke_data_t *a, const
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| a | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第一个大数，a->length 不能大于 p->length | 不为NULL |
-| b | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第二个大数，b->length 不能大于 p->length | 不为NULL |
-| p | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入模数，p->length 支持 192/256/384/512/1024/1536/2048/3072/4096 bits，且模数不能为偶数 | 不为NULL |
+| a | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第一个大数，a->length 不能大于 p->length | 不为 NULL |
+| b | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第二个大数，b->length 不能大于 p->length | 不为 NULL |
+| p | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入模数，p->length 支持 192/256/384/512/1024/1536/2048/3072/4096 bits，且模数不能为偶数 | 不为 NULL |
 
 **出参**
 
@@ -1095,8 +1095,8 @@ errcode_t uapi_drv_cipher_pke_inv_mod(const uapi_drv_cipher_pke_data_t *a, const
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| a | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入大数，a->length 应与 p->length 相同 | 不为NULL |
-| p | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入模数，p->length 支持 192/256/384/512/1024/1536/2048/3072/4096 bits，且模数不能为偶数 | 不为NULL |
+| a | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入大数，a->length 应与 p->length 相同 | 不为 NULL |
+| p | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入模数，p->length 支持 192/256/384/512/1024/1536/2048/3072/4096 bits，且模数不能为偶数 | 不为 NULL |
 
 **出参**
 
@@ -1147,8 +1147,8 @@ errcode_t uapi_drv_cipher_pke_mod(const uapi_drv_cipher_pke_data_t *a, const uap
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| a | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入大数，其有效数据长度不能大于 2 倍的 p->length 有效数据长度 | 不为NULL |
-| p | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入模数，p->length 支持 192/256/384/512/1024/1536/2048/3072/4096 bits，且模数不能为偶数 | 不为NULL |
+| a | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入大数，其有效数据长度不能大于 2 倍的 p->length 有效数据长度 | 不为 NULL |
+| p | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入模数，p->length 支持 192/256/384/512/1024/1536/2048/3072/4096 bits，且模数不能为偶数 | 不为 NULL |
 
 **出参**
 
@@ -1199,8 +1199,8 @@ errcode_t uapi_drv_cipher_pke_mul(const uapi_drv_cipher_pke_data_t *a, const uap
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| a | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第一个大数，a->length 不能大于 2048 bits | 不为NULL |
-| b | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第二个大数，b->length 不能大于 2048 bits | 不为NULL |
+| a | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第一个大数，a->length 不能大于 2048 bits | 不为 NULL |
+| b | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入第二个大数，b->length 不能大于 2048 bits | 不为 NULL |
 
 **出参**
 
@@ -1251,9 +1251,9 @@ errcode_t uapi_drv_cipher_pke_exp_mod(const uapi_drv_cipher_pke_data_t *n, const
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| n | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入模数，n->length 支持 192/256/384/512/1024/1536/2048/3072/4096 bits，且模数不能为偶数 | 不为NULL |
-| k | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入指数，数据长度不能大于 4096 bits | 不为NULL |
-| in | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入底数数据，数据长度不能大于 4096 bits | 不为NULL |
+| n | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入模数，n->length 支持 192/256/384/512/1024/1536/2048/3072/4096 bits，且模数不能为偶数 | 不为 NULL |
+| k | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入指数，数据长度不能大于 4096 bits | 不为 NULL |
+| in | [uapi_drv_cipher_pke_data_t](#uapi_drv_cipher_pke_data_t) | 输入底数数据，数据长度不能大于 4096 bits | 不为 NULL |
 
 **出参**
 
@@ -1342,8 +1342,8 @@ typedef enum {
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
 | UAPI_DRV_CIPHER_PKE_RSA_SCHEME_PKCS1_V15 | 0x00 | PKCS1 v1.5 填充方式（不安全，不建议使用） |
-| UAPI_DRV_CIPHER_PKE_RSA_SCHEME_PKCS1_V21 | 1 | PKCS1 v2.1 填充方式 |
-| UAPI_DRV_CIPHER_PKE_RSA_SCHEME_MAX | 2 | 填充方式上限 |
+| UAPI_DRV_CIPHER_PKE_RSA_SCHEME_PKCS1_V21 | 0x1 | PKCS1 v2.1 填充方式 |
+| UAPI_DRV_CIPHER_PKE_RSA_SCHEME_MAX | 0x2 | 填充方式上限 |
 | UAPI_DRV_CIPHER_PKE_RSA_SCHEME_INVALID | 0xffffffff | 无效填充方式 |
 
 ### uapi_drv_cipher_pke_hash_type_t <a id="uapi_drv_cipher_pke_hash_type_t"></a>
@@ -1364,12 +1364,12 @@ typedef enum {
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
 | UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA1 | 0x00 | SHA1 摘要算法 |
-| UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA224 | 1 | SHA224 摘要算法 |
-| UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA256 | 2 | SHA256 摘要算法 |
-| UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA384 | 3 | SHA384 摘要算法 |
-| UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA512 | 4 | SHA512 摘要算法 |
-| UAPI_DRV_CIPHER_PKE_HASH_TYPE_SM3 | 5 | SM3 摘要算法 |
-| UAPI_DRV_CIPHER_PKE_HASH_TYPE_MAX | 6 | 摘要算法上限 |
+| UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA224 | 0x1 | SHA224 摘要算法 |
+| UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA256 | 0x2 | SHA256 摘要算法 |
+| UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA384 | 0x3 | SHA384 摘要算法 |
+| UAPI_DRV_CIPHER_PKE_HASH_TYPE_SHA512 | 0x4 | SHA512 摘要算法 |
+| UAPI_DRV_CIPHER_PKE_HASH_TYPE_SM3 | 0x5 | SM3 摘要算法 |
+| UAPI_DRV_CIPHER_PKE_HASH_TYPE_MAX | 0x6 | 摘要算法上限 |
 | UAPI_DRV_CIPHER_PKE_HASH_TYPE_INVALID | 0xffffffff | 无效摘要算法 |
 
 ### uapi_drv_cipher_pke_buffer_secure_t <a id="uapi_drv_cipher_pke_buffer_secure_t"></a>
@@ -1385,7 +1385,7 @@ typedef enum {
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
 | UAPI_DRV_CIPHER_PKE_BUF_NONSECURE | 0x00 | 非安全缓冲区属性 |
-| UAPI_DRV_CIPHER_PKE_BUF_SECURE | 1 | 安全缓冲区属性 |
+| UAPI_DRV_CIPHER_PKE_BUF_SECURE | 0x1 | 安全缓冲区属性 |
 | UAPI_DRV_CIPHER_PKE_BUF_INVALID | 0xffffffff | 无效缓冲区属性 |
 
 ## Structures
@@ -1494,16 +1494,16 @@ typedef struct {
 | d | uint8_t * | RSA 私钥参数 d（私钥指数） |
 | p | uint8_t * | RSA 第一素数因子 p |
 | q | uint8_t * | RSA 第二素数因子 q |
-| dp | uint8_t * | D %(P - 1)的结果 |
-| dq | uint8_t * | D %(Q - 1)的结果 |
+| dp | uint8_t * | D %(P - 1) 的结果 |
+| dq | uint8_t * | D %(Q - 1) 的结果 |
 | qp | uint8_t * | 1 / (Q % P) 的结果 |
 | n_len | uint16_t | RSA 公钥参数 n 的长度 |
 | e_len | uint16_t | RSA 公钥参数 e 的长度 |
 | d_len | uint16_t | RSA 私钥参数 d 的长度 |
 | p_len | uint16_t | RSA 第一素因子 p 的长度，应为 n_len 的一半 |
 | q_len | uint16_t | RSA 第二素因子 q 的长度，应为 n_len 的一半 |
-| dp_len | uint16_t | D %(P - 1)结果的长度，应为 n_len 的一半 |
-| dq_len | uint16_t | D %(Q - 1)结果的长度，应为 n_len 的一半 |
+| dp_len | uint16_t | D %(P - 1) 结果的长度，应为 n_len 的一半 |
+| dq_len | uint16_t | D %(Q - 1) 结果的长度，应为 n_len 的一半 |
 | qp_len | uint16_t | 1 / (Q % P) 结果的长度，应为 n_len 的一半 |
 
 ### uapi_drv_cipher_pke_rsa_pub_key_t <a id="uapi_drv_cipher_pke_rsa_pub_key_t"></a>

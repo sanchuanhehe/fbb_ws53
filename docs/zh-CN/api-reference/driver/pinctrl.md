@@ -554,7 +554,7 @@ errcode_t uapi_pin_suspend(uintptr_t arg)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| arg | uintptr_t | 挂起所需要的参数 | 不为NULL |
+| arg | uintptr_t | 挂起所需要的参数 | 不为 NULL |
 
 **返回值**
 
@@ -602,7 +602,7 @@ errcode_t uapi_pin_resume(uintptr_t arg)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| arg | uintptr_t | 恢复所需要的参数 | 不为NULL |
+| arg | uintptr_t | 恢复所需要的参数 | 不为 NULL |
 
 **返回值**
 

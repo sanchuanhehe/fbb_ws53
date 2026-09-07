@@ -59,7 +59,7 @@ errcode_t gatts_register_server(bt_uuid_t *app_uuid, uint8_t *server_id)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| app_uuid | bt_uuid_t * | 上层应用 UUID，用于标识当前应用 | 不为NULL |
+| app_uuid | bt_uuid_t * | 上层应用 UUID，用于标识当前应用 | 不为 NULL |
 
 **出参**
 
@@ -145,7 +145,7 @@ errcode_t gatts_add_service(uint8_t server_id, bt_uuid_t *service_uuid, bool is_
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
-| service_uuid | bt_uuid_t * | 服务的 UUID | 不为NULL |
+| service_uuid | bt_uuid_t * | 服务的 UUID | 不为 NULL |
 | is_primary | bool | 是否为主服务 | true；<br>false。 |
 
 **返回值**
@@ -185,7 +185,7 @@ errcode_t gatts_add_characteristic(uint8_t server_id, uint16_t service_handle, g
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
 | service_handle | uint16_t | 所属服务的属性句柄 | gatts_add_service 回调返回的有效服务句柄 |
-| character | [gatts_add_chara_info_t](#struct_gatts_add_chara_info_t) * | 特征信息 | 不为NULL |
+| character | [gatts_add_chara_info_t](#struct_gatts_add_chara_info_t) * | 特征信息 | 不为 NULL |
 
 **返回值**
 
@@ -224,7 +224,7 @@ errcode_t gatts_add_descriptor(uint8_t server_id, uint16_t service_handle, gatts
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
 | service_handle | uint16_t | 所属服务的属性句柄 | gatts_add_service 回调返回的有效服务句柄 |
-| descriptor | [gatts_add_desc_info_t](#struct_gatts_add_desc_info_t) * | 特征描述符信息 | 不为NULL |
+| descriptor | [gatts_add_desc_info_t](#struct_gatts_add_desc_info_t) * | 特征描述符信息 | 不为 NULL |
 
 **返回值**
 
@@ -262,7 +262,7 @@ errcode_t gatts_add_service_sync(uint8_t server_id, bt_uuid_t *service_uuid, boo
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
-| service_uuid | bt_uuid_t * | 服务的 UUID | 不为NULL |
+| service_uuid | bt_uuid_t * | 服务的 UUID | 不为 NULL |
 | is_primary | bool | 是否为主服务 | true；<br>false。 |
 
 **出参**
@@ -313,7 +313,7 @@ errcode_t gatts_add_characteristic_sync(uint8_t server_id, uint16_t service_hand
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
 | service_handle | uint16_t | 所属服务的属性句柄 | gatts_add_service；<br>gatts_add_service_sync 返回的有效服务句柄。 |
-| character | [gatts_add_chara_info_t](#struct_gatts_add_chara_info_t) * | 特征信息 | 不为NULL |
+| character | [gatts_add_chara_info_t](#struct_gatts_add_chara_info_t) * | 特征信息 | 不为 NULL |
 
 **出参**
 
@@ -363,7 +363,7 @@ errcode_t gatts_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
 | service_handle | uint16_t | 所属服务的属性句柄 | gatts_add_service；<br>gatts_add_service_sync 返回的有效服务句柄。 |
-| descriptor | [gatts_add_desc_info_t](#struct_gatts_add_desc_info_t) * | 特征描述符信息 | 不为NULL |
+| descriptor | [gatts_add_desc_info_t](#struct_gatts_add_desc_info_t) * | 特征描述符信息 | 不为 NULL |
 
 **出参**
 
@@ -569,7 +569,7 @@ errcode_t gatts_send_response(uint8_t server_id, uint16_t conn_id, gatts_send_rs
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
 | conn_id | uint16_t | 连接 ID | 有效连接 ID |
-| param | [gatts_send_rsp_t](#struct_gatts_send_rsp_t) * | 响应参数 | 不为NULL |
+| param | [gatts_send_rsp_t](#struct_gatts_send_rsp_t) * | 响应参数 | 不为 NULL |
 
 **返回值**
 
@@ -608,7 +608,7 @@ errcode_t gatts_notify_indicate(uint8_t server_id, uint16_t conn_id, gatts_ntf_i
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
 | conn_id | uint16_t | 连接 ID | 有效连接 ID |
-| param | [gatts_ntf_ind_t](#struct_gatts_ntf_ind_t) * | 通知或指示参数 | 不为NULL |
+| param | [gatts_ntf_ind_t](#struct_gatts_ntf_ind_t) * | 通知或指示参数 | 不为 NULL |
 
 **返回值**
 
@@ -652,7 +652,7 @@ errcode_t gatts_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, gat
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
 | conn_id | uint16_t | 连接 ID | 有效连接 ID |
-| param | [gatts_ntf_ind_by_uuid_t](#struct_gatts_ntf_ind_by_uuid_t) * | 通知或指示参数 | 不为NULL |
+| param | [gatts_ntf_ind_by_uuid_t](#struct_gatts_ntf_ind_by_uuid_t) * | 通知或指示参数 | 不为 NULL |
 
 **返回值**
 
@@ -731,7 +731,7 @@ errcode_t gatts_register_callbacks(gatts_callbacks_t *func)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [gatts_callbacks_t](#struct_gatts_callbacks_t) * | 回调函数集合 | 不为NULL |
+| func | [gatts_callbacks_t](#struct_gatts_callbacks_t) * | 回调函数集合 | 不为 NULL |
 
 **返回值**
 

@@ -67,7 +67,7 @@ int osal_msg_queue_create(const char *name, unsigned short queue_len, unsigned l
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | 0 | 执行成功 | 消息队列创建成功 |
-| 非0 | 执行失败 | 消息队列创建失败 |
+| 非 0 | 执行失败 | 消息队列创建失败 |
 
 **参考案例**
 
@@ -122,7 +122,7 @@ int osal_msg_queue_write_copy(unsigned long queue_id, void *buffer_addr, unsigne
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | 0 | 执行成功 | 数据写入成功 |
-| 非0 | 执行失败 | 数据写入失败 |
+| 非 0 | 执行失败 | 数据写入失败 |
 
 **参考案例**
 
@@ -176,7 +176,7 @@ int osal_msg_queue_read_copy(unsigned long queue_id, void *buffer_addr, unsigned
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | 0 | 执行成功 | 数据读取成功 |
-| 非0 | 执行失败 | 数据读取失败 |
+| 非 0 | 执行失败 | 数据读取失败 |
 
 **参考案例**
 
@@ -225,7 +225,7 @@ int osal_msg_queue_write_head_copy(unsigned long queue_id, void *buffer_addr, un
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | 0 | 执行成功 | 数据写入成功 |
-| 非0 | 执行失败 | 数据写入失败 |
+| 非 0 | 执行失败 | 数据写入失败 |
 
 ### osal_msg_queue_delete <a id="osal_msg_queue_delete"></a>
 

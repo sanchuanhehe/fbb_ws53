@@ -349,7 +349,7 @@ errcode_t uapi_register_watchdog_callback(watchdog_callback_t callback)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| callback | [watchdog_callback_t](#typedef_watchdog_callback_t) | 看门狗超时回调函数，看门狗超时触发时被调用，回调返回值在当前实现中不被检查 | 不为NULL |
+| callback | [watchdog_callback_t](#typedef_watchdog_callback_t) | 看门狗超时回调函数，看门狗超时触发时被调用，回调返回值在当前实现中不被检查 | 不为 NULL |
 
 **返回值**
 

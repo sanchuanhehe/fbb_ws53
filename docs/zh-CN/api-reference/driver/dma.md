@@ -298,7 +298,7 @@ errcode_t uapi_dma_transfer_memory_single(const dma_ch_user_memory_config_t *use
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| user_cfg | [dma_ch_user_memory_config_t](#dma_ch_user_memory_config_t) * | 用户的 DMA 通道内存到内存传输配置 | 不为NULL |
+| user_cfg | [dma_ch_user_memory_config_t](#dma_ch_user_memory_config_t) * | 用户的 DMA 通道内存到内存传输配置 | 不为 NULL |
 | callback | [dma_transfer_cb_t](#dma_transfer_cb_t) | 通道传输完成/错误回调函数 | - |
 | arg | uintptr_t | 用于存储自定义信息的私有参数指针，传输完成时回传给回调函数 | - |
 
@@ -342,8 +342,8 @@ errcode_t uapi_dma_configure_peripheral_transfer_single(const dma_ch_user_periph
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| user_cfg | [dma_ch_user_peripheral_config_t](#dma_ch_user_peripheral_config_t) * | 用户的 DMA 通道内存到外设或外设到内存传输配置 | 不为NULL，且各字段满足合法性约束 |
-| channel | uint8_t * | 出参，由本接口写入被选中的 DMA 通道号 | 不为NULL |
+| user_cfg | [dma_ch_user_peripheral_config_t](#dma_ch_user_peripheral_config_t) * | 用户的 DMA 通道内存到外设或外设到内存传输配置 | 不为 NULL，且各字段满足合法性约束 |
+| channel | uint8_t * | 出参，由本接口写入被选中的 DMA 通道号 | 不为 NULL |
 | callback | [dma_transfer_cb_t](#dma_transfer_cb_t) | 通道传输完成/错误回调函数 | - |
 | arg | uintptr_t | 用于存储自定义信息的私有参数指针，传输完成时回传给回调函数 | - |
 
@@ -438,7 +438,7 @@ errcode_t uapi_dma_transfer_memory_lli(uint8_t channel, const dma_ch_user_memory
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | channel | uint8_t | DMA 通道号，建议来自 [uapi_dma_get_lli_channel](#uapi_dma_get_lli_channel) 的返回值 | 0 ~ [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)：8 - 1 |
-| user_cfg | [dma_ch_user_memory_config_t](#dma_ch_user_memory_config_t) * | 用户的 DMA 通道内存到内存传输配置 | 不为NULL |
+| user_cfg | [dma_ch_user_memory_config_t](#dma_ch_user_memory_config_t) * | 用户的 DMA 通道内存到内存传输配置 | 不为 NULL |
 | callback | [dma_transfer_cb_t](#dma_transfer_cb_t) | 通道传输完成/错误回调函数 | - |
 
 **返回值**
@@ -488,7 +488,7 @@ errcode_t uapi_dma_configure_peripheral_transfer_lli(uint8_t channel, const dma_
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | channel | uint8_t | DMA 通道号 | < [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)：8 |
-| user_cfg | [dma_ch_user_peripheral_config_t](#dma_ch_user_peripheral_config_t) * | 用户的 DMA 通道内存到外设或外设到内存传输配置 | 不为NULL，且各字段满足合法性约束 |
+| user_cfg | [dma_ch_user_peripheral_config_t](#dma_ch_user_peripheral_config_t) * | 用户的 DMA 通道内存到外设或外设到内存传输配置 | 不为 NULL，且各字段满足合法性约束 |
 | callback | [dma_transfer_cb_t](#dma_transfer_cb_t) | 通道传输完成/错误回调函数 | - |
 
 **返回值**

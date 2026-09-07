@@ -78,7 +78,7 @@ errcode_t gap_ble_set_local_addr(const bd_addr_t *addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 本地设备蓝牙地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 本地设备蓝牙地址 | 不为 NULL |
 
 **返回值**
 
@@ -196,7 +196,7 @@ errcode_t gap_ble_set_local_name(const uint8_t *name, const uint8_t len)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| name | const uint8_t * | 设备名称缓冲区指针 | 不为NULL |
+| name | const uint8_t * | 设备名称缓冲区指针 | 不为 NULL |
 | len | uint8_t | 名称长度，包含结束符 `\0` | 无实现级边界校验（实现闭源） |
 
 **返回值**
@@ -235,7 +235,7 @@ errcode_t gap_ble_get_local_name(uint8_t *name, uint8_t *len)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| len | uint8_t * | 入参为用户分配的缓冲区大小，出参为设备名称长度 | 不为NULL |
+| len | uint8_t * | 入参为用户分配的缓冲区大小，出参为设备名称长度 | 不为 NULL |
 
 **出参**
 
@@ -281,7 +281,7 @@ errcode_t gap_ble_set_adv_data(uint8_t adv_id, const gap_ble_config_adv_data_t *
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | adv_id | uint8_t | 广播 ID | 0 ~ 255 |
-| data | [gap_ble_config_adv_data_t](#struct_gap_ble_config_adv_data_t) * | 广播数据与扫描响应数据 | 不为NULL |
+| data | [gap_ble_config_adv_data_t](#struct_gap_ble_config_adv_data_t) * | 广播数据与扫描响应数据 | 不为 NULL |
 
 **返回值**
 
@@ -325,7 +325,7 @@ errcode_t gap_ble_set_adv_param(uint8_t adv_id, const gap_ble_adv_params_t *para
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | adv_id | uint8_t | 广播 ID | 0 ~ 255 |
-| param | [gap_ble_adv_params_t](#struct_gap_ble_adv_params_t) * | 广播参数 | 不为NULL |
+| param | [gap_ble_adv_params_t](#struct_gap_ble_adv_params_t) * | 广播参数 | 不为 NULL |
 
 **返回值**
 
@@ -448,7 +448,7 @@ errcode_t gap_ble_set_scan_parameters(const gap_ble_scan_params_t *param)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [gap_ble_scan_params_t](#struct_gap_ble_scan_params_t) * | 扫描参数 | 不为NULL |
+| param | [gap_ble_scan_params_t](#struct_gap_ble_scan_params_t) * | 扫描参数 | 不为 NULL |
 
 **返回值**
 
@@ -486,7 +486,7 @@ errcode_t gap_ble_set_scan_extern_parameters(const gap_ble_extern_scan_params_t 
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [gap_ble_extern_scan_params_t](#struct_gap_ble_extern_scan_params_t) * | 扫描扩展参数 | 不为NULL |
+| param | [gap_ble_extern_scan_params_t](#struct_gap_ble_extern_scan_params_t) * | 扫描扩展参数 | 不为 NULL |
 
 **返回值**
 
@@ -585,7 +585,7 @@ errcode_t gap_ble_set_phy(gap_le_set_phy_t *param)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [gap_le_set_phy_t](#struct_gap_le_set_phy_t) * | BLE PHY 参数 | 不为NULL |
+| param | [gap_le_set_phy_t](#struct_gap_le_set_phy_t) * | BLE PHY 参数 | 不为 NULL |
 
 **返回值**
 
@@ -627,7 +627,7 @@ errcode_t gap_ble_set_data_length(gap_le_set_data_length_t *param)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [gap_le_set_data_length_t](#struct_gap_le_set_data_length_t) * | BLE 发包参数 | 不为NULL |
+| param | [gap_le_set_data_length_t](#struct_gap_le_set_data_length_t) * | BLE 发包参数 | 不为 NULL |
 
 **返回值**
 
@@ -669,7 +669,7 @@ errcode_t gap_ble_pair_remote_device(const bd_addr_t *addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 待配对的远端设备地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 待配对的远端设备地址 | 不为 NULL |
 
 **返回值**
 
@@ -745,7 +745,7 @@ errcode_t gap_ble_get_paired_devices(bd_addr_t *addr, uint16_t *number)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| number | uint16_t * | 入参为缓冲区可容纳的设备数，出参为实际配对设备数 | 不为NULL |
+| number | uint16_t * | 入参为缓冲区可容纳的设备数，出参为实际配对设备数 | 不为 NULL |
 
 **出参**
 
@@ -790,7 +790,7 @@ errcode_t gap_ble_get_pair_state(const bd_addr_t *addr, gap_ble_pair_state_t *st
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 待查询的设备地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 待查询的设备地址 | 不为 NULL |
 
 **出参**
 
@@ -834,7 +834,7 @@ errcode_t gap_ble_remove_pair(const bd_addr_t *addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 待取消配对的对端设备地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 待取消配对的对端设备地址 | 不为 NULL |
 
 **返回值**
 
@@ -872,7 +872,7 @@ errcode_t gap_ble_add_white_list(const bd_addr_t *addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 待添加到白名单的对端设备地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 待添加到白名单的对端设备地址 | 不为 NULL |
 
 **返回值**
 
@@ -910,7 +910,7 @@ errcode_t gap_ble_remove_white_list(const bd_addr_t *addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 待移除的对端设备地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 待移除的对端设备地址 | 不为 NULL |
 
 **返回值**
 
@@ -1012,7 +1012,7 @@ errcode_t gap_ble_get_bonded_devices(bd_addr_t *addr, uint16_t *number)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| number | uint16_t * | 入参为缓冲区可容纳的设备数，出参为实际绑定设备数 | 不为NULL |
+| number | uint16_t * | 入参为缓冲区可容纳的设备数，出参为实际绑定设备数 | 不为 NULL |
 
 **出参**
 
@@ -1057,7 +1057,7 @@ errcode_t gap_ble_connect_param_update(gap_conn_param_update_t *params)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| params | [gap_conn_param_update_t](#struct_gap_conn_param_update_t) * | 待更新的连接参数 | 不为NULL |
+| params | [gap_conn_param_update_t](#struct_gap_conn_param_update_t) * | 待更新的连接参数 | 不为 NULL |
 
 **返回值**
 
@@ -1099,7 +1099,7 @@ errcode_t gap_ble_connect_remote_device(const bd_addr_t *addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 待连接的远端设备地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 待连接的远端设备地址 | 不为 NULL |
 
 **返回值**
 
@@ -1137,7 +1137,7 @@ errcode_t gap_ble_disconnect_remote_device(const bd_addr_t *addr)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 待断开的远端设备地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 待断开的远端设备地址 | 不为 NULL |
 
 **返回值**
 
@@ -1175,7 +1175,7 @@ errcode_t gap_ble_set_sec_param(gap_ble_sec_params_t *params)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| params | [gap_ble_sec_params_t](#struct_gap_ble_sec_params_t) * | 安全参数 | 不为NULL |
+| params | [gap_ble_sec_params_t](#struct_gap_ble_sec_params_t) * | 安全参数 | 不为 NULL |
 
 **返回值**
 
@@ -1251,7 +1251,7 @@ errcode_t gap_ble_register_callbacks(gap_ble_callbacks_t *func)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [gap_ble_callbacks_t](#struct_gap_ble_callbacks_t) * | 指向回调函数集合的指针 | 不为NULL |
+| func | [gap_ble_callbacks_t](#struct_gap_ble_callbacks_t) * | 指向回调函数集合的指针 | 不为 NULL |
 
 **返回值**
 
@@ -1364,9 +1364,9 @@ errcode_t ble_set_nv_pair_keys(ble_auth_info_evt_t *key, bd_addr_t *own_addr, bd
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| key | [ble_auth_info_evt_t](#struct_ble_auth_info_evt_t) * | 指向 SMP 配对密钥的指针 | 不为NULL |
-| own_addr | [bd_addr_t](#struct_bd_addr_t) * | 指向本端地址的指针 | 不为NULL |
-| peer_addr | [bd_addr_t](#struct_bd_addr_t) * | 指向对端地址的指针 | 不为NULL |
+| key | [ble_auth_info_evt_t](#struct_ble_auth_info_evt_t) * | 指向 SMP 配对密钥的指针 | 不为 NULL |
+| own_addr | [bd_addr_t](#struct_bd_addr_t) * | 指向本端地址的指针 | 不为 NULL |
+| peer_addr | [bd_addr_t](#struct_bd_addr_t) * | 指向对端地址的指针 | 不为 NULL |
 | index | uint8_t | 密钥的下标索引 | 0 ~ 255 |
 
 **返回值**
@@ -1769,7 +1769,7 @@ typedef enum {
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
 | GAP_BLE_SCAN_TYPE_PASSIVE | 0x00 | 被动扫描 |
-| GAP_BLE_SCAN_TYPE_ACTIVE | 1 | 主动扫描 |
+| GAP_BLE_SCAN_TYPE_ACTIVE | 0x1 | 主动扫描 |
 
 ### enum_gap_ble_scan_filter_policy_t <a id="enum_gap_ble_scan_filter_policy_t"></a>
 
@@ -1798,9 +1798,9 @@ typedef enum {
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
 | GAP_BLE_SCAN_FILTER_POLICY_ACCEPT_ALL | 0x00 | 接收所有广播，不接收目标地址不是本设备地址的定向广播（默认） |
-| GAP_BLE_SCAN_FILTER_POLICY_ONLY_WHITE_LIST | 1 | 只接收白名单里设备的广播，不接收目标地址不是本设备地址的定向广播 |
-| GAP_BLE_SCAN_FILTER_POLICY_ACCEPT_ALL_AND_RPA | 2 | 接收所有的非定向广播、地址是可解析私有地址的广播方发送的定向广播、发给该设备的定向广播 |
-| GAP_BLE_SCAN_FILTER_POLICY_ONLY_WHITE_LIST_AND_RPA | 3 | 接收白名单中的所有非定向广播、地址是可解析私有地址的广播方发送的定向广播、发给该设备的定向广播 |
+| GAP_BLE_SCAN_FILTER_POLICY_ONLY_WHITE_LIST | 0x1 | 只接收白名单里设备的广播，不接收目标地址不是本设备地址的定向广播 |
+| GAP_BLE_SCAN_FILTER_POLICY_ACCEPT_ALL_AND_RPA | 0x2 | 接收所有的非定向广播、地址是可解析私有地址的广播方发送的定向广播、发给该设备的定向广播 |
+| GAP_BLE_SCAN_FILTER_POLICY_ONLY_WHITE_LIST_AND_RPA | 0x3 | 接收白名单中的所有非定向广播、地址是可解析私有地址的广播方发送的定向广播、发给该设备的定向广播 |
 
 ### enum_gap_ble_scan_result_evt_type_t <a id="enum_gap_ble_scan_result_evt_type_t"></a>
 
@@ -1913,7 +1913,7 @@ typedef enum {
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
 | ADV_STATUS_STOPPED | 0x00 | 广播停止 |
-| ADV_STATUS_ADVERTISING | 1 | 正在广播 |
+| ADV_STATUS_ADVERTISING | 0x1 | 正在广播 |
 
 ### enum_gap_ble_sec_mode_t <a id="enum_gap_ble_sec_mode_t"></a>
 

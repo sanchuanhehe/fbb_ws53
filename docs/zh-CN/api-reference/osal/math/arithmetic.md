@@ -50,7 +50,7 @@ unsigned long long osal_div_u64(unsigned long long dividend, unsigned int diviso
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | dividend | unsigned long long | 无符号 64 位被除数 | 0 ~ 2^64-1 |
-| divisor | unsigned int | 无符号 32 位除数 | 不为0 |
+| divisor | unsigned int | 无符号 32 位除数 | 不为 0 |
 
 **返回值**
 
@@ -87,7 +87,7 @@ long long osal_div_s64(long long dividend, int divisor)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | dividend | long long | 有符号 64 位被除数 | -2^63 ~ 2^63-1 |
-| divisor | int | 有符号 32 位除数 | 不为0 |
+| divisor | int | 有符号 32 位除数 | 不为 0 |
 
 **返回值**
 
@@ -124,7 +124,7 @@ unsigned long long osal_div64_u64(unsigned long long dividend, unsigned long lon
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | dividend | unsigned long long | 无符号 64 位被除数 | 0 ~ 2^64-1 |
-| divisor | unsigned long long | 无符号 64 位除数 | 不为0 |
+| divisor | unsigned long long | 无符号 64 位除数 | 不为 0 |
 
 **返回值**
 
@@ -161,7 +161,7 @@ long long osal_div64_s64(long long dividend, long long divisor)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | dividend | long long | 有符号 64 位被除数 | -2^63 ~ 2^63-1 |
-| divisor | long long | 有符号 64 位除数 | 不为0 |
+| divisor | long long | 有符号 64 位除数 | 不为 0 |
 
 **返回值**
 
@@ -198,7 +198,7 @@ unsigned long long osal_div_u64_rem(unsigned long long dividend, unsigned int di
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | dividend | unsigned long long | 无符号 64 位被除数 | 0 ~ 2^64-1 |
-| divisor | unsigned int | 无符号 32 位除数 | 不为0 |
+| divisor | unsigned int | 无符号 32 位除数 | 不为 0 |
 
 **返回值**
 
@@ -235,7 +235,7 @@ long long osal_div_s64_rem(long long dividend, int divisor)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | dividend | long long | 有符号 64 位被除数 | -2^63 ~ 2^63-1 |
-| divisor | int | 有符号 32 位除数 | 不为0 |
+| divisor | int | 有符号 32 位除数 | 不为 0 |
 
 **返回值**
 
@@ -272,7 +272,7 @@ unsigned long long osal_div64_u64_rem(unsigned long long dividend, unsigned long
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | dividend | unsigned long long | 无符号 64 位被除数 | 0 ~ 2^64-1 |
-| divisor | unsigned long long | 无符号 64 位除数 | 不为0 |
+| divisor | unsigned long long | 无符号 64 位除数 | 不为 0 |
 
 **返回值**
 

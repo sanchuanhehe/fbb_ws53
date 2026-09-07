@@ -292,8 +292,8 @@ errcode_t wifi_p2p_listen(uint32_t period, uint32_t interval)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| period | uint32_t | 监听时间 | 0 ~ 65535（与 interval 须同为 0或同非 0，且period ≤ interval） |
-| interval | uint32_t | 一个周期的总时间 | 0 ~ 65535（与 period 须同为 0或同非 0，且period ≤ interval） |
+| period | uint32_t | 监听时间 | 0 ~ 65535（与 interval 须同为 0 或同非 0，且 period ≤ interval） |
+| interval | uint32_t | 一个周期的总时间 | 0 ~ 65535（与 period 须同为 0 或同非 0，且 period ≤ interval） |
 
 **返回值**
 
@@ -388,7 +388,7 @@ errcode_t wifi_p2p_connect(const p2p_config_stru *p2p_config)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| p2p_config | const [p2p_config_stru](#p2p_config_stru)* | 待连接的 P2P 设备网络信息 | 不为NULL |
+| p2p_config | const [p2p_config_stru](#p2p_config_stru)* | 待连接的 P2P 设备网络信息 | 不为 NULL |
 
 **返回值**
 
@@ -432,7 +432,7 @@ errcode_t wifi_p2p_connect_accept(const p2p_config_stru *p2p_config, int assoc)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| p2p_config | const [p2p_config_stru](#p2p_config_stru)* | 待连接的 P2P 设备网络信息 | 不为NULL |
+| p2p_config | const [p2p_config_stru](#p2p_config_stru)* | 待连接的 P2P 设备网络信息 | 不为 NULL |
 | assoc | int | 连接接受标志，1 表示接受连接，0 表示拒绝连接 | 0；<br>1。 |
 
 **返回值**
@@ -515,7 +515,7 @@ errcode_t wifi_p2p_go_get_gc_info(p2p_client_info_stru *client_list, uint32_t *c
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| client_list | [p2p_client_info_stru](#p2p_client_info_stru)* | GC 信息列表缓冲区 | 不为NULL |
+| client_list | [p2p_client_info_stru](#p2p_client_info_stru)* | GC 信息列表缓冲区 | 不为 NULL |
 | client_num | uint32_t* | 最大反馈 GC 个数 | 1 ~ 4（实现上界 SERVICE_P2P_MAX_GC_NUM = 4） |
 
 **出参**
@@ -567,7 +567,7 @@ errcode_t wifi_p2p_set_device_config(const p2p_device_config_stru *p2p_dev_set_i
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| p2p_dev_set_info | const [p2p_device_config_stru](#p2p_device_config_stru)* | P2P 设备设置信息 | 不为NULL |
+| p2p_dev_set_info | const [p2p_device_config_stru](#p2p_device_config_stru)* | P2P 设备设置信息 | 不为 NULL |
 
 **返回值**
 
@@ -611,7 +611,7 @@ errcode_t wifi_p2p_get_device_config(p2p_device_config_stru *p2p_dev_set_info)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| p2p_dev_set_info | [p2p_device_config_stru](#p2p_device_config_stru)* | P2P 设备设置信息缓冲区 | 不为NULL |
+| p2p_dev_set_info | [p2p_device_config_stru](#p2p_device_config_stru)* | P2P 设备设置信息缓冲区 | 不为 NULL |
 
 **出参**
 
@@ -661,7 +661,7 @@ errcode_t wifi_p2p_get_connect_info(p2p_status_info_stru *status)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| status | [p2p_status_info_stru](#p2p_status_info_stru)* | 待反馈的 P2P 连接状态信息缓冲区 | 不为NULL |
+| status | [p2p_status_info_stru](#p2p_status_info_stru)* | 待反馈的 P2P 连接状态信息缓冲区 | 不为 NULL |
 
 **出参**
 

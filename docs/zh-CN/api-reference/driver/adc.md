@@ -123,7 +123,7 @@ void uapi_adc_power_en(afe_scan_mode_t afe_scan_mode, bool en)
 
 - 对 ADC 执行上电或下电。
 - 选择 AFE 模拟前端精度模式（常规精度/高精度/麦克风/生物测量）。
-- 在启用高精度模式（CONFIG_ADC_SUPPORT_AFE且CONFIG_ADC_SUPPORT_HAFE）时管理各 AFE 模式的电源状态。
+- 在启用高精度模式（CONFIG_ADC_SUPPORT_AFE 且 CONFIG_ADC_SUPPORT_HAFE）时管理各 AFE 模式的电源状态。
 
 **前置条件**
 
@@ -157,7 +157,7 @@ bool uapi_adc_is_using(void)
 **功能说明**
 
 - 查询 ADC 是否处于使用（已上电）状态。
-- 在启用高精度模式（CONFIG_ADC_SUPPORT_AFE且CONFIG_ADC_SUPPORT_HAFE）时综合判断常规精度与高精度两种 AFE 模式的电源状态。
+- 在启用高精度模式（CONFIG_ADC_SUPPORT_AFE 且 CONFIG_ADC_SUPPORT_HAFE）时综合判断常规精度与高精度两种 AFE 模式的电源状态。
 - 返回当前 ADC 电源占用情况。
 
 **前置条件**
@@ -530,8 +530,8 @@ typedef enum afe_scan_mode {
 | ------- | ---- | ---- |
 | AFE_GADC_MODE | 0 | 模拟前端 ADC 常规精度模式 |
 | AFE_HADC_MODE | 1 | 模拟前端 ADC 高精度模式（CONFIG_ADC_SUPPORT_HAFE 启用时存在） |
-| AFE_AMIC_MODE | 1 | 模拟前端 ADC 麦克风模式（CONFIG_ADC_SUPPORT_AMIC 启用且CONFIG_ADC_SUPPORT_HAFE 未启用时存在） |
-| AFE_BIO_MODE | 2 | 模拟前端 ADC 生物测量模式（CONFIG_ADC_SUPPORT_AMIC 启用且CONFIG_ADC_SUPPORT_HAFE 未启用时存在） |
+| AFE_AMIC_MODE | 1 | 模拟前端 ADC 麦克风模式（CONFIG_ADC_SUPPORT_AMIC 启用且 CONFIG_ADC_SUPPORT_HAFE 未启用时存在） |
+| AFE_BIO_MODE | 2 | 模拟前端 ADC 生物测量模式（CONFIG_ADC_SUPPORT_AMIC 启用且 CONFIG_ADC_SUPPORT_HAFE 未启用时存在） |
 | AFE_SCAN_MODE_MAX_NUM | 1 / 2 / 3 | 模拟前端扫描模式枚举上限（取值随条件编译配置而定：仅 GADC 时为 1；HAFE 启用时为 2；AMIC 启用时为 3） |
 
 ## Structures

@@ -294,7 +294,7 @@ errcode_t uapi_upg_prepare(upg_prepare_info_t *prepare_info)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| prepare_info | [upg_prepare_info_t](#struct_upg_prepare_info)* | 准备信息的指针，包含升级包总长度 | 非NULL，package_len > 0 |
+| prepare_info | [upg_prepare_info_t](#struct_upg_prepare_info)* | 准备信息的指针，包含升级包总长度 | 非 NULL，package_len > 0 |
 
 **返回值**
 
@@ -386,7 +386,7 @@ errcode_t uapi_upg_write_package_async(uint32_t offset, const uint8_t *buff, uin
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | offset | uint32_t | 相对升级包开头的偏移 | 0 ~ 升级包大小-1 |
-| buff | const uint8_t* | 存放升级包数据的缓冲区 | 非NULL |
+| buff | const uint8_t* | 存放升级包数据的缓冲区 | 非 NULL |
 | len | uint16_t | 升级包数据缓冲区的长度 | > 0 |
 | callback | [uapi_upg_write_done_cb](#typedef_uapi_upg_write_done_cb) | 写入完成的回调函数 | 允许为 NULL（实现接受 NULL，无回调时不通知） |
 
@@ -437,7 +437,7 @@ errcode_t uapi_upg_write_package_sync(uint32_t offset, const uint8_t *buff, uint
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | offset | uint32_t | 相对升级包开头的偏移 | 0 ~ 升级包大小-1 |
-| buff | const uint8_t* | 存放升级包数据的缓冲区 | 非NULL |
+| buff | const uint8_t* | 存放升级包数据的缓冲区 | 非 NULL |
 | len | uint16_t | 升级包数据缓冲区的长度 | > 0 |
 
 **返回值**
@@ -487,7 +487,7 @@ errcode_t uapi_upg_read_package(uint32_t offset, uint8_t *buff, uint32_t len)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | offset | uint32_t | 相对升级包开头的偏移 | 0 ~ 升级包大小-1 |
-| buff | uint8_t* | 存放读取数据的缓冲区 | 非NULL |
+| buff | uint8_t* | 存放读取数据的缓冲区 | 非 NULL |
 | len | uint32_t | 要读取的数据长度 | > 0 |
 
 **返回值**
@@ -621,7 +621,7 @@ errcode_t uapi_upg_verify_file_head(const upg_package_header_t *pkg_header)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| pkg_header | [upg_package_header_t](#struct_upg_package_header)* | 指向升级包头结构的指针 | 非NULL |
+| pkg_header | [upg_package_header_t](#struct_upg_package_header)* | 指向升级包头结构的指针 | 非 NULL |
 
 **返回值**
 
@@ -674,8 +674,8 @@ errcode_t uapi_upg_verify_file_image(const upg_image_header_t *img_header, const
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| img_header | [upg_image_header_t](#struct_upg_image_header)* | 指向升级镜像头结构的指针 | 非NULL |
-| hash | const uint8_t* | 升级镜像的哈希值 | 非NULL |
+| img_header | [upg_image_header_t](#struct_upg_image_header)* | 指向升级镜像头结构的指针 | 非 NULL |
+| hash | const uint8_t* | 升级镜像的哈希值 | 非 NULL |
 | hash_len | uint32_t | 哈希的长度（单位 Bytes） | SHA_256_LENGTH(32) |
 | verify_old | bool | 是否校验旧镜像 | true；<br>false。 |
 
@@ -727,7 +727,7 @@ errcode_t uapi_upg_verify_file(const upg_package_header_t *pkg_header)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| pkg_header | [upg_package_header_t](#struct_upg_package_header)* | 指向升级包头结构的指针 | 非NULL |
+| pkg_header | [upg_package_header_t](#struct_upg_package_header)* | 指向升级包头结构的指针 | 非 NULL |
 
 **返回值**
 
@@ -1078,7 +1078,7 @@ typedef struct upg_image_header {
 | enc_pk_l1 | uint8_t[PROTECT_KEY_LEN] | 用于解密更新镜像的一级加密保护密钥 |
 | enc_pk_l2 | uint8_t[PROTECT_KEY_LEN] | 用于解密更新镜像的二级加密保护密钥 |
 | iv | uint8_t[IV_LEN] | 用于解密升级镜像的 IV |
-| padding | uint8_t[4] | 保留字段，以保证整个结构 16 Bytes对齐 |
+| padding | uint8_t[4] | 保留字段，以保证整个结构 16 Bytes 对齐 |
 
 ### upg_func <a id="struct_upg_func"></a>
 

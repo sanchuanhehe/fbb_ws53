@@ -87,7 +87,7 @@ void osal_completion_reinit(osal_completion *com)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| com | [osal_completion *](#osal_completion) | 指向已初始化的 completion 结构体 | 不为NULL |
+| com | [osal_completion *](#osal_completion) | 指向已初始化的 completion 结构体 | 不为 NULL |
 
 ### osal_complete <a id="osal_complete"></a>
 
@@ -116,7 +116,7 @@ void osal_complete(osal_completion *com)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| com | [osal_completion *](#osal_completion) | 指向已初始化的 completion 结构体 | 不为NULL |
+| com | [osal_completion *](#osal_completion) | 指向已初始化的 completion 结构体 | 不为 NULL |
 
 ### osal_wait_for_completion <a id="osal_wait_for_completion"></a>
 
@@ -145,7 +145,7 @@ void osal_wait_for_completion(osal_completion *com)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| com | [osal_completion *](#osal_completion) | 指向已初始化的 completion 结构体 | 不为NULL |
+| com | [osal_completion *](#osal_completion) | 指向已初始化的 completion 结构体 | 不为 NULL |
 
 ### osal_wait_for_completion_timeout <a id="osal_wait_for_completion_timeout"></a>
 
@@ -175,7 +175,7 @@ unsigned long osal_wait_for_completion_timeout(osal_completion *com, unsigned lo
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| com | [osal_completion *](#osal_completion) | 指向已初始化的 completion 结构体 | 不为NULL |
+| com | [osal_completion *](#osal_completion) | 指向已初始化的 completion 结构体 | 不为 NULL |
 | timeout | unsigned long | 超时等待时间 | 单位为 jiffies（linux）/ tick（liteos） |
 
 **返回值**
@@ -215,7 +215,7 @@ void osal_complete_all(osal_completion *com)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| com | [osal_completion *](#osal_completion) | 指向已初始化的 completion 结构体 | 不为NULL |
+| com | [osal_completion *](#osal_completion) | 指向已初始化的 completion 结构体 | 不为 NULL |
 
 ### osal_complete_destory <a id="osal_complete_destory"></a>
 
@@ -244,7 +244,7 @@ void osal_complete_destory(osal_completion *com)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| com | [osal_completion *](#osal_completion) | 指向待释放的 completion 结构体 | 不为NULL |
+| com | [osal_completion *](#osal_completion) | 指向待释放的 completion 结构体 | 不为 NULL |
 
 ## Structures
 

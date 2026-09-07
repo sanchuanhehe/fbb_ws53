@@ -108,7 +108,7 @@ int osal_klib_fwrite(const char *buf, unsigned long size, void *filp)
 **前置条件**
 
 - filp 为 osal_klib_fopen 返回的有效文件指针。
-- 文件以写模式（OSAL_O_WRONLY或OSAL_O_RDWR）打开。
+- 文件以写模式（OSAL_O_WRONLY 或 OSAL_O_RDWR）打开。
 
 **入参**
 
@@ -148,7 +148,7 @@ int osal_klib_fread(char *buf, unsigned long size, void *filp)
 **前置条件**
 
 - filp 为 osal_klib_fopen 返回的有效文件指针。
-- 文件以读模式（OSAL_O_RDONLY或OSAL_O_RDWR）打开。
+- 文件以读模式（OSAL_O_RDONLY 或 OSAL_O_RDWR）打开。
 
 **入参**
 

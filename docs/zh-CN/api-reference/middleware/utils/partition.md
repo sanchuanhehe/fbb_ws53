@@ -13,7 +13,7 @@ Partition 提供分区管理功能，支持分区管理模块的初始化与分�
 | 接口名称 | 功能简述 |
 | -------- | -------- |
 | [uapi_partition_init](#uapi_partition_init) | 初始化分区管理模块 |
-| [uapi_partition_get_info](#uapi_partition_get_info) | 获取指定ID对应的分区信息 |
+| [uapi_partition_get_info](#uapi_partition_get_info) | 获取指定 ID 对应的分区信息 |
 
 ## Functions
 
@@ -68,7 +68,7 @@ errcode_t uapi_partition_get_info(partition_ids_t partition_id, partition_inform
 
 **功能说明**
 
-- 获取指定ID对应的分区信息。
+- 获取指定 ID 对应的分区信息。
 - 支持按内存地址方式查询分区信息。
 - 支持按文件系统路径方式查询分区信息。
 
@@ -81,7 +81,7 @@ errcode_t uapi_partition_get_info(partition_ids_t partition_id, partition_inform
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| partition_id | [partition_ids_t](#enum_partition_ids_t) | 指定的分区的ID | [partition_ids_t](#enum_partition_ids_t) 全体成员 |
+| partition_id | [partition_ids_t](#enum_partition_ids_t) | 指定的分区的 ID | [partition_ids_t](#enum_partition_ids_t) 全体成员 |
 
 **出参**
 
@@ -96,7 +96,7 @@ errcode_t uapi_partition_get_info(partition_ids_t partition_id, partition_inform
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | ERRCODE_SUCC：0 | 执行成功 | 成功获取分区信息 |
-| Other | 其他错误码 | info指针为NULL或指定分区配置未找到 |
+| Other | 其他错误码 | info 指针为 NULL 或指定分区配置未找到 |
 
 **参考案例**
 
@@ -137,8 +137,8 @@ union {
 
 | 成员名称 | 类型 | 描述 | 接口使用逻辑 |
 | ------- | ---- | ---- | ----------- |
-| addr_info | struct | 分区的地址信息，包含起始地址(addr)和字节长度(size) | 接口出参载体 |
-| file_path | char * | 如果分区存在文件系统上，file_path标识存储分区所在路径 | 接口出参载体 |
+| addr_info | struct | 分区的地址信息，包含起始地址(addr) 和字节长度(size) | 接口出参载体 |
+| file_path | char * | 如果分区存在文件系统上，file_path 标识存储分区所在路径 | 接口出参载体 |
 
 ## Enumerations
 
@@ -193,23 +193,23 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| PARTITION_SSB | 0 | SSB分区ID |
-| PARTITION_FLASH_BOOT_IMAGE | 1 | Flash启动镜像分区ID |
-| PARTITION_FLASH_BOOT_IMAGE_BACKUP | 2 | Flash启动镜像备份分区ID |
-| PARTITION_FLASH_ROOT_PUBLIC_KEYS_AREA | 3 | Flash根公钥区域分区ID |
-| PARTITION_CUSTOMER_FACTORY | 8 | 客户出厂分区ID |
-| PARTITION_NV_DATA_BACKUP | 9 | NV数据备份分区ID |
-| PARTITION_NV_DATA | 0x10 | NV数据分区ID |
-| PARTITION_CRASH_INFO | 0x11 | 崩溃信息分区ID |
-| PARTITION_CCPU_IMAGE | 0x20 | CCPU镜像分区ID |
-| PARTITION_APP_IMAGE | 0x21 | 应用镜像分区ID |
-| PARTITION_FOTA_DATA | 0x22 | FOTA数据分区ID |
-| PARTITION_CCPU_IMAGE_BACKUP | 0x23 | CCPU镜像备份分区ID |
-| PARTITION_RESERVE2 | 0x30 | 保留分区2 |
-| PARTITION_RESERVE3 | 0x31 | 保留分区3 |
-| PARTITION_RESERVE4 | 0x32 | 保留分区4 |
-| PARTITION_RESERVE5 | 0x33 | 保留分区5 |
-| PARTITION_MAX_CNT | 16 | 分区的数量，只用来记录分区的数量，不作为分区ID有效性的判断 |
+| PARTITION_SSB | 0x0 | SSB 分区 ID |
+| PARTITION_FLASH_BOOT_IMAGE | 0x1 | Flash 启动镜像分区 ID |
+| PARTITION_FLASH_BOOT_IMAGE_BACKUP | 0x2 | Flash 启动镜像备份分区 ID |
+| PARTITION_FLASH_ROOT_PUBLIC_KEYS_AREA | 0x3 | Flash 根公钥区域分区 ID |
+| PARTITION_CUSTOMER_FACTORY | 0x8 | 客户出厂分区 ID |
+| PARTITION_NV_DATA_BACKUP | 0x9 | NV 数据备份分区 ID |
+| PARTITION_NV_DATA | 0x10 | NV 数据分区 ID |
+| PARTITION_CRASH_INFO | 0x11 | 崩溃信息分区 ID |
+| PARTITION_CCPU_IMAGE | 0x20 | CCPU 镜像分区 ID |
+| PARTITION_APP_IMAGE | 0x21 | 应用镜像分区 ID |
+| PARTITION_FOTA_DATA | 0x22 | FOTA 数据分区 ID |
+| PARTITION_CCPU_IMAGE_BACKUP | 0x23 | CCPU 镜像备份分区 ID |
+| PARTITION_RESERVE2 | 0x30 | 保留分区 2 |
+| PARTITION_RESERVE3 | 0x31 | 保留分区 3 |
+| PARTITION_RESERVE4 | 0x32 | 保留分区 4 |
+| PARTITION_RESERVE5 | 0x33 | 保留分区 5 |
+| PARTITION_MAX_CNT | 16 | 分区的数量，只用来记录分区的数量，不作为分区 ID 有效性的判断 |
 
 ## Structures
 

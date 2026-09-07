@@ -82,7 +82,7 @@ void osal_proc_exit(const char *name)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| name | const char * | 待删除的 proc 目录名称，应为 osal_proc_init 时传入的名称 | 非NULL |
+| name | const char * | 待删除的 proc 目录名称，应为 osal_proc_init 时传入的名称 | 非 NULL |
 
 **Kconfig配置**
 
@@ -117,8 +117,8 @@ void osal_remove_proc_entry(const char *name, osal_proc_entry *parent)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| name | const char * | 待删除的 proc 文件名称，应与 osal_create_proc_entry 时传入的名称一致 | 非NULL |
-| parent | [osal_proc_entry](#osal_proc_entry) * | 由 osal_create_proc_entry 返回的 proc 条目指针 | 非NULL |
+| name | const char * | 待删除的 proc 文件名称，应与 osal_create_proc_entry 时传入的名称一致 | 非 NULL |
+| parent | [osal_proc_entry](#osal_proc_entry) * | 由 osal_create_proc_entry 返回的 proc 条目指针 | 非 NULL |
 
 **Kconfig配置**
 
@@ -162,7 +162,7 @@ osal_proc_entry *osal_create_proc_entry(const char *name, osal_proc_entry *paren
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非NULL | 创建成功，返回 proc 文件条目指针 | proc 文件创建成功 |
+| 非 NULL | 创建成功，返回 proc 文件条目指针 | proc 文件创建成功 |
 | NULL | 创建失败 | proc 目录未初始化或 proc 文件创建失败 |
 
 **Kconfig配置**
@@ -198,8 +198,8 @@ void osal_seq_printf(void *seqfile, const char *fmt, ...)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| seqfile | void * | 顺序文件指针，取自 read 回调入参 entry 的 seqfile 字段 | 非NULL |
-| fmt | const char * | 格式化字符串，与可变参数一一对应 | 非NULL |
+| seqfile | void * | 顺序文件指针，取自 read 回调入参 entry 的 seqfile 字段 | 非 NULL |
+| fmt | const char * | 格式化字符串，与可变参数一一对应 | 非 NULL |
 | ... | 可变参数 | 与 fmt 中的格式说明符一一对应的可变参数 | - |
 
 **Kconfig配置**
