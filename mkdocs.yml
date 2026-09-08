@@ -5,6 +5,11 @@ site_description: WS53 SDK 开发文档
 site_author: HiSpark
 use_directory_urls: true
 
+# 暂停发布，原文件保留以便后续完善和恢复
+exclude_docs: |
+  /zh-CN/samples/peripherals/pmp/pmp.md
+  /zh-CN/samples/connectivity/wifi/repeater.md
+
 repo_name: 前往GitCode编辑
 repo_url: https://gitcode.com/HiSpark/fbb_ws53/tree/master/docs/zh-CN/
 
@@ -168,7 +173,6 @@ nav:
           - I2C: zh-CN/samples/peripherals/i2c/i2c.md
           - I2S: zh-CN/samples/peripherals/i2s/i2s.md
           - Pinctrl: zh-CN/samples/peripherals/pinctrl/pinctrl.md
-          - PMP: zh-CN/samples/peripherals/pmp/pmp.md
           - PWM: zh-CN/samples/peripherals/pwm/pwm.md
           - RTC: zh-CN/samples/peripherals/rtc/rtc.md
           - SFC: zh-CN/samples/peripherals/sfc/sfc.md
