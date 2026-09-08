@@ -10,29 +10,29 @@
 
 ```text
 0x400000 ┌──────────────────────────────┐
-         │ Root public key  2 KiB      │ ID 0x03
+         │ Root public key  2 KiB       │ ID 0x03
 0x402000 ├──────────────────────────────┤
-         │ SSB             24 KiB      │ ID 0x00
+         │ SSB             24 KiB       │ ID 0x00
 0x408000 ├──────────────────────────────┤
-         │ Customer factory 16 KiB     │ ID 0x08
+         │ Customer factory 16 KiB      │ ID 0x08
 0x40C000 ├──────────────────────────────┤
-         │ NV Backup       16 KiB      │ ID 0x09
+         │ NV Backup       16 KiB       │ ID 0x09
 0x410000 ├──────────────────────────────┤
-         │ FlashBoot backup 64 KiB     │ ID 0x02
+         │ FlashBoot backup 64 KiB      │ ID 0x02
 0x420000 ├──────────────────────────────┤
-         │ FlashBoot       64 KiB      │ ID 0x01
+         │ FlashBoot       64 KiB       │ ID 0x01
 0x430000 ├──────────────────────────────┤
-         │ Ccore_imageA                │ ID 0x20, 2.25 MiB
-0x45D000 │ ┌ Acore_imageA              │ ID 0x21，与 ID 0x20 重叠
-         │ │                           │
+         │ Ccore_imageA                 │ ID 0x20, 2.25 MiB
+0x45D000 │ ┌ Acore_imageA               │ ID 0x21，与 ID 0x20 重叠
+         │ │                            │
 0x670000 ├─┴────────────────────────────┤
-         │ Acore_imageB / FOTA data    │ ID 0x22
+         │ Acore_imageB / FOTA data     │ ID 0x22
 0x7F3000 ├──────────────────────────────┤
-         │ Customer reserve 28 KiB     │ ID 0x30
+         │ Customer reserve 28 KiB      │ ID 0x30
 0x7FA000 ├──────────────────────────────┤
-         │ Crash info       8 KiB      │ ID 0x11
+         │ Crash info       8 KiB       │ ID 0x11
 0x7FC000 ├──────────────────────────────┤
-         │ NV DATA         16 KiB      │ ID 0x10
+         │ NV DATA         16 KiB       │ ID 0x10
 0x800000 └──────────────────────────────┘
 ```
 
