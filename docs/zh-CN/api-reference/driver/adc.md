@@ -1,6 +1,6 @@
 # ADC
 
-LSADC (Low Speed Analog-to-Digital Converter) 提供模拟信号到数字信号的转换能力。输入时钟 32MHz，12bit 分辨率，单通道采样率最大为 1Msps。共 6 个通道，支持软件配置 0～5 任意通道使能，逻辑按通道编号先低后高发起切换，完成单通道采样并完成平均值滤波后自动进行通道切换。支持 128×17bit FIFO 用于数据缓存，数据存储格式：高 3bit 为通道编号，低 14bit 为有效数据。支持对 ADC 采样数据进行平均滤波处理，平均次数支持 1（不进行平均）、2、4、8；多通道时，每个通道接收 N 个数据（平均滤波个数）再切换通道。支持 FIFO 水线中断、满中断上报，ADC 忙状态、控制器 FIFO 空满状态查询。
+ADC（Analog-to-Digital Converter）提供模拟信号到数字信号的转换能力。输入时钟 32MHz，12bit 分辨率，单通道采样率最大为 1Msps。共 6 个通道，支持软件配置 0～5 任意通道使能，逻辑按通道编号先低后高发起切换，完成单通道采样并完成平均值滤波后自动进行通道切换。支持 128×17bit FIFO 用于数据缓存，数据存储格式：高 3bit 为通道编号，低 14bit 为有效数据。支持对 ADC 采样数据进行平均滤波处理，平均次数支持 1（不进行平均）、2、4、8；多通道时，每个通道接收 N 个数据（平均滤波个数）再切换通道。支持 FIFO 水线中断、满中断上报，ADC 忙状态、控制器 FIFO 空满状态查询。
 
 **模块公共头文件**
 
@@ -40,29 +40,29 @@ errcode_t uapi_adc_init(adc_clock_t clock)
 
 **功能说明**
 
-- 初始化 ADC 模块
-- ADC 已完成初始化时再次调用直接返回成功
-- 初始化成功后本模块其他接口方可使用
+- 初始化 ADC 模块。
+- ADC 已完成初始化时再次调用直接返回成功。
+- 成功初始化后本模块其他接口方可使用。
 
 **前置条件**
 
-- 调用时序约束：当前接口为 ADC 模块入口接口，须在其他 ADC 接口之前调用
-- 依赖关系：当前接口依赖 ADC 时钟与复位资源已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口为 ADC 模块入口接口，须在其他 ADC 接口之前调用。
+- 依赖关系：当前接口依赖 ADC 时钟与复位资源已就绪。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| clock | [adc_clock_t](#enum_adc_clock) | 采样时钟参数。当前芯片版本上此参数不影响实际采样时钟配置 | [ADC_CLOCK_500KHZ](#enum_adc_clock)(0) / [ADC_CLOCK_250KHZ](#enum_adc_clock)(1) / [ADC_CLOCK_125KHZ](#enum_adc_clock)(2) / [ADC_CLOCK_015KHZ](#enum_adc_clock)(3) / [ADC_CLOCK_MAX](#enum_adc_clock)(4) / [ADC_CLOCK_NONE](#enum_adc_clock)(4) |
+| clock | [adc_clock_t](#enum_adc_clock) | 采样时钟参数。当前芯片版本上此参数不影响实际采样时钟配置 | [adc_clock_t](#enum_adc_clock) 全体成员 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 操作成功，或 ADC 已完成初始化 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 操作成功，或 ADC 已完成初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 初始化失败 |
 
 **参考案例**
@@ -84,23 +84,23 @@ errcode_t uapi_adc_deinit(void)
 
 **功能说明**
 
-- 去初始化 ADC
-- 关闭 ADC 时钟
-- ADC 尚未初始化时直接返回成功
+- 去初始化 ADC。
+- 关闭 ADC 时钟。
+- ADC 尚未初始化时直接返回成功。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 成功返回后调用
-- 依赖关系：当前接口依赖 ADC 已初始化
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 成功返回后调用。
+- 依赖关系：当前接口依赖 ADC 已初始化。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 操作成功，或 ADC 尚未初始化 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 操作成功，或 ADC 尚未初始化 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 去初始化失败 |
 
 **参考案例**
@@ -121,22 +121,22 @@ void uapi_adc_power_en(afe_scan_mode_t afe_scan_mode, bool en)
 
 **功能说明**
 
-- 对 ADC 执行上电或下电
-- 选择 AFE 模拟前端精度模式（常规精度/高精度/麦克风/生物测量）
-- 在启用高精度模式（CONFIG_ADC_SUPPORT_AFE 且 CONFIG_ADC_SUPPORT_HAFE）时管理各 AFE 模式的电源状态
+- 对 ADC 执行上电或下电。
+- 选择 AFE 模拟前端精度模式（常规精度/高精度/麦克风/生物测量）。
+- 在启用高精度模式（CONFIG_ADC_SUPPORT_AFE 且 CONFIG_ADC_SUPPORT_HAFE）时管理各 AFE 模式的电源状态。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 成功返回后调用
-- 依赖关系：当前接口依赖 ADC 已初始化且 HAL 函数指针表已注册
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 成功返回后调用。
+- 依赖关系：当前接口依赖 ADC 已初始化且 HAL 函数指针表已注册。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| afe_scan_mode | [afe_scan_mode_t](#enum_afe_scan_mode) | AFE 模拟前端精度模式 | [AFE_GADC_MODE](#enum_afe_scan_mode)(0) / [AFE_HADC_MODE](#enum_afe_scan_mode)(1) / [AFE_AMIC_MODE](#enum_afe_scan_mode)(1) / [AFE_BIO_MODE](#enum_afe_scan_mode)(2) / [AFE_SCAN_MODE_MAX_NUM](#enum_afe_scan_mode)（受 CONFIG_ADC_SUPPORT_HAFE/CONFIG_ADC_SUPPORT_AMIC 条件编译控制，实际可用成员随构建配置而定） |
-| en | bool | 上电或下电标志，true 表示上电，false 表示下电 | true / false |
+| afe_scan_mode | [afe_scan_mode_t](#enum_afe_scan_mode) | AFE 模拟前端精度模式 | [afe_scan_mode_t](#enum_afe_scan_mode) 全体成员 |
+| en | bool | 上电或下电标志，true 表示上电，false 表示下电 | true；<br>false。 |
 
 **参考案例**
 
@@ -156,19 +156,19 @@ bool uapi_adc_is_using(void)
 
 **功能说明**
 
-- 查询 ADC 是否处于使用（已上电）状态
-- 在启用高精度模式（CONFIG_ADC_SUPPORT_AFE 且 CONFIG_ADC_SUPPORT_HAFE）时综合判断常规精度与高精度两种 AFE 模式的电源状态
-- 返回当前 ADC 电源占用情况
+- 查询 ADC 是否处于使用（已上电）状态。
+- 在启用高精度模式（CONFIG_ADC_SUPPORT_AFE 且 CONFIG_ADC_SUPPORT_HAFE）时综合判断常规精度与高精度两种 AFE 模式的电源状态。
+- 返回当前 ADC 电源占用情况。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 成功返回后调用
-- 依赖关系：当前接口依赖 ADC 已初始化
-- 上下文限制：当前接口可在中断或主线程调用
+- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 成功返回后调用。
+- 依赖关系：当前接口依赖 ADC 已初始化。
+- 上下文限制：当前接口可在中断或主线程调用。
 
 **返回值**
 
-- 返回类型：bool
+返回类型：bool
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -189,15 +189,15 @@ errcode_t uapi_adc_open_channel(uint8_t channel)
 
 **功能说明**
 
-- 打开指定的 ADC 通道
-- 在自动扫描已使能时拒绝打开通道
-- 记录当前正在工作的通道号
+- 打开指定的 ADC 通道。
+- 在自动扫描已使能时拒绝打开通道。
+- 记录当前正在工作的通道号。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 与 [uapi_adc_power_en](#uapi_adc_power_en) 成功返回后调用
-- 依赖关系：当前接口依赖 ADC 已上电、自动扫描未使能
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 与 [uapi_adc_power_en](#uapi_adc_power_en) 成功返回后调用。
+- 依赖关系：当前接口依赖 ADC 已上电、自动扫描未使能。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -207,13 +207,13 @@ errcode_t uapi_adc_open_channel(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 通道打开成功 |
-| [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER):0x80001141 | 参数无效 | channel 大于等于 ADC_CHANNEL_MAX_NUM |
-| [ERRCODE_ADC_SCAN_NOT_DISABLE](#ERRCODE_ADC_SCAN_NOT_DISABLE):0x80001142 | 自动扫描未禁用 | 自动扫描已使能时调用（CONFIG_ADC_SUPPORT_AUTO_SCAN 启用时） |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道打开成功 |
+| [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER)：0x80001141 | 参数无效 | channel 大于等于 ADC_CHANNEL_MAX_NUM |
+| [ERRCODE_ADC_SCAN_NOT_DISABLE](#ERRCODE_ADC_SCAN_NOT_DISABLE)：0x80001142 | 自动扫描未禁用 | 自动扫描已使能时调用（CONFIG_ADC_SUPPORT_AUTO_SCAN 启用时） |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 通道设置失败 |
 
 ### uapi_adc_close_channel <a id="uapi_adc_close_channel"></a>
@@ -230,15 +230,15 @@ errcode_t uapi_adc_close_channel(uint8_t channel)
 
 **功能说明**
 
-- 关闭指定的 ADC 通道
-- 校验入参通道与当前工作通道一致性
-- 在自动扫描已使能时拒绝关闭通道
+- 关闭指定的 ADC 通道。
+- 校验入参通道与当前工作通道一致性。
+- 在自动扫描已使能时拒绝关闭通道。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [uapi_adc_open_channel](#uapi_adc_open_channel) 成功打开通道后调用
-- 依赖关系：当前接口依赖 ADC 已上电、自动扫描未使能、入参通道与当前工作通道一致
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [uapi_adc_open_channel](#uapi_adc_open_channel) 成功打开通道后调用。
+- 依赖关系：当前接口依赖 ADC 已上电、自动扫描未使能、入参通道与当前工作通道一致。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -248,13 +248,13 @@ errcode_t uapi_adc_close_channel(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 通道关闭成功 |
-| [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER):0x80001141 | 参数无效 | channel 与当前工作通道不一致 |
-| [ERRCODE_ADC_SCAN_NOT_DISABLE](#ERRCODE_ADC_SCAN_NOT_DISABLE):0x80001142 | 自动扫描未禁用 | 自动扫描已使能时调用（CONFIG_ADC_SUPPORT_AUTO_SCAN 启用时） |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道关闭成功 |
+| [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER)：0x80001141 | 参数无效 | channel 与当前工作通道不一致 |
+| [ERRCODE_ADC_SCAN_NOT_DISABLE](#ERRCODE_ADC_SCAN_NOT_DISABLE)：0x80001142 | 自动扫描未禁用 | 自动扫描已使能时调用（CONFIG_ADC_SUPPORT_AUTO_SCAN 启用时） |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 通道设置失败 |
 
 ### uapi_adc_auto_scan_ch_enable <a id="uapi_adc_auto_scan_ch_enable"></a>
@@ -271,15 +271,15 @@ errcode_t uapi_adc_auto_scan_ch_enable(uint8_t channel, adc_scan_config_t config
 
 **功能说明**
 
-- 启用指定 ADC 通道的自动扫描（FIFO 全扫描或阈值扫描）
-- 配置扫描类型、扫描频率、阈值上下限等扫描参数
-- 注册自动扫描中断回调函数
+- 启用指定 ADC 通道的自动扫描（FIFO 全扫描或阈值扫描）。
+- 配置扫描类型、扫描频率、阈值上下限等扫描参数。
+- 注册自动扫描中断回调函数。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 与 [uapi_adc_power_en](#uapi_adc_power_en) 成功返回后调用，且 ADC 已上电
-- 依赖关系：当前接口依赖 ADC 已上电、CONFIG_ADC_SUPPORT_AUTO_SCAN 已启用、callback 不为 NULL
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 与 [uapi_adc_power_en](#uapi_adc_power_en) 成功返回后调用，且 ADC 已上电。
+- 依赖关系：当前接口依赖 ADC 已上电、CONFIG_ADC_SUPPORT_AUTO_SCAN 已启用、callback 不为 NULL。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -291,13 +291,13 @@ errcode_t uapi_adc_auto_scan_ch_enable(uint8_t channel, adc_scan_config_t config
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 自动扫描通道启用成功 |
-| [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER):0x80001141 | 参数无效 | channel、config.type、config.freq 非法或 callback 为 NULL |
-| [ERRCODE_PWM_NOT_POWER_ON](#ERRCODE_PWM_NOT_POWER_ON):0x80001084 | ADC 未上电 | ADC 未上电（adc_is_power_on 为 false）时调用 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 自动扫描通道启用成功 |
+| [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER)：0x80001141 | 参数无效 | channel、config.type、config.freq 非法或 callback 为 NULL |
+| [ERRCODE_PWM_NOT_POWER_ON](#ERRCODE_PWM_NOT_POWER_ON)：0x80001084 | ADC 未上电 | ADC 未上电（adc_is_power_on 为 false）时调用 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 通道扫描配置失败 |
 
 **Kconfig配置**
@@ -321,14 +321,14 @@ errcode_t uapi_adc_auto_scan_ch_disable(uint8_t channel)
 
 **功能说明**
 
-- 禁用指定 ADC 通道的自动扫描
-- 校验入参通道号有效性
+- 禁用指定 ADC 通道的自动扫描。
+- 校验入参通道号有效性。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [uapi_adc_auto_scan_ch_enable](#uapi_adc_auto_scan_ch_enable) 成功返回后调用
-- 依赖关系：当前接口依赖 ADC 已初始化、CONFIG_ADC_SUPPORT_AUTO_SCAN 已启用
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [uapi_adc_auto_scan_ch_enable](#uapi_adc_auto_scan_ch_enable) 成功返回后调用。
+- 依赖关系：当前接口依赖 ADC 已初始化、CONFIG_ADC_SUPPORT_AUTO_SCAN 已启用。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -338,12 +338,12 @@ errcode_t uapi_adc_auto_scan_ch_disable(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 自动扫描通道禁用成功 |
-| [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER):0x80001141 | 参数无效 | channel 大于等于 ADC_CHANNEL_MAX_NUM |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 自动扫描通道禁用成功 |
+| [ERRCODE_ADC_INVALID_PARAMETER](#ERRCODE_ADC_INVALID_PARAMETER)：0x80001141 | 参数无效 | channel 大于等于 ADC_CHANNEL_MAX_NUM |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | HAL 通道禁用失败 |
 
 **Kconfig配置**
@@ -366,15 +366,15 @@ void uapi_adc_auto_scan_disable(void)
 
 **功能说明**
 
-- 禁用 ADC 自动扫描总控制
-- 关闭所有扫描通道
-- 关闭 ADC 电源
+- 禁用 ADC 自动扫描总控制。
+- 关闭所有扫描通道。
+- 关闭 ADC 电源。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [uapi_adc_auto_scan_ch_enable](#uapi_adc_auto_scan_ch_enable) 成功返回后调用
-- 依赖关系：当前接口依赖 ADC 已初始化、CONFIG_ADC_SUPPORT_AUTO_SCAN 已启用
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [uapi_adc_auto_scan_ch_enable](#uapi_adc_auto_scan_ch_enable) 成功返回后调用。
+- 依赖关系：当前接口依赖 ADC 已初始化、CONFIG_ADC_SUPPORT_AUTO_SCAN 已启用。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **Kconfig配置**
 
@@ -396,18 +396,18 @@ bool uapi_adc_auto_scan_is_enabled(void)
 
 **功能说明**
 
-- 查询 ADC 自动扫描总控制是否已使能
-- 返回当前自动扫描使能状态
+- 查询 ADC 自动扫描总控制是否已使能。
+- 返回当前自动扫描使能状态。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 成功返回后调用
-- 依赖关系：当前接口依赖 ADC 已初始化、CONFIG_ADC_SUPPORT_AUTO_SCAN 已启用
-- 上下文限制：当前接口可在中断或主线程调用
+- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 成功返回后调用。
+- 依赖关系：当前接口依赖 ADC 已初始化、CONFIG_ADC_SUPPORT_AUTO_SCAN 已启用。
+- 上下文限制：当前接口可在中断或主线程调用。
 
 **返回值**
 
-- 返回类型：bool
+返回类型：bool
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -434,15 +434,15 @@ int32_t uapi_adc_manual_sample(uint8_t channel)
 
 **功能说明**
 
-- 触发 ADC 手动采样
-- 校验入参通道号有效性
-- 返回 ADC 采样值
+- 触发 ADC 手动采样。
+- 校验入参通道号有效性。
+- 返回 ADC 采样值。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 与 [uapi_adc_open_channel](#uapi_adc_open_channel) 成功返回后调用
-- 依赖关系：当前接口依赖 ADC 已初始化、目标通道已打开
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [uapi_adc_init](#uapi_adc_init) 与 [uapi_adc_open_channel](#uapi_adc_open_channel) 成功返回后调用。
+- 依赖关系：当前接口依赖 ADC 已初始化、目标通道已打开。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -452,7 +452,7 @@ int32_t uapi_adc_manual_sample(uint8_t channel)
 
 **返回值**
 
-- 返回类型：int32_t
+返回类型：int32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -469,11 +469,11 @@ typedef void (*adc_callback_t)(uint8_t channel, uint32_t *buffer, uint32_t lengt
 
 **使用说明**
 
-- 用于 [uapi_adc_auto_scan_ch_enable](#uapi_adc_auto_scan_ch_enable) 的入参 `callback`，作为 ADC 自动扫描中断回调函数指针类型
-- 参数 channel：自动扫描通道号（入参）
-- 参数 buffer：自动扫描采样结果存放缓冲区（出参）
-- 参数 length：扫描失败时长度为 0；FIFO 全扫描时长度为 128；阈值扫描时长度为 1（入参）
-- 参数 next：继续自动扫描或停止自动扫描（出参）
+- 用于 [uapi_adc_auto_scan_ch_enable](#uapi_adc_auto_scan_ch_enable) 的入参 `callback`，作为 ADC 自动扫描中断回调函数指针类型。
+- 参数 channel：自动扫描通道号（入参）。
+- 参数 buffer：自动扫描采样结果存放缓冲区（出参）。
+- 参数 length：扫描失败时长度为 0；FIFO 全扫描时长度为 128；阈值扫描时长度为 1（入参）。
+- 参数 next：继续自动扫描或停止自动扫描（出参）。
 
 ### typedef_errcode_t <a id="typedef_errcode_t"></a>
 
@@ -484,7 +484,7 @@ typedef uint32_t errcode_t;
 
 **使用说明**
 
-- 本模块返回类型为 errcode_t 的对外接口的返回值类型
+- 本模块返回类型为 errcode_t 的对外接口的返回值类型。
 ## Enumerations
 
 ### enum_adc_clock <a id="enum_adc_clock"></a>
@@ -542,11 +542,8 @@ typedef enum afe_scan_mode {
 // 源码原始定义，保留注释
 typedef struct adc_scan_config {
     uint8_t type;                       /*!< FIFO全扫描或阈值扫描。 */
-
     float threshold_l;                  /*!< 阈值扫描电压（v）下限。 */
-
     float threshold_h;                  /*!< 阈值扫描电压（v）上限。 */
-
     uint8_t freq;                       /*!< ADC扫描频率，用于所有频道。 */
 #if defined(CONFIG_ADC_SUPPORT_LONG_SAMPLE)
     uint32_t long_sample_time;           /*!< ADC长采样上报周期（单位：毫秒）。 */
@@ -562,7 +559,7 @@ typedef struct adc_scan_config {
 | threshold_l | float | 阈值扫描电压（v）下限 |
 | threshold_h | float | 阈值扫描电压（v）上限 |
 | freq | uint8_t | ADC 扫描频率，用于所有通道（取值范围 0 ~ 7） |
-| long_sample_time | uint32_t | ADC 长采样上报周期（单位：毫秒），仅在 CONFIG_ADC_SUPPORT_LONG_SAMPLE 启用时存在 |
+| long_sample_time | uint32_t | ADC 长采样上报周期（单位 ms），仅在 CONFIG_ADC_SUPPORT_LONG_SAMPLE 启用时存在 |
 
 ## Macros
 

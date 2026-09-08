@@ -1,6 +1,6 @@
 # GATT Server
 
-GATT (Generic Attribute Profile) Server 提供蓝牙低功耗 (Bluetooth Low Energy) 服务端的属性服务管理能力，支持服务、特征与描述符的注册与同步注册，服务的启动、停止、删除，以及对客户端读写请求的响应、通知 (Notification) 与指示 (Indication) 的发送，并通过回调机制向应用层上报服务注册、特征注册、读写请求、MTU (Maximum Transmission Unit) 变化与指示确认等事件。
+GATT Server（Generic Attribute Profile）提供蓝牙低功耗（Bluetooth Low Energy）服务端的属性服务管理能力，支持服务、特征与描述符的注册与同步注册，服务的启动、停止、删除，以及对客户端读写请求的响应、通知（Notification）与指示（Indication）的发送，并通过回调机制向应用层上报服务注册、特征注册、读写请求、MTU（Maximum Transmission Unit）变化与指示确认等事件。
 
 **模块公共头文件**
 
@@ -49,7 +49,7 @@ errcode_t gatts_register_server(bt_uuid_t *app_uuid, uint8_t *server_id)
 
 - 注册一个 GATT 服务端，向上层应用分配唯一的服务端 ID。
 - 服务端 ID 是后续添加服务、特征、描述符及收发数据等操作的关键标识。
-- 注册成功后服务端进入可用状态，可继续调用服务/特征注册相关接口。
+- 成功注册后服务端进入可用状态，可继续调用服务/特征注册相关接口。
 
 **前置条件**
 
@@ -59,27 +59,27 @@ errcode_t gatts_register_server(bt_uuid_t *app_uuid, uint8_t *server_id)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| app_uuid | bt_uuid_t * | 上层应用 UUID，用于标识当前应用 | 不为NULL |
+| app_uuid | bt_uuid_t * | 上层应用 UUID，用于标识当前应用 | 不为 NULL |
 
 **出参**
 
 | 名称 | 数据类型 | 输出说明 |
 | ---- | ---- | ---- |
-| server_id | uint8_t * | 注册成功后分配的服务端 ID，由调用方分配内存、函数填充 |
+| server_id | uint8_t * | 成功注册后分配的服务端 ID，由调用方分配内存、函数填充 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 注册成功 | 服务端注册成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功注册 | 服务端注册成功 |
 | Other | 其他错误码，参考 errcode_t | 注册失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_unregister_server <a id="gatts_unregister_server"></a>
 
@@ -111,11 +111,11 @@ errcode_t gatts_unregister_server(uint8_t server_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 注销成功 | 服务端注销成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功注销 | 服务端注销成功 |
 | Other | 其他错误码，参考 errcode_t | 注销失败 |
 
 ### gatts_add_service <a id="gatts_add_service"></a>
@@ -145,16 +145,16 @@ errcode_t gatts_add_service(uint8_t server_id, bt_uuid_t *service_uuid, bool is_
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
-| service_uuid | bt_uuid_t * | 服务的 UUID | 不为NULL |
-| is_primary | bool | 是否为主服务 | true / false |
+| service_uuid | bt_uuid_t * | 服务的 UUID | 不为 NULL |
+| is_primary | bool | 是否为主服务 | true；<br>false。 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 请求成功 | 添加服务请求成功发起，服务句柄将在回调中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 请求成功 | 添加服务请求成功发起，服务句柄将在回调中返回 |
 | Other | 其他错误码，参考 errcode_t | 添加服务请求失败 |
 
 ### gatts_add_characteristic <a id="gatts_add_characteristic"></a>
@@ -185,15 +185,15 @@ errcode_t gatts_add_characteristic(uint8_t server_id, uint16_t service_handle, g
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
 | service_handle | uint16_t | 所属服务的属性句柄 | gatts_add_service 回调返回的有效服务句柄 |
-| character | [gatts_add_chara_info_t](#struct_gatts_add_chara_info_t) * | 特征信息 | 不为NULL |
+| character | [gatts_add_chara_info_t](#struct_gatts_add_chara_info_t) * | 特征信息 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 请求成功 | 添加特征请求成功发起，特征句柄将在回调中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 请求成功 | 添加特征请求成功发起，特征句柄将在回调中返回 |
 | Other | 其他错误码，参考 errcode_t | 添加特征请求失败 |
 
 ### gatts_add_descriptor <a id="gatts_add_descriptor"></a>
@@ -224,15 +224,15 @@ errcode_t gatts_add_descriptor(uint8_t server_id, uint16_t service_handle, gatts
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
 | service_handle | uint16_t | 所属服务的属性句柄 | gatts_add_service 回调返回的有效服务句柄 |
-| descriptor | [gatts_add_desc_info_t](#struct_gatts_add_desc_info_t) * | 特征描述符信息 | 不为NULL |
+| descriptor | [gatts_add_desc_info_t](#struct_gatts_add_desc_info_t) * | 特征描述符信息 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 请求成功 | 添加描述符请求成功发起，描述符句柄将在回调中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 请求成功 | 添加描述符请求成功发起，描述符句柄将在回调中返回 |
 | Other | 其他错误码，参考 errcode_t | 添加描述符请求失败 |
 
 ### gatts_add_service_sync <a id="gatts_add_service_sync"></a>
@@ -262,8 +262,8 @@ errcode_t gatts_add_service_sync(uint8_t server_id, bt_uuid_t *service_uuid, boo
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
-| service_uuid | bt_uuid_t * | 服务的 UUID | 不为NULL |
-| is_primary | bool | 是否为主服务 | true / false |
+| service_uuid | bt_uuid_t * | 服务的 UUID | 不为 NULL |
+| is_primary | bool | 是否为主服务 | true；<br>false。 |
 
 **出参**
 
@@ -273,17 +273,17 @@ errcode_t gatts_add_service_sync(uint8_t server_id, bt_uuid_t *service_uuid, boo
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 添加成功 | 服务添加成功，服务句柄通过 handle 返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 添加成功 | 服务添加成功，服务句柄通过 handle 返回 |
 | Other | 其他错误码，参考 errcode_t | 添加服务失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_add_characteristic_sync <a id="gatts_add_characteristic_sync"></a>
 
@@ -312,8 +312,8 @@ errcode_t gatts_add_characteristic_sync(uint8_t server_id, uint16_t service_hand
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
-| service_handle | uint16_t | 所属服务的属性句柄 | gatts_add_service / gatts_add_service_sync 返回的有效服务句柄 |
-| character | [gatts_add_chara_info_t](#struct_gatts_add_chara_info_t) * | 特征信息 | 不为NULL |
+| service_handle | uint16_t | 所属服务的属性句柄 | gatts_add_service；<br>gatts_add_service_sync 返回的有效服务句柄。 |
+| character | [gatts_add_chara_info_t](#struct_gatts_add_chara_info_t) * | 特征信息 | 不为 NULL |
 
 **出参**
 
@@ -323,17 +323,17 @@ errcode_t gatts_add_characteristic_sync(uint8_t server_id, uint16_t service_hand
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 添加成功 | 特征添加成功，特征句柄通过 result 返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 添加成功 | 特征添加成功，特征句柄通过 result 返回 |
 | Other | 其他错误码，参考 errcode_t | 添加特征失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_add_descriptor_sync <a id="gatts_add_descriptor_sync"></a>
 
@@ -362,8 +362,8 @@ errcode_t gatts_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
-| service_handle | uint16_t | 所属服务的属性句柄 | gatts_add_service / gatts_add_service_sync 返回的有效服务句柄 |
-| descriptor | [gatts_add_desc_info_t](#struct_gatts_add_desc_info_t) * | 特征描述符信息 | 不为NULL |
+| service_handle | uint16_t | 所属服务的属性句柄 | gatts_add_service；<br>gatts_add_service_sync 返回的有效服务句柄。 |
+| descriptor | [gatts_add_desc_info_t](#struct_gatts_add_desc_info_t) * | 特征描述符信息 | 不为 NULL |
 
 **出参**
 
@@ -373,17 +373,17 @@ errcode_t gatts_add_descriptor_sync(uint8_t server_id, uint16_t service_handle, 
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 添加成功 | 描述符添加成功，描述符句柄通过 handle 返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 添加成功 | 描述符添加成功，描述符句柄通过 handle 返回 |
 | Other | 其他错误码，参考 errcode_t | 添加描述符失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_start_service <a id="gatts_start_service"></a>
 
@@ -412,21 +412,21 @@ errcode_t gatts_start_service(uint8_t server_id, uint16_t service_handle)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
-| service_handle | uint16_t | 待启动服务的属性句柄 | gatts_add_service / gatts_add_service_sync 返回的有效服务句柄 |
+| service_handle | uint16_t | 待启动服务的属性句柄 | gatts_add_service；<br>gatts_add_service_sync 返回的有效服务句柄。 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 请求成功 | 启动服务请求成功发起，启动结果将在回调中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 请求成功 | 启动服务请求成功发起，启动结果将在回调中返回 |
 | Other | 其他错误码，参考 errcode_t | 启动服务请求失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_stop_service <a id="gatts_stop_service"></a>
 
@@ -459,11 +459,11 @@ errcode_t gatts_stop_service(uint8_t server_id, uint16_t service_handle)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 请求成功 | 停止服务请求成功发起，停止结果将在回调中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 请求成功 | 停止服务请求成功发起，停止结果将在回调中返回 |
 | Other | 其他错误码，参考 errcode_t | 停止服务请求失败 |
 
 ### gatts_delete_service <a id="gatts_delete_service"></a>
@@ -497,11 +497,11 @@ errcode_t gatts_delete_service(uint8_t server_id, uint16_t service_handle)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 请求成功 | 删除服务请求成功发起，删除结果将在回调中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 请求成功 | 删除服务请求成功发起，删除结果将在回调中返回 |
 | Other | 其他错误码，参考 errcode_t | 删除服务请求失败 |
 
 ### gatts_delete_all_services <a id="gatts_delete_all_services"></a>
@@ -534,11 +534,11 @@ errcode_t gatts_delete_all_services(uint8_t server_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 请求成功 | 删除全部服务请求成功发起，删除结果将在回调中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 请求成功 | 删除全部服务请求成功发起，删除结果将在回调中返回 |
 | Other | 其他错误码，参考 errcode_t | 删除全部服务请求失败 |
 
 ### gatts_send_response <a id="gatts_send_response"></a>
@@ -569,15 +569,15 @@ errcode_t gatts_send_response(uint8_t server_id, uint16_t conn_id, gatts_send_rs
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
 | conn_id | uint16_t | 连接 ID | 有效连接 ID |
-| param | [gatts_send_rsp_t](#struct_gatts_send_rsp_t) * | 响应参数 | 不为NULL |
+| param | [gatts_send_rsp_t](#struct_gatts_send_rsp_t) * | 响应参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 发送成功 | 响应发送成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功发送 | 响应发送成功 |
 | Other | 其他错误码，参考 errcode_t | 响应发送失败 |
 
 ### gatts_notify_indicate <a id="gatts_notify_indicate"></a>
@@ -608,21 +608,21 @@ errcode_t gatts_notify_indicate(uint8_t server_id, uint16_t conn_id, gatts_ntf_i
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
 | conn_id | uint16_t | 连接 ID | 有效连接 ID |
-| param | [gatts_ntf_ind_t](#struct_gatts_ntf_ind_t) * | 通知或指示参数 | 不为NULL |
+| param | [gatts_ntf_ind_t](#struct_gatts_ntf_ind_t) * | 通知或指示参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 发送成功 | 通知/指示发送成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功发送 | 通知/指示发送成功 |
 | Other | 其他错误码，参考 errcode_t | 通知/指示发送失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_notify_indicate_by_uuid <a id="gatts_notify_indicate_by_uuid"></a>
 
@@ -640,7 +640,7 @@ errcode_t gatts_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, gat
 
 - 通过特征 UUID 向对端设备发送通知或指示。
 - 发送参数由 `gatts_ntf_ind_by_uuid_t` 描述，包含特征 UUID、起止句柄范围、数据长度与数据。
-- 具体发送状态取决于客户端特征配置描述符的值：0x0000 不允许通知和指示，0x0001 允许通知，0x0002 允许指示。
+- 具体发送状态取决于客户端特征配置描述符的值：0 不允许通知和指示，1 允许通知，2 允许指示。
 
 **前置条件**
 
@@ -652,21 +652,21 @@ errcode_t gatts_notify_indicate_by_uuid(uint8_t server_id, uint16_t conn_id, gat
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
 | conn_id | uint16_t | 连接 ID | 有效连接 ID |
-| param | [gatts_ntf_ind_by_uuid_t](#struct_gatts_ntf_ind_by_uuid_t) * | 通知或指示参数 | 不为NULL |
+| param | [gatts_ntf_ind_by_uuid_t](#struct_gatts_ntf_ind_by_uuid_t) * | 通知或指示参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 发送成功 | 通过 UUID 发送通知/指示成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功发送 | 通过 UUID 发送通知/指示成功 |
 | Other | 其他错误码，参考 errcode_t | 通过 UUID 发送通知/指示失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_set_mtu_size <a id="gatts_set_mtu_size"></a>
 
@@ -694,15 +694,15 @@ errcode_t gatts_set_mtu_size(uint8_t server_id, uint16_t mtu_size)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | server_id | uint8_t | 服务端 ID | 由 gatts_register_server 分配的有效 ID |
-| mtu_size | uint16_t | 服务端接收 MTU 大小 | [SDK_BLE_MTU_MIN](#SDK_BLE_MTU_MIN):23 ~ [SDK_BLE_MTU_MAX](#SDK_BLE_MTU_MAX):517 |
+| mtu_size | uint16_t | 服务端接收 MTU 大小 | [SDK_BLE_MTU_MIN](#SDK_BLE_MTU_MIN)：23 ~ [SDK_BLE_MTU_MAX](#SDK_BLE_MTU_MAX)：517 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 设置成功 | MTU 大小设置成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功设置 | MTU 大小设置成功 |
 | Other | 其他错误码，参考 errcode_t | MTU 大小设置失败 |
 
 ### gatts_register_callbacks <a id="gatts_register_callbacks"></a>
@@ -731,21 +731,21 @@ errcode_t gatts_register_callbacks(gatts_callbacks_t *func)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [gatts_callbacks_t](#struct_gatts_callbacks_t) * | 回调函数集合 | 不为NULL |
+| func | [gatts_callbacks_t](#struct_gatts_callbacks_t) * | 回调函数集合 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 注册成功 | 回调函数注册成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功注册 | 回调函数注册成功 |
 | Other | 其他错误码，参考 errcode_t | 回调函数注册失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### gatts_exchange_mtu_req <a id="gatts_exchange_mtu_req"></a>
 
@@ -773,20 +773,20 @@ errcode_t gatts_exchange_mtu_req(uint16_t conn_id, uint16_t mtu_size)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | conn_id | uint16_t | 连接 ID | 有效连接 ID |
-| mtu_size | uint16_t | 服务端接收 MTU | [SDK_BLE_MTU_MIN](#SDK_BLE_MTU_MIN):23 ~ [SDK_BLE_MTU_MAX](#SDK_BLE_MTU_MAX):517 |
+| mtu_size | uint16_t | 服务端接收 MTU | [SDK_BLE_MTU_MIN](#SDK_BLE_MTU_MIN)：23 ~ [SDK_BLE_MTU_MAX](#SDK_BLE_MTU_MAX)：517 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x0 | 请求成功 | 交换 MTU 请求发送成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 请求成功 | 交换 MTU 请求发送成功 |
 | Other | 其他错误码，参考 errcode_t | 交换 MTU 请求发送失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
 
 ## Type definitions
 

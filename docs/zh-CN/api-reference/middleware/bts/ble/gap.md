@@ -1,6 +1,6 @@
 # GAP
 
-GAP (Generic Access Profile) 提供 BLE (Bluetooth Low Energy) LE 广播、扫描、连接、配对、白名单、PHY (Physical Layer) 与数据长度等通用访问控制能力，支持本端设备信息设置与查询、安全参数配置、回调注册以及 SMP (Security Manager Protocol) 密钥存储等操作。
+GAP（Generic Access Profile）提供 BLE（Bluetooth Low Energy） LE 广播、扫描、连接、配对、白名单、PHY（Physical Layer）与数据长度等通用访问控制能力，支持本端设备信息设置与查询、安全参数配置、回调注册以及 SMP（Security Manager Protocol）密钥存储等操作。
 
 **模块公共头文件**
 
@@ -65,33 +65,33 @@ errcode_t gap_ble_set_local_addr(const bd_addr_t *addr)
 
 **功能说明**
 
-- 设置本端 BLE 设备的蓝牙地址
-- 地址通过 [bd_addr_t](#struct_bd_addr_t) 结构体指针传入
-- 配合广播、扫描、连接流程使用，影响本端设备对外呈现的地址
+- 设置本端 BLE 设备的蓝牙地址。
+- 地址通过 [bd_addr_t](#struct_bd_addr_t) 结构体指针传入。
+- 配合广播、扫描、连接流程使用，影响本端设备对外呈现的地址。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成、广播或扫描发起之前调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成、广播或扫描发起之前调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 本地设备蓝牙地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 本地设备蓝牙地址 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 地址设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 地址设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
 
 ### gap_ble_get_local_addr <a id="gap_ble_get_local_addr"></a>
 
@@ -107,14 +107,14 @@ errcode_t gap_ble_get_local_addr(bd_addr_t *addr)
 
 **功能说明**
 
-- 获取本端 BLE 设备的蓝牙地址
-- 地址通过出参 [bd_addr_t](#struct_bd_addr_t) 结构体指针回填给调用方
-- 用于查询当前生效的本端地址
+- 获取本端 BLE 设备的蓝牙地址。
+- 地址通过出参 [bd_addr_t](#struct_bd_addr_t) 结构体指针回填给调用方。
+- 用于查询当前生效的本端地址。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **出参**
 
@@ -124,11 +124,11 @@ errcode_t gap_ble_get_local_addr(bd_addr_t *addr)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 地址获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 地址获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_local_appearance <a id="gap_ble_set_local_appearance"></a>
@@ -145,28 +145,28 @@ errcode_t gap_ble_set_local_appearance(uint16_t appearance)
 
 **功能说明**
 
-- 设置本端设备的外观类型（Appearance），用于向对端表明设备类别
-- 外观值参考 [gap_ble_appearance_type_t](#enum_gap_ble_appearance_type_t)
-- 影响广播/连接过程中对外呈现的设备类别信息
+- 设置本端设备的外观类型（Appearance），用于向对端表明设备类别。
+- 外观值参考 [gap_ble_appearance_type_t](#enum_gap_ble_appearance_type_t)。
+- 影响广播/连接过程中对外呈现的设备类别信息。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成、广播发起之前调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成、广播发起之前调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| appearance | uint16_t | 本地设备外观类型 | [GAP_BLE_APPEARANCE_TYPE_UNKNOWN](#enum_gap_ble_appearance_type_t):0 / [GAP_BLE_APPEARANCE_TYPE_GENERIC_PHONE](#enum_gap_ble_appearance_type_t):64 / [GAP_BLE_APPEARANCE_TYPE_GENERIC_COMPUTER](#enum_gap_ble_appearance_type_t):128 / [GAP_BLE_APPEARANCE_TYPE_GENERIC_WATCH](#enum_gap_ble_appearance_type_t):192 / [GAP_BLE_APPEARANCE_TYPE_GENERIC_DISPLAY](#enum_gap_ble_appearance_type_t):320 / [GAP_BLE_APPEARANCE_TYPE_GENERIC_HID](#enum_gap_ble_appearance_type_t):960 / [GAP_BLE_APPEARANCE_TYPE_KEYBOARD](#enum_gap_ble_appearance_type_t):961 / [GAP_BLE_APPEARANCE_TYPE_MOUSE](#enum_gap_ble_appearance_type_t):962 / [GAP_BLE_APPEARANCE_TYPE_DIGITAL_PEN](#enum_gap_ble_appearance_type_t):967 |
+| appearance | uint16_t | 本地设备外观类型 | [GAP_BLE_APPEARANCE_TYPE_UNKNOWN](#enum_gap_ble_appearance_type_t)：0；<br>[GAP_BLE_APPEARANCE_TYPE_GENERIC_PHONE](#enum_gap_ble_appearance_type_t)：64；<br>[GAP_BLE_APPEARANCE_TYPE_GENERIC_COMPUTER](#enum_gap_ble_appearance_type_t)：128；<br>[GAP_BLE_APPEARANCE_TYPE_GENERIC_WATCH](#enum_gap_ble_appearance_type_t)：192；<br>[GAP_BLE_APPEARANCE_TYPE_GENERIC_DISPLAY](#enum_gap_ble_appearance_type_t)：320；<br>[GAP_BLE_APPEARANCE_TYPE_GENERIC_HID](#enum_gap_ble_appearance_type_t)：960；<br>[GAP_BLE_APPEARANCE_TYPE_KEYBOARD](#enum_gap_ble_appearance_type_t)：961；<br>[GAP_BLE_APPEARANCE_TYPE_MOUSE](#enum_gap_ble_appearance_type_t)：962；<br>[GAP_BLE_APPEARANCE_TYPE_DIGITAL_PEN](#enum_gap_ble_appearance_type_t)：967。 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 外观类型设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 外观类型设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_local_name <a id="gap_ble_set_local_name"></a>
@@ -183,29 +183,29 @@ errcode_t gap_ble_set_local_name(const uint8_t *name, const uint8_t len)
 
 **功能说明**
 
-- 设置本端 BLE 设备名称
+- 设置本端 BLE 设备名称。
 - 名称通过字节缓冲区指针及长度传入，长度包含结束符 `\0`
-- 影响广播/扫描响应中携带的设备名称
+- 影响广播/扫描响应中携带的设备名称。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成、广播发起之前调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成、广播发起之前调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| name | const uint8_t * | 设备名称缓冲区指针 | 不为NULL |
+| name | const uint8_t * | 设备名称缓冲区指针 | 不为 NULL |
 | len | uint8_t | 名称长度，包含结束符 `\0` | 无实现级边界校验（实现闭源） |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 设备名称设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 设备名称设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_get_local_name <a id="gap_ble_get_local_name"></a>
@@ -222,20 +222,20 @@ errcode_t gap_ble_get_local_name(uint8_t *name, uint8_t *len)
 
 **功能说明**
 
-- 获取本端 BLE 设备名称
-- 名称通过出参缓冲区回填，`len` 兼作入参与出参
-- 用于查询当前生效的本地设备名称
+- 获取本端 BLE 设备名称。
+- 名称通过出参缓冲区回填，`len` 兼作入参与出参。
+- 用于查询当前生效的本地设备名称。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| len | uint8_t * | 入参为用户分配的缓冲区大小，出参为设备名称长度 | 不为NULL |
+| len | uint8_t * | 入参为用户分配的缓冲区大小，出参为设备名称长度 | 不为 NULL |
 
 **出参**
 
@@ -246,11 +246,11 @@ errcode_t gap_ble_get_local_name(uint8_t *name, uint8_t *len)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 设备名称获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 设备名称获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_adv_data <a id="gap_ble_set_adv_data"></a>
@@ -267,35 +267,35 @@ errcode_t gap_ble_set_adv_data(uint8_t adv_id, const gap_ble_config_adv_data_t *
 
 **功能说明**
 
-- 设置指定广播 ID 的广播数据与扫描响应数据
-- 数据通过 [gap_ble_config_adv_data_t](#struct_gap_ble_config_adv_data_t) 结构体指针传入
-- 数据设置结果通过 [gap_ble_set_adv_data_callback](#typedef_gap_ble_set_adv_data_callback) 回调上报
+- 设置指定广播 ID 的广播数据与扫描响应数据。
+- 数据通过 [gap_ble_config_adv_data_t](#struct_gap_ble_config_adv_data_t) 结构体指针传入。
+- 数据设置结果通过 [gap_ble_set_adv_data_callback](#typedef_gap_ble_set_adv_data_callback) 回调上报。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后、启动广播之前调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后、启动广播之前调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | adv_id | uint8_t | 广播 ID | 0 ~ 255 |
-| data | [gap_ble_config_adv_data_t](#struct_gap_ble_config_adv_data_t) * | 广播数据与扫描响应数据 | 不为NULL |
+| data | [gap_ble_config_adv_data_t](#struct_gap_ble_config_adv_data_t) * | 广播数据与扫描响应数据 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 数据设置请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 数据设置请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server_adv.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_adv.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server_adv.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_adv.c`
 
 ### gap_ble_set_adv_param <a id="gap_ble_set_adv_param"></a>
 
@@ -311,35 +311,35 @@ errcode_t gap_ble_set_adv_param(uint8_t adv_id, const gap_ble_adv_params_t *para
 
 **功能说明**
 
-- 设置指定广播 ID 的广播参数
-- 参数通过 [gap_ble_adv_params_t](#struct_gap_ble_adv_params_t) 结构体指针传入
-- 参数设置结果通过 [gap_ble_set_adv_param_callback](#typedef_gap_ble_set_adv_param_callback) 回调上报
+- 设置指定广播 ID 的广播参数。
+- 参数通过 [gap_ble_adv_params_t](#struct_gap_ble_adv_params_t) 结构体指针传入。
+- 参数设置结果通过 [gap_ble_set_adv_param_callback](#typedef_gap_ble_set_adv_param_callback) 回调上报。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后、启动广播之前调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后、启动广播之前调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | adv_id | uint8_t | 广播 ID | 0 ~ 255 |
-| param | [gap_ble_adv_params_t](#struct_gap_ble_adv_params_t) * | 广播参数 | 不为NULL |
+| param | [gap_ble_adv_params_t](#struct_gap_ble_adv_params_t) * | 广播参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 参数设置请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 参数设置请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server_adv.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_adv.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server_adv.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_adv.c`
 
 ### gap_ble_start_adv <a id="gap_ble_start_adv"></a>
 
@@ -355,13 +355,13 @@ errcode_t gap_ble_start_adv(uint8_t adv_id)
 
 **功能说明**
 
-- 启动指定广播 ID 的广播
-- 广播状态通过 [gap_ble_start_adv_callback](#typedef_gap_ble_start_adv_callback) 回调上报
+- 启动指定广播 ID 的广播。
+- 广播状态通过 [gap_ble_start_adv_callback](#typedef_gap_ble_start_adv_callback) 回调上报。
 
 **前置条件**
 
-- 调用时序约束：需在 [gap_ble_set_adv_param](#gap_ble_set_adv_param) 与 [gap_ble_set_adv_data](#gap_ble_set_adv_data) 成功设置后调用
-- 依赖关系：依赖 bts 协议栈已就绪、广播参数已配置
+- 调用时序约束：需在 [gap_ble_set_adv_param](#gap_ble_set_adv_param) 与 [gap_ble_set_adv_data](#gap_ble_set_adv_data) 成功设置后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪、广播参数已配置。
 
 **入参**
 
@@ -371,18 +371,18 @@ errcode_t gap_ble_start_adv(uint8_t adv_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 启动请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 启动请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server_adv.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_adv.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server_adv.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_adv.c`
 
 ### gap_ble_stop_adv <a id="gap_ble_stop_adv"></a>
 
@@ -398,13 +398,13 @@ errcode_t gap_ble_stop_adv(uint8_t adv_id)
 
 **功能说明**
 
-- 停止指定广播 ID 的广播
-- 广播状态通过 [gap_ble_stop_adv_callback](#typedef_gap_ble_stop_adv_callback) 回调上报
+- 停止指定广播 ID 的广播。
+- 广播状态通过 [gap_ble_stop_adv_callback](#typedef_gap_ble_stop_adv_callback) 回调上报。
 
 **前置条件**
 
-- 调用时序约束：需在 [gap_ble_start_adv](#gap_ble_start_adv) 成功启动广播后调用
-- 依赖关系：依赖 bts 协议栈已就绪、广播处于运行状态
+- 调用时序约束：需在 [gap_ble_start_adv](#gap_ble_start_adv) 成功启动广播后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪、广播处于运行状态。
 
 **入参**
 
@@ -414,11 +414,11 @@ errcode_t gap_ble_stop_adv(uint8_t adv_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 停止请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 停止请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_scan_parameters <a id="gap_ble_set_scan_parameters"></a>
@@ -435,28 +435,28 @@ errcode_t gap_ble_set_scan_parameters(const gap_ble_scan_params_t *param)
 
 **功能说明**
 
-- 设置 BLE 扫描参数
-- 参数通过 [gap_ble_scan_params_t](#struct_gap_ble_scan_params_t) 结构体指针传入
-- 参数设置状态通过 [gap_ble_set_scan_param_callback](#typedef_gap_ble_set_scan_param_callback) 回调上报
+- 设置 BLE 扫描参数。
+- 参数通过 [gap_ble_scan_params_t](#struct_gap_ble_scan_params_t) 结构体指针传入。
+- 参数设置状态通过 [gap_ble_set_scan_param_callback](#typedef_gap_ble_set_scan_param_callback) 回调上报。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后、启动扫描之前调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后、启动扫描之前调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [gap_ble_scan_params_t](#struct_gap_ble_scan_params_t) * | 扫描参数 | 不为NULL |
+| param | [gap_ble_scan_params_t](#struct_gap_ble_scan_params_t) * | 扫描参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 参数设置请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 参数设置请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_scan_extern_parameters <a id="gap_ble_set_scan_extern_parameters"></a>
@@ -473,28 +473,28 @@ errcode_t gap_ble_set_scan_extern_parameters(const gap_ble_extern_scan_params_t 
 
 **功能说明**
 
-- 设置 BLE 扫描扩展参数
-- 参数通过 [gap_ble_extern_scan_params_t](#struct_gap_ble_extern_scan_params_t) 结构体指针传入
-- 用于配置重复包过滤、扫描持续时间与扫描周期等扩展行为
+- 设置 BLE 扫描扩展参数。
+- 参数通过 [gap_ble_extern_scan_params_t](#struct_gap_ble_extern_scan_params_t) 结构体指针传入。
+- 用于配置重复包过滤、扫描持续时间与扫描周期等扩展行为。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后、启动扫描之前调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后、启动扫描之前调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [gap_ble_extern_scan_params_t](#struct_gap_ble_extern_scan_params_t) * | 扫描扩展参数 | 不为NULL |
+| param | [gap_ble_extern_scan_params_t](#struct_gap_ble_extern_scan_params_t) * | 扫描扩展参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 扩展参数设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 扩展参数设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_start_scan <a id="gap_ble_start_scan"></a>
@@ -511,21 +511,21 @@ errcode_t gap_ble_start_scan(void)
 
 **功能说明**
 
-- 启动 BLE 扫描
-- 扫描结果通过 [gap_ble_scan_result_callback](#typedef_gap_ble_scan_result_callback) 回调上报
+- 启动 BLE 扫描。
+- 扫描结果通过 [gap_ble_scan_result_callback](#typedef_gap_ble_scan_result_callback) 回调上报。
 
 **前置条件**
 
-- 调用时序约束：需在 [gap_ble_set_scan_parameters](#gap_ble_set_scan_parameters) 成功设置扫描参数后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在 [gap_ble_set_scan_parameters](#gap_ble_set_scan_parameters) 成功设置扫描参数后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 启动请求成功发起，扫描结果通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 启动请求成功发起，扫描结果通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_stop_scan <a id="gap_ble_stop_scan"></a>
@@ -542,20 +542,20 @@ errcode_t gap_ble_stop_scan(void)
 
 **功能说明**
 
-- 停止 BLE 扫描
+- 停止 BLE 扫描。
 
 **前置条件**
 
-- 调用时序约束：需在 [gap_ble_start_scan](#gap_ble_start_scan) 成功启动扫描后调用
-- 依赖关系：依赖 bts 协议栈已就绪、扫描处于运行状态
+- 调用时序约束：需在 [gap_ble_start_scan](#gap_ble_start_scan) 成功启动扫描后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪、扫描处于运行状态。
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 停止扫描成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 停止扫描成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_phy <a id="gap_ble_set_phy"></a>
@@ -572,33 +572,33 @@ errcode_t gap_ble_set_phy(gap_le_set_phy_t *param)
 
 **功能说明**
 
-- 设置指定连接的 BLE PHY 参数
-- 参数通过 [gap_le_set_phy_t](#struct_gap_le_set_phy_t) 结构体指针传入
-- 用于在连接建立后切换发送/接收 PHY 类型与 PHY 选项
+- 设置指定连接的 BLE PHY 参数。
+- 参数通过 [gap_le_set_phy_t](#struct_gap_le_set_phy_t) 结构体指针传入。
+- 用于在连接建立后切换发送/接收 PHY 类型与 PHY 选项。
 
 **前置条件**
 
-- 调用时序约束：需在 ACL (Asynchronous Connection-Oriented Link) 链路建立成功后调用
-- 依赖关系：依赖 bts 协议栈已就绪、连接已建立
+- 调用时序约束：需在 ACL（Asynchronous Connection-Oriented Link）链路建立成功后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪、连接已建立。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [gap_le_set_phy_t](#struct_gap_le_set_phy_t) * | BLE PHY 参数 | 不为NULL |
+| param | [gap_le_set_phy_t](#struct_gap_le_set_phy_t) * | BLE PHY 参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | PHY 参数设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | PHY 参数设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
 
 ### gap_ble_set_data_length <a id="gap_ble_set_data_length"></a>
 
@@ -614,33 +614,33 @@ errcode_t gap_ble_set_data_length(gap_le_set_data_length_t *param)
 
 **功能说明**
 
-- 设置指定连接的 BLE 发包数据长度参数
-- 参数通过 [gap_le_set_data_length_t](#struct_gap_le_set_data_length_t) 结构体指针传入
-- 设置结果通过 [gap_ble_set_data_length_callback](#typedef_gap_ble_set_data_length_callback) 回调上报
+- 设置指定连接的 BLE 发包数据长度参数。
+- 参数通过 [gap_le_set_data_length_t](#struct_gap_le_set_data_length_t) 结构体指针传入。
+- 设置结果通过 [gap_ble_set_data_length_callback](#typedef_gap_ble_set_data_length_callback) 回调上报。
 
 **前置条件**
 
-- 调用时序约束：需在 ACL 链路建立成功后调用
-- 依赖关系：依赖 bts 协议栈已就绪、连接已建立
+- 调用时序约束：需在 ACL 链路建立成功后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪、连接已建立。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [gap_le_set_data_length_t](#struct_gap_le_set_data_length_t) * | BLE 发包参数 | 不为NULL |
+| param | [gap_le_set_data_length_t](#struct_gap_le_set_data_length_t) * | BLE 发包参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 发包参数设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 发包参数设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
 
 ### gap_ble_pair_remote_device <a id="gap_ble_pair_remote_device"></a>
 
@@ -656,28 +656,28 @@ errcode_t gap_ble_pair_remote_device(const bd_addr_t *addr)
 
 **功能说明**
 
-- 与指定远端设备启动 SMP 配对
-- 目标设备地址通过 [bd_addr_t](#struct_bd_addr_t) 结构体指针传入
-- 配对结果通过 [gap_ble_paired_complete_callback](#typedef_gap_ble_paired_complete_callback) 回调上报
+- 与指定远端设备启动 SMP 配对。
+- 目标设备地址通过 [bd_addr_t](#struct_bd_addr_t) 结构体指针传入。
+- 配对结果通过 [gap_ble_paired_complete_callback](#typedef_gap_ble_paired_complete_callback) 回调上报。
 
 **前置条件**
 
-- 调用时序约束：需在 ACL 链路建立成功之后调用
-- 依赖关系：依赖 bts 协议栈已就绪、连接已建立
+- 调用时序约束：需在 ACL 链路建立成功之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪、连接已建立。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 待配对的远端设备地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 待配对的远端设备地址 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 配对请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 配对请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_get_paired_devices_num <a id="gap_ble_get_paired_devices_num"></a>
@@ -694,14 +694,14 @@ errcode_t gap_ble_get_paired_devices_num(uint16_t *number)
 
 **功能说明**
 
-- 获取本端已配对设备的数量
-- 数量通过出参 `number` 回填给调用方
-- 用于查询当前已配对设备总数
+- 获取本端已配对设备的数量。
+- 数量通过出参 `number` 回填给调用方。
+- 用于查询当前已配对设备总数。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **出参**
 
@@ -711,11 +711,11 @@ errcode_t gap_ble_get_paired_devices_num(uint16_t *number)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 数量获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 数量获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_get_paired_devices <a id="gap_ble_get_paired_devices"></a>
@@ -732,20 +732,20 @@ errcode_t gap_ble_get_paired_devices(bd_addr_t *addr, uint16_t *number)
 
 **功能说明**
 
-- 获取本端已配对设备地址列表
-- 地址列表通过出参 `addr` 缓冲区回填，`number` 兼作入参与出参
-- 用于查询当前所有已配对设备的地址
+- 获取本端已配对设备地址列表。
+- 地址列表通过出参 `addr` 缓冲区回填，`number` 兼作入参与出参。
+- 用于查询当前所有已配对设备的地址。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| number | uint16_t * | 入参为缓冲区可容纳的设备数，出参为实际配对设备数 | 不为NULL |
+| number | uint16_t * | 入参为缓冲区可容纳的设备数，出参为实际配对设备数 | 不为 NULL |
 
 **出参**
 
@@ -756,11 +756,11 @@ errcode_t gap_ble_get_paired_devices(bd_addr_t *addr, uint16_t *number)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 地址列表获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 地址列表获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_get_pair_state <a id="gap_ble_get_pair_state"></a>
@@ -777,20 +777,20 @@ errcode_t gap_ble_get_pair_state(const bd_addr_t *addr, gap_ble_pair_state_t *st
 
 **功能说明**
 
-- 获取指定设备的配对状态
-- 目标设备地址通过入参传入，配对状态通过出参 [gap_ble_pair_state_t](#enum_gap_ble_pair_state_t) 回填
-- 用于查询特定设备当前的配对状态
+- 获取指定设备的配对状态。
+- 目标设备地址通过入参传入，配对状态通过出参 [gap_ble_pair_state_t](#enum_gap_ble_pair_state_t) 回填。
+- 用于查询特定设备当前的配对状态。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 待查询的设备地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 待查询的设备地址 | 不为 NULL |
 
 **出参**
 
@@ -800,11 +800,11 @@ errcode_t gap_ble_get_pair_state(const bd_addr_t *addr, gap_ble_pair_state_t *st
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 配对状态获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 配对状态获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_remove_pair <a id="gap_ble_remove_pair"></a>
@@ -821,28 +821,28 @@ errcode_t gap_ble_remove_pair(const bd_addr_t *addr)
 
 **功能说明**
 
-- 与指定远端设备取消配对
-- 目标设备地址通过 [bd_addr_t](#struct_bd_addr_t) 结构体指针传入
-- 用于清除与特定设备的配对关系
+- 与指定远端设备取消配对。
+- 目标设备地址通过 [bd_addr_t](#struct_bd_addr_t) 结构体指针传入。
+- 用于清除与特定设备的配对关系。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 待取消配对的对端设备地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 待取消配对的对端设备地址 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 取消配对成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 取消配对成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_add_white_list <a id="gap_ble_add_white_list"></a>
@@ -859,28 +859,28 @@ errcode_t gap_ble_add_white_list(const bd_addr_t *addr)
 
 **功能说明**
 
-- 添加指定设备到 BLE 白名单
-- 目标设备地址通过 [bd_addr_t](#struct_bd_addr_t) 结构体指针传入
-- 白名单生效后影响广播过滤与扫描过滤策略
+- 添加指定设备到 BLE 白名单。
+- 目标设备地址通过 [bd_addr_t](#struct_bd_addr_t) 结构体指针传入。
+- 白名单生效后影响广播过滤与扫描过滤策略。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 待添加到白名单的对端设备地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 待添加到白名单的对端设备地址 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 添加白名单成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 添加白名单成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_remove_white_list <a id="gap_ble_remove_white_list"></a>
@@ -897,28 +897,28 @@ errcode_t gap_ble_remove_white_list(const bd_addr_t *addr)
 
 **功能说明**
 
-- 从 BLE 白名单中移除指定设备
-- 目标设备地址通过 [bd_addr_t](#struct_bd_addr_t) 结构体指针传入
-- 用于删除白名单中的特定设备条目
+- 从 BLE 白名单中移除指定设备。
+- 目标设备地址通过 [bd_addr_t](#struct_bd_addr_t) 结构体指针传入。
+- 用于删除白名单中的特定设备条目。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪、设备已存在于白名单
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪、设备已存在于白名单。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 待移除的对端设备地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 待移除的对端设备地址 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 移除白名单成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 移除白名单成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_get_white_list <a id="gap_ble_get_white_list"></a>
@@ -935,22 +935,22 @@ errcode_t gap_ble_get_white_list(void)
 
 **功能说明**
 
-- 触发获取 BLE 白名单中的设备
-- 白名单获取结果通过 [gap_ble_get_white_list_callback](#typedef_gap_ble_get_white_list_callback) 回调上报
-- 用于查询当前白名单内容
+- 触发获取 BLE 白名单中的设备。
+- 白名单获取结果通过 [gap_ble_get_white_list_callback](#typedef_gap_ble_get_white_list_callback) 回调上报。
+- 用于查询当前白名单内容。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 获取请求成功发起，结果通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 获取请求成功发起，结果通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_remove_all_pairs <a id="gap_ble_remove_all_pairs"></a>
@@ -967,22 +967,22 @@ errcode_t gap_ble_remove_all_pairs(void)
 
 **功能说明**
 
-- 删除本端所有已配对的 BLE 设备
-- 一次清除全部配对关系
-- 用于重置配对状态
+- 删除本端所有已配对的 BLE 设备。
+- 一次清除全部配对关系。
+- 用于重置配对状态。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 删除所有配对成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 删除所有配对成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_get_bonded_devices <a id="gap_ble_get_bonded_devices"></a>
@@ -999,20 +999,20 @@ errcode_t gap_ble_get_bonded_devices(bd_addr_t *addr, uint16_t *number)
 
 **功能说明**
 
-- 获取本端已绑定设备的地址列表
-- 地址列表通过出参 `addr` 缓冲区回填，`number` 兼作入参与出参
-- 用于查询当前所有已绑定设备的地址
+- 获取本端已绑定设备的地址列表。
+- 地址列表通过出参 `addr` 缓冲区回填，`number` 兼作入参与出参。
+- 用于查询当前所有已绑定设备的地址。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| number | uint16_t * | 入参为缓冲区可容纳的设备数，出参为实际绑定设备数 | 不为NULL |
+| number | uint16_t * | 入参为缓冲区可容纳的设备数，出参为实际绑定设备数 | 不为 NULL |
 
 **出参**
 
@@ -1023,11 +1023,11 @@ errcode_t gap_ble_get_bonded_devices(bd_addr_t *addr, uint16_t *number)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 地址列表获取成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 地址列表获取成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_connect_param_update <a id="gap_ble_connect_param_update"></a>
@@ -1044,33 +1044,33 @@ errcode_t gap_ble_connect_param_update(gap_conn_param_update_t *params)
 
 **功能说明**
 
-- 更新指定连接的 BLE 连接参数
-- 参数通过 [gap_conn_param_update_t](#struct_gap_conn_param_update_t) 结构体指针传入
-- 用于在连接建立后调整连接间隔、从机延迟与超时倍数
+- 更新指定连接的 BLE 连接参数。
+- 参数通过 [gap_conn_param_update_t](#struct_gap_conn_param_update_t) 结构体指针传入。
+- 用于在连接建立后调整连接间隔、从机延迟与超时倍数。
 
 **前置条件**
 
-- 调用时序约束：需在 ACL 链路建立成功后调用
-- 依赖关系：依赖 bts 协议栈已就绪、连接已建立
+- 调用时序约束：需在 ACL 链路建立成功后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪、连接已建立。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| params | [gap_conn_param_update_t](#struct_gap_conn_param_update_t) * | 待更新的连接参数 | 不为NULL |
+| params | [gap_conn_param_update_t](#struct_gap_conn_param_update_t) * | 待更新的连接参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 连接参数更新成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 连接参数更新成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
 
 ### gap_ble_connect_remote_device <a id="gap_ble_connect_remote_device"></a>
 
@@ -1086,28 +1086,28 @@ errcode_t gap_ble_connect_remote_device(const bd_addr_t *addr)
 
 **功能说明**
 
-- 与指定远端设备建立 ACL 连接
-- 目标设备地址通过 [bd_addr_t](#struct_bd_addr_t) 结构体指针传入
-- 连接状态通过 [gap_ble_connect_state_changed_callback](#typedef_gap_ble_connect_state_changed_callback) 回调上报
+- 与指定远端设备建立 ACL 连接。
+- 目标设备地址通过 [bd_addr_t](#struct_bd_addr_t) 结构体指针传入。
+- 连接状态通过 [gap_ble_connect_state_changed_callback](#typedef_gap_ble_connect_state_changed_callback) 回调上报。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 待连接的远端设备地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 待连接的远端设备地址 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 连接请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 连接请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_disconnect_remote_device <a id="gap_ble_disconnect_remote_device"></a>
@@ -1124,28 +1124,28 @@ errcode_t gap_ble_disconnect_remote_device(const bd_addr_t *addr)
 
 **功能说明**
 
-- 断开与指定远端设备的连接，包括所有 profile 连接
-- 目标设备地址通过 [bd_addr_t](#struct_bd_addr_t) 结构体指针传入
-- 连接状态通过 [gap_ble_connect_state_changed_callback](#typedef_gap_ble_connect_state_changed_callback) 回调上报
+- 断开与指定远端设备的连接，包括所有 profile 连接。
+- 目标设备地址通过 [bd_addr_t](#struct_bd_addr_t) 结构体指针传入。
+- 连接状态通过 [gap_ble_connect_state_changed_callback](#typedef_gap_ble_connect_state_changed_callback) 回调上报。
 
 **前置条件**
 
-- 调用时序约束：需在与远端设备建立 ACL 连接之后调用
-- 依赖关系：依赖 bts 协议栈已就绪、连接处于已建立状态
+- 调用时序约束：需在与远端设备建立 ACL 连接之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪、连接处于已建立状态。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| addr | [bd_addr_t](#struct_bd_addr_t) * | 待断开的远端设备地址 | 不为NULL |
+| addr | [bd_addr_t](#struct_bd_addr_t) * | 待断开的远端设备地址 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 断连请求成功发起，最终状态通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 断连请求成功发起，最终状态通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_sec_param <a id="gap_ble_set_sec_param"></a>
@@ -1162,28 +1162,28 @@ errcode_t gap_ble_set_sec_param(gap_ble_sec_params_t *params)
 
 **功能说明**
 
-- 设置 BLE 安全参数
-- 参数通过 [gap_ble_sec_params_t](#struct_gap_ble_sec_params_t) 结构体指针传入
-- 用于配置绑定能力、输入输出能力、安全配对能力与安全模式
+- 设置 BLE 安全参数。
+- 参数通过 [gap_ble_sec_params_t](#struct_gap_ble_sec_params_t) 结构体指针传入。
+- 用于配置绑定能力、输入输出能力、安全配对能力与安全模式。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成、发起配对之前调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成、发起配对之前调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| params | [gap_ble_sec_params_t](#struct_gap_ble_sec_params_t) * | 安全参数 | 不为NULL |
+| params | [gap_ble_sec_params_t](#struct_gap_ble_sec_params_t) * | 安全参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 安全参数设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 安全参数设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_read_remote_device_rssi <a id="gap_ble_read_remote_device_rssi"></a>
@@ -1200,14 +1200,14 @@ errcode_t gap_ble_read_remote_device_rssi(uint16_t conn_id)
 
 **功能说明**
 
-- 读取指定连接的远端设备 RSSI (Received Signal Strength Indicator)
-- 通过连接 ID 指定目标连接
-- RSSI 结果通过 [gap_ble_read_rssi_callback](#typedef_gap_ble_read_rssi_callback) 回调上报
+- 读取指定连接的远端设备 RSSI（Received Signal Strength Indicator）。
+- 通过连接 ID 指定目标连接。
+- RSSI 结果通过 [gap_ble_read_rssi_callback](#typedef_gap_ble_read_rssi_callback) 回调上报。
 
 **前置条件**
 
-- 调用时序约束：需在 ACL 链路建立成功后调用
-- 依赖关系：依赖 bts 协议栈已就绪、连接已建立
+- 调用时序约束：需在 ACL 链路建立成功后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪、连接已建立。
 
 **入参**
 
@@ -1217,11 +1217,11 @@ errcode_t gap_ble_read_remote_device_rssi(uint16_t conn_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 读取请求成功发起，RSSI 结果通过回调上报 |
+| ERRCODE_SUCC：0 | 成功执行 | 读取请求成功发起，RSSI 结果通过回调上报 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_register_callbacks <a id="gap_ble_register_callbacks"></a>
@@ -1238,34 +1238,34 @@ errcode_t gap_ble_register_callbacks(gap_ble_callbacks_t *func)
 
 **功能说明**
 
-- 注册 BLE GAP 回调函数集合
-- 回调集合通过 [gap_ble_callbacks_t](#struct_gap_ble_callbacks_t) 结构体指针传入
-- 注册后 BTS 在广播、扫描、连接、配对、认证等事件发生时回调对应接口上报给上层
+- 注册 BLE GAP 回调函数集合。
+- 回调集合通过 [gap_ble_callbacks_t](#struct_gap_ble_callbacks_t) 结构体指针传入。
+- 注册后 BTS 在广播、扫描、连接、配对、认证等事件发生时回调对应接口上报给上层。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后、发起广播/扫描/连接之前调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后、发起广播/扫描/连接之前调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [gap_ble_callbacks_t](#struct_gap_ble_callbacks_t) * | 指向回调函数集合的指针 | 不为NULL |
+| func | [gap_ble_callbacks_t](#struct_gap_ble_callbacks_t) * | 指向回调函数集合的指针 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 回调函数注册成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 回调函数注册成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 **参考案例**
 
-- `application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
-- `application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
+- `src/application/samples/bt/ble/ble_speed_server/src/ble_speed_server.c`
+- `src/application/samples/bt/ble/ble_wifi_cfg_server/src/ble_wifi_cfg_server.c`
 
 ### bth_ota_init <a id="bth_ota_init"></a>
 
@@ -1281,21 +1281,21 @@ errcode_t bth_ota_init(void)
 
 **功能说明**
 
-- 初始化 bth OTA (Over-The-Air) 通道
-- 用于建立 OTA 升级所需的底层通道资源
+- 初始化 bth OTA（Over-The-Air）通道。
+- 用于建立 OTA 升级所需的底层通道资源。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | OTA 通道初始化成功 |
+| ERRCODE_SUCC：0 | 成功执行 | OTA 通道初始化成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### ble_customize_max_pwr <a id="ble_customize_max_pwr"></a>
@@ -1312,14 +1312,14 @@ errcode_t ble_customize_max_pwr(int8_t ble_pwr, int8_t sle_pwr)
 
 **功能说明**
 
-- 配置 BLE 与 SLE (Star Flash Low Energy) 最大发射功率定制化信息
-- 通过入参分别指定 BLE 与 SLE 的最大功率
-- 用于将定制化功率参数写入生效
+- 配置 BLE 与 SLE（Star Flash Low Energy）最大发射功率定制化信息。
+- 通过入参分别指定 BLE 与 SLE 的最大功率。
+- 用于将定制化功率参数写入生效。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成、发起射频业务之前调用
-- 依赖关系：依赖 nv (Non-Volatile) 定制化配置模块已就绪
+- 调用时序约束：需在协议栈初始化完成、发起射频业务之前调用。
+- 依赖关系：依赖 NV（Non-Volatile）定制化配置模块已就绪。
 
 **入参**
 
@@ -1330,11 +1330,11 @@ errcode_t ble_customize_max_pwr(int8_t ble_pwr, int8_t sle_pwr)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 定制化功率配置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 定制化功率配置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### ble_set_nv_pair_keys <a id="ble_set_nv_pair_keys"></a>
@@ -1351,31 +1351,31 @@ errcode_t ble_set_nv_pair_keys(ble_auth_info_evt_t *key, bd_addr_t *own_addr, bd
 
 **功能说明**
 
-- 将 SMP 配对密钥写入 Flash 持久化存储
-- 密钥通过 [ble_auth_info_evt_t](#struct_ble_auth_info_evt_t) 结构体指针传入，并关联本端地址与对端地址
-- 通过 `index` 指定密钥存储下标
+- 将 SMP 配对密钥写入 Flash 持久化存储。
+- 密钥通过 [ble_auth_info_evt_t](#struct_ble_auth_info_evt_t) 结构体指针传入，并关联本端地址与对端地址。
+- 通过 `index` 指定密钥存储下标。
 
 **前置条件**
 
-- 调用时序约束：需在配对完成、获得认证信息之后调用
-- 依赖关系：依赖 bts 协议栈与 Flash 存储已就绪
+- 调用时序约束：需在配对完成、获得认证信息之后调用。
+- 依赖关系：依赖 BTS 协议栈与 Flash 存储已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| key | [ble_auth_info_evt_t](#struct_ble_auth_info_evt_t) * | 指向 SMP 配对密钥的指针 | 不为NULL |
-| own_addr | [bd_addr_t](#struct_bd_addr_t) * | 指向本端地址的指针 | 不为NULL |
-| peer_addr | [bd_addr_t](#struct_bd_addr_t) * | 指向对端地址的指针 | 不为NULL |
+| key | [ble_auth_info_evt_t](#struct_ble_auth_info_evt_t) * | 指向 SMP 配对密钥的指针 | 不为 NULL |
+| own_addr | [bd_addr_t](#struct_bd_addr_t) * | 指向本端地址的指针 | 不为 NULL |
+| peer_addr | [bd_addr_t](#struct_bd_addr_t) * | 指向对端地址的指针 | 不为 NULL |
 | index | uint8_t | 密钥的下标索引 | 0 ~ 255 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 密钥写入 Flash 成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 密钥写入 Flash 成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_save_smp_keys_mode <a id="gap_ble_set_save_smp_keys_mode"></a>
@@ -1392,28 +1392,28 @@ errcode_t gap_ble_set_save_smp_keys_mode(uint8_t is_available)
 
 **功能说明**
 
-- 设置 SMP 配对密钥的保存模式
-- 模式取值参考 [gap_ble_save_pair_keys_mode_switch_t](#enum_gap_ble_save_pair_keys_mode_switch_t)
-- 用于选择自动保存或用户手动保存配对密钥
+- 设置 SMP 配对密钥的保存模式。
+- 模式取值参考 [gap_ble_save_pair_keys_mode_switch_t](#enum_gap_ble_save_pair_keys_mode_switch_t)。
+- 用于选择自动保存或用户手动保存配对密钥。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| is_available | uint8_t | 配对密钥保存模式 | [GAP_BLE_SAVE_SMP_KEYS_AUTO](#enum_gap_ble_save_pair_keys_mode_switch_t):0 / [GAP_BLE_SAVE_SMP_KEYS_MANU](#enum_gap_ble_save_pair_keys_mode_switch_t):1 |
+| is_available | uint8_t | 配对密钥保存模式 | [GAP_BLE_SAVE_SMP_KEYS_AUTO](#enum_gap_ble_save_pair_keys_mode_switch_t)：0；<br>[GAP_BLE_SAVE_SMP_KEYS_MANU](#enum_gap_ble_save_pair_keys_mode_switch_t)：1。 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 保存模式设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 保存模式设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ### gap_ble_set_pair_info_available <a id="gap_ble_set_pair_info_available"></a>
@@ -1430,28 +1430,28 @@ errcode_t gap_ble_set_pair_info_available(uint8_t is_available)
 
 **功能说明**
 
-- 设置配对信息是否可获取的开关
-- 开关取值参考 [gap_ble_pair_info_switch_t](#enum_gap_ble_pair_info_switch_t)
-- 用于控制配对信息的可获取性
+- 设置配对信息是否可获取的开关。
+- 开关取值参考 [gap_ble_pair_info_switch_t](#enum_gap_ble_pair_info_switch_t)。
+- 用于控制配对信息的可获取性。
 
 **前置条件**
 
-- 调用时序约束：需在协议栈初始化完成之后调用
-- 依赖关系：依赖 bts 协议栈已就绪
+- 调用时序约束：需在协议栈初始化完成之后调用。
+- 依赖关系：依赖 BTS 协议栈已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| is_available | uint8_t | 配对信息可获取开关 | [GAP_BLE_PAIR_INFO_UNAVAILABLE](#enum_gap_ble_pair_info_switch_t):0 / [GAP_BLE_PAIR_INFO_AVAILABLE](#enum_gap_ble_pair_info_switch_t):1 |
+| is_available | uint8_t | 配对信息可获取开关 | [GAP_BLE_PAIR_INFO_UNAVAILABLE](#enum_gap_ble_pair_info_switch_t)：0；<br>[GAP_BLE_PAIR_INFO_AVAILABLE](#enum_gap_ble_pair_info_switch_t)：1。 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0 | 执行成功 | 开关设置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 开关设置成功 |
 | Other | 其他错误码，参考`errcode_t` | 执行失败 |
 
 ## Type definitions
@@ -1467,7 +1467,7 @@ typedef void (*gap_ble_start_adv_callback)(uint8_t adv_id, adv_status_t status);
 启动广播结果回调函数指针类型，BTS 在每次启动广播后调用该回调向应用层上报启动结果。
 
 回调说明：
-- 调用时机：广播启动完成后在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：广播启动完成后在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 adv_id：广播 ID。
 - 参数 status：当前广播状态，参考 [adv_status_t](#enum_adv_status_t)。
 - 返回值处理：无返回值。
@@ -1483,7 +1483,7 @@ typedef void (*gap_ble_stop_adv_callback)(uint8_t adv_id, adv_status_t status);
 停止广播结果回调函数指针类型，BTS 在每次停止广播后调用该回调向应用层上报停止结果。
 
 回调说明：
-- 调用时机：广播停止完成后在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：广播停止完成后在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 adv_id：广播 ID。
 - 参数 status：当前广播状态，参考 [adv_status_t](#enum_adv_status_t)。
 - 返回值处理：无返回值。
@@ -1499,7 +1499,7 @@ typedef void (*gap_ble_set_adv_data_callback)(uint8_t adv_id, errcode_t status);
 设置广播数据结果回调函数指针类型，BTS 在每次设置广播数据后调用该回调向应用层上报设置结果。
 
 回调说明：
-- 调用时机：广播数据设置完成后在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：广播数据设置完成后在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 adv_id：广播 ID。
 - 参数 status：执行结果错误码。
 - 返回值处理：无返回值。
@@ -1515,7 +1515,7 @@ typedef void (*gap_ble_set_adv_param_callback)(uint8_t adv_id, errcode_t status)
 设置广播参数结果回调函数指针类型，BTS 在每次设置广播参数后调用该回调向应用层上报更新结果。
 
 回调说明：
-- 调用时机：广播参数设置完成后在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：广播参数设置完成后在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 adv_id：广播 ID。
 - 参数 status：执行结果错误码。
 - 返回值处理：无返回值。
@@ -1531,8 +1531,8 @@ typedef void (*gap_ble_scan_result_callback)(gap_scan_result_data_t *scan_result
 扫描结果回调函数指针类型，BTS 在每次收到扫描结果后调用该回调向应用层上报扫描结果数据。
 
 回调说明：
-- 调用时机：收到扫描结果后在 bts 线程被调用，不应阻塞或长时间等待。
-- 参数 scan_result_data：扫描结果数据，参考 [gap_scan_result_data_t](#struct_gap_scan_result_data_t)，内存由 bts 申请与释放，回调中不应释放。
+- 调用时机：收到扫描结果后在 BTS 线程被调用，不应阻塞或长时间等待。
+- 参数 scan_result_data：扫描结果数据，参考 [gap_scan_result_data_t](#struct_gap_scan_result_data_t)，内存由 BTS 申请与释放，回调中不应释放。
 - 返回值处理：无返回值。
 
 ### typedef_gap_ble_set_scan_param_callback <a id="typedef_gap_ble_set_scan_param_callback"></a>
@@ -1546,7 +1546,7 @@ typedef void (*gap_ble_set_scan_param_callback)(errcode_t status);
 扫描参数设置完成回调函数指针类型，BTS 在扫描参数设置完成后调用该回调向应用层上报设置状态。
 
 回调说明：
-- 调用时机：扫描参数设置完成后在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：扫描参数设置完成后在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 status：执行结果错误码。
 - 返回值处理：无返回值。
 
@@ -1562,7 +1562,7 @@ typedef void (*gap_ble_connect_state_changed_callback)(uint16_t conn_id, bd_addr
 连接状态改变回调函数指针类型，BTS 在连接完成后调用该回调向应用层上报连接状态信息。
 
 回调说明：
-- 调用时机：连接状态改变时在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：连接状态改变时在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 conn_id：连接 ID。
 - 参数 addr：对端设备地址，参考 [bd_addr_t](#struct_bd_addr_t)。
 - 参数 conn_state：连接状态，参考 [gap_ble_conn_state_t](#enum_gap_ble_conn_state_t)。
@@ -1581,7 +1581,7 @@ typedef void (*gap_ble_paired_complete_callback)(uint16_t conn_id, const bd_addr
 配对完成回调函数指针类型，BTS 在配对后调用该回调向应用层上报配对状态信息。
 
 回调说明：
-- 调用时机：配对完成后在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：配对完成后在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 conn_id：连接 ID。
 - 参数 addr：对端设备地址，参考 [bd_addr_t](#struct_bd_addr_t)。
 - 参数 status：执行结果错误码。
@@ -1598,7 +1598,7 @@ typedef void (*gap_ble_terminate_adv_callback)(uint8_t adv_id, adv_status_t stat
 被动中止广播回调函数指针类型，BTS 在广播被中止时调用该回调向应用层上报广播状态。
 
 回调说明：
-- 调用时机：广播被中止时在 bts 线程被调用，不应阻塞或长时间等待。
+- 调用时机：广播被中止时在 BTS 线程被调用，不应阻塞或长时间等待。
 - 参数 adv_id：广播 ID。
 - 参数 status：广播状态，参考 [adv_status_t](#enum_adv_status_t)。
 - 返回值处理：无返回值。
@@ -1709,7 +1709,7 @@ typedef enum {
 
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
-| GAP_BLE_APPEARANCE_TYPE_UNKNOWN | 0 | 未知类型 |
+| GAP_BLE_APPEARANCE_TYPE_UNKNOWN | 00 | 未知类型 |
 | GAP_BLE_APPEARANCE_TYPE_GENERIC_PHONE | 64 | 通用手机 |
 | GAP_BLE_APPEARANCE_TYPE_GENERIC_COMPUTER | 128 | 通用电脑 |
 | GAP_BLE_APPEARANCE_TYPE_GENERIC_WATCH | 192 | 通用手表 |
@@ -1769,7 +1769,7 @@ typedef enum {
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
 | GAP_BLE_SCAN_TYPE_PASSIVE | 0x00 | 被动扫描 |
-| GAP_BLE_SCAN_TYPE_ACTIVE | 0x01 | 主动扫描 |
+| GAP_BLE_SCAN_TYPE_ACTIVE | 0x1 | 主动扫描 |
 
 ### enum_gap_ble_scan_filter_policy_t <a id="enum_gap_ble_scan_filter_policy_t"></a>
 
@@ -1798,9 +1798,9 @@ typedef enum {
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
 | GAP_BLE_SCAN_FILTER_POLICY_ACCEPT_ALL | 0x00 | 接收所有广播，不接收目标地址不是本设备地址的定向广播（默认） |
-| GAP_BLE_SCAN_FILTER_POLICY_ONLY_WHITE_LIST | 0x01 | 只接收白名单里设备的广播，不接收目标地址不是本设备地址的定向广播 |
-| GAP_BLE_SCAN_FILTER_POLICY_ACCEPT_ALL_AND_RPA | 0x02 | 接收所有的非定向广播、地址是可解析私有地址的广播方发送的定向广播、发给该设备的定向广播 |
-| GAP_BLE_SCAN_FILTER_POLICY_ONLY_WHITE_LIST_AND_RPA | 0x03 | 接收白名单中的所有非定向广播、地址是可解析私有地址的广播方发送的定向广播、发给该设备的定向广播 |
+| GAP_BLE_SCAN_FILTER_POLICY_ONLY_WHITE_LIST | 0x1 | 只接收白名单里设备的广播，不接收目标地址不是本设备地址的定向广播 |
+| GAP_BLE_SCAN_FILTER_POLICY_ACCEPT_ALL_AND_RPA | 0x2 | 接收所有的非定向广播、地址是可解析私有地址的广播方发送的定向广播、发给该设备的定向广播 |
+| GAP_BLE_SCAN_FILTER_POLICY_ONLY_WHITE_LIST_AND_RPA | 0x3 | 接收白名单中的所有非定向广播、地址是可解析私有地址的广播方发送的定向广播、发给该设备的定向广播 |
 
 ### enum_gap_ble_scan_result_evt_type_t <a id="enum_gap_ble_scan_result_evt_type_t"></a>
 
@@ -1913,7 +1913,7 @@ typedef enum {
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
 | ADV_STATUS_STOPPED | 0x00 | 广播停止 |
-| ADV_STATUS_ADVERTISING | 0x01 | 正在广播 |
+| ADV_STATUS_ADVERTISING | 0x1 | 正在广播 |
 
 ### enum_gap_ble_sec_mode_t <a id="enum_gap_ble_sec_mode_t"></a>
 
@@ -2004,7 +2004,7 @@ typedef enum {
 | 枚举成员 | 取值 | 描述 |
 | ------- | ---- | ---- |
 | GAP_BLE_DISCONN_UNKNOWN | 0x00 | 未知原因断链 |
-| GAP_BLE_ERR_CONN_TIMEOUT | 0x08 | 连接超时断链 |
+| GAP_BLE_ERR_CONN_TIMEOUT | 0x8 | 连接超时断链 |
 | GAP_BLE_DICSCONNECT_BY_REMOTE_USER | 0x13 | 远端用户断链 |
 | GAP_BLE_CONN_TERMINATE_BY_LOCAL_HOST | 0x16 | 本端 HOST 断链 |
 
@@ -2146,7 +2146,7 @@ typedef struct {
 | adv_type | uint8_t | 广播类型，参考 [gap_ble_adv_type_t](#enum_gap_ble_adv_type_t) |
 | own_addr | bd_addr_t | 本端地址，参考 [bd_addr_t](#struct_bd_addr_t) |
 | peer_addr | bd_addr_t | 对端地址，参考 [bd_addr_t](#struct_bd_addr_t) |
-| channel_map | uint8_t | 广播通道选择：0x01 使用 37 通道；0x07 使用 37/38/39 三个通道 |
+| channel_map | uint8_t | 广播通道选择：1 使用 37 通道；7 使用 37/38/39 三个通道 |
 | adv_filter_policy | uint8_t | 白名单过滤策略，参考 [gap_ble_adv_filter_allow_scan_t](#enum_gap_ble_adv_filter_allow_scan_t) |
 | tx_power | int8_t | 发送功率，单位 dbm，范围 -127 ~ 20 |
 | duration | uint32_t | 广播持续发送时长 |
@@ -2265,9 +2265,9 @@ typedef struct {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| bondable | uint8_t | 绑定能力选择：0x01 支持绑定；0x00 不支持绑定 |
+| bondable | uint8_t | 绑定能力选择：1 支持绑定；0 不支持绑定 |
 | io_capability | uint8_t | 输入输出能力，参考 [gap_ble_io_ability_t](#enum_gap_ble_io_ability_t) |
-| sc_enable | uint8_t | 安全配对能力选择：0x01 支持安全配对；0x00 不支持安全配对 |
+| sc_enable | uint8_t | 安全配对能力选择：1 支持安全配对；0 不支持安全配对 |
 | sc_mode | uint8_t | 安全模式，参考 [gap_ble_sec_mode_t](#enum_gap_ble_sec_mode_t) |
 
 ### struct_ble_auth_info_evt_t <a id="struct_ble_auth_info_evt_t"></a>

@@ -1,6 +1,6 @@
 # GPIO
 
-GPIO (General-Purpose Input/Output) 提供通用输入输出引脚的配置与控制功能，支持引脚方向设置、电平读写、电平翻转，以及上升沿、下降沿、双边沿、高/低电平等多种触发模式的中断注册与使能控制。支持低功耗挂起/恢复与多核选择特性。
+GPIO（General-Purpose Input/Output）提供通用输入输出引脚的配置与控制功能，支持引脚方向设置、电平读写、电平翻转，以及上升沿、下降沿、双边沿、高/低电平等多种触发模式的中断注册与使能控制。支持低功耗挂起/恢复与多核选择特性。
 
 **模块公共头文件**
 
@@ -46,13 +46,13 @@ void uapi_gpio_init(void)
 
 **功能说明**
 
-- 初始化 GPIO 模块，为后续引脚方向、电平、中断等操作建立基础运行环境
-- 已初始化时重复调用直接返回成功
+- 初始化 GPIO 模块，为后续引脚方向、电平、中断等操作建立基础运行环境。
+- 已初始化时重复调用直接返回成功。
 
 **前置条件**
 
-- 调用时序约束：应在调用模块内任何其他接口之前完成初始化
-- 依赖关系：依赖底层 GPIO HAL 已可被调用
+- 调用时序约束：应在调用模块内任何其他接口之前完成初始化。
+- 依赖关系：依赖底层 GPIO HAL 已可被调用。
 
 **参考案例**
 
@@ -72,13 +72,13 @@ void uapi_gpio_deinit(void)
 
 **功能说明**
 
-- 去初始化 GPIO 模块，释放初始化状态
-- 未初始化时调用直接返回
-- 与 uapi_gpio_init() 配对使用
+- 去初始化 GPIO 模块，释放初始化状态。
+- 未初始化时调用直接返回。
+- 与 uapi_gpio_init() 配对使用。
 
 **前置条件**
 
-- 调用时序约束：应在 uapi_gpio_init() 成功执行之后调用
+- 调用时序约束：应在 uapi_gpio_init() 成功执行之后调用。
 
 ### uapi_gpio_set_dir <a id="uapi_gpio_set_dir"></a>
 
@@ -94,31 +94,31 @@ errcode_t uapi_gpio_set_dir(pin_t pin, gpio_direction_t dir)
 
 **功能说明**
 
-- 设置指定 GPIO 引脚的输入或输出方向
-- 方向配置操作具备原子性
-- 返回操作执行结果
+- 设置指定 GPIO 引脚的输入或输出方向。
+- 方向配置操作具备原子性。
+- 返回操作执行结果。
 
 **前置条件**
 
-- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
-- 上下文限制：可在任务上下文调用
+- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用。
+- 上下文限制：可在任务上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#pin_t) | 待设置方向的 GPIO 引脚编号 | 有效引脚编号 |
-| dir | [gpio_direction_t](#enum_gpio_direction) | 引脚输入输出方向 | [GPIO_DIRECTION_INPUT](#enum_gpio_direction)(0) / [GPIO_DIRECTION_OUTPUT](#enum_gpio_direction)(1) |
+| dir | [gpio_direction_t](#enum_gpio_direction) | 引脚输入输出方向 | [gpio_direction_t](#enum_gpio_direction) 全体成员 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 方向设置成功 |
-| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT):0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
-| [ERRCODE_GPIO_DIR_SET_FAIL](#ERRCODE_GPIO_DIR_SET_FAIL):0x80001000 | 方向设置失败 | dir 超出有效范围（≥ 2） |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 方向设置成功 |
+| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
+| [ERRCODE_GPIO_DIR_SET_FAIL](#ERRCODE_GPIO_DIR_SET_FAIL)：0x80001000 | 方向设置失败 | dir 超出有效范围(≥ 2) |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层设置失败 |
 
 **参考案例**
@@ -150,12 +150,12 @@ gpio_direction_t uapi_gpio_get_dir(pin_t pin)
 
 **功能说明**
 
-- 获取指定 GPIO 引脚当前的输入输出方向
-- 直接返回方向枚举值
+- 获取指定 GPIO 引脚当前的输入输出方向。
+- 直接返回方向枚举值。
 
 **前置条件**
 
-- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
+- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用。
 
 **入参**
 
@@ -165,7 +165,7 @@ gpio_direction_t uapi_gpio_get_dir(pin_t pin)
 
 **返回值**
 
-- 返回类型：gpio_direction_t
+返回类型：gpio_direction_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -196,30 +196,30 @@ errcode_t uapi_gpio_set_val(pin_t pin, gpio_level_t level)
 
 **功能说明**
 
-- 设置指定 GPIO 引脚的输出电平（高或低）
-- 输出电平写入操作具备原子性
-- 返回操作执行结果
+- 设置指定 GPIO 引脚的输出电平（高或低）。
+- 输出电平写入操作具备原子性。
+- 返回操作执行结果。
 
 **前置条件**
 
-- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用，且引脚应已配置为输出方向
-- 上下文限制：可在任务上下文调用
+- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用，且引脚应已配置为输出方向。
+- 上下文限制：可在任务上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#pin_t) | 待设置输出电平的 GPIO 引脚编号 | 有效引脚编号 |
-| level | [gpio_level_t](#enum_gpio_level) | 输出电平值 | [GPIO_LEVEL_LOW](#enum_gpio_level)(0) / [GPIO_LEVEL_HIGH](#enum_gpio_level)(1) |
+| level | [gpio_level_t](#enum_gpio_level) | 输出电平值 | [gpio_level_t](#enum_gpio_level) 全体成员 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 电平设置成功 |
-| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT):0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 电平设置成功 |
+| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层输出失败 |
 
 **参考案例**
@@ -247,12 +247,12 @@ gpio_level_t uapi_gpio_get_output_val(pin_t pin)
 
 **功能说明**
 
-- 获取指定 GPIO 引脚当前的输出电平值
-- 直接返回输出电平枚举值
+- 获取指定 GPIO 引脚当前的输出电平值。
+- 直接返回输出电平枚举值。
 
 **前置条件**
 
-- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
+- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用。
 
 **入参**
 
@@ -262,7 +262,7 @@ gpio_level_t uapi_gpio_get_output_val(pin_t pin)
 
 **返回值**
 
-- 返回类型：gpio_level_t
+返回类型：gpio_level_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -289,12 +289,12 @@ gpio_level_t uapi_gpio_get_val(pin_t pin)
 
 **功能说明**
 
-- 读取指定 GPIO 引脚的输入电平值
-- 直接返回输入电平枚举值
+- 读取指定 GPIO 引脚的输入电平值。
+- 直接返回输入电平枚举值。
 
 **前置条件**
 
-- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
+- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用。
 
 **入参**
 
@@ -304,7 +304,7 @@ gpio_level_t uapi_gpio_get_val(pin_t pin)
 
 **返回值**
 
-- 返回类型：gpio_level_t
+返回类型：gpio_level_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -335,14 +335,14 @@ errcode_t uapi_gpio_toggle(pin_t pin)
 
 **功能说明**
 
-- 翻转指定 GPIO 引脚的输出电平状态（高变低、低变高）
-- 翻转操作具备原子性
-- 返回操作执行结果
+- 翻转指定 GPIO 引脚的输出电平状态（高变低、低变高）。
+- 翻转操作具备原子性。
+- 返回操作执行结果。
 
 **前置条件**
 
-- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用，且引脚应已配置为输出方向
-- 上下文限制：可在任务上下文调用
+- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用，且引脚应已配置为输出方向。
+- 上下文限制：可在任务上下文调用。
 
 **入参**
 
@@ -352,12 +352,12 @@ errcode_t uapi_gpio_toggle(pin_t pin)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 电平翻转成功 |
-| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT):0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 电平翻转成功 |
+| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层翻转失败 |
 
 **参考案例**
@@ -384,30 +384,30 @@ errcode_t uapi_gpio_set_isr_mode(pin_t pin, uint32_t trigger)
 
 **功能说明**
 
-- 设置指定 GPIO 引脚的中断触发模式（上升沿、下降沿、双边沿、高/低电平）
-- 中断模式配置操作具备原子性
-- 返回操作执行结果
+- 设置指定 GPIO 引脚的中断触发模式（上升沿、下降沿、双边沿、高/低电平）。
+- 中断模式配置操作具备原子性。
+- 返回操作执行结果。
 
 **前置条件**
 
-- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
-- 上下文限制：可在任务上下文调用
+- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用。
+- 上下文限制：可在任务上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#pin_t) | 待设置中断模式的 GPIO 引脚编号 | 有效引脚编号 |
-| trigger | uint32_t | GPIO 中断触发类型 | [GPIO_INTERRUPT_RISING_EDGE](#GPIO_INTERRUPT_RISING_EDGE)(0x00000001) / [GPIO_INTERRUPT_FALLING_EDGE](#GPIO_INTERRUPT_FALLING_EDGE)(0x00000002) / [GPIO_INTERRUPT_LOW](#GPIO_INTERRUPT_LOW)(0x00000004) / [GPIO_INTERRUPT_HIGH](#GPIO_INTERRUPT_HIGH)(0x00000008) / [GPIO_INTERRUPT_DEDGE](#GPIO_INTERRUPT_DEDGE)(0x00000003) |
+| trigger | uint32_t | GPIO 中断触发类型 | [GPIO_INTERRUPT_RISING_EDGE](#GPIO_INTERRUPT_RISING_EDGE)：1；<br>[GPIO_INTERRUPT_FALLING_EDGE](#GPIO_INTERRUPT_FALLING_EDGE)：2；<br>[GPIO_INTERRUPT_LOW](#GPIO_INTERRUPT_LOW)：4；<br>[GPIO_INTERRUPT_HIGH](#GPIO_INTERRUPT_HIGH)：8；<br>[GPIO_INTERRUPT_DEDGE](#GPIO_INTERRUPT_DEDGE)：3。 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 中断模式设置成功 |
-| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT):0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 中断模式设置成功 |
+| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层设置失败 |
 
 **参考案例**
@@ -435,31 +435,31 @@ errcode_t uapi_gpio_register_isr_func(pin_t pin, uint32_t trigger, gpio_callback
 
 **功能说明**
 
-- 为指定 GPIO 引脚注册中断回调函数，并设置中断触发模式
-- 中断触发时调用已注册的回调函数
-- 注册操作具备原子性
+- 为指定 GPIO 引脚注册中断回调函数，并设置中断触发模式。
+- 中断触发时调用已注册的回调函数。
+- 注册操作具备原子性。
 
 **前置条件**
 
-- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
-- 上下文限制：可在任务上下文调用
+- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用。
+- 上下文限制：可在任务上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | pin | [pin_t](#pin_t) | 待注册中断的 GPIO 引脚编号 | 有效引脚编号 |
-| trigger | uint32_t | GPIO 中断触发类型 | [GPIO_INTERRUPT_RISING_EDGE](#GPIO_INTERRUPT_RISING_EDGE)(0x00000001) / [GPIO_INTERRUPT_FALLING_EDGE](#GPIO_INTERRUPT_FALLING_EDGE)(0x00000002) / [GPIO_INTERRUPT_LOW](#GPIO_INTERRUPT_LOW)(0x00000004) / [GPIO_INTERRUPT_HIGH](#GPIO_INTERRUPT_HIGH)(0x00000008) / [GPIO_INTERRUPT_DEDGE](#GPIO_INTERRUPT_DEDGE)(0x00000003) |
+| trigger | uint32_t | GPIO 中断触发类型 | [GPIO_INTERRUPT_RISING_EDGE](#GPIO_INTERRUPT_RISING_EDGE)：1；<br>[GPIO_INTERRUPT_FALLING_EDGE](#GPIO_INTERRUPT_FALLING_EDGE)：2；<br>[GPIO_INTERRUPT_LOW](#GPIO_INTERRUPT_LOW)：4；<br>[GPIO_INTERRUPT_HIGH](#GPIO_INTERRUPT_HIGH)：8；<br>[GPIO_INTERRUPT_DEDGE](#GPIO_INTERRUPT_DEDGE)：3。 |
 | callback | [gpio_callback_t](#gpio_callback_t) | 中断回调函数指针 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 中断注册成功 |
-| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT):0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 中断注册成功 |
+| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层注册失败 |
 
 **参考案例**
@@ -486,14 +486,14 @@ errcode_t uapi_gpio_unregister_isr_func(pin_t pin)
 
 **功能说明**
 
-- 去注册指定 GPIO 引脚已注册的中断回调
-- 去注册操作具备原子性
-- 返回操作执行结果
+- 去注册指定 GPIO 引脚已注册的中断回调。
+- 去注册操作具备原子性。
+- 返回操作执行结果。
 
 **前置条件**
 
-- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
-- 上下文限制：可在任务上下文调用
+- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用。
+- 上下文限制：可在任务上下文调用。
 
 **入参**
 
@@ -503,12 +503,12 @@ errcode_t uapi_gpio_unregister_isr_func(pin_t pin)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 去注册成功 |
-| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT):0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 去成功注册 |
+| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层去注册失败 |
 
 **Kconfig配置**
@@ -531,14 +531,14 @@ errcode_t uapi_gpio_enable_interrupt(pin_t pin)
 
 **功能说明**
 
-- 使能指定 GPIO 引脚的中断
-- 使能操作具备原子性
-- 返回操作执行结果
+- 使能指定 GPIO 引脚的中断。
+- 使能操作具备原子性。
+- 返回操作执行结果。
 
 **前置条件**
 
-- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用，且已通过 uapi_gpio_register_isr_func() 完成回调注册
-- 上下文限制：可在任务上下文调用
+- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用，且已通过 uapi_gpio_register_isr_func() 完成回调注册。
+- 上下文限制：可在任务上下文调用。
 
 **入参**
 
@@ -548,12 +548,12 @@ errcode_t uapi_gpio_enable_interrupt(pin_t pin)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 中断使能成功 |
-| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT):0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 中断使能成功 |
+| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层使能失败 |
 
 **参考案例**
@@ -580,14 +580,14 @@ errcode_t uapi_gpio_disable_interrupt(pin_t pin)
 
 **功能说明**
 
-- 去使能指定 GPIO 引脚的中断
-- 去使能操作具备原子性
-- 返回操作执行结果
+- 去使能指定 GPIO 引脚的中断。
+- 去使能操作具备原子性。
+- 返回操作执行结果。
 
 **前置条件**
 
-- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
-- 上下文限制：可在任务上下文调用
+- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用。
+- 上下文限制：可在任务上下文调用。
 
 **入参**
 
@@ -597,12 +597,12 @@ errcode_t uapi_gpio_disable_interrupt(pin_t pin)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 中断去使能成功 |
-| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT):0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 中断去使能成功 |
+| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层去使能失败 |
 
 **参考案例**
@@ -629,14 +629,14 @@ errcode_t uapi_gpio_clear_interrupt(pin_t pin)
 
 **功能说明**
 
-- 清除指定 GPIO 引脚已触发的中断
-- 清除操作具备原子性
-- 返回操作执行结果
+- 清除指定 GPIO 引脚已触发的中断。
+- 清除操作具备原子性。
+- 返回操作执行结果。
 
 **前置条件**
 
-- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用
-- 上下文限制：可在任务上下文调用
+- 调用时序约束：必须在 uapi_gpio_init() 成功返回后调用。
+- 上下文限制：可在任务上下文调用。
 
 **入参**
 
@@ -646,12 +646,12 @@ errcode_t uapi_gpio_clear_interrupt(pin_t pin)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 中断清除成功 |
-| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT):0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 中断清除成功 |
+| [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层清除失败 |
 
 **Kconfig配置**
@@ -674,8 +674,8 @@ errcode_t uapi_gpio_suspend(uintptr_t arg)
 
 **功能说明**
 
-- 挂起所有 GPIO 通道，用于进入低功耗场景
-- 返回操作执行结果
+- 挂起所有 GPIO 通道，用于进入低功耗场景。
+- 返回操作执行结果。
 
 **入参**
 
@@ -685,11 +685,11 @@ errcode_t uapi_gpio_suspend(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 挂起成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 挂起成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层挂起失败 |
 
 **参考案例**
@@ -716,8 +716,8 @@ errcode_t uapi_gpio_resume(uintptr_t arg)
 
 **功能说明**
 
-- 恢复所有 GPIO 通道，用于退出低功耗场景
-- 返回操作执行结果
+- 恢复所有 GPIO 通道，用于退出低功耗场景。
+- 返回操作执行结果。
 
 **入参**
 
@@ -727,11 +727,11 @@ errcode_t uapi_gpio_resume(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 恢复成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 恢复成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层恢复失败 |
 
 **参考案例**
@@ -758,8 +758,8 @@ void uapi_gpio_select_core(pin_t pin, cores_t core)
 
 **功能说明**
 
-- 选择指定 GPIO 引脚归属的核心
-- 当前芯片版本上此接口不产生实际配置效果
+- 选择指定 GPIO 引脚归属的核心。
+- 当前芯片版本上此接口不产生实际配置效果。
 
 **入参**
 
@@ -862,7 +862,6 @@ typedef enum {
     // 29 S_MGPIO29 not pin out
     S_MGPIO30 = 30,
     S_MGPIO31 = 31,
-
     S_AGPIO0  = S_MGPIO6, // 32
     S_AGPIO1  = 33,
     S_AGPIO2  = 34,
@@ -876,11 +875,9 @@ typedef enum {
     S_AGPIO10 = 42, // RTC_IN
     S_AGPIO11 = 43, // RTC_OUT
     S_AGPIO12 = 44, // RST_N (不能作为GPIO,不能配置pinmux,但可以配置padctrl)
-
     S_SGPIO0  = S_MGPIO14, // 45 same as MGPIO14
     S_SGPIO1  = S_MGPIO15, // 46 same as MGPIO15
     S_SGPIO2  = S_MGPIO21, // 47 same as MGPIO21
-
     PIN_NONE  = 48, // used as invalid/unused PIN number
 } pin_t;
 ```
@@ -965,7 +962,7 @@ typedef enum {
 | CORES_BT_CORE | 0 | BT 核心 |
 | CORES_PROTOCOL_CORE | 1 | 协议核心（Hifi） |
 | CORES_APPS_CORE | 2 | 应用核心 |
-| CORES_EXTERN0_CORE | 3 | 外部核心 0（Gnss 或 Hifi） |
+| CORES_EXTERN0_CORE | 3 | 外部核心 0（GNSS 或 Hifi） |
 | CORES_GNSS_CORE | 3 | GNSS 核心（GNSS_EXIST 启用时，等同 CORES_EXTERN0_CORE） |
 | CORES_HIFI1_CORE | 3 | HIFI1 核心（GNSS_EXIST 未启用时，等同 CORES_EXTERN0_CORE） |
 | CORES_EXTERN1_CORE | 4 | 外部核心 1（Sec 或 Sensor） |

@@ -1,6 +1,6 @@
 # DMA
 
-DMA (Direct Memory Access) 在无需 CPU 干预的情况下实现外设与内存之间的数据传输，支持内存到内存、内存到外设以及外设到内存的单次传输与链表 (Linked List Item, LLI) 传输模式。模块同时提供低功耗 (Low Power Mode, LPM) 场景下的挂起与恢复能力，并通过回调机制在传输完成或发生错误时通知调用方。
+DMA（Direct Memory Access）在无需 CPU 干预的情况下实现外设与内存之间的数据传输，支持内存到内存、内存到外设以及外设到内存的单次传输与链表（Linked List Item, LLI）传输模式。模块同时提供低功耗（Low Power Mode, LPM）场景下的挂起与恢复能力，并通过回调机制在传输完成或发生错误时通知调用方。
 
 **模块公共头文件**
 
@@ -51,16 +51,16 @@ errcode_t uapi_dma_init(void)
 **前置条件**
 
 - 调用时序约束：在使用任何 DMA 通道传输接口之前，必须先调用本接口完成模块初始化。
-- 依赖关系：当前接口依赖底层 HAL 函数表已可获取且初始化成功。
+- 依赖关系：当前接口依赖底层 HAL 函数表已可获取且成功初始化。
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 初始化成功或模块已初始化 |
-| ERRCODE_DMA_NOT_INIT:0x80001100 | DMA 未初始化 | 底层 HAL 函数表获取失败 |
+| ERRCODE_SUCC：0 | 成功执行 | 成功初始化或模块已初始化 |
+| ERRCODE_DMA_NOT_INIT：0x80001100 | DMA 未初始化 | 底层 HAL 函数表获取失败 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层 HAL 初始化返回失败 |
 
 **参考案例**
@@ -119,12 +119,12 @@ errcode_t uapi_dma_open(void)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 模块开启成功 |
-| ERRCODE_DMA_NOT_INIT:0x80001100 | DMA 未初始化 | 模块未初始化即调用本接口 |
+| ERRCODE_SUCC：0 | 成功执行 | 模块开启成功 |
+| ERRCODE_DMA_NOT_INIT：0x80001100 | DMA 未初始化 | 模块未初始化即调用本接口 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -181,15 +181,15 @@ errcode_t uapi_dma_start_transfer(uint8_t channel)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| channel | uint8_t | DMA 通道号 | 0 ~ [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)(8) - 1 |
+| channel | uint8_t | DMA 通道号 | 0 ~ [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)：8 - 1 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 通道传输启动成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 通道传输启动成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 ### uapi_dma_end_transfer <a id="uapi_dma_end_transfer"></a>
@@ -219,15 +219,15 @@ errcode_t uapi_dma_end_transfer(uint8_t channel)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| channel | uint8_t | DMA 通道号 | 0 ~ [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)(8) - 1 |
+| channel | uint8_t | DMA 通道号 | 0 ~ [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)：8 - 1 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 通道传输停止成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 通道传输停止成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -261,11 +261,11 @@ uint32_t uapi_dma_get_block_ts(uint8_t channel)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| channel | uint8_t | DMA 通道号 | 0 ~ [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)(8) - 1 |
+| channel | uint8_t | DMA 通道号 | 0 ~ [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)：8 - 1 |
 
 **返回值**
 
-- 返回类型：uint32_t
+返回类型：uint32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -298,17 +298,17 @@ errcode_t uapi_dma_transfer_memory_single(const dma_ch_user_memory_config_t *use
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| user_cfg | [dma_ch_user_memory_config_t](#dma_ch_user_memory_config_t) * | 用户的 DMA 通道内存到内存传输配置 | 不为NULL |
+| user_cfg | [dma_ch_user_memory_config_t](#dma_ch_user_memory_config_t) * | 用户的 DMA 通道内存到内存传输配置 | 不为 NULL |
 | callback | [dma_transfer_cb_t](#dma_transfer_cb_t) | 通道传输完成/错误回调函数 | - |
 | arg | uintptr_t | 用于存储自定义信息的私有参数指针，传输完成时回传给回调函数 | - |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 内存到内存单次传输配置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 内存到内存单次传输配置成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -342,8 +342,8 @@ errcode_t uapi_dma_configure_peripheral_transfer_single(const dma_ch_user_periph
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| user_cfg | [dma_ch_user_peripheral_config_t](#dma_ch_user_peripheral_config_t) * | 用户的 DMA 通道内存到外设或外设到内存传输配置 | 不为NULL，且各字段满足合法性约束 |
-| channel | uint8_t * | 出参，由本接口写入被选中的 DMA 通道号 | 不为NULL |
+| user_cfg | [dma_ch_user_peripheral_config_t](#dma_ch_user_peripheral_config_t) * | 用户的 DMA 通道内存到外设或外设到内存传输配置 | 不为 NULL，且各字段满足合法性约束 |
+| channel | uint8_t * | 出参，由本接口写入被选中的 DMA 通道号 | 不为 NULL |
 | callback | [dma_transfer_cb_t](#dma_transfer_cb_t) | 通道传输完成/错误回调函数 | - |
 | arg | uintptr_t | 用于存储自定义信息的私有参数指针，传输完成时回传给回调函数 | - |
 
@@ -355,14 +355,14 @@ errcode_t uapi_dma_configure_peripheral_transfer_single(const dma_ch_user_periph
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 内存到外设或外设到内存单次传输配置成功 |
-| ERRCODE_DMA_NOT_INIT:0x80001100 | DMA 未初始化 | 模块未初始化即调用本接口 |
-| ERRCODE_DMA_INVALID_PARAMETER:0x80001102 | 参数无效 | user_cfg 为空或其字段未通过合法性校验 |
-| ERRCODE_DMA_RET_NO_AVAIL_CH:0x80001103 | 无可用通道 | 未找到满足握手号与 burst 长度要求的空闲 DMA 通道 |
+| ERRCODE_SUCC：0 | 成功执行 | 内存到外设或外设到内存单次传输配置成功 |
+| ERRCODE_DMA_NOT_INIT：0x80001100 | DMA 未初始化 | 模块未初始化即调用本接口 |
+| ERRCODE_DMA_INVALID_PARAMETER：0x80001102 | 参数无效 | user_cfg 为空或其字段未通过合法性校验 |
+| ERRCODE_DMA_RET_NO_AVAIL_CH：0x80001103 | 无可用通道 | 未找到满足握手号与 burst 长度要求的空闲 DMA 通道 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层配置返回其他失败 |
 
 ### uapi_dma_get_lli_channel <a id="uapi_dma_get_lli_channel"></a>
@@ -397,7 +397,7 @@ uint8_t uapi_dma_get_lli_channel(uint8_t burst_length, uint8_t handshaking)
 
 **返回值**
 
-- 返回类型：uint8_t
+返回类型：uint8_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -437,17 +437,17 @@ errcode_t uapi_dma_transfer_memory_lli(uint8_t channel, const dma_ch_user_memory
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| channel | uint8_t | DMA 通道号，建议来自 [uapi_dma_get_lli_channel](#uapi_dma_get_lli_channel) 的返回值 | 0 ~ [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)(8) - 1 |
-| user_cfg | [dma_ch_user_memory_config_t](#dma_ch_user_memory_config_t) * | 用户的 DMA 通道内存到内存传输配置 | 不为NULL |
+| channel | uint8_t | DMA 通道号，建议来自 [uapi_dma_get_lli_channel](#uapi_dma_get_lli_channel) 的返回值 | 0 ~ [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)：8 - 1 |
+| user_cfg | [dma_ch_user_memory_config_t](#dma_ch_user_memory_config_t) * | 用户的 DMA 通道内存到内存传输配置 | 不为 NULL |
 | callback | [dma_transfer_cb_t](#dma_transfer_cb_t) | 通道传输完成/错误回调函数 | - |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 内存到内存链表传输配置成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 内存到内存链表传输配置成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -487,19 +487,19 @@ errcode_t uapi_dma_configure_peripheral_transfer_lli(uint8_t channel, const dma_
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| channel | uint8_t | DMA 通道号 | < [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)(8) |
-| user_cfg | [dma_ch_user_peripheral_config_t](#dma_ch_user_peripheral_config_t) * | 用户的 DMA 通道内存到外设或外设到内存传输配置 | 不为NULL，且各字段满足合法性约束 |
+| channel | uint8_t | DMA 通道号 | < [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)：8 |
+| user_cfg | [dma_ch_user_peripheral_config_t](#dma_ch_user_peripheral_config_t) * | 用户的 DMA 通道内存到外设或外设到内存传输配置 | 不为 NULL，且各字段满足合法性约束 |
 | callback | [dma_transfer_cb_t](#dma_transfer_cb_t) | 通道传输完成/错误回调函数 | - |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 内存到外设或外设到内存链表传输配置成功 |
-| ERRCODE_DMA_INVALID_PARAMETER:0x80001102 | 参数无效 | channel 超出范围、user_cfg 为空或其字段未通过合法性校验 |
-| ERRCODE_DMA_NOT_INIT:0x80001100 | DMA 未初始化 | 模块未初始化即调用本接口 |
+| ERRCODE_SUCC：0 | 成功执行 | 内存到外设或外设到内存链表传输配置成功 |
+| ERRCODE_DMA_INVALID_PARAMETER：0x80001102 | 参数无效 | channel 超出范围、user_cfg 为空或其字段未通过合法性校验 |
+| ERRCODE_DMA_NOT_INIT：0x80001100 | DMA 未初始化 | 模块未初始化即调用本接口 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层链表配置返回其他失败 |
 
 **Kconfig配置**
@@ -535,17 +535,17 @@ errcode_t uapi_dma_enable_lli(uint8_t channel, dma_transfer_cb_t callback, uintp
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| channel | uint8_t | DMA 通道号 | 0 ~ [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)(8) - 1 |
+| channel | uint8_t | DMA 通道号 | 0 ~ [DMA_CHANNEL_MAX_NUM](#DMA_CHANNEL_MAX_NUM)：8 - 1 |
 | callback | [dma_transfer_cb_t](#dma_transfer_cb_t) | 通道传输完成/错误回调函数 | - |
 | arg | uintptr_t | 用于存储自定义信息的私有参数指针，传输完成时回传给回调函数 | - |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 链表传输启用成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 链表传输启用成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **参考案例**
@@ -589,12 +589,12 @@ errcode_t uapi_dma_resume(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 模块恢复成功 |
-| ERRCODE_DMA_NOT_INIT:0x80001100 | DMA 未初始化 | 模块未初始化即调用本接口 |
+| ERRCODE_SUCC：0 | 成功执行 | 模块恢复成功 |
+| ERRCODE_DMA_NOT_INIT：0x80001100 | DMA 未初始化 | 模块未初始化即调用本接口 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -634,11 +634,11 @@ errcode_t uapi_dma_suspend(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 模块挂起成功 |
+| ERRCODE_SUCC：0 | 成功执行 | 模块挂起成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 执行失败 |
 
 **Kconfig配置**
@@ -832,7 +832,7 @@ typedef struct dma_ch_user_memory_config {
 | dest | uint32_t | 传输目的地址 |
 | transfer_num | uint16_t | 传输数据量 |
 | priority | uint8_t | 传输通道优先级，最低为 0、最高为 3 |
-| width | uint8_t | 传输数据宽度：0 表示 1 字节、1 表示 2 字节、2 表示 4 字节 |
+| width | uint8_t | 传输数据宽度：0 表示 1 Bytes；<br>1 表示 2 Bytes；<br>2 表示 4 Bytes。 |
 
 ### dma_ch_user_peripheral_config_t <a id="dma_ch_user_peripheral_config_t"></a>
 
@@ -967,15 +967,15 @@ typedef struct dma_ch_user_peripheral_config {
 | transfer_num | uint16_t | 传输数据量 |
 | src_handshaking | uint16_t | 源端硬件握手号，参考 [hal_dma_handshaking_source_t](#hal_dma_handshaking_source_t) |
 | dest_handshaking | uint16_t | 目的端硬件握手号，参考 [hal_dma_handshaking_source_t](#hal_dma_handshaking_source_t) |
-| trans_type | uint8_t | 传输类型：0 表示内存到内存且由 DMA 流控、1 表示内存到外设且由 DMA 流控、2 表示外设到内存且由 DMA 流控、3 表示外设到外设且由 DMA 流控、4 表示外设到内存且由外设流控、5 表示外设到外设且由源端外设流控、6 表示内存到外设且由外设流控、7 表示外设到外设且由目的端外设流控 |
-| trans_dir | uint8_t | 传输方向：0 表示内存到外设、1 表示外设到内存、2 表示外设到外设 |
+| trans_type | uint8_t | 传输类型：0 表示内存到内存且由 DMA 流控；<br>1 表示内存到外设且由 DMA 流控；<br>2 表示外设到内存且由 DMA 流控；<br>3 表示外设到外设且由 DMA 流控；<br>4 表示外设到内存且由外设流控；<br>5 表示外设到外设且由源端外设流控；<br>6 表示内存到外设且由外设流控；<br>7 表示外设到外设且由目的端外设流控。 |
+| trans_dir | uint8_t | 传输方向：0 表示内存到外设；<br>1 表示外设到内存；<br>2 表示外设到外设。 |
 | priority | uint8_t | 传输通道优先级，最低为 0、最高为 3 |
-| src_width | uint8_t | 源端传输数据宽度：0 表示 1 字节、1 表示 2 字节、2 表示 4 字节 |
-| dest_width | uint8_t | 目的端传输数据宽度：0 表示 1 字节、1 表示 2 字节、2 表示 4 字节 |
-| burst_length | uint8_t | 传输 burst 长度：0 表示 burst 长度为 1、1 表示 4、2 表示 8、3 表示 16 |
-| src_increment | uint8_t | 源端地址增量模式：0 表示递增、1 表示递减、2 表示不变 |
-| dest_increment | uint8_t | 目的端地址增量模式：0 表示递增、1 表示递减、2 表示不变 |
-| protection | uint8_t | DMA 保护控制位，用于驱动 AHB HPROT[3:1] 总线：0 表示 HPROT[1]、1 表示 HPROT[2]、2 表示 HPROT[3] |
+| src_width | uint8_t | 源端传输数据宽度：0 表示 1 Bytes；<br>1 表示 2 Bytes；<br>2 表示 4 Bytes。 |
+| dest_width | uint8_t | 目的端传输数据宽度：0 表示 1 Bytes；<br>1 表示 2 Bytes；<br>2 表示 4 Bytes。 |
+| burst_length | uint8_t | 传输 burst 长度：0 表示 burst 长度为 1；<br>1 表示 4；<br>2 表示 8；<br>3 表示 16。 |
+| src_increment | uint8_t | 源端地址增量模式：0 表示递增；<br>1 表示递减；<br>2 表示不变。 |
+| dest_increment | uint8_t | 目的端地址增量模式：0 表示递增；<br>1 表示递减；<br>2 表示不变。 |
+| protection | uint8_t | DMA 保护控制位，用于驱动 AHB HPROT[3:1] 总线：0 表示 HPROT[1]；<br>1 表示 HPROT[2]；<br>2 表示 HPROT[3]。 |
 
 ## Macros
 

@@ -1,6 +1,6 @@
 # String
 
-string 提供操作系统抽象层的字符串与内存操作接口，包括字符串比较、字符查找、子串定位、字符串长度计算、字符串分割、内存比较、内存字符查找以及字符串到整数的转换功能。
+String 提供操作系统抽象层的字符串与内存操作接口，包括字符串比较、字符查找、子串定位、字符串长度计算、字符串分割、内存比较、内存字符查找以及字符串到整数的转换功能。
 
 **模块公共头文件**
 
@@ -53,8 +53,8 @@ int osal_memncmp(const void *buf1, const void *buf2, unsigned long size)
 
 **功能说明**
 
-- 比较内存区域 buf1 和 buf2 的前 size 字节
-- 返回值小于零表示 buf1 小于 buf2，等于零表示两者相同，大于零表示 buf1 大于 buf2
+- 比较内存区域 buf1 和 buf2 的前 size 字节。
+- 返回值小于零表示 buf1 小于 buf2，等于零表示两者相同，大于零表示 buf1 大于 buf2。
 
 **入参**
 
@@ -66,7 +66,7 @@ int osal_memncmp(const void *buf1, const void *buf2, unsigned long size)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -88,8 +88,8 @@ int osal_strcmp(const char *s1, const char *s2)
 
 **功能说明**
 
-- 比较字符串 s1 和 s2
-- 返回值小于零表示 s1 小于 s2，等于零表示两者相同，大于零表示 s1 大于 s2
+- 比较字符串 s1 和 s2。
+- 返回值小于零表示 s1 小于 s2，等于零表示两者相同，大于零表示 s1 大于 s2。
 
 **入参**
 
@@ -100,7 +100,7 @@ int osal_strcmp(const char *s1, const char *s2)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -128,8 +128,8 @@ int osal_strncmp(const char *s1, const char *s2, unsigned long size)
 
 **功能说明**
 
-- 比较字符串 s1 和 s2 的前 size 字节
-- 返回值小于零表示 s1 小于 s2，等于零表示两者相同，大于零表示 s1 大于 s2
+- 比较字符串 s1 和 s2 的前 size 字节。
+- 返回值小于零表示 s1 小于 s2，等于零表示两者相同，大于零表示 s1 大于 s2。
 
 **入参**
 
@@ -141,7 +141,7 @@ int osal_strncmp(const char *s1, const char *s2, unsigned long size)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -163,8 +163,8 @@ int osal_strcasecmp(const char *s1, const char *s2)
 
 **功能说明**
 
-- 忽略大小写逐字节比较字符串 s1 和 s2
-- 返回值小于零表示 s1 小于 s2，等于零表示两者相同，大于零表示 s1 大于 s2
+- 忽略大小写逐字节比较字符串 s1 和 s2。
+- 返回值小于零表示 s1 小于 s2，等于零表示两者相同，大于零表示 s1 大于 s2。
 
 **入参**
 
@@ -175,7 +175,7 @@ int osal_strcasecmp(const char *s1, const char *s2)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -197,8 +197,8 @@ int osal_strncasecmp(const char *s1, const char *s2, unsigned long size)
 
 **功能说明**
 
-- 忽略大小写逐字节比较字符串 s1 和 s2 的前 size 字节
-- 返回值小于零表示 s1 小于 s2，等于零表示两者相同，大于零表示 s1 大于 s2
+- 忽略大小写逐字节比较字符串 s1 和 s2 的前 size 字节。
+- 返回值小于零表示 s1 小于 s2，等于零表示两者相同，大于零表示 s1 大于 s2。
 
 **入参**
 
@@ -210,7 +210,7 @@ int osal_strncasecmp(const char *s1, const char *s2, unsigned long size)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -232,8 +232,8 @@ char *osal_strchr(const char *s, int n)
 
 **功能说明**
 
-- 在字符串 s 中查找字符 n 的首次出现位置
-- 返回指向该字符的指针，若未找到则返回 NULL
+- 在字符串 s 中查找字符 n 的首次出现位置。
+- 返回指向该字符的指针，若未找到则返回 NULL。
 
 **入参**
 
@@ -244,7 +244,7 @@ char *osal_strchr(const char *s, int n)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -265,8 +265,8 @@ char *osal_strnchr(const char *s, int count, int c)
 
 **功能说明**
 
-- 在字符串 s 的前 count 个字符范围内查找字符 c 的首次出现位置
-- 返回指向该字符的指针，若未找到则返回 NULL
+- 在字符串 s 的前 count 个字符范围内查找字符 c 的首次出现位置。
+- 返回指向该字符的指针，若未找到则返回 NULL。
 
 **入参**
 
@@ -278,7 +278,7 @@ char *osal_strnchr(const char *s, int count, int c)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -299,8 +299,8 @@ char *osal_strrchr(const char *s, int c)
 
 **功能说明**
 
-- 在字符串 s 中查找字符 c 的最后一次出现位置
-- 返回指向该字符的指针，若未找到则返回 NULL
+- 在字符串 s 中查找字符 c 的最后一次出现位置。
+- 返回指向该字符的指针，若未找到则返回 NULL。
 
 **入参**
 
@@ -311,7 +311,7 @@ char *osal_strrchr(const char *s, int c)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -332,8 +332,8 @@ char *osal_strstr(const char *s1, const char *s2)
 
 **功能说明**
 
-- 在字符串 s1 中查找子串 s2 的首次出现位置
-- 返回指向子串起始位置的指针，若未找到则返回 NULL
+- 在字符串 s1 中查找子串 s2 的首次出现位置。
+- 返回指向子串起始位置的指针，若未找到则返回 NULL。
 
 **入参**
 
@@ -344,7 +344,7 @@ char *osal_strstr(const char *s1, const char *s2)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -369,8 +369,8 @@ char *osal_strnstr(const char *s1, const char *s2, int n)
 
 **功能说明**
 
-- 在字符串 s1 的前 n 个字符范围内查找子串 s2 的首次出现位置
-- 返回指向子串起始位置的指针，若未找到则返回 NULL
+- 在字符串 s1 的前 n 个字符范围内查找子串 s2 的首次出现位置。
+- 返回指向子串起始位置的指针，若未找到则返回 NULL。
 
 **入参**
 
@@ -382,7 +382,7 @@ char *osal_strnstr(const char *s1, const char *s2, int n)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -403,7 +403,7 @@ unsigned int osal_strlen(const char *s)
 
 **功能说明**
 
-- 计算字符串 s 的长度，不包含终止符 '\0'
+- 计算字符串 s 的长度，不包含终止符 '\0'。
 
 **入参**
 
@@ -413,7 +413,7 @@ unsigned int osal_strlen(const char *s)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -439,8 +439,8 @@ unsigned int osal_strnlen(const char *s, unsigned int size)
 
 **功能说明**
 
-- 计算字符串 s 的长度，但不越过 s + size 的范围
-- 返回字符串中 '\0' 之前的字符数，最多返回 size
+- 计算字符串 s 的长度，但不越过 s + size 的范围。
+- 返回字符串中 '\0' 之前的字符数，最多返回 size。
 
 **入参**
 
@@ -451,7 +451,7 @@ unsigned int osal_strnlen(const char *s, unsigned int size)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -471,8 +471,8 @@ char *osal_strpbrk(const char *s1, const char *s2)
 
 **功能说明**
 
-- 在字符串 s1 中搜索字符集合 s2 中任一字符的首次出现位置
-- 返回指向该字符的指针，若未找到则返回 NULL
+- 在字符串 s1 中搜索字符集合 s2 中任一字符的首次出现位置。
+- 返回指向该字符的指针，若未找到则返回 NULL。
 
 **入参**
 
@@ -483,7 +483,7 @@ char *osal_strpbrk(const char *s1, const char *s2)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -504,8 +504,8 @@ char *osal_strsep(char **s, const char *ct)
 
 **功能说明**
 
-- 从字符串中提取以分隔符 ct 分隔的下一个标记
-- 更新 *s 指向分隔符之后的下一个位置
+- 从字符串中提取以分隔符 ct 分隔的下一个标记。
+- 更新 *s 指向分隔符之后的下一个位置。
 
 **入参**
 
@@ -522,7 +522,7 @@ char *osal_strsep(char **s, const char *ct)
 
 **返回值**
 
-- 返回类型：char *
+返回类型：char *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -543,7 +543,7 @@ unsigned int osal_strspn(const char *s, const char *accept)
 
 **功能说明**
 
-- 计算字符串 s 前缀中仅由 accept 中字符组成的长度
+- 计算字符串 s 前缀中仅由 accept 中字符组成的长度。
 
 **入参**
 
@@ -554,7 +554,7 @@ unsigned int osal_strspn(const char *s, const char *accept)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -574,7 +574,7 @@ unsigned int osal_strcspn(const char *s, const char *reject)
 
 **功能说明**
 
-- 计算字符串 s 前缀中不包含 reject 中任何字符的长度
+- 计算字符串 s 前缀中不包含 reject 中任何字符的长度。
 
 **入参**
 
@@ -585,7 +585,7 @@ unsigned int osal_strcspn(const char *s, const char *reject)
 
 **返回值**
 
-- 返回类型：unsigned int
+返回类型：unsigned int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -605,8 +605,8 @@ void *osal_memscan(void *addr, int c, int size)
 
 **功能说明**
 
-- 在内存区域 addr 的前 size 字节中查找字节 c
-- 返回指向该字节首次出现位置的指针，若未找到则返回内存区域末尾之后一个字节的地址
+- 在内存区域 addr 的前 size 字节中查找字节 c。
+- 返回指向该字节首次出现位置的指针，若未找到则返回内存区域末尾之后一个字节的地址。
 
 **入参**
 
@@ -618,7 +618,7 @@ void *osal_memscan(void *addr, int c, int size)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -638,8 +638,8 @@ int osal_memcmp(const void *cs, const void *ct, int count)
 
 **功能说明**
 
-- 比较内存区域 cs 和 ct 的前 count 字节
-- 返回值小于零表示 cs 小于 ct，等于零表示两者相同，大于零表示 cs 大于 ct
+- 比较内存区域 cs 和 ct 的前 count 字节。
+- 返回值小于零表示 cs 小于 ct，等于零表示两者相同，大于零表示 cs 大于 ct。
 
 **入参**
 
@@ -651,7 +651,7 @@ int osal_memcmp(const void *cs, const void *ct, int count)
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -679,8 +679,8 @@ void *osal_memchr(const void *s, int c, int n)
 
 **功能说明**
 
-- 在内存区域 s 的前 n 字节中查找字节 c 的首次出现位置
-- 返回指向该字节的指针，若未找到则返回 NULL
+- 在内存区域 s 的前 n 字节中查找字节 c 的首次出现位置。
+- 返回指向该字节的指针，若未找到则返回 NULL。
 
 **入参**
 
@@ -692,7 +692,7 @@ void *osal_memchr(const void *s, int c, int n)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -713,8 +713,8 @@ void *osal_memchr_inv(const void *s, int c, int n)
 
 **功能说明**
 
-- 在内存区域 s 的前 n 字节中查找与字节 c 不匹配的首个字节
-- 返回指向该不匹配字节的指针，若全部匹配则返回 NULL
+- 在内存区域 s 的前 n 字节中查找与字节 c 不匹配的首个字节。
+- 返回指向该不匹配字节的指针，若全部匹配则返回 NULL。
 
 **入参**
 
@@ -726,7 +726,7 @@ void *osal_memchr_inv(const void *s, int c, int n)
 
 **返回值**
 
-- 返回类型：void *
+返回类型：void *
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -747,9 +747,9 @@ unsigned long long osal_strtoull(const char *cp, char **endp, unsigned int base)
 
 **功能说明**
 
-- 将字符串 cp 按 base 指定的进制转换为 unsigned long long 整数
-- 支持 2 到 36 进制，base 为 0 时根据字符串前缀自动判断进制（0x 为十六进制，0 为八进制，否则为十进制）
-- 若 endp 不为 NULL，将第一个无效字符的地址存入 *endp
+- 将字符串 cp 按 base 指定的进制转换为 unsigned long long 整数。
+- 支持 2 到 36 进制，base 为 0 时根据字符串前缀自动判断进制（0x 为十六进制，0 为八进制，否则为十进制）。
+- 若 endp 不为 NULL，将第一个无效字符的地址存入 *endp。
 
 **入参**
 
@@ -757,7 +757,7 @@ unsigned long long osal_strtoull(const char *cp, char **endp, unsigned int base)
 | ---- | ---- | ---- | ---- |
 | cp | const char * | 待转换的字符串指针 | 有效字符串指针 |
 | endp | char ** | 用于存储第一个无效字符地址的指针，可为 NULL | NULL 或有效的二级指针 |
-| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)(10) / [OSAL_BASE_HEX](#OSAL_BASE_HEX)(16) / 0 / 2~36 |
+| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)：10；<br>[OSAL_BASE_HEX](#OSAL_BASE_HEX)：16；<br>0；<br>2~36。 |
 
 **出参**
 
@@ -767,7 +767,7 @@ unsigned long long osal_strtoull(const char *cp, char **endp, unsigned int base)
 
 **返回值**
 
-- 返回类型：unsigned long long
+返回类型：unsigned long long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -788,9 +788,9 @@ unsigned long osal_strtoul(const char *cp, char **endp, unsigned int base)
 
 **功能说明**
 
-- 将字符串 cp 按 base 指定的进制转换为 unsigned long 整数
-- 支持 2 到 36 进制，base 为 0 时根据字符串前缀自动判断进制（0x 为十六进制，0 为八进制，否则为十进制）
-- 若 endp 不为 NULL，将第一个无效字符的地址存入 *endp
+- 将字符串 cp 按 base 指定的进制转换为 unsigned long 整数。
+- 支持 2 到 36 进制，base 为 0 时根据字符串前缀自动判断进制（0x 为十六进制，0 为八进制，否则为十进制）。
+- 若 endp 不为 NULL，将第一个无效字符的地址存入 *endp。
 
 **入参**
 
@@ -798,7 +798,7 @@ unsigned long osal_strtoul(const char *cp, char **endp, unsigned int base)
 | ---- | ---- | ---- | ---- |
 | cp | const char * | 待转换的字符串指针 | 有效字符串指针 |
 | endp | char ** | 用于存储第一个无效字符地址的指针，可为 NULL | NULL 或有效的二级指针 |
-| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)(10) / [OSAL_BASE_HEX](#OSAL_BASE_HEX)(16) / 0 / 2~36 |
+| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)：10；<br>[OSAL_BASE_HEX](#OSAL_BASE_HEX)：16；<br>0；<br>2~36。 |
 
 **出参**
 
@@ -808,7 +808,7 @@ unsigned long osal_strtoul(const char *cp, char **endp, unsigned int base)
 
 **返回值**
 
-- 返回类型：unsigned long
+返回类型：unsigned long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -833,9 +833,9 @@ long osal_strtol(const char *cp, char **endp, unsigned int base)
 
 **功能说明**
 
-- 将字符串 cp 按 base 指定的进制转换为 long 整数
-- 支持 2 到 36 进制，base 为 0 时根据字符串前缀自动判断进制（0x 为十六进制，0 为八进制，否则为十进制）
-- 若 endp 不为 NULL，将第一个无效字符的地址存入 *endp
+- 将字符串 cp 按 base 指定的进制转换为 long 整数。
+- 支持 2 到 36 进制，base 为 0 时根据字符串前缀自动判断进制（0x 为十六进制，0 为八进制，否则为十进制）。
+- 若 endp 不为 NULL，将第一个无效字符的地址存入 *endp。
 
 **入参**
 
@@ -843,7 +843,7 @@ long osal_strtol(const char *cp, char **endp, unsigned int base)
 | ---- | ---- | ---- | ---- |
 | cp | const char * | 待转换的字符串指针 | 有效字符串指针 |
 | endp | char ** | 用于存储第一个无效字符地址的指针，可为 NULL | NULL 或有效的二级指针 |
-| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)(10) / [OSAL_BASE_HEX](#OSAL_BASE_HEX)(16) / 0 / 2~36 |
+| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)：10；<br>[OSAL_BASE_HEX](#OSAL_BASE_HEX)：16；<br>0；<br>2~36。 |
 
 **出参**
 
@@ -853,7 +853,7 @@ long osal_strtol(const char *cp, char **endp, unsigned int base)
 
 **返回值**
 
-- 返回类型：long
+返回类型：long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -882,9 +882,9 @@ long long osal_strtoll(const char *cp, char **endp, unsigned int base)
 
 **功能说明**
 
-- 将字符串 cp 按 base 指定的进制转换为 long long 整数
-- 支持 2 到 36 进制，base 为 0 时根据字符串前缀自动判断进制（0x 为十六进制，0 为八进制，否则为十进制）
-- 若 endp 不为 NULL，将第一个无效字符的地址存入 *endp
+- 将字符串 cp 按 base 指定的进制转换为 long long 整数。
+- 支持 2 到 36 进制，base 为 0 时根据字符串前缀自动判断进制（0x 为十六进制，0 为八进制，否则为十进制）。
+- 若 endp 不为 NULL，将第一个无效字符的地址存入 *endp。
 
 **入参**
 
@@ -892,7 +892,7 @@ long long osal_strtoll(const char *cp, char **endp, unsigned int base)
 | ---- | ---- | ---- | ---- |
 | cp | const char * | 待转换的字符串指针 | 有效字符串指针 |
 | endp | char ** | 用于存储第一个无效字符地址的指针，可为 NULL | NULL 或有效的二级指针 |
-| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)(10) / [OSAL_BASE_HEX](#OSAL_BASE_HEX)(16) / 0 / 2~36 |
+| base | unsigned int | 转换的进制基数 | [OSAL_BASE_DEC](#OSAL_BASE_DEC)：10；<br>[OSAL_BASE_HEX](#OSAL_BASE_HEX)：16；<br>0；<br>2~36。 |
 
 **出参**
 
@@ -902,7 +902,7 @@ long long osal_strtoll(const char *cp, char **endp, unsigned int base)
 
 **返回值**
 
-- 返回类型：long long
+返回类型：long long
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

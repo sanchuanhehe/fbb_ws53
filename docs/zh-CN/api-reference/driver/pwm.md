@@ -1,6 +1,6 @@
 # PWM
 
-PWM (Pulse Width Modulation) 提供脉冲宽度调制信号的生成与管理功能，支持多通道配置、占空比与周期设置、通道分组以及完成中断回调，并支持低功耗场景下的挂起与恢复。
+PWM（Pulse Width Modulation）提供脉冲宽度调制信号的生成与管理功能，支持多通道配置、占空比与周期设置、通道分组以及完成中断回调，并支持低功耗场景下的挂起与恢复。
 
 **模块公共头文件**
 
@@ -12,7 +12,7 @@ PWM (Pulse Width Modulation) 提供脉冲宽度调制信号的生成与管理功
 
 | 接口名称 | 功能简述 |
 | -------- | -------- |
-| [uapi_pwm_init](#uapi_pwm_init) | 初始化 PWM 驱动，注册 HAL (Hardware Abstraction Layer) 函数表并使能时钟 |
+| [uapi_pwm_init](#uapi_pwm_init) | 初始化 PWM 驱动，注册 HAL（Hardware Abstraction Layer）函数表并使能时钟 |
 | [uapi_pwm_deinit](#uapi_pwm_deinit) | 反初始化 PWM 驱动，关闭已打开通道并注销 HAL 函数表 |
 | [uapi_pwm_open](#uapi_pwm_open) | 以指定配置打开一个 PWM 通道 |
 | [uapi_pwm_close](#uapi_pwm_close) | 关闭指定 PWM 通道并注销其中断回调 |
@@ -48,22 +48,22 @@ errcode_t uapi_pwm_init(void)
 
 **功能说明**
 
-- 初始化 PWM 驱动模块
-- 已初始化时重复调用直接返回成功，不重复执行初始化动作
-- 初始化成功后本模块其他接口方可使用
+- 初始化 PWM 驱动模块。
+- 已初始化时重复调用直接返回成功，不重复执行初始化动作。
+- 成功初始化后本模块其他接口方可使用。
 
 **前置条件**
 
-- 调用时序约束：作为 PWM 驱动的入口，使用其他 PWM 接口前必须先调用本接口
-- 依赖关系：依赖目标芯片 porting 层已提供 `pwm_port_register_hal_funcs` 与底层 HAL 初始化实现
+- 调用时序约束：作为 PWM 驱动的入口，使用其他 PWM 接口前必须先调用本接口。
+- 依赖关系：依赖目标芯片 porting 层已提供 `pwm_port_register_hal_funcs` 与底层 HAL 初始化实现。
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 驱动已初始化或本次初始化成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 驱动已初始化或本次初始化成功 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层 HAL 初始化返回失败 |
 
 **参考案例**
@@ -84,14 +84,14 @@ void uapi_pwm_deinit(void)
 
 **功能说明**
 
-- 反初始化 PWM 驱动模块，关闭所有已打开的通道
-- 注销 HAL 函数表并关闭 PWM 外设时钟
-- 未初始化时调用直接返回，不执行任何动作
+- 反初始化 PWM 驱动模块，关闭所有已打开的通道。
+- 注销 HAL 函数表并关闭 PWM 外设时钟。
+- 未初始化时调用直接返回，不执行任何动作。
 
 **前置条件**
 
-- 调用时序约束：应在 `uapi_pwm_init` 成功返回之后调用
-- 依赖关系：内部会逐一调用 `uapi_pwm_close` 关闭已打开通道，依赖该接口可用
+- 调用时序约束：应在 `uapi_pwm_init` 成功返回之后调用。
+- 依赖关系：内部会逐一调用 `uapi_pwm_close` 关闭已打开通道，依赖该接口可用。
 
 **参考案例**
 
@@ -111,15 +111,15 @@ errcode_t uapi_pwm_open(uint8_t channel, const pwm_config_t *cfg)
 
 **功能说明**
 
-- 以指定配置打开并初始化一个 PWM 通道，设置低/高电平时间、相位偏移、重复周期与连续输出标志
-- 通道已打开时先关闭再按新配置重新打开
-- 注册默认中断回调 `uapi_pwm_isr`，用于响应通道完成中断
+- 以指定配置打开并初始化一个 PWM 通道，设置低/高电平时间、相位偏移、重复周期与连续输出标志。
+- 通道已打开时先关闭再按新配置重新打开。
+- 注册默认中断回调 `uapi_pwm_isr`，用于响应通道完成中断。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_pwm_init` 成功返回后调用
-- 依赖关系：依赖底层 HAL 已提供 `set_time`、`set_cycles`、`set_action`、`registerfunc` 实现
-- 上下文限制：内部通过关中断保护配置过程，可在任务上下文调用
+- 调用时序约束：必须在 `uapi_pwm_init` 成功返回后调用。
+- 依赖关系：依赖底层 HAL 已提供 `set_time`、`set_cycles`、`set_action`、`registerfunc` 实现。
+- 上下文限制：内部通过关中断保护配置过程，可在任务上下文调用。
 
 **入参**
 
@@ -130,13 +130,13 @@ errcode_t uapi_pwm_open(uint8_t channel, const pwm_config_t *cfg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 通道配置成功写入并打开 |
-| ERRCODE_PWM_INVALID_PARAMETER:0x80001082 | 参数无效 | channel 超出有效范围、cfg->cycles 大于最大值或 porting 层参数校验失败 |
-| ERRCODE_PWM_NOT_INIT:0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道配置写入并打开成功 |
+| ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围、cfg->cycles 大于最大值或 porting 层参数校验失败 |
+| ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
 
 **参考案例**
 
@@ -156,15 +156,15 @@ errcode_t uapi_pwm_close(uint8_t channel)
 
 **功能说明**
 
-- 关闭指定 PWM 通道，停止其信号输出
-- 注销该通道的完成中断回调并标记通道为未打开状态
-- 按通道所属分组执行停止动作，避免影响同组其他通道（仅 V151）
+- 关闭指定 PWM 通道，停止其信号输出。
+- 注销该通道的完成中断回调并标记通道为未打开状态。
+- 按通道所属分组执行停止动作，避免影响同组其他通道（仅 V151）。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_pwm_init` 成功返回且目标通道已通过 `uapi_pwm_open` 打开后调用
-- 依赖关系：依赖底层 HAL 已提供 `set_action`、`set_group`（V151）实现
-- 上下文限制：内部通过关中断保护停止动作，可在任务上下文调用
+- 调用时序约束：必须在 `uapi_pwm_init` 成功返回且目标通道已通过 `uapi_pwm_open` 打开后调用。
+- 依赖关系：依赖底层 HAL 已提供 `set_action`、`set_group`（V151）实现。
+- 上下文限制：内部通过关中断保护停止动作，可在任务上下文调用。
 
 **入参**
 
@@ -174,14 +174,14 @@ errcode_t uapi_pwm_close(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 通道成功关闭 |
-| ERRCODE_PWM_INVALID_PARAMETER:0x80001082 | 参数无效 | channel 超出有效范围或该通道未归属任何分组（V151） |
-| ERRCODE_PWM_NOT_INIT:0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
-| ERRCODE_PWM_NOT_OPEN:0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道关闭成功 |
+| ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围或该通道未归属任何分组（V151） |
+| ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
+| ERRCODE_PWM_NOT_OPEN：0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
 
 **参考案例**
 
@@ -201,15 +201,15 @@ errcode_t uapi_pwm_start(uint8_t channel)
 
 **功能说明**
 
-- 启动指定 PWM 通道的信号输出
-- V151 实现下通过通道所属分组下发启动动作，保证分组内通道同步控制
-- 仅触发启动动作，不修改已配置的占空比与周期参数
+- 启动指定 PWM 通道的信号输出。
+- V151 实现下通过通道所属分组下发启动动作，保证分组内通道同步控制。
+- 仅触发启动动作，不修改已配置的占空比与周期参数。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_pwm_init` 成功返回且目标通道已通过 `uapi_pwm_open` 配置后调用
-- 依赖关系：V151 实现下要求通道已通过 `uapi_pwm_set_group` 归入某个分组
-- 上下文限制：内部通过关中断保护启动动作，可在任务上下文调用
+- 调用时序约束：必须在 `uapi_pwm_init` 成功返回且目标通道已通过 `uapi_pwm_open` 配置后调用。
+- 依赖关系：V151 实现下要求通道已通过 `uapi_pwm_set_group` 归入某个分组。
+- 上下文限制：内部通过关中断保护启动动作，可在任务上下文调用。
 
 **入参**
 
@@ -219,14 +219,14 @@ errcode_t uapi_pwm_start(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 通道成功启动 |
-| ERRCODE_PWM_INVALID_PARAMETER:0x80001082 | 参数无效 | channel 超出有效范围或该通道未归属任何分组（V151） |
-| ERRCODE_PWM_NOT_INIT:0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
-| ERRCODE_PWM_NOT_OPEN:0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道启动成功 |
+| ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围或该通道未归属任何分组（V151） |
+| ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
+| ERRCODE_PWM_NOT_OPEN：0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
 
 **参考案例**
 
@@ -246,14 +246,14 @@ uint32_t uapi_pwm_get_frequency(uint8_t channel)
 
 **功能说明**
 
-- 获取指定 PWM 通道的工作频率，返回值单位为 Hz
-- 用于结合 `pwm_config_t` 中的时钟周期计数换算实际高低电平时间
-- 仅读取 porting 层时钟配置，不修改任何硬件状态
+- 获取指定 PWM 通道的工作频率，返回值单位为 Hz。
+- 用于结合 `pwm_config_t` 中的时钟周期计数换算实际高低电平时间。
+- 仅读取 porting 层时钟配置，不修改任何硬件状态。
 
 **前置条件**
 
-- 调用时序约束：建议在 `uapi_pwm_init` 之后调用，以确保时钟已使能
-- 依赖关系：依赖目标芯片 porting 层提供的 `pwm_port_get_clock_value` 实现
+- 调用时序约束：建议在 `uapi_pwm_init` 之后调用，以确保时钟已使能。
+- 依赖关系：依赖目标芯片 porting 层提供的 `pwm_port_get_clock_value` 实现。
 
 **入参**
 
@@ -263,7 +263,7 @@ uint32_t uapi_pwm_get_frequency(uint8_t channel)
 
 **返回值**
 
-- 返回类型：uint32_t
+返回类型：uint32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -283,15 +283,15 @@ errcode_t uapi_pwm_stop(uint8_t channel)
 
 **功能说明**
 
-- 停止指定 PWM 通道的信号输出
-- 仅对 V150 HAL 实现可用，V151 通过分组接口停止通道
-- 仅触发停止动作，不关闭通道、不注销中断回调
+- 停止指定 PWM 通道的信号输出。
+- 仅对 V150 HAL 实现可用，V151 通过分组接口停止通道。
+- 仅触发停止动作，不关闭通道、不注销中断回调。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_pwm_init` 成功返回且目标通道已打开并启动后调用
-- 依赖关系：依赖底层 HAL（V150）已提供 `set_action` 实现
-- 上下文限制：内部通过关中断保护停止动作，可在任务上下文调用
+- 调用时序约束：必须在 `uapi_pwm_init` 成功返回且目标通道已打开并启动后调用。
+- 依赖关系：依赖底层 HAL（V150）已提供 `set_action` 实现。
+- 上下文限制：内部通过关中断保护停止动作，可在任务上下文调用。
 
 **入参**
 
@@ -301,14 +301,14 @@ errcode_t uapi_pwm_stop(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 通道成功停止 |
-| ERRCODE_PWM_INVALID_PARAMETER:0x80001082 | 参数无效 | channel 超出有效范围 |
-| ERRCODE_PWM_NOT_INIT:0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
-| ERRCODE_PWM_NOT_OPEN:0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道停止成功 |
+| ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围 |
+| ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
+| ERRCODE_PWM_NOT_OPEN：0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
 
 **Kconfig配置**
 
@@ -330,15 +330,15 @@ errcode_t uapi_pwm_update_duty_ratio(uint8_t channel, uint32_t low_time, uint32_
 
 **功能说明**
 
-- 在已打开的 PWM 通道上更新低电平与高电平的时钟周期计数，调整占空比
-- 写入后触发刷新动作使新配置立即生效
-- 仅对 V150 HAL 实现可用，V151 通过 `uapi_pwm_update_cfg` 更新配置
+- 在已打开的 PWM 通道上更新低电平与高电平的时钟周期计数，调整占空比。
+- 写入后触发刷新动作使新配置立即生效。
+- 仅对 V150 HAL 实现可用，V151 通过 `uapi_pwm_update_cfg` 更新配置。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_pwm_init` 成功返回且目标通道已通过 `uapi_pwm_open` 打开后调用
-- 依赖关系：依赖底层 HAL（V150）已提供 `set_time`、`set_action` 实现
-- 上下文限制：内部通过关中断保护更新过程，可在任务上下文调用
+- 调用时序约束：必须在 `uapi_pwm_init` 成功返回且目标通道已通过 `uapi_pwm_open` 打开后调用。
+- 依赖关系：依赖底层 HAL（V150）已提供 `set_time`、`set_action` 实现。
+- 上下文限制：内部通过关中断保护更新过程，可在任务上下文调用。
 
 **入参**
 
@@ -350,14 +350,14 @@ errcode_t uapi_pwm_update_duty_ratio(uint8_t channel, uint32_t low_time, uint32_
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 占空比更新成功 |
-| ERRCODE_PWM_INVALID_PARAMETER:0x80001082 | 参数无效 | channel 超出有效范围 |
-| ERRCODE_PWM_NOT_INIT:0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
-| ERRCODE_PWM_NOT_OPEN:0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 占空比更新成功 |
+| ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围 |
+| ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
+| ERRCODE_PWM_NOT_OPEN：0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
 
 **Kconfig配置**
 
@@ -379,14 +379,14 @@ errcode_t uapi_pwm_isr(uint8_t channel)
 
 **功能说明**
 
-- PWM 中断服务例程，清除指定通道的中断标志
-- 作为 `uapi_pwm_open` 时注册的默认回调，在通道完成中断触发时被调用
-- 也可由上层在中断处理流程中直接调用以清除中断
+- PWM 中断服务例程，清除指定通道的中断标志。
+- 作为 `uapi_pwm_open` 时注册的默认回调，在通道完成中断触发时被调用。
+- 也可由上层在中断处理流程中直接调用以清除中断。
 
 **前置条件**
 
-- 调用时序约束：依赖底层 HAL 已通过 `uapi_pwm_open` 或 `uapi_pwm_register_interrupt` 注册回调
-- 上下文限制：设计用于中断上下文调用，内部通过关中断保护清除动作
+- 调用时序约束：依赖底层 HAL 已通过 `uapi_pwm_open` 或 `uapi_pwm_register_interrupt` 注册回调。
+- 上下文限制：设计用于中断上下文调用，内部通过关中断保护清除动作。
 
 **入参**
 
@@ -396,12 +396,12 @@ errcode_t uapi_pwm_isr(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 中断标志成功清除 |
-| ERRCODE_PWM_INVALID_PARAMETER:0x80001082 | 参数无效 | channel 超出有效范围 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 中断标志成功清除 |
+| ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围 |
 
 ### uapi_pwm_register_interrupt <a id="uapi_pwm_register_interrupt"></a>
 
@@ -417,15 +417,15 @@ errcode_t uapi_pwm_register_interrupt(uint8_t channel, pwm_callback_t callback)
 
 **功能说明**
 
-- 为指定 PWM 通道注册完成中断回调函数
-- 注册时同步在 porting 层注册中断并覆盖 `uapi_pwm_open` 设置的默认回调
-- 回调在通道完成周期输出触发中断时被调用，参数为触发中断的通道号
+- 为指定 PWM 通道注册完成中断回调函数。
+- 注册时同步在 porting 层注册中断并覆盖 `uapi_pwm_open` 设置的默认回调。
+- 回调在通道完成周期输出触发中断时被调用，参数为触发中断的通道号。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_pwm_init` 成功返回且目标通道已通过 `uapi_pwm_open` 打开后调用
-- 依赖关系：依赖 porting 层 `pwm_port_register_irq` 与底层 HAL `registerfunc` 实现
-- 上下文限制：建议在任务上下文调用
+- 调用时序约束：必须在 `uapi_pwm_init` 成功返回且目标通道已通过 `uapi_pwm_open` 打开后调用。
+- 依赖关系：依赖 porting 层 `pwm_port_register_irq` 与底层 HAL `registerfunc` 实现。
+- 上下文限制：建议在任务上下文调用。
 
 **入参**
 
@@ -436,14 +436,14 @@ errcode_t uapi_pwm_register_interrupt(uint8_t channel, pwm_callback_t callback)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 回调注册成功 |
-| ERRCODE_PWM_INVALID_PARAMETER:0x80001082 | 参数无效 | channel 超出有效范围 |
-| ERRCODE_PWM_NOT_INIT:0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
-| ERRCODE_PWM_NOT_OPEN:0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 回调注册成功 |
+| ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围 |
+| ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
+| ERRCODE_PWM_NOT_OPEN：0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
 
 **参考案例**
 
@@ -463,15 +463,15 @@ errcode_t uapi_pwm_unregister_interrupt(uint8_t channel)
 
 **功能说明**
 
-- 注销指定 PWM 通道已注册的完成中断回调
-- 同步在 porting 层注销中断并清除底层 HAL 回调注册
-- 在 `uapi_pwm_close` 内部会自动调用本接口完成回调清理
+- 注销指定 PWM 通道已注册的完成中断回调。
+- 同步在 porting 层注销中断并清除底层 HAL 回调注册。
+- 在 `uapi_pwm_close` 内部会自动调用本接口完成回调清理。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_pwm_init` 成功返回且目标通道已通过 `uapi_pwm_open` 打开后调用
-- 依赖关系：依赖 porting 层 `pwm_port_unregister_irq` 与底层 HAL `unregisterfunc` 实现
-- 上下文限制：建议在任务上下文调用
+- 调用时序约束：必须在 `uapi_pwm_init` 成功返回且目标通道已通过 `uapi_pwm_open` 打开后调用。
+- 依赖关系：依赖 porting 层 `pwm_port_unregister_irq` 与底层 HAL `unregisterfunc` 实现。
+- 上下文限制：建议在任务上下文调用。
 
 **入参**
 
@@ -481,14 +481,14 @@ errcode_t uapi_pwm_unregister_interrupt(uint8_t channel)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 回调注销成功 |
-| ERRCODE_PWM_INVALID_PARAMETER:0x80001082 | 参数无效 | channel 超出有效范围 |
-| ERRCODE_PWM_NOT_INIT:0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
-| ERRCODE_PWM_NOT_OPEN:0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 回调注销成功 |
+| ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围 |
+| ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
+| ERRCODE_PWM_NOT_OPEN：0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
 
 ### uapi_pwm_set_group <a id="uapi_pwm_set_group"></a>
 
@@ -504,15 +504,15 @@ errcode_t uapi_pwm_set_group(uint8_t group, const uint8_t *channel_set, uint32_t
 
 **功能说明**
 
-- 将一个或多个 PWM 通道归入同一分组，便于按组统一启停控制
-- 同一通道不可同时归属多个分组，归入前会校验是否已存在于其他分组
-- 仅对 V151 HAL 实现可用
+- 将一个或多个 PWM 通道归入同一分组，便于按组统一启停控制。
+- 同一通道不可同时归属多个分组，归入前会校验是否已存在于其他分组。
+- 仅对 V151 HAL 实现可用。
 
 **前置条件**
 
-- 调用时序约束：在 `uapi_pwm_open` 配置通道后、`uapi_pwm_start_group` 启动分组前调用
-- 依赖关系：依赖底层 HAL（V151）已提供 `set_group` 实现
-- 上下文限制：内部通过关中断保护分组写入，可在任务上下文调用
+- 调用时序约束：在 `uapi_pwm_open` 配置通道后、`uapi_pwm_start_group` 启动分组前调用。
+- 依赖关系：依赖底层 HAL（V151）已提供 `set_group` 实现。
+- 上下文限制：内部通过关中断保护分组写入，可在任务上下文调用。
 
 **入参**
 
@@ -524,12 +524,12 @@ errcode_t uapi_pwm_set_group(uint8_t group, const uint8_t *channel_set, uint32_t
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 通道集合成功归入分组 |
-| ERRCODE_PWM_INVALID_PARAMETER:0x80001082 | 参数无效 | group 超出有效范围、channel_set 为 NULL、channel_set_len 为 0 或目标通道已存在于其他分组 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道集合成功归入分组 |
+| ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | group 超出有效范围、channel_set 为 NULL、channel_set_len 为 0 或目标通道已存在于其他分组 |
 
 **Kconfig配置**
 
@@ -555,15 +555,15 @@ errcode_t uapi_pwm_clear_group(uint8_t group)
 
 **功能说明**
 
-- 清空指定分组中的全部 PWM 通道成员
+- 清空指定分组中的全部 PWM 通道成员。
 - 清空后该分组不再持有任何通道，可重新用于 `uapi_pwm_set_group`
-- 仅对 V151 HAL 实现可用
+- 仅对 V151 HAL 实现可用。
 
 **前置条件**
 
-- 调用时序约束：建议在分组内通道已停止输出后调用
-- 依赖关系：依赖底层 HAL（V151）已提供 `set_group` 实现
-- 上下文限制：内部通过关中断保护清空动作，可在任务上下文调用
+- 调用时序约束：建议在分组内通道已停止输出后调用。
+- 依赖关系：依赖底层 HAL（V151）已提供 `set_group` 实现。
+- 上下文限制：内部通过关中断保护清空动作，可在任务上下文调用。
 
 **入参**
 
@@ -573,12 +573,12 @@ errcode_t uapi_pwm_clear_group(uint8_t group)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 分组成员成功清空 |
-| ERRCODE_PWM_INVALID_PARAMETER:0x80001082 | 参数无效 | group 超出有效范围 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 分组成员成功清空 |
+| ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | group 超出有效范围 |
 
 **Kconfig配置**
 
@@ -600,15 +600,15 @@ errcode_t uapi_pwm_start_group(uint8_t group)
 
 **功能说明**
 
-- 启动指定分组中全部 PWM 通道的信号输出
-- 通过通道所属分组下发启动动作，保证分组内通道同步控制
-- 仅对 V151 HAL 实现可用
+- 启动指定分组中全部 PWM 通道的信号输出。
+- 通过通道所属分组下发启动动作，保证分组内通道同步控制。
+- 仅对 V151 HAL 实现可用。
 
 **前置条件**
 
-- 调用时序约束：必须在分组已通过 `uapi_pwm_set_group` 设置且组内通道已打开后调用
-- 依赖关系：依赖底层 HAL（V151）已提供 `set_action` 实现
-- 上下文限制：内部通过关中断保护启动动作，可在任务上下文调用
+- 调用时序约束：必须在分组已通过 `uapi_pwm_set_group` 设置且组内通道已打开后调用。
+- 依赖关系：依赖底层 HAL（V151）已提供 `set_action` 实现。
+- 上下文限制：内部通过关中断保护启动动作，可在任务上下文调用。
 
 **入参**
 
@@ -618,12 +618,12 @@ errcode_t uapi_pwm_start_group(uint8_t group)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 分组内通道成功启动 |
-| ERRCODE_PWM_INVALID_PARAMETER:0x80001082 | 参数无效 | group 超出有效范围 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 分组内通道启动成功 |
+| ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | group 超出有效范围 |
 
 **Kconfig配置**
 
@@ -649,15 +649,15 @@ errcode_t uapi_pwm_stop_group(uint8_t group)
 
 **功能说明**
 
-- 停止指定分组中全部 PWM 通道的信号输出
-- 仅触发停止动作，不关闭通道、不注销回调，可重新通过 `uapi_pwm_start_group` 启动
-- 仅对 V151 HAL 实现可用
+- 停止指定分组中全部 PWM 通道的信号输出。
+- 仅触发停止动作，不关闭通道、不注销回调，可重新通过 `uapi_pwm_start_group` 启动。
+- 仅对 V151 HAL 实现可用。
 
 **前置条件**
 
-- 调用时序约束：必须在分组已启动后调用
-- 依赖关系：依赖底层 HAL（V151）已提供 `set_action` 实现
-- 上下文限制：内部通过关中断保护停止动作，可在任务上下文调用
+- 调用时序约束：必须在分组已启动后调用。
+- 依赖关系：依赖底层 HAL（V151）已提供 `set_action` 实现。
+- 上下文限制：内部通过关中断保护停止动作，可在任务上下文调用。
 
 **入参**
 
@@ -667,12 +667,12 @@ errcode_t uapi_pwm_stop_group(uint8_t group)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 分组内通道成功停止 |
-| ERRCODE_PWM_INVALID_PARAMETER:0x80001082 | 参数无效 | group 超出有效范围 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 分组内通道停止成功 |
+| ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | group 超出有效范围 |
 
 **Kconfig配置**
 
@@ -698,15 +698,15 @@ errcode_t uapi_pwm_update_cfg(uint8_t channel, const pwm_config_t *cfg)
 
 **功能说明**
 
-- 更新指定 PWM 通道的全部配置参数，包括低/高电平时间、相位偏移、重复周期与连续输出标志
-- 写入后按通道所属分组下发刷新动作使新配置立即生效
-- 仅对 V151 HAL 实现可用
+- 更新指定 PWM 通道的全部配置参数，包括低/高电平时间、相位偏移、重复周期与连续输出标志。
+- 写入后按通道所属分组下发刷新动作使新配置立即生效。
+- 仅对 V151 HAL 实现可用。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_pwm_init` 成功返回且目标通道已通过 `uapi_pwm_open` 打开后调用
-- 依赖关系：V151 实现下要求通道已通过 `uapi_pwm_set_group` 归入某个分组；依赖底层 HAL 已提供 `set_time`、`set_cycles`、`set_action` 实现
-- 上下文限制：内部通过关中断保护更新过程，可在任务上下文调用
+- 调用时序约束：必须在 `uapi_pwm_init` 成功返回且目标通道已通过 `uapi_pwm_open` 打开后调用。
+- 依赖关系：V151 实现下要求通道已通过 `uapi_pwm_set_group` 归入某个分组；依赖底层 HAL 已提供 `set_time`、`set_cycles`、`set_action` 实现。
+- 上下文限制：内部通过关中断保护更新过程，可在任务上下文调用。
 
 **入参**
 
@@ -717,14 +717,14 @@ errcode_t uapi_pwm_update_cfg(uint8_t channel, const pwm_config_t *cfg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 通道配置成功更新 |
-| ERRCODE_PWM_INVALID_PARAMETER:0x80001082 | 参数无效 | channel 超出有效范围、cfg->cycles 大于最大值或 porting 层参数校验失败 |
-| ERRCODE_PWM_NOT_INIT:0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
-| ERRCODE_PWM_NOT_OPEN:0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 通道配置更新成功 |
+| ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 超出有效范围、cfg->cycles 大于最大值或 porting 层参数校验失败 |
+| ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
+| ERRCODE_PWM_NOT_OPEN：0x80001081 | 通道未打开 | 目标通道尚未通过 `uapi_pwm_open` 打开 |
 
 **Kconfig配置**
 
@@ -750,15 +750,15 @@ errcode_t uapi_pwm_config_preload(uint8_t group, uint8_t channel, const pwm_conf
 
 **功能说明**
 
-- 为指定分组内的通道配置预加载参数，当上一个 PWM 配置周期完成时自动加载新配置
-- 写入低/高电平时间、相位偏移、重复周期后触发分组预加载动作
-- 仅在同时启用 V151 HAL 与 PWM 预加载特性时可用
+- 为指定分组内的通道配置预加载参数，当上一个 PWM 配置周期完成时自动加载新配置。
+- 写入低/高电平时间、相位偏移、重复周期后触发分组预加载动作。
+- 仅在同时启用 V151 HAL 与 PWM 预加载特性时可用。
 
 **前置条件**
 
-- 调用时序约束：必须在 `uapi_pwm_init` 成功返回后调用
-- 依赖关系：依赖底层 HAL（V151）已提供 `set_time`、`set_cycles`、`config_preload` 实现
-- 上下文限制：内部通过关中断保护配置过程，可在任务上下文调用
+- 调用时序约束：必须在 `uapi_pwm_init` 成功返回后调用。
+- 依赖关系：依赖底层 HAL（V151）已提供 `set_time`、`set_cycles`、`config_preload` 实现。
+- 上下文限制：内部通过关中断保护配置过程，可在任务上下文调用。
 
 **入参**
 
@@ -770,13 +770,13 @@ errcode_t uapi_pwm_config_preload(uint8_t group, uint8_t channel, const pwm_conf
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 预加载参数成功写入 |
-| ERRCODE_PWM_INVALID_PARAMETER:0x80001082 | 参数无效 | channel 或 group 超出有效范围、cfg 为 NULL 或 cfg->cycles 大于最大值 |
-| ERRCODE_PWM_NOT_INIT:0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 预加载参数写入成功 |
+| ERRCODE_PWM_INVALID_PARAMETER：0x80001082 | 参数无效 | channel 或 group 超出有效范围、cfg 为 NULL 或 cfg->cycles 大于最大值 |
+| ERRCODE_PWM_NOT_INIT：0x80001080 | 驱动未初始化 | 未先调用 `uapi_pwm_init` |
 
 **Kconfig配置**
 
@@ -799,14 +799,14 @@ errcode_t uapi_pwm_suspend(uintptr_t arg)
 
 **功能说明**
 
-- 挂起 PWM 驱动，作为低功耗管理框架的挂起钩子
-- 当前实现忽略传入参数并直接返回成功，不修改硬件状态
-- 仅在启用 PWM 低功耗支持特性时可用
+- 挂起 PWM 驱动，作为低功耗管理框架的挂起钩子。
+- 当前实现忽略传入参数并直接返回成功，不修改硬件状态。
+- 仅在启用 PWM 低功耗支持特性时可用。
 
 **前置条件**
 
-- 调用时序约束：由低功耗管理框架在进入低功耗状态前调用
-- 上下文限制：建议在任务上下文调用
+- 调用时序约束：由低功耗管理框架在进入低功耗状态前调用。
+- 上下文限制：建议在任务上下文调用。
 
 **入参**
 
@@ -816,11 +816,11 @@ errcode_t uapi_pwm_suspend(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 任意调用均返回成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 任意调用均返回成功 |
 
 **Kconfig配置**
 
@@ -846,15 +846,15 @@ errcode_t uapi_pwm_resume(uintptr_t arg)
 
 **功能说明**
 
-- 恢复 PWM 驱动，作为低功耗管理框架的恢复钩子
-- 按挂起前记录的配置恢复已打开的通道
-- 恢复中断注册状态与通道分组配置
-- 仅在启用 PWM 低功耗支持特性时可用
+- 恢复 PWM 驱动，作为低功耗管理框架的恢复钩子。
+- 按挂起前记录的配置恢复已打开的通道。
+- 恢复中断注册状态与通道分组配置。
+- 仅在启用 PWM 低功耗支持特性时可用。
 
 **前置条件**
 
 - 调用时序约束：由低功耗管理框架在退出低功耗状态后调用，且此前已调用过 `uapi_pwm_suspend`
-- 上下文限制：建议在任务上下文调用
+- 上下文限制：建议在任务上下文调用。
 
 **入参**
 
@@ -864,11 +864,11 @@ errcode_t uapi_pwm_resume(uintptr_t arg)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0x00 | 执行成功 | 驱动状态与通道配置成功恢复或驱动未初始化时直接返回成功 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 驱动状态与通道配置恢复或驱动未成功初始化时直接返回成功 |
 
 **Kconfig配置**
 
@@ -890,9 +890,9 @@ typedef errcode_t (*pwm_callback_t)(uint8_t channel);
 
 **使用说明**
 
-- 在 `uapi_pwm_register_interrupt` 中作为 `callback` 入参类型，用于注册 PWM 通道完成中断回调
-- 回调参数 `channel` 为触发中断的通道号，由底层中断处理流程透传
-- 回调返回 `errcode_t`，由上层注册方约定返回值语义
+- 在 `uapi_pwm_register_interrupt` 中作为 `callback` 入参类型，用于注册 PWM 通道完成中断回调。
+- 回调参数 `channel` 为触发中断的通道号，由底层中断处理流程透传。
+- 回调返回 `errcode_t`，由上层注册方约定返回值语义。
 
 ### typedef_errcode_t <a id="typedef_errcode_t"></a>
 

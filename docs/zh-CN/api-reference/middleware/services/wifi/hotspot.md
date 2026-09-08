@@ -1,6 +1,6 @@
 # Hotspot
 
-hotspot 提供 WiFi SoftAP (Software Access Point) 功能，支持开启/关闭热点、配置基本与扩展参数、查询已连接 STA (Station) 信息以及断开指定 STA 连接。
+Hotspot 提供 Wi-Fi SoftAP（Software Access Point）功能，支持开启/关闭热点、配置基本与扩展参数、查询已连接 STA（Station）信息以及断开指定 STA 连接。
 
 **模块公共头文件**
 
@@ -38,27 +38,27 @@ errcode_t wifi_softap_enable(const softap_config_stru *config)
 
 **功能说明**
 
-- 启动 SoftAP 接口，使设备以热点模式工作
-- 根据 config 参数中的 SSID、密码、安全类型和信道号配置热点
+- 启动 SoftAP 接口，使设备以热点模式工作。
+- 根据 config 参数中的 SSID、密码、安全类型和信道号配置热点。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 WiFi 初始化完成（wifi_init 成功返回）后调用
-- 依赖关系：当前接口依赖 SoftAP 未处于使能状态，且 P2P 未使能
+- 调用时序约束：当前接口必须在 Wi-Fi 初始化完成（wifi_init 成功返回）后调用。
+- 依赖关系：当前接口依赖 SoftAP 未处于使能状态，且 P2P 未使能。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| config | const [softap_config_stru](#softap_config_stru)* | SoftAP 基本配置参数 | 不为NULL |
+| config | const [softap_config_stru](#softap_config_stru)* | SoftAP 基本配置参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 配置合法且 SoftAP 启动成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 配置合法且 SoftAP 启动成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 配置无效或 SoftAP 启动失败 |
 
 **参考案例**
@@ -85,23 +85,23 @@ errcode_t wifi_softap_disable(void)
 
 **功能说明**
 
-- 关闭 SoftAP 接口，停止热点模式
-- 关闭时自动停止 DHCP 服务器（如果已启动）
-- 关闭后清除热点接口名与配置信息
+- 关闭 SoftAP 接口，停止热点模式。
+- 关闭时自动停止 DHCP 服务器（如果已启动）。
+- 关闭后清除热点接口名与配置信息。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 WiFi 初始化完成且 SoftAP 已使能后调用
-- 依赖关系：当前接口依赖 SoftAP 处于使能状态
+- 调用时序约束：当前接口必须在 Wi-Fi 初始化完成且 SoftAP 已使能后调用。
+- 依赖关系：当前接口依赖 SoftAP 处于使能状态。
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | SoftAP 正常关闭 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | WiFi 未初始化或 SoftAP 未使能 |
+| ERRCODE_SUCC：0 | 执行成功 | SoftAP 正常关闭 |
+| Other | 其他错误码，参考[errcode_t](#errcode_t) | Wi-Fi 未初始化或 SoftAP 未使能 |
 
 **参考案例**
 
@@ -111,7 +111,7 @@ errcode_t wifi_softap_disable(void)
 
 | 配置项 | 宏类型 | 说明 | 默认值 |
 | -------- | -------- | -------- | -------- |
-| LWIP_DHCPS | 特性宏 | 支持DHCP服务器资源清理分支（分支级，无前缀注入宏） | 由构建目标决定 |
+| LWIP_DHCPS | 特性宏 | 支持 DHCP 服务器资源清理分支（分支级，无前缀注入宏） | 由构建目标决定 |
 
 ### wifi_is_softap_enabled <a id="wifi_is_softap_enabled"></a>
 
@@ -127,18 +127,18 @@ int32_t wifi_is_softap_enabled(void)
 
 **功能说明**
 
-- 查询 SoftAP 是否已使能
-- 返回值 1 表示已使能，0 表示未使能
-- WiFi 未初始化时返回 0
+- 查询 SoftAP 是否已使能。
+- 返回值 1 表示已使能，0 表示未使能。
+- Wi-Fi 未初始化时返回 0。
 
 **返回值**
 
-- 返回类型：int32_t
+返回类型：int32_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 1 | SoftAP 已使能 | SoftAP 已成功启动 |
-| 0 | SoftAP 未使能 | SoftAP 未启动或 WiFi 未初始化 |
+| 1 | SoftAP 已使能 | SoftAP 已启动成功 |
+| 0 | SoftAP 未使能 | SoftAP 未启动或 Wi-Fi 未初始化 |
 
 ### wifi_set_softap_config_advance <a id="wifi_set_softap_config_advance"></a>
 
@@ -154,27 +154,27 @@ errcode_t wifi_set_softap_config_advance(const softap_config_advance_stru *confi
 
 **功能说明**
 
-- 设置 SoftAP 的扩展配置参数，包括信标间隔、DTIM (Delivery Traffic Indication Message) 周期、组播密钥更新时间、SSID 隐藏标志、GI 和协议模式
-- 配置中 protocol_mode 为 0 表示不配置，按芯片最大协议能力设置
+- 设置 SoftAP 的扩展配置参数，包括信标间隔、DTIM（Delivery Traffic Indication Message）周期、组播密钥更新时间、SSID 隐藏标志、GI 和协议模式。
+- 配置中 protocol_mode 为 0 表示不配置，按芯片最大协议能力设置。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 WiFi 初始化完成且 SoftAP 未使能时调用
-- 依赖关系：当前接口依赖 SoftAP 处于未使能状态
+- 调用时序约束：当前接口必须在 Wi-Fi 初始化完成且 SoftAP 未使能时调用。
+- 依赖关系：当前接口依赖 SoftAP 处于未使能状态。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| config | const [softap_config_advance_stru](#softap_config_advance_stru)* | SoftAP 扩展配置参数 | 不为NULL |
+| config | const [softap_config_advance_stru](#softap_config_advance_stru)* | SoftAP 扩展配置参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 配置合法且设置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 配置合法且设置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 配置无效或 SoftAP 已使能 |
 
 **参考案例**
@@ -195,8 +195,8 @@ errcode_t wifi_get_softap_config(softap_config_stru *result)
 
 **功能说明**
 
-- 获取 SoftAP 的基本配置信息
-- 返回当前 SoftAP 的 SSID、预共享密钥、安全类型、信道号和 PSK 类型
+- 获取 SoftAP 的基本配置信息。
+- 返回当前 SoftAP 的 SSID、预共享密钥、安全类型、信道号和 PSK 类型。
 
 **入参**
 
@@ -211,11 +211,11 @@ errcode_t wifi_get_softap_config(softap_config_stru *result)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 获取配置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 获取配置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 内存拷贝失败 |
 
 **参考案例**
@@ -236,8 +236,8 @@ errcode_t wifi_get_softap_config_advance(softap_config_advance_stru *result)
 
 **功能说明**
 
-- 获取 SoftAP 的扩展配置信息
-- 返回当前 SoftAP 的信标间隔、DTIM 周期、组播密钥更新时间、SSID 隐藏标志、GI 和协议模式
+- 获取 SoftAP 的扩展配置信息。
+- 返回当前 SoftAP 的信标间隔、DTIM 周期、组播密钥更新时间、SSID 隐藏标志、GI 和协议模式。
 
 **入参**
 
@@ -252,11 +252,11 @@ errcode_t wifi_get_softap_config_advance(softap_config_advance_stru *result)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 获取配置成功 |
+| ERRCODE_SUCC：0 | 执行成功 | 获取配置成功 |
 | Other | 其他错误码，参考[errcode_t](#errcode_t) | 内存拷贝失败 |
 
 **参考案例**
@@ -277,20 +277,20 @@ errcode_t wifi_softap_get_sta_list(wifi_sta_info_stru *result, uint32_t *size)
 
 **功能说明**
 
-- 获取当前连接到 SoftAP 的所有 STA 信息
-- 返回每个 STA 的 MAC 地址、RSSI (Received Signal Strength Indicator) 和最佳发送速率
-- size 参数输入时表示缓冲区可容纳的 STA 数量，输出时为实际 STA 数量
+- 获取当前连接到 SoftAP 的所有 STA 信息。
+- 返回每个 STA 的 MAC 地址、RSSI（Received Signal Strength Indicator）和最佳发送速率。
+- size 参数输入时表示缓冲区可容纳的 STA 数量，输出时为实际 STA 数量。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 WiFi 初始化完成且 SoftAP 已使能后调用
-- 依赖关系：当前接口依赖 SoftAP 处于使能状态
+- 调用时序约束：当前接口必须在 Wi-Fi 初始化完成且 SoftAP 已使能后调用。
+- 依赖关系：当前接口依赖 SoftAP 处于使能状态。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| size | uint32_t* | 输入时为缓冲区可容纳 STA 数量，输出时为实际 STA 数量 | 不为NULL，*size > 0 |
+| size | uint32_t* | 输入时为缓冲区可容纳 STA 数量，输出时为实际 STA 数量 | 不为 NULL，*size > 0 |
 
 **出参**
 
@@ -301,12 +301,12 @@ errcode_t wifi_softap_get_sta_list(wifi_sta_info_stru *result, uint32_t *size)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 成功获取 STA 列表 |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | WiFi 未初始化、SoftAP 未使能或参数无效 |
+| ERRCODE_SUCC：0 | 执行成功 | 获取成功 STA 列表 |
+| Other | 其他错误码，参考[errcode_t](#errcode_t) | Wi-Fi 未初始化、SoftAP 未使能或参数无效 |
 
 **参考案例**
 
@@ -326,29 +326,29 @@ errcode_t wifi_softap_deauth_sta(const uint8_t *mac, int32_t mac_len)
 
 **功能说明**
 
-- 断开指定 MAC 地址的 STA 与 SoftAP 的连接
-- 向目标 STA 发送 deauth 报文
+- 断开指定 MAC 地址的 STA 与 SoftAP 的连接。
+- 向目标 STA 发送 deauth 报文。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 WiFi 初始化完成且 SoftAP 已使能后调用
-- 依赖关系：当前接口依赖 SoftAP 处于使能状态
+- 调用时序约束：当前接口必须在 Wi-Fi 初始化完成且 SoftAP 已使能后调用。
+- 依赖关系：当前接口依赖 SoftAP 处于使能状态。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| mac | const uint8_t* | 目标 STA 的 MAC 地址 | 不为NULL，长度为 [WIFI_MAC_LEN](#WIFI_MAC_LEN)(6) |
+| mac | const uint8_t* | 目标 STA 的 MAC 地址 | 不为 NULL，长度为 [WIFI_MAC_LEN](#WIFI_MAC_LEN)：6 |
 | mac_len | int32_t | MAC 地址长度 | 6 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 成功断开指定 STA |
-| Other | 其他错误码，参考[errcode_t](#errcode_t) | WiFi 未初始化、SoftAP 未使能、MAC 地址无效或断开失败 |
+| ERRCODE_SUCC：0 | 执行成功 | 成功断开指定 STA |
+| Other | 其他错误码，参考[errcode_t](#errcode_t) | Wi-Fi 未初始化、SoftAP 未使能、MAC 地址无效或断开失败 |
 
 **参考案例**
 
@@ -394,16 +394,16 @@ typedef enum wifi_security_enum {
 | ------- | ---- | ---- |
 | WIFI_SEC_TYPE_INVALID | -1 | 无效安全类型 |
 | WIFI_SEC_TYPE_OPEN | 0 | Open |
-| WIFI_SEC_TYPE_WEP | 1 | WEP (Wired Equivalent Privacy) SHARED |
+| WIFI_SEC_TYPE_WEP | 1 | WEP（Wired Equivalent Privacy） SHARED |
 | WIFI_SEC_TYPE_WPA2PSK | 2 | WPA2-Personal |
 | WIFI_SEC_TYPE_WPA2_WPA_PSK_MIX | 3 | WPA-Personal 和 WPA2-Personal 混合 |
 | WIFI_SEC_TYPE_WPAPSK | 4 | WPA-Personal |
 | WIFI_SEC_TYPE_WPA | 5 | WPA-Enterprise |
 | WIFI_SEC_TYPE_WPA2 | 6 | WPA2-Enterprise |
-| WIFI_SEC_TYPE_SAE | 7 | SAE (Simultaneous Authentication of Equals，WPA3 个人级) |
+| WIFI_SEC_TYPE_SAE | 7 | SAE（Simultaneous Authentication of Equals，WPA3 个人级） |
 | WIFI_SEC_TYPE_WPA3_WPA2_PSK_MIX | 8 | WPA2-Personal 和 WPA3-Personal 混合 |
 | WIFI_SEC_TYPE_WPA3 | 9 | WPA3-Enterprise |
-| WIFI_SEC_TYPE_OWE | 10 | OWE (Opportunistic Wireless Encryption) |
+| WIFI_SEC_TYPE_OWE | 10 | OWE（Opportunistic Wireless Encryption） |
 | WIFI_SEC_TYPE_WAPI_PSK | 11 | WAPI 个人级 |
 | WIFI_SEC_TYPE_WAPI_CERT | 12 | WAPI 企业级 |
 | WIFI_SEC_TYPE_WPA3_WPA2_MIX | 13 | WPA2-Enterprise 和 WPA3-Enterprise 混合 |
@@ -448,8 +448,8 @@ typedef struct {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| ssid | int8_t[WIFI_MAX_SSID_LEN] | SSID (Service Set Identifier) |
-| pre_shared_key | int8_t[WIFI_MAX_KEY_LEN] | 预共享密钥 (PSK) |
+| ssid | int8_t[WIFI_MAX_SSID_LEN] | SSID（Service Set Identifier） |
+| pre_shared_key | int8_t[WIFI_MAX_KEY_LEN] | 预共享密钥（PSK） |
 | reserved | int8_t[2] | 保留字段 |
 | security_type | wifi_security_enum | 安全类型 |
 | channel_num | int32_t | 信道号，取值范围 0 ~ 14 |
@@ -476,7 +476,7 @@ typedef struct {
 | dtim_period | uint32_t | DTIM 周期，范围 1 ~ 30，默认 2，0 表示未配置 |
 | group_rekey | uint32_t | 组播密钥更新时间，范围 30s ~ 86400s，默认 86400s，0 表示未配置 |
 | hidden_ssid_flag | uint32_t | SSID 隐藏标志，1 表示不隐藏，2 表示隐藏，0 表示未配置 |
-| gi | uint32_t | GI (Guard Interval) 配置，默认 auto_GI，0 表示未配置；配置非 0 有效值时需同时配置有效的协议模式 |
+| gi | uint32_t | GI（Guard Interval）配置，默认 auto_GI，0 表示未配置；配置非 0 有效值时需同时配置有效的协议模式 |
 | protocol_mode | protocol_mode_enum | 协议模式，默认按芯片最大协议能力配置，0 表示未配置 |
 
 ### wifi_sta_info_stru <a id="wifi_sta_info_stru"></a>
@@ -495,7 +495,7 @@ typedef struct {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | mac_addr | uint8_t[WIFI_MAC_LEN] | MAC 地址 |
-| rssi | int8_t | 接收信号强度指示 (RSSI) |
+| rssi | int8_t | 接收信号强度指示（RSSI） |
 | rsv | int8_t | 保留字段 |
 | best_rate | uint32_t | 最佳发送速率，单位 kbps |
 

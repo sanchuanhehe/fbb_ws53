@@ -1,6 +1,6 @@
 # Wait
 
-wait 提供 OSAL (Operating System Abstraction Layer) 的等待队列机制，支持线程在指定条件满足前阻塞睡眠、超时自动唤醒以及主动唤醒等待队列上的线程，用于线程间同步与事件等待。
+Wait 提供 OSAL（Operating System Abstraction Layer）的等待队列机制，支持线程在指定条件满足前阻塞睡眠、超时自动唤醒以及主动唤醒等待队列上的线程，用于线程间同步与事件等待。
 
 **模块公共头文件**
 
@@ -38,28 +38,28 @@ int osal_wait_init(osal_wait *wait)
 **功能说明**
 
 - 初始化一个等待队列，使其进入可用状态。
-- 初始化成功后该等待队列可用于阻塞等待、唤醒与销毁操作。
+- 成功初始化后该等待队列可用于阻塞等待、唤醒与销毁操作。
 - 支持 linux、LiteOS、FreeRTOS 系统。
 
 **前置条件**
 
 - 调用时序约束：wait 指向的 osal_wait 结构体须由调用方预先分配，且 wait->wait 必须为 NULL（未重复初始化）。
-- 上下文限制：初始化成功后方可调用等待、唤醒与销毁接口。
+- 上下文限制：成功初始化后方可调用等待、唤醒与销毁接口。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| wait | [osal_wait](#osal_wait) * | 待初始化的等待队列句柄 | 不为NULL 且 wait->wait 为 NULL |
+| wait | [osal_wait](#osal_wait) * | 待初始化的等待队列句柄 | 不为 NULL 且 wait->wait 为 NULL |
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 0 | 执行成功 (OSAL_SUCCESS) | 等待队列初始化成功 |
-| -1 | 执行失败 (OSAL_FAILURE) | wait 为 NULL、wait->wait 非空（已初始化）或底层资源分配失败 |
+| 0 | 执行成功（OSAL_SUCCESS） | 等待队列初始化成功 |
+| -1 | 执行失败（OSAL_FAILURE） | wait 为 NULL、wait->wait 非空（已初始化）或底层资源分配失败 |
 
 **参考案例**
 
@@ -93,19 +93,19 @@ int osal_wait_interruptible(osal_wait *wait, osal_wait_condition_func func, cons
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| wait | [osal_wait](#osal_wait) * | 等待的等待队列句柄 | 不为NULL 且 wait->wait 已初始化 |
+| wait | [osal_wait](#osal_wait) * | 等待的等待队列句柄 | 不为 NULL 且 wait->wait 已初始化 |
 | func | [osal_wait_condition_func](#osal_wait_condition_func) | 条件判断回调函数，每次唤醒时调用；为 NULL 时按永真条件等待 | 为 NULL 或指向有效的条件判断函数 |
 | param | const void * | 传递给条件判断回调函数的参数 | - |
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 0 | 执行成功 (OSAL_SUCCESS) | 条件满足或被唤醒 |
-| -1 | 执行失败 (OSAL_FAILURE) | wait 为 NULL 或 wait->wait 为 NULL |
-| -512 | 被信号中断 (-OSAL_ERESTARTSYS) | Linux 下被信号打断；LiteOS 不产生该返回值 |
+| 0 | 执行成功（OSAL_SUCCESS） | 条件满足或被唤醒 |
+| -1 | 执行失败（OSAL_FAILURE） | wait 为 NULL 或 wait->wait 为 NULL |
+| -512 | 被信号中断（-OSAL_ERESTARTSYS） | Linux 下被信号打断；LiteOS 不产生该返回值 |
 
 **参考案例**
 
@@ -138,18 +138,18 @@ int osal_wait_uninterruptible(osal_wait *wait, osal_wait_condition_func func, co
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| wait | [osal_wait](#osal_wait) * | 等待的等待队列句柄 | 不为NULL 且 wait->wait 已初始化 |
+| wait | [osal_wait](#osal_wait) * | 等待的等待队列句柄 | 不为 NULL 且 wait->wait 已初始化 |
 | func | [osal_wait_condition_func](#osal_wait_condition_func) | 条件判断回调函数，每次唤醒时调用；为 NULL 时按永真条件等待 | 为 NULL 或指向有效的条件判断函数 |
 | param | const void * | 传递给条件判断回调函数的参数 | - |
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 0 | 执行成功 (OSAL_SUCCESS) | 条件满足或被唤醒 |
-| -1 | 执行失败 (OSAL_FAILURE) | wait 为 NULL 或 wait->wait 为 NULL |
+| 0 | 执行成功（OSAL_SUCCESS） | 条件满足或被唤醒 |
+| -1 | 执行失败（OSAL_FAILURE） | wait 为 NULL 或 wait->wait 为 NULL |
 
 ### osal_wait_timeout_interruptible <a id="osal_wait_timeout_interruptible"></a>
 
@@ -178,21 +178,21 @@ int osal_wait_timeout_interruptible(osal_wait *wait, osal_wait_condition_func fu
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| wait | [osal_wait](#osal_wait) * | 等待的等待队列句柄 | 不为NULL 且 wait->wait 已初始化 |
+| wait | [osal_wait](#osal_wait) * | 等待的等待队列句柄 | 不为 NULL 且 wait->wait 已初始化 |
 | func | [osal_wait_condition_func](#osal_wait_condition_func) | 条件判断回调函数，每次唤醒时调用；为 NULL 时按永真条件等待并默认返回超时 | 为 NULL 或指向有效的条件判断函数 |
 | param | const void * | 传递给条件判断回调函数的参数 | - |
-| ms | unsigned long | 超时时间，单位毫秒 | 0 ~ 0xFFFFFFFF；[OSAL_WAIT_FOREVER](#OSAL_WAIT_FOREVER)(0xFFFFFFFF) 表示永久等待 |
+| ms | unsigned long | 超时时间，单位 ms | 0 ~ 0xFFFFFFFF；[OSAL_WAIT_FOREVER](#OSAL_WAIT_FOREVER)：0xFFFFFFFF 表示永久等待 |
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | 0 | 超时且条件未满足 | 超时结束后条件仍为假 |
 | 大于 0 | 条件已满足，返回剩余时间 | 条件在超时前满足，返回剩余 tick 数（Linux 为 jiffies）；LiteOS 下条件在超时点为真时返回 1 |
-| -1 | 参数无效 (OSAL_FAILURE) | wait 为 NULL 或 wait->wait 为 NULL |
-| -512 | 被信号中断 (-OSAL_ERESTARTSYS) | Linux 下被信号打断 |
+| -1 | 参数无效（OSAL_FAILURE） | wait 为 NULL 或 wait->wait 为 NULL |
+| -512 | 被信号中断（-OSAL_ERESTARTSYS） | Linux 下被信号打断 |
 
 **参考案例**
 
@@ -225,20 +225,20 @@ int osal_wait_timeout_uninterruptible(osal_wait *wait, osal_wait_condition_func 
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| wait | [osal_wait](#osal_wait) * | 等待的等待队列句柄 | 不为NULL 且 wait->wait 已初始化 |
+| wait | [osal_wait](#osal_wait) * | 等待的等待队列句柄 | 不为 NULL 且 wait->wait 已初始化 |
 | func | [osal_wait_condition_func](#osal_wait_condition_func) | 条件判断回调函数，每次唤醒时调用；为 NULL 时按永真条件等待 | 为 NULL 或指向有效的条件判断函数 |
 | param | const void * | 传递给条件判断回调函数的参数 | - |
-| ms | unsigned long | 超时时间，单位毫秒 | 0 ~ 0xFFFFFFFF；[OSAL_WAIT_FOREVER](#OSAL_WAIT_FOREVER)(0xFFFFFFFF) 表示永久等待 |
+| ms | unsigned long | 超时时间，单位 ms | 0 ~ 0xFFFFFFFF；[OSAL_WAIT_FOREVER](#OSAL_WAIT_FOREVER)：0xFFFFFFFF 表示永久等待 |
 
 **返回值**
 
-- 返回类型：int
+返回类型：int
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | 0 | 超时且条件未满足 | 超时结束后条件仍为假 |
 | 大于 0 | 条件已满足，返回剩余时间 | 条件在超时前满足，返回剩余 tick 数（Linux 为 jiffies） |
-| -1 | 参数无效 (OSAL_FAILURE) | wait 为 NULL 或 wait->wait 为 NULL |
+| -1 | 参数无效（OSAL_FAILURE） | wait 为 NULL 或 wait->wait 为 NULL |
 
 ### osal_wait_wakeup <a id="osal_wait_wakeup"></a>
 
@@ -267,7 +267,7 @@ void osal_wait_wakeup(osal_wait *wait)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| wait | [osal_wait](#osal_wait) * | 待唤醒的等待队列句柄 | 不为NULL 且 wait->wait 已初始化 |
+| wait | [osal_wait](#osal_wait) * | 待唤醒的等待队列句柄 | 不为 NULL 且 wait->wait 已初始化 |
 
 **参考案例**
 
@@ -301,7 +301,7 @@ void osal_wait_wakeup_interruptible(osal_wait *wait)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| wait | [osal_wait](#osal_wait) * | 待唤醒的等待队列句柄 | 不为NULL 且 wait->wait 已初始化 |
+| wait | [osal_wait](#osal_wait) * | 待唤醒的等待队列句柄 | 不为 NULL 且 wait->wait 已初始化 |
 
 ### osal_wait_destroy <a id="osal_wait_destroy"></a>
 
@@ -330,7 +330,7 @@ void osal_wait_destroy(osal_wait *wait)
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| wait | [osal_wait](#osal_wait) * | 待销毁的等待队列句柄 | 不为NULL 且 wait->wait 已初始化 |
+| wait | [osal_wait](#osal_wait) * | 待销毁的等待队列句柄 | 不为 NULL 且 wait->wait 已初始化 |
 
 **参考案例**
 

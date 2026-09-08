@@ -1,6 +1,6 @@
 # SLE CHBA
 
-SLE (Star Flash Low Energy) CHBA manager 提供 SLE CHBA 网络设备管理能力，支持基于 SLE 链路的网络设备创建、销毁、链路维护与数据收发，并通过回调机制向上层通知发送队列状态、链路状态及上行数据。
+SLE CHBA（Star Flash Low Energy）提供 SLE CHBA 网络设备管理能力，支持基于 SLE 链路的网络设备创建、销毁、链路维护与数据收发，并通过回调机制向上层通知发送队列状态、链路状态及上行数据。
 
 **模块公共头文件**
 
@@ -36,25 +36,25 @@ errcode_t sle_chba_netdev_create(uint8_t chba_role, uint8_t chba_mode)
 
 **功能说明**
 
-- 创建一个 SLE CHBA 网络设备实例
-- 按入参指定的设备角色（AP (Access Point) 或 STA (Station)）与工作模式初始化该网络设备
-- 为后续的链路添加、数据收发及回调注册提供运行基础
+- 创建一个 SLE CHBA 网络设备实例。
+- 按入参指定的设备角色（AP（Access Point）或 STA（Station））与工作模式初始化该网络设备。
+- 为后续的链路添加、数据收发及回调注册提供运行基础。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 SLE 协议栈初始化完成、SLE 设备使能后调用
-- 依赖关系：当前接口依赖底层 SLE 链路资源及本地设备地址已就绪
+- 调用时序约束：当前接口必须在 SLE 协议栈初始化完成、SLE 设备使能后调用。
+- 依赖关系：当前接口依赖底层 SLE 链路资源及本地设备地址已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| chba_role | uint8_t | SLE CHBA 设备角色，取值参考 [sle_chba_role](#enum_sle_chba_role) | [CHBA_ROLE_AP](#enum_sle_chba_role):0 / [CHBA_ROLE_STA](#enum_sle_chba_role):1 |
+| chba_role | uint8_t | SLE CHBA 设备角色，取值参考 [sle_chba_role](#enum_sle_chba_role) | [CHBA_ROLE_AP](#enum_sle_chba_role)：0；<br>[CHBA_ROLE_STA](#enum_sle_chba_role)：1。 |
 | chba_mode | uint8_t | SLE CHBA 工作模式 | 0 ~ 255 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -78,18 +78,18 @@ errcode_t sle_chba_netdev_destroy(void)
 
 **功能说明**
 
-- 销毁已创建的 SLE CHBA 网络设备实例
-- 释放网络设备相关运行资源
-- 解除后续链路维护与数据收发的运行基础
+- 销毁已创建的 SLE CHBA 网络设备实例。
+- 释放网络设备相关运行资源。
+- 解除后续链路维护与数据收发的运行基础。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [sle_chba_netdev_create](#sle_chba_netdev_create) 成功返回后调用
-- 依赖关系：当前接口执行前应已完成所有链路的删除与数据收发停止
+- 调用时序约束：当前接口必须在 [sle_chba_netdev_create](#sle_chba_netdev_create) 成功返回后调用。
+- 依赖关系：当前接口执行前应已完成所有链路的删除与数据收发停止。
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -109,14 +109,14 @@ errcode_t sle_chba_netdev_add_link(uint16_t conn_id, const sle_addr_t *remote_ad
 
 **功能说明**
 
-- 向 SLE CHBA 网络设备添加一条对端链路
-- 以连接 ID 与对端设备地址标识该链路
-- 链路添加成功后即可用于后续的数据收发与链路信息查询
+- 向 SLE CHBA 网络设备添加一条对端链路。
+- 以连接 ID 与对端设备地址标识该链路。
+- 链路添加成功后即可用于后续的数据收发与链路信息查询。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [sle_chba_netdev_create](#sle_chba_netdev_create) 成功返回后调用，且对应 conn_id 的 SLE 连接已建立
-- 依赖关系：当前接口依赖入参 remote_addr 指向有效的对端设备地址
+- 调用时序约束：当前接口必须在 [sle_chba_netdev_create](#sle_chba_netdev_create) 成功返回后调用，且对应 conn_id 的 SLE 连接已建立。
+- 依赖关系：当前接口依赖入参 remote_addr 指向有效的对端设备地址。
 
 **入参**
 
@@ -127,7 +127,7 @@ errcode_t sle_chba_netdev_add_link(uint16_t conn_id, const sle_addr_t *remote_ad
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -151,14 +151,14 @@ errcode_t sle_chba_netdev_del_link(uint16_t conn_id, const sle_addr_t *remote_ad
 
 **功能说明**
 
-- 从 SLE CHBA 网络设备删除一条已添加的对端链路
-- 按连接 ID 与对端设备地址定位待删除的链路
-- 链路删除后不再参与后续数据收发与链路信息查询
+- 从 SLE CHBA 网络设备删除一条已添加的对端链路。
+- 按连接 ID 与对端设备地址定位待删除的链路。
+- 链路删除后不再参与后续数据收发与链路信息查询。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [sle_chba_netdev_add_link](#sle_chba_netdev_add_link) 添加对应链路后调用
-- 依赖关系：当前接口依赖入参 remote_addr 指向有效的对端设备地址
+- 调用时序约束：当前接口必须在 [sle_chba_netdev_add_link](#sle_chba_netdev_add_link) 添加对应链路后调用。
+- 依赖关系：当前接口依赖入参 remote_addr 指向有效的对端设备地址。
 
 **入参**
 
@@ -169,7 +169,7 @@ errcode_t sle_chba_netdev_del_link(uint16_t conn_id, const sle_addr_t *remote_ad
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -193,14 +193,14 @@ errcode_t sle_chba_netdev_get_linkinfo(uint16_t conn_id, sle_ip_link_info *link)
 
 **功能说明**
 
-- 查询指定连接 ID 对应链路的统计信息
-- 输出对端设备地址与该链路的收发包计数及收发字节数
-- 供上层获取链路运行状态
+- 查询指定连接 ID 对应链路的统计信息。
+- 输出对端设备地址与该链路的收发包计数及收发字节数。
+- 供上层获取链路运行状态。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [sle_chba_netdev_add_link](#sle_chba_netdev_add_link) 添加对应链路后调用
-- 依赖关系：当前接口依赖入参 link 指向调用方分配的 [sle_ip_link_info](#struct_sle_ip_link_info) 存储空间
+- 调用时序约束：当前接口必须在 [sle_chba_netdev_add_link](#sle_chba_netdev_add_link) 添加对应链路后调用。
+- 依赖关系：当前接口依赖入参 link 指向调用方分配的 [sle_ip_link_info](#struct_sle_ip_link_info) 存储空间。
 
 **入参**
 
@@ -216,7 +216,7 @@ errcode_t sle_chba_netdev_get_linkinfo(uint16_t conn_id, sle_ip_link_info *link)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -236,25 +236,25 @@ errcode_t sle_chba_netdev_driver_send(uint8_t *data, uint16_t len)
 
 **功能说明**
 
-- 通过 SLE CHBA 网络设备驱动发送一帧数据
-- 按入参 data 与 len 指定的数据缓冲区及长度执行发送
-- 供上层网络协议栈在 SLE CHBA 链路上进行数据发送
+- 通过 SLE CHBA 网络设备驱动发送一帧数据。
+- 按入参 data 与 len 指定的数据缓冲区及长度执行发送。
+- 供上层网络协议栈在 SLE CHBA 链路上进行数据发送。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [sle_chba_netdev_create](#sle_chba_netdev_create) 成功返回且至少添加一条链路后调用
-- 依赖关系：当前接口依赖入参 data 指向有效的待发送数据缓冲区
+- 调用时序约束：当前接口必须在 [sle_chba_netdev_create](#sle_chba_netdev_create) 成功返回且至少添加一条链路后调用。
+- 依赖关系：当前接口依赖入参 data 指向有效的待发送数据缓冲区。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | data | uint8_t * | 待发送数据缓冲区指针 | 不为 NULL |
-| len | uint16_t | 待发送数据长度，单位字节 | 0 ~ 65535 |
+| len | uint16_t | 待发送数据长度，单位 Bytes | 0 ~ 65535 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -279,14 +279,14 @@ errcode_t sle_chba_netdev_register_callbacks(sle_chba_netdev_callbacks_t *func)
 
 **功能说明**
 
-- 向 SLE CHBA 网络设备注册一组事件回调函数
-- 注册的回调用于通知发送队列停止/唤醒、链路启用/禁用及上行数据上报
-- 注册后由网络设备在对应事件发生时回调，回调返回值在当前实现中不被检查
+- 向 SLE CHBA 网络设备注册一组事件回调函数。
+- 注册的回调用于通知发送队列停止/唤醒、链路启用/禁用及上行数据上报。
+- 注册后由网络设备在对应事件发生时回调，回调返回值在当前实现中不被检查。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [sle_chba_netdev_create](#sle_chba_netdev_create) 成功返回后调用
-- 依赖关系：当前接口依赖入参 func 指向调用方填充好的 [sle_chba_netdev_callbacks_t](#struct_sle_chba_netdev_callbacks_t) 结构体
+- 调用时序约束：当前接口必须在 [sle_chba_netdev_create](#sle_chba_netdev_create) 成功返回后调用。
+- 依赖关系：当前接口依赖入参 func 指向调用方填充好的 [sle_chba_netdev_callbacks_t](#struct_sle_chba_netdev_callbacks_t) 结构体。
 
 **入参**
 
@@ -296,7 +296,7 @@ errcode_t sle_chba_netdev_register_callbacks(sle_chba_netdev_callbacks_t *func)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |

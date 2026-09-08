@@ -1,6 +1,6 @@
-# factory
+# Factory
 
-factory 提供 BLE (Bluetooth Low Energy) 产测 RF (Radio Frequency) 收发测试、单音模式与产线校准能力。该模块支持射频长发/长收的启停与复位、NV (Non-Volatile) 校准，以及 XO (Crystal Oscillator) 频偏校准、芯片温度获取、功率校准及其补偿值的 EFUSE (electronic Fuse) 读写等产线校准命令。
+Factory 提供 BLE（Bluetooth Low Energy）产测 RF（Radio Frequency）收发测试、单音模式与产线校准能力。该模块支持射频长发/长收的启停与复位、NV（Non-Volatile）校准，以及 XO（Crystal Oscillator）频偏校准、芯片温度获取、功率校准及其补偿值的 EFUSE（electronic Fuse）读写等产线校准命令。
 
 **模块公共头文件**
 
@@ -37,23 +37,23 @@ errcode_t ble_factory_register_callbacks(ble_factory_callbacks_t *func)
 
 **功能说明**
 
-- 注册 BLE factory 管理回调函数集合，用于接收射频长发/长收、收发结束、收发复位、NV 校准、单音模式及产线校准命令等异步执行结果
-- 回调函数集合通过 [ble_factory_callbacks_t](#struct_ble_factory_callbacks_t) 结构体指针传入
-- 注册后由 BLE service 在对应操作完成时调用相应回调
+- 注册 BLE factory 管理回调函数集合，用于接收射频长发/长收、收发结束、收发复位、NV 校准、单音模式及产线校准命令等异步执行结果。
+- 回调函数集合通过 [ble_factory_callbacks_t](#struct_ble_factory_callbacks_t) 结构体指针传入。
+- 注册后由 BLE service 在对应操作完成时调用相应回调。
 
 **前置条件**
 
-- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
+- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [ble_factory_callbacks_t](#struct_ble_factory_callbacks_t) * | 指向回调函数集合结构体的指针，注册后由 BLE service 在对应事件发生时回调 | 不为NULL |
+| func | [ble_factory_callbacks_t](#struct_ble_factory_callbacks_t) * | 指向回调函数集合结构体的指针，注册后由 BLE service 在对应事件发生时回调 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -73,24 +73,24 @@ errcode_t ble_factory_rf_tx_start(ble_rf_tx_start_t* param)
 
 **功能说明**
 
-- 启动射频长发测试，按入参配置的频率、数据长度、数据包类型与射频物理层执行发射
-- 发射启动结果通过已注册的 [ble_factory_rf_tx_start_callback](#ble_factory_rf_tx_start_callback) 回调返回
-- 本接口仅返回发起结果，实际长发状态以回调上报为准
+- 启动射频长发测试，按入参配置的频率、数据长度、数据包类型与射频物理层执行发射。
+- 发射启动结果通过已注册的 [ble_factory_rf_tx_start_callback](#ble_factory_rf_tx_start_callback) 回调返回。
+- 本接口仅返回发起结果，实际长发状态以回调上报为准。
 
 **前置条件**
 
-- 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用
-- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
+- 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用。
+- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [ble_rf_tx_start_t](#struct_ble_rf_tx_start_t) * | 指向射频长发参数结构体的指针，包含发送频率、测试数据长度、数据包类型与射频物理层 | 不为NULL |
+| param | [ble_rf_tx_start_t](#struct_ble_rf_tx_start_t) * | 指向射频长发参数结构体的指针，包含发送频率、测试数据长度、数据包类型与射频物理层 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -110,24 +110,24 @@ errcode_t ble_factory_rf_rx_start(ble_rf_rx_start_t* param)
 
 **功能说明**
 
-- 启动射频长收测试，按入参配置的接收频率、射频物理层与调制指数执行接收
-- 接收启动结果通过已注册的 [ble_factory_rf_rx_start_callback](#ble_factory_rf_rx_start_callback) 回调返回
-- 本接口仅返回发起结果，实际长收状态以回调上报为准
+- 启动射频长收测试，按入参配置的接收频率、射频物理层与调制指数执行接收。
+- 接收启动结果通过已注册的 [ble_factory_rf_rx_start_callback](#ble_factory_rf_rx_start_callback) 回调返回。
+- 本接口仅返回发起结果，实际长收状态以回调上报为准。
 
 **前置条件**
 
-- 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用
-- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
+- 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用。
+- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [ble_rf_rx_start_t](#struct_ble_rf_rx_start_t) * | 指向射频长收参数结构体的指针，包含接收频率、射频物理层与调制指数 | 不为NULL |
+| param | [ble_rf_rx_start_t](#struct_ble_rf_rx_start_t) * | 指向射频长收参数结构体的指针，包含接收频率、射频物理层与调制指数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -147,18 +147,18 @@ errcode_t ble_factory_rf_trx_end(void)
 
 **功能说明**
 
-- 关闭射频收发，停止当前长发与长收测试
-- 关闭结果通过已注册的 [ble_factory_rf_trx_end_callback](#ble_factory_rf_trx_end_callback) 回调返回，回调中携带收发期间累计的数据包数
-- 本接口仅返回发起结果，实际关闭状态以回调上报为准
+- 关闭射频收发，停止当前长发与长收测试。
+- 关闭结果通过已注册的 [ble_factory_rf_trx_end_callback](#ble_factory_rf_trx_end_callback) 回调返回，回调中携带收发期间累计的数据包数。
+- 本接口仅返回发起结果，实际关闭状态以回调上报为准。
 
 **前置条件**
 
-- 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用
-- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
+- 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用。
+- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪。
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -178,18 +178,18 @@ errcode_t ble_factory_rf_reset(void)
 
 **功能说明**
 
-- 重置射频收发，复位当前射频长发与长收状态
-- 重置结果通过已注册的 [ble_factory_rf_reset_callback](#ble_factory_rf_reset_callback) 回调返回
-- 本接口仅返回发起结果，实际重置状态以回调上报为准
+- 重置射频收发，复位当前射频长发与长收状态。
+- 重置结果通过已注册的 [ble_factory_rf_reset_callback](#ble_factory_rf_reset_callback) 回调返回。
+- 本接口仅返回发起结果，实际重置状态以回调上报为准。
 
 **前置条件**
 
-- 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用
-- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
+- 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用。
+- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪。
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -209,18 +209,18 @@ errcode_t ble_factory_rf_cali_nv(void)
 
 **功能说明**
 
-- 触发射频 NV 校准，对射频相关 NV 参数执行校准
-- 校准结果通过已注册的 [ble_factory_rf_cali_nv_callback](#ble_factory_rf_cali_nv_callback) 回调返回
-- 本接口仅返回发起结果，实际校准状态以回调上报为准
+- 触发射频 NV 校准，对射频相关 NV 参数执行校准。
+- 校准结果通过已注册的 [ble_factory_rf_cali_nv_callback](#ble_factory_rf_cali_nv_callback) 回调返回。
+- 本接口仅返回发起结果，实际校准状态以回调上报为准。
 
 **前置条件**
 
-- 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用
-- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
+- 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用。
+- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪。
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -240,24 +240,24 @@ errcode_t ble_factory_rf_single_tone(ble_rf_single_tone_t* param)
 
 **功能说明**
 
-- 设置或关闭射频单音模式，按入参配置的射频频率与单音模式开关执行
-- 单音模式设置结果通过已注册的 [ble_factory_rf_single_tone_callback](#ble_factory_rf_single_tone_callback) 回调返回
-- 本接口仅返回发起结果，实际单音状态以回调上报为准
+- 设置或关闭射频单音模式，按入参配置的射频频率与单音模式开关执行。
+- 单音模式设置结果通过已注册的 [ble_factory_rf_single_tone_callback](#ble_factory_rf_single_tone_callback) 回调返回。
+- 本接口仅返回发起结果，实际单音状态以回调上报为准。
 
 **前置条件**
 
-- 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用
-- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
+- 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用。
+- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [ble_rf_single_tone_t](#struct_ble_rf_single_tone_t) * | 指向射频单音参数结构体的指针，包含射频频率与单音模式开关 | 不为NULL |
+| param | [ble_rf_single_tone_t](#struct_ble_rf_single_tone_t) * | 指向射频单音参数结构体的指针，包含射频频率与单音模式开关 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -277,24 +277,24 @@ errcode_t ble_factory_vendor_productline_cmd(ble_vendor_productline_cmd_t* param
 
 **功能说明**
 
-- 发送产线校准 vendor 命令，按入参子操作码携带的参数执行频偏校准、温度获取/读写、功率校准及其补偿值的 EFUSE 读写等产线操作
-- 命令执行完成事件通过已注册的 [ble_factory_vendor_pdl_cmd_callback](#ble_factory_vendor_pdl_cmd_callback) 回调返回
-- 本接口仅返回发起结果，实际执行结果以回调上报为准
+- 发送产线校准 vendor 命令，按入参子操作码携带的参数执行频偏校准、温度获取/读写、功率校准及其补偿值的 EFUSE 读写等产线操作。
+- 命令执行完成事件通过已注册的 [ble_factory_vendor_pdl_cmd_callback](#ble_factory_vendor_pdl_cmd_callback) 回调返回。
+- 本接口仅返回发起结果，实际执行结果以回调上报为准。
 
 **前置条件**
 
-- 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用
-- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪
+- 调用时序约束：当前接口须在 [ble_factory_register_callbacks](#ble_factory_register_callbacks) 成功注册回调后调用。
+- 依赖关系：当前接口依赖 bts_def.h 定义的基础类型已就绪。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| param | [ble_vendor_productline_cmd_t](#struct_ble_vendor_productline_cmd_t) * | 指向产线校准命令结构体的指针，包含子操作码及按子操作码生效的联合体参数 | 不为NULL |
+| param | [ble_vendor_productline_cmd_t](#struct_ble_vendor_productline_cmd_t) * | 指向产线校准命令结构体的指针，包含子操作码及按子操作码生效的联合体参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
@@ -324,9 +324,9 @@ typedef void (*ble_factory_rf_tx_start_callback)(errcode_t status);
 
 回调说明：
 
-- 调用时机：射频长发启动完成后，由 BLE service 在其线程上下文调用，不应在回调中阻塞或长时间等待
-- 参数 status：长发启动执行结果错误码
-- 返回值处理：回调返回值为 void，BLE service 不检查
+- 调用时机：射频长发启动完成后，由 BLE service 在其线程上下文调用，不应在回调中阻塞或长时间等待。
+- 参数 status：长发启动执行结果错误码。
+- 返回值处理：回调返回值为 void，BLE service 不检查。
 
 ### ble_factory_rf_rx_start_callback <a id="ble_factory_rf_rx_start_callback"></a>
 
@@ -340,9 +340,9 @@ typedef void (*ble_factory_rf_rx_start_callback)(errcode_t status);
 
 回调说明：
 
-- 调用时机：射频长收启动完成后，由 BLE service 在其线程上下文调用，不应在回调中阻塞或长时间等待
-- 参数 status：长收启动执行结果错误码
-- 返回值处理：回调返回值为 void，BLE service 不检查
+- 调用时机：射频长收启动完成后，由 BLE service 在其线程上下文调用，不应在回调中阻塞或长时间等待。
+- 参数 status：长收启动执行结果错误码。
+- 返回值处理：回调返回值为 void，BLE service 不检查。
 
 ### ble_factory_rf_trx_end_callback <a id="ble_factory_rf_trx_end_callback"></a>
 
@@ -356,10 +356,10 @@ typedef void (*ble_factory_rf_trx_end_callback)(errcode_t status, uint16_t num_p
 
 回调说明：
 
-- 调用时机：射频收发关闭完成后，由 BLE service 在其线程上下文调用，不应在回调中阻塞或长时间等待
-- 参数 status：收发关闭执行结果错误码
-- 参数 num_packets：收发期间累计的数据包数
-- 返回值处理：回调返回值为 void，BLE service 不检查
+- 调用时机：射频收发关闭完成后，由 BLE service 在其线程上下文调用，不应在回调中阻塞或长时间等待。
+- 参数 status：收发关闭执行结果错误码。
+- 参数 num_packets：收发期间累计的数据包数。
+- 返回值处理：回调返回值为 void，BLE service 不检查。
 
 ### ble_factory_rf_reset_callback <a id="ble_factory_rf_reset_callback"></a>
 
@@ -373,9 +373,9 @@ typedef void (*ble_factory_rf_reset_callback)(errcode_t status);
 
 回调说明：
 
-- 调用时机：射频收发重置完成后，由 BLE service 在其线程上下文调用，不应在回调中阻塞或长时间等待
-- 参数 status：收发重置执行结果错误码
-- 返回值处理：回调返回值为 void，BLE service 不检查
+- 调用时机：射频收发重置完成后，由 BLE service 在其线程上下文调用，不应在回调中阻塞或长时间等待。
+- 参数 status：收发重置执行结果错误码。
+- 返回值处理：回调返回值为 void，BLE service 不检查。
 
 ### ble_factory_rf_cali_nv_callback <a id="ble_factory_rf_cali_nv_callback"></a>
 
@@ -389,9 +389,9 @@ typedef void (*ble_factory_rf_cali_nv_callback)(errcode_t status);
 
 回调说明：
 
-- 调用时机：射频 NV 校准完成后，由 BLE service 在其线程上下文调用，不应在回调中阻塞或长时间等待
-- 参数 status：NV 校准执行结果错误码
-- 返回值处理：回调返回值为 void，BLE service 不检查
+- 调用时机：射频 NV 校准完成后，由 BLE service 在其线程上下文调用，不应在回调中阻塞或长时间等待。
+- 参数 status：NV 校准执行结果错误码。
+- 返回值处理：回调返回值为 void，BLE service 不检查。
 
 ### ble_factory_rf_single_tone_callback <a id="ble_factory_rf_single_tone_callback"></a>
 
@@ -405,9 +405,9 @@ typedef void (*ble_factory_rf_single_tone_callback)(errcode_t status);
 
 回调说明：
 
-- 调用时机：单音模式开启或关闭完成后，由 BLE service 在其线程上下文调用，不应在回调中阻塞或长时间等待
-- 参数 status：单音模式设置执行结果错误码
-- 返回值处理：回调返回值为 void，BLE service 不检查
+- 调用时机：单音模式开启或关闭完成后，由 BLE service 在其线程上下文调用，不应在回调中阻塞或长时间等待。
+- 参数 status：单音模式设置执行结果错误码。
+- 返回值处理：回调返回值为 void，BLE service 不检查。
 
 ### ble_factory_vendor_pdl_cmd_callback <a id="ble_factory_vendor_pdl_cmd_callback"></a>
 
@@ -421,9 +421,9 @@ typedef void (*ble_factory_vendor_pdl_cmd_callback)(ble_hci_vendor_productline_c
 
 回调说明：
 
-- 调用时机：产线校准 vendor 命令执行完成后，由 BLE service 在其线程上下文调用，不应在回调中阻塞或长时间等待
-- 参数 evt：指向完成事件结构体的指针，携带子操作码及对应读取结果，指针内存由 BLE service 申请与释放，回调中不应释放
-- 返回值处理：回调返回值为 void，BLE service 不检查
+- 调用时机：产线校准 vendor 命令执行完成后，由 BLE service 在其线程上下文调用，不应在回调中阻塞或长时间等待。
+- 参数 evt：指向完成事件结构体的指针，携带子操作码及对应读取结果，指针内存由 BLE service 申请与释放，回调中不应释放。
+- 返回值处理：回调返回值为 void，BLE service 不检查。
 
 ## Enumerations
 
@@ -522,8 +522,8 @@ typedef struct {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| tx_freq | uint8_t | 发送频率，范围 0x00~0x27，对应载波频率 2402+x*2 MHz |
-| test_data_len | uint16_t | 发射测试数据长度，范围 0x00~0xFB |
+| tx_freq | uint8_t | 发送频率，范围 0~0x27，对应载波频率 2402+x*2 MHz |
+| test_data_len | uint16_t | 发射测试数据长度，范围 0~0xFB |
 | payload_type | uint8_t | 发射测试数据包类型，取值为 [ble_rf_payload_type_t](#enum_ble_rf_payload_type_t) 枚举成员 |
 | tx_phy | uint8_t | 射频物理层，取值为 [ble_rf_phy_t](#enum_ble_rf_phy_t) 枚举成员 |
 
@@ -541,9 +541,9 @@ typedef struct {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| rx_freq | uint8_t | 接收频率，范围 0x00~0x27，对应载波频率 2402+x*2 MHz |
+| rx_freq | uint8_t | 接收频率，范围 0~0x27，对应载波频率 2402+x*2 MHz |
 | rx_phy | uint8_t | 射频物理层，取值为 [ble_rf_phy_t](#enum_ble_rf_phy_t) 枚举成员 |
-| modulation_index | uint8_t | 调制指数，0:标准，1:稳定 |
+| modulation_index | uint8_t | 调制指数，0：标准；<br>1：稳定。|
 
 ### ble_rf_single_tone_t <a id="struct_ble_rf_single_tone_t"></a>
 
@@ -558,8 +558,8 @@ typedef struct {
 
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
-| rf_freq | uint8_t | 射频频率，范围 0x00~0x4E，对应载波频率 2402+x*2 MHz |
-| rf_mode | uint8_t | 单音模式开关，0x00:开启，0xFF:关闭 |
+| rf_freq | uint8_t | 射频频率，范围 0~0x4E，对应载波频率 2402+x*2 MHz |
+| rf_mode | uint8_t | 单音模式开关，0：开启；<br>0xFF：关闭。|
 
 ### pdl_xo_trim_t <a id="struct_pdl_xo_trim_t"></a>
 

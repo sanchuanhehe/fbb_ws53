@@ -1,6 +1,6 @@
 # SSAP Client
 
-SSAP (Service Access Protocol) client 提供 SLE (Star Flash Low Energy) 协议中服务接入协议客户端侧的能力，支持注册与注销客户端、注册回调函数、发起服务/属性/描述符查找、按句柄或 UUID (Universally Unique Identifier) 读取、发起写请求与写命令以及交换信息请求。
+SSAP Client（Service Access Protocol）提供 SLE（Star Flash Low Energy）协议中服务接入协议客户端侧的能力，支持注册与注销客户端、注册回调函数、发起服务/属性/描述符查找、按句柄或 UUID（Universally Unique Identifier）读取、发起写请求与写命令以及交换信息请求。
 
 **模块公共头文件**
 
@@ -19,7 +19,7 @@ SSAP (Service Access Protocol) client 提供 SLE (Star Flash Low Energy) 协议�
 | [ssapc_read_req](#ssapc_read_req) | 发起按句柄读取请求 |
 | [ssapc_write_req](#ssapc_write_req) | 发起写请求（需服务端响应） |
 | [ssapc_write_cmd](#ssapc_write_cmd) | 发起写命令（无需服务端响应） |
-| [ssapc_exchange_info_req](#ssapc_exchange_info_req) | 发送交换信息请求（协商 MTU (Maximum Transmission Unit) 等） |
+| [ssapc_exchange_info_req](#ssapc_exchange_info_req) | 发送交换信息请求（协商 MTU（Maximum Transmission Unit）等） |
 | [ssapc_register_callbacks](#ssapc_register_callbacks) | 注册 SSAP 客户端回调函数集合 |
 
 ## Functions
@@ -38,21 +38,21 @@ errcode_t ssapc_register_client(sle_uuid_t *app_uuid, uint8_t *client_id)
 
 **功能说明**
 
-- 注册 SSAP 客户端，向上层应用分配并返回客户端 ID
-- 以应用 UUID 标识上层应用身份
-- 注册成功后该客户端 ID 可用于后续查找、读写、交换信息等请求
+- 注册 SSAP 客户端，向上层应用分配并返回客户端 ID。
+- 以应用 UUID 标识上层应用身份。
+- 成功注册后该客户端 ID 可用于后续查找、读写、交换信息等请求。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 SLE 协议栈初始化完成后调用
-- 依赖关系：当前接口依赖 SLE service 已就绪
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 SLE 协议栈初始化完成后调用。
+- 依赖关系：当前接口依赖 SLE service 已就绪。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| app_uuid | [sle_uuid_t](#struct_sle_uuid_t) * | 上层应用 UUID | 不为NULL |
+| app_uuid | [sle_uuid_t](#struct_sle_uuid_t) * | 上层应用 UUID | 不为 NULL |
 
 **出参**
 
@@ -62,11 +62,11 @@ errcode_t ssapc_register_client(sle_uuid_t *app_uuid, uint8_t *client_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 请求成功发起 |
+| ERRCODE_SUCC：0 | 执行成功 | 请求成功发起 |
 
 **参考案例**
 
@@ -86,15 +86,15 @@ errcode_t ssapc_unregister_client(uint8_t client_id)
 
 **功能说明**
 
-- 注销已注册的 SSAP 客户端
-- 释放该客户端 ID 占用的资源
-- 注销后该客户端 ID 不再可用于发起请求
+- 注销已注册的 SSAP 客户端。
+- 释放该客户端 ID 占用的资源。
+- 注销后该客户端 ID 不再可用于发起请求。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [ssapc_register_client](#ssapc_register_client) 成功返回后调用
-- 依赖关系：当前接口依赖传入的客户端 ID 已通过注册获得
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [ssapc_register_client](#ssapc_register_client) 成功返回后调用。
+- 依赖关系：当前接口依赖传入的客户端 ID 已通过注册获得。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -104,11 +104,11 @@ errcode_t ssapc_unregister_client(uint8_t client_id)
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 请求成功发起 |
+| ERRCODE_SUCC：0 | 执行成功 | 请求成功发起 |
 
 ### ssapc_find_structure <a id="ssapc_find_structure"></a>
 
@@ -124,15 +124,15 @@ errcode_t ssapc_find_structure(uint8_t client_id, uint16_t conn_id, ssapc_find_s
 
 **功能说明**
 
-- 向对端发起服务、属性、描述符查找请求
-- 支持按 UUID 过滤或发现全部结构（param 为 NULL 时发现全部结构）
-- 查找结果通过已注册的回调函数返回
+- 向对端发起服务、属性、描述符查找请求。
+- 支持按 UUID 过滤或发现全部结构（param 为 NULL 时发现全部结构）。
+- 查找结果通过已注册的回调函数返回。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [ssapc_register_client](#ssapc_register_client) 成功返回后调用，且对应的 SLE 连接已建立
-- 依赖关系：当前接口依赖 [ssapc_register_callbacks](#ssapc_register_callbacks) 已注册用于接收结果的回调函数
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [ssapc_register_client](#ssapc_register_client) 成功返回后调用，且对应的 SLE 连接已建立。
+- 依赖关系：当前接口依赖 [ssapc_register_callbacks](#ssapc_register_callbacks) 已注册用于接收结果的回调函数。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -140,15 +140,15 @@ errcode_t ssapc_find_structure(uint8_t client_id, uint16_t conn_id, ssapc_find_s
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 由 ssapc_register_client 分配 |
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
-| param | [ssapc_find_structure_param_t](#struct_ssapc_find_structure_param_t) * | 查找参数，传 NULL 表示发现全部结构 | 为NULL 或指向有效的查找参数结构体 |
+| param | [ssapc_find_structure_param_t](#struct_ssapc_find_structure_param_t) * | 查找参数，传 NULL 表示发现全部结构 | 为 NULL 或指向有效的查找参数结构体 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；服务发现结果将在 ssapc_find_structure_callback 和 ssapc_find_structure_complete_callback 中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 请求发起成功；服务发现结果将在 ssapc_find_structure_callback 和 ssapc_find_structure_complete_callback 中返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
 
 **参考案例**
@@ -169,15 +169,15 @@ errcode_t ssapc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, ssapc_read
 
 **功能说明**
 
-- 向对端发起按 UUID 的读取请求
-- 读取范围由参数中的句柄区间与 UUID 共同确定
-- 读取结果通过已注册的回调函数返回
+- 向对端发起按 UUID 的读取请求。
+- 读取范围由参数中的句柄区间与 UUID 共同确定。
+- 读取结果通过已注册的回调函数返回。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [ssapc_register_client](#ssapc_register_client) 成功返回后调用，且对应的 SLE 连接已建立
-- 依赖关系：当前接口依赖 [ssapc_register_callbacks](#ssapc_register_callbacks) 已注册用于接收结果的回调函数
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [ssapc_register_client](#ssapc_register_client) 成功返回后调用，且对应的 SLE 连接已建立。
+- 依赖关系：当前接口依赖 [ssapc_register_callbacks](#ssapc_register_callbacks) 已注册用于接收结果的回调函数。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -185,7 +185,7 @@ errcode_t ssapc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, ssapc_read
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 由 ssapc_register_client 分配 |
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
-| param | [ssapc_read_req_by_uuid_param_t](#struct_ssapc_read_req_by_uuid_param_t) * | 按 UUID 读取请求参数 | 不为NULL |
+| param | [ssapc_read_req_by_uuid_param_t](#struct_ssapc_read_req_by_uuid_param_t) * | 按 UUID 读取请求参数 | 不为 NULL |
 
 **参考案例**
 
@@ -193,11 +193,11 @@ errcode_t ssapc_read_req_by_uuid(uint8_t client_id, uint16_t conn_id, ssapc_read
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；读取结果将在 ssapc_read_cfm_callback 和 ssapc_read_by_uuid_complete_callback 中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 请求发起成功；读取结果将在 ssapc_read_cfm_callback 和 ssapc_read_by_uuid_complete_callback 中返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
 
 ### ssapc_read_req <a id="ssapc_read_req"></a>
@@ -214,15 +214,15 @@ errcode_t ssapc_read_req(uint8_t client_id, uint16_t conn_id, uint16_t handle, u
 
 **功能说明**
 
-- 向对端发起按句柄的读取请求
-- 读取对象由属性句柄与特征类型共同确定
-- 读取结果通过已注册的回调函数返回
+- 向对端发起按句柄的读取请求。
+- 读取对象由属性句柄与特征类型共同确定。
+- 读取结果通过已注册的回调函数返回。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [ssapc_register_client](#ssapc_register_client) 成功返回后调用，且对应的 SLE 连接已建立
-- 依赖关系：当前接口依赖 [ssapc_register_callbacks](#ssapc_register_callbacks) 已注册用于接收结果的回调函数
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [ssapc_register_client](#ssapc_register_client) 成功返回后调用，且对应的 SLE 连接已建立。
+- 依赖关系：当前接口依赖 [ssapc_register_callbacks](#ssapc_register_callbacks) 已注册用于接收结果的回调函数。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -231,15 +231,15 @@ errcode_t ssapc_read_req(uint8_t client_id, uint16_t conn_id, uint16_t handle, u
 | client_id | uint8_t | 客户端 ID | 由 ssapc_register_client 分配 |
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
 | handle | uint16_t | 属性句柄 | 有效属性句柄 |
-| type | uint8_t | 特征类型 | [SSAP_PROPERTY_TYPE_VALUE](#enum_ssap_property_type_t):0 / [SSAP_DESCRIPTOR_USER_DESCRIPTION](#enum_ssap_property_type_t):1 / [SSAP_DESCRIPTOR_CLIENT_CONFIGURATION](#enum_ssap_property_type_t):2 / [SSAP_DESCRIPTOR_SERVER_CONFIGURATION](#enum_ssap_property_type_t):3 / [SSAP_DESCRIPTOR_PRESENTATION_FORMAT](#enum_ssap_property_type_t):4 / [SSAP_DESCRIPTOR_RFU](#enum_ssap_property_type_t):5 / [SSAP_DESCRIPTOR_CUSTOM](#enum_ssap_property_type_t):255 |
+| type | uint8_t | 特征类型 | [SSAP_PROPERTY_TYPE_VALUE](#enum_ssap_property_type_t)：0；<br>[SSAP_DESCRIPTOR_USER_DESCRIPTION](#enum_ssap_property_type_t)：1；<br>[SSAP_DESCRIPTOR_CLIENT_CONFIGURATION](#enum_ssap_property_type_t)：2；<br>[SSAP_DESCRIPTOR_SERVER_CONFIGURATION](#enum_ssap_property_type_t)：3；<br>[SSAP_DESCRIPTOR_PRESENTATION_FORMAT](#enum_ssap_property_type_t)：4；<br>[SSAP_DESCRIPTOR_RFU](#enum_ssap_property_type_t)：5；<br>[SSAP_DESCRIPTOR_CUSTOM](#enum_ssap_property_type_t)：255。 |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；读取结果将在 ssapc_read_cfm_callback 中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 请求发起成功；读取结果将在 ssapc_read_cfm_callback 中返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
 
 **参考案例**
@@ -261,15 +261,15 @@ errcode_t ssapc_write_req(uint8_t client_id, uint16_t conn_id, ssapc_write_param
 
 **功能说明**
 
-- 向对端发起写请求，需服务端回复响应
-- 写入对象与数据内容由参数指定
-- 写结果通过已注册的回调函数返回
+- 向对端发起写请求，需服务端回复响应。
+- 写入对象与数据内容由参数指定。
+- 写结果通过已注册的回调函数返回。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [ssapc_register_client](#ssapc_register_client) 成功返回后调用，且对应的 SLE 连接已建立
-- 依赖关系：当前接口依赖 [ssapc_register_callbacks](#ssapc_register_callbacks) 已注册用于接收结果的回调函数
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [ssapc_register_client](#ssapc_register_client) 成功返回后调用，且对应的 SLE 连接已建立。
+- 依赖关系：当前接口依赖 [ssapc_register_callbacks](#ssapc_register_callbacks) 已注册用于接收结果的回调函数。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -277,15 +277,15 @@ errcode_t ssapc_write_req(uint8_t client_id, uint16_t conn_id, ssapc_write_param
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 由 ssapc_register_client 分配 |
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
-| param | [ssapc_write_param_t](#struct_ssapc_handle_value_t) * | 写请求参数 | 不为NULL |
+| param | [ssapc_write_param_t](#struct_ssapc_handle_value_t) * | 写请求参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；写结果将在 ssapc_write_cfm_callback 中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 请求发起成功；写结果将在 ssapc_write_cfm_callback 中返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
 
 ### ssapc_write_cmd <a id="ssapc_write_cmd"></a>
@@ -302,15 +302,15 @@ errcode_t ssapc_write_cmd(uint8_t client_id, uint16_t conn_id, ssapc_write_param
 
 **功能说明**
 
-- 向对端发起写命令，无需服务端回复响应
-- 写入对象与数据内容由参数指定
-- 写命令不产生写结果回调
+- 向对端发起写命令，无需服务端回复响应。
+- 写入对象与数据内容由参数指定。
+- 写命令不产生写结果回调。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [ssapc_register_client](#ssapc_register_client) 成功返回后调用，且对应的 SLE 连接已建立
-- 依赖关系：当前接口依赖对应 SLE 连接已建立
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [ssapc_register_client](#ssapc_register_client) 成功返回后调用，且对应的 SLE 连接已建立。
+- 依赖关系：当前接口依赖对应 SLE 连接已建立。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -318,15 +318,15 @@ errcode_t ssapc_write_cmd(uint8_t client_id, uint16_t conn_id, ssapc_write_param
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 由 ssapc_register_client 分配 |
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
-| param | [ssapc_write_param_t](#struct_ssapc_handle_value_t) * | 写命令参数 | 不为NULL |
+| param | [ssapc_write_param_t](#struct_ssapc_handle_value_t) * | 写命令参数 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 请求成功发起 |
+| ERRCODE_SUCC：0 | 执行成功 | 请求成功发起 |
 
 ### ssapc_exchange_info_req <a id="ssapc_exchange_info_req"></a>
 
@@ -342,15 +342,15 @@ errcode_t ssapc_exchange_info_req(uint8_t client_id, uint16_t conn_id, ssap_exch
 
 **功能说明**
 
-- 向对端发送交换信息请求，用于协商 MTU (Maximum Transmission Unit) 等
-- 交换信息内容由参数指定
-- 交换结果通过已注册的回调函数返回
+- 向对端发送交换信息请求，用于协商 MTU（Maximum Transmission Unit）等。
+- 交换信息内容由参数指定。
+- 交换结果通过已注册的回调函数返回。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 [ssapc_register_client](#ssapc_register_client) 成功返回后调用，且对应的 SLE 连接已建立
-- 依赖关系：当前接口依赖 [ssapc_register_callbacks](#ssapc_register_callbacks) 已注册用于接收结果的回调函数
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 [ssapc_register_client](#ssapc_register_client) 成功返回后调用，且对应的 SLE 连接已建立。
+- 依赖关系：当前接口依赖 [ssapc_register_callbacks](#ssapc_register_callbacks) 已注册用于接收结果的回调函数。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
@@ -358,15 +358,15 @@ errcode_t ssapc_exchange_info_req(uint8_t client_id, uint16_t conn_id, ssap_exch
 | ---- | ---- | ---- | ---- |
 | client_id | uint8_t | 客户端 ID | 由 ssapc_register_client 分配 |
 | conn_id | uint16_t | 连接 ID | 已建立的 SLE 连接 ID |
-| param | [ssap_exchange_info_t](#struct_ssap_exchange_info_t) * | 客户端交换信息 | 不为NULL |
+| param | [ssap_exchange_info_t](#struct_ssap_exchange_info_t) * | 客户端交换信息 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| [ERRCODE_SUCC](#ERRCODE_SUCC):0 | 执行成功 | 请求发起成功；MTU 改变结果将在 ssapc_exchange_info_callback 中返回 |
+| [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 执行成功 | 请求发起成功；MTU 改变结果将在 ssapc_exchange_info_callback 中返回 |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 请求发起失败 |
 
 **参考案例**
@@ -387,29 +387,29 @@ errcode_t ssapc_register_callbacks(ssapc_callbacks_t *func)
 
 **功能说明**
 
-- 注册 SSAP 客户端回调函数集合
-- 注册后回调集合用于接收服务发现、读写、通知、指示等异步事件
-- 回调运行于 SLE service 线程，回调内不应阻塞或长时间等待
+- 注册 SSAP 客户端回调函数集合。
+- 注册后回调集合用于接收服务发现、读写、通知、指示等异步事件。
+- 回调运行于 SLE service 线程，回调内不应阻塞或长时间等待。
 
 **前置条件**
 
-- 调用时序约束：当前接口必须在 SLE 协议栈初始化完成后调用，建议在发起查找/读写请求前完成注册
-- 依赖关系：当前接口依赖 func 指向的回调集合已由上层正确填充
-- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用
+- 调用时序约束：当前接口必须在 SLE 协议栈初始化完成后调用，建议在发起查找/读写请求前完成注册。
+- 依赖关系：当前接口依赖 func 指向的回调集合已由上层正确填充。
+- 上下文限制：当前接口需在主线程调用，禁止在中断上下文调用。
 
 **入参**
 
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
-| func | [ssapc_callbacks_t](#struct_ssapc_callbacks_t) * | 回调函数集合 | 不为NULL |
+| func | [ssapc_callbacks_t](#struct_ssapc_callbacks_t) * | 回调函数集合 | 不为 NULL |
 
 **返回值**
 
-- 返回类型：errcode_t
+返回类型：errcode_t
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| ERRCODE_SUCC:0x00 | 执行成功 | 请求成功发起 |
+| ERRCODE_SUCC：0 | 执行成功 | 请求成功发起 |
 
 **参考案例**
 
@@ -571,7 +571,7 @@ typedef enum {
 | SSAP_DESCRIPTOR_CLIENT_CONFIGURATION | 0x02 | 客户端配置描述符 |
 | SSAP_DESCRIPTOR_SERVER_CONFIGURATION | 0x03 | 服务端配置描述符 |
 | SSAP_DESCRIPTOR_PRESENTATION_FORMAT | 0x04 | 格式描述符 |
-| SSAP_DESCRIPTOR_RFU | 0x05 | 服务管理保留描述符，0x05 – 0x1F |
+| SSAP_DESCRIPTOR_RFU | 0x05 | 服务管理保留描述符，5 – 0x1F |
 | SSAP_DESCRIPTOR_CUSTOM | 0xFF | 厂商自定义描述符 |
 
 ## Structures
