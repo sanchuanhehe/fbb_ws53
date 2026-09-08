@@ -690,7 +690,7 @@ typedef void (*timer_callback_t)(uintptr_t data);
 
 作为 [uapi_timer_start](#uapi_timer_start) 的入参类型，用于注册软件定时器超时回调。
 - 调用时机：软件定时器超时触发硬件定时器中断时，由中断处理流程在硬件定时器中断上下文中调用（实现中 `timer_int_callback` 经 `timer_process_timers` 判空后调用）。
-- 参数 data：调用方在 uapi_timer_start 中传入的 uintptr_t 透传参数，原样传入回调。
+- 参数 data：调用方在 uapi_timer_start 中传入的 uintptr_t 透传参数，直接传入回调。
 - 返回值处理：回调返回类型为 void，无返回值。
 
 ### high_precision_timer_callback_t <a id="typedef_high_precision_timer_callback_t"></a>

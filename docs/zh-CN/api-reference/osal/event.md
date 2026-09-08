@@ -57,7 +57,6 @@ int osal_event_init(osal_event *event_obj)
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 事件控制块初始化成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 执行失败 | event_obj 为 NULL、event 成员非 NULL 或内存分配失败 |
-| Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
 
 **参考案例**
 
@@ -100,8 +99,9 @@ int osal_event_write(osal_event *event_obj, unsigned int mask)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 事件写入成功 |
-| [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 执行失败 | event_obj 为 NULL 或 mask 使用了 bit[31] |
-| Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
+| [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 执行失败 | event_obj 为 NULL |
+| LOS_ERRNO_EVENT_SETBIT_INVALID：0x02001C00 | 写入位含禁用位 | 底层 LOS_EventWrite 错误码直接透传；mask 含 bit[25] |
+| LOS_ERRNO_EVENT_PTR_NULL：0x02001C06 | 事件未初始化 | 底层直接透传；event 成员为 NULL（未调用 osal_event_init）时调用 |
 
 **参考案例**
 
@@ -145,10 +145,14 @@ int osal_event_read(osal_event *event_obj, unsigned int mask, unsigned int timeo
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 非零位掩码 | 成功读取到的事件位 | 等待条件满足，返回实际读取到的事件位 |
-| 0 | 未读取到事件 | 超时或事件已被消费 |
+| 实际读取到的事件位值 | 成功读取到的事件位 | 等待条件满足，返回命中 mask 的事件位组合（读到 bit[0] 与 bit[2] 时返回 0x5）；为 bit[25] 为 0 的正数，下方 LOS_ERRNO_EVENT_* 错误码的 bit[25] 置位 |
+| [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 未读取到事件 | timeout_ms 为 0 且无匹配事件时立即返回；阻塞等待超时不返回 0，而是返回下方错误码 |
 | [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 参数无效 | event_obj 为 NULL |
-| Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码（含 LOS_ERRTYPE_ERROR 标志） |
+| LOS_ERRNO_EVENT_READ_TIMEOUT：0x02001C01 | 读超时 | 底层 LOS_EventRead 错误码直接透传；阻塞等待超时 |
+| LOS_ERRNO_EVENT_EVENTMASK_INVALID：0x02001C02 | 事件掩码无效 | 底层直接透传；mask 为 0 |
+| LOS_ERRNO_EVENT_READ_IN_INTERRUPT：0x02001C03 | 中断上下文调用 | 底层直接透传；在中断中调用本接口 |
+| LOS_ERRNO_EVENT_FLAGS_INVALID：0x02001C04 | 事件模式无效 | 底层直接透传；mode 非法（AND/OR 并存、含未知位或缺省） |
+| LOS_ERRNO_EVENT_READ_IN_LOCK：0x02001C05 | 调度锁内调用 | 底层直接透传；持有调度锁时调用 |
 
 **参考案例**
 
@@ -192,7 +196,7 @@ int osal_event_clear(osal_event *event_obj, unsigned int mask)
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 事件清除成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 执行失败 | event_obj 为 NULL |
-| Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
+| LOS_ERRNO_EVENT_PTR_NULL：0x02001C06 | 事件未初始化 | 底层 LOS_EventClear 错误码直接透传；event 成员为 NULL（未调用 osal_event_init）时调用 |
 
 **参考案例**
 
@@ -235,7 +239,8 @@ int osal_event_destroy(osal_event *event_obj)
 | -------- | -------- | -------- |
 | [OSAL_SUCCESS](#OSAL_SUCCESS)：0 | 执行成功 | 事件控制块销毁成功 |
 | [OSAL_FAILURE](#OSAL_FAILURE)：-1 | 执行失败 | event_obj 为 NULL |
-| Other | 其他错误码 | 底层 LiteOS 接口失败时透传的错误码 |
+| LOS_ERRNO_EVENT_SHOULD_NOT_DESTORY：0x02001C08 | 存在阻塞等待任务 | 底层 LOS_EventDestroy 错误码直接透传；仍有任务阻塞等待该事件 |
+| LOS_ERRNO_EVENT_PTR_NULL：0x02001C06 | 事件未初始化 | 底层直接透传；event 成员为 NULL（未调用 osal_event_init）时调用 |
 
 **参考案例**
 
