@@ -76,7 +76,7 @@ Linux 系统推荐使用 Ubuntu 18.04 及以上版本，Shell 使用 bash，SDK 
 
 ## SDK目录结构介绍<a name="ZH-CN_TOPIC_0000001777394018"></a>
 
-解压缩SDK后的根目录，如[图1](#fig3274131411460)所示。（编译后生成output目录）
+解压缩SDK后的根目录，如[图1](#fig3274131411460)（编译后生成output目录）所示。
 
 **图 1**  解压缩SDK示例<a name="fig3274131411460"></a>  
 ![](figures/解压缩SDK示例.png "解压缩SDK示例")
@@ -279,7 +279,7 @@ SDK编译默认包含Syschannel Host驱动编译，编译SDK前，需要修改�
 
 ### Flash分区表配置<a name="ZH-CN_TOPIC_0000002079231697"></a>
 
-分区表配置文件路径：sdk\\build\\config\\target\_config\\ws53\\param\_sector\\param\_sector.json
+分区表配置文件路径：sdk\\build\\config\\target\_config\\ws53\\param\_sector\\param\_sector.json。
 
 ![](figures/zh-cn_image_0000002043245450.png)
 
@@ -287,7 +287,7 @@ SDK编译默认包含Syschannel Host驱动编译，编译SDK前，需要修改�
 >上图内容仅作文件内容说明，具体分区信息请参考《WS53V100 FOTA 开发指南》“升级包保存”章节的“注意事项”中分区信息。
 >分区表ID限制16个分区数量，默认Flash共4M大小，预留5个分区ID，可通过uapi\_partition\_get\_info接口传入分区ID获取对应地址和长度。
 
-根据当前Flash分区方案，Flash划分情况如下图：
+根据当前Flash分区方案，Flash划分情况如下图。
 
 ![](figures/zh-cn_image_0000002089402393.png)
 
@@ -522,7 +522,7 @@ WS53总共有3个UART，SDK默认配置如下。
     </tr>
     <tr id="row99971710133619"><td class="cellrowborder" valign="top" width="27.900000000000002%" headers="mcps1.2.3.1.1 "><p id="p199976101361"><a name="p199976101361"></a><a name="p199976101361"></a>SOURCES</p>
     </td>
-    <td class="cellrowborder" valign="top" width="72.1%" headers="mcps1.2.3.1.2 "><p id="p499751023618"><a name="p499751023618"></a><a name="p499751023618"></a>当前组件的C文件列表，其中CMAKE_CURRENT_SOURCE_DIR变量标识当前CMakeLists.txt所在的路径。</p>
+    <td class="cellrowborder" valign="top" width="72.1%" headers="mcps1.2.3.1.2 "><p id="p499751023618"><a name="p499751023618"></a><a name="p499751023618"></a>当前组件的C文件列表，其中 CMAKE_CURRENT_SOURCE_DIR 变量标识当前“CMakeLists.txt”所在的路径。</p>
     </td>
     </tr>
     <tr id="row5997910163618"><td class="cellrowborder" valign="top" width="27.900000000000002%" headers="mcps1.2.3.1.1 "><p id="p129971210143615"><a name="p129971210143615"></a><a name="p129971210143615"></a>PUBLIC_HEADER</p>
@@ -558,7 +558,7 @@ WS53总共有3个UART，SDK默认配置如下。
     </tbody>
     </table>
 
-4.  修改“application/ws53/CMakeLists.txt”，将my\_demo目录加入编译。
+4.  修改“application/ws53/CMakeLists.txt”，将“my_demo”目录加入编译。
 5.  修改“build/config/target\_config/ws53/config.py”，在ram\_component字段中加入‘my\_demo’，向编译系统中注册my\_demo组件。
 
 ## 开发代码<a name="ZH-CN_TOPIC_0000001823873917"></a>
