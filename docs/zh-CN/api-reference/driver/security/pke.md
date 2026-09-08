@@ -1,6 +1,6 @@
 # PKE
 
-PKE（Public Key Engine）提供公钥密码运算能力，覆盖 ECC（Elliptic Curve Cryptography）密钥生成、ECDSA（Elliptic Curve Digital Signature Algorithm） / EdDSA（Edwards-curve Digital Signature Algorithm）签名与验签、ECDH（Elliptic Curve Diffie-Hellman）密钥协商、SM2 签名/加密与解密、RSA（Rivest-Shamir-Adleman） 签名/验签/加解密、DH（Diffie-Hellman） 密钥生成与协商，以及大数模加、模减、模乘、模逆、取模、大数乘和模幂运算。
+PKE（Public Key Engine）提供公钥密码运算能力，覆盖 ECC（Elliptic Curve Cryptography）密钥生成、ECDSA（Elliptic Curve Digital Signature Algorithm） / EdDSA（Edwards-curve Digital Signature Algorithm）签名与验签、ECDH（Elliptic Curve Diffie-Hellman）密钥协商、SM2 签名/加密与解密、RSA（Rivest-Shamir-Adleman）签名/验签/加解密、DH（Diffie-Hellman）密钥生成与协商，以及大数模加、模减、模乘、模逆、取模、大数乘和模幂运算。
 
 **模块公共头文件**
 
@@ -870,7 +870,7 @@ errcode_t uapi_drv_cipher_pke_dh_compute_key(const uapi_drv_cipher_pke_data_t *m
 
 **功能说明**
 
-- 基于 DH（Diffie-Hellman） 算法计算共享密钥。
+- 基于 DH（Diffie-Hellman）算法计算共享密钥。
 - 输入本地私钥与对端公钥，输出协商得到的共享密钥。
 - 模数为公开质数。
 
@@ -1494,16 +1494,16 @@ typedef struct {
 | d | uint8_t * | RSA 私钥参数 d（私钥指数） |
 | p | uint8_t * | RSA 第一素数因子 p |
 | q | uint8_t * | RSA 第二素数因子 q |
-| dp | uint8_t * | D %(P - 1) 的结果 |
-| dq | uint8_t * | D %(Q - 1) 的结果 |
+| dp | uint8_t * | D %(P - 1)的结果 |
+| dq | uint8_t * | D %(Q - 1)的结果 |
 | qp | uint8_t * | 1 / (Q % P) 的结果 |
 | n_len | uint16_t | RSA 公钥参数 n 的长度 |
 | e_len | uint16_t | RSA 公钥参数 e 的长度 |
 | d_len | uint16_t | RSA 私钥参数 d 的长度 |
 | p_len | uint16_t | RSA 第一素因子 p 的长度，应为 n_len 的一半 |
 | q_len | uint16_t | RSA 第二素因子 q 的长度，应为 n_len 的一半 |
-| dp_len | uint16_t | D %(P - 1) 结果的长度，应为 n_len 的一半 |
-| dq_len | uint16_t | D %(Q - 1) 结果的长度，应为 n_len 的一半 |
+| dp_len | uint16_t | D %(P - 1)结果的长度，应为 n_len 的一半 |
+| dq_len | uint16_t | D %(Q - 1)结果的长度，应为 n_len 的一半 |
 | qp_len | uint16_t | 1 / (Q % P) 结果的长度，应为 n_len 的一半 |
 
 ### uapi_drv_cipher_pke_rsa_pub_key_t <a id="uapi_drv_cipher_pke_rsa_pub_key_t"></a>

@@ -58,8 +58,8 @@ int osal_wait_init(osal_wait *wait)
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 0 | 执行成功 (OSAL_SUCCESS) | 等待队列初始化成功 |
-| -1 | 执行失败 (OSAL_FAILURE) | wait 为 NULL、wait->wait 非空（已初始化）或底层资源分配失败 |
+| 0 | 执行成功（OSAL_SUCCESS） | 等待队列初始化成功 |
+| -1 | 执行失败（OSAL_FAILURE） | wait 为 NULL、wait->wait 非空（已初始化）或底层资源分配失败 |
 
 **参考案例**
 
@@ -103,9 +103,9 @@ int osal_wait_interruptible(osal_wait *wait, osal_wait_condition_func func, cons
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 0 | 执行成功 (OSAL_SUCCESS) | 条件满足或被唤醒 |
-| -1 | 执行失败 (OSAL_FAILURE) | wait 为 NULL 或 wait->wait 为 NULL |
-| -512 | 被信号中断 (-OSAL_ERESTARTSYS) | Linux 下被信号打断；LiteOS 不产生该返回值 |
+| 0 | 执行成功（OSAL_SUCCESS） | 条件满足或被唤醒 |
+| -1 | 执行失败（OSAL_FAILURE） | wait 为 NULL 或 wait->wait 为 NULL |
+| -512 | 被信号中断（-OSAL_ERESTARTSYS） | Linux 下被信号打断；LiteOS 不产生该返回值 |
 
 **参考案例**
 
@@ -148,8 +148,8 @@ int osal_wait_uninterruptible(osal_wait *wait, osal_wait_condition_func func, co
 
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
-| 0 | 执行成功 (OSAL_SUCCESS) | 条件满足或被唤醒 |
-| -1 | 执行失败 (OSAL_FAILURE) | wait 为 NULL 或 wait->wait 为 NULL |
+| 0 | 执行成功（OSAL_SUCCESS） | 条件满足或被唤醒 |
+| -1 | 执行失败（OSAL_FAILURE） | wait 为 NULL 或 wait->wait 为 NULL |
 
 ### osal_wait_timeout_interruptible <a id="osal_wait_timeout_interruptible"></a>
 
@@ -181,7 +181,7 @@ int osal_wait_timeout_interruptible(osal_wait *wait, osal_wait_condition_func fu
 | wait | [osal_wait](#osal_wait) * | 等待的等待队列句柄 | 不为 NULL 且 wait->wait 已初始化 |
 | func | [osal_wait_condition_func](#osal_wait_condition_func) | 条件判断回调函数，每次唤醒时调用；为 NULL 时按永真条件等待并默认返回超时 | 为 NULL 或指向有效的条件判断函数 |
 | param | const void * | 传递给条件判断回调函数的参数 | - |
-| ms | unsigned long | 超时时间，单位 ms | 0 ~ 0xFFFFFFFF；[OSAL_WAIT_FOREVER](#OSAL_WAIT_FOREVER)(0xFFFFFFFF) 表示永久等待 |
+| ms | unsigned long | 超时时间，单位 ms | 0 ~ 0xFFFFFFFF；[OSAL_WAIT_FOREVER](#OSAL_WAIT_FOREVER)：0xFFFFFFFF 表示永久等待 |
 
 **返回值**
 
@@ -191,8 +191,8 @@ int osal_wait_timeout_interruptible(osal_wait *wait, osal_wait_condition_func fu
 | -------- | -------- | -------- |
 | 0 | 超时且条件未满足 | 超时结束后条件仍为假 |
 | 大于 0 | 条件已满足，返回剩余时间 | 条件在超时前满足，返回剩余 tick 数（Linux 为 jiffies）；LiteOS 下条件在超时点为真时返回 1 |
-| -1 | 参数无效 (OSAL_FAILURE) | wait 为 NULL 或 wait->wait 为 NULL |
-| -512 | 被信号中断 (-OSAL_ERESTARTSYS) | Linux 下被信号打断 |
+| -1 | 参数无效（OSAL_FAILURE） | wait 为 NULL 或 wait->wait 为 NULL |
+| -512 | 被信号中断（-OSAL_ERESTARTSYS） | Linux 下被信号打断 |
 
 **参考案例**
 
@@ -228,7 +228,7 @@ int osal_wait_timeout_uninterruptible(osal_wait *wait, osal_wait_condition_func 
 | wait | [osal_wait](#osal_wait) * | 等待的等待队列句柄 | 不为 NULL 且 wait->wait 已初始化 |
 | func | [osal_wait_condition_func](#osal_wait_condition_func) | 条件判断回调函数，每次唤醒时调用；为 NULL 时按永真条件等待 | 为 NULL 或指向有效的条件判断函数 |
 | param | const void * | 传递给条件判断回调函数的参数 | - |
-| ms | unsigned long | 超时时间，单位 ms | 0 ~ 0xFFFFFFFF；[OSAL_WAIT_FOREVER](#OSAL_WAIT_FOREVER)(0xFFFFFFFF) 表示永久等待 |
+| ms | unsigned long | 超时时间，单位 ms | 0 ~ 0xFFFFFFFF；[OSAL_WAIT_FOREVER](#OSAL_WAIT_FOREVER)：0xFFFFFFFF 表示永久等待 |
 
 **返回值**
 
@@ -238,7 +238,7 @@ int osal_wait_timeout_uninterruptible(osal_wait *wait, osal_wait_condition_func 
 | -------- | -------- | -------- |
 | 0 | 超时且条件未满足 | 超时结束后条件仍为假 |
 | 大于 0 | 条件已满足，返回剩余时间 | 条件在超时前满足，返回剩余 tick 数（Linux 为 jiffies） |
-| -1 | 参数无效 (OSAL_FAILURE) | wait 为 NULL 或 wait->wait 为 NULL |
+| -1 | 参数无效（OSAL_FAILURE） | wait 为 NULL 或 wait->wait 为 NULL |
 
 ### osal_wait_wakeup <a id="osal_wait_wakeup"></a>
 

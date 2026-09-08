@@ -627,7 +627,7 @@ errcode_t wifi_set_channel(wifi_if_type_enum iftype, int32_t channel)
 | 名称 | 参数类型 | 说明 | 约束取值范围 |
 | ---- | ---- | ---- | ---- |
 | iftype | [wifi_if_type_enum](#enum_wifi_if_type_enum) | 接口类型 | [wifi_if_type_enum](#enum_wifi_if_type_enum) 全体成员 |
-| channel | int32_t | 信道号 | 1~14(2.4GHz) |
+| channel | int32_t | 信道号 | 1~14（2.4GHz） |
 
 **返回值**
 
@@ -3007,7 +3007,7 @@ typedef struct {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | linkloss_threshold | uint16_t | 取值范围[50, 500]，设置为 n 时，表示 linkloss 阈值基础时间为(100*n)ms |
-| send_probe_request_ratio | uint8_t | 取值范围[1, 10]，设置为 n 时，表示 linkloss 计数达到阈值的(n/10) 时，开始发送探测帧保活 |
+| send_probe_request_ratio | uint8_t | 取值范围[1, 10]，设置为 n 时，表示 linkloss 计数达到阈值的（n/10）时，开始发送探测帧保活 |
 | resv | uint8_t[1] | 保留 |
 
 ### ext_psd_option_param <a id="struct_ext_psd_option_param"></a>
@@ -3186,4 +3186,4 @@ typedef struct {
 | mac_addr | uint8_t[WIFI_MAC_LEN] | MAC 地址 |
 | rssi | int8_t | RSSI |
 | rsv | int8_t | 保留字段 |
-| best_rate | uint32_t | SoftAP 上一次接收相连的 Station 报文最佳发送速率值(kbps) |
+| best_rate | uint32_t | SoftAP 上一次接收相连的 Station 报文最佳发送速率值（kbps） |

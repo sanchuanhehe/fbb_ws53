@@ -118,7 +118,7 @@ errcode_t uapi_gpio_set_dir(pin_t pin, gpio_direction_t dir)
 | -------- | -------- | -------- |
 | [ERRCODE_SUCC](#ERRCODE_SUCC)：0 | 成功执行 | 方向设置成功 |
 | [ERRCODE_GPIO_NOT_INIT](#ERRCODE_GPIO_NOT_INIT)：0x80001001 | 模块未初始化 | 未调用 uapi_gpio_init() |
-| [ERRCODE_GPIO_DIR_SET_FAIL](#ERRCODE_GPIO_DIR_SET_FAIL)：0x80001000 | 方向设置失败 | dir 超出有效范围（≥ 2） |
+| [ERRCODE_GPIO_DIR_SET_FAIL](#ERRCODE_GPIO_DIR_SET_FAIL)：0x80001000 | 方向设置失败 | dir 超出有效范围(≥ 2) |
 | Other | 其他错误码，参考[errcode_t](#typedef_errcode_t) | 底层设置失败 |
 
 **参考案例**

@@ -172,7 +172,7 @@ int osal_spin_trylock(osal_spinlock *lock)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | true（非 0） | 获取锁成功 | 锁可立即获取 |
-| false (0) | 获取锁失败 | 锁已被占用或参数无效 |
+| false （0） | 获取锁失败 | 锁已被占用或参数无效 |
 
 ### osal_spin_trylock_irq <a id="osal_spin_trylock_irq"></a>
 
@@ -210,7 +210,7 @@ int osal_spin_trylock_irq(osal_spinlock *lock)
 | 返回值 | 文字含义 | 触发场景 |
 | -------- | -------- | -------- |
 | true（非 0） | 获取锁成功 | 锁可立即获取 |
-| false (0) | 获取锁失败 | 锁已被占用 |
+| false （0） | 获取锁失败 | 锁已被占用 |
 | -1 | 参数无效 | lock 为空或未初始化 |
 
 ### osal_spin_trylock_irqsave <a id="osal_spin_trylock_irqsave"></a>

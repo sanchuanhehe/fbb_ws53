@@ -1281,7 +1281,7 @@ errcode_t bth_ota_init(void)
 
 **功能说明**
 
-- 初始化 bth OTA（Over-The-Air） 通道。
+- 初始化 bth OTA（Over-The-Air）通道。
 - 用于建立 OTA 升级所需的底层通道资源。
 
 **前置条件**
@@ -1319,7 +1319,7 @@ errcode_t ble_customize_max_pwr(int8_t ble_pwr, int8_t sle_pwr)
 **前置条件**
 
 - 调用时序约束：需在协议栈初始化完成、发起射频业务之前调用。
-- 依赖关系：依赖 NV（Non-Volatile） 定制化配置模块已就绪。
+- 依赖关系：依赖 NV（Non-Volatile）定制化配置模块已就绪。
 
 **入参**
 

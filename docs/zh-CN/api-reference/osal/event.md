@@ -136,8 +136,8 @@ int osal_event_read(osal_event *event_obj, unsigned int mask, unsigned int timeo
 | ---- | ---- | ---- | ---- |
 | event_obj | [osal_event](#osal_event) * | 指向目标事件控制块 | 不为 NULL |
 | mask | unsigned int | 期望读取的事件掩码 | bit[0:30]，禁止使用 bit[31]；liteos 上禁止使用 bit[25] |
-| timeout_ms | unsigned int | 读取超时时间，单位 ms；[OSAL_EVENT_FOREVER](#OSAL_EVENT_FOREVER)(0xFFFFFFFF) 表示永久等待 | 0 ~ 0xFFFFFFFF |
-| mode | unsigned int | 事件读取模式，可组合使用 | [OSAL_WAITMODE_AND](#OSAL_WAITMODE_AND)(4U)；<br>[OSAL_WAITMODE_OR](#OSAL_WAITMODE_OR)(2U)；<br>[OSAL_WAITMODE_CLR](#OSAL_WAITMODE_CLR)(1U)。 |
+| timeout_ms | unsigned int | 读取超时时间，单位 ms；[OSAL_EVENT_FOREVER](#OSAL_EVENT_FOREVER)：0xFFFFFFFF 表示永久等待 | 0 ~ 0xFFFFFFFF |
+| mode | unsigned int | 事件读取模式，可组合使用 | [OSAL_WAITMODE_AND](#OSAL_WAITMODE_AND)：4U；<br>[OSAL_WAITMODE_OR](#OSAL_WAITMODE_OR)：2U；<br>[OSAL_WAITMODE_CLR](#OSAL_WAITMODE_CLR)：1U。 |
 
 **返回值**
 

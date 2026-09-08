@@ -113,7 +113,7 @@ int osal_msg_queue_write_copy(unsigned long queue_id, void *buffer_addr, unsigne
 | queue_id | unsigned long | 由 osal_msg_queue_create 创建的队列 ID | 由 osal_msg_queue_create 创建 |
 | buffer_addr | void * | 存储待写入数据的缓冲区起始地址 | 不为 NULL |
 | buffer_size | unsigned int | 待写入数据的缓冲区大小 | 大于 0 |
-| timeout | unsigned int | 超时时间（单位：Tick） | [OSAL_MSGQ_NO_WAIT](#OSAL_MSGQ_NO_WAIT)：0 ~ [OSAL_MSGQ_WAIT_FOREVER](#OSAL_MSGQ_WAIT_FOREVER)(0xFFFFFFFF) |
+| timeout | unsigned int | 超时时间（单位：Tick） | [OSAL_MSGQ_NO_WAIT](#OSAL_MSGQ_NO_WAIT)：0 ~ [OSAL_MSGQ_WAIT_FOREVER](#OSAL_MSGQ_WAIT_FOREVER)：0xFFFFFFFF |
 
 **返回值**
 
@@ -160,7 +160,7 @@ int osal_msg_queue_read_copy(unsigned long queue_id, void *buffer_addr, unsigned
 | ---- | ---- | ---- | ---- |
 | queue_id | unsigned long | 由 osal_msg_queue_create 创建的队列 ID | 由 osal_msg_queue_create 创建 |
 | buffer_size | unsigned int * | 读取前为期望读取的缓冲区大小 | 大于 0 |
-| timeout | unsigned int | 超时时间（单位：Tick） | [OSAL_MSGQ_NO_WAIT](#OSAL_MSGQ_NO_WAIT)：0 ~ [OSAL_MSGQ_WAIT_FOREVER](#OSAL_MSGQ_WAIT_FOREVER)(0xFFFFFFFF) |
+| timeout | unsigned int | 超时时间（单位：Tick） | [OSAL_MSGQ_NO_WAIT](#OSAL_MSGQ_NO_WAIT)：0 ~ [OSAL_MSGQ_WAIT_FOREVER](#OSAL_MSGQ_WAIT_FOREVER)：0xFFFFFFFF |
 
 **出参**
 
@@ -216,7 +216,7 @@ int osal_msg_queue_write_head_copy(unsigned long queue_id, void *buffer_addr, un
 | queue_id | unsigned long | 由 osal_msg_queue_create 创建的队列 ID | 由 osal_msg_queue_create 创建 |
 | buffer_addr | void * | 存储待写入数据的缓冲区起始地址 | 不为 NULL |
 | buffer_size | unsigned int | 待写入数据的缓冲区大小 | 1 ~ 0xFFFFFFFF |
-| timeout | unsigned int | 超时时间（单位：Tick） | [OSAL_MSGQ_NO_WAIT](#OSAL_MSGQ_NO_WAIT)：0 ~ [OSAL_MSGQ_WAIT_FOREVER](#OSAL_MSGQ_WAIT_FOREVER)(0xFFFFFFFF) |
+| timeout | unsigned int | 超时时间（单位：Tick） | [OSAL_MSGQ_NO_WAIT](#OSAL_MSGQ_NO_WAIT)：0 ~ [OSAL_MSGQ_WAIT_FOREVER](#OSAL_MSGQ_WAIT_FOREVER)：0xFFFFFFFF |
 
 **返回值**
 

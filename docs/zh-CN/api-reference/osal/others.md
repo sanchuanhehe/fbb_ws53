@@ -1180,7 +1180,7 @@ struct osal_hlist_node {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | next | struct osal_hlist_node * | 指向哈希链表的下一个节点 |
-| pprev | struct osal_hlist_node ** | 指向前驱节点的 next 指针的地址（双指针设计便于 O(1) 删除） |
+| pprev | struct osal_hlist_node ** | 指向前驱节点的 next 指针的地址（双指针设计便于 O（1）删除） |
 
 **使用说明**
 

@@ -1,6 +1,6 @@
 # Factory
 
-Factory 提供 BLE（Bluetooth Low Energy）产测 RF（Radio Frequency）收发测试、单音模式与产线校准能力。该模块支持射频长发/长收的启停与复位、NV（Non-Volatile） 校准，以及 XO（Crystal Oscillator）频偏校准、芯片温度获取、功率校准及其补偿值的 EFUSE（electronic Fuse）读写等产线校准命令。
+Factory 提供 BLE（Bluetooth Low Energy）产测 RF（Radio Frequency）收发测试、单音模式与产线校准能力。该模块支持射频长发/长收的启停与复位、NV（Non-Volatile）校准，以及 XO（Crystal Oscillator）频偏校准、芯片温度获取、功率校准及其补偿值的 EFUSE（electronic Fuse）读写等产线校准命令。
 
 **模块公共头文件**
 

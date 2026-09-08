@@ -137,7 +137,7 @@ union {
 
 | 成员名称 | 类型 | 描述 | 接口使用逻辑 |
 | ------- | ---- | ---- | ----------- |
-| addr_info | struct | 分区的地址信息，包含起始地址(addr) 和字节长度(size) | 接口出参载体 |
+| addr_info | struct | 分区的地址信息，包含起始地址（addr）和字节长度（size） | 接口出参载体 |
 | file_path | char * | 如果分区存在文件系统上，file_path 标识存储分区所在路径 | 接口出参载体 |
 
 ## Enumerations

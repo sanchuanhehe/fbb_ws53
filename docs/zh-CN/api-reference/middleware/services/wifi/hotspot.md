@@ -1,6 +1,6 @@
 # Hotspot
 
-Hotspot 提供 Wi-Fi SoftAP（Software Access Point）功能，支持开启/关闭热点、配置基本与扩展参数、查询已连接 STA（Station） 信息以及断开指定 STA 连接。
+Hotspot 提供 Wi-Fi SoftAP（Software Access Point）功能，支持开启/关闭热点、配置基本与扩展参数、查询已连接 STA（Station）信息以及断开指定 STA 连接。
 
 **模块公共头文件**
 
@@ -449,7 +449,7 @@ typedef struct {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | ssid | int8_t[WIFI_MAX_SSID_LEN] | SSID（Service Set Identifier） |
-| pre_shared_key | int8_t[WIFI_MAX_KEY_LEN] | 预共享密钥 (PSK) |
+| pre_shared_key | int8_t[WIFI_MAX_KEY_LEN] | 预共享密钥（PSK） |
 | reserved | int8_t[2] | 保留字段 |
 | security_type | wifi_security_enum | 安全类型 |
 | channel_num | int32_t | 信道号，取值范围 0 ~ 14 |
@@ -495,7 +495,7 @@ typedef struct {
 | 成员名称 | 数据类型 | 描述 |
 | ------- | ------- | ---- |
 | mac_addr | uint8_t[WIFI_MAC_LEN] | MAC 地址 |
-| rssi | int8_t | 接收信号强度指示 (RSSI) |
+| rssi | int8_t | 接收信号强度指示（RSSI） |
 | rsv | int8_t | 保留字段 |
 | best_rate | uint32_t | 最佳发送速率，单位 kbps |
 

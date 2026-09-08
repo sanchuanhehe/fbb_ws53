@@ -33,7 +33,7 @@ void osal_dcache_region_wb(void *kvirt, unsigned long phys_addr, unsigned long s
 **功能说明**
 
 - 将指定内存区域的 DCache 数据写回主存（write-back）。
-- 起始地址若未按 CACHE_LINE_SIZE(32Bytes) 对齐，将自动向下对齐到 CACHE_LINE_SIZE 边界。
+- 起始地址若未按 CACHE_LINE_SIZE（32Bytes）对齐，将自动向下对齐到 CACHE_LINE_SIZE 边界。
 - 当 MMU（Memory Management Unit）不存在时，需确保 phys_addr 有效，此时用户通过 kvirt 参数设置地址。
 
 **前置条件**
@@ -74,7 +74,7 @@ void osal_dcache_region_inv(void *addr, unsigned long size)
 **功能说明**
 
 - 使指定内存区域的 DCache 缓存行失效（invalidate）。
-- 起始地址若未按 CACHE_LINE_SIZE(32Bytes) 对齐，将自动向下对齐到 CACHE_LINE_SIZE 边界。
+- 起始地址若未按 CACHE_LINE_SIZE（32Bytes）对齐，将自动向下对齐到 CACHE_LINE_SIZE 边界。
 - 用于 DMA 读取前使 CPU 缓存失效，确保后续读取来自主存而非缓存。
 
 **前置条件**
