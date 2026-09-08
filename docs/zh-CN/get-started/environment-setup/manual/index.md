@@ -76,7 +76,7 @@ Linux 系统推荐使用 Ubuntu 18.04 及以上版本，Shell 使用 bash，SDK 
 
 ## SDK目录结构介绍<a name="ZH-CN_TOPIC_0000001777394018"></a>
 
-解压缩SDK后的根目录，如[图1](#fig3274131411460)所示。（编译后生成output目录）
+解压缩SDK后的根目录，如[图1](#fig3274131411460)（编译后生成output目录）所示。
 
 **图 1**  解压缩SDK示例<a name="fig3274131411460"></a>  
 ![](figures/解压缩SDK示例.png "解压缩SDK示例")
@@ -279,7 +279,7 @@ SDK编译默认包含Syschannel Host驱动编译，编译SDK前，需要修改�
 
 ### Flash分区表配置<a name="ZH-CN_TOPIC_0000002079231697"></a>
 
-分区表配置文件路径：sdk\\build\\config\\target\_config\\ws53\\param\_sector\\param\_sector.json
+分区表配置文件路径：sdk\\build\\config\\target\_config\\ws53\\param\_sector\\param\_sector.json。
 
 ![](figures/zh-cn_image_0000002043245450.png)
 
@@ -287,7 +287,7 @@ SDK编译默认包含Syschannel Host驱动编译，编译SDK前，需要修改�
 >上图内容仅作文件内容说明，具体分区信息请参考《WS53V100 FOTA 开发指南》“升级包保存”章节的“注意事项”中分区信息。
 >分区表ID限制16个分区数量，默认Flash共4M大小，预留5个分区ID，可通过uapi\_partition\_get\_info接口传入分区ID获取对应地址和长度。
 
-根据当前Flash分区方案，Flash划分情况如下图：
+根据当前Flash分区方案，Flash划分情况如下图。
 
 ![](figures/zh-cn_image_0000002089402393.png)
 
