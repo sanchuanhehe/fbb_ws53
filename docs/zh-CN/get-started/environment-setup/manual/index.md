@@ -503,10 +503,10 @@ WS53总共有3个UART，SDK默认配置如下。
 步骤如下：
 
 1.  新建“application/ws53/my\_demo”目录，用来存放“my\_demo”的源文件。
-2.  复制“application/ws53/ws53\_application/CMakeLists.txt”到“application/ws53/my\_demo/CmakeLists.txt”，并将源文件放在“application/ws53/my\_demo”目录下。
-3.  修改“application/ws53/my\_demo/CmakeLists.txt”文件。其中各个变量的含义如[表1](#table89969106362)所示。
+2.  复制“application/ws53/ws53\_application/CMakeLists.txt”到“application/ws53/my\_demo/CMakeLists.txt”，并将源文件放在“application/ws53/my\_demo”目录下。
+3.  修改“application/ws53/my\_demo/CMakeLists.txt”文件。其中各个变量的含义如[表1](#table89969106362)所示。
 
-    **表 1**  组件的CmakeLists.txt中的变量含义
+    **表 1**  组件的CMakeLists.txt中的变量含义
 
     <a name="table89969106362"></a>
     <table><thead align="left"><tr id="row69971710143612"><th class="cellrowborder" valign="top" width="27.900000000000002%" id="mcps1.2.3.1.1"><p id="p8997181043611"><a name="p8997181043611"></a><a name="p8997181043611"></a>变量名称</p>

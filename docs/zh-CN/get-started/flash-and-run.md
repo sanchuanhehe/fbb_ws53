@@ -7,10 +7,10 @@
 默认目标 `ws53_liteos_app` 的完整固件包为：
 
 ```text
-src/output/ws53/fwpkg/ws53-liteos-app/ws53-liteos-app_all.fwpkg
+src/output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg
 ```
 
-ELF 位于 `src/output/ws53/acore/ws53-liteos-app/ws53-liteos-app.elf`，用于符号化调试和问题定位。
+ELF 位于 `src/output/ws53/acore/ws53_liteos_app/application.elf`，用于符号化调试和问题定位。
 
 ## 串口参数
 

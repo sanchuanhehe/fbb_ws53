@@ -135,7 +135,7 @@ CONFIG_SUPPORT_TCP_SERVER_SAMPLE=y
 
 ### 第二步：修改网络参数
 
-编辑 src/application/samples/wifi/tcp_sample/tcp_sample.c：
+编辑 `src/application/samples/wifi/tcp_sample/tcp_sample.c`：
 
 ```c
 #define WIFI_TCP_SAMPLE_DST_IP "192.168.50.100"
