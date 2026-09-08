@@ -30,11 +30,11 @@
 
 ## 搭建Linux开发环境<a name="ZH-CN_TOPIC_0000001823873925"></a>
 
-Linux系统推荐使用Ubuntu 18.04及以上版本，Shell使用bash ，SDK使用Cmake编译（3.14.1以上），编译工具还包括Python（3.8.0以上）等。
+Linux 系统推荐使用 Ubuntu 18.04 及以上版本，Shell 使用 bash，SDK 使用 CMake 编译（3.14.1 以上），编译工具还包括 Python（3.8.0 以上）等。
 
 -   **[配置Shell](#ZH-CN_TOPIC_0000001777394006)**  
 
--   **[安装Cmake](#ZH-CN_TOPIC_0000001823993865)**  
+-   **[安装 CMake](#ZH-CN_TOPIC_0000001823993865)**
 
 -   **[安装Python环境](#ZH-CN_TOPIC_0000001777394014)**  
 
@@ -42,9 +42,9 @@ Linux系统推荐使用Ubuntu 18.04及以上版本，Shell使用bash ，SDK使�
 
 配置默认使用 bash。打开Linux终端，执行命令“sudo dpkg-reconfigure dash”，选择 no。
 
-### 安装Cmake<a name="ZH-CN_TOPIC_0000001823993865"></a>
+### 安装 CMake<a name="ZH-CN_TOPIC_0000001823993865"></a>
 
-打开Linux终端，执行命令“sudo apt install cmake”，完成Cmake的安装。
+打开 Linux 终端，执行命令“sudo apt install cmake”，完成 CMake 安装。
 
 ### 安装Python环境<a name="ZH-CN_TOPIC_0000001777394014"></a>
 
@@ -72,7 +72,7 @@ Linux系统推荐使用Ubuntu 18.04及以上版本，Shell使用bash ，SDK使�
 
 -   **[SDK目录结构介绍](#ZH-CN_TOPIC_0000001777394018)**  
 
--   **[编译（Cmake）](#ZH-CN_TOPIC_0000001777234346)**  
+-   **[编译（CMake）](#ZH-CN_TOPIC_0000001777234346)**
 
 ## SDK目录结构介绍<a name="ZH-CN_TOPIC_0000001777394018"></a>
 
@@ -144,7 +144,7 @@ SDK根目录结构如[表1](#table13927142512394)所示。
 </tr>
 <tr id="row26011201747"><td class="cellrowborder" valign="top" width="27.38%" headers="mcps1.2.3.1.1 "><p id="p1601420844"><a name="p1601420844"></a><a name="p1601420844"></a>protocol</p>
 </td>
-<td class="cellrowborder" valign="top" width="72.61999999999999%" headers="mcps1.2.3.1.2 "><p id="p14611201340"><a name="p14611201340"></a><a name="p14611201340"></a>WiFi、BT、Radar等组件代码。</p>
+<td class="cellrowborder" valign="top" width="72.61999999999999%" headers="mcps1.2.3.1.2 "><p id="p14611201340"><a name="p14611201340"></a><a name="p14611201340"></a>Wi-Fi、BT、Radar 等组件代码。</p>
 </td>
 </tr>
 <tr id="row17392173512420"><td class="cellrowborder" valign="top" width="27.38%" headers="mcps1.2.3.1.1 "><p id="p1839303512418"><a name="p1839303512418"></a><a name="p1839303512418"></a>test</p>
@@ -180,7 +180,7 @@ SDK根目录结构如[表1](#table13927142512394)所示。
 </tbody>
 </table>
 
-## 编译（Cmake）<a name="ZH-CN_TOPIC_0000001777234346"></a>
+## 编译（CMake）<a name="ZH-CN_TOPIC_0000001777234346"></a>
 
 -   **[内核依赖配置](#ZH-CN_TOPIC_0000001987379681)**  
 
@@ -188,7 +188,7 @@ SDK根目录结构如[表1](#table13927142512394)所示。
 
 -   **[Flash分区表配置](#ZH-CN_TOPIC_0000002079231697)**  
 
--   **[Menuconfig配置](#ZH-CN_TOPIC_0000001777234354)**  
+-   **[menuconfig 配置](#ZH-CN_TOPIC_0000001777234354)**
 
 -   **[UART配置方法](#ZH-CN_TOPIC_0000001949361268)**  
 
@@ -308,9 +308,9 @@ SDK编译默认包含Syschannel Host驱动编译，编译SDK前，需要修改�
 2.  FOTA分区受APP镜像区的影响，首地址前移8K，调整为0x26E000，压缩升级方案中FOTA分区大小需同步调整，4K对齐后为减少4K，最终FOTA分区结束地址为0x3F0000。
 3.  APP镜像分区以及FOTA分区总计调整出12K的余量，可合并到预留分区中，预留分区首地址前移12K，为0x3F0000，同时大小增加12K，结束地址保持为0x3FA000。
 
-### Menuconfig配置<a name="ZH-CN_TOPIC_0000001777234354"></a>
+### menuconfig 配置<a name="ZH-CN_TOPIC_0000001777234354"></a>
 
-运行“python3 build.py -c ws53\_liteos\_app menuconfig”脚本会启动Menuconfig程序，用户可通过Menuconfig对编译和系统功能进行配置，如[图1](#fig155343385597)所示。
+运行“python3 build.py -c ws53\_liteos\_app menuconfig”脚本会启动 menuconfig 程序，用户可通过 menuconfig 对编译和系统功能进行配置，如[图 1](#fig155343385597)所示。
 
 SDK集成了默认配置，但建议用户首次运行时进行相应配置，从而减少因为配置原因引起的问题。用户随时可以运行“python3 build.py -c ws53\_liteos\_app menuconfig”更改配置。
 
@@ -459,7 +459,7 @@ WS53总共有3个UART，SDK默认配置如下。
     ![](figures/zh-cn_image_0000002247600772.png)
 
 -   支持AT、DEBUG串口功能合一到HSO口上，可以用HSO工具完成AT命令及回显、DEBUG日志、HSO日志功能。需要先打开**CONFIG\_AT\_SUPPORT\_ZDIAG**宏，再通过menuconfig配置HSO/AT/DEBUG为同一串口，波特率一致，可以选择是否打开HSO心跳功能。以下是将AT、DEBUG功能都合一到HSO上，并使用L0作为串口的配置示例如下。
--   ![](figures/zh-cn_image_0000002298050126.png)
+    ![](figures/zh-cn_image_0000002298050126.png)
 
     ![](figures/zh-cn_image_0000002247763860.png)
 
@@ -472,8 +472,8 @@ WS53总共有3个UART，SDK默认配置如下。
 
 -   串口管脚复用配置：
 
-    1.  debug串口方案上A/C核共用串口，debug串口管脚跟随选择的串口选择对应管脚。如果选择UART L0，串口管脚采用AGPIO1和AGPIO2; 如果选择UART H1，串口管脚TX采用MGPIO12，RX采用AGPIO4。为了串口输入能唤醒系统，RX管脚都会采用AGPIO。
-    2.  AT口/HSO口，可以选择与debug口复用串口，此时管脚与debug口一致。如果选择其他串口，可以更改管脚配置。配置代码位于文件uart\_porting.c，参考函数uart\_port\_config\_pinmux, 该函数配置了对应串口管脚的模式和上拉。硬件管脚如果与默认配置不一样，需要修改函数中对应管脚定义的宏。
+    1.  DEBUG 串口方案上 A/C 核共用串口，DEBUG 串口管脚跟随选择的串口使用对应管脚。如果选择 UART L0，串口管脚采用 AGPIO1 和 AGPIO2；如果选择 UART H1，串口管脚 TX 采用 MGPIO12，RX 采用 AGPIO4。为了通过串口输入唤醒系统，RX 管脚均采用 AGPIO。
+    2.  AT 口/HSO 口可以选择与 DEBUG 口复用串口，此时管脚与 DEBUG 口一致。如果选择其他串口，可以更改管脚配置。配置代码位于文件 uart\_porting.c，参考函数 uart\_port\_config\_pinmux；该函数配置对应串口管脚的模式和上拉。硬件管脚与默认配置不一致时，需要修改函数中对应管脚定义的宏。
     3.  对于AT命令 UART RX管脚，建议选择AGPIO管脚，否则AT命令本身无法唤醒系统，需要由其它管脚唤醒或者关闭低功耗模式才能输入串口。
     4.  UART RX管脚配置下拉可能导致误触发串口中断，建议针对该管脚在低功耗初始化函数uapi\_pm\_lpc\_init调用pm\_port\_skip\_pull\_down配置跳过睡眠流程下拉处理。
 

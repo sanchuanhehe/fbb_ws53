@@ -39,9 +39,9 @@ flowchart TD
 
 > Sample 默认超时 2 秒（`TIME_OUT=2`），喂狗间隔 500ms。该配置用于演示；产品配置仍需根据任务最坏响应时间和调度抖动评估。
 
-### sample 的两种配置
+### Sample 的两种配置
 
-本 sample 通过 Kconfig 控制两种行为：
+本 Sample 通过 Kconfig 控制两种行为：
 - **`CONFIG_WDT_TIMEOUT_SAMPLE`**：启动看门狗后进入 `while(1){}` 死循环——不喂狗。当前 `WDT_MODE=1` 为中断模式，首次超时执行回调；回调阶段仍未喂狗时，系统随后复位
 - **`CONFIG_WDT_KICK_SAMPLE`**：启动看门狗后在循环中每 500ms 喂狗——系统稳定运行不复位。用于验证喂狗机制正常工作
 

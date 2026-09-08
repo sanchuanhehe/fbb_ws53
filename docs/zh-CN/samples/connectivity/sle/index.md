@@ -29,7 +29,7 @@ hide:
 - [高吞吐传输](./data-comm/high-throughput.md)
 - [分片传输](./data-comm/fragmentation.md)
 
-### 连接与链路管理
+### 连接管理
 
 - [连接参数动态更新](./link-mgmt/conn-param-tuning.md)
 - [无线链路自适应（PHY/MCS）](./link-mgmt/phy-mcs-switch.md)

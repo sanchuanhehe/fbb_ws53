@@ -24,9 +24,9 @@ flowchart LR
     C --> D[uapi_tcxo_delay_ms/us]
 ```
 
-### TCXO 时钟 vs Systick 时钟
+### TCXO 时钟 vs SysTick 时钟
 
-| 对比项 | TCXO API | Systick API |
+| 对比项 | TCXO API | SysTick API |
 |--------|---|---|
 | 时间戳接口 | `uapi_tcxo_get_ms/us` | `uapi_systick_get_ms/us` |
 | 延时接口 | `uapi_tcxo_delay_ms/us` | `uapi_systick_delay_ms/us` |
@@ -48,7 +48,7 @@ flowchart LR
 
 ### 案例简介
 
-本 sample 演示 TCXO 时钟的毫秒/微秒级延时与时间戳功能：
+本 Sample 演示 TCXO 时钟的毫秒/微秒级延时与时间戳功能：
 1. `uapi_tcxo_init()` 初始化 TCXO
 2. 在循环中执行毫秒级延时 1000ms 和微秒级延时 20000us，并在每轮开始时喂看门狗
 3. 每种延时前后分别调用 `get_ms/get_us` 获取时间戳；源码以 `after > before` 作为接口正常的判定条件

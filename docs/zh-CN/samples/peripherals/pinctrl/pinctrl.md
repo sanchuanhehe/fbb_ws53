@@ -217,6 +217,6 @@ if (uapi_pin_set_pull(pin, pull) == ERRCODE_SUCC &&
 uapi_pin_deinit();
 ```
 
-> `uapi_pin_deinit()` 释放引脚控制模块的资源。在 sample 中仅作演示——实际项目中如果后续还要使用其他引脚功能，不应过早 deinit。
+> `uapi_pin_deinit()` 释放引脚控制模块的资源。在 Sample 中仅作演示——实际项目中如果后续还要使用其他引脚功能，不应过早 deinit。
 
 ---

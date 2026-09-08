@@ -1,4 +1,4 @@
-# OSAL 抽象层
+# OS 抽象层
 
 > WS53 应用在 LiteOS (Huawei LiteOS) 上统一使用的操作系统接口
 

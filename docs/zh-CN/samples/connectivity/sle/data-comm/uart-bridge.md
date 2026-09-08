@@ -324,7 +324,7 @@ C2S_OK_F3U4
 ### UART、缓冲区和队列参数
 
 | 配置项 | 默认值 | 说明 |
-| --- | ---: | --- |
+| --- | --- | --- |
 | `CONFIG_UART_BUS_ID` | `1` | 使用 UART1 |
 | `CONFIG_UART_TXD_PIN` | `17` | MIO17，UART1 TX |
 | `CONFIG_UART_RXD_PIN` | `18` | MIO18，UART1 RX |
@@ -439,7 +439,7 @@ app_run(sle_uart_entry);
 UART 初始化由 Server 和 Client 任务分别调用，配置来自 `Kconfig`：
 
 | 配置项 | WS53 默认值 | 用途 |
-| --- | ---: | --- |
+| --- | --- | --- |
 | `CONFIG_UART_BUS_ID` | `1` | UART 总线编号 |
 | `CONFIG_UART_TXD_PIN` | `17` | UART TX 引脚 |
 | `CONFIG_UART_RXD_PIN` | `18` | UART RX 引脚 |

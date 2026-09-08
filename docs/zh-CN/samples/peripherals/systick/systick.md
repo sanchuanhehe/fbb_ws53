@@ -1,18 +1,18 @@
 # SysTick
 
-> Systick 驱动 | sample: `src/application/samples/peripheral/systick/systick_demo.c`
+> SysTick 驱动 | Sample: `src/application/samples/peripheral/systick/systick_demo.c`
 
 ## 学习目标
 
-- 理解 WS53 Systick 驱动提供的统一计数基准和时间单位换算
+- 理解 WS53 SysTick 驱动提供的统一计数基准和时间单位换算
 - 掌握 `uapi_systick_get_s()` / `uapi_systick_get_ms()` / `uapi_systick_get_us()` 的时间戳获取功能
 - 掌握 `uapi_systick_delay_s()` / `uapi_systick_delay_ms()` / `uapi_systick_delay_us()` 的阻塞延时用法
 
 ## 基本概念
 
-### Systick 是什么
+### SysTick 是什么
 
-WS53 的 Systick 驱动向应用提供秒、毫秒、微秒时间戳和对应的阻塞延时接口。当前 `systick.c` 中的 `uapi_systick_get_s()`、`uapi_systick_get_ms()`、`uapi_systick_get_us()` 都先调用同一个 `uapi_systick_get_count()`，再按目标单位换算；不能把 `get_ms()` 描述成读取 OS 软件 Tick、把 `get_us()` 描述成另一条硬件直读路径。
+WS53 的 SysTick 驱动向应用提供秒、毫秒、微秒时间戳和对应的阻塞延时接口。当前 `systick.c` 中的 `uapi_systick_get_s()`、`uapi_systick_get_ms()`、`uapi_systick_get_us()` 都先调用同一个 `uapi_systick_get_count()`，再按目标单位换算；不能把 `get_ms()` 描述成读取 OS 软件 Tick、把 `get_us()` 描述成另一条硬件直读路径。
 
 ```mermaid
 flowchart LR
@@ -22,9 +22,9 @@ flowchart LR
     C --> D[uapi_systick_delay_s/ms/us]
 ```
 
-### Systick 与 Timer 案例的使用方式
+### SysTick 与 Timer 案例的使用方式
 
-| 对比项 | Systick API | Timer API |
+| 对比项 | SysTick API | Timer API |
 |--------|---|---|
 | 使用方式 | 直接获取时间戳或执行阻塞延时 | 创建定时器并在到期时执行回调 |
 | 典型 API | `get_s/get_ms/get_us/delay_*` | `create/start/stop/delete` + 回调 |
@@ -34,8 +34,8 @@ flowchart LR
 
 | API | 用途 | 头文件 |
 |-----|------|--------|
-| `uapi_systick_deinit()` | 清理已有 Systick 状态 | `systick.h` |
-| `uapi_systick_init()` | 初始化 Systick（使能时钟和中断） | `systick.h` |
+| `uapi_systick_deinit()` | 清理已有 SysTick 状态 | `systick.h` |
+| `uapi_systick_init()` | 初始化 SysTick（使能时钟和中断） | `systick.h` |
 | `uapi_systick_get_s()` | 获取系统运行秒数（uint64） | `systick.h` |
 | `uapi_systick_get_ms()` | 获取系统运行毫秒数（uint64） | `systick.h` |
 | `uapi_systick_get_us()` | 获取系统运行微秒数（uint64） | `systick.h` |
@@ -43,13 +43,13 @@ flowchart LR
 | `uapi_systick_delay_ms(n)` | 阻塞延时 n 毫秒 | `systick.h` |
 | `uapi_systick_delay_us(n)` | 阻塞延时 n 微秒 | `systick.h` |
 
-> 三个 `get_*()` 接口基于同一个 Systick 计数值，只是返回单位不同。返回单位不等同于已验证的测量精度。
+> 三个 `get_*()` 接口基于同一个 SysTick 计数值，只是返回单位不同。返回单位不等同于已验证的测量精度。
 
 ## 案例说明
 
 ### 案例简介
 
-本 Sample 演示 Systick 时间获取与阻塞延时的三种单位（秒/毫秒/微秒），每种单位执行以下步骤：
+本 Sample 演示 SysTick 时间获取与阻塞延时的三种单位（秒/毫秒/微秒），每种单位执行以下步骤：
 1. 记录延时前的时间戳（`get_s/ms/us`）
 2. 调用对应的 `delay_*()` 阻塞延时
 3. 记录延时后的时间戳
@@ -120,14 +120,14 @@ sequenceDiagram
 
 ## 代码详解
 
-### 1. Systick 初始化
+### 1. SysTick 初始化
 
 ```c
 uapi_systick_deinit();
 uapi_systick_init();
 ```
 
-案例先反初始化再初始化 Systick，确保测试从明确的驱动状态开始。进入每轮秒、毫秒和微秒测试前调用 `uapi_watchdog_kick()`，避免长时间阻塞延时触发系统看门狗。
+案例先反初始化再初始化 SysTick，确保测试从明确的驱动状态开始。进入每轮秒、毫秒和微秒测试前调用 `uapi_watchdog_kick()`，避免长时间阻塞延时触发系统看门狗。
 
 ### 2. 秒级延时与验证
 

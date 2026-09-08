@@ -121,7 +121,7 @@ sequenceDiagram
 
 ### 1. 全局变量定义与回调注册
 
-DMA 传输需要源缓冲区和目的缓冲区，外加一个完成标志供任务轮询。以下定义来自 sample 实际代码：
+DMA 传输需要源缓冲区和目的缓冲区，外加一个完成标志供任务轮询。以下定义来自 Sample 实际代码：
 
 ```c
 #define DMA_TRANSFER_WORD_NUM       32
@@ -217,7 +217,7 @@ if (memcmp((void *)transfer_config.src, (void *)transfer_config.dest,
 
 ### 5. LLI 链式传输（扩展模式）
 
-当 `CONFIG_DMA_MEMORY_LLI_TRANSFER_MODE` 开启时，sample 走 LLI 分支。LLI 传输需要先获取专用通道，再配置链表，最后使能传输：
+当 `CONFIG_DMA_MEMORY_LLI_TRANSFER_MODE` 开启时，Sample 走 LLI 分支。LLI 传输需要先获取专用通道，再配置链表，最后使能传输：
 
 ```c
 dma_channel_t dma_channel = uapi_dma_get_lli_channel(0, HAL_DMA_HANDSHAKING_MAX_NUM);
