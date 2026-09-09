@@ -194,6 +194,4 @@ if (!ip_addr_isany(&netif_p->ip_addr)) {
 2. 观察 `STA enable succ`、`Scan done`、`Connect succ` 日志。
 3. 确认最终出现 `STA DHCP success`，并记录获取到的地址。
 
-还应验证错误密码、目标 AP 不存在、DHCP 不响应、AP 重启和弱信号断连等失败路径，确认不会出现无间隔重试或继续使用旧 IP/socket 的情况。
-
-构建方法参见[快速入门](../../../../get-started/quick-start.md)。不要将真实网络密码提交到仓库；连接失败时依次检查扫描结果、安全类型、密码和 DHCP 服务。
+构建方法参见[快速入门](../../../../get-started/quick-start.md)。连接失败时依次检查扫描结果、安全类型、密码和 DHCP 服务。
