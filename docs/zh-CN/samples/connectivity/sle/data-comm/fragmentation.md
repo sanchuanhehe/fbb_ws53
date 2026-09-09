@@ -328,7 +328,7 @@ CONFIG_SAMPLE_SUPPORT_SLE_FRAGMENTATION_CLIENT_SAMPLE
 
 ## 代码详解
 
-### 代码目录与调用关系
+### 1. 代码目录与调用关系
 
 ```text
 src/application/samples/bt/sle/sle_fragmentation/
@@ -347,7 +347,7 @@ src/application/samples/bt/sle/sle_fragmentation/
 
 `sle_fragmentation_entry()` 根据 Kconfig 创建 `SLEFragmentServer` 或 `SLEFragmentClient` 任务，角色任务优先级为 28、栈大小为 `0x1000`。Server 收到触发后另建优先级 27 的 `SLEFragmentTx` 任务执行实际发送。
 
-### Server 只接受明确的触发值
+### 2. Server 只接受明确的触发值
 
 Server 写回调只接受长度为 1、首字节为 1 的请求：
 
@@ -361,7 +361,7 @@ bool valid_trigger =
 
 由于启动函数返回 `void`，任务创建失败无法反馈到已经发送的写响应；源码也没有使用忙标志拒绝第二个合法触发。
 
-### Server 计算边界并逐片发送
+### 3. Server 计算边界并逐片发送
 
 发送任务生成递增测试数据并计算完整校验和：
 
@@ -383,7 +383,7 @@ packet.payload_len =
 
 复制和 Notification 发送任一失败都会立即结束任务，不再发送后续分片。全部 6 片的发送调用都返回成功后，Server 才输出 `transfer complete`。
 
-### Client 先校验再写入缓冲区
+### 4. Client 先校验再写入缓冲区
 
 Notification 回调依次执行以下检查：
 
@@ -399,7 +399,7 @@ Notification 回调依次执行以下检查：
 
 只有全部检查通过，Client 才追加负载、增加累计长度并递增下一片序号。源码不保存乱序分片，也不在序号错误后跳过缺失位置。
 
-### 0 号片重置接收状态
+### 5. 0 号片重置接收状态
 
 回调在进行序号检查之前处理：
 
@@ -412,7 +412,7 @@ if (packet->index == 0) {
 
 这让新一轮传输可以从 0 号片重新开始，但没有同时检查新的 Transfer ID，因为 Transfer ID 始终固定为 1。重复或并发到达的 0 号片也会清空当前进度。
 
-### 最后一片触发完整性校验
+### 6. 最后一片触发完整性校验
 
 每接收一片，`g_next_fragment` 加 1。当它等于头中的 `total` 时，Client 对当前重组缓冲区重新求和：
 

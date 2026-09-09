@@ -57,7 +57,7 @@ SoftAP 无线接口、IPv4 地址和 DHCP Server 是三个独立环节。`wifi_s
 
 ## 代码详解
 
-### 等待 Wi-Fi 初始化
+### 1. 等待 Wi-Fi 初始化
 
 SoftAP Sample 由独立任务运行。任务首先等待系统完成 Wi-Fi 初始化，再进入热点配置流程：
 
@@ -74,7 +74,7 @@ if (example_softap_function() != 0) {
 
 这里的等待只确认 Wi-Fi 模块已经初始化，不代表 SoftAP 接口已经创建。实际产品可以由系统就绪事件触发热点任务，避免永久轮询。
 
-### 配置 SoftAP 基本参数
+### 2. 配置 SoftAP 基本参数
 
 `softap_config_stru` 保存 SSID、预共享密钥、安全类型和信道。下面使用枚举名表示当前 Sample 中的数字配置：
 
@@ -95,7 +95,7 @@ hapd_conf.wifi_psk_type = 0;
 
 `ssid` 和 `pre_shared_key` 缓冲区在复制前已经清零，因此短字符串后仍保留结束符。产品代码必须检查 `memcpy_s()` 返回值，并校验 SSID、密码长度、安全类型和信道是否合法。不要在日志中打印明文密码。
 
-### 配置 SoftAP 扩展参数
+### 3. 配置 SoftAP 扩展参数
 
 扩展配置需要在 `wifi_softap_enable()` 之前设置：
 
@@ -116,7 +116,7 @@ if (wifi_set_softap_config_advance(&config) != ERRCODE_SUCC) {
 
 `hidden_ssid_flag = 1` 表示不隐藏 SSID；`gi = 0` 表示不配置该项。Beacon、DTIM 和组密钥更新周期都有有效范围，产品应使用 [Wi-Fi Hotspot API](../../../../api-reference/middleware/services/wifi/hotspot.md) 中定义的约束，不要直接照搬其他芯片参数。
 
-### 启动热点并配置 DHCP Server
+### 4. 启动热点并配置 DHCP Server
 
 基本参数和扩展参数就绪后启动 SoftAP：
 

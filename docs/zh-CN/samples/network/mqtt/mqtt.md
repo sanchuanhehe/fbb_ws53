@@ -187,7 +187,7 @@ fbb flash ws53-liteos-app
 
 ## 代码详解
 
-### 文件结构
+### 1. 文件结构
 
 ```text
 src/application/samples/wifi/
@@ -201,7 +201,7 @@ src/application/samples/wifi/
     └── CMakeLists.txt
 ```
 
-### DHCP 成功后触发 MQTT
+### 2. DHCP 成功后触发 MQTT
 
 STA Sample 的 DHCP 状态检查在获得 IP 后调用 mqtt_publish_client()：
 
@@ -217,7 +217,7 @@ if (ip_addr_isany(&(netif_p->ip_addr)) == 0) {
 
 MQTT 不是独立常驻任务；发布函数返回后，STA 流程继续结束。
 
-### TLS 连接配置
+### 3. TLS 连接配置
 
 ```c
 ssl_opts.los_keyStore = &g_mqtt_client_crt_store;
@@ -233,7 +233,7 @@ conn_opts.password = g_mqtt_password;
 
 客户端证书、私钥和根 CA 存放在 cert_string、key_string 中，长度由 sizeof 字符串计算。
 
-### 发布和等待交付
+### 4. 发布和等待交付
 
 ```c
 pubmsg.payload = (void *)g_mqtt_publish_msg;
@@ -247,6 +247,6 @@ MQTTClient_waitForCompletion(client, token, MQTT_TCP_TIMEOUT_MS);
 
 发布成功后打印 Delivery Token；无论连接、发布或等待结果如何，函数都会进入断开、销毁和全局清理路径。
 
-### 资源清理和错误路径
+### 5. 资源清理和错误路径
 
 初始化失败时调用 MQTTClient_cleanup()；连接失败时跳过发布，销毁客户端；发布失败或等待超时后断开并销毁。源码没有重连循环，下一次连接需要由上层重新触发 STA/MQTT 流程。

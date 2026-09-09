@@ -61,7 +61,7 @@ wifi_sta_set_reconnect_policy(1, 10, 5, 10);
 
 ## 代码详解
 
-### 注册事件并维护状态
+### 1. 注册事件并维护状态
 
 案例注册扫描完成和连接变化两个事件：
 
@@ -98,7 +98,7 @@ wifi_register_event_cb(&g_wifi_event);
 
 当前 Sample 使用 `0` 和 `1` 判断连接状态，代码中可改用 `WIFI_STATE_NOT_AVALIABLE` 和 `WIFI_STATE_AVALIABLE` 提高可读性。若改用协议栈自动重连，断开分支应进入单独的“重连中”状态，而不是返回 `WIFI_STA_SAMPLE_INIT`。
 
-### 扫描并匹配目标 AP
+### 2. 扫描并匹配目标 AP
 
 初始状态下使能 STA 并发起扫描：
 
@@ -154,7 +154,7 @@ expected_bss->ip_type = 1; /* DHCP */
 
 安全类型应使用扫描结果中的值，不能固定写成某一种加密方式。同名 SSID 较多时，还应结合 BSSID、RSSI 或信道选择目标 AP。所有失败分支都必须释放 `result`。
 
-### 发起连接并获取地址
+### 3. 发起连接并获取地址
 
 配置准备完成后调用 `wifi_sta_connect()`：
 

@@ -163,7 +163,7 @@ Client 模式确认出现 Start TcpSample client 和 Send Packet Succ；对端�
 
 ## 代码详解
 
-### 文件结构
+### 1. 文件结构
 
 ```text
 src/application/samples/wifi/
@@ -173,7 +173,7 @@ src/application/samples/wifi/
 └── Kconfig
 ```
 
-### TCP Client 创建连接
+### 2. TCP Client 创建连接
 
 ```c
 sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -183,7 +183,7 @@ context->trafficSock = sock;
 connect(sock, remote, addrLen);
 ```
 
-### TCP Server 接收连接
+### 3. TCP Server 接收连接
 
 ```c
 sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -195,7 +195,7 @@ accept(sock, remote, &addrLen);
 
 Server 绑定 IPADDR_ANY，当前 backlog 参数为 0，只适合单连接演示。
 
-### Server 接收循环
+### 4. Server 接收循环
 
 ```c
 while (context->isFinish == FALSE) {
@@ -208,6 +208,6 @@ while (context->isFinish == FALSE) {
 }
 ```
 
-### Client 周期发送
+### 5. Client 周期发送
 
 Client 建立连接后创建发送任务，使用共享缓冲区发送 100 字节数据；主任务约每 30 秒再次创建发送任务。源码用互斥锁保护共享上下文，但发送成功路径没有调用 `osal_mutex_unlock()`。修正该问题前，后续发送任务可能阻塞在同一互斥锁上，不能把首次发送成功当作周期发送已经稳定运行。

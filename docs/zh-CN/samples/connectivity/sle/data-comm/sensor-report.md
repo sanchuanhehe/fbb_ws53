@@ -416,7 +416,7 @@ supervision_timeout × 20 > (max_latency + 1) × interval_max
 
 ## 代码详解
 
-### 代码目录与调用关系
+### 1. 代码目录与调用关系
 
 ```text
 sle_sensor_report/
@@ -450,7 +450,7 @@ sle_sensor_report_entry()
         -> ssaps_notify_indicate()
 ```
 
-### 传感器故障会自动重试并节流日志
+### 2. 传感器故障会自动重试并节流日志
 
 任一读取阶段失败都会执行：
 
@@ -464,7 +464,7 @@ g_consecutive_failures++;
 
 BMP280 探测只执行一次。它会在 I2C 初始化后额外等待 500 ms，检查 `0x76` 和 `0x77` 的 `0xD0` 寄存器是否等于 `0x58`，但不执行复位、校准、补偿或压力上报。
 
-### Server 在发送前做二次连接快照检查
+### 3. Server 在发送前做二次连接快照检查
 
 处理函数先检查连接和上报门控，再保存连接句柄快照。帧复制完成后会再次检查：
 
@@ -477,7 +477,7 @@ if (!g_connected || !g_reporting_enabled ||
 
 这可以降低采样、组帧期间发生断链后仍使用旧连接句柄的风险。随后 `ssaps_notify_indicate()` 的直接返回值会被检查并打印，但源码没有排队重试。
 
-### Client 的发现范围和 CCCD 推算
+### 4. Client 的发现范围和 CCCD 推算
 
 MTU 交换成功后，Client 在完整 handle 范围发现 Property：
 
@@ -498,7 +498,7 @@ wparam.data = cccd_val; /* {0x02, 0x00} */
 
 这段代码依赖“告警 CCCD 紧跟属性”的注册顺序，并隐藏写命令的直接返回值。更稳健的实现应发现并校验服务、属性和描述符 UUID/类型，再保存真实 handle。
 
-### Client 只严格检查帧长度
+### 5. Client 只严格检查帧长度
 
 Notification 和 Indication 回调都会拒绝空指针和非 11 字节数据，这避免了按错误长度读取结构体。但回调没有检查：
 

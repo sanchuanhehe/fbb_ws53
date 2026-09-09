@@ -143,11 +143,11 @@ static errcode_t watchdog_callback(uintptr_t param)
 }
 ```
 
-### 超时回调限制
+### 2. 超时回调限制
 
 不要在超时回调中直接擦写非易失存储。Flash 擦写或通过 I2C 访问 EEPROM 可能无法在剩余时间内完成，复位打断写入还可能造成数据损坏。优先只设置保留寄存器、备份 RAM 或其他确定时延的标志；系统重启后读取硬件复位原因，再在正常任务上下文中持久化记录。
 
-### 2. 初始化看门狗
+### 3. 初始化看门狗
 
 案例先调用 `uapi_watchdog_deinit()` 清理已有状态，再重新初始化。`uapi_watchdog_init` 的参数 `TIME_OUT` 单位为**秒**（非毫秒）。返回值检查 `ERRCODE_INVALID_PARAM` 用于防御无效超时值：
 
@@ -163,7 +163,7 @@ if (ret == ERRCODE_INVALID_PARAM) {
 osal_printk("init watchdog\r\n");
 ```
 
-### 3. 超时场景（不喂狗）
+### 4. 超时场景（不喂狗）
 
 使能 `CONFIG_WDT_TIMEOUT_SAMPLE` 后，任务进入死循环。当前模式下先触发超时回调，未喂狗时随后复位：
 
@@ -173,7 +173,7 @@ osal_printk("init watchdog\r\n");
 #endif
 ```
 
-### 4. 正常喂狗场景
+### 5. 正常喂狗场景
 
 使能 `CONFIG_WDT_KICK_SAMPLE` 后，任务每 500ms 调用 `uapi_watchdog_kick()` 重置计数器：
 
@@ -187,7 +187,7 @@ osal_printk("init watchdog\r\n");
 #endif
 ```
 
-### 5. 反初始化（正常退出路径）
+### 6. 反初始化（正常退出路径）
 
 当不复位也不喂狗时（两个 Kconfig 都未开启），执行 `deinit` 退出：
 

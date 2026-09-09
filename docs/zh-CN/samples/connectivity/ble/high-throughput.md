@@ -216,7 +216,7 @@ start send notify info.
 
 ## 代码详解
 
-### 文件结构
+### 1. 文件结构
 
 ```text
 src/application/samples/bt/ble/ble_speed_server/
@@ -230,7 +230,7 @@ src/application/samples/bt/ble/ble_speed_server/
 └── CMakeLists.txt
 ```
 
-### GATT Service 创建
+### 2. GATT Service 创建
 
 ```c
 stream_data_to_uuid(BLE_UUID_UUID_SERVER_SERVICE, &service_uuid);
@@ -244,7 +244,7 @@ gatts_add_descriptor_sync(server_id, srvc_handle, &descriptor, &handle);
 
 `ccc_uuid` 是栈上定义的 `bt_uuid_t` 对象，其 `uuid` 成员是结构体内嵌数组。当前源码在添加 CCCD 后直接结束函数，不会对 `ccc_uuid.uuid` 执行释放操作。
 
-### 链路参数设置
+### 3. 链路参数设置
 
 吞吐模式下，连接参数回调请求 MTU，发送任务请求 PHY 和 Data Length：
 
@@ -256,7 +256,7 @@ gatts_exchange_mtu_req(conn_id, DEFAULT_BLE_SPEED_MTU_SIZE);
 
 这些 API 是协商请求，最终值需要 Client 和控制器共同支持。
 
-### 发送循环和流控
+### 4. 发送循环和流控
 
 ```c
 while (1) {
