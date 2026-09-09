@@ -96,7 +96,7 @@
 
     ![串口输出](figures/监视器-串口输出.png)
 
-每秒输出一行 `hello world`，表示程序运行成功。
+    每秒输出一行 `hello world`，表示程序运行成功。
 
 ### Sample 代码说明
 
