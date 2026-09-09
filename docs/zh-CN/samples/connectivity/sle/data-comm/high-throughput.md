@@ -362,7 +362,7 @@ CONFIG_LARGE_THROUGHPUT_SERVER
 
 ## 代码详解
 
-### 代码目录与调用关系
+### 1. 代码目录与调用关系
 
 ```text
 src/application/samples/bt/sle/
@@ -377,7 +377,7 @@ src/application/samples/bt/sle/
 
 Server 和 Client 是两个独立入口：Server 创建名为 `speed` 的任务，Client 创建名为 `RadarTask` 的任务。两者不是由共享的业务入口文件统一选择。
 
-### Server 初始化的额外操作
+### 2. Server 初始化的额外操作
 
 `sle_speed_server_init()` 的顺序是：
 
@@ -394,7 +394,7 @@ Server 和 Client 是两个独立入口：Server 创建名为 `speed` 的任务�
 
 初始化函数没有逐项检查这些调用的返回值，最终仍返回 `ERRCODE_SLE_SUCCESS`。排查问题时必须查看各阶段日志，不能只依赖入口返回值。
 
-### Client 只匹配固定地址
+### 3. Client 只匹配固定地址
 
 扫描结果回调使用以下条件：
 
@@ -408,13 +408,13 @@ if (memcmp(seek_result_data->addr.addr, mac, SLE_ADDR_LEN) == 0) {
 
 虽然 Server 扫描响应包含名称 `sle_speed_server`，Client 没有解析该名称，也没有在扫描阶段按服务 UUID 筛选。
 
-### 参数更新回调创建发送任务
+### 4. 参数更新回调创建发送任务
 
 Server 连接回调提交 `sle_update_connect_param()`。随后 `sle_sample_update_cbk()` 无论 `status` 值如何，只要 `g_ssap_handle == NULL` 就尝试创建 `SsapSampleTask`。
 
 因此发送任务启动条件实际上是“收到参数更新回调”，不是“确认参数更新成功”。生产实现应先检查回调 `status` 和实际参数，再决定是否启动高负载发送。
 
-### Server 请求高速参数
+### 5. Server 请求高速参数
 
 发送任务启动后依次调用：
 
@@ -426,7 +426,7 @@ sle_set_mcs(g_sle_conn_hdl, 10);
 
 三个返回值均未保存。若需要可验证的实验，应记录每个 API 的返回值，并在协议栈提供相应事件时记录最终生效参数。
 
-### Server 根据发送余量连续提交
+### 6. Server 根据发送余量连续提交
 
 发送缓冲区是 1450 字节静态数组。每次有余量时递增 `i`，把低 16 位按高字节、低字节写入 `data[0]` 和 `data[1]`，其余字节保持为 0，然后提交 Notification。
 
@@ -440,7 +440,7 @@ sle_uuid_server_send_report_by_handle_id(
 
 当前 Client 不解析这两个字节，所以它们还没有发挥丢包检测作用。若增加校验，需要定义 16 位回绕和断连重置规则。
 
-### 发送封装隐藏错误
+### 7. 发送封装隐藏错误
 
 当前封装为：
 
@@ -451,7 +451,7 @@ return ERRCODE_SLE_SUCCESS;
 
 它没有返回 `ssaps_notify_indicate()` 的真实结果。更合理的实现应直接返回该 API 的返回值，并让发送循环根据错误类型执行统计、退避或退出。
 
-### Client 计算应用层吞吐量
+### 8. Client 计算应用层吞吐量
 
 Notification 回调第一次进入时保存 `g_count_before_get_us`；当进入回调前的计数等于 100 时，读取结束时间并计算：
 
@@ -464,6 +464,6 @@ float speed = data->data_len * RECV_PKT_CNT * 8 / time;
 
 计算假设窗口内每包长度都与当前 `data->data_len` 相同。当前 Server 固定发送 1450 字节，因此该假设在正常路径成立；若未来支持变长包，应累计每包实际字节数，而不是用最后一个长度乘以 100。
 
-### RSSI 统计与吞吐统计相互独立
+### 9. RSSI 统计与吞吐统计相互独立
 
 每次 Notification 回调都会调用 `sle_read_remote_device_rssi(conn_id)`。RSSI 回调把返回值相加，累计 100 次后输出整数平均值。由于 RSSI 读取是异步的，RSSI 的 100 次回调不一定与某一个吞吐窗口逐包严格对应；分析时应把它视为邻近时段的链路质量参考。

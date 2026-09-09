@@ -211,11 +211,11 @@ if (memcmp((void *)transfer_config.src, (void *)transfer_config.dest,
 }
 ```
 
-### 当前源码验证范围
+### 5. 当前源码验证范围
 
 当前 Sample 只比较四分之一缓冲区。两个缓冲区均为 `uint32_t[32]`，总大小为 128 字节。要完整验证，应将比较长度改为 `transfer_config.transfer_num * sizeof(uint32_t)`，或直接使用缓冲区的 `sizeof`。在源码修正前，不能依据成功日志认定完整 128 字节均一致。
 
-### 5. LLI 链式传输（扩展模式）
+### 6. LLI 链式传输（扩展模式）
 
 当 `CONFIG_DMA_MEMORY_LLI_TRANSFER_MODE` 开启时，Sample 走 LLI 分支。LLI 传输需要先获取专用通道，再配置链表，最后使能传输：
 

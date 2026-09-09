@@ -321,7 +321,7 @@ SLE 发现 → 连接 → 配对 → PHY 回调 → CHBA link → sle netif → 
 
 ## 代码详解
 
-### 文件结构
+### 1. 文件结构
 
 ```text
 src/application/samples/bt/sle_chba/
@@ -347,7 +347,7 @@ src/application/samples/bt/sle_chba/
 | `sle_chba_bridge.c` | `_PRE_WLAN_FEATURE_SLE_BRIDGE` 下的 SLE/Wi-Fi 桥接 |
 | `sle_chba_opt.h` | 默认连接、PHY、MCS 和超时宏 |
 
-### 入口和初始化
+### 2. 入口和初始化
 
 `app_run(chba_speed_entry)` 创建 `chbaTask`，任务调用 `sle_chba_sample_init()`：
 
@@ -365,7 +365,7 @@ src/application/samples/bt/sle_chba/
 
 `CHECK_RC` 只打印错误，不会统一终止初始化。因此调试时需要逐条查看返回状态，不能把最后一条启动日志当作前面所有步骤都成功。
 
-### AP 扫描与匹配
+### 3. AP 扫描与匹配
 
 AP 配置主动扫描，interval 和 window 都为 800，并打开重复过滤：
 
@@ -383,7 +383,7 @@ sle_seek_param_t scan_params = {
 
 扫描报告只在长度和 `SLE_CHBA` 内容都匹配时调用 `sle_chba_user_create_connection()`。
 
-### STA 广播
+### 4. STA 广播
 
 STA 使用可连接、可扫描广播，并允许 G/T 协商：
 
@@ -403,7 +403,7 @@ sle_announce_param_t adv_params = {
 
 广播包和扫描响应使用相同的 9 字节发现数据。
 
-### 连接、配对和链路升级
+### 5. 连接、配对和链路升级
 
 连接成功后，AP 调用 `sle_pair_remote_device()`。配对成功时，非 AP 端请求 4M PHY：
 
@@ -426,7 +426,7 @@ link->link_ready = true;
 
 链路表满时 `sle_chba_user_get_new_linkinfo()` 会返回 `NULL`，而连接回调没有检查返回值。产品化代码需要在写入 `link->conn_id` 前检查容量，并在失败时拒绝或断开新连接。
 
-### lwIP netif 创建
+### 6. lwIP netif 创建
 
 `chba_adapter_netdev_init()` 设置发送函数、硬件地址长度和接口名，然后以全零 IP 参数调用 `netifapi_netif_add()`：
 
@@ -443,7 +443,7 @@ netifapi_netif_set_link_down(&g_sle_chba_netdev);
 
 上层发送时，`sle_chba_send_pkt()` 把 pbuf payload 和长度交给 CHBA 驱动。接收回调分配 pbuf、复制数据，并根据编译宏先尝试 SysChannel 或 Wi-Fi Bridge 分流，普通报文通过 `driverif_input()` 进入 lwIP。
 
-### 断链恢复
+### 7. 断链恢复
 
 断开回调先删除 netdev link 和本地链路记录：
 

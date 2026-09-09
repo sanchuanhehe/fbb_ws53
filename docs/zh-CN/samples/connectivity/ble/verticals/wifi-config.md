@@ -276,7 +276,7 @@ WS53 当前案例没有 WS63 文档中的 `CONFIG_BLE_PROV_*` 配置项。实际
 
 ## 代码详解
 
-### 文件结构
+### 1. 文件结构
 
 ```text
 src/application/samples/
@@ -296,7 +296,7 @@ src/application/samples/
 
 WS53 当前目录中没有 `ble_wifi_cfg_client`、NV、LED 或按键模块。
 
-### 入口和任务创建
+### 2. 入口和任务创建
 
 Wi-Fi 配网任务由 `app_run()` 注册，任务优先级为 26，栈大小为 `0x1000`：
 
@@ -320,7 +320,7 @@ static void bgle_wifi_cfg_entry(void)
 app_run(bgle_wifi_cfg_entry);
 ```
 
-### BLE 和 Wi-Fi 初始化
+### 3. BLE 和 Wi-Fi 初始化
 
 任务启动后先初始化 BLE Server、配置广播，再使能 Wi-Fi STA 并注册事件回调：
 
@@ -345,7 +345,7 @@ static int bgwc_wifi_start(void)
 }
 ```
 
-### 凭证写入回调
+### 4. 凭证写入回调
 
 Client 向 `0xFD5E` 写入数据时，GATT Server 先检查协议栈状态、数据指针、offset 和 Prepared Write 标志，再根据 Characteristic Handle 调用 `set_wifi_cfg_info()`。核心处理如下：
 
@@ -383,7 +383,7 @@ int set_wifi_cfg_info(const uint8_t *info, uint16_t info_len)
 
 写回调使用 `uint16_t` 遍历写入数据；当请求需要响应时，还会根据上述检查结果返回对应的 GATT 状态。长度错误、复制失败、非零 offset 或 Prepared Write 均不会设置凭证就绪标志。
 
-### AP 列表生成
+### 5. AP 列表生成
 
 扫描完成回调最多选择 10 个非空 SSID，每项包含 SSID 和 RSSI：
 
@@ -399,7 +399,7 @@ ble_wifi_cfg_server_send_report_by_uuid(
 
 `ble_wifi_cfg_server_send_report_by_uuid()` 固定查找 `0xFD5D`，所以 AP 列表最终从 Control Point 上报，而不是从 `0xFD5F` 上报。
 
-### Wi-Fi 连接和 DHCP
+### 6. Wi-Fi 连接和 DHCP
 
 `example_get_match_network()` 从扫描结果中精确匹配 SSID，并填充 BSSID、安全类型和密码。主任务随后连接 AP，并在 `wlan0` 上启动 DHCP：
 

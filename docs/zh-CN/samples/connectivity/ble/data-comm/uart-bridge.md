@@ -245,15 +245,15 @@ USB-TTL 应收到相同字节，WS53 输出：
 
 ## 代码详解
 
-### UART 回调与工作任务
+### 1. UART 回调与工作任务
 
 UART RX 回调只把完整数据写入 RX 环形队列并唤醒工作任务。工作任务根据连接、CCCD 和 MTU 状态决定是否发送下一包 Indication，不在中断回调中调用耗时的 BLE 流程。
 
-### BLE 写入到 UART
+### 2. BLE 写入到 UART
 
 GATT 写回调先区分 CCCD Handle 和 Data Handle。Data 数据能够完整进入 TX 队列时才返回成功；随后工作任务调用 `uapi_uart_write()`，并按驱动实际接受的字节数推进队列。
 
-### 断连恢复
+### 3. 断连恢复
 
 断连时 Sample 清除连接、CCCD 和当前 MTU 状态，将在途 Indication 标记为失败但不消费数据，然后重新广播。Client 重连并再次订阅后，工作任务可以继续发送保留的数据。
 

@@ -50,7 +50,7 @@ sequenceDiagram
 
 ## 代码详解
 
-### 准备目标接口
+### 1. 准备目标接口
 
 混杂模式依附于已使能的 Wi-Fi 接口。以下示例使用 STA 接口：
 
@@ -77,7 +77,7 @@ if (wifi_set_channel(IFTYPE_STA, 6) != ERRCODE_SUCC) {
 
 信道必须符合当前国家码和区域法规。与 STA、SoftAP 或 P2P 并发时，应以实际业务接口的工作信道为准。
 
-### 注册混杂模式回调
+### 2. 注册混杂模式回调
 
 WS53 回调签名为 `int32_t (*)(void *recv_buf, int32_t frame_len, int8_t rssi)`：
 
@@ -119,7 +119,7 @@ if (wifi_set_promis_rx_pkt_cb(promis_rx_cb) != ERRCODE_SUCC) {
 
 实际产品通常把有限长度的帧头复制到预分配队列，由普通任务完成解析和日志输出。队列已满时应丢弃并计数，不能在回调中等待消费者。
 
-### 配置过滤器并开启监听
+### 3. 配置过滤器并开启监听
 
 下面只接收管理类和定制上报帧：
 
@@ -140,7 +140,7 @@ if (wifi_set_promis_mode(IFTYPE_STA, 1, &filter) != ERRCODE_SUCC) {
 
 `IFTYPE_STA` 必须与实际使能的接口一致。使用 SoftAP 或 P2P 接口时，应传入对应的 `wifi_if_type_enum`，并确认目标构建包含该接口能力。
 
-### 关闭监听
+### 4. 关闭监听
 
 停止时先阻止新帧上报，再注销回调，最后等待消费任务处理或丢弃队列中的剩余数据：
 

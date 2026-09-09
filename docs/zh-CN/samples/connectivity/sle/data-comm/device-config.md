@@ -313,7 +313,7 @@ CONFIG_SAMPLE_SUPPORT_SLE_DEVICE_CONFIG_CLIENT_SAMPLE
 
 ## 代码详解
 
-### 代码目录与调用关系
+### 1. 代码目录与调用关系
 
 ```text
 src/application/samples/bt/sle/sle_device_config/
@@ -332,7 +332,7 @@ src/application/samples/bt/sle/sle_device_config/
 
 `sle_device_config_entry()` 根据 Kconfig 创建 `SLEConfigServer` 或 `SLEConfigClient` 任务，任务优先级为 28、栈大小为 `0x1000`。
 
-### 为什么读写请求会进入应用回调
+### 2. 为什么读写请求会进入应用回调
 
 Server 属性权限包含：
 
@@ -352,7 +352,7 @@ ssaps_register_callbacks(&ssaps_cbk);
 
 读回调将当前 `g_device_config` 放入响应；写回调负责解释候选结构体、校验字段、保存配置并返回状态。这是“协议栈负责传递、应用负责决策”的实现位置。
 
-### Server 校验候选配置
+### 3. Server 校验候选配置
 
 写回调首先要求数据长度恰好等于 8 字节，并把数据复制到局部变量 `candidate`。只有复制成功后才检查字段：
 
@@ -371,7 +371,7 @@ static bool sle_device_config_is_valid(const sle_device_config_t *config)
 
 长度或复制失败返回 `ERRCODE_SSAP_INCORRECT_DATA_TYPE`；字段越界返回 `ERRCODE_SSAP_VALUE_OUT_OF_RANGE`，Client 日志中的低字节为 `0x0F`。
 
-### Server 保存配置并发送响应
+### 4. Server 保存配置并发送响应
 
 当前实现的关键顺序如下：
 
@@ -386,7 +386,7 @@ if (nv_ret != ERRCODE_SUCC) {
 
 如果请求要求响应，Server 再把 `response_status` 放入 `ssaps_send_response()`。因此 Client 能区分接受、越界和资源不足；但 NV 失败不会撤销前面的 `g_device_config = candidate`，这是阅读源码和设计产品逻辑时必须注意的边界。
 
-### Client 按回调推进自动测试
+### 5. Client 按回调推进自动测试
 
 Client 没有使用固定延时猜测对端何时完成，而是按以下回调推进：
 
@@ -401,7 +401,7 @@ Client 没有使用固定延时猜测对端何时完成，而是按以下回调�
 
 这种写法符合异步协议栈模型。不过，当前状态变量不会在断连回调中重置，自动测试主要面向一次上电后的单轮验证；复位持久化应以 Server 启动日志为准。
 
-### Server 启动时恢复 NV 配置
+### 6. Server 启动时恢复 NV 配置
 
 Server 初始化时不会仅凭 `uapi_nv_read()` 返回成功就采用数据，还会检查实际长度并复用字段合法性校验：
 

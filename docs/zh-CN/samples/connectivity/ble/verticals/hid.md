@@ -203,21 +203,21 @@ WS53 正常输出：
 
 ## 代码详解
 
-### HID Report
+### 1. HID Report
 
 `hid_kb_report_t` 固定为 8 字节。按下时将配置键码写入 `keys[0]`，松开时发送全零结构体。`ble_hid_btn_send_report()` 仅在 Host 已连接时调用 `gatts_notify_indicate()`。
 
-### HID Service 注册
+### 2. HID Service 注册
 
 `build_hid_service()` 创建 Service `0x1812`，随后依次添加 Protocol Mode、Report Map、Boot Keyboard Input/Output、HID Information 和 HID Control Point。只有 Boot Keyboard Input 带 CCCD，用于发送 Notification。
 
 当前写回调没有区分 Protocol Mode、Boot Keyboard Output 和 HID Control Point 的 Handle，因此这些标准属性仅完成注册，尚未形成完整业务闭环。后续实现需增加 Handle 分流、取值校验、挂起状态、LED 位图处理，以及与 Protocol Mode 对应的发送路径。
 
-### 按键任务
+### 3. 按键任务
 
 `hid_btn_task()` 配置 GPIO 并以 20 ms 周期采样。`hid_button_update_level()` 完成连续两次确认消抖，`hid_button_handle_state()` 处理按下、松开和长按重复。
 
-### 断连恢复
+### 4. 断连恢复
 
 连接状态回调在 Host 断开后调用 `ble_hid_adv_restart()`，重新等待 PC 或手机连接。
 
