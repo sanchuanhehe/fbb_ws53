@@ -8,7 +8,7 @@
 - 掌握 `sle_update_connect_param()` 的在线更新流程。
 - 观察参数更新请求回调和更新完成回调。
 - 通过 Kconfig 在 Low Power、Balanced 和 Low Latency 三个编译期档位之间选择。
-- 能在两块 WS53 开发板上验证双方最终生效的连接参数
+- 能在两块 WS53 开发板上验证双方最终生效的连接参数。
 
 ## 案例说明
 

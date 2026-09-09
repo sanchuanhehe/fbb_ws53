@@ -7,7 +7,7 @@ hide:
 
 > WS53 常用外设的应用开发参考。可构建案例位于 `src/application/samples/peripheral/`，通过 Peripheral Sample 的 Kconfig 选项选择并编译。
 
-当前共收录 16 个有 WS53 Sample 源码和构建入口的案例。PMP 只有驱动能力和文档栏目，尚无可直接构建的 WS53 Sample，因此在页面末尾单独列出，不计入可运行案例。
+当前共收录 16 个有 WS53 Sample 源码和构建入口的案例。
 
 首次使用外设时，建议先从 GPIO 或 UART 完成单板验证，再根据外接器件的电平、时钟、引脚复用和通信协议选择对应案例。
 
@@ -40,9 +40,3 @@ hide:
 
 - [Watchdog 看门狗](./watchdog/watchdog.md)
 - [LPC GPIO 唤醒](./lpc/lpc.md)（WS53 当前独有 Sample）
-
-### 驱动能力（暂无 Sample）
-
-以下页面用于说明 WS53 当前的驱动 API 和案例缺口，不提供可执行的 Sample 操作步骤：
-
-- [PMP 内存保护](./pmp/pmp.md)（占位）

@@ -32,7 +32,6 @@ Wi-Fi 案例位于 `src/application/samples/wifi/`。网络案例除构建和烧
 | [省电模式](power-save/power-save.md) | 控制 STA 低功耗模式并验证功耗/时延 | 在 `wifi/sta_sample/` 上集成 |
 | [P2P](p2p.md) | P2P 发现、GO/GC 协商与直连 | 公开 API 可用性取决于目标构建特性 |
 | [监听模式](monitor.md) | 混杂模式收包与过滤 | 公开 API，需自行集成诊断任务 |
-| [中继设计](repeater.md) | STA + SoftAP 组合及网络层边界 | 无独立中继案例，需补充转发/NAT |
 
 网络地址、端口、SSID、密码和 Broker 信息应根据测试环境配置。先确认 Wi-Fi 链路和 DHCP 正常，再验证 TCP、MQTT 或升级业务。
 
