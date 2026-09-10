@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 WS53V100 是海思推出的 Wi-Fi、BLE、SLE Combo 芯片，适用于物联网智能场景。本仓库是基于 FBB（Family Big Box）统一开发框架的 SDK 代码包，托管在 gitcode.com/HiSpark/fbb_ws53。
 
-- **芯片架构**: RISC-V 32-bit (rv32imc)
+- **芯片架构**: RISC-V 32-bit (rv32imfc)
 - **操作系统**: Huawei LiteOS v208.5.0
 - **工具链**: RISC-V 32-bit musl (`cc_riscv32_musl_b010`)
 - **SDK 版本**: 1.10.106

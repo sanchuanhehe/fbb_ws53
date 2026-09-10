@@ -9,6 +9,11 @@ use_directory_urls: true
 exclude_docs: |
   /zh-CN/samples/peripherals/pmp/pmp.md
   /zh-CN/samples/connectivity/wifi/repeater.md
+  /zh-CN/samples/connectivity/wifi/power-save/power-save.md
+  /zh-CN/samples/connectivity/wifi/scan/scan.md
+  /zh-CN/samples/connectivity/wifi/p2p.md
+  /zh-CN/samples/connectivity/wifi/monitor.md
+  /zh-CN/samples/connectivity/wifi/hilink-indie-upgrade.md
 
 repo_name: 前往GitCode编辑
 repo_url: https://gitcode.com/HiSpark/fbb_ws53/tree/master/docs/zh-CN/
@@ -158,13 +163,8 @@ nav:
               - Wi-Fi: zh-CN/samples/connectivity/wifi/index.md
               - STA 连接: zh-CN/samples/connectivity/wifi/sta/sta-connect.md
               - SoftAP: zh-CN/samples/connectivity/wifi/softap/softap.md
-              - 扫描: zh-CN/samples/connectivity/wifi/scan/scan.md
-              - 省电模式: zh-CN/samples/connectivity/wifi/power-save/power-save.md
-              - P2P: zh-CN/samples/connectivity/wifi/p2p.md
-              - 监听模式: zh-CN/samples/connectivity/wifi/monitor.md
               # - 中继设计: zh-CN/samples/connectivity/wifi/repeater.md
               - SysChannel: zh-CN/samples/connectivity/wifi/syschannel.md
-              - HiLink 独立升级: zh-CN/samples/connectivity/wifi/hilink-indie-upgrade.md
       - 外设驱动:
           - 外设驱动: zh-CN/samples/peripherals/index.md
           - ADC: zh-CN/samples/peripherals/adc/adc.md
