@@ -17,22 +17,22 @@
 ```mermaid
 flowchart LR
     P[物理引脚 Pin_N] --> MUX{引脚复用矩阵<br/>PinMux}
-    MUX --> F0[功能0: GPIO]
-    MUX --> F1[功能1: UART_TXD]
-    MUX --> F2[功能2: SPI_CLK]
-    MUX --> F3[功能3: I2C_SDA]
-    MUX --> F4[功能4: PWM_OUT]
+    MUX --> F0["<div style='width: 180px;'>功能0: GPIO</div>"]
+    MUX --> F1["<div style='width: 180px;'>功能1: UART_TXD</div>"]
+    MUX --> F2["<div style='width: 180px;'>功能2: SPI_CLK</div>"]
+    MUX --> F3["<div style='width: 180px;'>功能3: I2C_SDA</div>"]
+    MUX --> F4["<div style='width: 180px;'>功能4: PWM_OUT</div>"]
 ```
 
 ### 引脚属性三要素
 
 每个引脚除了功能模式，还有两个影响电气特性的属性：
 
-| 属性 | API | 说明 | sample 取值 |
-|------|-----|------|---|
-| `mode`（功能模式） | `uapi_pin_set_mode` / `uapi_pin_get_mode` | 选择引脚连接到的功能模块 | 5 |
-| `ds`（驱动强度） | `uapi_pin_set_ds` / `uapi_pin_get_ds` | 引脚输出电流能力，影响信号边沿速率和 EMI | 3 |
-| `pull`（上下拉） | `uapi_pin_set_pull` / `uapi_pin_get_pull` | 未驱动时的默认电平——上拉/下拉/浮空 | 2 |
+| 属性 | API | 说明 |
+|------|-----|------|
+| `mode`（功能模式） | `uapi_pin_set_mode` / `uapi_pin_get_mode` | 选择引脚连接到的功能模块 |
+| `ds`（驱动强度） | `uapi_pin_set_ds` / `uapi_pin_get_ds` | 引脚输出电流能力，影响信号边沿速率和 EMI |
+| `pull`（上下拉） | `uapi_pin_set_pull` / `uapi_pin_get_pull` | 未驱动时的默认电平——上拉/下拉/浮空 |
 
 > **驱动强度选择**：数字越大驱动电流越强。高速信号（SPI CLK > 10MHz）需要高驱动强度以保证信号完整性；低速信号（I2C、UART）用低驱动强度以减少功耗和 EMI。
 
@@ -106,26 +106,13 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-    INIT[uapi_pin_init] --> GET_M[get_mode 读取当前]
-    GET_M --> SET_M[set_mode=5]
-    SET_M --> CHK_M{get_mode == 5?}
-    CHK_M -->|是| OK_M[print succ]
-    CHK_M -->|否| ERR_M[print fail]
-
-    OK_M --> GET_D[get_ds 读取当前]
-    GET_D --> SET_D[set_ds=3]
-    SET_D --> CHK_D{get_ds == 3?}
-    CHK_D -->|是| OK_D[print succ]
-    CHK_D -->|否| ERR_D[print fail]
-
-    OK_D --> GET_P[get_pull 读取当前]
-    GET_P --> SET_P[set_pull=2]
-    SET_P --> CHK_P{get_pull == 2?}
-    CHK_P -->|是| OK_P[print succ]
-    CHK_P -->|否| ERR_P[print fail]
-
-    OK_P --> DEINIT[uapi_pin_deinit]
+    INIT[初始化] --> MODE["配置并验证功能模式<br/>mode = 5"]
+    MODE --> DS["配置并验证驱动强度<br/>ds = 3"]
+    DS --> PULL["配置并验证上下拉<br/>pull = 2"]
+    PULL --> DEINIT[反初始化]
 ```
+
+三项属性均按“读取当前值 → 设置目标值 → 回读验证”执行；设置成功且回读值与目标值一致时，打印 `succ`。初始化和反初始化分别调用 `uapi_pin_init()` 和 `uapi_pin_deinit()`。
 
 ## 案例操作指导
 
@@ -143,20 +130,25 @@ flowchart TD
 
 ## 关键配置
 
-| 配置项 | 推荐值 | 说明 |
-|--------|---|------|
-| `mode` 切换前 | 先 `deinit` 原外设 | 切换引脚功能前确保原外设已停用——否则新旧功能可能同时驱动引脚导致电平冲突 |
-| `pull` 值 | 依外设需求 | UART RX (Receive) 用上拉（防悬空误触发）；I2C 用上拉（开漏输出需要）；GPIO 输出用浮空 |
-| `ds` 值 | 3（中等等级） | 低速信号 1~3，高速信号 4~7。驱动强度越高功耗越大、EMI 越高 |
-| 回读验证 | 必须 | 引脚配置寄存器可能受硬件限制只读部分位——必须回读确认实际生效的值 |
+下表说明各参数的含义和选取依据。实际使用时，应根据所选引脚、外设要求和板级电路确定取值。
 
-> **Trade-off**：高驱动强度 = 更快的信号边沿 + 更好的信号完整性，但代价是更高的动态功耗和更强的电磁辐射。在 EMI 敏感场景（如射频附近），应使用最低可接受的驱动强度。
+| 参数 | 含义  | 实际选取依据 |
+|------|------|--------------|
+| `mode`（功能模式） | 选择引脚连接的外设功能，如 GPIO、UART 或 SPI | 查阅所选引脚的复用功能表，确认目标功能对应的模式值 |
+| `ds`（驱动强度） | 设置引脚输出信号的驱动能力 | 根据信号速率和负载选择，并确认所选引脚支持的档位 |
+| `pull`（上下拉） | 设置引脚的上拉、下拉或浮空状态 | 根据外设要求和板上已有的上下拉电阻选择；数值含义以 SDK 定义为准 |
+
+配置时还需注意：
+
+- **切换功能前**：先停用当前占用该引脚的外设，再修改 `mode`。
+- **设置参数后**：检查 `set` 接口返回值，并使用对应的 `get` 接口回读；设置成功且回读值与目标值一致，才判定该项配置通过。
+- **选择驱动强度时**：在满足信号要求的前提下选择合适档位，同时考虑功耗和电磁干扰（EMI）。
 
 ## 代码详解
 
 ### 1. 初始化和功能模式配置
 
-`uapi_pin_init()` 初始化引脚控制模块。每个属性的操作遵循相同模式：`get`（读当前值）→ `set`（写新值）→ `get`（回读验证）：
+`uapi_pin_init()` 初始化引脚控制模块。每个属性的操作遵循相同模式：`get`（读当前值）→ `set`（写新值）→ `get`（回读验证）。
 
 ```c
 pin_t pin = CONFIG_PINCTRL_USE_PIN;

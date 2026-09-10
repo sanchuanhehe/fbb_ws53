@@ -63,15 +63,15 @@ RTC 超时回调运行在中断上下文中，应只执行记录时间、更新�
 
 ```mermaid
 flowchart TD
-    A[uapi_rtc_deinit] --> B[uapi_rtc_init]
-    B --> C[uapi_rtc_adapter]
-    C --> D[创建 4 个软件定时器]
-    D --> E[记录开始时间并分别启动]
-    E --> F[RTC 中断回调记录结束时间]
+    A["<div style='width: 220px;'>uapi_rtc_deinit</div>"] --> B["<div style='width: 220px;'>uapi_rtc_init</div>"]
+    B --> C["<div style='width: 220px;'>uapi_rtc_adapter</div>"]
+    C --> D["<div style='width: 220px;'>创建 4 个软件定时器</div>"]
+    D --> E["<div style='width: 220px;'>记录开始时间并分别启动</div>"]
+    E --> F["<div style='width: 220px;'>RTC 中断回调记录结束时间</div>"]
     F --> G{4 个回调全部完成?}
     G -->|否| F
-    G -->|是| H[停止并删除 4 个定时器]
-    H --> I[打印实际耗时]
+    G -->|是| H["<div style='width: 220px;'>停止并删除 4 个定时器</div>"]
+    H --> I["<div style='width: 220px;'>打印实际耗时</div>"]
 ```
 
 ## 案例操作指导
@@ -110,10 +110,10 @@ real time[3] = 4000ms  delay = 4000ms
 | `CONFIG_RTC_IRQN` | 49 | RTC 中断号 |
 | `CONFIG_RTC_PRIO` | 1 | RTC 中断优先级 |
 | `RTC_TIMERS_NUM` | 4 | 同时创建的软件定时器数量 |
-| `RTC1_DELAY_1000MS` | 1000ms | 第一个定时器超时值 |
-| `RTC2_DELAY_2000MS` | 2000ms | 第二个定时器超时值 |
-| `RTC3_DELAY_3000MS` | 3000ms | 第三个定时器超时值 |
-| `RTC4_DELAY_4000MS` | 4000ms | 第四个定时器超时值 |
+| `RTC1_DELAY_1000MS` | 1000 | 第一个定时器超时值 |
+| `RTC2_DELAY_2000MS` | 2000 | 第二个定时器超时值 |
+| `RTC3_DELAY_3000MS` | 3000 | 第三个定时器超时值 |
+| `RTC4_DELAY_4000MS` | 4000 | 第四个定时器超时值 |
 
 ## 代码详解
 

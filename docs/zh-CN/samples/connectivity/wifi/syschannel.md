@@ -10,17 +10,9 @@
 
 ## 案例说明
 
-Device 端源码位于：
+Device 端源码位于：src/application/samples/wifi/syschannel_dev/
 
-```text
-src/application/samples/wifi/syschannel_dev/
-```
-
-Linux Host 配套源码位于：
-
-```text
-src/application/samples/wifi/syschannel_host/linux/
-```
+Linux Host 配套源码位于：src/application/samples/wifi/syschannel_host/linux/
 
 Device 端设置网络报文过滤规则、初始化 SDIO SysChannel，并处理 Host 发来的命令。Host 端的 `sample_link` 负责连接内核 Netlink 通道、接收 Device 上报并维护 Linux 网络接口；`sample_cli` 通过本机 UDP 端口向 `sample_link` 发送控制命令。
 
@@ -42,8 +34,6 @@ flowchart LR
 | Host 网络接口 | `wlan0` | `sample_link` 使用该名称配置 MAC 和 IP |
 | CLI 本机端口 | UDP 8822 | `sample_cli` 与 `sample_link` 的本地命令通道 |
 | Netlink 参数 | PID 1100、mode 28 | 必须与配套内核驱动实现一致 |
-
-### Host 运行前提
 
 Host 示例会配置 Linux `wlan0` 的 MAC 和 IP，需要相应权限。不要在生产设备上未经评估直接运行；接口名、Netlink 参数和权限模型都应按实际平台适配。
 
