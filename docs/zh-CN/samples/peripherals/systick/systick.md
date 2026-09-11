@@ -16,10 +16,11 @@ WS53 的 SysTick 驱动向应用提供秒、毫秒、微秒时间戳和对应的
 
 ```mermaid
 flowchart LR
-    C[uapi_systick_get_count] --> S[uapi_systick_get_s]
-    C --> M[uapi_systick_get_ms]
-    C --> U[uapi_systick_get_us]
-    C --> D[uapi_systick_delay_s/ms/us]
+    C[uapi_systick_get_count]
+    C --> S["<div style='width:240px'>uapi_systick_get_s</div>"]
+    C --> M["<div style='width:240px'>uapi_systick_get_ms</div>"]
+    C --> U["<div style='width:240px'>uapi_systick_get_us</div>"]
+    C --> D["<div style='width:240px'>uapi_systick_delay_s/ms/us</div>"]
 ```
 
 ### SysTick 与 Timer 案例的使用方式

@@ -37,14 +37,14 @@ WS53 使用 lwIP 提供的 BSD Socket 风格接口。TCP 建立可靠、有序�
 
 ## Wi-Fi 前置流程
 
-TCP 任务不会直接启动 Socket。wifi_sta_sample_init() 先注册事件回调，等待 Wi-Fi 初始化，随后执行：
+TCP 任务不会直接启动 Socket。`wifi_sta_sample_init()` 首先注册事件回调，并等待 Wi-Fi 初始化完成，随后依次执行以下步骤：
 
-1. wifi_sta_enable() 创建 STA 接口。
-2. wifi_sta_scan() 扫描附近 AP。
-3. 精确匹配 SSID tcp_test。
-4. 使用扫描结果中的 BSSID 和安全类型调用 wifi_sta_connect()。
-5. 在 wlan0 上调用 netifapi_dhcp_start()。
-6. 获取非零 IP 后调用 CmdTcpSample() 创建 TCP 任务。
+1. 调用 `wifi_sta_enable()` 创建 STA 接口。
+2. 调用 `wifi_sta_scan()` 扫描附近 AP。
+3. 精确匹配 SSID 为 `tcp_test` 的目标 AP。
+4. 根据扫描结果中的 BSSID 和安全类型，调用 `wifi_sta_connect()` 发起连接。
+5. 在 `wlan0` 接口上调用 `netifapi_dhcp_start()` 启动 DHCP。
+6. 获取到非零 IP 地址后，调用 `CmdTcpSample()` 创建 TCP 任务。
 
 | 参数 | 默认值 |
 | --- | --- |
@@ -55,7 +55,9 @@ TCP 任务不会直接启动 Socket。wifi_sta_sample_init() 先注册事件回�
 | TCP 数据缓冲 | 100 字节 |
 | DHCP 检查 | 最多 300 次循环 |
 
+```text
 实际使用前应修改源码中的演示 SSID、密码和目标地址。
+```
 
 ## 涉及 API
 
@@ -95,8 +97,6 @@ WS53 在本地端口 5001 监听，等待 PC 或其他 TCP Client 连接。连�
 | 发送间隔 | 约 30 秒 | 由对端决定 |
 | 发送超时 | 10 秒 | 不使用 |
 
-源码将 Server 接收超时宏 60 转换为 tv_sec=0、tv_usec=60000，实际约为 60 ms，不应理解为 60 秒。
-
 ## 关键配置
 
 Client：
@@ -119,8 +119,8 @@ CONFIG_SUPPORT_TCP_SERVER_SAMPLE=y
 | --- | --- | --- |
 | TCP_SAMPLE_DEFAULT_PORT | 5001 | Client 目标端口和 Server 监听端口 |
 | TCP_SAMPLE_DEFAULT_TCP_SAMPLE_BUFLEN | 100 | TCP 缓冲长度 |
-| TCP_SAMPLE_DEFAULT_RX_TIMEOUT | 60 | Server 接收超时配置值，实际单位需注意 |
-| TCP_SAMPLE_DEFAULT_TX_TIMEOUT | 10 秒 | Client 发送超时 |
+| TCP_SAMPLE_DEFAULT_RX_TIMEOUT | 60 | Server 接收超时，按当前源码换算为 60 毫秒；宏注释中的秒与实现不一致 |
+| TCP_SAMPLE_DEFAULT_TX_TIMEOUT | 10 | Client 发送超时，单位：秒 |
 | WIFI_TCP_SAMPLE_DST_IP | 192.168.50.100 | Client 默认目标 IP |
 | WIFI_SSID | tcp_test | 演示 SSID |
 | WIFI_TEST | 1a2b3c4d | 演示密码 |

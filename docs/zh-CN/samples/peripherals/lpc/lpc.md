@@ -68,15 +68,15 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    A[初始化 10ms OS 定时器] --> B[GPIO 引脚复用为模式 0]
-    B --> C[注册 GPIO 设备 suspend/resume]
-    C --> D[设置 GPIO 输入]
-    D --> E[注册下降沿中断]
-    E --> F[等待平台策略使系统进入低功耗]
-    F --> G[外部下降沿触发唤醒]
-    G --> H[ISR 关闭中断并打印计数]
-    H --> I[启动 10ms 防抖定时器]
-    I --> J[重新使能 GPIO 中断]
+    A["<div style='width:220px;text-align:center'>初始化 10ms OS 定时器</div>"] --> B["<div style='width:220px;text-align:center'>GPIO 引脚复用为模式 0</div>"]
+    B --> C["<div style='width:220px;text-align:center'>注册 GPIO 设备 suspend/resume</div>"]
+    C --> D["<div style='width:220px;text-align:center'>设置 GPIO 输入</div>"]
+    D --> E["<div style='width:220px;text-align:center'>注册下降沿中断</div>"]
+    E --> F["<div style='width:220px;text-align:center'>等待平台策略<br/>使系统进入低功耗</div>"]
+    F --> G["<div style='width:220px;text-align:center'>外部下降沿触发唤醒</div>"]
+    G --> H["<div style='width:220px;text-align:center'>ISR 关闭中断并打印计数</div>"]
+    H --> I["<div style='width:220px;text-align:center'>启动 10ms 防抖定时器</div>"]
+    I --> J["<div style='width:220px;text-align:center'>重新使能 GPIO 中断</div>"]
 ```
 
 ## 案例操作指导

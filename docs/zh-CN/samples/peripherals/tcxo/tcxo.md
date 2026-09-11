@@ -19,9 +19,9 @@ WS53 的实际时钟源结构、温度补偿方式、频率误差和低功耗切
 ```mermaid
 flowchart LR
     I[uapi_tcxo_init] --> C[TCXO 计数基准]
-    C --> M[uapi_tcxo_get_ms]
-    C --> U[uapi_tcxo_get_us]
-    C --> D[uapi_tcxo_delay_ms/us]
+    C --> M["<div style='width:180px'>uapi_tcxo_get_ms</div>"]
+    C --> U["<div style='width:180px'>uapi_tcxo_get_us</div>"]
+    C --> D["<div style='width:180px'>uapi_tcxo_delay_ms/us</div>"]
 ```
 
 ### TCXO 时钟 vs SysTick 时钟

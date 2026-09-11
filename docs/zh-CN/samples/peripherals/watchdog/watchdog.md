@@ -16,22 +16,24 @@
 
 ```mermaid
 flowchart TD
-    S[系统正常运行]
-    S -->|任务定期喂狗| S
-    S -->|某任务卡死<br/>未喂狗| T[看门狗计数器减到0]
+    A[初始化看门狗] --> E[使能看门狗]
+    E --> S[系统正常运行]
+    S -->|任务按周期喂狗| K[重置计数器]
+    K --> S
+    S -->|任务卡死或未及时喂狗| T[计数器归零<br/>发生超时]
     T --> M{工作模式}
     M -->|RESET| R[硬件复位]
     M -->|INTERRUPT| I[执行超时回调]
-    I -->|仍未喂狗| R
+    I -->|回调后仍未喂狗| R
     R --> B[系统重新启动]
-    B --> S
+    B --> A
 ```
 
 ### 超时值的选择策略
 
 超时值必须大于系统内**最长不可中断操作**的时间：
 
-| 操作类型 | 配置时需要考虑的事项 |
+| 操作类型 | 注意事项 |
 |----------|----------------------|
 | Flash 擦除/写入 | 以所用 Flash 器件手册和驱动实测的最坏耗时为准 |
 | OTA (Over-The-Air) 下载与校验 | 确保长流程中仍由健康监控逻辑按策略喂狗 |
@@ -123,33 +125,16 @@ sequenceDiagram
 |--------|---|------|
 | `TIME_OUT` | 根据系统最坏响应时间确定 | Sample 使用 2 秒便于观察；产品值应覆盖最长不可中断操作和调度抖动，并满足故障恢复时间要求 |
 | `WDT_MODE` | 使用枚举名 | `WDT_MODE_RESET=0`：触发时直接复位；`WDT_MODE_INTERRUPT=1`：先进入中断，若中断阶段未喂狗则随后复位。Sample 当前使用模式 1 |
-| 喂狗位置 | 最高优先级监控任务 | 决不能在各功能任务中各喂各的——若监控任务卡死而某个低优先级任务仍在喂狗，看门狗失效 |
+| 喂狗位置 | 最高优先级监控任务 | 严禁各功能任务分别独立执行看门狗喂狗操作。否则，一旦监控任务发生卡死，而某一低优先级任务仍持续喂狗，将导致看门狗监控机制失效，无法发挥异常检测与复位保护作用。 |
 | 超时回调 | 仅作日志/告警 | `watchdog_callback` 在超时前极短时间窗口触发——只能做最少操作（记录日志、设置标志），不能做耗时操作 |
 
 > **Trade-off**：超时值过小会使正常的长耗时操作或调度抖动误触发看门狗；超时值过大会延长故障恢复时间。应使用目标系统的最坏耗时实测结果确定，而不是套用统一数值。
 
 ## 代码详解
 
-### 1. 超时回调
+### 1. 初始化看门狗
 
-当前 Sample 使用 `WDT_MODE_INTERRUPT`。首次超时时进入回调；若回调阶段仍未喂狗，系统随后复位。回调中只应执行有确定时延的最小操作：
-
-```c
-static errcode_t watchdog_callback(uintptr_t param)
-{
-    UNUSED(param);
-    osal_printk("watchdog kick timeout!\r\n");
-    return ERRCODE_SUCC;
-}
-```
-
-### 2. 超时回调限制
-
-不要在超时回调中直接擦写非易失存储。Flash 擦写或通过 I2C 访问 EEPROM 可能无法在剩余时间内完成，复位打断写入还可能造成数据损坏。优先只设置保留寄存器、备份 RAM 或其他确定时延的标志；系统重启后读取硬件复位原因，再在正常任务上下文中持久化记录。
-
-### 3. 初始化看门狗
-
-案例先调用 `uapi_watchdog_deinit()` 清理已有状态，再重新初始化。`uapi_watchdog_init` 的参数 `TIME_OUT` 单位为**秒**（非毫秒）。返回值检查 `ERRCODE_INVALID_PARAM` 用于防御无效超时值：
+案例先调用 `uapi_watchdog_deinit()` 清理已有状态，再重新初始化。`uapi_watchdog_init` 的参数 `TIME_OUT` 单位为秒（非毫秒）。返回值检查 `ERRCODE_INVALID_PARAM` 用于防御无效超时值：
 
 ```c
 (void)uapi_watchdog_deinit();
@@ -163,7 +148,20 @@ if (ret == ERRCODE_INVALID_PARAM) {
 osal_printk("init watchdog\r\n");
 ```
 
-### 4. 超时场景（不喂狗）
+### 2. 超时回调
+
+当前 Sample 使用 `WDT_MODE_INTERRUPT`。首次超时时进入回调；若回调阶段仍未喂狗，系统随后复位。回调中只应执行有确定时延的最小操作：
+
+```c
+static errcode_t watchdog_callback(uintptr_t param)
+{
+    UNUSED(param);
+    osal_printk("watchdog kick timeout!\r\n");
+    return ERRCODE_SUCC;
+}
+```
+
+### 3. 超时场景（不喂狗）
 
 使能 `CONFIG_WDT_TIMEOUT_SAMPLE` 后，任务进入死循环。当前模式下先触发超时回调，未喂狗时随后复位：
 
@@ -173,7 +171,7 @@ osal_printk("init watchdog\r\n");
 #endif
 ```
 
-### 5. 正常喂狗场景
+### 4. 正常喂狗场景
 
 使能 `CONFIG_WDT_KICK_SAMPLE` 后，任务每 500ms 调用 `uapi_watchdog_kick()` 重置计数器：
 
@@ -187,7 +185,7 @@ osal_printk("init watchdog\r\n");
 #endif
 ```
 
-### 6. 反初始化（正常退出路径）
+### 5. 反初始化（正常退出路径）
 
 当不复位也不喂狗时（两个 Kconfig 都未开启），执行 `deinit` 退出：
 
