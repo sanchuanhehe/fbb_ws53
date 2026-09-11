@@ -16,14 +16,14 @@ ADC将模拟电压转换为数字值——温度传感器、光敏电阻、电�
 
 ```mermaid
 flowchart LR
-    A[ADC 引脚输入电压] --> ADC[ADC 转换器]
-    ADC --> D[数字值 0~4095<br/>12-bit 分辨率]
-    D --> C[CPU 读取]
+    A["ADC 引脚输入电压<br/>&nbsp;"] --> ADC["ADC 转换器<br/>&nbsp;"]
+    ADC --> D["数字值 0~4095<br/>12-bit 分辨率"]
+    D --> C["CPU 读取<br/>&nbsp;"]
 ```
 
 ### 分辨率和参考电压
 
-WS53 当前默认启用 V155 ADC。ADC 原始码为 12 bit，码值范围为 0～4095，共 4096 个量化等级；V155 HAL 使用 1800mV 作为标称换算上限，并结合芯片校准参数 `data_k`、`data_b` 将原始码换算为毫伏值。
+ADC 原始码为 12 bit，码值范围为 0～4095，共 4096 个量化等级；V155 HAL 使用 1800mV 作为标称换算上限，并结合芯片校准参数 `data_k`、`data_b` 将原始码换算为毫伏值。
 
 应用调用 `adc_port_read()` 时得到的已经是换算后的毫伏值，不需要再按 `原始码 / 4095 × Vref` 进行二次计算。
 
@@ -68,13 +68,13 @@ WS53 当前默认启用 V155 ADC。ADC 原始码为 12 bit，码值范围为 0�
 
 ```mermaid
 flowchart TD
-    I[uapi_adc_init] --> L
-    L[循环 10 次] --> R[adc_port_read channel, voltage]
-    R --> P[printf voltage mV]
-    P --> S[osal_msleep 10000ms]
+    I["<div style='width: 220px;'>uapi_adc_init</div>"] --> L
+    L["<div style='width: 220px;'>循环 10 次</div>"] --> R["<div style='width: 220px;'>adc_port_read channel, voltage</div>"]
+    R --> P["<div style='width: 220px;'>printf voltage mV</div>"]
+    P --> S["<div style='width: 220px;'>osal_msleep 10000ms</div>"]
     S --> D{10 次?}
     D -->|否| R
-    D -->|是| E[uapi_adc_deinit]
+    D -->|是| E["<div style='width: 220px;'>uapi_adc_deinit</div>"]
 ```
 
 ## 案例操作指导
@@ -112,7 +112,6 @@ voltage: 1652 mv
 | ADC 通道 | Kconfig 可配 | 确认硬件引脚对应哪个 ADC 通道 |
 | 标称换算上限 | 1800mV | 当前 V155 HAL 的 `VOLTAGE_UPPER_LIMIT`，实际结果还会应用芯片校准参数 |
 | 采样间隔 | 10000ms | 慢变信号（如温度），无需高频采样 |
-| 分压电阻 | 注意 | 有分压则测量值需按比例还原 |
 
 ## 代码详解
 

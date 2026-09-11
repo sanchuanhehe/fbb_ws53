@@ -16,16 +16,19 @@
 
 ```mermaid
 flowchart LR
-    subgraph A["无 DMA: CPU 逐字搬运"]
+    subgraph A["无 DMA：CPU 逐字搬运"]
+        direction TB
         C1[CPU] -->|循环读写| M1[源内存]
         C1 -->|循环读写| M2[目的内存]
     end
-    subgraph B["有 DMA: 硬件自动搬运"]
+    subgraph B["有 DMA：硬件自动搬运"]
+        direction TB
         C2[CPU] -->|一次配置| D[DMA 控制器]
         D -->|硬件搬运| M3[源内存]
         D -->|硬件搬运| M4[目的内存]
         C2 -->|同时处理| T[其他任务]
     end
+    A ~~~ B
 ```
 
 ### DMA 传输要素
@@ -58,7 +61,7 @@ flowchart LR
 ### 案例简介
 
 本案例演示 DMA 两种传输模式的内存间数据拷贝：
-- **单次传输**（默认）：一次性配置源/目的/长度，启动后 DMA 自动搬运 32 个 word，完成后通过回调通知任务；当前 Sample 的比较长度存在不足，详见后文说明
+- **单次传输**（默认）：一次性配置源/目的/长度，启动后 DMA 自动搬运 32 个 word，完成后通过回调通知任务；
 - **LLI 链式传输**（`CONFIG_DMA_MEMORY_LLI_TRANSFER_MODE` 宏开启）：将传输描述符链表预先写入 DMA，硬件自动遍历执行，适合连续多块搬运
 
 ### 功能规格

@@ -90,8 +90,7 @@ flowchart TD
     C --> D[uapi_i2s_set_config]
     D --> E{主机还是从机}
     E -->|主机| F[准备左右声道测试数据]
-    F --> G[uapi_i2s_write_data]
-    G --> F
+    F <--> G[uapi_i2s_write_data]
     E -->|从机| H[uapi_i2s_read_start]
     H --> I[回调打印左右声道数据]
 ```
@@ -101,10 +100,6 @@ flowchart TD
 ### 第一步：配置案例
 
 启用 `ENABLE_PERIPHERAL_SAMPLE`、`SAMPLE_SUPPORT_I2S`，再选择 `SAMPLE_SUPPORT_I2S_MASTER` 或 `SAMPLE_SUPPORT_I2S_SLAVE`。总线编号和传输长度可通过 Kconfig 配置。
-
-### 当前引脚配置
-
-`sio_porting_i2s_pinmux()` 没有读取 I2S Sample Kconfig 中的 CLK、WS、DO、DI 引脚配置，而是将 `S_MGPIO17`、`S_MGPIO20`、`S_MGPIO19`、`S_MGPIO18` 固定配置为 `PIN_MODE_3`。如需更换引脚，应根据 WS53 引脚复用表修改 `src/drivers/chips/ws53/porting/sio/sio_porting.c`，不能只修改 Sample Kconfig。
 
 ### 第二步：连接设备
 

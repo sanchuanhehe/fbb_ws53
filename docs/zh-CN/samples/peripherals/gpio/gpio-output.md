@@ -22,8 +22,9 @@
 
 基本流程：
 
-```text
-设置引脚复用 → 设置输出方向 → 写入初始电平 → 按业务切换电平
+```mermaid
+flowchart LR
+    A[设置引脚复用] --> B[设置输出方向] --> C[写入初始电平] --> D[按业务切换电平]
 ```
 
 常用接口包括 `uapi_pin_set_mode()`、`uapi_gpio_set_dir()`、`uapi_gpio_set_val()` 和 `uapi_gpio_toggle()`。

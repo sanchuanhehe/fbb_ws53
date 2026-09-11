@@ -2,10 +2,6 @@
 
 > PWM (Pulse Width Modulation) 驱动 | sample: `src/application/samples/peripheral/pwm/pwm_demo.c`
 
-!!! info "与 WS63 参考案例的关系"
-
-    WS53 与 WS63 的主 `pwm_demo.c` 流程基本一致，均包含非重复输出、重复输出和 V151 动态配置更新。本页使用 WS53 的默认通道 0、引脚 47，并按完整源码流程说明。WS63 额外提供的 PWM Preload Sample 当前不在 WS53 源码中。
-
 ## 学习目标
 
 - 掌握 PWM 高、低电平时间与周期、占空比之间的关系
@@ -20,12 +16,13 @@ PWM 通过周期性切换高低电平，并调整高电平在一个周期中的�
 
 ```mermaid
 flowchart LR
-    subgraph 占空比 50%
+    subgraph A["占空比 50%"]
         H1[高电平 50%] --> L1[低电平 50%]
     end
-    subgraph 占空比 25%
+    subgraph B["占空比 25%"]
         H2[高电平 25%] --> L2[低电平 75%]
     end
+    A~~~B
 ```
 
 | 占空比 | 平均电压（VCC=3.3V） | LED 效果 |
@@ -85,16 +82,16 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    A[配置 PWM 引脚复用] --> B[uapi_pwm_init]
-    B --> C[打开非重复模式]
-    C --> D[启动通道或通道组]
-    D --> E[延时 500ms 后关闭]
-    E --> F[打开重复模式并注册回调]
-    F --> G[启动 PWM]
-    G --> H{V151 驱动?}
-    H -->|是| I[每 500ms 更新高低电平时间]
-    H -->|否| J[保持输出 500ms]
-    I --> K[停止并关闭]
+    A["<div style='width: 220px;'>配置 PWM 引脚复用</div>"] --> B["<div style='width: 220px;'>uapi_pwm_init</div>"]
+    B --> C["<div style='width: 220px;'>打开非重复模式</div>"]
+    C --> D["<div style='width: 220px;'>启动通道或通道组</div>"]
+    D --> E["<div style='width: 220px;'>延时 500ms 后关闭</div>"]
+    E --> F["<div style='width: 220px;'>打开重复模式并注册回调</div>"]
+    F --> G["<div style='width: 220px;'>启动 PWM</div>"]
+    G --> H{是否为V151 驱动?}
+    H -->|是| I["<div style='width: 220px;'>每 500ms 更新高低电平时间</div>"]
+    H -->|否| J["<div style='width: 220px;'>保持输出 500ms</div>"]
+    I --> K["<div style='width: 220px;'>停止并关闭</div>"]
     J --> K
 ```
 
@@ -107,8 +104,8 @@ flowchart TD
 ### 第二步：编译和烧录
 
 ```bash
-fbb build ws53-liteos-app
-fbb flash ws53-liteos-app
+fbb build ws53_liteos_app
+fbb flash ws53_liteos_app
 ```
 
 > 完整的工程配置、编译和烧录方式请参考 [构建系统](../../../overall-architecture/build-system/index.md)。
@@ -125,7 +122,7 @@ fbb flash ws53-liteos-app
 | `CONFIG_PWM_GROUP_ID` | 0 | V151 驱动使用的通道组编号 |
 | `CONFIG_PWM_PIN` | 47 | PWM 输出引脚 |
 | `CONFIG_PWM_PIN_MODE` | 1 | 引脚复用模式 |
-| `TEST_TCXO_DELAY_500MS` | 500ms | 两次配置更新之间的延时 |
+| `TEST_TCXO_DELAY_500MS` | 500 | 两次配置更新之间的延时 |
 | `PWM_HIGH_TIME_CYC` | 20 | 重复模式初始高电平时间 |
 | `PWM_LOW_TIME_CYC` | 0 | 重复模式初始低电平时间 |
 
@@ -208,7 +205,3 @@ uapi_pwm_stop_group(CONFIG_PWM_GROUP_ID);
 uapi_pwm_start(CONFIG_PWM_CHANNEL);
 #endif
 ```
-
-在 V151 分支中，高电平时间从 20 逐步减小到 0，低电平时间从 0 逐步增加到 20，因此总周期保持为 20，而占空比逐步下降。
-
----
