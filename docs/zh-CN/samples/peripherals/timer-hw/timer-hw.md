@@ -12,14 +12,14 @@
 
 ### 硬件定时器 vs OS 软件定时器
 
-| 对比项 | 硬件定时器 | OS 软件定时器 |
+| 对比维度 | 硬件定时器 | OS 软件定时器 |
 |--------|---|---|
 | 时钟源 | 芯片硬件定时器（APB 时钟） | OS tick（SysTick 1ms） |
 | 延迟参数单位 | 微秒 | 取决于所用软件定时器接口 |
-| 回调上下文 | **硬件 ISR** | 定时器软中断 / 任务上下文 |
-| 可调阻塞 API | 绝对不能 | 绝对不能 |
-| 可用数量 | 受 WS53 定时器驱动和硬件资源限制 | 受系统配置和内存资源限制 |
-| 典型用途 | 精密时序、PWM (Pulse Width Modulation) 生成、波形测量 | 通用周期性任务、超时处理 |
+| 回调执行上下文 | **中断上下文（硬件 ISR）** | 软件中断或任务上下文，取决于具体实现 |
+| 是否允许阻塞调用 | 不允许，不能调用睡眠、打印等阻塞或耗时 API | 不允许在回调中调用延时接口；任务上下文中的阻塞操作也会延误其他软件定时器回调 |
+| 资源数量 | 受芯片硬件定时器数量及驱动资源限制 | 受系统配置和内存资源限制 |
+| 典型用途 | 精确定时、PWM (Pulse Width Modulation) 生成、波形测量 | 周期性任务、超时处理 |
 
 > **关键约束**：硬件定时器回调在 ISR 中执行——不能调用 `osal_msleep`、`osal_printk`、`printf` 等阻塞或耗时 API。回调中只能做简单操作（翻转 GPIO (General Purpose Input/Output)、递增计数器、`sem_up` 信号量通知任务）。
 
@@ -29,17 +29,35 @@
 
 ```mermaid
 flowchart TD
-    INIT[uapi_timer_deinit] --> INIT2[uapi_timer_init]
-    INIT2 --> ADAPT[uapi_timer_adapter 绑定 IRQ]
-    ADAPT --> LOOP[for i=0..3]
-    LOOP --> CREATE[uapi_timer_create]
-    CREATE --> RECORD[记录 start_time]
-    RECORD --> START[uapi_timer_start delay=1+i ms]
-    START --> LOOP
-    LOOP --> WAIT[等待 4 个回调全部触发]
-    WAIT --> STOP[逐个 stop + delete]
-    STOP --> PRINT[打印 real_time vs delay_time]
+    subgraph TASK["timer_task（任务上下文）"]
+        INIT["uapi_timer_deinit → uapi_timer_init"] --> ADAPT["uapi_timer_adapter：绑定通道 1 与 IRQ"]
+        ADAPT --> CREATE_INIT["i = 0"]
+        CREATE_INIT --> CREATE_CHECK{"i < 4？"}
+        CREATE_CHECK -->|是| CREATE["uapi_timer_create：创建第 i 个实例"]
+        CREATE --> RECORD["记录 start_time[i]（毫秒）"]
+        RECORD --> START["uapi_timer_start：启动第 i 个实例<br/>delay = 1000 × (i + 1) 微秒，data = i"]
+        START --> CREATE_NEXT["i = i + 1"]
+        CREATE_NEXT --> CREATE_CHECK
+        CREATE_CHECK -->|否| WAIT{"g_timer_int_count < 4？"}
+        WAIT -->|是：尚有回调未完成| SLEEP["osal_msleep(1)：等待 1 毫秒"]
+        SLEEP --> WAIT
+        WAIT -->|否：全部回调已完成| CLEAN_INIT["i = 0"]
+        CLEAN_INIT --> CLEAN_CHECK{"i < 4？"}
+        CLEAN_CHECK -->|是| CLEAN["uapi_timer_stop → uapi_timer_delete<br/>停止并删除第 i 个实例"]
+        CLEAN --> PRINT["打印第 i 个实例的实际延迟与配置延迟（毫秒）"]
+        PRINT --> CLEAN_NEXT["i = i + 1"]
+        CLEAN_NEXT --> CLEAN_CHECK
+        CLEAN_CHECK -->|否| DONE["任务返回"]
+    end
+
+    subgraph ISR["timer_timeout_callback（ISR 上下文）"]
+        CALLBACK["根据 data 确定实例索引<br/>记录 end_time[data]（毫秒）"] --> COUNT["g_timer_int_count++"]
+    end
+
+    START -.->|定时到期，异步触发| CALLBACK
 ```
+
+实线表示各上下文内的执行顺序，虚线表示定时到期后异步触发回调。回调可能在创建循环尚未结束时执行；任务启动全部 4 个实例后检查完成计数，尚未全部完成时休眠 1ms 后重试，待所有回调完成后逐个停止、删除实例并打印对应结果。图中的 `4` 对应代码中的 `TIMER_TIMERS_NUM`。
 
 ## 涉及 API
 

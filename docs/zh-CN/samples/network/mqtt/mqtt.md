@@ -52,7 +52,9 @@ sequenceDiagram
 | 1 | 至少一次，可能重复 | 使用，等待 Delivery Token |
 | 2 | 恰好一次，开销最大 | 未使用 |
 
+```text
 QoS 1 只保证消息至少到达一次，Broker 或网络重试时可能产生重复消息。业务侧需要使用消息 ID 或幂等逻辑去重。
+```
 
 ### TLS 与 MQTT URI
 
