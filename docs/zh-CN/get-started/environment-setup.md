@@ -36,45 +36,18 @@
 
 ## 安装 Git
 
-HiSpark Studio 插件的“从 HiSpark 下载 SDK”功能依赖 Git 命令工具。请先确认电脑已安装 Git，已安装时可跳过本节。
+HiSpark Studio 插件的“从 HiSpark 下载 SDK”功能会优先使用本机 Git 下载 SDK。相关说明可参考 [HiSpark Studio for VS Code 用户指南 - SDK下载](../tools/HiSparkStudioforVSCodeUserGuide/HiSparkStudioforVSCodeUserGuide.md#ZH-CN_TOPIC_0000002303416852)。
 
-### 下载安装 Git
+如电脑尚未安装 Git，请参考 [Git 官方安装说明](https://git-scm.com/book/zh/v2/起步-安装-Git){ target=_blank }安装 Git for Windows。安装时建议保留将 Git 添加到命令行环境变量的默认选项；安装界面或选项变化时，以 Git 官方文档和安装向导为准。
 
-1. 访问 [Git for Windows](https://git-scm.com/install/windows){ target=_blank }下载安装包。
-2. 下载完成后运行安装程序，按提示完成安装。
-
-### 配置环境变量
-
-以下步骤以 Windows 11 为例，界面以实际显示为准。安装完成后，需要将 Git 安装路径添加到系统环境变量 `PATH` 中。
-
-1. 找到 Git 安装目录，默认为 `C:\Program Files\Git\cmd`。单击文件夹地址栏并复制实际路径。
-
-    ![Git 安装路径](figures/git-安装路径.png)
-
-2. 使用快捷键 `Win+E` 打开文件资源管理器，右键左侧“此电脑”，选择“属性”。
-
-    ![此电脑属性](figures/打开PC属性.png)
-
-3. 选择“高级系统设置”。
-
-    ![高级系统设置](figures/PC-高级系统设置.png)
-
-4. 打开“环境变量”配置窗口，选择 `Path` 后单击“编辑”。
-
-    ![环境变量](figures/PC-环境变量.png)
-
-5. 单击“新建”，粘贴 Git 安装路径，单击“确定”完成配置。
-
-    ![配置 Git 路径](figures/PC-配置git路径.png)
-
-### 验证安装
-
-使用快捷键 `Win+R`，输入 `cmd` 并打开命令提示符，执行以下命令：
+安装完成后，关闭并重新打开命令提示符，执行以下命令确认 Git 可用：
 
 ```cmd
 git --version
-:: 输出示例: git version 2.47.1.windows.1
+:: 输出示例: git version 2.x.x.windows.x
 ```
+
+> 如果命令提示“不是内部或外部命令”，说明 Git 未加入 `PATH`。请参考 Git 官方安装说明重新配置，或重新运行 Git for Windows 安装程序并选择将 Git 加入命令行环境的选项。
 
 ## 安装 HiSpark Studio 插件
 
