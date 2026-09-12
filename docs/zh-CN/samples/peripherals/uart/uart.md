@@ -16,9 +16,9 @@ UART是嵌入式最常用的异步串行通信接口——仅需 TX/RX/GND 三�
 
 ```mermaid
 flowchart LR
-    MCU1[WS53 TX] -->|数据线| RX[PC RX]
-    MCU2[WS53 RX] -->|数据线| TX[PC TX]
-    MCU1 & MCU2 --> G[GND 共地]
+    MCU1[WS53 TX] -->|数据线| RX["<div style='width: 100px; text-align: center;'>PC RX</div>"]
+    MCU2[WS53 RX] -->|数据线| TX["<div style='width: 100px; text-align: center;'>PC TX</div>"]
+    MCU1 & MCU2 --> G["<div style='width: 100px; text-align: center;'>GND 共地</div>"]
 ```
 
 ### 波特率和帧格式
