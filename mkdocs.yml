@@ -83,9 +83,20 @@ nav:
           - 驱动 API: zh-CN/api-reference/driver/index.md
       - 安全:
           - 安全: zh-CN/guides/security/index.md
-          - 安全模块: zh-CN/guides/security/crypto/index.md
-          - eFuse: zh-CN/guides/security/efuse/index.md
-          - TLS/DTLS: zh-CN/guides/security/tls/index.md
+          - 安全模块:
+              - 安全模块: zh-CN/guides/security/crypto/index.md
+              - 安全模块开发指南: zh-CN/guides/security/crypto/manual/index.md
+              - 安全驱动 API: zh-CN/api-reference/driver/security/cipher.md
+          - eFuse:
+              - eFuse: zh-CN/guides/security/efuse/index.md
+              - eFuse 使用指南: zh-CN/guides/security/efuse/manual/index.md
+              - eFuse Core API: zh-CN/api-reference/driver/efuse/core.md
+              - eFuse User API: zh-CN/api-reference/driver/efuse/user.md
+          - TLS/DTLS:
+              - TLS/DTLS: zh-CN/guides/security/tls/index.md
+              - TLS/DTLS 开发指南: zh-CN/guides/security/tls/manual/index.md
+              - Cipher API: zh-CN/api-reference/driver/security/cipher.md
+              - Hash API: zh-CN/api-reference/driver/security/hash.md
       - 系统服务:
           - 系统服务: zh-CN/guides/system/index.md
           - CJSON: zh-CN/guides/system/cjson/index.md

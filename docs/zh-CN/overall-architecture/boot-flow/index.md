@@ -37,9 +37,9 @@ flowchart LR
     UPG -. 使用升级数据 .-> FOTA["FOTA data"]
 ```
 
-当前默认分区同时保留主 FlashBoot 和 `FlashBoot backup`。如果前级启动阶段无法使用主 FlashBoot，则进入备份镜像；备份镜像运行时会将备份分区恢复到主分区，然后继续引导 App。
+当前默认分区同时保留主 FlashBoot 和 FlashBoot backup。如果前级启动阶段无法使用主 FlashBoot，则进入备份镜像；备份镜像运行时会将备份分区恢复到主分区，然后继续引导 App。
 
-WS53 默认分区中的 `Ccore_imageA`（ID `0x20`）与 `Acore_imageA`（ID `0x21`）地址范围重叠；升级数据使用 ID `0x22`。不应把 ID `0x20` 与 ID `0x21` 的容量直接相加。只有产品显式启用 A/B 升级配置时，FlashBoot 才会按当前运行区域选择和映射镜像。
+WS53 默认分区中的 Ccore_imageA（ID `0x20`）与 Acore_imageA（ID `0x21`）地址范围重叠；升级数据使用 ID `0x22`。不应把 ID `0x20` 与 ID `0x21` 的容量直接相加。只有产品显式启用 A/B 升级配置时，FlashBoot 才会按当前运行区域选择和映射镜像。
 
 分区地址和大小见 [Flash 与 RAM](../memory-layout/index.md)。最终 `.fwpkg` 会组合 SSB、FlashBoot、App、NV (Non-Volatile) 和分区参数等内容，不是单独的 App 二进制。
 

@@ -47,29 +47,34 @@ WS53 是一款面向物联网和短距无线通信的 SoC 芯片，其 SDK采用
 应用层只应依赖 SDK 明确公开的接口，HAL、Porting 和寄存器操作属于驱动内部实现。
 
 ```mermaid
+%%{init: {"htmlLabels": true, "securityLevel": "loose"}}%%
 graph TD
-    APP[应用层]
-    OSAL[OSAL 接口]
-    MW[中间件公开 API]
-    DRIVER[驱动 UAPI]
-    HAL[HAL]
-    PORTING[Porting 适配层]
-    KERNEL[LiteOS 内核]
-    HW[芯片资源与硬件寄存器]
+    APP["<div style='width:130px;text-align:center'>应用层</div>"]
+    MW["<div style='width:130px;text-align:center'>中间件公开 API</div>"]
+    OSAL["<div style='width:130px;text-align:center'>OSAL 接口</div>"]
+    DRIVER["<div style='width:130px;text-align:center'>驱动 UAPI</div>"]
+    HAL["<div style='width:130px;text-align:center'>HAL</div>"]
+    PORTING["<div style='width:130px;text-align:center'>Porting 适配层</div>"]
+    KERNEL["<div style='width:130px;text-align:center'>LiteOS 内核</div>"]
+    HW["<div style='width:130px;text-align:center'>芯片资源与硬件寄存器</div>"]
 
-    MW --> DRIVER
     MW --> OSAL
-    DRIVER --> HAL
-    OSAL --> KERNEL
-    HAL -- 获取芯片适配参数 --> PORTING
-    PORTING --> HW
-    HAL -- 寄存器访问 --> HW
 
     APP -- 调用 --> MW
     APP -- 调用 --> OSAL
     APP -- 调用 --> DRIVER
 
-    linkStyle 7,8,9 stroke-width:3px
+    MW --> DRIVER
+
+    DRIVER --> HAL
+    OSAL --> KERNEL
+
+    HAL -- 获取芯片适配参数 --> PORTING
+    PORTING --> HW
+    HAL -- 寄存器访问 --> HW
+
+
+    linkStyle 1,2,3 stroke-width:3px
 ```
 
 应用层推荐调用以下三类接口：
