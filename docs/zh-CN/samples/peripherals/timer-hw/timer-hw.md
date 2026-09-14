@@ -23,41 +23,28 @@
 
 > **关键约束**：硬件定时器回调在 ISR 中执行——不能调用 `osal_msleep`、`osal_printk`、`printf` 等阻塞或耗时 API。回调中只能做简单操作（翻转 GPIO (General Purpose Input/Output)、递增计数器、`sem_up` 信号量通知任务）。
 
-### Sample 架构：多定时器同步测量
+### Sample 架构：硬件定时器驱动多个软件定时器
 
-本 Sample 创建 4 个硬件定时器，分别配置 1ms / 2ms / 3ms / 4ms 延迟，记录每个定时器的启动时间和回调触发时间，最后打印实际延迟与理论值的对比：
+本 Sample 仅适配 1 个硬件定时器通道（`TIMER_INDEX = 1`），并在该通道下创建 4 个软件定时器，分别配置 1ms / 2ms / 3ms / 4ms 延迟。4 个软件定时器共用同一个硬件定时器，由硬件定时器的时钟中断触发回调，记录每个软件定时器的启动时间和回调触发时间，最后打印实际延迟与理论值的对比：
 
 ```mermaid
-flowchart TD
-    subgraph TASK["timer_task（任务上下文）"]
-        INIT["uapi_timer_deinit → uapi_timer_init"] --> ADAPT["uapi_timer_adapter：绑定通道 1 与 IRQ"]
-        ADAPT --> CREATE_INIT["i = 0"]
-        CREATE_INIT --> CREATE_CHECK{"i < 4？"}
-        CREATE_CHECK -->|是| CREATE["uapi_timer_create：创建第 i 个实例"]
-        CREATE --> RECORD["记录 start_time[i]（毫秒）"]
-        RECORD --> START["uapi_timer_start：启动第 i 个实例<br/>delay = 1000 × (i + 1) 微秒，data = i"]
-        START --> CREATE_NEXT["i = i + 1"]
-        CREATE_NEXT --> CREATE_CHECK
-        CREATE_CHECK -->|否| WAIT{"g_timer_int_count < 4？"}
-        WAIT -->|是：尚有回调未完成| SLEEP["osal_msleep(1)：等待 1 毫秒"]
-        SLEEP --> WAIT
-        WAIT -->|否：全部回调已完成| CLEAN_INIT["i = 0"]
-        CLEAN_INIT --> CLEAN_CHECK{"i < 4？"}
-        CLEAN_CHECK -->|是| CLEAN["uapi_timer_stop → uapi_timer_delete<br/>停止并删除第 i 个实例"]
-        CLEAN --> PRINT["打印第 i 个实例的实际延迟与配置延迟（毫秒）"]
-        PRINT --> CLEAN_NEXT["i = i + 1"]
-        CLEAN_NEXT --> CLEAN_CHECK
-        CLEAN_CHECK -->|否| DONE["任务返回"]
+sequenceDiagram
+    participant T as timer_task（任务上下文）
+    participant H as 硬件定时器1
+    participant I as 时钟中断（ISR上下文）
+
+    T->>H: uapi_timer_deinit → uapi_timer_init
+    T->>H: uapi_timer_adapter(1, TIMER_1_IRQN, TIMER_PRIO)
+
+    loop 直到 g_timer_int_count == TIMER_TIMERS_NUM
+        H->>I: 定时到期，产生时钟中断
+        I->>I: timer_timeout_callback(i)<br/>记录 end_time[i]，g_timer_int_count++
+        T->>T: osal_msleep(1)
     end
 
-    subgraph ISR["timer_timeout_callback（ISR 上下文）"]
-        CALLBACK["根据 data 确定实例索引<br/>记录 end_time[data]（毫秒）"] --> COUNT["g_timer_int_count++"]
-    end
-
-    START -.->|定时到期，异步触发| CALLBACK
 ```
 
-实线表示各上下文内的执行顺序，虚线表示定时到期后异步触发回调。回调可能在创建循环尚未结束时执行；任务启动全部 4 个实例后检查完成计数，尚未全部完成时休眠 1ms 后重试，待所有回调完成后逐个停止、删除实例并打印对应结果。图中的 `4` 对应代码中的 `TIMER_TIMERS_NUM`。
+图中 `H` 表示唯一适配的硬件定时器通道，`timer_index[i]` 表示在该通道下创建的 4 个软件定时器句柄。软件定时器到期后，由硬件定时器产生时钟中断并在 ISR 上下文中执行回调；任务每 1ms 检查一次完成计数，待 4 个回调全部完成后逐个停止、删除软件定时器并打印结果。图中的 `4` 对应代码中的 `TIMER_TIMERS_NUM`。
 
 ## 涉及 API
 
@@ -66,27 +53,27 @@ flowchart TD
 | `uapi_timer_deinit()` | 清理已有定时器驱动状态 | `timer.h` |
 | `uapi_timer_init()` | 初始化定时器模块 | `timer.h` |
 | `uapi_timer_adapter(index, irqn, prio)` | 绑定定时器硬件通道与中断号 | `timer.h` |
-| `uapi_timer_create(index, &handle)` | 创建定时器实例（获取句柄） | `timer.h` |
-| `uapi_timer_start(handle, delay_us, cb, data)` | 启动单次/周期定时器（微秒） | `timer.h` |
-| `uapi_timer_stop(handle)` | 停止定时器 | `timer.h` |
-| `uapi_timer_delete(handle)` | 删除定时器实例 | `timer.h` |
+| `uapi_timer_create(index, &handle)` | 在指定硬件通道下创建软件定时器实例（获取句柄） | `timer.h` |
+| `uapi_timer_start(handle, delay_us, cb, data)` | 启动软件定时器（微秒） | `timer.h` |
+| `uapi_timer_stop(handle)` | 停止软件定时器 | `timer.h` |
+| `uapi_timer_delete(handle)` | 删除软件定时器实例 | `timer.h` |
 | `uapi_tcxo_get_ms()` | 获取系统毫秒时间戳（TCXO (Temperature Compensated Crystal Oscillator) 时钟） | `tcxo.h` |
 
 ## 案例说明
 
 ### 案例简介
 
-创建 4 个硬件定时器，配置不同延迟（1000/2000/3000/4000 微秒），在每个定时器的回调中用 `uapi_tcxo_get_ms()` 记录触发时间戳，待所有回调完成后打印毫秒级观测结果。由于记录接口的返回单位为毫秒，本案例只能进行基本触发顺序和粗略延迟检查，不能证明微秒级精度。
+适配 1 个硬件定时器通道，并在该通道下创建 4 个软件定时器，配置不同延迟（1000/2000/3000/4000 微秒）。在每个软件定时器的回调中用 `uapi_tcxo_get_ms()` 记录触发时间戳，待所有回调完成后打印毫秒级观测结果。由于记录接口的返回单位为毫秒，本案例只能进行基本触发顺序和粗略延迟检查，不能证明微秒级精度。
 
 ### 功能规格
 
 | 规格项 | 说明 |
 |--------|------|
-| 定时器数量 | 4 个 |
+| 定时器数量 | 1 个硬件定时器通道，4 个软件定时器 |
 | 延迟配置 | 1000us / 2000us / 3000us / 4000us |
-| 定时器通道 | 硬件通道 1（TIMER_INDEX=1） |
+| 定时器通道 | 4 个软件定时器共用硬件通道 1（`TIMER_INDEX=1`） |
 | 观测手段 | `uapi_tcxo_get_ms()` 记录启动和回调时间，分辨到毫秒单位 |
-| 回调功能 | 记录 `end_time` + 递增 `g_timer_int_count` |
+| 回调功能 | 时钟中断触发回调，记录 `end_time` + 递增 `g_timer_int_count` |
 
 ### 案例流程
 
@@ -94,23 +81,28 @@ flowchart TD
 sequenceDiagram
     participant T as timer_task
     participant H as 硬件定时器1
-    participant C as 回调 ISR
+    participant I as 时钟中断（ISR）
 
     T->>H: uapi_timer_deinit
     T->>H: uapi_timer_init
     T->>H: uapi_timer_adapter(1, IRQN, PRIO)
-    T->>H: uapi_timer_create → handle0
-    T->>T: start_time0 = tcxo_get_ms
-    T->>H: uapi_timer_start(handle0, 1000us, cb, 0)
 
-    Note over H: 1ms 后
-    H->>C: 回调: end_time0 = tcxo_get_ms
-    C->>C: g_timer_int_count++
+    loop i = 0...3
+        T->>H: uapi_timer_create(1, &timer_index[i])
+        T->>T: start_time[i] = tcxo_get_ms
+        T->>H: uapi_timer_start(timer_index[i], delay_time[i], cb, i)
+    end
 
-    Note over T: ... 同理创建 handle1~3 ...
-    Note over T: 等待 g_timer_int_count == 4
-    T->>H: uapi_timer_stop + delete ×4
-    T->>T: 打印 real_time[i] vs delay_time[i]
+    loop 直到 g_timer_int_count == 4
+        H->>I: 软件定时器到期，产生时钟中断
+        I->>I: 回调记录 end_time[i]，g_timer_int_count++
+        T->>T: osal_msleep(1)
+    end
+
+    loop i = 0...3
+        T->>H: uapi_timer_stop + uapi_timer_delete
+        T->>T: 打印 real_time[i] 与 delay_time[i]
+    end
 ```
 
 ## 案例操作指导
@@ -135,7 +127,7 @@ sequenceDiagram
 | `delay_time` 单位 | 微秒 | `uapi_timer_start` 的 `delay` 参数单位为 **微秒**，`1ms = 1000` |
 | `TIMER_INDEX` | 1（或 SOC 定义） | 不同通道对应不同的硬件定时器 IP (Internet Protocol)。WS53 的通道号和 IRQ (Interrupt Request) 号需查芯片手册 |
 | `timer_adapter` 优先级 | 与 Sample 和系统中断规划一致 | 具体优先级需要结合 WS53 中断控制器及整个系统的中断优先级方案配置 |
-| 完成等待间隔 | `osal_msleep(1)` | 任务每 1ms 检查一次 4 个回调是否全部完成 |
+| 完成等待间隔 | `osal_msleep(1)` | 任务每 1ms 检查一次 4 个软件定时器回调是否全部完成 |
 
 > **Trade-off**：硬件定时器资源有限且回调有 ISR 上下文约束；软件定时器受调度影响，但管理更灵活。选择时应结合定时分辨率、允许抖动、回调工作量和可用资源，不使用未经 WS53 资料确认的固定通道数量。
 
@@ -176,7 +168,7 @@ static void timer_timeout_callback(uintptr_t data)
 
 ### 3. 定时器初始化与创建
 
-先初始化模块，绑定硬件通道与中断号，然后循环创建 4 个定时器实例并依次启动：
+先初始化模块，绑定 1 个硬件通道与中断号，然后在该通道下循环创建 4 个软件定时器实例并依次启动：
 
 ```c
 timer_handle_t timer_index[TIMER_TIMERS_NUM] = { 0 };
@@ -210,6 +202,6 @@ for (uint32_t i = 0; i < TIMER_TIMERS_NUM; i++) {
 }
 ```
 
-> 硬件定时器使用完毕后必须调用 `uapi_timer_delete` 释放资源——定时器句柄是有限资源，泄漏会导致后续定时器创建失败。
+> 软件定时器使用完毕后必须调用 `uapi_timer_delete` 释放资源——软件定时器句柄是有限资源，泄漏会导致后续定时器创建失败。
 
 ---

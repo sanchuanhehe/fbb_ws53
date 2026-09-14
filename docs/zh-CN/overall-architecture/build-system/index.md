@@ -6,12 +6,12 @@ WS53 SDK采用组件化构建体系，通过 config.py 选定组件、Kconfig �
 
 ```mermaid
 flowchart TD
-    A["<div style='width: 260px; height: 90px; display: flex; align-items: center; justify-content: center; text-align: center; margin: 0 auto; box-sizing: border-box; transform: translateX(-24px);'>config.py 组件清单<br/>wifi_drv_ws53 / wifi_driver_tcm / nv / mbedtls …</div>"] --> E["<div style='width: 260px; height: 60px; display: flex; align-items: center; justify-content: center; text-align: center; margin: 0 auto; box-sizing: border-box; transform: translateX(-24px);'>CMake</div>"]
-    B["<div style='width: 260px; height: 90px; display: flex; align-items: center; justify-content: center; text-align: center; margin: 0 auto; box-sizing: border-box; transform: translateX(-24px);'>Kconfig 设置<br/>CONFIG_DEBUG_UART_SUPPORT=y<br/>CONFIG_DEBUG_UART_BAUD_RATE=115200</div>"] --> E
-    C["<div style='width: 260px; height: 90px; display: flex; align-items: center; justify-content: center; text-align: center; margin: 0 auto; box-sizing: border-box; transform: translateX(-24px);'>各组件 CMakeLists.txt<br/>set(COMPONENT_NAME gpio)<br/>set(SOURCES ...)<br/>build_component()</div>"] --> E
-    E --> F["<div style='width: 260px; height: 60px; display: flex; align-items: center; justify-content: center; text-align: center; margin: 0 auto; box-sizing: border-box; transform: translateX(-24px);'>编译 .c → .o → .a<br/>链接所有 .a → .elf</div>"]
-    F --> G["<div style='width: 260px; height: 60px; display: flex; align-items: center; justify-content: center; text-align: center; margin: 0 auto; box-sizing: border-box; transform: translateX(-24px);'>objcopy → .bin → 签名</div>"]
-    G --> H["<div style='width: 260px; height: 60px; display: flex; align-items: center; justify-content: center; text-align: center; margin: 0 auto; box-sizing: border-box; transform: translateX(-24px);'>打包 _all.fwpkg</div>"]
+    A["config.py 组件清单<br/>wifi_drv_ws53 / wifi_driver_tcm / nv / mbedtls …"] --> E[CMake]
+    B["Kconfig 设置<br/>CONFIG_DEBUG_UART_SUPPORT=y<br/>CONFIG_DEBUG_UART_BAUD_RATE=115200"] --> E
+    C["各组件 CMakeLists.txt<br/>set(COMPONENT_NAME gpio)<br/>set(SOURCES ...)<br/>build_component()"] --> E
+    E --> F["编译 .c → .o → .a<br/>链接所有 .a → .elf"]
+    F --> G["objcopy → .bin → 签名"]
+    G --> H["打包 _all.fwpkg"]
 ```
 
 ## 组件化配置
