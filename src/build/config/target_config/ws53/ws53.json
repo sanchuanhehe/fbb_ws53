@@ -13,10 +13,10 @@
 		"tool_chain": [
 			"cc_riscv32_musl_fp_win"
 		],
-		"map_path": "./output/ws53/acore/ws53-liteos-app/ws53-liteos-app.elf"
+		"map_path": "./output/ws53/acore/ws53_liteos_app/application.elf"
 	},
 	"debug": {
-		"elf_path": "./output/ws53/acore/ws53-liteos-app/ws53-liteos-app.elf",
+		"elf_path": "./output/ws53/acore/ws53_liteos_app/application.elf",
 		"breakpoints_limitation": "7",
 		"stop_debug_state": "continue",
 		"client": [
@@ -62,7 +62,7 @@
 		"timeout_default": "60000"
 	},
 	"upload": {
-		"bin_path": "./output/ws53/fwpkg/ws53-liteos-app/ws53-liteos-app_all.fwpkg",
+		"bin_path":  "./output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg",
 		"reset": 1,
 		"burn_verification": 0,
 		"protocol": [
@@ -144,8 +144,8 @@
 		}
 	],
 	"analysis": {
-		"elf_path": "./output/ws53/acore/ws53-liteos-app/ws53-liteos-app.elf",
-		"map_path": "./output/ws53/acore/ws53-liteos-app/ws53-liteos-app.map",
+		"elf_path": "./output/ws53/acore/ws53_liteos_app/application.elf",
+		"map_path": "./output/ws53/acore/ws53_liteos_app/application.map",
 		"tool_path": "./tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl_win/bin"
 	},
 	"kConfig": {
@@ -185,19 +185,19 @@
 						}
 					},
 					"stack analysis": {
-						"analysis_elf_path": "./output/ws53/acore/ws53-liteos-app/ws53-liteos-app.elf",
+						"analysis_elf_path": "./output/ws53/acore/ws53_liteos_app/application.elf",
 						"analysis_compiler_path": "./tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl_win/bin",
 						"build_config_path": ""
 					},
 					"image analysis": {
-						"analysis_elf_path": "./output/ws53/acore/ws53-liteos-app/ws53-liteos-app.elf",
-						"analysis_map_path": "./output/ws53/acore/ws53-liteos-app/ws53-liteos-app.map",
+						"analysis_elf_path": "./output/ws53/acore/ws53_liteos_app/application.elf",
+						"analysis_map_path": "./output/ws53/acore/ws53_liteos_app/application.map",
 						"analysis_compiler_path": "./tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl_win/bin",
 						"build_config_path": ""
 					},
 					"upload": {
 						"upload_speed": "921600",
-						"upload_partitions": "./output/ws53/fwpkg/ws53-liteos-app/ws53-liteos-app_all.fwpkg",
+						"upload_partitions": "./output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg",
 						"upload_protocol": ""
 					},
 					"debug": {
@@ -205,7 +205,7 @@
 						"debug_tool": "jlink",
 						"debug_interface": "swd",
 						"debug_device": "CPU CORE|RISC-V|RISC-V",
-						"debug_elf": "./output/ws53/acore/ws53-liteos-app/ws53-liteos-app.elf"
+						"debug_elf": "./output/ws53/acore/ws53_liteos_app/application.elf"
 					},
 					"kconfig": {
 						"menu_config_file_path": "./config.in",
