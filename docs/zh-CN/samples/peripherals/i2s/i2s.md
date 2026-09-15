@@ -2,9 +2,6 @@
 
 > I2S (Inter-IC Sound) 驱动 | sample: `src/application/samples/peripheral/i2s/`
 
-!!! info "与 WS63 参考案例的区别"
-
-    本页对应 WS53 当前可构建的普通 I2S 主从收发 Sample。WS63 对应页面基于 `i2s_dma_lli/`，重点是 DMA/LLI 流式传输，两者不是同一个案例，因此位宽、传输接口和案例流程不同。
 
 ## 学习目标
 

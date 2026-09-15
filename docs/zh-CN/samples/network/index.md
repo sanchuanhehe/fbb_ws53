@@ -5,8 +5,6 @@ hide:
 
 # 网络协议
 
-WS53 当前可从 `src/application/samples/wifi/` 构建以下网络协议案例。虽然源码位于 Wi-Fi 目录，文档按照 WS63 的结构独立归类。
-
 | 案例 | 功能说明 | 源码目录 | Kconfig 选项 |
 | --- | --- | --- | --- |
 | [TCP](tcp/tcp.md) | TCP Client / Server 收发和流量统计 | `wifi/tcp_sample/` | `SUPPORT_TCP_CLIENT_SAMPLE` / `SUPPORT_TCP_SERVER_SAMPLE` |

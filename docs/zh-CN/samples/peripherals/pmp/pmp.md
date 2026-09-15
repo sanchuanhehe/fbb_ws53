@@ -1,9 +1,5 @@
 # PMP 内存保护
 
-!!! info "占位说明"
-
-    本页对应 WS63 的 PMP 案例位置。WS53 当前提供 `uapi_pmp_config()`，但没有 `src/application/samples/peripheral/pmp/` 源码目录和 Sample 构建入口。
-
 ## 学习目标
 
 - 了解 PMP 对物理内存区域访问权限的约束作用。
@@ -27,7 +23,6 @@ WS53 有驱动入口，但没有可直接构建的 PMP Sample。后续案例应�
 
 | 项目 | 状态 |
 | --- | --- |
-| WS63 参考案例 | 已存在 |
 | WS53 驱动 API | 已存在 `uapi_pmp_config()` |
 | WS53 Sample 源码 | **缺失** |
 | WS53 Sample 构建入口 | **缺失** |

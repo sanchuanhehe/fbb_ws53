@@ -323,4 +323,3 @@ ssapc_register_callbacks(&client_callbacks);
 
 建议先完成 Hello SLE，再依次学习数据通信和连接管理案例，最后根据产品需求组合传感器、NV、低时延、OTA、HADM 或 CHBA 能力。
 
-> 本页的 SLE 通用原理与 WS63 概述保持一致。涉及最大发射功率、最大连接数、连接参数边界等芯片规格时，应以 WS53 对应版本的芯片资料和 SDK 头文件为准，不直接套用 WS63 数值。
