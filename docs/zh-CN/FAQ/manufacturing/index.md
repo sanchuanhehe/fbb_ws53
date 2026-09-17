@@ -64,7 +64,7 @@ per对环境比较敏感，建议在屏蔽环境复测。
 
 **解决方法<a name="section3636174715466"></a>**
 
-查询默认发射功率，参考《middleware/chips/ws53/nv/nv\_config/cfg/acore/app.json》。
+查询默认发射功率，请参考 `src/middleware/chips/ws53/nv/nv_config/cfg/acore/app.json`。
 
 方法一：
 

@@ -1940,7 +1940,7 @@ acore\_cpu\_trace 82 --- addr 0x20021ed4, time: 0xa0146a8a, LR: 0x28d02, PC: 0x2
     -   执行**AT+SCANRESULT**命令查看“<SCAN RESULT\>:”是否存在AP信息，若未存在任何AP信息，查看HSO日志是否有ERROR类型日志，进而判断扫描异常阶段；若“<SCAN RESULT\>:”中存在AP信息，进入**[步骤2](#li137192711211)**分析。
 
     >![](public_sys-resources/icon-note.gif) **说明：** 
-    >AT命令详细介绍请参考《WS53V100 AT命令 使用指南》，HSO工具请参考《WS53V100 DebugKits工具 使用指南》。
+    >AT命令详细介绍请参考 [AT 命令使用指南](../../commands/manual/index.md)，HSO工具的使用方法请结合实际工具版本确认。
 
 2.  <a name="li137192711211"></a>检查“<SCAN RESULT\>:”中AP数量。
 
@@ -2012,7 +2012,7 @@ STA关联AP失败。
         登录AP配置界面，若AP为强制PMF加密方式，可尝试执行“AT+STARTSTA=1,1”命令，在起STA时，强制启动PMF尝试关联。
 
     >![](public_sys-resources/icon-note.gif) **说明：** 
-    >AT命令：AT+STARTSTA=\[<protocol\_mode\>\],\[<pmf\>\]，其中<pmf\>为管理帧保护策略，默认为1，表示PMF自适应，AT命令详情使用请参考《WS53V100 AT命令 使用指南》
+    >AT命令：AT+STARTSTA=\[<protocol\_mode\>\],\[<pmf\>\]，其中<pmf\>为管理帧保护策略，默认为1，表示PMF自适应，AT命令详情请参考 [AT 命令使用指南](../../commands/manual/index.md)。
 
     1.  检查加密方式。
 
@@ -2308,7 +2308,7 @@ Wi-Fi性能相关的测试场景可以大致分为以下几种类型：
 
 -   定制化文件方式：
 
-    WS53 – 通过NV的形式来修改各协议模式及速率下的默认功率配置（NV配置可参考《WS53V100 NV存储 用户指南》与《WS53V100 软件 开发指南》中的“国家码功能配置”章节）
+    WS53 – 通过NV的形式来修改各协议模式及速率下的默认功率配置（NV配置可参考 [NV指南](../../system/nv/index.md) 与 [软件开发指南](../../sdk-development/software-development/manual/index.md) 中的“国家码功能配置”章节）
 
 #### 干扰场景<a name="ZH-CN_TOPIC_0000001911424130"></a>
 

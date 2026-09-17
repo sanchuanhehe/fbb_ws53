@@ -198,8 +198,6 @@ SDK根目录结构如[表1](#table13927142512394)所示。
 
 SDK编译默认包含Syschannel Host驱动编译，编译SDK前，需要修改“/middleware/utils/syschannel/syschannel\_host/Makefile”指定正确的内核路径。
 
-详细配置方法参考《WS53V100 Syschannel 使用指南》 的“Syschannel 组件编译”章节。
-
 如果不需要编译Syschannel Host驱动，可以修改"build/config/target\_config/ws53/config.py"文件，删除或注释掉ram\_component中的"syschannel\_host\_ko"组件。
 
 ### 编译方法<a name="ZH-CN_TOPIC_0000001823993877"></a>
@@ -284,7 +282,7 @@ SDK编译默认包含Syschannel Host驱动编译，编译SDK前，需要修改�
 ![](figures/zh-cn_image_0000002043245450.png)
 
 >![](public_sys-resources/icon-note.gif) **说明：** 
->上图内容仅作文件内容说明，具体分区信息请参考《WS53V100 FOTA 开发指南》“升级包保存”章节的“注意事项”中分区信息。
+>上图内容仅作文件内容说明，具体分区信息请参考 [FOTA](../../../guides/system/fota/index.md) 中“升级包保存”章节的“注意事项”。
 >分区表ID限制16个分区数量，默认Flash共4M大小，预留5个分区ID，可通过uapi\_partition\_get\_info接口传入分区ID获取对应地址和长度。
 
 根据当前Flash分区方案，Flash划分情况如下图。
@@ -567,6 +565,6 @@ WS53总共有3个UART，SDK默认配置如下。
 
 ## 镜像烧录<a name="ZH-CN_TOPIC_0000001777234342"></a>
 
-镜像烧录方法，请参见《WS53V100 BurnTool工具 使用指南》中“操作指南”章节。
+镜像烧录方法，请参见 [BurnTool](../../../tools/BurnToolUserGuide/BurnToolUserGuide.md) 中“操作指南”章节。
 
 

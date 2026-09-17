@@ -14,7 +14,7 @@ CIPHER DRIVER为安全算法模块，对外提供mbedtls API 和service layer两
 
 -   mbedtls API
     -   安全驱动对接开源第三方mbedtls接口，可以通过调用mbedtls API使用硬件安全能力。
-    -   对于硬件支持的规格，均完成mbedtls对接，硬化范围及API使用具体参考《WS53V100 TLS & DTLS 开发指南》。
+    -   对于硬件支持的规格，均完成mbedtls对接，硬化范围及API使用具体参考 [TLS/DTLS 开发指南](../../tls/manual/index.md)。
 
 -   service layer
     -   自研安全驱动接口，为上层业务提供直接使用硬件安全的能力，支持LiteOS环境，及flashboot/bootrom等无OS环境。
@@ -1618,6 +1618,6 @@ ERROR_PKE_ALG_TIMEOUT,     /* return when pke algorithm timeout. */
 建议用户采用以下措施：
 
 -   产品出厂时，将JTAG接口从物理上删除。
--   芯片提供JTAG disable功能，软件通过写EFUSE，可从芯片层面直接永久关闭JTAG，具体参考《WS53V100 EFUSE 使用指南》。
+-   芯片提供JTAG disable功能，软件通过写EFUSE，可从芯片层面直接永久关闭JTAG，具体操作请参考 [eFuse 使用指南](../../efuse/manual/index.md)。
 
 

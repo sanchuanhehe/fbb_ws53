@@ -29,7 +29,7 @@ WS53V100 Boot分为三部分：RomBoot、FlashBoot、LoaderBoot。
 
 ## 下载镜像及烧写EFUSE<a name="ZH-CN_TOPIC_0000001934865157"></a>
 
-RomBoot通过加载LoaderBoot实现下载镜像到Flash及烧写EFUSE的功能，具体操作请参见《WS53V100 BurnTool工具 使用指南》。
+RomBoot通过加载LoaderBoot实现下载镜像到Flash及烧写EFUSE的功能，具体操作请参见 [BurnTool](../../../tools/BurnToolUserGuide/BurnToolUserGuide.md)。
 
 ## 检验及引导FlashBoot<a name="ZH-CN_TOPIC_0000001891945430"></a>
 
