@@ -127,7 +127,7 @@ fbb build ws53_liteos_app --clean
 fbb flash ws53_liteos_app --port <CLIENT_COM> --json-summary
 ```
 
-必须先烧录 Server，再切换并构建 Client。固件位于 `output/ws53/fwpkg/ws53_liteos_app/ws53_liteos_app_all.fwpkg`。
+必须先烧录 Server，再切换并构建 Client。固件位于 `output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg`。
 
 ### 运行
 

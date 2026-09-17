@@ -124,7 +124,7 @@ fbb build ws53_liteos_app --clean
 fbb flash ws53_liteos_app --port <CLIENT_COM> --json-summary
 ```
 
-固件输出：`output/ws53/fwpkg/ws53_liteos_app/ws53_liteos_app_all.fwpkg`。
+固件输出：`output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg`。
 
 ### 运行
 

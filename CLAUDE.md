@@ -40,8 +40,8 @@ menuconfig 配置文件路径：`src/build/config/target_config/ws53/menuconfig/
 
 ### 产物输出
 
-- ELF: `src/output/ws53/acore/ws53-liteos-app/ws53-liteos-app.elf`
-- 最终固件包: `src/output/ws53/fwpkg/ws53-liteos-app/ws53-liteos-app_all.fwpkg`
+- ELF: `src/output/ws53/acore/ws53_liteos_app/application.elf`
+- 最终固件包: `src/output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg`
 
 ### 调试与烧录
 
