@@ -299,7 +299,7 @@ CONFIG_SUPPORT_SLE_CENTRAL=y
 Server 与 Client 位于同一个 SLE Sample `choice` 中，需要分别构建和烧录。固件包位于：
 
 ```text
-output/ws53/fwpkg/ws53-liteos-app/ws53-liteos-app_all.fwpkg
+output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg
 ```
 
 ### 运行与分层验收

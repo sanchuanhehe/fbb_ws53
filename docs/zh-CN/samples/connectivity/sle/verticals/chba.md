@@ -239,7 +239,7 @@ fbb build ws53_liteos_app --clean
 默认固件输出路径为：
 
 ```text
-output/ws53/fwpkg/ws53-liteos-app/ws53-liteos-app_all.fwpkg
+output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg
 ```
 
 ### 第四步：烧录

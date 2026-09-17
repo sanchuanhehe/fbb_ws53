@@ -113,7 +113,7 @@ fbb build ws53-liteos-app --clean -j1
 ### 运行
 
 ```powershell
-fbb flash -f src/output/ws53/fwpkg/ws53_liteos_app/ws53_liteos_app_all.fwpkg --chip ws53 -p COM<N> --timeout 240
+fbb flash -f src/output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg --chip ws53 -p COM<N> --timeout 240
 fbb monitor --port COM<N> --baud 115200 --chip ws53 --reset --timeout 40
 ```
 
