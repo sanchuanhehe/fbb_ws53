@@ -107,6 +107,8 @@
 		"default_baud": 115200,
 		"reset_method": "at_rst",
 		"reset_command": "AT+RST\r\n",
+		"reset_count": 2,
+		"reset_interval_ms": 1000,
 		"boot_marker_examples": [
 			"boot.",
 			"APP|dbg uart init ok.",
