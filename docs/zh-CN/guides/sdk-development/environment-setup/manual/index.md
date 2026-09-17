@@ -1,3 +1,17 @@
+---
+title: WS53 环境与构建详解
+doc_type: how-to
+product: WS53
+applies_to:
+  sdk: 1.10.106
+status: draft
+verification_level: static
+source_refs:
+  - src/build/config/target_config/ws53/ws53.json
+---
+
+> 本页面介绍命令行环境、menuconfig 和高级构建操作。首次开发请先从[快速入门](../../../../get-started/index.md)完成 Hello World。
+
 **概述<a name="section4537382116410"></a>**
 
 本文档介绍WS53芯片SDK开发环境（包括：SDK编译、应用程序的开发等），用于帮助用户在快速了解开发环境后编译出可执行文件进行二次开发。
@@ -26,7 +40,7 @@
 
     **图 1**  SDK 开发环境<a name="fig1236915206315"></a>  
     
-    ![](figures/zh-cn_image_0000001777234358.png)
+    ![SDK 开发环境示意图](../../../../get-started/environment-setup/manual/figures/zh-cn_image_0000001777234358.png)
 
 ## 搭建Linux开发环境<a name="ZH-CN_TOPIC_0000001823873925"></a>
 
@@ -57,7 +71,7 @@ Linux 系统推荐使用 Ubuntu 18.04 及以上版本，Shell 使用 bash，SDK 
 4.  安装Kconfiglib 14.1.0+，使用命令“sudo pip3 install kconfiglib”（需root/sudo权限安装），或从“[https://pypi.org/project/kconfiglib](https://pypi.org/project/kconfiglib)”下载.whl文件（例如：kconfiglib-14.1.0-py2.py3-none-any.whl）后，使用“pip3 install kconfiglib-xxx.whl”进行安装（需root/sudo权限安装），或者下载源码包到本地并解压，使用“python setup.py install”进行安装（需root/sudo权限安装）。安装完成界面如[图1](#fig743717512220)所示。
 
     **图 1**  安装Kconfiglib组件包完成示例<a name="fig743717512220"></a>  
-    ![](figures/安装Kconfiglib组件包完成示例.png "安装Kconfiglib组件包完成示例")
+    ![安装 Kconfiglib 组件包完成示例](../../../../get-started/environment-setup/manual/figures/安装Kconfiglib组件包完成示例.png)
 
 5.  安装升级文件签名依赖的Python组件包。
 
@@ -65,10 +79,10 @@ Linux 系统推荐使用 Ubuntu 18.04 及以上版本，Shell 使用 bash，SDK 
 
     从“[https://pypi.org/project/pycparser/](https://pypi.org/project/pycparser/)”下载.whl文件（例如：pycparser-2.21-py2.py3-none-any.whl）后，使用“pip3 install pycparser-xxx.whl”进行安装（需root/sudo权限安装），或者下载源码包到本地并解压，使用“python setup.py install”进行安装（需root/sudo权限安装）。安装完成后界面会提示“Successfully intalled pycparser-2.21”。
 
->![](public_sys-resources/icon-note.gif) **说明：** 
+> **说明：**
 >如果构建环境中包含多个python，特别是多个同版本的python，而用户无法辨认正在使用的是其中的哪个版本，此情况下，在安装python组件包时，推荐使用组件包源码进行安装。
 
-# 编译<a name="ZH-CN_TOPIC_0000001777394010"></a>
+## 编译<a name="ZH-CN_TOPIC_0000001777394010"></a>
 
 -   **[SDK目录结构介绍](#ZH-CN_TOPIC_0000001777394018)**  
 
@@ -79,7 +93,7 @@ Linux 系统推荐使用 Ubuntu 18.04 及以上版本，Shell 使用 bash，SDK 
 解压缩SDK后的根目录，如[图1](#fig3274131411460)（编译后生成output目录）所示。
 
 **图 1**  解压缩SDK示例<a name="fig3274131411460"></a>  
-![](figures/解压缩SDK示例.png "解压缩SDK示例")
+![解压缩 SDK 后的目录结构示例](../../../../get-started/environment-setup/manual/figures/解压缩SDK示例.png)
 
 SDK根目录结构如[表1](#table13927142512394)所示。
 
@@ -272,22 +286,22 @@ SDK编译默认包含Syschannel Host驱动编译，编译SDK前，需要修改�
 </tbody>
 </table>
 
->![](public_sys-resources/icon-note.gif) **说明：** 
+> **说明：**
 >注：编译得到的中间文件在“output/ws53/acore/ws53\_liteos\_app”目录下。
 
 ### Flash分区表配置<a name="ZH-CN_TOPIC_0000002079231697"></a>
 
 分区表配置文件路径：sdk\\build\\config\\target\_config\\ws53\\param\_sector\\param\_sector.json。
 
-![](figures/zh-cn_image_0000002043245450.png)
+![Flash 分区表配置文件示例](../../../../get-started/environment-setup/manual/figures/zh-cn_image_0000002043245450.png)
 
->![](public_sys-resources/icon-note.gif) **说明：** 
->上图内容仅作文件内容说明，具体分区信息请参考 [FOTA](../../../guides/system/fota/index.md) 中“升级包保存”章节的“注意事项”。
+>![](../../../../get-started/environment-setup/manual/public_sys-resources/icon-note.gif) **说明：**
+>上图内容仅作文件内容说明，具体分区信息请参考 [FOTA](../../../system/fota/index.md) 中“升级包保存”章节的“注意事项”。
 >分区表ID限制16个分区数量，默认Flash共4M大小，预留5个分区ID，可通过uapi\_partition\_get\_info接口传入分区ID获取对应地址和长度。
 
 根据当前Flash分区方案，Flash划分情况如下图。
 
-![](figures/zh-cn_image_0000002089402393.png)
+![Flash 分区划分示意图](../../../../get-started/environment-setup/manual/figures/zh-cn_image_0000002089402393.png)
 
 调整分区时，需要遵守以下原则：
 
@@ -314,7 +328,7 @@ SDK集成了默认配置，但建议用户首次运行时进行相应配置，�
 
 **图 1**  Menuconfig运行界面<a name="fig155343385597"></a>  
 
-![](figures/zh-cn_image_0000001782676170.png)
+![Menuconfig 运行界面](../../../../get-started/environment-setup/manual/figures/zh-cn_image_0000001782676170.png)
 
 注：界面如存在差异，以实际版本为准。
 
@@ -361,7 +375,7 @@ Menuconfig操作说明如[表1](#table364152210248)所示，在Menuconfig界面�
 
 **图 2**  Menuconfig命令帮助栏<a name="fig14504171214012"></a>  
 
-![](figures/zh-cn_image_0000001829475697.png)
+![Menuconfig 命令帮助栏](../../../../get-started/environment-setup/manual/figures/zh-cn_image_0000001829475697.png)
 
 **表 2**  常用Menuconfig配置
 
@@ -442,24 +456,24 @@ WS53总共有3个UART，SDK默认配置如下。
 
     menuconfig的配置路径为Drivers-\>Chips-\>Chip Configurations for ws53。
 
-    ![](figures/zh-cn_image_0000002247598320.png)
+    ![HSO 串口 menuconfig 配置示例](../../../../get-started/environment-setup/manual/figures/zh-cn_image_0000002247598320.png)
 
 -   AT串口默认是UART-L0，可通过menuconfig配置串口号（可选UART-L0、UART-H1）和波特率，默认使用UART-L0，波特率默认为115200，支持关闭。 menuconfig的配置路径为Drivers-\>Chips-\>Chip Configurations for ws53。
 
-    ![](figures/zh-cn_image_0000002282797565.png)
+    ![AT 串口 menuconfig 配置示例](../../../../get-started/environment-setup/manual/figures/zh-cn_image_0000002282797565.png)
 
 -   DEBUG串口可通过menuconfig配置串口号（可选UART-L0、UART-H1、UART-H0）和波特率，默认使用UART-L0，波特率默认为115200，支持关闭。
 
-    ![](figures/zh-cn_image_0000002247760108.png)
+    ![DEBUG 串口 menuconfig 配置示例](../../../../get-started/environment-setup/manual/figures/zh-cn_image_0000002247760108.png)
 
 -   支持UART-L0 RX管脚复用为普通GPIO，仅保留TX功能。可通过打开CONFIG\_UART\_L0\_NOT\_SUPPORT\_RX实现，默认未打开，menuconfig配置方法如下。
 
-    ![](figures/zh-cn_image_0000002247600772.png)
+    ![UART-L0 RX 管脚复用配置示例](../../../../get-started/environment-setup/manual/figures/zh-cn_image_0000002247600772.png)
 
 -   支持AT、DEBUG串口功能合一到HSO口上，可以用HSO工具完成AT命令及回显、DEBUG日志、HSO日志功能。需要先打开**CONFIG\_AT\_SUPPORT\_ZDIAG**宏，再通过menuconfig配置HSO/AT/DEBUG为同一串口，波特率一致，可以选择是否打开HSO心跳功能。以下是将AT、DEBUG功能都合一到HSO上，并使用L0作为串口的配置示例如下。
-    ![](figures/zh-cn_image_0000002298050126.png)
+    ![HSO、AT 和 DEBUG 串口合一配置示例一](../../../../get-started/environment-setup/manual/figures/zh-cn_image_0000002298050126.png)
 
-    ![](figures/zh-cn_image_0000002247763860.png)
+    ![HSO、AT 和 DEBUG 串口合一配置示例二](../../../../get-started/environment-setup/manual/figures/zh-cn_image_0000002247763860.png)
 
     -   AT、DEBUG串口功能合到HSO口，使用时需要注意以下事项：
         1.  连接HSO工具前要配置关闭低功耗。
@@ -475,7 +489,7 @@ WS53总共有3个UART，SDK默认配置如下。
     3.  对于AT命令 UART RX管脚，建议选择AGPIO管脚，否则AT命令本身无法唤醒系统，需要由其它管脚唤醒或者关闭低功耗模式才能输入串口。
     4.  UART RX管脚配置下拉可能导致误触发串口中断，建议针对该管脚在低功耗初始化函数uapi\_pm\_lpc\_init调用pm\_port\_skip\_pull\_down配置跳过睡眠流程下拉处理。
 
->![](public_sys-resources/icon-notice.gif) **须知：** 
+> **须知：**
 >1.  UART波特率建议配置典型值，如115200/921600/1M等，考虑到兼容性，不建议配置不常用的特殊值，比如115623此类波特率值。
 >2.  修改UART序号请慎重，必须要与板级硬件工程师确认uart硬件连接，确保软件配置与硬件板级的实际电路连接匹配，否则无法正常工作。
 
@@ -485,7 +499,7 @@ WS53总共有3个UART，SDK默认配置如下。
 -   编译过程中，报错找不到某个包，请检查环境中的python是否已经安装了相应组件。如果构建环境中包含多个python，特别是多个同版本的python，而用户无法辨认正在使用的是其中的哪个版本，此情况下，在安装python组件包时，推荐使用组件包源码进行安装。
 -   系统优先使用用户通过Menuconfig所做的配置，如果用户未配置，系统将使用默认配置进行编译。
 
-# 新建APP<a name="ZH-CN_TOPIC_0000001823993873"></a>
+## 新建APP<a name="ZH-CN_TOPIC_0000001823993873"></a>
 
 -   **[建立源码目录](#ZH-CN_TOPIC_0000001823993869)**  
 
@@ -495,7 +509,7 @@ WS53总共有3个UART，SDK默认配置如下。
 
 ## 建立源码目录<a name="ZH-CN_TOPIC_0000001823993869"></a>
 
->![](public_sys-resources/icon-note.gif) **说明：** 
+> **说明：**
 >用户可在“application/ws53”同级目录下参考“ws53\_application”目录建立app，以下均以建立“my\_demo”为例。
 
 步骤如下：
@@ -565,6 +579,6 @@ WS53总共有3个UART，SDK默认配置如下。
 
 ## 镜像烧录<a name="ZH-CN_TOPIC_0000001777234342"></a>
 
-镜像烧录方法，请参见 [BurnTool](../../../tools/BurnToolUserGuide/BurnToolUserGuide.md) 中“操作指南”章节。
+镜像烧录方法，请参见 [BurnTool](../../../../tools/BurnToolUserGuide/BurnToolUserGuide.md) 中“操作指南”章节。
 
 

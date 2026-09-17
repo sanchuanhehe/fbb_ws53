@@ -108,7 +108,7 @@ fbb build ws53_liteos_app
 fbb flash ws53_liteos_app
 ```
 
-> 完整的工程配置、编译和烧录方式请参考 [构建系统](../../../overall-architecture/build-system/index.md)。
+> 完整的工程配置、编译和烧录方式请参考 [命令行配置与构建](../../../guides/sdk-development/build/index.md)和[烧录与运行验证](../../../guides/sdk-development/flash-and-run/index.md)。
 
 ### 第三步：验证
 

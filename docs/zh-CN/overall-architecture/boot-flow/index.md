@@ -56,7 +56,7 @@ flowchart LR
 
 BurnTool 通过串口等通道打断正常启动并发起下载。Boot ROM 先接收和校验 LoaderBoot，再将其加载到 RAM 运行；LoaderBoot 初始化通信、Flash 和 EFUSE 后进入命令循环，按照固件包和烧写配置完成后续操作。
 
-LoaderBoot 是临时下载环境，不会常驻在正常启动链中。具体的固件包选择、串口配置和烧写步骤见 [烧录与运行](../../get-started/flash-and-run.md)。
+LoaderBoot 是临时下载环境，不会常驻在正常启动链中。具体的固件包选择、串口配置和烧写步骤见 [烧录与运行](../../guides/sdk-development/flash-and-run/index.md)。
 
 ## App 初始化流程
 

@@ -25,7 +25,7 @@ hide:
 
 - [构建系统](build-system/index.md)
 
-    了解基于 CMake + Kconfig 的组件化构建体系，使用 fbb CLI (Command Line Interface) 编译并生成可烧录的 .fwpkg 固件包。
+    了解组件清单、Kconfig 与 CMake 的协作方式，以及配置生效、编译链接和固件打包流程。
 
 ---
 

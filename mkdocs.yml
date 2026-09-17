@@ -56,15 +56,18 @@ nav:
       - 内存布局: zh-CN/overall-architecture/memory-layout/index.md
   - 快速入门:
       - 快速入门: zh-CN/get-started/index.md
-      - 环境搭建: zh-CN/get-started/environment-setup.md
-      - 开发环境搭建详解: zh-CN/get-started/environment-setup/manual/index.md
-      - 快速开始: zh-CN/get-started/quick-start.md
-      - 创建应用: zh-CN/get-started/create-application.md
-      - 烧录与运行: zh-CN/get-started/flash-and-run.md
+      - 构建并运行第一个示例: zh-CN/get-started/quick-start.md
   - 开发指南:
       - 开发指南: zh-CN/guides/index.md
       - SDK 开发:
           - SDK 开发: zh-CN/guides/sdk-development/index.md
+          - 配置开发环境: zh-CN/guides/sdk-development/environment-setup/index.md
+          - 命令行配置与构建: zh-CN/guides/sdk-development/build/index.md
+          - 创建独立应用工程: zh-CN/guides/sdk-development/create-project/index.md
+          - 新增 SDK 组件: zh-CN/guides/sdk-development/add-component/index.md
+          - 环境与构建详解: zh-CN/guides/sdk-development/environment-setup/manual/index.md
+          - 创建应用组件: zh-CN/guides/sdk-development/create-application/index.md
+          - 烧录与运行验证: zh-CN/guides/sdk-development/flash-and-run/index.md
           - SDK 开发指南: zh-CN/guides/sdk-development/sdk/manual/index.md
           - 软件开发指南: zh-CN/guides/sdk-development/software-development/manual/index.md
           - 特性开发说明: zh-CN/guides/sdk-development/feature-development/manual/index.md
