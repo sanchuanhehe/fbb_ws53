@@ -603,9 +603,9 @@ Syschannel 组件目录如[图1](#fig727113352820)所示。
 
 ## Syschannel适配总体流程是什么？<a name="ZH-CN_TOPIC_0000002017425473"></a>
 
-1.  参考《WS53V100 SoC Wi-Fi、BLE 和 SLE Combo 芯片 硬件用户指南》“SDIO 接口参考”设计章节，确定SDIO接口设计。
-2.  参考《WS53V100 SoC Wi-Fi、BLE 和 SLE Combo 芯片 硬件用户指南》“SDIO 四线模式”章节以及“SDIO 一线模式”章节确认使用SDIO一线模式还是SDIO四线模式，确认所需管脚连接正常。
-3.  参考《WS53V100 SoC Wi-Fi、BLE 和 SLE Combo 芯片 硬件用户指南》“SDIO时序”章节，确认主控能否满足WS53的时序要求。
+1.  参考 SoC Wi-Fi、BLE 和 SLE Combo 芯片硬件用户指南中的“SDIO 接口参考”设计章节，确定SDIO接口设计。
+2.  参考 SoC Wi-Fi、BLE 和 SLE Combo 芯片硬件用户指南中的“SDIO 四线模式”和“SDIO 一线模式”章节，确认使用SDIO一线模式还是SDIO四线模式，并确认所需管脚连接正常。
+3.  参考 SoC Wi-Fi、BLE 和 SLE Combo 芯片硬件用户指南中的“SDIO时序”章节，确认主控能否满足WS53的时序要求。
 4.  确认SDIO使用哪种中断模式，SDIO 四线/一线模式根据中断方式可以分成两种：一种是GPIO中断方式，另一种是 SDIO 中断方式，推荐使用SDIO中断，SDK默认支持的是SDIO中断模式，如果是GPIO中断模式，需要参考“[如何配置SDIO GPIO中断模式？](#ZH-CN_TOPIC_0000002017346009)”适配。
 5.  完成Syschannel 53侧代码开发，参考Syschannel的dev demo示例代码（路径：application/samples/wifi/syschannel\_dev/syschannel\_dev\_sample.c）开发，或者参考“[Syschannel 组件编译](#ZH-CN_TOPIC_0000001854719077)”章节打开demo组件用于调试。重点关注SDIO管脚配置，参考“[SDIO的管脚配置有什么约束？](#ZH-CN_TOPIC_0000001980706060)”。
 6.  完成Syschannel主控侧ko编译，参考“[如何编译客户主控平台的syschannel.ko？](#ZH-CN_TOPIC_0000001980865776)”。

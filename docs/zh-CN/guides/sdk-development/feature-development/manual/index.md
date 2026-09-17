@@ -271,7 +271,7 @@ BLE配网参考流程如[图1](#fig07609154494)所示。
 
 ## 接口说明<a name="ZH-CN_TOPIC_0000001911426842"></a>
 
-请参见《WS53V100 软件开发指南》中“BLE开发流程”章节。
+请参见 [软件开发指南](../../software-development/manual/index.md) 中的“BLE开发流程”章节。
 
 ## 使用示例<a name="ZH-CN_TOPIC_0000001911546782"></a>
 
@@ -339,7 +339,7 @@ BLE配网参考流程如[图1](#fig07609154494)所示。
 ![](figures/zh-cn_image_0000001919108272.png)
 
 >![](public_sys-resources/icon-note.gif) **说明：** 
->可参照《WS53V100 二次开发网络安全 注意事项》中安全启动配置章节进行配置
+>安全启动配置请按本节说明完成。
 
 # FLASH在线解密特性说明<a name="ZH-CN_TOPIC_0000001944706077"></a>
 
@@ -383,6 +383,6 @@ FLASH在线解密特性主要用于对加密存储在FLASH上的APP镜像进行�
 ![](figures/zh-cn_image_0000001919268560.png)
 
 >![](public_sys-resources/icon-note.gif) **说明：** 
->可参照《WS53V100 二次开发网络安全 注意事项》中镜像加密配置章节进行配置
+>镜像加密配置请按本节说明完成。
 
 

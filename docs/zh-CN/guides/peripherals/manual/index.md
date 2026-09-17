@@ -51,14 +51,14 @@ Pinctrl接口使用遵循如下操作步骤（以下步骤根据实际需要可�
     uapi_pin_set_pull(MGPIO10, PIN_PULL_TYPE_UP);
     /* 设置MGPIO10的复用功能为PIN_MODE_3*/
     uapi_pin_set_mode(S_MGPIO10, PIN_MODE_3); /* 返回失败，该管脚不支持该复用模式 */
-    /* 需要查询管脚支持复用模式，查看《1.4注意事项》中第2条 */
+    /* 需要查询管脚支持复用模式，查看注意事项第2条 */
 
 ```
 
 ## 注意事项<a name="ZH-CN_TOPIC_0000001891779678"></a>
 
 1.  配置IO复用功能时，应关注此IO是否支持目标功能或者已经被复用为其他功能，避免影响既有功能， IO复用请参考“sdk\\drivers\\chips\\ws53\\include\\acore\\platform\_core.h”源码中“pin\_t”结构体的定义。
-2.  配置IO复用功能时，软件复用管脚及可配置复用模式参考《Q353233N1100 SoC Wi-Fi、BLE和SLE Combo芯片 用户指南》中“软件复用管脚描述”节；其中部分管脚为flash内置，不可通过软件配置，可配置管脚可查询源码中“pin\_t”结构体的定义。
+2.  配置IO复用功能时，软件复用管脚及可配置复用模式请以 `src/drivers/chips/ws53/include/acore/platform_core.h` 源码中 `pin_t` 结构体的定义为准；其中部分管脚为flash内置，不可通过软件配置。
 
 # GPIO<a name="ZH-CN_TOPIC_0000001891779690"></a>
 

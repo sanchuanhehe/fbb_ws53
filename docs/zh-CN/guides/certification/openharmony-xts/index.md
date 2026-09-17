@@ -6,7 +6,7 @@
 
 openharmony XTS认证具体描述与要求，请参考[openharmony官网XTS](https://www.openharmony.cn/certification/document/guid)信息。
 
-WS53属于轻量级系统，只需要关注轻量级系统的测试项，当前最新自检表为《OpenHarmony设备兼容性规范3.2自检表\_轻量系统.xlsx》，筛选出如下测试套：
+WS53属于轻量级系统，只需要关注轻量级系统的测试项，测试时以 OpenHarmony 认证网站发布的最新轻量系统自检表为准，筛选出如下测试套：
 
 <a name="table295mcpsimp"></a>
 <table><thead align="left"><tr id="row308mcpsimp"><th class="cellrowborder" valign="top" width="7.000000000000001%" id="mcps1.1.11.1.1"><p id="p310mcpsimp"><a name="p310mcpsimp"></a><a name="p310mcpsimp"></a>中文名称*</p>
@@ -162,14 +162,14 @@ WS53属于轻量级系统，只需要关注轻量级系统的测试项，当前�
 </tbody>
 </table>
 
-本文档指导适配XTS认证所需的openharmonyAPI接口，按照[《L0设备OpenHarmony适配通用指导》](https://gitee.com/great-god-dudu/docs/tree/master)思路执行，本文档不再赘述。
+本文档指导适配XTS认证所需的openharmonyAPI接口，具体按照 [L0设备 OpenHarmony 适配通用指导](https://gitee.com/great-god-dudu/docs/tree/master) 的思路执行，本文档不再赘述。
 
 # 准备工作<a name="ZH-CN_TOPIC_0000001963234670"></a>
 
 1.  搭建openharmony编译环境（请参考openharmony官网环境搭建说明）。
 2.  下载openharmony源码（release 3.2）。
 3.  完成openharmony预编译。
-4.  并在该环境上完成WS53V100 SDK环境搭建，请参见《WS53V100 SDK开发环境搭建 用户指南》。
+4.  并在该环境上完成WS53V100 SDK环境搭建，请参见 [开发环境搭建详解](../../../get-started/environment-setup/manual/index.md)。
 
 # 编译openharmony静态库<a name="ZH-CN_TOPIC_0000001963074838"></a>
 

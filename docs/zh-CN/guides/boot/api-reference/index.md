@@ -1,6 +1,6 @@
 **概述<a name="section4537382116410"></a>**
 
-本文主要介绍WS53 Flashboot中升级相关的API接口，具体参考《WS53V100 FOTA开发指南》中的接口介绍。
+本文主要介绍WS53 Flashboot中升级相关的API接口，具体参考 [FOTA](../../system/fota/index.md) 中的接口介绍。
 
 # 接口介绍<a name="ZH-CN_TOPIC_0000001891938610"></a>
 

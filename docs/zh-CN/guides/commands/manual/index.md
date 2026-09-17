@@ -5828,7 +5828,7 @@ ERRCODE_SSAP_UPPERLAYER_APPLICATION_ERROR_MAX = ERRCODE_SLE_SSAP_BASE + 0xFF,   
 </tr>
 <tr id="row1425113294"><th class="firstcol" valign="top" width="18%" id="mcps1.1.3.3.1"><p id="p14651122918"><a name="p14651122918"></a><a name="p14651122918"></a>参数说明</p>
 </th>
-<td class="cellrowborder" valign="top" width="82%" headers="mcps1.1.3.3.1 "><a name="ul42264814217"></a><a name="ul42264814217"></a><ul id="ul42264814217"><li>&lt;ID&gt;：0~47</li><li>&lt;MODE&gt;：0~7，IO管脚复用模式，各管脚支持的复用模式不同，具体请参考《芯片用户指南》（可联系技术支持人员获取）。</li><li>&lt;PULL&gt;：引脚上下拉状态，范围0~2。<p id="p743712419269"><a name="p743712419269"></a><a name="p743712419269"></a>0：去使能；</p>
+<td class="cellrowborder" valign="top" width="82%" headers="mcps1.1.3.3.1 "><a name="ul42264814217"></a><a name="ul42264814217"></a><ul id="ul42264814217"><li>&lt;ID&gt;：0~47</li><li>&lt;MODE&gt;：0~7，IO管脚复用模式，各管脚支持的复用模式不同，具体支持情况请联系技术支持人员确认。</li><li>&lt;PULL&gt;：引脚上下拉状态，范围0~2。<p id="p743712419269"><a name="p743712419269"></a><a name="p743712419269"></a>0：去使能；</p>
 <p id="p18999113117219"><a name="p18999113117219"></a><a name="p18999113117219"></a>1：上拉；</p>
 <p id="p195697715215"><a name="p195697715215"></a><a name="p195697715215"></a>2：下拉；</p>
 </li><li>&lt;DS&gt;：0~7，引脚驱动能力，从7到0，驱动能力依次减弱</li></ul>
@@ -5872,7 +5872,7 @@ ERRCODE_SSAP_UPPERLAYER_APPLICATION_ERROR_MAX = ERRCODE_SLE_SSAP_BASE + 0xFF,   
 <td class="cellrowborder" valign="top" width="82%" headers="mcps1.1.3.4.1 "><p id="p1260152643211"><a name="p1260152643211"></a><a name="p1260152643211"></a>AT+GETIOMODE=1</p>
 <p id="p16042653215"><a name="p16042653215"></a><a name="p16042653215"></a>+GETIOMODE:&lt;ID&gt;,&lt;MODE&gt;,&lt;PULL&gt;,&lt;DS&gt;</p>
 <p id="p1960152643215"><a name="p1960152643215"></a><a name="p1960152643215"></a>OK</p>
-<a name="ul164043019334"></a><a name="ul164043019334"></a><ul id="ul164043019334"><li>&lt;MODE&gt;：0~7，IO管脚复用模式，各管脚支持的复用模式不同，具体请参考《芯片用户指南》（可联系技术支持人员获取）。&lt;PULL&gt;：引脚上下拉状态。范围0~2，。<p id="p4914155319493"><a name="p4914155319493"></a><a name="p4914155319493"></a>0：去使能；</p>
+<a name="ul164043019334"></a><a name="ul164043019334"></a><ul id="ul164043019334"><li>&lt;MODE&gt;：0~7，IO管脚复用模式，各管脚支持的复用模式不同，具体支持情况请联系技术支持人员确认。&lt;PULL&gt;：引脚上下拉状态。范围0~2，。<p id="p4914155319493"><a name="p4914155319493"></a><a name="p4914155319493"></a>0：去使能；</p>
 <p id="p69141053124918"><a name="p69141053124918"></a><a name="p69141053124918"></a>1：上拉；</p>
 <p id="p195697715215"><a name="p195697715215"></a><a name="p195697715215"></a>2：下拉；</p>
 </li><li><p id="p788012277273"><a name="p788012277273"></a><a name="p788012277273"></a>&lt;DS&gt;：0~7，引脚驱动能力，从7到0，驱动能力依次减弱</p>
