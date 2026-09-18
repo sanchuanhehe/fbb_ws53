@@ -85,7 +85,7 @@ flowchart TD
 fbb build ws53-liteos-app
 ```
 
-> 完整的编译方式请参考 [构建](../../../overall-architecture/build-system/index.md#构建)。
+> 完整的编译方式请参考 [构建](../../../guides/sdk-development/build/index.md#cli-build)。
 
 ### 第二步：烧录
 
@@ -93,7 +93,7 @@ fbb build ws53-liteos-app
 fbb flash ws53-liteos-app
 ```
 
-> 完整的烧录方式请参考 [烧录](../../../overall-architecture/build-system/index.md#烧录)。
+> 完整的烧录方式请参考 [烧录](../../../guides/sdk-development/flash-and-run/index.md#cli-flash)。
 
 ### 第三步：验证
 

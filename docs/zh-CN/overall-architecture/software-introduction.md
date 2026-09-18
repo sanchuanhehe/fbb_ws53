@@ -1,3 +1,22 @@
+---
+title: 软件架构介绍
+doc_type: explanation
+product: WS53
+applies_to:
+  sdk: 1.10.106
+  target: ws53_liteos_app
+status: draft
+verification_level: static
+source_refs:
+  - src/application/
+  - src/middleware/
+  - src/protocol/
+  - src/kernel/
+  - src/drivers/
+  - src/build/
+  - docs/zh-CN/overall-architecture/images/WS53架构图.png
+---
+
 # 软件架构介绍
 
 ## 概述

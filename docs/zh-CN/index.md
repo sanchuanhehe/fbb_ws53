@@ -54,41 +54,29 @@ WS53 是海思推出的低功耗 Wi-Fi、BLE 和 SLE Combo 芯片，适用于智
 
 <nav class="grid cards" markdown>
 
--   [**1. 环境搭建**](get-started/environment-setup.md)
+-   [**1. 快速入门**](get-started/index.md)
 
     ---
 
-    准备 Python、构建工具和 WS53 RISC-V 工具链，完成 SDK 构建环境配置。
+    沿唯一的 Hello World 路径完成工程创建、构建、烧录和串口验证。
 
--   [**2. 快速开始**](get-started/quick-start.md)
-
-    ---
-
-    构建 `ws53_liteos_app`，检查 ELF 和固件包输出。
-
--   [**3. 创建应用**](get-started/create-application.md)
+-   [**2. 开发指南**](guides/index.md)
 
     ---
 
-    参考现有 Sample 和组件构建方式创建应用，并通过 Kconfig 接入目标。
+    按具体开发任务查找环境、连接、外设、系统服务和故障排查指南。
 
--   [**4. 烧录与运行**](get-started/flash-and-run.md)
-
-    ---
-
-    烧录固件、复位开发板并通过串口日志验证运行结果。
-
--   [**5. 开发指南**](guides/index.md)
+-   [**3. 参考案例**](samples/index.md)
 
     ---
 
-    按专题了解功能配置、开发流程和验证方法。
+    基于真实源码、配置和验证判据完成具体案例开发任务。
 
--   [**6. 参考案例**](samples/index.md)
+-   [**4. API 与硬件参考**](api-reference/index.md)
 
     ---
 
-    结合仓库中的外设、蓝牙、星闪和 Wi-Fi Sample 继续开发。
+    查询 API 签名、参数约束、芯片规格和硬件设计事实。
 
 </nav>
 

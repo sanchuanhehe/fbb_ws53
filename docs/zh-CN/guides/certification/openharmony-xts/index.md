@@ -169,7 +169,7 @@ WS53属于轻量级系统，只需要关注轻量级系统的测试项，测试�
 1.  搭建openharmony编译环境（请参考openharmony官网环境搭建说明）。
 2.  下载openharmony源码（release 3.2）。
 3.  完成openharmony预编译。
-4.  并在该环境上完成WS53V100 SDK环境搭建，请参见 [开发环境搭建详解](../../../get-started/environment-setup/manual/index.md)。
+4.  并在该环境上完成WS53V100 SDK环境搭建，请参见 [开发环境搭建详解](../../sdk-development/environment-setup/manual/index.md)。
 
 # 编译openharmony静态库<a name="ZH-CN_TOPIC_0000001963074838"></a>
 

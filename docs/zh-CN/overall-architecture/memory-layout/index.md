@@ -1,3 +1,18 @@
+---
+title: Flash 与 RAM
+doc_type: explanation
+product: WS53
+applies_to:
+  sdk: 1.10.106
+  target: ws53_liteos_app
+status: draft
+verification_level: static
+source_refs:
+  - src/build/config/target_config/ws53/param_sector/param_sector.json
+  - src/build/config/target_config/ws53/
+  - src/drivers/boards/ws53/linker/ws53_app_linker/
+---
+
 # Flash 与 RAM
 
 > WS53 芯片的 Flash 分区方案与 RAM (Random Access Memory) 内存分配

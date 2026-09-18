@@ -113,7 +113,7 @@ sequenceDiagram
 fbb build ws53-liteos-app
 ```
 
-> 更多编译选项请参考 [构建](../../../overall-architecture/build-system/index.md#构建)。
+> 更多编译选项请参考 [构建](../../../guides/sdk-development/build/index.md#cli-build)。
 
 ### 第二步：烧录
 
@@ -121,7 +121,7 @@ fbb build ws53-liteos-app
 fbb flash ws53-liteos-app
 ```
 
-> 更多烧录选项请参考 [烧录](../../../overall-architecture/build-system/index.md#烧录)。
+> 更多烧录选项请参考 [烧录](../../../guides/sdk-development/flash-and-run/index.md#cli-flash)。
 
 如需用两块 WS53 开发板对测：一块编译主机 Sample，另一块编译从机 Sample；连接 Master CLK→Slave CLK、Master DO(MOSI)→Slave DI、Slave DO(MISO)→Master DI、Master CS→Slave CS，并连接 GND。两侧的 CPOL、CPHA、帧大小和速率配置必须匹配。
 

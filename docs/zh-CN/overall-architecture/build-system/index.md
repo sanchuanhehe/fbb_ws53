@@ -1,369 +1,198 @@
-# 构建系统
+---
+title: WS53 构建框架
+doc_type: explanation
+product: WS53
+applies_to:
+  sdk: 1.10.106
+  target: ws53_liteos_app
+status: draft
+verification_level: static
+source_refs:
+  - src/build.py
+  - src/CMakeLists.txt
+  - src/build/script/cmake_builder.py
+  - src/build/script/enviroment.py
+  - src/build/script/usr_config.py
+  - src/build/config/target_config/ws53/config.py
+  - src/build/config/target_config/ws53/target_config.py
+  - src/build/cmake/build_core.cmake
+  - src/build/toolchains/riscv32_musl_b010.cmake
+  - src/build/cmake/build_component.cmake
+  - src/build/cmake/build_function.cmake
+  - src/build/cmake/build_linker.cmake
+  - src/build/cmake/build_rom_callback.cmake
+  - src/build/cmake/build_sign.cmake
+  - src/build/cmake/build_nv_bin.cmake
+  - src/build/cmake/build_partition_bin.cmake
+  - src/build/config/target_config/ws53/script/entry.py
+  - src/build/config/target_config/ws53/sign_config/params_and_bin_sign.py
+  - src/tools/pkg/packet.py
+  - src/tools/pkg/chip_packet/ws53/packet.py
+---
 
-## 概述
+# WS53 构建框架
 
-WS53 SDK采用组件化构建体系，通过 config.py 选定组件、Kconfig 配置参数、CMake 执行编译，最终打包为可烧录的 .fwpkg 固件文件。SDK 中每个软件模块都是一个组件，一个 App 固件由上百个组件组合而成。
+本文以 SDK 1.10.106 的 `ws53_liteos_app` 目标为主线，分析目标配置、组件源码和已有二进制如何经过构建框架处理，形成 WS53 固件。其他目标共用部分框架，但组件、ROM 处理和后处理分支由各自配置决定。
 
-```mermaid
-flowchart TD
-    A["config.py 组件清单<br/>wifi_drv_ws53 / wifi_driver_tcm / nv / mbedtls …"] --> E[CMake]
-    B["Kconfig 设置<br/>CONFIG_DEBUG_UART_SUPPORT=y<br/>CONFIG_DEBUG_UART_BAUD_RATE=115200"] --> E
-    C["各组件 CMakeLists.txt<br/>set(COMPONENT_NAME gpio)<br/>set(SOURCES ...)<br/>build_component()"] --> E
-    E --> F["编译 .c → .o → .a<br/>链接所有 .a → .elf"]
-    F --> G["objcopy → .bin → 签名"]
-    G --> H["打包 _all.fwpkg"]
-```
+## 框架总览
 
-## 组件化配置
-
-### 组件模型
-
-SDK 中每个软件模块都是一个组件。以 gpio 为例：
-
-```
-drivers/drivers/driver/gpio/
-├── gpio.c
-└── CMakeLists.txt
-```
-
-每个组件的 CMakeLists.txt 按统一模板声明：
-
-```cmake
-set(COMPONENT_NAME "gpio")
-
-set(SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/gpio.c
-)
-
-set(PUBLIC_HEADER
-)
-
-set(PRIVATE_HEADER
-)
-
-set(PRIVATE_DEFINES
-)
-
-set(PUBLIC_DEFINES
-    SUPPORT_GPIO
-)
-
-#use this when you want to add ccflags like -include xxx
-set(COMPONENT_PUBLIC_CCFLAGS
-)
-
-set(COMPONENT_CCFLAGS
-)
-
-set(WHOLE_LINK
-    true
-)
-
-set(MAIN_COMPONENT
-    false
-)
-
-build_component()
-```
-
-### 组件清单
-
-构建一个 target 时，并非所有组件都参与编译。config.py 为每个 target 定义了组件清单：
-
-```
-src/build/config/target_config/ws53/config.py
-```
-
-```python
-'ws53_liteos_app': {
-    'ram_component': [
-        'mbedtls_v3.6.0',
-        'wifi_drv_ws53',
-        'wifi_driver_tcm',
-        'nv',
-        'nv_ws53',
-        # ... 上百个组件
-    ],
-}
-```
-
-`ws53_liteos_app` 会继承 `target_application_rom_template` 中的基础组件，再合并自身的 `ram_component` 和 `ram_component_set`。最终合并后的组件清单参与构建；以 `-:` 前缀声明的组件会从清单中排除。
-
-### Kconfig 参数配置
-
-组件进入清单后，内部还有更细的控制需求：用 UART0 还是 UART1 做调试口？波特率多少？这些由 Kconfig 管理，配置以键值对形式存在 .config 文件中：
-
-```
-src/build/config/target_config/ws53/menuconfig/acore/ws53_liteos_app.config
-```
-
-```
-CONFIG_SAMPLE_ENABLE=y
-CONFIG_ENABLE_BT_SAMPLE=y
-CONFIG_DEBUG_UART_SUPPORT=y
-CONFIG_UART_DEBUG_PORT_L0=y
-CONFIG_DEBUG_UART_BAUD_RATE=115200
-```
-
-.config 通过两条路径生效：
+开发者通过 Python 入口发起构建，由 CMake 生成规则，Make/Ninja 执行规则并调用 RISC-V GCC 工具链完成编译和链接。
 
 ```mermaid
 flowchart LR
-    DOT[.config 键值对] -->|usr_config.py| MH[mconfig.h]
-    DOT -->|KCONFIG_GET_PARAMS| CMAKE[CMake 变量]
-    MH --> SRC["源码 #ifdef CONFIG_xxx"]
-    CMAKE --> CML["CMakeLists.txt 条件判断"]
+    USER["开发者"] --> PY["Python<br/>构建入口"]
+    PY --> CM["CMake<br/>生成规则"]
+    CM --> EXEC["Make / Ninja<br/>执行构建"]
+    EXEC --> TC["RISC-V GCC<br/>编译与链接"]
 ```
 
-修改配置推荐使用 `fbb menuconfig <target>`。交互式菜单按模块层级组织，方向键移动、空格切换开关，保存退出后 `.config` 和 `mconfig.h` 自动更新：
+## 构建入口与执行阶段
 
-```bash
-fbb menuconfig ws53_liteos_app
+`src/build.py` 实例化 `CMakeBuilder` 并调用 `build()`。对于普通编译目标，`build_target()` 创建目标环境，依次执行构建前钩子、目标编译、构建后钩子，并在 `packet` 配置启用时发起固件打包。
+
+下图按阶段展示主要输入和结果；实线表示主流程或数据输入，虚线表示已有文件的输入。ROM 相关的条件分支见[链接与 ROM/RAM 处理](#rom-link)。
+
+```mermaid
+flowchart TD
+    INPUT["目标名、目标模板与差异配置"] --> PY["Python 调度<br/>build.py → CMakeBuilder → TargetEnvironment"]
+    PY --> CFG["准备有效目标配置与 Kconfig 头文件"]
+    CFG --> CM["CMake 配置与规则生成<br/>CMakeLists.txt → build_core.cmake"]
+    COMP["组件 CMake 声明与源码树"] --> CM
+    CM --> RULES["Makefile / Ninja 构建规则"]
+    RULES --> RUN["Make / Ninja 执行规则<br/>编译、链接与镜像后处理"]
+    EXIST["已有静态库、ROM 符号与二进制输入"] -.-> RUN
+    RUN --> POST["Python 构建后处理<br/>WS53 build_post"]
+    POST --> PACK["WS53 打包脚本"]
+    PACK --> OUT["固件包 .fwpkg"]
 ```
 
-自动化脚本和 CI 推荐使用无交互的 `fbb config`。该命令会校验 Kconfig 依赖和 choice 互斥关系：
+| 阶段 | 主要执行者 | 职责与结果 |
+| --- | --- | --- |
+| 目标解析与前置处理 | `TargetEnvironment`、WS53 `build_pre` 钩子 | 合成目标配置，执行芯片相关前置处理；例如缺少 FlashBoot 镜像时触发其构建 |
+| 配置与规则生成 | `CMakeBuilder.start()`、`usr_config.py`、CMake | 准备生成头文件和 CMake 参数，生成组件及后处理目标的构建规则 |
+| 编译、链接与镜像后处理 | Make/Ninja、工具链、CMake 自定义目标 | 按依赖关系生成库、ELF、镜像及所需辅助数据 |
+| 构建后处理与打包 | WS53 `build_post`、`pack_fwpkg()` | 按目标配置整理二进制等输入，并调用 WS53 打包实现 |
 
-```bash
-fbb config --target ws53_liteos_app get CONFIG_SAMPLE_ENABLE
-fbb config --target ws53_liteos_app set CONFIG_SAMPLE_ENABLE=y
-fbb config --target ws53_liteos_app unset CONFIG_SAMPLE_ENABLE
+CMake 的入口是 `src/CMakeLists.txt`。它加载 `build_core.cmake`，通过 `cfbb_build_prologue()` 准备平台和通用模块，在 `project()` 初始化编译语言后，由 `cfbb_build_epilogue()` 接入组件树、链接脚本和后处理目标。
+
+这里需要区分“声明规则”和“执行规则”：配置阶段处理 `CMakeLists.txt`、创建目标与依赖；编译和大部分镜像后处理在构建工具执行这些规则时发生。Python 调度器也会在 CMake 调用前后运行自己的处理逻辑。
+
+## 目标与配置解析
+
+### 目标配置的合成
+
+目标名表示一组芯片、内核、工具链、组件及后处理配置，不等同于一个源码目录，也不等同于 CMake 内部的库目标。
+
+`ws53_liteos_app` 在 `config.py` 中选择 `target_application_rom_template` 为基础模板。模板位于 `target_config.py`，定义 WS53、`acore`、LiteOS、工具链以及 ROM/RAM 等基础配置；目标再补充或调整组件、宏和功能开关。
+
+`TargetEnvironment` 按以下关系合成有效配置：
+
+1. 加载基础模板，合并目标差异。非列表字段由目标值覆盖，列表字段按实现追加；编译宏还经过专门的合并处理。
+2. 加入公共编译和链接配置，展开 `ram_component_set`、`rom_component_set` 和宏集合。
+3. 处理列表中的删除标记。以 `-:` 开头的条目用于从合成结果中排除相应条目。
+4. 将结果交给 `CMakeBuilder`，转换成 CMake 参数，包括 `RAM_COMPONENT`、`ROM_COMPONENT`、编译宏、链接选项及工具链文件。
+
+因此，最终组件集合需要结合基础模板、目标差异和集合定义理解，不能仅从 `config.py` 的某一段列表判断。
+
+### Kconfig 的两条生效路径
+
+目标配置确定框架使用哪些配置文件。Kconfig 进一步表达功能选项及其依赖；当前目标的配置保存在 `menuconfig/acore/ws53_liteos_app.config` 中。
+
+```mermaid
+flowchart LR
+    DEF["config.in 与各级 Kconfig<br/>选项定义和依赖"] --> KC["usr_config.py / Kconfiglib"]
+    DOT["目标 .config"] --> KC
+    KC --> HEADER["构建目录中的 mconfig.h"]
+    HEADER --> CC["编译器强制包含<br/>影响源码条件编译"]
+    DOT --> READ["KCONFIG_GET_PARAMS"]
+    READ --> VAR["匹配规则的 CMake 变量"]
+    VAR --> SELECT["影响目录选择与构建规则"]
 ```
 
-## 推荐的应用工程入口
+Python 路径中，`CMakeBuilder.start()` 调用 `mconfig("savemenuconfig", ...)`，由 Kconfiglib 读取配置并生成 `mconfig.h`。组件构建规则在启用 Kconfig 时通过编译选项强制包含这个头文件。
 
-产品应用使用 SDK 外的独立工程，不直接修改 `application/ws53/ws53_application/main.c`。升级后的 fbb CLI (Command Line Interface) 提供工程脚手架：
+CMake 路径中，`build_core.cmake` 调用 `KCONFIG_GET_PARAMS` 读取同一份目标配置。当前实现仅对值为 `y` 或带引号字符串的匹配项设置变量；不能将其理解为所有配置类型都会等价导入 CMake。源码中的数值配置仍可通过生成头文件生效。
 
-```bash
-fbb create-project my_ws53_app --chip ws53
-cd my_ws53_app
-fbb build
-```
+## 组件组织与构建规则生成
 
-生成的工程包含：
+<a name="component-model"></a>
 
-```text
-my_ws53_app/
-├── fbb-project.toml        # 芯片、target 和依赖
-├── CMakeLists.txt          # 外置工程构建入口
-└── main/
-    ├── CMakeLists.txt
-    └── app.c               # app_run() 业务入口
-```
+### 组件模型与筛选
 
-业务可以继续拆分到 `components/`。外置工程通过 `FBB_SDK_DIR` 接入 SDK 组件树，应用代码与 SDK 源码分开管理。
+组件是框架组织源码、编译属性和链接输入的基本单元。框架先通过 `build_core.cmake` 遍历应用、内核、驱动、中间件等源码子树，再由各级 CMake 条件控制子目录是否进入配置过程。
 
-## 新增组件
+当一个目录调用 `build_component()` 时，框架检查 `COMPONENT_NAME` 是否属于有效的 `RAM_COMPONENT` 或 `ROM_COMPONENT` 集合，并据此选择处理分支。目录存在、被遍历，以及生成实际编译目标，是不同的条件。
 
-> 本节面向维护 SDK 平台组件的开发者。普通产品业务优先在外置工程的 `main/` 或 `components/` 中扩展，不要为了增加业务功能直接修改 SDK 的 `config.py`。
+源码目录与构建组件也不必一一对应。例如，Hello World 案例向父作用域追加源码，最终由上层 `samples` 组件构建；GPIO 则声明独立组件。
 
-向 SDK 中添加一个新的软件模块时，按以下步骤操作。以新增 `my_driver` 组件为例：
+### ROM 组件与 RAM 组件
 
-**第一步：创建源码和 CMakeLists.txt**
+ROM 组件与 RAM 组件是构建框架对组件的两类划分，用于区分 ROM 侧实现与当前固件中的非 ROM 侧实现：
 
-```
-drivers/drivers/driver/my_driver/
-├── my_driver.c
-└── CMakeLists.txt
-```
+- **ROM 组件**：属于有效 `ROM_COMPONENT` 集合的组件。默认 `ws53_liteos_app` 目标使用已有 ROM 符号，框架为这些组件提供公开头文件、宏等接口属性，不重新编译其实现；已有 ROM 中的实现通过符号信息供链接时引用。
+- **RAM 组件**：属于有效 `RAM_COMPONENT` 集合的组件，其源码或预编译库按构建规则参与当前固件构建。这里的“RAM”是构建分类，不表示组件的所有代码和数据都放在 RAM 中，实际布局由链接脚本决定。
 
-```cmake
-set(COMPONENT_NAME "my_driver")
+分类依据是目标模板、目标差异和组件集合展开后得到的有效配置，不是源码目录名或组件名称后缀。例如，当前应用模板将 `samples` 列入 `ram_component`，将 `version_rom` 列入 `rom_component`。名称中的 `_rom` 可以帮助阅读，但不是框架判定归属的依据。
 
-set(SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/my_driver.c
-)
+这两类组件共用组件声明机制，但采用的编译和链接处理不同。上述 ROM 行为针对默认应用目标；其他配置下的 ROM 构建、符号引用及回调处理见[链接与 ROM/RAM 处理](#rom-link)。
 
-set(PUBLIC_HEADER
-)
+### 从组件声明到构建目标
 
-set(PRIVATE_HEADER
-)
+`build_component.cmake` 将组件声明转换为以下几类构建对象：
 
-set(PRIVATE_DEFINES
-)
+| 对象 | 框架中的处理方式 |
+| --- | --- |
+| 有源码的组件 | `build_library()` 默认创建静态库目标；启用 `BUILD_AS_OBJ` 时创建对象库目标 |
+| 预编译库输入 | 源码不可用时按实现查找对应静态库，或通过组件声明的库输入参与链接 |
+| 接口属性 | 创建组件接口目标，承载公开头文件目录、宏和编译选项 |
+| 最终镜像目标 | 将所需组件库、对象及其他链接输入组合到 ELF 目标中 |
 
-set(PUBLIC_DEFINES
-)
+有源码的组件编译时使用自身的私有属性，并通过框架组织的接口目标获取公开属性。框架还根据 ROM 分类和全量链接设置，选择普通链接或 `--whole-archive` 处理。具体模板与字段填写见[创建应用组件](../../guides/sdk-development/create-application/index.md#cmake-template)。
 
-set(COMPONENT_CCFLAGS
-)
+<a name="rom-link"></a>
 
-set(WHOLE_LINK
-    true
-)
+## 链接与 ROM/RAM 处理
 
-set(MAIN_COMPONENT
-    false
-)
+### 链接脚本连接组件与内存布局
 
-build_component()
-```
+组件选入构建后，还需要决定代码和数据如何进入镜像。`build_linker.cmake` 根据组件分类生成辅助链接描述，将目标的链接脚本模板、宏和头文件路径交给预处理器，形成最终 `linker.lds`。
 
-模板中各字段含义：
+ELF 目标使用该脚本及目标链接选项完成链接，同时生成地址映射文件。组件清单决定参与构建的输入，链接脚本决定这些输入的段如何布局；具体地址和分区说明见[内存布局](../memory-layout/index.md)。
 
-| 字段 | 必填 | 说明 |
-|------|:---:|------|
-| COMPONENT_NAME | 是 | 组件名，需与 config.py 中注册的名称一致 |
-| SOURCES | 是 | 源文件列表，使用 `${CMAKE_CURRENT_SOURCE_DIR}` 拼接路径 |
-| PUBLIC_HEADER | 否 | 公开头文件，暴露给其他组件使用 |
-| PRIVATE_HEADER | 否 | 私有头文件，仅本组件内部使用 |
-| PRIVATE_DEFINES | 否 | 组件内部宏定义，不对外暴露 |
-| PUBLIC_DEFINES | 否 | 公开宏定义，其他组件依赖本组件时自动继承 |
-| COMPONENT_PUBLIC_CCFLAGS | 否 | 公开编译选项，其他组件依赖本组件时自动追加 |
-| COMPONENT_CCFLAGS | 否 | 组件私有编译选项，仅本组件使用 |
-| WHOLE_LINK | 否 | 是否全量链接，true 表示即使未被引用也保留所有符号 |
-| MAIN_COMPONENT | 否 | 是否为主组件，每个 target 有且仅有一个 |
+### 默认应用目标的 ROM 路径
 
-**第二步：注册到目标 target**
+WS53 的应用模板同时配置 ROM/RAM 组件、`rom_sym_path`、`fixed_rom` 和 `build_rom_callback`。这些配置共同决定处理路径，不能只看到开关存在就认为所有 ROM 处理都会执行。
 
-在 config.py 的 ram_component 列表中添加组件名：
+| 条件 | 当前框架的行为 |
+| --- | --- |
+| 配置有效的 ROM 符号文件 | `deal_symbol_link()` 为链接器添加 `--just-symbols`；`build_component()` 对 ROM 组件走符号模式分支，提供接口属性及相关登记信息 |
+| 回调处理开启且 `fixed_rom` 为真 | `rom_callback()` 跳过自动回调生成过程；随后调度器关闭本轮自动生成开关，加入 `rom_callback` 组件及相关宏 |
+| 回调处理开启且不是固定 ROM | 框架先构建并收集未定义符号、重定位和符号表，再调用回调生成逻辑，随后进行后续构建 |
+| 进入 `rom_check()` 时仍有 `rom_sym_path` | 直接返回，不执行该函数后续的 ROM 二进制比对 |
+| 无 ROM 符号路径且启用固定 ROM | 将本次生成的 ROM 二进制与 `fixed_rom_path` 指定的基线比较 |
+| 无 ROM 符号路径、非固定 ROM 且启用 ROM/RAM 检查 | 进入额外检查构建，并按 `rom_ram_compare` 决定是否比对结果 |
 
-```python
-'ws53_liteos_app': {
-    'ram_component': [
-        # ... 已有组件 ...
-        'my_driver',         # 新增
-    ],
-}
-```
+默认 `ws53_liteos_app` 模板使用已有 ROM 符号文件和固定 ROM 配置。理解这条路径时，应把已有 ROM 符号的引用、回调组件的接入，以及其他配置下的 ROM 重建和校验区分开。
 
-**第三步（可选）：添加 Kconfig 开关**
+## 镜像后处理与固件打包
 
-如果组件需要可配置，在对应目录下新建或编辑 Kconfig：
+### CMake 构建图内的后处理
 
-```kconfig
-config MY_DRIVER_ENABLE
-    bool "Enable My Driver"
-    default y
-```
+ELF 链接完成后，`build_core.cmake` 声明的自定义目标调用 `objcopy` 提取镜像；存在 ROM 组件定义时，规则包含分别提取普通镜像和 ROM 段的处理。
 
-源码中使用方式：
+后续任务按配置加入构建图，而不是统一的一条串行命令：
 
-```c
-#ifdef CONFIG_MY_DRIVER_ENABLE
-    /* 初始化 */
-    my_driver_init();
-    /* 创建任务 */
-    osal_kthread_lock();
-    osal_task *task = osal_kthread_create((osal_kthread_handler)my_driver_task,
-                                           0, "MyDriver", 0x1000);
-    if (task != NULL) {
-        osal_kthread_set_priority(task, 26);
-        osal_kfree(task);
-    }
-    osal_kthread_unlock();
-#endif
-```
+- `build_sign.cmake` 为 WS53 声明 `WS53_GENERAT_SIGNBIN`，调用芯片签名脚本 `params_and_bin_sign.py`，并依赖镜像生成目标。
+- `build_nv_bin.cmake` 根据 NV 配置和更新开关组织配置数据与 NV 镜像生成。
+- `build_partition_bin.cmake` 在存在分区配置时声明分区数据生成规则。
+- 其他模块按目标需要补充启动镜像、镜像信息和辅助数据处理。
 
-**第四步：重新构建**
+这些任务的先后关系由各自的依赖声明确定。某个 CMake 模块被加载，并不表示其中的每个生成任务都会启用。
 
-```bash
-fbb build ws53_liteos_app
-```
+### Python 后处理与包输入汇总
 
-## 构建操作 <a id="构建操作"></a>
+目标编译及相应 ROM 检查返回后，`build_target()` 调用 WS53 的 `build_post` 钩子。该钩子根据配置执行启动镜像整理、eFuse 配置生成、ROM 合并等处理；各处理受独立开关和目标条件控制。
 
-### 环境准备
+随后，启用 `packet` 的目标由 `pack_fwpkg()` 调用 `tools/pkg/packet.py`，再分派到 `chip_packet/ws53/packet.py`。WS53 打包实现按包类型和配置组织应用签名镜像、LoaderBoot、启动参数、SSB、FlashBoot、NV 等输入，并生成固件包；可选输入由相应条件控制。
 
-**安装 uv（Python 包管理器）**：
-
-```powershell
-irm https://astral.sh/uv/install.ps1 | iex
-```
-
-**安装或更新 fbb CLI**：
-
-```powershell
-uv tool install --force 'git+https://gitcode.com/HiSpark/hs-fbb-cli.git'
-fbb -V
-```
-
-WS53 SDK 要求 `fbb` 不低于 `1.1.0`，本文命令已使用 `fbb 1.2.0` 验证。团队项目可另行固定经过验证的 CLI 提交。
-
-**初始化构建环境并安装 SDK 与工具链**：
-
-```bash
-fbb setup
-fbb sdk install ws53          # 安装匹配的 SDK 与 RISC-V 工具链
-fbb doctor                    # 环境检查
-fbb describe --json           # 查看 CLI、SDK、工具链和可用 target
-```
-
-> `fbb sdk install` 会下载 SDK 源码并安装该 SDK 声明的匹配工具链。团队项目应在开发说明中固定 SDK tag 或 commit；不要只执行 `git clone` 后假设本机已有匹配工具链。
-
-### 查看可用 Target
-
-```bash
-fbb list-targets --json       # 列出所有可构建的 target
-fbb describe --json            # 完整环境探测（SDK、工具链、target 等）
-```
-
-常用 target：
-
-| Target | 用途 |
-|--------|------|
-| `ws53_liteos_app` | 主应用镜像（默认） |
-| `ws53-flashboot` | FlashBoot 引导 |
-| `ws53_liteos_xts` | LiteOS XTS 测试镜像 |
-
-可设置默认 target 后续省略：
-
-```bash
-fbb set-target ws53_liteos_app
-fbb get-target                 # 查看当前默认 target
-```
-
-### 构建
-
-```bash
-fbb build ws53_liteos_app              # 增量构建
-fbb build --clean ws53_liteos_app      # 全量重编（修改 .config 后必须 --clean）
-fbb build ws53_liteos_app -j8          # 指定并行任务数
-```
-
-> 修改过 `.config` 后必须 `--clean`，否则 CMake 缓存会导致改动不生效。
-
-构建成功需同时满足：
-1. 进程退出码为 `0`
-2. `src/output/ws53/fwpkg/<target>/<target>_all.fwpkg` 存在且时间戳更新
-3. 使用 `_all.fwpkg`，不要使用 `_load_only.fwpkg`
-
-### 烧录
-
-```bash
-fbb flash ws53_liteos_app                                 # 自动检测串口
-fbb flash ws53_liteos_app --port COM3 --baud 921600       # 指定串口和波特率
-```
-
-## 构建产物
-
-构建产物位于 `src/output/ws53/`：
-
-```
-src/output/ws53/
-├── acore/
-│   ├── ws53_liteos_app/
-│   │   ├── application.elf            # ELF（含调试符号，GDB 用）
-│   │   ├── application.map            # 函数 / 变量地址映射
-│   │   ├── application.lst            # 反汇编清单
-│   │   ├── application.bin            # App 裸二进制
-│   │   ├── ws53_liteos_app.bin       # 裸二进制
-│   │   ├── ws53_liteos_app_sign.bin  # 签名固件
-│   │   └── mconfig.h                 # Kconfig 生成的头文件
-│   ├── ws53-flashboot/               # FlashBoot 产物
-│   ├── boot_bin/                      # SSB、LoaderBoot 等启动镜像
-│   ├── nv_bin/                        # NV 全量与出厂数据
-│   └── param_bin/params.bin           # 分区表
-└── fwpkg/
-    └── ws53_liteos_app/
-        └── ws53_liteos_app_all.fwpkg  # ★ 最终烧录文件
-```
-
-| 产物 | 说明 |
-|------|------|
-| .fwpkg | 最终烧录文件，含 Bootloader + App + NV (Non-Volatile) + 分区表 |
-| .elf | 完整 ELF (Executable and Linkable Format)，含调试符号和段信息，GDB (GNU Debugger) 调试用，不可烧录 |
-| .bin | ELF 经 objcopy 提取的裸二进制 |
-| `_sign.bin` | 签名固件，安全启动需要 |
-| .map | 所有函数 / 变量的地址映射，崩溃时配合 PC / LR 定位 |
-| .lst | 源码与汇编一一对照，深度调试用 |
+因此，固件包是多个构建产物与已有二进制的组合，不是给应用 ELF 换一个扩展名。具体产物路径、包的选用及烧录方法见[烧录与运行验证](../../guides/sdk-development/flash-and-run/index.md)。

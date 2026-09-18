@@ -1,3 +1,22 @@
+---
+title: 目录结构
+doc_type: explanation
+product: WS53
+applies_to:
+  sdk: 1.10.106
+  target: ws53_liteos_app
+status: draft
+verification_level: static
+source_refs:
+  - src/application/
+  - src/middleware/
+  - src/protocol/
+  - src/kernel/
+  - src/drivers/
+  - src/build/
+  - src/bootloader/
+---
+
 # 目录结构
 
 > SDK (Software Development Kit) 源码的组织方式及各目录用途

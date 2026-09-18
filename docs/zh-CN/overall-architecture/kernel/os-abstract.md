@@ -1,3 +1,20 @@
+---
+title: OS 抽象层
+doc_type: explanation
+product: WS53
+applies_to:
+  sdk: 1.10.106
+  target: ws53_liteos_app
+status: draft
+verification_level: static
+source_refs:
+  - src/kernel/osal/include/
+  - src/kernel/osal/src/liteos/
+  - src/kernel/osal/adapt/liteos/
+  - src/kernel/osal_adapt/
+  - src/kernel/liteos/
+---
+
 # OS 抽象层
 
 > WS53 应用在 LiteOS (Huawei LiteOS) 上统一使用的操作系统接口

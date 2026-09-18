@@ -1,3 +1,19 @@
+---
+title: 运行时架构
+doc_type: explanation
+product: WS53
+applies_to:
+  sdk: 1.10.106
+  target: ws53_liteos_app
+status: draft
+verification_level: static
+source_refs:
+  - src/application/ws53/ws53_application/app_os_init.c
+  - src/middleware/utils/app_init/
+  - src/kernel/osal/
+  - src/kernel/liteos/
+---
+
 # 运行时架构
 
 > 基于 `ws53_liteos_app` 当前源码，说明 LiteOS (Huawei LiteOS) 开始调度后系统中的任务组成、执行上下文、通信边界和资源约束
