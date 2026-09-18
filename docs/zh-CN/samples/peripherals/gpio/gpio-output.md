@@ -1,6 +1,6 @@
 # GPIO
 
-> GPIO (General Purpose Input/Output) 驱动 | sample: blinky
+> GPIO (General Purpose Input/Output) 驱动 | 案例：blinky
 
 ## 学习目标
 

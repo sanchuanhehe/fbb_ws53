@@ -9,7 +9,7 @@
 - WS53 在写请求回调中校验 Handle 和长度，再更新 RAM (Random Access Memory) 中的值。
 - 外部 Client 按实际 Value Handle 发起读写并处理响应状态。
 
-连接、配对、服务发现、CCCD (Client Characteristic Configuration Descriptor) 和 Notification 流程请参考前两篇。本篇仍使用同一个 `ble_hello` Sample，不需要切换配置项。
+连接、配对、服务发现、CCCD (Client Characteristic Configuration Descriptor) 和 Notification 流程请参考前两篇。本篇仍使用同一个 `ble_hello` 案例，不需要切换配置项。
 
 ## 三种交互方式
 
@@ -54,7 +54,7 @@ WS53 不会把远端数据直接当作无界 C 字符串使用。写入前会检
 
 ## 广播状态字节
 
-写入成功后，Sample 会同步更新广播 Service Data 中的状态字节：
+写入成功后，案例会同步更新广播 Service Data 中的状态字节：
 
 | 状态字节 | Data 当前状态 |
 | --- | --- |

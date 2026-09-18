@@ -157,7 +157,7 @@ Indication 确认只表示 Client 协议栈接收了当前分片，不表示 Cli
 | 公共最大载荷和跨模块接口 | `src/application/samples/bt/ble/ble_uart_bridge/ble_uart_bridge.h` |
 | GATT Server 逻辑 | `ble_uart_bridge_server/src/ble_uart_bridge_server.c` |
 | 广播数据和参数 | `ble_uart_bridge_server/src/ble_uart_bridge_server_adv.c` |
-| Sample 配置 | `src/application/samples/bt/ble/Kconfig` |
+| 案例配置 | `src/application/samples/bt/ble/Kconfig` |
 
 ## 案例操作指导
 
@@ -184,9 +184,9 @@ CONFIG_SAMPLE_SUPPORT_BLE_SAMPLE=y
 CONFIG_SAMPLE_SUPPORT_BLE_UART_BRIDGE_SERVER_SAMPLE=y
 ```
 
-该选项自动选择 `UART_SUPPORT_LPM`。为了保持 UART 连续接收，Sample 会持有 sleep veto，功耗高于允许深睡的应用。
+该选项自动选择 `UART_SUPPORT_LPM`。为了保持 UART 连续接收，案例会持有 sleep veto，功耗高于允许深睡的应用。
 
-BLE Sample 使用 Kconfig `choice` 互斥选择，同一固件中只能启用一个 BLE 示例。
+BLE 案例使用 Kconfig `choice` 互斥选择，同一固件中只能启用一个 BLE 示例。
 
 ### 第三步：编译和烧录
 
@@ -241,7 +241,7 @@ USB-TTL 应收到相同字节，WS53 输出：
 | 初始握手 | `uart_from_peripheral`，20 字节 | 开启 CCCD 后首先发送；确认完成前暂停 UART 队列发送 |
 | BLE 提交失败退避 | 短暂退避后重试 | 保留未确认数据 |
 
-当前固定 BLE 地址可能与其他 Sample 冲突。量产应用应使用唯一地址或通过 NV (Non-Volatile) 配置地址。
+当前固定 BLE 地址可能与其他案例冲突。量产应用应使用唯一地址或通过 NV (Non-Volatile) 配置地址。
 
 ## 代码详解
 
@@ -255,11 +255,11 @@ GATT 写回调先区分 CCCD Handle 和 Data Handle。Data 数据能够完整进
 
 ### 3. 断连恢复
 
-断连时 Sample 清除连接、CCCD 和当前 MTU 状态，将在途 Indication 标记为失败但不消费数据，然后重新广播。Client 重连并再次订阅后，工作任务可以继续发送保留的数据。
+断连时案例清除连接、CCCD 和当前 MTU 状态，将在途 Indication 标记为失败但不消费数据，然后重新广播。Client 重连并再次订阅后，工作任务可以继续发送保留的数据。
 
 ## 常见问题
 
-- 扫描不到 `uart1_bridge`：确认固件启用了 UART Bridge Server Sample，并检查 WS53 是否输出广播启动日志。
+- 扫描不到 `uart1_bridge`：确认固件启用了 UART Bridge Server 案例，并检查 WS53 是否输出广播启动日志。
 - 已连接但收不到 UART 数据：确认 Client 已向 `0x4546` 对应的 CCCD 写入 `02 00`。
 - USB-TTL 没有输出：检查 TX/RX 是否交叉连接、是否共地以及串口参数是否为 115200 8N1。
 - 只能单向传输：分别检查 `0x4545` 写入和 `0x4546` Indication 订阅。

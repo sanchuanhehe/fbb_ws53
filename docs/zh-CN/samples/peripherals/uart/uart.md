@@ -1,6 +1,6 @@
 # UART
 
-> UART (Universal Asynchronous Receiver/Transmitter) 驱动 | sample: uart
+> UART (Universal Asynchronous Receiver/Transmitter) 驱动 | 案例：uart
 
 ## 学习目标
 
@@ -213,9 +213,3 @@ static void uart_task(const char *arg)
 }
 app_run(uart_entry);
 ```
-
-!!! note "当前 Sample 与产品代码的区别"
-
-    当前 `uart_demo.c` 为了便于观察接收数据，会在 RX 回调中多次调用 `osal_printk()` 并逐字节打印。这是 Sample 的现状，不代表推荐的产品实现。量产代码应避免在回调中阻塞或大量打印，优先把数据写入环形缓冲区或投递给任务，再由任务完成日志和业务处理。
-
----

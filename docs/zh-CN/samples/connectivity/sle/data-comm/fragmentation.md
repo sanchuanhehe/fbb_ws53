@@ -287,7 +287,7 @@ Client 关键日志应包含：
 
 ### 角色与能力
 
-顶层 SLE Sample `choice` 定义两个互斥角色：
+顶层 SLE 案例 `choice` 定义两个互斥角色：
 
 ```text
 CONFIG_SAMPLE_SUPPORT_SLE_FRAGMENTATION_SERVER_SAMPLE

@@ -44,7 +44,7 @@ WS53 不支持 BLE Central/GATT Client 功能；本案例中的 Client/Host 是�
 | Boot Keyboard Input | `0x2A22` | Read、Notify | 8 字节按键报告，带 CCCD `0x2902` |
 | Boot Keyboard Output | `0x2A32` | Read、Write、Write Without Response | 注册标准属性；当前未解析键盘 LED 输出 |
 
-当前 Sample 只完整实现 Boot Keyboard Input Report 的按键发送，不实现复杂组合键、多键同时按下或 Consumer Control Report。HID Control Point、Protocol Mode 和 Boot Keyboard Output 已注册到 GATT 表，但共用写回调尚未按 Handle 分流：任意 1 字节写入都会更新 `g_protocol_mode`，Suspend / Exit Suspend、键盘 LED 输出和完整 Report Mode 发送路径尚未实现。该限制已记录，后续应在源码中保存各可写属性的 Value Handle，并按 Handle 分别校验和处理。
+当前案例只完整实现 Boot Keyboard Input Report 的按键发送，不实现复杂组合键、多键同时按下或 Consumer Control Report。HID Control Point、Protocol Mode 和 Boot Keyboard Output 已注册到 GATT 表，但共用写回调尚未按 Handle 分流：任意 1 字节写入都会更新 `g_protocol_mode`，Suspend / Exit Suspend、键盘 LED 输出和完整 Report Mode 发送路径尚未实现。该限制已记录，后续应在源码中保存各可写属性的 Value Handle，并按 Handle 分别校验和处理。
 
 ### Boot Keyboard Input Report
 
@@ -52,9 +52,9 @@ WS53 不支持 BLE Central/GATT Client 功能；本案例中的 Client/Host 是�
 
 | 字节 | 字段 | 说明 |
 | --- | --- | --- |
-| 0 | Modifier | Ctrl、Shift、Alt 等修饰键位图，本 Sample 固定为 0 |
+| 0 | Modifier | Ctrl、Shift、Alt 等修饰键位图，本案例固定为 0 |
 | 1 | Reserved | 固定为 0 |
-| 2～7 | Keycodes | 最多 6 个普通键码，本 Sample 只使用第一个 |
+| 2～7 | Keycodes | 最多 6 个普通键码，本案例只使用第一个 |
 
 默认 Page Down 按下和松开报告：
 
@@ -79,7 +79,7 @@ WS53 不支持 BLE Central/GATT Client 功能；本案例中的 Client/Host 是�
 
 ### 按键消抖与长按
 
-Sample 每 20 ms 读取一次按键，连续两次读到相同状态后确认变化。默认板载 S1 使用 MGPIO6，高电平有效且不启用内部上下拉。
+案例每 20 ms 读取一次按键，连续两次读到相同状态后确认变化。默认板载 S1 使用 MGPIO6，高电平有效且不启用内部上下拉。
 
 ```mermaid
 flowchart TD
@@ -141,7 +141,7 @@ flowchart TD
 
 | 内容 | 源码位置 |
 | --- | --- |
-| Sample 入口、GPIO 和按键状态机 | `src/application/samples/bt/ble/ble_hid_btn/src/ble_hid_btn_sample.c` |
+| 案例入口、GPIO 和按键状态机 | `src/application/samples/bt/ble/ble_hid_btn/src/ble_hid_btn_sample.c` |
 | HID GATT Service 和报告发送 | `src/application/samples/bt/ble/ble_hid_btn/src/ble_hid_btn.c` |
 | 广播和扫描响应 | `src/application/samples/bt/ble/ble_hid_btn/src/ble_hid_adv.c` |
 | 用户配置 | `src/application/samples/bt/ble/ble_hid_btn/Kconfig` |
@@ -161,7 +161,7 @@ CONFIG_BLE_HID_BTN_LONGPRESS=y
 CONFIG_BLE_HID_DEVICE_NAME="ble_hid_btn"
 ```
 
-BLE Sample 使用 Kconfig `choice` 互斥选择，同一固件中只能启用一个 BLE 示例。
+BLE 案例使用 Kconfig `choice` 互斥选择，同一固件中只能启用一个 BLE 示例。
 
 ### 第二步：准备硬件
 
@@ -223,7 +223,7 @@ WS53 正常输出：
 
 ## 常见问题
 
-- 扫描不到设备：确认 Sample 已启用，并检查广播启动日志和设备名配置。
+- 扫描不到设备：确认案例已启用，并检查广播启动日志和设备名配置。
 - 已连接但按键无效：确认 Host 已识别 HID Service，或使用 GATT 工具订阅 `0x2A22`。
 - 按一次却连续翻页：确认松开时发送了全零报告，并检查按键电平与消抖日志。
 - 修改 GPIO 后状态相反：非 MGPIO6 配置默认使用低电平有效和内部上拉，需要按实际电路调整。

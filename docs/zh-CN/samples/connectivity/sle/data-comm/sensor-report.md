@@ -296,7 +296,7 @@ CONFIG_SAMPLE_SUPPORT_SLE_SENSOR_REPORT_CLIENT_SAMPLE=y
 CONFIG_SUPPORT_SLE_CENTRAL=y
 ```
 
-Server 与 Client 位于同一个 SLE Sample `choice` 中，需要分别构建和烧录。固件包位于：
+Server 与 Client 位于同一个 SLE 案例 `choice` 中，需要分别构建和烧录。固件包位于：
 
 ```text
 output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg

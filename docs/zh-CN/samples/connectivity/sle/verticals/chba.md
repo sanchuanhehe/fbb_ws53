@@ -17,7 +17,7 @@
 
 ### CHBA 角色与拓扑
 
-CHBA 角色由 NV 中的 `role_idx` 决定，不是两个独立的 Kconfig Sample：
+CHBA 角色由 NV 中的 `role_idx` 决定，不是两个独立的 Kconfig 案例：
 
 | `role_idx` | CHBA 角色 | SLE 行为 | 拓扑职责 |
 | --- | --- | --- | --- |
@@ -127,7 +127,7 @@ flowchart LR
 
 ### 案例简介
 
-同一份 CHBA Sample 通过 NV 决定 AP/STA 角色。AP 持续扫描固定发现数据，STA 持续广播；连接、配对和 PHY/MCS 更新完成后，连接被加入网络设备。案例提供网络接口适配和可选桥接代码，但不提供独立的 IP 地址分配服务或上层 TCP/UDP 测试任务。
+同一份 CHBA 案例通过 NV 决定 AP/STA 角色。AP 持续扫描固定发现数据，STA 持续广播；连接、配对和 PHY/MCS 更新完成后，连接被加入网络设备。案例提供网络接口适配和可选桥接代码，但不提供独立的 IP 地址分配服务或上层 TCP/UDP 测试任务。
 
 ### 功能规格
 
@@ -204,7 +204,7 @@ typedef struct {
 
 ### 第一步：配置案例
 
-CHBA 与 BLE、普通 SLE Sample 位于 `src/application/samples/bt/Kconfig` 的同一个 `choice`，只能选择其中一个：
+CHBA 与 BLE、普通 SLE 案例位于 `src/application/samples/bt/Kconfig` 的同一个 `choice`，只能选择其中一个：
 
 ```text
 CONFIG_ENABLE_BT_SAMPLE=y
@@ -226,7 +226,7 @@ AP : [chba_mode=0, role_idx=0]
 STA: [chba_mode=0, role_idx=1]
 ```
 
-也可以把 STA 的 `role_idx` 设为 2～4，但同一拓扑中的地址和角色编号不能冲突。当前 CHBA Sample 没有提供运行时修改 `NV_ID_CHBA_MODE_CFG` 的命令，不能仅靠同一份默认固件完成互补角色配置。
+也可以把 STA 的 `role_idx` 设为 2～4，但同一拓扑中的地址和角色编号不能冲突。当前 CHBA 案例没有提供运行时修改 `NV_ID_CHBA_MODE_CFG` 的命令，不能仅靠同一份默认固件完成互补角色配置。
 
 ### 第三步：编译
 
