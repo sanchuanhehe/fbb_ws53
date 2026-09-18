@@ -1,3 +1,18 @@
+---
+title: LiteOS
+doc_type: explanation
+product: WS53
+applies_to:
+  sdk: 1.10.106
+  target: ws53_liteos_app
+status: draft
+verification_level: static
+source_refs:
+  - src/kernel/liteos/
+  - src/kernel/liteos/liteos_v208.5.0/
+  - docs/zh-CN/overall-architecture/kernel/figures/HiFBB-LiteOS的基本框架图.png
+---
+
 # LiteOS
 
 > 轻量级实时操作系统，WS53 默认内核

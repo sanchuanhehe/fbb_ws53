@@ -1,3 +1,21 @@
+---
+title: 启动流程
+doc_type: explanation
+product: WS53
+applies_to:
+  sdk: 1.10.106
+  target: ws53_liteos_app
+status: draft
+verification_level: static
+source_refs:
+  - src/bootloader/flashboot_ws53/
+  - src/bootloader/commonboot/
+  - src/application/ws53/ws53_application/
+  - src/kernel/liteos/
+  - src/middleware/utils/app_init/
+  - src/drivers/boards/ws53/linker/ws53_app_linker/linker.prelds
+---
+
 # 启动流程
 
 WS53 有两条用途不同的 Boot 链路：

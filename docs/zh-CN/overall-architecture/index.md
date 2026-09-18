@@ -1,4 +1,21 @@
 ---
+title: 整体架构
+doc_type: explanation
+product: WS53
+applies_to:
+  sdk: 1.10.106
+  target: ws53_liteos_app
+status: draft
+verification_level: not-applicable
+source_refs:
+  - docs/zh-CN/overall-architecture/software-introduction.md
+  - docs/zh-CN/overall-architecture/source-tree/index.md
+  - docs/zh-CN/overall-architecture/build-system/index.md
+  - docs/zh-CN/overall-architecture/kernel/os-abstract.md
+  - docs/zh-CN/overall-architecture/kernel/liteos.md
+  - docs/zh-CN/overall-architecture/boot-flow/index.md
+  - docs/zh-CN/overall-architecture/runtime-architecture/index.md
+  - docs/zh-CN/overall-architecture/memory-layout/index.md
 hide:
   - toc
 ---
