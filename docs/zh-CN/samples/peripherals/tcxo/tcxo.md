@@ -89,7 +89,7 @@ sequenceDiagram
 
 1. 编译：
    ```bash
-   fbb build ws53-liteos-app
+   fbb build ws53_liteos_app
    ```
 2. 烧录固件，串口观察输出：
    - `tcxo delay 1000ms!` 后打印实际 `count_ms`；只要延时后的时间戳大于延时前，就输出 `tcxo get ms work normall.`

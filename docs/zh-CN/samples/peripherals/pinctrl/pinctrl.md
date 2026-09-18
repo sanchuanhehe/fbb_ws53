@@ -119,7 +119,7 @@ flowchart TD
 1. 在 `menuconfig` 中选择要测试的引脚（`CONFIG_PINCTRL_USE_PIN`），确保该引脚未被其他外设占用
 2. 编译：
    ```bash
-   fbb build ws53-liteos-app
+   fbb build ws53_liteos_app
    ```
 3. 烧录固件，串口观察输出：
    - `start get pin<N> mode!` → `the mode of pin<N> is X.`

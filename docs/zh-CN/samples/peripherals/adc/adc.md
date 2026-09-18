@@ -82,7 +82,7 @@ flowchart TD
 ### 第一步：编译
 
 ```bash
-fbb build ws53-liteos-app
+fbb build ws53_liteos_app
 ```
 
 > 完整的编译方式请参考 [构建](../../../guides/sdk-development/build/index.md#cli-build)。
@@ -90,7 +90,7 @@ fbb build ws53-liteos-app
 ### 第二步：烧录
 
 ```bash
-fbb flash ws53-liteos-app
+fbb flash ws53_liteos_app
 ```
 
 > 完整的烧录方式请参考 [烧录](../../../guides/sdk-development/flash-and-run/index.md#cli-flash)。

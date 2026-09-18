@@ -120,7 +120,7 @@ GATT 模型：
 选择 BT 和 Wi-Fi 两侧配置后执行：
 
 ```powershell
-fbb build ws53-liteos-app --clean -j1
+fbb build ws53_liteos_app --clean -j1
 ```
 
 ### 运行

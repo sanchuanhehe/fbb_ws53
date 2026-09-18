@@ -277,7 +277,7 @@ CONFIG_SAMPLE_SUPPORT_SLE_UART_CLIENT_SAMPLE=y
 CONFIG_SUPPORT_SLE_CENTRAL=y
 ```
 
-实际固件路径以构建输出为准，通常位于 `output/ws53/fwpkg/ws53_liteos_app/`。不要把其他芯片的固件目录或 target 名称复制到 WS53 命令中。
+实际固件路径以构建输出为准，默认完整固件包为 `output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg`。不要把其他芯片的固件目录或 target 名称复制到 WS53 命令中。
 
 ### 第四步：启动和就绪检查
 

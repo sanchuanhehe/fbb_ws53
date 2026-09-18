@@ -170,8 +170,8 @@ BLE Sample 使用 Kconfig `choice` 互斥选择，同一固件中只能启用一
 ### 第三步：编译和烧录
 
 ```powershell
-fbb build ws53-liteos-app
-fbb flash ws53-liteos-app
+fbb build ws53_liteos_app
+fbb flash ws53_liteos_app
 ```
 
 ### 第四步：验证

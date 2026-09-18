@@ -59,7 +59,7 @@ WS53V100的SDK使用CMake作为构建工具，因此建议使用CMake进行第�
 
 4.  现在，已经成功将一个名为“cjson”（COMPONENT\_NAME）的组件新增到框架中了，最后应开启对该组件的编译。通过修改“build/config/target\_config/ws53/config.py”中对应的target的“ram\_component”，将需要编译的组件加入到编译流程中。例如：
 
-    想要编译的target名称为“ws53-liteos-app”，则找到“ws53-liteos-app”字典下的ram\_component，在该数组中新增值“cjson”，当启动“ws53-liteos-app”的编译时，CMake就会尝试编译“cjson”（SOURCES）
+    想要编译的target名称为“ws53_liteos_app”，则找到“ws53_liteos_app”字典下的ram\_component，在该数组中新增值“cjson”，当启动“ws53_liteos_app”的编译时，CMake就会尝试编译“cjson”（SOURCES）
 
 # 常见问题<a name="ZH-CN_TOPIC_0000001934859153"></a>
 

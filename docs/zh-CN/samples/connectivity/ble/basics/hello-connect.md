@@ -149,8 +149,8 @@ CONFIG_SAMPLE_SUPPORT_BLE_HELLO_SERVER_SAMPLE=y
 ### 第二步：编译和烧录
 
 ```powershell
-fbb build ws53-liteos-app
-fbb flash ws53-liteos-app
+fbb build ws53_liteos_app
+fbb flash ws53_liteos_app
 ```
 
 ### 第三步：连接 WS53

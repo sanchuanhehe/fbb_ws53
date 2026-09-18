@@ -109,7 +109,7 @@ GATT 模型：Service `0x3333`；Data `0x3434` Read/Write；Report `0x3435` Noti
 ### 编译
 
 ```powershell
-fbb build ws53-liteos-app --clean -j1
+fbb build ws53_liteos_app --clean -j1
 ```
 
 ### 运行

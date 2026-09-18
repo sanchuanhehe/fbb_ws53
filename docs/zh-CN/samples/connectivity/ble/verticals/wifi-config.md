@@ -217,7 +217,7 @@ BLE 示例和 Wi-Fi 示例分别位于两个 `choice` 中，缺少任意一侧�
 ### 第二步：编译
 
 ```bash
-fbb build ws53-liteos-app
+fbb build ws53_liteos_app
 ```
 
 完整构建方法请参考[快速入门](../../../../get-started/quick-start.md)。
@@ -225,7 +225,7 @@ fbb build ws53-liteos-app
 ### 第三步：烧录
 
 ```bash
-fbb flash ws53-liteos-app
+fbb flash ws53_liteos_app
 ```
 
 ### 第四步：验证广播和服务
