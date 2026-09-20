@@ -58,7 +58,7 @@ def do_cmd(target_name: str, hook_name: str, env: Dict[str, Any])->bool:
     if root_path.endswith('output/sdk') and hook_name == 'build_post':
         return True
     if target_name == 'ws53_liteos_mfg' and hook_name == 'build_post':
-        errcode = exec_shell(["python3", "build.py", "ws53_liteos_app"], None, True)
+        errcode = exec_shell([python_path, "build.py", "ws53_liteos_app"], None, True)
         return True
 
     if hook_name != 'build_post':
@@ -154,7 +154,7 @@ def do_cmd(target_name: str, hook_name: str, env: Dict[str, Any])->bool:
 def build_sdk():
     if os.path.isdir(output_root):
         shutil.rmtree(output_root)
-    errcode = exec_shell(["python3", "build.py", "pack_ws53_sdk"], None, True)
+    errcode = exec_shell([python_path, "build.py", "pack_ws53_sdk"], None, True)
     if errcode != 0:
         print(f"build target pack_ws53_sdk  failed!")
         sys.exit(1)
@@ -185,7 +185,7 @@ def guard_sample(target_name, env):
         print(f"souce menuconfig path:{cfg_full_path}")
         print(f"dist menuconfig path:{base_cfg_path}")
         shutil.copyfile(cfg_full_path, base_cfg_path)
-        errcode = exec_shell(["python3", "build.py", "-c", build_target], None, True)
+        errcode = exec_shell([python_path, "build.py", "-c", build_target], None, True)
         if errcode != 0:
             print(f"build target:{target_name}\tusing menuconfig:{cfg_full_path} failed!")
             sys.exit(1)
