@@ -101,7 +101,7 @@ sequenceDiagram
 1. 确保工程已使能 DMA 驱动（Kconfig 中选中 `DMA` 相关配置）
 2. 编译：
    ```bash
-   fbb build ws53-liteos-app
+   fbb build ws53_liteos_app
    ```
    更多编译选项请参考 [构建](../../../guides/sdk-development/build/index.md#cli-build)。
 3. 如需体验 LLI 链式传输，在 `menuconfig` 中开启 `CONFIG_DMA_MEMORY_LLI_TRANSFER_MODE` 后重新编译

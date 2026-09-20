@@ -116,7 +116,7 @@ GATT 数据模型：
 在 `fbb_ws53` 根目录选择上述 Kconfig 项，然后执行：
 
 ```powershell
-fbb build ws53-liteos-app --clean -j1
+fbb build ws53_liteos_app --clean -j1
 ```
 
 ### 运行

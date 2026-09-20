@@ -109,7 +109,7 @@ sequenceDiagram
 
 1. 编译：
    ```bash
-   fbb build ws53-liteos-app
+   fbb build ws53_liteos_app
    ```
 2. 烧录固件，串口观察输出：
    ```

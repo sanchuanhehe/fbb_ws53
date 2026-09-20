@@ -163,8 +163,8 @@ CONFIG_BLE_SPEED_TEST=y
 ### 第二步：编译和烧录
 
 ```bash
-fbb build ws53-liteos-app
-fbb flash ws53-liteos-app
+fbb build ws53_liteos_app
+fbb flash ws53_liteos_app
 ```
 
 完整步骤请参考[快速入门](../../../get-started/quick-start.md)。

@@ -96,7 +96,7 @@ API 按实际调用阶段排列。详细参数和返回值请查阅对应 API Re
 | Client 非法测试值 | `interval=50 ms`，其余字段合法 |
 | NV ID | `0x20A1` |
 | SSAP MTU 请求值 | 520 字节，版本 1 |
-| 角色选择 | 顶层 SLE Sample `choice`，Server 与 Client 互斥 |
+| 角色选择 | 顶层 SLE 案例`choice`，Server 与 Client 互斥 |
 
 ### 公共配置结构体
 
@@ -287,7 +287,7 @@ output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg
 
 ### 角色与能力
 
-顶层 SLE Sample `choice` 定义两个互斥角色：
+顶层 SLE 案例`choice` 定义两个互斥角色：
 
 ```text
 CONFIG_SAMPLE_SUPPORT_SLE_DEVICE_CONFIG_SERVER_SAMPLE

@@ -315,11 +315,11 @@ WS53的固件包含多个固件镜像，不同镜像可能采用不同的升级�
             self.temp_dir = os.path.join(self.upg_output, "temp_dir")
             # 产品镜像路径
             self.flashboot = os.path.join(self.output, "acore", "ws53-flashboot", "flashboot_sign.bin")
-            self.app_bin = os.path.join(self.output, "acore", "ws53-liteos-app", "ws53-liteos-app-sign.bin")
+            self.app_bin = os.path.join(self.output, "acore", "ws53_liteos_app", "ws53_liteos_app_sign.bin")
             self.nv_bin = os.path.join(self.output, "acore", "nv_bin", "ws53_all_nv.bin")
     
             self.flashboot_old_bin = os.path.join(self.output, "acore", "old_version", "flashboot_sign.bin")
-            self.app_old_bin = os.path.join(self.output, "acore", "old_version", "ws53-liteos-app-sign.bin")
+            self.app_old_bin = os.path.join(self.output, "acore", "old_version", "ws53_liteos_app_sign.bin")
             self.nv_old_bin = os.path.join(self.output, "acore", "old_version", "ws53_all_nv.bin")
     def get_new_image(input,info):
         image_list = []
@@ -609,7 +609,7 @@ SDK默认配置为非加密，在开启flash在线解密功能时，镜像以加
 以压缩加密升级为例：
 
 1.  将"sdk/build/config/target\_config/ws53/sign\_config/ws53\_liteos\_app\_ecc.cfg"配置文件中Iv项注释打开，例如："Iv=FF000000000000000000000000000000"。
-2.  在sdk下执行"./build.py -c ws53-liteos-app"编译出app镜像\(该app镜像仅用于打包生成OTA镜像，直接烧录无法启动\)。
+2.  在sdk下执行"./build.py -c ws53_liteos_app"编译出app镜像\(该app镜像仅用于打包生成OTA镜像，直接烧录无法启动\)。
 3.  执行"python3 build/config/target\_config/ws53/build\_ws53\_update.py"将app镜像打成OTA升级包结果在output/ws53/upgrade/update.fwpkg。
 
 >![](public_sys-resources/icon-note.gif) **说明：** 

@@ -97,7 +97,7 @@ sequenceDiagram
 1. 检查 `CONFIG_SFC_SAMPLE_USER_ADDR` 和 `CONFIG_SFC_SAMPLE_USER_SIZE`。默认会擦除 `0x003F3000`～`0x003F3FFF`，即客户预留区前 4KB；确认其中没有有效数据并完成必要备份
 2. 编译：
    ```bash
-   fbb build ws53-liteos-app
+   fbb build ws53_liteos_app
    ```
 3. 烧录固件，串口观察输出：
    - `Erasing for API sample...` → 擦除中

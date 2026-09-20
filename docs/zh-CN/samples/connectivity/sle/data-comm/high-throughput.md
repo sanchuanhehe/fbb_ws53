@@ -8,7 +8,7 @@
 
 ## 构建前置修正
 
-当前 WS53 `src/application/samples/bt/sle/Kconfig` 把 `LARGE_THROUGHPUT_SERVER` 放在 SLE Sample 的同一个 `choice` 内，同时又让它依赖 `SAMPLE_SUPPORT_SLE_SPEED_SERVER_SAMPLE`。按标准 Kconfig `choice` 语义，两个选项不能同时为 `y`；只选择 Server 时，受 `#ifdef CONFIG_LARGE_THROUGHPUT_SERVER` 保护的发送任务可能不会编译。执行吞吐测试前必须先修正该 Kconfig 结构，并检查最终配置中两个宏确实同时生效。
+当前 WS53 `src/application/samples/bt/sle/Kconfig` 把 `LARGE_THROUGHPUT_SERVER` 放在 SLE 案例的同一个 `choice` 内，同时又让它依赖 `SAMPLE_SUPPORT_SLE_SPEED_SERVER_SAMPLE`。按标准 Kconfig `choice` 语义，两个选项不能同时为 `y`；只选择 Server 时，受 `#ifdef CONFIG_LARGE_THROUGHPUT_SERVER` 保护的发送任务可能不会编译。执行吞吐测试前必须先修正该 Kconfig 结构，并检查最终配置中两个宏确实同时生效。
 
 ## 学习目标
 
@@ -228,7 +228,7 @@ CONFIG_SAMPLE_SUPPORT_SLE_SPEED_SERVER_SAMPLE=y
 CONFIG_LARGE_THROUGHPUT_SERVER=y
 ```
 
-原因是 `LARGE_THROUGHPUT_SERVER` 位于 SLE Sample 的 `choice` 内。要执行连续发送，应先在源码中完成以下等价修正之一：
+原因是 `LARGE_THROUGHPUT_SERVER` 位于 SLE 案例（Sample）的 `choice` 内。要执行连续发送，应先在源码中完成以下等价修正之一：
 
 - 将 `config LARGE_THROUGHPUT_SERVER` 移到 `endchoice` 之后，使其成为依赖 Server 角色的普通布尔选项；或
 - 删除单独的 `LARGE_THROUGHPUT_SERVER` 条件，让连续发送代码直接随 Speed Server 角色编译。
@@ -273,7 +273,7 @@ CONFIG_SAMPLE_SUPPORT_SLE_SAMPLE=y
 CONFIG_SAMPLE_SUPPORT_SLE_SPEED_CLIENT_SAMPLE=y
 ```
 
-Server 与 Client 属于同一个 SLE Sample `choice`，需要分别构建和烧录。固件包位于：
+Server 与 Client 属于同一个 SLE 案例 `choice`，需要分别构建和烧录。固件包位于：
 
 ```text
 output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg
@@ -341,7 +341,7 @@ CONFIG_SAMPLE_SUPPORT_SLE_SPEED_CLIENT_SAMPLE
 CONFIG_LARGE_THROUGHPUT_SERVER
 ```
 
-前两个角色属于 SLE Sample `choice`。第三个配置在当前源码中位置错误，不能按普通依赖项理解。
+前两个角色属于 SLE 案例 `choice`。第三个配置在当前源码中位置错误，不能按普通依赖项理解。
 
 ### 链路与统计常量
 

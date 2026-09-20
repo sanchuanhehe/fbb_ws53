@@ -107,7 +107,7 @@ sequenceDiagram
 
 1. 编译：
    ```bash
-   fbb build ws53-liteos-app
+   fbb build ws53_liteos_app
    ```
 2. 测试超时流程——在 `menuconfig` 中选中 `CONFIG_WDT_TIMEOUT_SAMPLE`：
    - 烧录后串口打印 `init watchdog`

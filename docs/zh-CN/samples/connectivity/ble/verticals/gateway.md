@@ -140,7 +140,7 @@ sequenceDiagram
 
 | 内容 | 源码位置 |
 | --- | --- |
-| Sample 入口 | `src/application/samples/bt/ble/ble_gateway/ble_gateway.c` |
+| 案例入口 | `src/application/samples/bt/ble/ble_gateway/ble_gateway.c` |
 | 二进制协议编解码和范围检查 | `ble_gateway/inc/ble_gateway_protocol.h` |
 | GATT Server 和报告循环 | `ble_gateway_server/src/ble_gateway_server.c` |
 | AHT20/BMP280 驱动 | `ble_gateway_server/src/ble_gateway_sensor.c` |
@@ -168,13 +168,13 @@ CONFIG_SAMPLE_SUPPORT_BLE_SAMPLE=y
 CONFIG_SAMPLE_SUPPORT_BLE_GATEWAY_SERVER_SAMPLE=y
 ```
 
-BLE Sample 使用 Kconfig `choice` 互斥选择，同一固件中只能启用一个 BLE 示例。
+BLE 案例使用 Kconfig `choice` 互斥选择，同一固件中只能启用一个 BLE 示例。
 
 ### 第三步：编译和烧录
 
 ```powershell
-fbb build ws53-liteos-app
-fbb flash ws53-liteos-app
+fbb build ws53_liteos_app
+fbb flash ws53_liteos_app
 ```
 
 ### 第四步：验证传感器节点
@@ -234,4 +234,4 @@ fbb flash ws53-liteos-app
 - 能看到采样日志但收不到报告：确认 Gateway 已连接并成功写入 Report CCCD。
 - 报告解析失败：检查长度是否为 14、协议版本是否为 1，以及多字节字段是否按 little-endian 解码。
 - 周期命令被拒绝：检查长度是否为 6、命令类型是否为 1、周期是否处于 5～3600 秒。
-- 需要上云：WS53 Sample 不包含 Gateway Client、Wi-Fi 或云端代码，需要在外部 Gateway 上实现。
+- 需要上云：WS53 案例不包含 Gateway Client、Wi-Fi 或云端代码，需要在外部 Gateway 上实现。

@@ -94,7 +94,7 @@ SLE 把连接中的两个设备称为 **G（Grant，授权端）** 和 **T（Ter
 | **G（Grant）** | 管理连接参数、调度通信时隙 | 电脑、手机、网关 |
 | **T（Terminal）** | 按照 G 的调度进行通信 | 鼠标、键盘、传感器 |
 
-G/T 和 Server/Client 是两套独立概念。G/T 描述谁管理连接，Server/Client 描述谁提供数据、谁消费数据。阅读 Sample 时应分别确认广播/扫描行为、连接发起方和 SSAP 数据角色。
+G/T 和 Server/Client 是两套独立概念。G/T 描述谁管理连接，Server/Client 描述谁提供数据、谁消费数据。阅读案例时应分别确认广播/扫描行为、连接发起方和 SSAP 数据角色。
 
 ### 设备发现：广播与扫描
 
@@ -188,7 +188,7 @@ SLE 低时延接口提供多档调度频率，用于输入设备等对响应速�
 | 1 kHz / 2 kHz | 1 ms / 0.5 ms | 高性能鼠标或手柄 |
 | 4 kHz / 8 kHz | 0.25 ms / 0.125 ms | 极低时延场景 |
 
-调度档位存在于接口层不等同于当前已有独立 Sample。实际使用前还需要确认产品时钟、功耗、链路质量和对端支持情况。
+调度档位存在于接口层不等同于当前已有独立案例。实际使用前还需要确认产品时钟、功耗、链路质量和对端支持情况。
 
 ### OTA：固件无线升级
 
@@ -196,7 +196,7 @@ SLE OTA Service 可用于通过无线链路传输固件并管理升级状态。W
 
 ### HADM：高精度测距
 
-**HADM（High Accuracy Distance Measurement）** 通过 Channel Sounding 等过程获取测距所需数据，精度目标高于普通 RSSI 距离估算。WS53 SDK 包含 `sle_hadm_manager.h` 接口，但当前没有独立 HADM Sample；现有案例为 RSSI 粗粒度测距。
+**HADM（High Accuracy Distance Measurement）** 通过 Channel Sounding 等过程获取测距所需数据，精度目标高于普通 RSSI 距离估算。WS53 SDK 包含 `sle_hadm_manager.h` 接口，但当前没有独立 HADM 案例；现有案例为 RSSI 粗粒度测距。
 
 ### 射频测试
 

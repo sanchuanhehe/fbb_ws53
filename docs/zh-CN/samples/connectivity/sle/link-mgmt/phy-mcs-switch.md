@@ -164,7 +164,7 @@ CONFIG_SAMPLE_SUPPORT_SLE_PHY_MCS_SWITCH_SERVER_SAMPLE
 CONFIG_SAMPLE_SUPPORT_SLE_PHY_MCS_SWITCH_CLIENT_SAMPLE
 ```
 
-这两个选项位于同一个 SLE Sample Kconfig choice 中，角色互斥构建。
+这两个选项位于同一个 SLE 案例Kconfig choice 中，角色互斥构建。
 
 ## 关键代码
 

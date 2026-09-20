@@ -328,7 +328,7 @@ sle_rssi_ranging/
 
 顶层 `sle_rssi_ranging.c` 根据 Kconfig 创建 Server 或 Client 任务。Server 负责广播和连接状态；Client 负责扫描、连接、RSSI 轮询、滤波、测距、按键校准和 NV 持久化。
 
-角色配置位于同一个 SLE Sample Kconfig choice 中，角色互斥构建：
+角色配置位于同一个 SLE 案例Kconfig choice 中，角色互斥构建：
 
 ```text
 CONFIG_SAMPLE_SUPPORT_SLE_RSSI_RANGING_SERVER_SAMPLE

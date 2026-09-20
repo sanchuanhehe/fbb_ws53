@@ -3,7 +3,7 @@ hide:
   - toc
 ---
 
-# HiSpark插件
+# HiSpark Studio for VS Code 插件
 
 HiSpark Studio for VS Code 插件面向智能设备开发者提供一站式集成开发环境，支持代码编辑、编译、烧录和调试等全流程开发能力，支持 C/C++ 语言，覆盖 Windows x86_64、Linux x86/aarch64（含 WSL，要求 Ubuntu 20.04 及以上版本）以及 macOS Apple Silicon 架构。
 

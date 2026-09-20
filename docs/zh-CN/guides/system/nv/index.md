@@ -186,7 +186,7 @@ NV项可通过两种方式进行存储：编译预置和API写入。
 ## 编译生成NV镜像<a name="ZH-CN_TOPIC_0000001886269014"></a>
 
 >![](public_sys-resources/icon-notice.gif) **须知：** 
->使用build.py编译非boot目标，如ws53-liteos-app时，会默认编译生成NV镜像并打包，打包时默认仅包含ws53\_all\_nv.bin，不包含ws53\_all\_nv\_factory.bin，若需打包ws53\_all\_nv\_factory.bin，可在编译命令中加入额外参数进行打包，如：python3 build.py -c ws53-liteos-app -def=PACKET\_NV\_FACTORY。
+>使用build.py编译非boot目标，如ws53_liteos_app时，会默认编译生成NV镜像并打包，打包时默认仅包含ws53\_all\_nv.bin，不包含ws53\_all\_nv\_factory.bin，若需打包ws53\_all\_nv\_factory.bin，可在编译命令中加入额外参数进行打包，如：python3 build.py -c ws53_liteos_app -def=PACKET\_NV\_FACTORY。
 
 在全量编译时自动生成NV镜像，如[图 build\_nvbin.py脚本执行成功](#fig14910136115720)所示即为成功，即可在输出路径下生成“ws53\_all\_nv.bin”文件，可直接烧录使用。
 

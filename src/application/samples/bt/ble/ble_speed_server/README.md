@@ -108,7 +108,7 @@ ble_speed_server/
 选择 Speed Server 和所需模式后执行：
 
 ```powershell
-fbb build ws53-liteos-app --clean -j1
+fbb build ws53_liteos_app --clean -j1
 ```
 
 ### 运行

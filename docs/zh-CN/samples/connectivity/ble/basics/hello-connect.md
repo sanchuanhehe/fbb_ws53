@@ -35,7 +35,7 @@ WS53 不支持 BLE Central（中心设备）/GATT Client（客户端）功能。
 4. Client 发现 GATT 服务并进行通知订阅、读取和写入。
 5. 连接断开后，WS53 清理连接状态并重新广播。
 
-通知、读取和写入分别在后两篇说明，三篇使用的是同一个 `ble_hello` 集成 Sample 和同一个 Server 配置项。
+通知、读取和写入分别在后两篇说明，三篇使用的是同一个 `ble_hello` 集成案例和同一个 Server 配置项。
 
 ## 基本概念
 
@@ -69,7 +69,7 @@ WS53 在 37、38、39 三个广播信道发送以下 AD（Advertising Data）字
 | `0x09` Complete Local Name | `ble_hello_server` | 供 Client 识别设备 |
 | `0x16` Service Data 16-bit | UUID `0x3333` + 状态字节 | 指示 Data 当前是否为默认值 |
 
-状态字节 `0x00` 表示 Data 为默认值 `device_status_ok`，`0x01` 表示 Server RAM (Random Access Memory) 中保留了 Client 写入的新值。该字段是本 Sample 的应用约定，不是通用 BLE 协议要求。
+状态字节 `0x00` 表示 Data 为默认值 `device_status_ok`，`0x01` 表示 Server RAM (Random Access Memory) 中保留了 Client 写入的新值。该字段是本案例的应用约定，不是通用 BLE 协议要求。
 
 ### 广播参数
 
@@ -144,13 +144,13 @@ CONFIG_SAMPLE_SUPPORT_BLE_SAMPLE=y
 CONFIG_SAMPLE_SUPPORT_BLE_HELLO_SERVER_SAMPLE=y
 ```
 
-角色配置位于 `src/application/samples/bt/ble/Kconfig`。BLE Sample 使用 Kconfig `choice` 互斥选择，同一固件中只能启用一个 BLE 示例。
+角色配置位于 `src/application/samples/bt/ble/Kconfig`。BLE 案例使用 Kconfig `choice` 互斥选择，同一固件中只能启用一个 BLE 示例。
 
 ### 第二步：编译和烧录
 
 ```powershell
-fbb build ws53-liteos-app
-fbb flash ws53-liteos-app
+fbb build ws53_liteos_app
+fbb flash ws53_liteos_app
 ```
 
 ### 第三步：连接 WS53
@@ -197,7 +197,7 @@ src/application/samples/bt/ble/ble_hello/
         └── ble_hello_server_adv.c
 ```
 
-- `ble_hello.c` 创建 Sample 任务并调用 `ble_hello_server_init()`。
+- `ble_hello.c` 创建案例任务并调用 `ble_hello_server_init()`。
 - `ble_hello_server.c` 创建 GATT 表并处理连接、配对、读写和通知。
 - `ble_hello_server_adv.c` 构造广播数据并设置广播参数。
 

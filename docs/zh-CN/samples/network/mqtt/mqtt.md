@@ -154,8 +154,8 @@ g_mqtt_publish_msg  // 发布内容
 只有在第二步完成、并确认 `mqtt_sample.c` 中不存在未续行的 PEM 文本后，才执行构建：
 
 ```bash
-fbb build ws53-liteos-app
-fbb flash ws53-liteos-app
+fbb build ws53_liteos_app
+fbb flash ws53_liteos_app
 ```
 
 构建和烧录方法请参考[快速入门](../../../get-started/quick-start.md)。

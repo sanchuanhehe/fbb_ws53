@@ -1,6 +1,6 @@
 # PWM
 
-> PWM (Pulse Width Modulation) 驱动 | sample: `src/application/samples/peripheral/pwm/pwm_demo.c`
+> PWM (Pulse Width Modulation) 驱动 | 案例：`src/application/samples/peripheral/pwm/pwm_demo.c`
 
 ## 学习目标
 

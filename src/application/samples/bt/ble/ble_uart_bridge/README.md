@@ -116,7 +116,7 @@ ble_uart_bridge/
 ### 编译
 
 ```powershell
-fbb build ws53-liteos-app --clean -j1
+fbb build ws53_liteos_app --clean -j1
 ```
 
 ### 运行

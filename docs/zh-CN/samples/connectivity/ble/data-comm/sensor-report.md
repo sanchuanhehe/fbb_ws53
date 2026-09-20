@@ -158,11 +158,11 @@ sequenceDiagram
 
 | 内容 | 源码位置 |
 | --- | --- |
-| Sample 入口和上报循环启动 | `src/application/samples/bt/ble/ble_sensor_report/ble_sensor_report.c` |
+| 案例入口和上报循环启动 | `src/application/samples/bt/ble/ble_sensor_report/ble_sensor_report.c` |
 | GATT、连接、CCCD 和周期控制 | `ble_sensor_report_server/src/ble_sensor_report_server.c` |
 | 广播数据和参数 | `ble_sensor_report_server/src/ble_sensor_report_server_adv.c` |
 | AHT20、BMP280 和 I2C0 驱动 | `ble_sensor_report_server/src/aht20_bmp280.c` |
-| Sample 配置 | `src/application/samples/bt/ble/Kconfig` |
+| 案例配置 | `src/application/samples/bt/ble/Kconfig` |
 
 ## 案例操作指导
 
@@ -188,13 +188,13 @@ CONFIG_SAMPLE_SUPPORT_BLE_SAMPLE=y
 CONFIG_SAMPLE_SUPPORT_BLE_SENSOR_REPORT_SERVER_SAMPLE=y
 ```
 
-BLE Sample 使用 Kconfig `choice` 互斥选择，同一固件中只能启用一个 BLE 示例。
+BLE 案例使用 Kconfig `choice` 互斥选择，同一固件中只能启用一个 BLE 示例。
 
 ### 第三步：编译和烧录
 
 ```powershell
-fbb build ws53-liteos-app
-fbb flash ws53-liteos-app
+fbb build ws53_liteos_app
+fbb flash ws53_liteos_app
 ```
 
 ### 第四步：连接并订阅

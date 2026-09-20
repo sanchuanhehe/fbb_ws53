@@ -37,7 +37,7 @@
 
 > Hello 三部曲已经覆盖连接、通知和读写的基础能力。本案例将这些能力与 UART 驱动和消息队列组合起来，形成双向数据通道。
 
-Server 和 Client 属于同一个 SLE Sample 选择项，必须分别构建并烧录。透传层不定义包头、长度、CRC 或重传协议；UART 回调产生的数据块可能因驱动和调度被拆分为多个块。
+Server 和 Client 属于同一个 SLE 案例选择项，必须分别构建并烧录。透传层不定义包头、长度、CRC 或重传协议；UART 回调产生的数据块可能因驱动和调度被拆分为多个块。
 
 ## 基本概念
 
@@ -277,7 +277,7 @@ CONFIG_SAMPLE_SUPPORT_SLE_UART_CLIENT_SAMPLE=y
 CONFIG_SUPPORT_SLE_CENTRAL=y
 ```
 
-实际固件路径以构建输出为准，通常位于 `output/ws53/fwpkg/ws53_liteos_app/`。不要把其他芯片的固件目录或 target 名称复制到 WS53 命令中。
+实际固件路径以构建输出为准，默认完整固件包（`.fwpkg`）为 `output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg`。不要把其他芯片的固件目录或构建目标名称复制到 WS53 命令中。
 
 ### 第四步：启动和就绪检查
 
@@ -357,7 +357,7 @@ C2S_OK_F3U4
 
 ### 低功耗限制
 
-当 `CONFIG_UART_SUPPORT_LPM` 生效时，初始化代码会申请 `PM_USER0_VETO_ID`，以避免 UART 连续接收期间进入不适合的低功耗状态。当前 Sample 运行期间不会主动释放该 veto，因此功耗评估应单独进行。
+当 `CONFIG_UART_SUPPORT_LPM` 生效时，初始化代码会申请 `PM_USER0_VETO_ID`，以避免 UART 连续接收期间进入不适合的低功耗状态。当前案例（Sample）运行期间不会主动释放该 veto，因此功耗评估应单独进行。
 
 ## 关键性能指标
 

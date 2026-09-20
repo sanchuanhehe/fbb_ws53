@@ -7,7 +7,7 @@ hide:
 
 > GATT (Generic Attribute Profile) Server、基础入门、数据通信、垂直应用
 
-WS53 不支持 BLE Central（中心设备）/GATT Client（客户端）功能，BLE 示例均以 Peripheral（外设）/GATT Server（服务端）角色运行。验证示例时，请使用手机、PC 调试工具、WS63 或其他支持 BLE Client 功能的设备完成扫描、连接、服务发现和特征操作。BLE Sample 通过 Kconfig `choice` 互斥选择，同一固件中只能启用一个 BLE 示例。
+WS53 不支持 BLE Central（中心设备）/GATT Client（客户端）功能，BLE 示例均以 Peripheral（外设）/GATT Server（服务端）角色运行。验证示例时，请使用手机、PC 调试工具、WS63 或其他支持 BLE Client 功能的设备完成扫描、连接、服务发现和特征操作。BLE 案例通过 Kconfig `choice` 互斥选择，同一固件中只能启用一个 BLE 示例。
 
 ## 快速导航
 

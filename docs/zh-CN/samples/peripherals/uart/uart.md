@@ -1,6 +1,6 @@
 # UART
 
-> UART (Universal Asynchronous Receiver/Transmitter) 驱动 | sample: uart
+> UART (Universal Asynchronous Receiver/Transmitter) 驱动 | 案例：uart
 
 ## 学习目标
 
@@ -91,7 +91,7 @@ sequenceDiagram
 ### 第一步：编译
 
 ```bash
-fbb build ws53-liteos-app
+fbb build ws53_liteos_app
 ```
 
 > 更多编译选项请参考 [构建](../../../guides/sdk-development/build/index.md#cli-build)。
@@ -99,7 +99,7 @@ fbb build ws53-liteos-app
 ### 第二步：烧录
 
 ```bash
-fbb flash ws53-liteos-app
+fbb flash ws53_liteos_app
 ```
 
 > 更多烧录选项请参考 [烧录](../../../guides/sdk-development/flash-and-run/index.md#cli-flash)。
@@ -213,9 +213,3 @@ static void uart_task(const char *arg)
 }
 app_run(uart_entry);
 ```
-
-!!! note "当前 Sample 与产品代码的区别"
-
-    当前 `uart_demo.c` 为了便于观察接收数据，会在 RX 回调中多次调用 `osal_printk()` 并逐字节打印。这是 Sample 的现状，不代表推荐的产品实现。量产代码应避免在回调中阻塞或大量打印，优先把数据写入环形缓冲区或投递给任务，再由任务完成日志和业务处理。
-
----

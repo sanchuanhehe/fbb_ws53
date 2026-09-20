@@ -275,12 +275,12 @@ BLE配网参考流程如[图1](#fig07609154494)所示。
 
 ## 使用示例<a name="ZH-CN_TOPIC_0000001911546782"></a>
 
-1.  在SDK根目录下执行命令“python3 build.py  ws53-liteos-app menuconfig”，并按下图配置对应编译选项进行配置。
+1.  在SDK根目录下执行命令“python3 build.py  ws53_liteos_app menuconfig”，并按下图配置对应编译选项进行配置。
 
     **图 1**  BLE Demo配置选项<a name="fig161841164188"></a>  
     ![](figures/BLE-Demo配置选项.png "BLE-Demo配置选项")
 
-2.  完成配置后执行命令“python3 build.py  ws53-liteos-app”，将生成的镜像通过BurnTool烧录进单板中。
+2.  完成配置后执行命令“python3 build.py  ws53_liteos_app”，将生成的镜像通过BurnTool烧录进单板中。
 3.  使用Android机安装“EasyConnect”软件，配置“wifi configuration”，使其与待连接热点一致；待Android设备扫描到WS53的BLE广播后，进行连接；待Android设备和53连接成功后，点击“配网”。
 
     **图 2**  Android设备进行WS53 BLE配网流程<a name="fig196274111185"></a>  

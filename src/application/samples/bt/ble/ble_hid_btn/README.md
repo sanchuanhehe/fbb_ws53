@@ -107,7 +107,7 @@ ble_hid_btn/
 选择 `CONFIG_SAMPLE_SUPPORT_BLE_HID_BTN_SAMPLE=y` 后执行：
 
 ```powershell
-fbb build ws53-liteos-app --clean -j1
+fbb build ws53_liteos_app --clean -j1
 ```
 
 ### 运行
