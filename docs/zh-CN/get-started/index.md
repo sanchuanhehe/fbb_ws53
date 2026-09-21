@@ -1,42 +1,46 @@
 ---
-title: 快速入门
+title: 选择 WS53 开发方式
 doc_type: tutorial
 product: WS53
 applies_to:
   sdk: 1.10.106
+  branch: master
   target: ws53_liteos_app
+  host: Windows 10/11 x86_64 或 Linux x86_64
 status: draft
-verification_level: not-applicable
+owner: WS53 SDK Maintainers
+verification_level: static
 source_refs:
-  - docs/zh-CN/get-started/quick-start.md
+  - src/build/config/target_config/ws53/target_config.py
   - src/build/config/target_config/ws53/ws53.json
 ---
 
-# 快速入门
+# 选择 WS53 开发方式
 
-本入口面向第一次使用 WS53 SDK 的开发者。沿本文完成一个固定的 Hello World 路径，即可创建工程、构建固件、烧录开发板并在串口看到运行结果。
+这是 Get Started 的入口。环境准备、配置、构建、烧录和运行验证都属于 Get Started；你只需要在这里选择一次操作方式，随后沿对应页面完成一条不再分支的 Hello World 路径。
 
-## 默认路径
+CLI 和 HiSpark Studio for VS Code 使用相同的 SDK、Target、Kconfig、工具链版本、固件格式和完成判据。两条路径都以串口持续输出 `hello world` 为首次成功标志。
 
-1. [配置开发环境](../guides/sdk-development/environment-setup/index.md)，获取 WS53 SDK 和开发板。
-2. 按[快速开始](quick-start.md)创建并配置 Hello World 工程。
-3. 编译、烧录并确认串口输出 `hello world`。
+## 适用范围
 
-该路径预先选择 WS53、`ws53_liteos_app` 构建目标（Target）、HiSpark Studio for VS Code 和 `SAMPLE_SUPPORT_HELLOWORLD` 配置，不要求在首次成功前选择其他开发板、构建目标或示例。
+| 项目 | 固定取值 |
+| --- | --- |
+| SDK | `1.10.106` 的 `master` 分支 |
+| CLI 主机 | Windows 10/11 x86_64 或 Linux x86_64 |
+| VS Code 主机 | Windows 10/11 x86_64 |
+| Target | `ws53_liteos_app` |
+| 开发板 | 项目配置中标识为 `ws53` 的 WS53 开发板 |
+| Sample | `SAMPLE_SUPPORT_HELLOWORLD` |
 
-## 前置条件
+## 只选择一个页面
 
-开始前请确认：
+| 你的工作方式 | 进入页面 |
+| --- | --- |
+| 希望在 Windows PowerShell 或 Linux Shell 中使用命令，并与 CI 对齐 | [使用 CLI 完成第一次开发](cli.md) |
+| 希望使用图形界面配置、构建、烧录和监视 | [使用 VS Code 完成第一次开发](vscode.md) |
 
-- 已安装 VS Code 和 HiSpark Studio for VS Code 插件。
-- 已获取 WS53 SDK，并完成工具链准备。
-- 已准备 WS53 开发板、Type-C USB 数据线和对应串口驱动。
-- 开发板连接后能在设备管理器中看到串口。
+两个页面都是完整教程，均从各自的环境搭建开始。完成当前所选页面前，不要切换到另一页面，也不需要同时配置两套环境。
 
-前置条件无法满足时，请按[环境搭建](../guides/sdk-development/environment-setup/index.md)完成检查。该页面包含完整安装步骤，属于默认路径之外的实践指南。
+## 当前验证边界
 
-## 完成后继续
-
-- 需要详细烧录参数或失败恢复时，参见[烧录与运行](../guides/sdk-development/flash-and-run/index.md)。
-- 需要使用命令行、menuconfig 或自定义应用时，参见[开发环境搭建详解](../guides/sdk-development/environment-setup/manual/index.md)和[创建应用](../guides/sdk-development/create-application/index.md)。
-- 需要查询其他案例时，参见[参考案例](../samples/index.md)。
+本入口已静态核对 SDK 版本、Target 和两条路径的共同边界。CLI 与 VS Code 页面仍需分别取得干净环境 Smoke、构建日志和目标板 HIL 记录，因此当前保持 `draft` 和 `verification_level: static`。

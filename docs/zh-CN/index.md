@@ -58,7 +58,7 @@ WS53 是海思推出的低功耗 Wi-Fi、BLE 和 SLE Combo 芯片，适用于智
 
     ---
 
-    沿唯一的 Hello World 路径完成工程创建、构建、烧录和串口验证。
+    先选择 CLI 或 VS Code 准备环境，再沿唯一的 Hello World 路径完成构建、烧录和串口验证。
 
 -   [**2. 开发指南**](guides/index.md)
 

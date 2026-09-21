@@ -4,18 +4,27 @@ doc_type: how-to
 product: WS53
 applies_to:
   sdk: 1.10.106
-  host: Windows 10/11 64-bit 或 Linux
+  host: Windows 10/11 x86_64
 status: draft
+owner: WS53 SDK Maintainers
 verification_level: static
 source_refs:
+  - .gitattributes
   - src/build/config/target_config/ws53/ws53.json
+upstream_refs:
+  - project: Git
+    version: "2.x（本页未限定最低小版本）"
+    url: https://git-scm.com/downloads/
+  - project: Git LFS
+    version: 3.x
+    url: https://git-lfs.com/
 ---
 
 # 配置 WS53 开发环境
 
-> 本页面是默认快速入门路径之外的环境实践指南。第一次开发请先从[快速入门](../../../get-started/index.md)进入唯一默认成功路径。
+> 本页是 VS Code 环境配置 How-to。第一次开发请先从 Get Started 的[选择 WS53 开发方式](../../../get-started/index.md)进入，并只在需要详细安装步骤或排障时返回本页。
 
-本文档以 Windows 图形化流程为主，介绍 IDE（Integrated Development Environment）、工具链、SDK 和串口环境的配置。Linux 命令行环境请参见[开发环境搭建详解](manual/index.md)。环境准备完成后返回[构建并运行 WS53 第一个示例](../../../get-started/quick-start.md)。
+本文档面向 Windows 上使用 HiSpark Studio for VS Code 的开发者，介绍 IDE（Integrated Development Environment）、工具链、SDK 和串口环境的详细配置。使用 CLI 时请按[命令行环境准备](../build/index.md#cli-setup)操作；Linux 命令行环境请参见[开发环境搭建详解](manual/index.md)。环境准备完成后返回[VS Code 快速入门](../../../get-started/vscode.md)。
 
 ## 环境要求
 
@@ -51,20 +60,22 @@ source_refs:
 
     ![中文简体语言包](../../../get-started/figures/安装中文简体语言包.png)
 
-## 安装 Git
+## 安装 Git 和 Git LFS
 
 HiSpark Studio 插件的“从 HiSpark 下载 SDK”功能会优先使用本机 Git 下载 SDK。相关说明可参考 [HiSpark Studio for VS Code 用户指南 - SDK下载](../../../tools/HiSparkStudioforVSCodeUserGuide/HiSparkStudioforVSCodeUserGuide.md#ZH-CN_TOPIC_0000002303416852)。
 
-如电脑尚未安装 Git，请参考 [Git 官方安装说明](https://git-scm.com/book/zh/v2/起步-安装-Git) 安装 Git。安装时建议保留将 Git 添加到命令行环境变量的默认选项；安装界面或选项变化时，以 Git 官方文档和安装向导为准。
+如电脑尚未安装 Git，请参考 [Git 官方下载与安装说明](https://git-scm.com/downloads/)安装 Git。再按 [Git LFS 官方安装说明](https://git-lfs.com/)安装 Git LFS。安装时建议保留将 Git 添加到命令行环境变量的默认选项；安装界面或选项变化时，以上游官方说明和安装向导为准。
 
 安装完成后，关闭并重新打开命令提示符，执行以下命令确认 Git 可用：
 
 ```cmd
 git --version
+git lfs version
+git lfs install
 :: 输出示例: git version 2.x.x
 ```
 
-> 如果命令提示“不是内部或外部命令”，说明 Git 未加入 `PATH`。请参考 Git 官方安装说明重新配置，或重新运行 Git 安装程序并选择将 Git 加入命令行环境的选项。
+> 如果命令提示“不是内部或外部命令”，说明 Git 或 Git LFS 未加入 `PATH`。请参考对应的官方安装说明重新配置；两项检查都通过后再下载 SDK。
 
 ## 安装 HiSpark Studio 插件
 
@@ -121,9 +132,19 @@ HiSpark Studio 插件编译工程需要依赖工具链、Python 和 pip 依赖�
 
     ![下载 SDK 提示框](../../../get-started/figures/下载SDK-插件下载进度.png)
 
+4. 在 PowerShell 中进入包含 `.git` 和 `src` 的 SDK 根目录，下载 Git LFS 对象并检查 Windows 编译器文件不是 LFS 指针：
+
+    ```powershell
+    git lfs pull
+    $compiler = Get-Item .\src\tools\bin\compiler\riscv\cc_riscv32_musl_b010\cc_riscv32_musl_win\libexec\gcc\riscv32-linux-musl\7.3.0\cc1.exe
+    if ($compiler.Length -lt 1MB) { throw "Git LFS objects are not hydrated" }
+    ```
+
+    命令无报错且文件大小不小于 1 MiB 后，才继续配置和构建。
+
 ## 下一步
 
-环境检查完成后，按[构建并运行 WS53 第一个示例](../../../get-started/quick-start.md)完成唯一默认成功路径。
+环境检查完成后，按[VS Code 快速入门](../../../get-started/vscode.md)继续首次成功路径。
 
 
 ## 常见问题

@@ -10,7 +10,7 @@ source_refs:
   - src/build/config/target_config/ws53/ws53.json
 ---
 
-> 本页面介绍命令行环境、menuconfig 和高级构建操作。首次开发请先从[快速入门](../../../../get-started/index.md)完成 Hello World。
+> 本页面介绍命令行环境、menuconfig 和高级构建操作。首次开发请先从 Get Started 的[CLI 快速入门](../../../../get-started/cli.md)开始。
 
 **概述<a name="section4537382116410"></a>**
 
@@ -580,5 +580,3 @@ WS53总共有3个UART，SDK默认配置如下。
 ## 镜像烧录<a name="ZH-CN_TOPIC_0000001777234342"></a>
 
 镜像烧录方法，请参见 [BurnTool](../../../../tools/BurnToolUserGuide/BurnToolUserGuide.md) 中“操作指南”章节。
-
-

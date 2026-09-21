@@ -16,7 +16,7 @@
 | 名称 | 介绍 |
 | :--- | :--- |
 | [开发者中心](docs/zh-CN/index.md) | WS53 文档总入口和推荐阅读路径。 |
-| [快速入门](docs/zh-CN/get-started/index.md) | 环境搭建、首次构建、创建应用、烧录和运行。 |
+| [快速入门](docs/zh-CN/get-started/index.md) | 选择 CLI 或 VS Code，完成环境准备、Hello World 构建、烧录和运行验证。 |
 | [开发指南](docs/zh-CN/guides/index.md) | SDK、连接、网络、外设、安全、系统服务、测试和认证专题。 |
 | [参考案例](docs/zh-CN/samples/index.md) | 示例源码入口和历史 SAMPLE 用例资料。 |
 | [API 参考](docs/zh-CN/api-reference/index.md) | 驱动、中间件和 OS 抽象层接口。 |

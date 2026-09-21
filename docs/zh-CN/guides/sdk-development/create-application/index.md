@@ -19,7 +19,7 @@ source_refs:
 
 # 如何创建 WS53 应用组件
 
-> 本页面是应用开发实践指南，不属于默认快速入门路径。首次开发请先从[快速入门](../../../get-started/index.md)完成 Hello World。
+> 本页面是应用开发实践指南，不属于默认快速入门路径。首次开发请先从[快速入门](../../../get-started/index.md)选择 CLI 或 VS Code 并完成 Hello World。
 
 WS53 的应用入口和案例都在 `src/application/`。推荐从现有 Sample 复制组件结构，再通过 Kconfig 控制是否编译；这样可以复用 SDK 的 CMake、日志和打包流程。
 
@@ -143,7 +143,7 @@ build_component()
 
 **预期结果：** 新组件目录、Kconfig 开关和构建入口均已注册，且 menuconfig 中可以看到新选项。
 
-**恢复入口：** 如果新选项未出现，先检查上级 `Kconfig` 和 `CMakeLists.txt` 的条件是否与宏名称一致，再使用[快速入门](../../../get-started/quick-start.md)确认基础构建环境正常。
+**恢复入口：** 如果新选项未出现，先检查上级 `Kconfig` 和 `CMakeLists.txt` 的条件是否与宏名称一致，再使用[快速入门](../../../get-started/index.md)确认基础构建环境正常。
 
 ## 构建与调试
 
@@ -156,7 +156,7 @@ python build.py ws53_liteos_app -c -j1
 
 ## 相关页面
 
-- [快速开始](../../../get-started/quick-start.md)
+- [快速入门](../../../get-started/index.md)
 - [烧录与运行](../flash-and-run/index.md)
 - [外设驱动](../../../samples/peripherals/index.md)
 - [整体架构](../../../overall-architecture/index.md)

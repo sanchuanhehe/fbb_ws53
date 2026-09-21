@@ -5,105 +5,158 @@ product: WS53
 applies_to:
   sdk: 1.10.106
   target: ws53_liteos_app
+  host: Windows 10/11 x86_64 或 Linux x86_64
+  cli: fbb >= 1.1.0（本页静态核对 1.2.1）
 status: draft
+owner: WS53 SDK Maintainers
 verification_level: static
 source_refs:
   - src/build/config/target_config/ws53/config.py
   - src/build/config/target_config/ws53/ws53.json
+  - src/build/config/target_config/ws53/menuconfig/acore/ws53_liteos_app.config
+  - src/tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl/bin/riscv32-linux-musl-gcc
+upstream_refs:
+  - project: hs-fbb-cli
+    version: "1.2.1 (master d0722a3)"
+    url: https://gitcode.com/HiSpark/hs-fbb-cli
+  - project: Microsoft Dev Drive
+    version: Windows 11
+    url: https://learn.microsoft.com/windows/dev-drive/
+  - project: Windows Subsystem for Linux
+    version: WSL 2
+    url: https://learn.microsoft.com/windows/wsl/filesystems
 ---
 
 # 使用命令行配置并构建 WS53 固件
 
-本文介绍通过 fbb CLI 准备构建环境、选择目标、配置 Kconfig 并生成固件的方法。首次使用图形化开发流程，请参见[快速入门](../../../get-started/index.md)。
+本文介绍如何使用 FBB CLI 检查环境、配置 Kconfig 并构建 WS53 固件。第一次运行 Hello World 时，请从[CLI 快速入门](../../../get-started/cli.md)进入。
 
-除安装步骤外，下列命令在已配置的 SDK 工作目录中执行。独立应用工程的创建和构建入口见[创建独立应用工程](../create-project/index.md)。
+除安装和更新 CLI 外，以下命令均在 WS53 SDK 的 `src` 目录中执行。
 
 <a name="cli-setup"></a>
 
-## 环境准备
+## 准备命令行环境
 
-**安装 uv（Python 包管理器）**：
+1. 按 [FBB CLI 项目说明](https://gitcode.com/HiSpark/hs-fbb-cli)安装或更新 `fbb`。
+2. 在 PowerShell 或 Bash 中检查版本：
 
-```powershell
-irm https://astral.sh/uv/install.ps1 | iex
+    ```console
+    fbb -V
+    ```
+
+    `src/build/config/target_config/ws53/ws53.json` 要求 `fbb >= 1.1.0`。版本低于 `1.1.0` 时停止操作，从项目认可的发布渠道取得兼容版本；不要忽略版本检查继续构建。
+
+3. 进入 SDK 的 `src` 目录。`<sdk-root>` 表示 SDK 根目录：
+
+    ```powershell
+    cd <sdk-root>\src
+    ```
+
+    Linux Bash 使用：
+
+    ```bash
+    cd <sdk-root>/src
+    ```
+
+4. 准备工具链并检查环境：
+
+    ```console
+    fbb setup --sdk-dir .
+    fbb doctor
+    fbb describe --json
+    ```
+
+环境就绪需同时满足：
+
+- `fbb doctor` 以 `0` 退出；
+- `fbb describe --json` 识别到芯片 `ws53`；
+- 工具链版本为 SDK 声明的 `hcc 7.3.0-20240618`；
+- 当前目录包含 `build.py`。
+
+任一检查失败时先修复环境，不要进入配置或构建步骤。
+
+## 查看 Target
+
+```console
+fbb list-targets --json
 ```
 
-**安装或更新 fbb CLI**：
+本页固定使用 `ws53_liteos_app`。其他 Target 的用途和验证状态不从本页推断。
 
-```powershell
-uv tool install --force 'git+https://gitcode.com/HiSpark/hs-fbb-cli.git'
-fbb -V
-```
-
-WS53 SDK 要求 `fbb` 不低于 `1.1.0`，以下命令对应 `fbb 1.2.0`。团队项目可另行固定经过验证的 CLI 提交。
-
-**初始化构建环境并安装 SDK 与工具链**：
-
-```bash
-fbb setup
-fbb sdk install ws53          # 安装匹配的 SDK 与 RISC-V 工具链
-fbb doctor                    # 环境检查
-fbb describe --json           # 查看 CLI、SDK、工具链和可用 target
-```
-
-> `fbb sdk install` 会下载 SDK 源码并安装该 SDK 声明的匹配工具链。团队项目应在开发说明中固定 SDK tag 或 commit；不要只执行 `git clone` 后假设本机已有匹配工具链。
-
-## 查看可用 Target
-
-```bash
-fbb list-targets --json       # 列出所有可构建的 target
-fbb describe --json            # 完整环境探测（SDK、工具链、target 等）
-```
-
-常用 target：
-
-| Target | 用途 |
-|--------|------|
-| `ws53_liteos_app` | 主应用镜像（默认） |
-| `ws53-flashboot` | FlashBoot 引导 |
-| `ws53_liteos_xts` | LiteOS XTS 测试镜像 |
-
-可设置默认 target 后续省略：
-
-```bash
-fbb set-target ws53_liteos_app
-fbb get-target                 # 查看当前默认 target
-```
+<a name="configure-kconfig"></a>
 
 ## 配置 Kconfig
 
-修改配置推荐使用 `fbb menuconfig <target>`。交互式菜单按模块层级组织，方向键移动、空格切换开关，保存退出后 `.config` 和 `mconfig.h` 自动更新：
+交互配置使用：
 
-```bash
+```console
 fbb menuconfig ws53_liteos_app
 ```
 
-自动化脚本和 CI 推荐使用无交互的 `fbb config`。该命令会校验 Kconfig 依赖和 choice 互斥关系：
+脚本化配置使用 `get`、`set` 和 `unset`。以下示例假设目标配置仍是仓库的未修改默认值；复用已有工作目录时，先保存自己的配置，不要据此推断其他 Sample 已关闭。
 
-```bash
-fbb config --target ws53_liteos_app get CONFIG_SAMPLE_ENABLE
-fbb config --target ws53_liteos_app set CONFIG_SAMPLE_ENABLE=y
-fbb config --target ws53_liteos_app unset CONFIG_SAMPLE_ENABLE
+```console
+fbb config set CONFIG_SAMPLE_ENABLE=y --target ws53_liteos_app
+fbb config unset CONFIG_ENABLE_BT_SAMPLE --target ws53_liteos_app
+fbb config set CONFIG_ENABLE_PERIPHERAL_SAMPLE=y --target ws53_liteos_app
+fbb config set CONFIG_SAMPLE_SUPPORT_HELLOWORLD=y --target ws53_liteos_app
 ```
+
+检查结果：
+
+```console
+fbb config get CONFIG_SAMPLE_ENABLE --target ws53_liteos_app
+fbb config get CONFIG_ENABLE_BT_SAMPLE --target ws53_liteos_app
+fbb config get CONFIG_ENABLE_PERIPHERAL_SAMPLE --target ws53_liteos_app
+fbb config get CONFIG_SAMPLE_SUPPORT_HELLOWORLD --target ws53_liteos_app
+```
+
+预期依次输出 `y`、`n`、`y`、`y`。配置写入 `build/config/target_config/ws53/menuconfig/acore/ws53_liteos_app.config`；不要直接编辑该生成文件。
 
 <a name="cli-build"></a>
 
 ## 构建
 
-```bash
-fbb build ws53_liteos_app              # 增量构建
-fbb build --clean ws53_liteos_app      # 全量重编（修改 .config 后必须 --clean）
-fbb build ws53_liteos_app -j8          # 指定并行任务数
+修改 Kconfig 后执行干净构建：
+
+```console
+fbb build --clean ws53_liteos_app
 ```
 
-> 修改过 `.config` 后必须 `--clean`，否则 CMake 缓存会导致改动不生效。
+未修改配置时可执行增量构建：
+
+```console
+fbb build ws53_liteos_app
+```
 
 构建成功需同时满足：
 
-1. 进程退出码为 `0`
-2. `src/output/ws53/fwpkg/<target>/<target>_all.fwpkg` 存在且时间戳更新
-3. 使用 `_all.fwpkg`，不要使用 `_load_only.fwpkg`
+1. 进程退出码为 `0`；
+2. `output/ws53/acore/ws53_liteos_app/application.elf` 存在且时间戳更新；
+3. `output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg` 存在且时间戳更新。
+
+完整烧录使用 `_all_in_one.fwpkg`，不要把 `_load_only.fwpkg` 当作完整固件包。
+
+FBB CLI `1.2.1` 会读取 `ws53.json` 的 `upload.upload_partitions`，按 Target 找到上述完整固件。烧录命令和显式文件路径的恢复方式见[烧录与运行验证](../flash-and-run/index.md#cli-flash)。
+
+<a name="build-performance"></a>
+
+## 构建较慢时
+
+存储位置优化只处理文件 I/O 或实时扫描带来的耗时，不会修复 CLI 版本、工具链、Kconfig 或源码错误。先完成一次正确构建并记录用时，再选择与实际主机环境匹配的方案。
+
+### Windows 原生构建
+
+在符合微软前置条件的 Windows 11 上使用原生 CLI 或 VS Code 构建时，可评估将源码、构建输出和可再生成的缓存放到 Dev Drive。创建 Dev Drive 会涉及磁盘空间、格式化、权限和安全策略，本仓库不复制这些通用步骤；请按 [Microsoft Dev Drive 官方文档](https://learn.microsoft.com/windows/dev-drive/)检查前置条件和风险。
+
+企业设备还应遵循组织的 Defender 和存储策略。不要为了构建速度在快速入门中关闭安全软件或添加未经评审的全目录排除。
+
+### WSL 中使用 Linux 工具构建
+
+WSL 不是快速入门的前置条件。如果团队已经支持 WSL，并决定在 WSL 中使用 Linux 工具构建，请将仓库放在 WSL 的 Linux 文件系统（例如 `~/projects`），不要放在 `/mnt/c` 后跨文件系统反复访问。原因和路径建议见 [Microsoft WSL 文件系统说明](https://learn.microsoft.com/windows/wsl/filesystems)。
+
+Dev Drive 面向 Windows 原生开发负载；WSL 构建应遵循 WSL 文件系统建议，两者不作为叠加优化步骤。WSL 的安装、VS Code Remote、USB 和串口透传属于独立任务，不在本页展开。
 
 ## 下一步
 
-构建完成后，按[烧录与运行验证](../flash-and-run/index.md)烧录固件并确认应用运行。构建失败时，先运行 `fbb doctor` 检查环境，并核对所选 Target 与 Kconfig 配置。
+构建完成后，按[烧录与运行验证](../flash-and-run/index.md)烧录完整固件并检查应用专属成功标志。构建失败时保留完整日志，先运行 `fbb doctor`，再核对 CLI 版本、Target 和 Kconfig。
