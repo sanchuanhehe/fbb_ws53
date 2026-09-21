@@ -191,12 +191,6 @@ jobs:
             runner: windows-2025
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 90
-    env:
-      FBB_INSTALL_DIR: ${{ runner.temp }}/hs-fbb
-      FBB_NO_COLOR: "1"
-      NO_COLOR: "1"
-      PYTHONUTF8: "1"
-      PYTHONIOENCODING: utf-8
     steps:
       - name: Enable long Git paths on Windows
         if: runner.os == 'Windows'
@@ -218,6 +212,12 @@ jobs:
         run: python .github/scripts/get_started_cli.py install-cli
 
       - name: Run the exact non-HIL Get Started path
+        env:
+          FBB_INSTALL_DIR: ${{ runner.temp }}/hs-fbb
+          FBB_NO_COLOR: "1"
+          NO_COLOR: "1"
+          PYTHONUTF8: "1"
+          PYTHONIOENCODING: utf-8
         run: >-
           python .github/scripts/get_started_cli.py run
           --platform ${{ matrix.platform }}
