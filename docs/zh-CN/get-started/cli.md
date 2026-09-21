@@ -17,6 +17,7 @@ owner: WS53 SDK Maintainers
 verification_level: static
 source_refs:
   - .gitattributes
+  - .github/scripts/get_started_cli.py
   - src/build/config/target_config/ws53/ws53.json
   - src/build/config/target_config/ws53/menuconfig/acore/ws53_liteos_app.config
   - src/application/Kconfig
@@ -119,19 +120,15 @@ git lfs pull
 
 按 [FBB CLI 项目说明](https://gitcode.com/HiSpark/hs-fbb-cli)中对应操作系统的安装方法，安装项目认可的 FBB CLI。安装后重新打开当前终端，然后执行：
 
-```console
-fbb -V
-```
+<!-- get-started-cli:version:begin -->
+<!-- get-started-cli:version:end -->
 
 本 SDK 要求 `fbb >= 1.1.0`。版本低于 `1.1.0` 时停止操作，从项目认可的发布渠道取得兼容版本，不要绕过版本检查继续构建。
 
 仍在 SDK 的 `src` 目录中执行：
 
-```console
-fbb setup --sdk-dir .
-fbb doctor
-fbb describe --json
-```
+<!-- get-started-cli:setup:begin -->
+<!-- get-started-cli:setup:end -->
 
 **预期结果：** `fbb doctor` 以 `0` 退出；`fbb describe --json` 能识别芯片 `ws53`、Target `ws53_liteos_app` 和工具链 `hcc 7.3.0-20240618`。任一检查失败时，先按命令输出修复环境，不要进入下一步。
 
@@ -149,21 +146,13 @@ git diff --exit-code -- build/config/target_config/ws53/menuconfig/acore/ws53_li
 
 确认配置文件未修改后，执行以下 4 个配置操作：
 
-```console
-fbb config set CONFIG_SAMPLE_ENABLE=y --target ws53_liteos_app
-fbb config unset CONFIG_ENABLE_BT_SAMPLE --target ws53_liteos_app
-fbb config set CONFIG_ENABLE_PERIPHERAL_SAMPLE=y --target ws53_liteos_app
-fbb config set CONFIG_SAMPLE_SUPPORT_HELLOWORLD=y --target ws53_liteos_app
-```
+<!-- get-started-cli:configure:begin -->
+<!-- get-started-cli:configure:end -->
 
 检查配置：
 
-```console
-fbb config get CONFIG_SAMPLE_ENABLE --target ws53_liteos_app
-fbb config get CONFIG_ENABLE_BT_SAMPLE --target ws53_liteos_app
-fbb config get CONFIG_ENABLE_PERIPHERAL_SAMPLE --target ws53_liteos_app
-fbb config get CONFIG_SAMPLE_SUPPORT_HELLOWORLD --target ws53_liteos_app
-```
+<!-- get-started-cli:verify-config:begin -->
+<!-- get-started-cli:verify-config:end -->
 
 **预期结果：** 4 项依次为 `y`、`n`、`y`、`y`。如果结果不同，重新执行对应的 `set` 或 `unset` 命令；不要直接编辑生成的 `.config` 文件。
 
@@ -171,16 +160,13 @@ fbb config get CONFIG_SAMPLE_SUPPORT_HELLOWORLD --target ws53_liteos_app
 
 配置改变后执行一次干净构建：
 
-```console
-fbb build --clean ws53_liteos_app
-```
+<!-- get-started-cli:build:begin -->
+<!-- get-started-cli:build:end -->
 
 **预期结果：** 命令以 `0` 退出，并生成以下两个文件：
 
-```text
-output/ws53/acore/ws53_liteos_app/application.elf
-output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg
-```
+<!-- get-started-cli:artifacts:begin -->
+<!-- get-started-cli:artifacts:end -->
 
 按所用命令壳层检查文件：
 
