@@ -3,9 +3,9 @@
 
 This is intentionally an offline checker.  It proves that references inside the
 generated site resolve to generated files with exact path spelling; it does not
-claim that external HTTP links are reachable.  Broken references on source pages
-that declare ``doc_type`` are blocking.  Existing debt on legacy pages remains
-visible as report-only findings until those pages enter structured maintenance.
+claim that external HTTP links are reachable.  The baseline retains the
+high-confidence/migration-debt classification and drift history, but every
+current finding fails the gate.
 """
 
 from __future__ import annotations
@@ -27,6 +27,13 @@ from docs_static_baseline import (
     load_baseline,
     reconcile,
     update_section,
+)
+from docs_static_report import (
+    ReportError,
+    build_report,
+    emit_warning_annotations,
+    write_json_report,
+    write_tsv_report,
 )
 from get_started_cli import GENERATED_SECTIONS, render_section
 
@@ -140,9 +147,28 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--update-baseline",
         action="store_true",
-        help="replace the rendered section with current report-only findings",
+        help="replace the rendered section with current migration-debt findings",
     )
-    return parser.parse_args()
+    parser.add_argument(
+        "--json-report",
+        type=Path,
+        help="write every finding and resolved baseline entry to this JSON file",
+    )
+    parser.add_argument(
+        "--tsv-report",
+        type=Path,
+        help="write every finding and resolved baseline entry to this TSV file",
+    )
+    parser.add_argument(
+        "--annotation-limit-per-rule",
+        type=int,
+        default=2,
+        help="GitHub warning annotations per rule (default: 2; 0 disables)",
+    )
+    args = parser.parse_args()
+    if args.annotation_limit_per_rule < 0:
+        parser.error("--annotation-limit-per-rule must not be negative")
+    return args
 
 
 def relative(path: Path, root: Path) -> str:
@@ -633,6 +659,9 @@ def main() -> int:
     baseline_new = 0
     baseline_resolved = 0
     resolved: set[tuple[str, str, int, str]] = set()
+    classifications = {
+        fingerprint(item): "hard_blocking" for item in hard_blocking
+    }
 
     if args.update_baseline:
         print_findings(hard_blocking, True)
@@ -660,30 +689,72 @@ def main() -> int:
         findings = hard_blocking + [
             replace(item, blocking=fingerprint(item) in new) for item in reports
         ]
+        classifications.update({identity: "baseline_known" for identity in known})
+        classifications.update({identity: "baseline_new" for identity in new})
     except BaselineError as error:
-        findings = hard_blocking + reports + [
-            Finding("WEB005", relative(baseline_path, root), 1, str(error), True)
-        ]
+        baseline_new = len(reports)
+        findings = hard_blocking + [replace(item, blocking=True) for item in reports]
+        classifications.update(
+            {fingerprint(item): "baseline_new" for item in reports}
+        )
+        baseline_finding = Finding(
+            "WEB005", relative(baseline_path, root), 1, str(error), True
+        )
+        findings.append(baseline_finding)
+        classifications[fingerprint(baseline_finding)] = "hard_blocking"
 
     blocking = [item for item in findings if item.blocking]
     reports = [item for item in findings if not item.blocking]
-    report_rules = Counter(item.rule for item in reports)
+    finding_rules = Counter(item.rule for item in findings)
     print_findings(blocking, True)
     print_findings(reports, False)
     print_improvements(resolved)
+    report = build_report(
+        check="rendered",
+        findings=findings,
+        classifications=classifications,
+        resolved=resolved,
+        context={
+            "html_files": len(html_files),
+            "maintained_pages": len(maintained_pages),
+            "get_started_contract_verified": contract_verified,
+            "get_started_contract_expected": contract_expected,
+            "internal_references": checked_count,
+            "external_references_skipped": external_count,
+            "site_url": site_url,
+            "baseline": relative(baseline_path, root),
+        },
+    )
+    try:
+        if args.json_report:
+            json_report = args.json_report
+            if not json_report.is_absolute():
+                json_report = root / json_report
+            write_json_report(json_report.resolve(), report)
+        if args.tsv_report:
+            tsv_report = args.tsv_report
+            if not tsv_report.is_absolute():
+                tsv_report = root / tsv_report
+            write_tsv_report(tsv_report.resolve(), report)
+    except ReportError as error:
+        print(f"[BLOCK] WEB007 {error}", file=sys.stderr)
+        return 2
+    emit_warning_annotations(
+        report, limit_per_rule=args.annotation_limit_per_rule
+    )
     print(
         "Rendered site check: "
         f"html_files={len(html_files)} maintained_pages={len(maintained_pages)} "
         f"get_started_contract={contract_verified}/{contract_expected} "
         f"internal_references={checked_count} "
         f"external_references_skipped={external_count} "
-        f"blocking={len(blocking)} report_only={len(reports)} "
-        f"report_by_rule={dict(sorted(report_rules.items()))} "
+        f"findings={len(findings)} hard_or_new={len(blocking)} "
+        f"findings_by_rule={dict(sorted(finding_rules.items()))} "
         f"baseline_known={baseline_known} baseline_new={baseline_new} "
         f"baseline_resolved={baseline_resolved} "
         f"site_url={site_url}"
     )
-    if blocking:
+    if findings:
         print("Rendered site check: FAIL", file=sys.stderr)
         return 1
     print("Rendered site check: PASS")

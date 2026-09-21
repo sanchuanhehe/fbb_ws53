@@ -69,11 +69,17 @@ jobs:
         run: python -m pip install --requirement .github/requirements-docs.txt
 
       - name: Check all documentation sources
+        id: source_static
+        continue-on-error: true
         shell: bash
         run: |
           set -o pipefail
           mkdir -p artifacts/documentation
-          python .github/scripts/check-docs.py 2>&1 | tee artifacts/documentation/source-static.log
+          python .github/scripts/check-docs.py \
+            --json-report artifacts/documentation/source-static.json \
+            --tsv-report artifacts/documentation/source-static.tsv \
+            --annotation-limit-per-rule 2 \
+            2>&1 | tee artifacts/documentation/source-static.log
 
       - name: Check Get Started source and executable contract
         shell: bash
@@ -83,11 +89,13 @@ jobs:
           python .github/scripts/get_started_cli.py check-document docs/zh-CN/get-started/cli.md \
             2>&1 | tee artifacts/documentation/generated-contract.log
 
-      - name: Run existing CI gate unit tests
+      - name: Run documentation gate unit tests
         shell: bash
         run: |
           set -o pipefail
           python ci/test_ci_gate.py 2>&1 | tee artifacts/documentation/ci-gate-unit.log
+          python ci/test_docs_static_checkers.py \
+            2>&1 | tee artifacts/documentation/docs-checker-unit.log
 
       - name: Build documentation strictly
         shell: bash
@@ -97,24 +105,50 @@ jobs:
             2>&1 | tee artifacts/documentation/mkdocs-build.log
 
       - name: Check rendered links, anchors, and assets
+        id: rendered_site
+        continue-on-error: true
         shell: bash
         run: |
           set -o pipefail
           python .github/scripts/check-rendered-site.py site \
+            --json-report artifacts/documentation/rendered-site.json \
+            --tsv-report artifacts/documentation/rendered-site.tsv \
+            --annotation-limit-per-rule 2 \
             2>&1 | tee artifacts/documentation/rendered-site.log
 
-      - name: Record validation boundary
+      - name: Summarize findings and validation boundary
+        id: documentation_summary
         if: always()
+        continue-on-error: true
         shell: bash
         run: |
+          set +e
+          python .github/scripts/summarize-docs-reports.py \
+            artifacts/documentation/source-static.json \
+            artifacts/documentation/rendered-site.json \
+            --output artifacts/documentation/summary.md
+          summary_status=$?
+
+          if [[ -s artifacts/documentation/summary.md ]]; then
+            cat artifacts/documentation/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "## Documentation quality gate" >> "$GITHUB_STEP_SUMMARY"
+            echo >> "$GITHUB_STEP_SUMMARY"
+            echo "> **REPORT ERROR:** summary.md was not generated." >> "$GITHUB_STEP_SUMMARY"
+            summary_status=1
+          fi
+
           {
-            echo "## Documentation evidence"
+            echo
+            echo "### Validation boundary"
             echo
             echo "- Owner: ${DOCUMENTATION_OWNER}"
             echo "- Nightly maximum stale-success policy: ${NIGHTLY_MAX_STALE_HOURS} hours"
             echo "- This job covers source/static checks and the rendered documentation site."
             echo "- Firmware flash, serial output, Smoke, and board HIL: **NOT RUN**."
           } >> "$GITHUB_STEP_SUMMARY"
+
+          exit "$summary_status"
 
       - name: Upload documentation evidence
         if: always()
@@ -127,16 +161,60 @@ jobs:
 
       - name: Upload GitHub Pages artifact
         if: >-
-          github.event_name == 'push' ||
+          steps.source_static.outcome == 'success' &&
+          steps.rendered_site.outcome == 'success' &&
           (
-            github.event_name == 'workflow_dispatch' &&
-            inputs.profile == 'deploy' &&
-            github.ref == 'refs/heads/master'
+            github.event_name == 'push' ||
+            (
+              github.event_name == 'workflow_dispatch' &&
+              inputs.profile == 'deploy' &&
+              github.ref == 'refs/heads/master'
+            )
           )
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: site
           retention-days: 1
+
+      - name: Enforce documentation quality gate
+        if: always()
+        env:
+          SOURCE_STATIC_RESULT: ${{ steps.source_static.outcome }}
+          RENDERED_SITE_RESULT: ${{ steps.rendered_site.outcome }}
+          DOCUMENTATION_SUMMARY_RESULT: ${{ steps.documentation_summary.outcome }}
+        shell: bash
+        run: |
+          failed=0
+
+          if [[ "$SOURCE_STATIC_RESULT" != "success" ]]; then
+            echo "::error title=Source documentation findings::Source checker result: ${SOURCE_STATIC_RESULT}. See source-static.json/tsv in the evidence artifact."
+            failed=1
+          fi
+          if [[ "$RENDERED_SITE_RESULT" != "success" ]]; then
+            echo "::error title=Rendered documentation findings::Rendered checker result: ${RENDERED_SITE_RESULT}. See rendered-site.json/tsv in the evidence artifact."
+            failed=1
+          fi
+          if [[ "$DOCUMENTATION_SUMMARY_RESULT" != "success" ]]; then
+            echo "::error title=Documentation report unavailable::Summary result: ${DOCUMENTATION_SUMMARY_RESULT}."
+            failed=1
+          fi
+
+          for report in \
+            artifacts/documentation/source-static.json \
+            artifacts/documentation/source-static.tsv \
+            artifacts/documentation/rendered-site.json \
+            artifacts/documentation/rendered-site.tsv; do
+            if [[ ! -s "$report" ]]; then
+              echo "::error title=Documentation report unavailable::Missing or empty ${report}."
+              failed=1
+            fi
+          done
+
+          if (( failed != 0 )); then
+            echo "Documentation quality gate: FAIL"
+            exit 1
+          fi
+          echo "Documentation quality gate: PASS"
 
   upstream_links:
     name: Documentation / upstream links

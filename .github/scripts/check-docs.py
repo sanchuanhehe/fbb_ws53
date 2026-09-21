@@ -1,13 +1,9 @@
 #!/usr/bin/env python3
 """Fail-closed source checks for the complete MkDocs documentation tree.
 
-The checker deliberately separates high-confidence failures from migration debt:
-
-* malformed UTF-8, malformed front matter, exposed secrets, and broken local
-  references in maintained pages are blocking;
-* the same broken references in legacy pages, missing structured metadata, and
-  empty image alternative text are reported without making today's repository
-  permanently red.
+The checker retains the distinction between high-confidence failures and known
+migration debt, but every current finding fails the gate.  The checked-in
+baseline is therefore an inventory and drift tracker, not an allowlist.
 
 A page is considered maintained when its front matter declares ``doc_type``.
 This is a repository policy boundary, not an inference about content quality.
@@ -33,6 +29,13 @@ from docs_static_baseline import (
     load_baseline,
     reconcile,
     update_section,
+)
+from docs_static_report import (
+    ReportError,
+    build_report,
+    emit_warning_annotations,
+    write_json_report,
+    write_tsv_report,
 )
 
 FENCE_RE = re.compile(r"^[ ]{0,3}(`{3,}|~{3,})")
@@ -105,9 +108,28 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--update-baseline",
         action="store_true",
-        help="replace the source section with current report-only findings",
+        help="replace the source section with current migration-debt findings",
     )
-    return parser.parse_args()
+    parser.add_argument(
+        "--json-report",
+        type=Path,
+        help="write every finding and resolved baseline entry to this JSON file",
+    )
+    parser.add_argument(
+        "--tsv-report",
+        type=Path,
+        help="write every finding and resolved baseline entry to this TSV file",
+    )
+    parser.add_argument(
+        "--annotation-limit-per-rule",
+        type=int,
+        default=2,
+        help="GitHub warning annotations per rule (default: 2; 0 disables)",
+    )
+    args = parser.parse_args()
+    if args.annotation_limit_per_rule < 0:
+        parser.error("--annotation-limit-per-rule must not be negative")
+    return args
 
 
 def relative(path: Path, root: Path) -> str:
@@ -629,6 +651,9 @@ def main() -> int:
     baseline_new = 0
     baseline_resolved = 0
     resolved: set[tuple[str, str, int, str]] = set()
+    classifications = {
+        fingerprint(item): "hard_blocking" for item in hard_blocking
+    }
 
     if args.update_baseline:
         print_findings(hard_blocking, True)
@@ -657,27 +682,65 @@ def main() -> int:
         findings = hard_blocking + [
             replace(item, blocking=fingerprint(item) in new) for item in reports
         ]
+        classifications.update({identity: "baseline_known" for identity in known})
+        classifications.update({identity: "baseline_new" for identity in new})
     except BaselineError as error:
-        findings = hard_blocking + reports + [
-            Finding("SRC005", relative(baseline_path, root), 1, str(error), True)
-        ]
+        baseline_new = len(reports)
+        findings = hard_blocking + [replace(item, blocking=True) for item in reports]
+        classifications.update(
+            {fingerprint(item): "baseline_new" for item in reports}
+        )
+        baseline_finding = Finding(
+            "SRC005", relative(baseline_path, root), 1, str(error), True
+        )
+        findings.append(baseline_finding)
+        classifications[fingerprint(baseline_finding)] = "hard_blocking"
 
     blocking = [item for item in findings if item.blocking]
     reports = [item for item in findings if not item.blocking]
-    report_rules = Counter(item.rule for item in reports)
+    finding_rules = Counter(item.rule for item in findings)
     print_findings(blocking, True)
     print_findings(reports, False)
     print_improvements(resolved)
+    report = build_report(
+        check="source",
+        findings=findings,
+        classifications=classifications,
+        resolved=resolved,
+        context={
+            "files": len(markdown_files),
+            "maintained": maintained_count,
+            "front_matter_parser": sorted(parser_names),
+            "baseline": relative(baseline_path, root),
+        },
+    )
+    try:
+        if args.json_report:
+            json_report = args.json_report
+            if not json_report.is_absolute():
+                json_report = root / json_report
+            write_json_report(json_report.resolve(), report)
+        if args.tsv_report:
+            tsv_report = args.tsv_report
+            if not tsv_report.is_absolute():
+                tsv_report = root / tsv_report
+            write_tsv_report(tsv_report.resolve(), report)
+    except ReportError as error:
+        print(f"[BLOCK] SRC006 {error}", file=sys.stderr)
+        return 2
+    emit_warning_annotations(
+        report, limit_per_rule=args.annotation_limit_per_rule
+    )
     print(
         "Source documentation check: "
         f"files={len(markdown_files)} maintained={maintained_count} "
-        f"blocking={len(blocking)} report_only={len(reports)} "
-        f"report_by_rule={dict(sorted(report_rules.items()))} "
+        f"findings={len(findings)} hard_or_new={len(blocking)} "
         f"baseline_known={baseline_known} baseline_new={baseline_new} "
+        f"findings_by_rule={dict(sorted(finding_rules.items()))} "
         f"baseline_resolved={baseline_resolved} "
         f"front_matter_parser={','.join(sorted(parser_names))}"
     )
-    if blocking:
+    if findings:
         print("Source documentation check: FAIL", file=sys.stderr)
         return 1
     print("Source documentation check: PASS")
