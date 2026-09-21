@@ -18,9 +18,12 @@ verification_level: build
 last_verified: 2026-09-21
 source_refs:
   - .gitattributes
-  - .github/scripts/get_started_cli.py
-  - .github/scripts/get_started_hook.py
   - .github/workflows/docs-pages.yml
+  - tools/docs/get_started/contract.py
+  - tools/docs/get_started/render.py
+  - tools/docs/get_started/runner.py
+  - tools/docs/get_started/evidence.py
+  - tools/docs/get_started/mkdocs_hook.py
   - src/build/config/target_config/ws53/ws53.json
   - src/build/config/target_config/ws53/menuconfig/acore/ws53_liteos_app.config
   - src/application/Kconfig
@@ -80,13 +83,11 @@ upstream_refs:
 
 在所用系统的终端中进入工作目录，获取 SDK 和 Git LFS 文件：
 
-<!-- get-started-cli:checkout:begin -->
-<!-- get-started-cli:checkout:end -->
+<!-- get-started-cli:checkout -->
 
 检查当前系统使用的编译器文件，并进入 SDK 的 `src` 目录：
 
-<!-- get-started-cli:sdk-platform-checks:begin -->
-<!-- get-started-cli:sdk-platform-checks:end -->
+<!-- get-started-cli:sdk-platform-checks -->
 
 **预期结果：** Git LFS 下载完成且编译器文件不再是小于 1 MiB 的指针文件。Windows 的 `Test-Path` 输出 `True`；Linux 输出 `Git LFS objects: OK` 和 `SDK root: OK`。两个系统都能找到 `SDK_VERSION` 为 `1.10.106` 的源码行。
 
@@ -96,15 +97,13 @@ upstream_refs:
 
 按 [FBB CLI 项目说明](https://gitcode.com/HiSpark/hs-fbb-cli)中对应操作系统的安装方法，安装项目认可的 FBB CLI。安装后重新打开当前终端，然后执行：
 
-<!-- get-started-cli:version:begin -->
-<!-- get-started-cli:version:end -->
+<!-- get-started-cli:version -->
 
 本教程固定验证 FBB CLI `1.2.1`；SDK 声明的 `1.1.0` 只是最低兼容版本，不表示 Nightly 覆盖了所有 `>= 1.1.0` 版本。若 `fbb -V` 未输出 `fbb 1.2.1`，请从项目认可的发布渠道取得该版本，不要绕过版本检查继续构建。
 
 仍在 SDK 的 `src` 目录中执行：
 
-<!-- get-started-cli:setup:begin -->
-<!-- get-started-cli:setup:end -->
+<!-- get-started-cli:setup -->
 
 **预期结果：** `fbb doctor` 以 `0` 退出；`fbb describe --json` 能识别芯片 `ws53`、Target `ws53_liteos_app` 和工具链 `hcc 7.3.0-20240618`。任一检查失败时，先按命令输出修复环境，不要进入下一步。
 
@@ -114,20 +113,17 @@ upstream_refs:
 
 以下 4 个操作以全新 checkout 中未修改的默认配置为起点。执行前先检查该文件没有本地改动：
 
-<!-- get-started-cli:clean-config:begin -->
-<!-- get-started-cli:clean-config:end -->
+<!-- get-started-cli:clean-config -->
 
 命令必须以 `0` 退出。若存在本地改动，先另行保存并恢复自己的配置，不要用本教程的命令覆盖或误判已有 Sample 配置。
 
 确认配置文件未修改后，执行以下 4 个配置操作：
 
-<!-- get-started-cli:configure:begin -->
-<!-- get-started-cli:configure:end -->
+<!-- get-started-cli:configure -->
 
 检查配置：
 
-<!-- get-started-cli:verify-config:begin -->
-<!-- get-started-cli:verify-config:end -->
+<!-- get-started-cli:verify-config -->
 
 **预期结果：** 4 项依次为 `y`、`n`、`y`、`y`。如果结果不同，重新执行对应的 `set` 或 `unset` 命令；不要直接编辑生成的 `.config` 文件。
 
@@ -135,18 +131,15 @@ upstream_refs:
 
 配置改变后执行一次干净构建：
 
-<!-- get-started-cli:build:begin -->
-<!-- get-started-cli:build:end -->
+<!-- get-started-cli:build -->
 
 **预期结果：** 命令以 `0` 退出，并生成以下两个文件：
 
-<!-- get-started-cli:artifacts:begin -->
-<!-- get-started-cli:artifacts:end -->
+<!-- get-started-cli:artifacts -->
 
 按所用命令壳层检查文件：
 
-<!-- get-started-cli:artifact-checks:begin -->
-<!-- get-started-cli:artifact-checks:end -->
+<!-- get-started-cli:artifact-checks -->
 
 Windows 的两行都应输出 `True`；Linux 应输出 `ELF: OK` 和 `FWPKG: OK`。
 
@@ -242,6 +235,6 @@ Dev Drive 与 WSL 不是需要叠加执行的步骤。WSL 安装、USB 和串口
 
 截至 2026-09-21，本页的非 HIL 路径已在 GitHub-hosted Ubuntu 24.04 和 Windows Server 2025 x86_64 runner 上通过环境检查、4 项配置切换、干净构建，以及 ELF/FWPKG 非空且为本次新生成的断言。因此页面保持 `draft`，验证等级为 `verification_level: build`。
 
-为防止文档与自动验证漂移，SDK/FBB CLI 版本、仓库地址、Windows/Linux 编译器检查、公共命令和产物路径只在 `.github/scripts/get_started_cli.py` 中维护。MkDocs 构建时由 hook 将同一份契约注入本页，Nightly 则按相同阶段和常量执行语义等价检查；其中 checkout 使用 GitHub Actions 固定到当次提交，并另行确认文档声明的 GitCode `master` 分支可解析。静态门禁会拒绝缺失、重复或写入标记区的受管内容，构建后门禁还会核对最终 HTML 中的命令和产物。
+为防止文档与自动验证漂移，SDK/FBB CLI 版本、仓库地址、Windows/Linux 编译器检查、公共命令和产物路径统一由 `tools/docs/get_started/` 下的契约、渲染、执行和证据模块维护；维护者在仓库根目录运行 `python -m tools.docs.get_started`，CI 也使用同一入口。MkDocs 构建时由同目录下的 hook 将同一份契约注入本页，Nightly 则按相同阶段和常量执行语义等价检查；其中 checkout 使用 GitHub Actions 固定到当次提交，并另行确认文档声明的 GitCode `master` 分支可解析。静态门禁会拒绝缺失、重复、未知或畸形的占位符以及手写的受管内容，构建后门禁还会核对最终 HTML 中的命令和产物。
 
 验证没有覆盖 Windows 10/11 桌面安装、固件烧录、串口输出、Smoke 或开发板 HIL，不能据此声称 Hello World 已在目标板运行。Nightly 证据保留 14 天；上述未覆盖项继续作为 `not_run` 记录。

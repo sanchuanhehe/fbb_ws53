@@ -72,7 +72,7 @@ jobs:
         id: source_static
         shell: bash
         run: |
-          set -o pipefail
+          set -euo pipefail
           mkdir -p artifacts/documentation
           python .github/scripts/check-docs.py \
             --json-report artifacts/documentation/source-static.json \
@@ -81,28 +81,34 @@ jobs:
             2>&1 | tee artifacts/documentation/source-static.log
 
       - name: Check Get Started source and executable contract
+        id: get_started_contract
         if: ${{ !cancelled() }}
         shell: bash
         run: |
-          set -o pipefail
-          python .github/scripts/check-get-started.py 2>&1 | tee artifacts/documentation/get-started.log
-          python .github/scripts/get_started_cli.py check-document docs/zh-CN/get-started/cli.md \
+          set -euo pipefail
+          python -m tools.docs.get_started check-source \
+            2>&1 | tee artifacts/documentation/get-started.log
+          python -m tools.docs.get_started check-document docs/zh-CN/get-started/cli.md \
             2>&1 | tee artifacts/documentation/generated-contract.log
 
       - name: Run documentation gate unit tests
+        id: documentation_tests
         if: ${{ !cancelled() }}
         shell: bash
         run: |
-          set -o pipefail
+          set -euo pipefail
           python ci/test_ci_gate.py 2>&1 | tee artifacts/documentation/ci-gate-unit.log
           python ci/test_docs_static_checkers.py \
             2>&1 | tee artifacts/documentation/docs-checker-unit.log
+          python -m unittest discover -s tests/docs -p 'test_*.py' \
+            2>&1 | tee artifacts/documentation/get-started-unit.log
 
       - name: Build documentation strictly
+        id: mkdocs_build
         if: ${{ !cancelled() }}
         shell: bash
         run: |
-          set -o pipefail
+          set -euo pipefail
           python -m mkdocs build --clean --strict --site-dir site \
             2>&1 | tee artifacts/documentation/mkdocs-build.log
 
@@ -111,7 +117,7 @@ jobs:
         if: ${{ !cancelled() }}
         shell: bash
         run: |
-          set -o pipefail
+          set -euo pipefail
           python .github/scripts/check-rendered-site.py site \
             --json-report artifacts/documentation/rendered-site.json \
             --tsv-report artifacts/documentation/rendered-site.tsv \
@@ -152,6 +158,7 @@ jobs:
           exit "$summary_status"
 
       - name: Upload documentation evidence
+        id: documentation_evidence
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
@@ -182,8 +189,12 @@ jobs:
         if: always()
         env:
           SOURCE_STATIC_RESULT: ${{ steps.source_static.outcome }}
+          GET_STARTED_CONTRACT_RESULT: ${{ steps.get_started_contract.outcome }}
+          DOCUMENTATION_TESTS_RESULT: ${{ steps.documentation_tests.outcome }}
+          MKDOCS_BUILD_RESULT: ${{ steps.mkdocs_build.outcome }}
           RENDERED_SITE_RESULT: ${{ steps.rendered_site.outcome }}
           DOCUMENTATION_SUMMARY_RESULT: ${{ steps.documentation_summary.outcome }}
+          DOCUMENTATION_EVIDENCE_RESULT: ${{ steps.documentation_evidence.outcome }}
         shell: bash
         run: |
           failed=0
@@ -192,12 +203,28 @@ jobs:
             echo "::error title=Source documentation findings::Source checker result: ${SOURCE_STATIC_RESULT}. See source-static.json/tsv in the evidence artifact."
             failed=1
           fi
+          if [[ "$GET_STARTED_CONTRACT_RESULT" != "success" ]]; then
+            echo "::error title=Get Started contract failure::Get Started source/contract result: ${GET_STARTED_CONTRACT_RESULT}."
+            failed=1
+          fi
+          if [[ "$DOCUMENTATION_TESTS_RESULT" != "success" ]]; then
+            echo "::error title=Documentation test failure::Documentation test result: ${DOCUMENTATION_TESTS_RESULT}."
+            failed=1
+          fi
+          if [[ "$MKDOCS_BUILD_RESULT" != "success" ]]; then
+            echo "::error title=Strict documentation build failure::MkDocs build result: ${MKDOCS_BUILD_RESULT}."
+            failed=1
+          fi
           if [[ "$RENDERED_SITE_RESULT" != "success" ]]; then
             echo "::error title=Rendered documentation findings::Rendered checker result: ${RENDERED_SITE_RESULT}. See rendered-site.json/tsv in the evidence artifact."
             failed=1
           fi
           if [[ "$DOCUMENTATION_SUMMARY_RESULT" != "success" ]]; then
             echo "::error title=Documentation report unavailable::Summary result: ${DOCUMENTATION_SUMMARY_RESULT}."
+            failed=1
+          fi
+          if [[ "$DOCUMENTATION_EVIDENCE_RESULT" != "success" ]]; then
+            echo "::error title=Documentation evidence upload failure::Evidence upload result: ${DOCUMENTATION_EVIDENCE_RESULT}."
             failed=1
           fi
 
@@ -289,7 +316,7 @@ jobs:
           python-version: "3.13"
 
       - name: Install pinned FBB CLI
-        run: python .github/scripts/get_started_cli.py install-cli
+        run: python -m tools.docs.get_started install-cli
 
       - name: Run the exact non-HIL Get Started path
         env:
@@ -299,7 +326,7 @@ jobs:
           PYTHONUTF8: "1"
           PYTHONIOENCODING: utf-8
         run: >-
-          python .github/scripts/get_started_cli.py run
+          python -m tools.docs.get_started run
           --platform ${{ matrix.platform }}
           --runner-label ${{ matrix.runner }}
           --evidence-dir artifacts/get-started-${{ matrix.platform }}
@@ -307,7 +334,7 @@ jobs:
       - name: Validate non-HIL build evidence
         if: always()
         run: >-
-          python .github/scripts/get_started_cli.py validate-evidence
+          python -m tools.docs.get_started validate-evidence
           --summary artifacts/get-started-${{ matrix.platform }}/summary.json
           --platform ${{ matrix.platform }}
           --runner-label ${{ matrix.runner }}

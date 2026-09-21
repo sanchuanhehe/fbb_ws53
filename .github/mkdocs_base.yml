@@ -69,4 +69,4 @@ extra:
   generator: false
 
 hooks:
-  - .github/scripts/get_started_hook.py
+  - tools/docs/get_started/mkdocs_hook.py

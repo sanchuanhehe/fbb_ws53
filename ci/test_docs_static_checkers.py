@@ -9,9 +9,11 @@ import importlib.util
 import io
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
+import types
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -21,10 +23,13 @@ SCRIPTS_DIR = REPOSITORY_ROOT / ".github" / "scripts"
 SOURCE_CHECKER = SCRIPTS_DIR / "check-docs.py"
 SUMMARY_SCRIPT = SCRIPTS_DIR / "summarize-docs-reports.py"
 WORKFLOW = REPOSITORY_ROOT / ".github" / "workflows" / "docs-pages.yml"
+if str(REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPOSITORY_ROOT))
 if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 from docs_static_report import build_report, emit_warning_annotations
+from tools.docs.get_started.contract import EXPECTED_RUNNER_LABELS
 
 
 def write_baseline(
@@ -194,6 +199,49 @@ class SourceCheckerTests(unittest.TestCase):
 
 
 class RenderedCheckerTests(unittest.TestCase):
+    def test_get_started_source_placeholder_cannot_survive_rendering(self) -> None:
+        checker = load_rendered_checker()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            site = root / "site"
+            output = site / checker.GET_STARTED_OUTPUT
+            output.parent.mkdir(parents=True)
+            (root / "mkdocs.yml").write_text("site_name: test\n", encoding="utf-8")
+            rendered_sections = []
+            for section in checker.GENERATED_SECTIONS:
+                rendered_sections.extend(
+                    (
+                        f"<!-- get-started-cli:{section}:begin -->",
+                        checker.render_section(section),
+                        f"<!-- get-started-cli:{section}:end -->",
+                    )
+                )
+            rendered_sections.append("<!-- get-started-cli:checkout -->")
+            output.write_text("\n".join(rendered_sections), encoding="utf-8")
+            hook = mock.Mock()
+            hook.__file__ = str(root / checker.GET_STARTED_HOOK)
+            hook.CLI_PAGE = checker.GET_STARTED_SOURCE_URI
+            mkdocs = types.ModuleType("mkdocs")
+            mkdocs_config = types.ModuleType("mkdocs.config")
+            mkdocs_config.load_config = mock.Mock(  # type: ignore[attr-defined]
+                return_value={"hooks": {checker.GET_STARTED_HOOK: hook}}
+            )
+            mkdocs.config = mkdocs_config  # type: ignore[attr-defined]
+
+            with mock.patch.dict(
+                sys.modules,
+                {"mkdocs": mkdocs, "mkdocs.config": mkdocs_config},
+            ):
+                findings, verified, expected = checker.get_started_contract_findings(
+                    root, site
+                )
+
+            self.assertEqual(verified, expected)
+            self.assertTrue(
+                any("source placeholder" in finding.message for finding in findings),
+                findings,
+            )
+
     def test_baseline_known_finding_still_fails(self) -> None:
         checker = load_rendered_checker()
         with tempfile.TemporaryDirectory() as directory:
@@ -299,6 +347,28 @@ class AnnotationTests(unittest.TestCase):
 
 
 class WorkflowContractTests(unittest.TestCase):
+    def test_get_started_matrix_covers_every_contract_platform_once(self) -> None:
+        workflow = WORKFLOW.read_text(encoding="utf-8")
+        build_job = workflow.split("\n  get_started_build:\n", 1)[1].split(
+            "\n  nightly_result:\n", 1
+        )[0]
+        entries = re.findall(
+            r"(?m)^\s+- label:\s*(\S+)\s*$\n"
+            r"\s+platform:\s*(\S+)\s*$\n"
+            r"\s+runner:\s*(\S+)\s*$",
+            build_job,
+        )
+        expected = [
+            (platform.title(), platform, runner)
+            for platform, runner in EXPECTED_RUNNER_LABELS.items()
+        ]
+
+        self.assertEqual(entries, expected)
+        nightly_job = workflow.split("\n  nightly_result:\n", 1)[1].split(
+            "\n  deploy:\n", 1
+        )[0]
+        self.assertIn("- get_started_build", nightly_job)
+
     def test_checker_failures_stay_visible_while_evidence_collection_continues(
         self,
     ) -> None:
@@ -331,6 +401,47 @@ class WorkflowContractTests(unittest.TestCase):
             "steps.documentation_summary.outcome == 'success'",
             documentation_job,
         )
+        for step_id in (
+            "get_started_contract",
+            "documentation_tests",
+            "mkdocs_build",
+            "documentation_evidence",
+        ):
+            self.assertIn(f"id: {step_id}", documentation_job)
+            self.assertIn(f"steps.{step_id}.outcome", documentation_job)
+        self.assertIn(
+            "python -m tools.docs.get_started check-source",
+            documentation_job,
+        )
+        self.assertIn(
+            "python -m tools.docs.get_started check-document",
+            documentation_job,
+        )
+        self.assertIn(
+            "python -m unittest discover -s tests/docs -p 'test_*.py'",
+            documentation_job,
+        )
+        self.assertNotIn(
+            "python .github/scripts/check-get-started.py",
+            workflow,
+        )
+        self.assertNotIn(
+            "python .github/scripts/get_started_cli.py",
+            workflow,
+        )
+        for step_name in (
+            "Check all documentation sources",
+            "Check Get Started source and executable contract",
+            "Run documentation gate unit tests",
+            "Build documentation strictly",
+            "Check rendered links, anchors, and assets",
+        ):
+            self.assertIn("set -euo pipefail", step_block(step_name))
+        for subcommand in ("install-cli", "run", "validate-evidence"):
+            self.assertIn(
+                f"python -m tools.docs.get_started {subcommand}",
+                workflow,
+            )
         self.assertLess(
             documentation_job.index("- name: Upload documentation evidence"),
             documentation_job.index("- name: Enforce documentation quality gate"),

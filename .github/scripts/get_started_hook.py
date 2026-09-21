@@ -1,14 +1,16 @@
-"""MkDocs hook that renders the executable CLI Get Started contract."""
+"""Compatibility wrapper for the repository-level MkDocs hook."""
 
 from __future__ import annotations
 
-from get_started_cli import render_document
+import sys
+from pathlib import Path
 
 
-CLI_PAGE = "zh-CN/get-started/cli.md"
+REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+if str(REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPOSITORY_ROOT))
 
-
-def on_page_markdown(markdown: str, page, **_kwargs) -> str | None:
-    if page.file.src_uri != CLI_PAGE:
-        return None
-    return render_document(markdown)
+from tools.docs.get_started.mkdocs_hook import (  # noqa: E402,F401
+    CLI_PAGE,
+    on_page_markdown,
+)

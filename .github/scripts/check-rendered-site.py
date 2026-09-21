@@ -21,6 +21,10 @@ from dataclasses import dataclass, replace
 from pathlib import Path
 from urllib.parse import unquote, urljoin, urlsplit
 
+REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+if str(REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPOSITORY_ROOT))
+
 from docs_static_baseline import (
     BaselineError,
     fingerprint,
@@ -35,7 +39,7 @@ from docs_static_report import (
     write_json_report,
     write_tsv_report,
 )
-from get_started_cli import GENERATED_SECTIONS, render_section
+from tools.docs.get_started import GENERATED_SECTIONS, render_section
 
 IGNORED_SCHEMES = {
     "data",
@@ -50,7 +54,7 @@ IGNORED_SCHEMES = {
 CSS_URL_RE = re.compile(r"url\(\s*(['\"]?)(.*?)\1\s*\)", re.IGNORECASE)
 SITE_URL_RE = re.compile(r"^site_url:\s*['\"]?([^'\"\s#]+)", re.MULTILINE)
 MAX_DETAIL_LINES = 40
-GET_STARTED_HOOK = ".github/scripts/get_started_hook.py"
+GET_STARTED_HOOK = "tools/docs/get_started/mkdocs_hook.py"
 GET_STARTED_SOURCE_URI = "zh-CN/get-started/cli.md"
 # zh-CN is the default folder locale, so mkdocs-static-i18n removes the locale
 # prefix from its rendered URL.
@@ -465,6 +469,18 @@ def get_started_contract_findings(
         return findings, verified_count, expected_count
 
     for section in GENERATED_SECTIONS:
+        source_comment = f"<!-- get-started-cli:{section} -->"
+        source_count = rendered.count(source_comment)
+        if source_count:
+            findings.append(
+                Finding(
+                    "WEB006",
+                    output_rel,
+                    1,
+                    f"rendered section {section!r} retains {source_count} source "
+                    "placeholder(s); the MkDocs hook did not fully consume its input",
+                )
+            )
         begin_comment = f"<!-- get-started-cli:{section}:begin -->"
         end_comment = f"<!-- get-started-cli:{section}:end -->"
         begin_count = rendered.count(begin_comment)
