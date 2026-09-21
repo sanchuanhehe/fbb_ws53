@@ -55,13 +55,14 @@ nav:
       - 运行时架构: zh-CN/overall-architecture/runtime-architecture/index.md
       - 内存布局: zh-CN/overall-architecture/memory-layout/index.md
   - 快速入门:
-      - 快速入门: zh-CN/get-started/index.md
-      - 构建并运行第一个示例: zh-CN/get-started/quick-start.md
+      - 选择开发方式: zh-CN/get-started/index.md
+      - 使用 CLI 完成第一次开发: zh-CN/get-started/cli.md
+      - 使用 VS Code 完成第一次开发: zh-CN/get-started/vscode.md
   - 开发指南:
       - 开发指南: zh-CN/guides/index.md
       - SDK 开发:
           - SDK 开发: zh-CN/guides/sdk-development/index.md
-          - 配置开发环境: zh-CN/guides/sdk-development/environment-setup/index.md
+          - VS Code 环境配置详解: zh-CN/guides/sdk-development/environment-setup/index.md
           - 命令行配置与构建: zh-CN/guides/sdk-development/build/index.md
           - 创建独立应用工程: zh-CN/guides/sdk-development/create-project/index.md
           - 新增 SDK 组件: zh-CN/guides/sdk-development/add-component/index.md
