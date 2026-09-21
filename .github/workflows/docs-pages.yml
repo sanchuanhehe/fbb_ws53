@@ -70,7 +70,6 @@ jobs:
 
       - name: Check all documentation sources
         id: source_static
-        continue-on-error: true
         shell: bash
         run: |
           set -o pipefail
@@ -82,6 +81,7 @@ jobs:
             2>&1 | tee artifacts/documentation/source-static.log
 
       - name: Check Get Started source and executable contract
+        if: ${{ !cancelled() }}
         shell: bash
         run: |
           set -o pipefail
@@ -90,6 +90,7 @@ jobs:
             2>&1 | tee artifacts/documentation/generated-contract.log
 
       - name: Run documentation gate unit tests
+        if: ${{ !cancelled() }}
         shell: bash
         run: |
           set -o pipefail
@@ -98,6 +99,7 @@ jobs:
             2>&1 | tee artifacts/documentation/docs-checker-unit.log
 
       - name: Build documentation strictly
+        if: ${{ !cancelled() }}
         shell: bash
         run: |
           set -o pipefail
@@ -106,7 +108,7 @@ jobs:
 
       - name: Check rendered links, anchors, and assets
         id: rendered_site
-        continue-on-error: true
+        if: ${{ !cancelled() }}
         shell: bash
         run: |
           set -o pipefail
@@ -119,7 +121,6 @@ jobs:
       - name: Summarize findings and validation boundary
         id: documentation_summary
         if: always()
-        continue-on-error: true
         shell: bash
         run: |
           set +e
@@ -163,6 +164,7 @@ jobs:
         if: >-
           steps.source_static.outcome == 'success' &&
           steps.rendered_site.outcome == 'success' &&
+          steps.documentation_summary.outcome == 'success' &&
           (
             github.event_name == 'push' ||
             (

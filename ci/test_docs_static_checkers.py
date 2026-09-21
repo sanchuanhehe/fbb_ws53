@@ -20,6 +20,7 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS_DIR = REPOSITORY_ROOT / ".github" / "scripts"
 SOURCE_CHECKER = SCRIPTS_DIR / "check-docs.py"
 SUMMARY_SCRIPT = SCRIPTS_DIR / "summarize-docs-reports.py"
+WORKFLOW = REPOSITORY_ROOT / ".github" / "workflows" / "docs-pages.yml"
 if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
@@ -295,6 +296,45 @@ class AnnotationTests(unittest.TestCase):
         self.assertIn("%0A", lines[0])
         self.assertIn("(3 total)", lines[0])
         self.assertIn("(2 total)", lines[1])
+
+
+class WorkflowContractTests(unittest.TestCase):
+    def test_checker_failures_stay_visible_while_evidence_collection_continues(
+        self,
+    ) -> None:
+        workflow = WORKFLOW.read_text(encoding="utf-8")
+        documentation_job = workflow.split("  upstream_links:", 1)[0]
+
+        def step_block(name: str) -> str:
+            marker = f"      - name: {name}\n"
+            start = documentation_job.index(marker)
+            end = documentation_job.find("\n      - name: ", start + len(marker))
+            return (
+                documentation_job[start:] if end < 0 else documentation_job[start:end]
+            )
+
+        self.assertNotIn("continue-on-error:", documentation_job)
+        for step_name in (
+            "Check Get Started source and executable contract",
+            "Run documentation gate unit tests",
+            "Build documentation strictly",
+            "Check rendered links, anchors, and assets",
+        ):
+            self.assertIn("if: ${{ !cancelled() }}", step_block(step_name))
+        for step_name in (
+            "Summarize findings and validation boundary",
+            "Upload documentation evidence",
+            "Enforce documentation quality gate",
+        ):
+            self.assertIn("if: always()", step_block(step_name))
+        self.assertIn(
+            "steps.documentation_summary.outcome == 'success'",
+            documentation_job,
+        )
+        self.assertLess(
+            documentation_job.index("- name: Upload documentation evidence"),
+            documentation_job.index("- name: Enforce documentation quality gate"),
+        )
 
 
 class SummaryTests(unittest.TestCase):
