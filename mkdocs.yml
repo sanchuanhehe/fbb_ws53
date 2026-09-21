@@ -1,6 +1,6 @@
-INHERIT: mkdocs_base.yml
+INHERIT: .github/mkdocs_base.yml
 site_name: WS53 开发者中心
-site_url: https://docs.hisilicon.com/projects/fbb_ws53/master/
+site_url: https://github.sanchuanhehe.com/fbb_ws53/
 site_description: WS53 SDK 开发文档
 site_author: HiSpark
 use_directory_urls: true
