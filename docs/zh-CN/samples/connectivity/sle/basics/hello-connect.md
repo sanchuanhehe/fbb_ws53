@@ -492,7 +492,7 @@ fbb flash ws53_liteos_app --port <CLIENT_COM> --json-summary
 fbb monitor --port <CLIENT_COM> --until "hello world" --timeout 30 --json-summary
 ```
 
-固件输出目录和串口号以当前 SDK 与主机实际配置为准。构建、烧录和串口参数可参考[快速入门](../../../../get-started/quick-start.md)。
+固件输出目录和串口号以当前 SDK 与主机实际配置为准。构建、烧录和串口参数可参考[快速入门](../../../../get-started/index.md)。
 
 ### 预期日志
 

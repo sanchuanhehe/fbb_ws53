@@ -251,7 +251,7 @@ fbb flash ws53_liteos_app --port <AP_COM> --json-summary
 fbb flash ws53_liteos_app --port <STA_COM> --json-summary
 ```
 
-通用构建、烧录和串口监视方法参见[快速入门](../../../../get-started/quick-start.md)。
+通用构建、烧录和串口监视方法参见[快速入门](../../../../get-started/index.md)。
 
 ### 第五步：验证广播、扫描和连接
 

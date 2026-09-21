@@ -158,7 +158,7 @@ fbb build ws53_liteos_app
 fbb flash ws53_liteos_app
 ```
 
-构建和烧录方法请参考[快速入门](../../../get-started/quick-start.md)。
+构建和烧录方法请参考[快速入门](../../../get-started/index.md)。
 
 ### 第四步：验证 Wi-Fi 前置条件
 

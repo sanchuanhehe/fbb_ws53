@@ -151,7 +151,7 @@ fbb build ws53_liteos_app
 fbb flash ws53_liteos_app
 ```
 
-完整步骤请参考[快速入门](../../../get-started/quick-start.md)。
+完整步骤请参考[快速入门](../../../get-started/index.md)。
 
 ### 第四步：验证 Wi-Fi
 

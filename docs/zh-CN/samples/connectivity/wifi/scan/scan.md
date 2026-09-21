@@ -211,4 +211,4 @@ static void scan_clear_result(void)
 6. 扫描期间会占用射频资源。STA 已连接或与 SoftAP/P2P 并发时，应根据时延和信道策略限制扫描频率。
 7. 连续执行多轮扫描并清理结果，检查任务内存和服务侧结果缓存没有持续增长。
 
-构建、烧录和串口日志查看方法参见[快速入门](../../../../get-started/quick-start.md)。
+构建、烧录和串口日志查看方法参见[快速入门](../../../../get-started/index.md)。
