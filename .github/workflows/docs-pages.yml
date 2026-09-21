@@ -1,37 +1,58 @@
-name: Deploy documentation
+name: Documentation
 
 on:
+  # This is a required check candidate, so every PR must create it. Do not add
+  # path filters: a skipped required workflow remains Pending on GitHub.
+  pull_request:
+  merge_group:
+    types:
+      - checks_requested
   push:
     branches:
       - master
-    paths:
-      - .github/workflows/docs-pages.yml
-      - .github/mkdocs_base.yml
-      - .github/requirements-docs.txt
-      - docs/**
-      - mkdocs.yml
-  pull_request:
-    paths:
-      - .github/workflows/docs-pages.yml
-      - .github/mkdocs_base.yml
-      - .github/requirements-docs.txt
-      - docs/**
-      - mkdocs.yml
+  schedule:
+    # Daily at 02:37 in the repository team's operating timezone. The
+    # non-zero minute avoids GitHub's busiest scheduling boundary.
+    - cron: "37 2 * * *"
+      timezone: Asia/Singapore
   workflow_dispatch:
+    inputs:
+      profile:
+        description: Validation profile
+        required: true
+        default: full
+        type: choice
+        options:
+          - quick
+          - full
+          - deploy
 
 permissions:
   contents: read
 
+env:
+  DOCUMENTATION_OWNER: "@sanchuanhehe"
+  NIGHTLY_MAX_STALE_HOURS: "24"
+
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: docs-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' || github.event_name == 'merge_group' }}
 
 jobs:
-  build:
-    name: Build documentation
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
+  documentation:
+    name: Documentation / gate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
+      - name: Reject deploy from a non-default branch
+        if: >-
+          github.event_name == 'workflow_dispatch' &&
+          inputs.profile == 'deploy' &&
+          github.ref != 'refs/heads/master'
+        run: |
+          echo "::error title=Invalid deployment ref::The deploy profile is allowed only on master."
+          exit 1
+
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -47,24 +68,240 @@ jobs:
       - name: Install documentation dependencies
         run: python -m pip install --requirement .github/requirements-docs.txt
 
-      - name: Build documentation
-        run: python -m mkdocs build --strict --site-dir site
+      - name: Check all documentation sources
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p artifacts/documentation
+          python .github/scripts/check-docs.py 2>&1 | tee artifacts/documentation/source-static.log
+
+      - name: Check Get Started source and executable contract
+        shell: bash
+        run: |
+          set -o pipefail
+          python .github/scripts/check-get-started.py 2>&1 | tee artifacts/documentation/get-started.log
+          python .github/scripts/get_started_cli.py check-document docs/zh-CN/get-started/cli.md \
+            2>&1 | tee artifacts/documentation/generated-contract.log
+
+      - name: Run existing CI gate unit tests
+        shell: bash
+        run: |
+          set -o pipefail
+          python ci/test_ci_gate.py 2>&1 | tee artifacts/documentation/ci-gate-unit.log
+
+      - name: Build documentation strictly
+        shell: bash
+        run: |
+          set -o pipefail
+          python -m mkdocs build --clean --strict --site-dir site \
+            2>&1 | tee artifacts/documentation/mkdocs-build.log
+
+      - name: Check rendered links, anchors, and assets
+        shell: bash
+        run: |
+          set -o pipefail
+          python .github/scripts/check-rendered-site.py site \
+            2>&1 | tee artifacts/documentation/rendered-site.log
+
+      - name: Record validation boundary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## Documentation evidence"
+            echo
+            echo "- Owner: ${DOCUMENTATION_OWNER}"
+            echo "- Nightly maximum stale-success policy: ${NIGHTLY_MAX_STALE_HOURS} hours"
+            echo "- This job covers source/static checks and the rendered documentation site."
+            echo "- Firmware flash, serial output, Smoke, and board HIL: **NOT RUN**."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload documentation evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: documentation-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/documentation
+          retention-days: 14
+          if-no-files-found: warn
 
       - name: Upload GitHub Pages artifact
-        if: github.event_name != 'pull_request'
+        if: >-
+          github.event_name == 'push' ||
+          (
+            github.event_name == 'workflow_dispatch' &&
+            inputs.profile == 'deploy' &&
+            github.ref == 'refs/heads/master'
+          )
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: site
+          retention-days: 1
+
+  upstream_links:
+    name: Documentation / upstream links
+    if: >-
+      github.event_name == 'schedule' ||
+      (
+        github.event_name == 'workflow_dispatch' &&
+        inputs.profile != 'quick'
+      )
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Check declared upstream references
+        run: >-
+          python .github/scripts/check-upstream-links.py
+          --output upstream-links.json
+          --min-refs 16
+          --retries 3
+          --timeout 20
+
+      - name: Upload upstream-link evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: upstream-link-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: upstream-links.json
+          retention-days: 14
+          if-no-files-found: warn
+
+  get_started_build:
+    name: Get Started / ${{ matrix.label }} non-HIL build
+    if: >-
+      github.event_name == 'schedule' ||
+      (
+        github.event_name == 'workflow_dispatch' &&
+        inputs.profile == 'full'
+      )
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: Linux
+            platform: linux
+            runner: ubuntu-24.04
+          - label: Windows
+            platform: windows
+            runner: windows-2025
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    env:
+      FBB_INSTALL_DIR: ${{ runner.temp }}/hs-fbb
+      FBB_NO_COLOR: "1"
+      NO_COLOR: "1"
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: utf-8
+    steps:
+      - name: Enable long Git paths on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: git config --global core.longpaths true
+
+      - name: Check out repository and Git LFS objects
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          lfs: true
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+
+      - name: Install pinned FBB CLI
+        run: python .github/scripts/get_started_cli.py install-cli
+
+      - name: Run the exact non-HIL Get Started path
+        run: >-
+          python .github/scripts/get_started_cli.py run
+          --platform ${{ matrix.platform }}
+          --evidence-dir artifacts/get-started-${{ matrix.platform }}
+
+      - name: Upload non-HIL build evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: get-started-${{ matrix.platform }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/get-started-${{ matrix.platform }}
+          retention-days: 14
+          if-no-files-found: warn
+
+  nightly_result:
+    name: Documentation / nightly result
+    if: >-
+      always() &&
+      (
+        github.event_name == 'schedule' ||
+        (
+          github.event_name == 'workflow_dispatch' &&
+          inputs.profile == 'full'
+        )
+      )
+    needs:
+      - documentation
+      - upstream_links
+      - get_started_build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Enforce complete nightly evidence
+        env:
+          DOCUMENTATION_RESULT: ${{ needs.documentation.result }}
+          UPSTREAM_LINKS_RESULT: ${{ needs.upstream_links.result }}
+          GET_STARTED_BUILD_RESULT: ${{ needs.get_started_build.result }}
+        shell: bash
+        run: |
+          {
+            echo "## Nightly documentation result"
+            echo
+            echo "| Layer | Result |"
+            echo "| --- | --- |"
+            echo "| Full-site static and rendered checks | ${DOCUMENTATION_RESULT} |"
+            echo "| Declared upstream links | ${UPSTREAM_LINKS_RESULT} |"
+            echo "| Get Started Windows/Linux Build | ${GET_STARTED_BUILD_RESULT} |"
+            echo "| Flash / serial / Smoke / HIL | NOT RUN |"
+            echo
+            echo "Owner: ${DOCUMENTATION_OWNER}; maximum stale success: ${NIGHTLY_MAX_STALE_HOURS} hours."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          test "$DOCUMENTATION_RESULT" = success
+          test "$UPSTREAM_LINKS_RESULT" = success
+          test "$GET_STARTED_BUILD_RESULT" = success
 
   deploy:
     name: Deploy to GitHub Pages
-    if: github.event_name != 'pull_request'
-    needs: build
-    runs-on: ubuntu-latest
+    if: >-
+      always() &&
+      needs.documentation.result == 'success' &&
+      (
+        needs.upstream_links.result == 'success' ||
+        needs.upstream_links.result == 'skipped'
+      ) &&
+      (
+        github.event_name == 'push' ||
+        (
+          github.event_name == 'workflow_dispatch' &&
+          inputs.profile == 'deploy' &&
+          github.ref == 'refs/heads/master'
+        )
+      )
+    needs:
+      - documentation
+      - upstream_links
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       pages: write
       id-token: write
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

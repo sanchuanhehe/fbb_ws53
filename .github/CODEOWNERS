@@ -1,0 +1,8 @@
+# Documentation quality and publication ownership
+/docs/ @sanchuanhehe
+/mkdocs.yml @sanchuanhehe
+/.github/mkdocs_base.yml @sanchuanhehe
+/.github/requirements-docs.txt @sanchuanhehe
+/.github/docs-static-baseline.json @sanchuanhehe
+/.github/scripts/ @sanchuanhehe
+/.github/workflows/docs-pages.yml @sanchuanhehe
