@@ -11,6 +11,7 @@ status: draft
 owner: WS53 SDK Maintainers
 verification_level: static
 source_refs:
+  - .github/workflows/docs-pages.yml
   - src/build/config/target_config/ws53/target_config.py
   - src/build/config/target_config/ws53/ws53.json
 ---
@@ -43,4 +44,4 @@ CLI 和 HiSpark Studio for VS Code 使用相同的 SDK、Target、Kconfig、工�
 
 ## 当前验证边界
 
-本入口已静态核对 SDK 版本、Target 和两条路径的共同边界。CLI 与 VS Code 页面仍需分别取得干净环境 Smoke、构建日志和目标板 HIL 记录，因此当前保持 `draft` 和 `verification_level: static`。
+本入口已静态核对 SDK 版本、Target 和两条路径的共同边界。CLI 的 Windows/Linux 非 HIL 命令路径已有 Nightly Build 证据；VS Code 路径仍只有静态核对。Windows 10/11 桌面安装、烧录、串口输出、Smoke 和目标板 HIL 尚未覆盖，因此入口页保持 `draft` 和 `verification_level: static`。

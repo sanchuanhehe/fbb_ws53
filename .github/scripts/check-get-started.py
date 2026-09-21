@@ -351,6 +351,11 @@ def check_metadata(repo: Repository) -> str:
         CLI: ("Windows 10/11 x86_64", "Linux x86_64"),
         VSCODE: ("Windows 10/11 x86_64",),
     }
+    expected_verification_levels = {
+        INDEX: "static",
+        CLI: "build",
+        VSCODE: "static",
+    }
     for page in EXPECTED_PAGES:
         front, _ = markdown_parts(repo.read(page), page)
         require(scalar(front, "title"), f"{page} has no title")
@@ -358,8 +363,9 @@ def check_metadata(repo: Repository) -> str:
         require(scalar(front, "product") == "WS53", f"{page} product must be WS53")
         require(scalar(front, "status") == "draft", f"{page} status must remain draft")
         require(scalar(front, "owner") == "WS53 SDK Maintainers", f"{page} owner changed or is missing")
-        require(scalar(front, "verification_level") == "static",
-                f"{page} verification_level must remain static")
+        expected_level = expected_verification_levels[page]
+        require(scalar(front, "verification_level") == expected_level,
+                f"{page} verification_level must be {expected_level}")
         require(nested_scalar(front, "sdk") == SDK_VERSION,
                 f"{page} applies_to.sdk must be {SDK_VERSION}")
         require(nested_scalar(front, "branch") == "master",
@@ -371,7 +377,7 @@ def check_metadata(repo: Repository) -> str:
         if page == VSCODE:
             host_lines = front_list(front, "host")
             require(not host_lines, "VS Code host must remain a single Windows scalar")
-    return "3/3 pages keep explicit product, version, target, owner, draft/static scope"
+    return "3/3 pages keep explicit scope; CLI=build, entry/VS Code=static"
 
 
 def check_cli_tabs(repo: Repository) -> str:
@@ -393,6 +399,9 @@ def check_cli_tabs(repo: Repository) -> str:
 def check_source_refs(repo: Repository) -> str:
     expected_critical = {
         CLI: {
+            ".github/scripts/get_started_cli.py",
+            ".github/scripts/get_started_hook.py",
+            ".github/workflows/docs-pages.yml",
             str(TARGET_JSON), str(DEFAULT_CONFIG), str(APP_KCONFIG),
             str(SAMPLES_KCONFIG), str(PERIPHERAL_KCONFIG), str(HELLO_SOURCE),
         },
@@ -452,7 +461,14 @@ def check_target_mapping(repo: Repository) -> str:
     for page in (CLI, VSCODE):
         text = repo.read(page)
         require_contains(text, TOOLCHAIN_VERSION, str(page))
-    return f"SDK {SDK_VERSION}, Target {TARGET}, CLI >= {MIN_CLI_VERSION}, hcc {TOOLCHAIN_VERSION} agree"
+    cli_front, _ = markdown_parts(repo.read(CLI), CLI)
+    cli_scope = nested_scalar(cli_front, "cli") or ""
+    require_contains(cli_scope, cli_contract.CLI_VERSION, f"{CLI} applies_to.cli")
+    require_contains(cli_scope, MIN_CLI_VERSION, f"{CLI} applies_to.cli")
+    return (
+        f"SDK {SDK_VERSION}, Target {TARGET}, CLI validated {cli_contract.CLI_VERSION} "
+        f"(SDK minimum {MIN_CLI_VERSION}), hcc {TOOLCHAIN_VERSION} agree"
+    )
 
 
 def check_kconfig_mapping(repo: Repository) -> str:
@@ -506,7 +522,26 @@ def check_executable_cli_contract(repo: Repository) -> str:
             "executable contract CLI version changed unexpectedly")
     require(cli_contract.TARGET == TARGET,
             "executable contract target differs from page metadata")
+    require(cli_contract.SDK_VERSION == SDK_VERSION,
+            "executable contract SDK version differs from page metadata")
+    require(cli_contract.TOOLCHAIN_VERSION == TOOLCHAIN_VERSION,
+            "executable contract toolchain differs from page metadata")
+    require(cli_contract.SDK_REPOSITORY == "https://gitcode.com/HiSpark/fbb_ws53.git",
+            "executable contract uses a different SDK repository")
     require_contains(cli_source, cli_contract.CLI_COMMIT[:7], str(CLI))
+
+    base = repo.read(".github/mkdocs_base.yml")
+    require(
+        re.search(
+            r"(?m)^hooks:\s*$\n(?:^[ \t]+.*\n)*?^  - \.github/scripts/get_started_hook\.py\s*$",
+            base,
+        ) is not None,
+        "MkDocs does not register .github/scripts/get_started_hook.py",
+    )
+    hook = repo.read(".github/scripts/get_started_hook.py")
+    require_contains(hook, "from get_started_cli import render_document", "Get Started hook")
+    require_contains(hook, 'CLI_PAGE = "zh-CN/get-started/cli.md"', "Get Started hook")
+    require_contains(hook, "return render_document(markdown)", "Get Started hook")
     for group, commands in cli_contract.COMMAND_GROUPS.items():
         for command in commands:
             require(
@@ -516,7 +551,8 @@ def check_executable_cli_contract(repo: Repository) -> str:
     for artifact in cli_contract.ARTIFACTS:
         require_contains(rendered, artifact.as_posix(), "rendered CLI artifacts")
     return (
-        f"{len(cli_contract.COMMAND_GROUPS)} generated groups and "
+        f"{len(cli_contract.GENERATED_SECTIONS)} generated sections, "
+        f"{len(cli_contract.COMMAND_GROUPS)} executable groups, and "
         f"{sum(len(group) for group in cli_contract.COMMAND_GROUPS.values())} "
         "executable commands share one source"
     )
@@ -536,6 +572,8 @@ def check_artifact_mapping(repo: Repository) -> str:
     require(config["flash"]["signalbaud"] == 921600, "flash baud must be 921600")
     for page in (CLI, VSCODE):
         text = repo.read(page)
+        if page == CLI:
+            text = cli_contract.render_document(text)
         for value in (ELF_PATH, FWPKG_PATH, "921600", "115200"):
             require_contains(text, value, str(page))
     return "ELF, all-in-one firmware, flash 921600, and console 115200 map to ws53.json"
@@ -578,7 +616,7 @@ def check_platform_sources(repo: Repository) -> str:
     )
     repo.require_exact_path(windows_compiler)
     repo.require_exact_path(linux_compiler)
-    cli = repo.read(CLI)
+    cli = cli_contract.render_document(repo.read(CLI))
     require_contains(cli, str(windows_compiler).replace("/", "\\"), str(CLI))
     require_contains(cli, f"./{linux_compiler}", str(CLI))
     return "Windows and Linux compiler source paths exist and match CLI checks"
@@ -632,8 +670,17 @@ def check_performance_links_are_follow_up(repo: Repository) -> str:
 
 def check_validation_boundary(repo: Repository) -> str:
     required_boundary_terms = {
-        INDEX: ("Smoke", "HIL", "draft", "verification_level: static"),
-        CLI: ("实际构建", "烧录", "目标板日志证据", "draft", "verification_level: static"),
+        INDEX: ("Nightly Build", "VS Code", "Smoke", "HIL", "verification_level: static"),
+        CLI: (
+            "Ubuntu 24.04",
+            "Windows Server 2025",
+            "verification_level: build",
+            ".github/scripts/get_started_cli.py",
+            "烧录",
+            "Smoke",
+            "HIL",
+            "not_run",
+        ),
         VSCODE: ("干净构建", "目标板 HIL", "draft", "verification_level: static"),
     }
     for page, terms in required_boundary_terms.items():
@@ -641,7 +688,7 @@ def check_validation_boundary(repo: Repository) -> str:
         require_contains(text, "当前验证边界", str(page))
         for term in terms:
             require_contains(text, term, str(page))
-    return "pages explicitly retain draft/static scope; build, flash, Smoke, and HIL are not credited"
+    return "CLI credits Build only; entry/VS Code stay static; flash, Smoke, and HIL stay uncredited"
 
 
 def github_escape(value: str) -> str:
@@ -680,7 +727,7 @@ def main(argv: list[str] | None = None) -> int:
         Check("GS013", "Windows/Linux compiler source mapping", lambda: check_platform_sources(repo)),
         Check("GS014", "official upstream-link baseline", lambda: check_upstream_baseline(repo)),
         Check("GS015", "performance content is follow-up only", lambda: check_performance_links_are_follow_up(repo)),
-        Check("GS016", "static verification boundary", lambda: check_validation_boundary(repo)),
+        Check("GS016", "declared verification boundary", lambda: check_validation_boundary(repo)),
     )
 
     print("Get Started source/static gate")

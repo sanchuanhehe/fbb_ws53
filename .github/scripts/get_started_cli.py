@@ -31,12 +31,17 @@ from typing import Iterable, Sequence
 CLI_REPOSITORY = "https://gitcode.com/HiSpark/hs-fbb-cli"
 CLI_COMMIT = "d0722a37e421b0844f8d28bc59dd3e2fe7bfa578"
 CLI_VERSION = "1.2.1"
+SDK_REPOSITORY = "https://gitcode.com/HiSpark/fbb_ws53.git"
+SDK_BRANCH = "master"
+SDK_VERSION = "1.10.106"
 CHIP = "ws53"
 TARGET = "ws53_liteos_app"
+TOOLCHAIN_VERSION = "7.3.0-20240618"
 
 CONFIG_PATH = Path(
     "build/config/target_config/ws53/menuconfig/acore/ws53_liteos_app.config"
 )
+SDK_VERSION_SOURCE = Path("build/config/target_config/ws53/target_config.py")
 ARTIFACTS = (
     Path("output/ws53/acore/ws53_liteos_app/application.elf"),
     Path(
@@ -54,6 +59,18 @@ PLATFORM_COMPILERS = {
         "libexec/gcc/riscv32-linux-musl/7.3.0/cc1.exe"
     ),
 }
+EXPECTED_RUNNER_LABELS = {
+    "linux": "ubuntu-24.04",
+    "windows": "windows-2025",
+}
+EXPECTED_MACHINES = {
+    "linux": {"x86_64", "amd64"},
+    "windows": {"amd64", "x86_64"},
+}
+EXPECTED_IMAGE_OS_PREFIXES = {
+    "linux": "ubuntu24",
+    "windows": "win25",
+}
 
 
 @dataclass(frozen=True)
@@ -69,6 +86,14 @@ class Command:
         return " ".join(self.argv)
 
 
+SDK_REMOTE_COMMAND = Command(
+    "sdk-remote-branch",
+    ("git", "ls-remote", SDK_REPOSITORY, f"refs/heads/{SDK_BRANCH}"),
+    120,
+    rf"^[0-9a-f]{{40}}\s+refs/heads/{re.escape(SDK_BRANCH)}$",
+)
+
+
 COMMAND_GROUPS: dict[str, tuple[Command, ...]] = {
     "version": (
         Command("fbb-version", ("fbb", "-V"), 30, rf"^fbb {re.escape(CLI_VERSION)}$"),
@@ -77,6 +102,13 @@ COMMAND_GROUPS: dict[str, tuple[Command, ...]] = {
         Command("fbb-setup", ("fbb", "setup", "--sdk-dir", "."), 1800),
         Command("fbb-doctor", ("fbb", "doctor"), 120),
         Command("fbb-describe", ("fbb", "describe", "--json"), 120),
+    ),
+    "clean-config": (
+        Command(
+            "target-config-clean",
+            ("git", "diff", "--exit-code", "--", CONFIG_PATH.as_posix()),
+            30,
+        ),
     ),
     "configure": (
         Command(
@@ -143,18 +175,127 @@ COMMAND_GROUPS: dict[str, tuple[Command, ...]] = {
     ),
 }
 
-GENERATED_SECTIONS = (*COMMAND_GROUPS.keys(), "artifacts")
+GENERATED_SECTIONS = (
+    "checkout",
+    "sdk-platform-checks",
+    *COMMAND_GROUPS.keys(),
+    "artifacts",
+    "artifact-checks",
+)
 
 
 def _marker(section: str, edge: str) -> str:
     return f"<!-- get-started-cli:{section}:{edge} -->"
 
 
+def _indent(text: str, spaces: int = 4) -> str:
+    prefix = " " * spaces
+    return "\n".join(f"{prefix}{line}" if line else "" for line in text.splitlines())
+
+
+def _windows_path(path: Path) -> str:
+    return ".\\" + path.as_posix().replace("/", "\\")
+
+
+def _render_checkout() -> str:
+    return "\n".join(
+        (
+            "```console",
+            "git lfs install",
+            f"git clone --branch {SDK_BRANCH} --single-branch {SDK_REPOSITORY}",
+            "cd fbb_ws53",
+            "git lfs pull",
+            "```",
+        )
+    )
+
+
+def _render_sdk_platform_checks() -> str:
+    windows_compiler = _windows_path(Path("src") / PLATFORM_COMPILERS["windows"])
+    linux_compiler = (Path("src") / PLATFORM_COMPILERS["linux"]).as_posix()
+    windows = "\n".join(
+        (
+            "```powershell",
+            f"$compiler = Get-Item {windows_compiler}",
+            'if ($compiler.Length -lt 1MB) { throw "Git LFS objects are not hydrated" }',
+            "cd src",
+            "Test-Path .\\build.py",
+            (
+                "Select-String -Path "
+                ".\\build\\config\\target_config\\ws53\\target_config.py "
+                f"-Pattern 'SDK_VERSION.*{re.escape(SDK_VERSION)}'"
+            ),
+            "```",
+        )
+    )
+    linux = "\n".join(
+        (
+            "```bash",
+            f"size=$(wc -c < ./{linux_compiler})",
+            'if [ "$size" -ge 1048576 ] && cd src && test -f ./build.py; then',
+            '  echo "Git LFS objects: OK"',
+            '  echo "SDK root: OK"',
+            (
+                "  grep -n "
+                f"'SDK_VERSION.*{re.escape(SDK_VERSION)}' "
+                "./build/config/target_config/ws53/target_config.py"
+            ),
+            "else",
+            '  echo "SDK checkout is incomplete; stop before build" >&2',
+            "  false",
+            "fi",
+            "```",
+        )
+    )
+    return "\n".join(
+        (
+            '=== "Windows"',
+            "",
+            _indent(windows),
+            "",
+            '=== "Linux"',
+            "",
+            _indent(linux),
+        )
+    )
+
+
+def _render_artifact_checks() -> str:
+    windows_lines = ["```powershell"]
+    windows_lines.extend(f"Test-Path {_windows_path(path)}" for path in ARTIFACTS)
+    windows_lines.append("```")
+    linux_lines = ["```bash"]
+    linux_lines.extend(
+        (
+            f'test -f ./{ARTIFACTS[0].as_posix()} && echo "ELF: OK"',
+            f'test -f ./{ARTIFACTS[1].as_posix()} && echo "FWPKG: OK"',
+        )
+    )
+    linux_lines.append("```")
+    return "\n".join(
+        (
+            '=== "Windows"',
+            "",
+            _indent("\n".join(windows_lines)),
+            "",
+            '=== "Linux"',
+            "",
+            _indent("\n".join(linux_lines)),
+        )
+    )
+
+
 def render_section(section: str) -> str:
     """Render one generated Markdown section from the executable contract."""
+    if section == "checkout":
+        return _render_checkout()
+    if section == "sdk-platform-checks":
+        return _render_sdk_platform_checks()
     if section == "artifacts":
         body = "\n".join(path.as_posix() for path in ARTIFACTS)
         return f"```text\n{body}\n```"
+    if section == "artifact-checks":
+        return _render_artifact_checks()
     commands = COMMAND_GROUPS.get(section)
     if commands is None:
         raise KeyError(f"unknown generated section: {section}")
@@ -186,6 +327,18 @@ def render_document(markdown: str) -> str:
 def validate_document_source(markdown: str) -> None:
     """Ensure commands are owned by generated regions rather than hand-copied."""
     rendered = render_document(markdown)
+    for section in GENERATED_SECTIONS:
+        begin = _marker(section, "begin")
+        end = _marker(section, "end")
+        match = re.search(
+            rf"{re.escape(begin)}(?P<body>.*?){re.escape(end)}",
+            markdown,
+            flags=re.DOTALL,
+        )
+        if match is None or match.group("body").strip():
+            raise ValueError(
+                f"generated section {section!r} must be empty between its source markers"
+            )
     for group, commands in COMMAND_GROUPS.items():
         begin = rendered.index(_marker(group, "begin"))
         end = rendered.index(_marker(group, "end"), begin)
@@ -214,6 +367,14 @@ class StepEvidence:
 
 class ValidationFailure(RuntimeError):
     """A deterministic failure in the non-HIL build path."""
+
+
+class StepExecutionFailure(ValidationFailure):
+    """A failed command that still carries its evidence record."""
+
+    def __init__(self, message: str, evidence: StepEvidence) -> None:
+        super().__init__(message)
+        self.evidence = evidence
 
 
 def _utc_now() -> str:
@@ -297,16 +458,18 @@ def _run_command(
         stderr_log=stderr_name,
     )
     if result_code != 0:
-        raise ValidationFailure(
-            f"{command.command_id} exited {result_code}: {command.display}"
+        raise StepExecutionFailure(
+            f"{command.command_id} exited {result_code}: {command.display}",
+            evidence,
         )
     combined = stdout.strip()
     if command.expected_stdout and not re.fullmatch(
         command.expected_stdout, combined, flags=re.MULTILINE
     ):
-        raise ValidationFailure(
+        raise StepExecutionFailure(
             f"{command.command_id} output did not match {command.expected_stdout!r}: "
-            f"{combined!r}"
+            f"{combined!r}",
+            evidence,
         )
     return evidence, stdout
 
@@ -344,7 +507,7 @@ def _validate_describe(payload: str) -> None:
         raise ValidationFailure(
             f"fbb describe did not report target {TARGET!r}: {targets!r}"
         )
-    if pins.get("hcc") != "7.3.0-20240618":
+    if pins.get("hcc") != TOOLCHAIN_VERSION:
         raise ValidationFailure(f"unexpected hcc pin: {pins.get('hcc')!r}")
 
 
@@ -352,6 +515,7 @@ def run_validation(
     *,
     root: Path,
     expected_platform: str,
+    runner_label: str | None,
     evidence_dir: Path,
 ) -> int:
     root = root.resolve()
@@ -378,6 +542,29 @@ def run_validation(
             raise ValidationFailure(
                 f"runner platform is {actual_platform!r}, expected {expected_platform!r}"
             )
+        machine = platform_module.machine().casefold()
+        if machine not in EXPECTED_MACHINES[expected_platform]:
+            raise ValidationFailure(
+                f"runner architecture is {machine!r}, expected x86_64/AMD64"
+            )
+        if runner_label is not None and (
+            runner_label != EXPECTED_RUNNER_LABELS[expected_platform]
+        ):
+            raise ValidationFailure(
+                f"runner label is {runner_label!r}, expected "
+                f"{EXPECTED_RUNNER_LABELS[expected_platform]!r}"
+            )
+        image_os = os.environ.get("ImageOS")
+        if runner_label is not None and (
+            not image_os
+            or not image_os.casefold().startswith(
+                EXPECTED_IMAGE_OS_PREFIXES[expected_platform]
+            )
+        ):
+            raise ValidationFailure(
+                f"runner ImageOS is {image_os!r}, expected prefix "
+                f"{EXPECTED_IMAGE_OS_PREFIXES[expected_platform]!r}"
+            )
         if not (sdk / "build.py").is_file():
             raise ValidationFailure(f"invalid SDK root: {sdk}")
         if shutil.which("fbb") is None:
@@ -389,6 +576,13 @@ def run_validation(
                 evidence_dir=evidence_dir, environment=environment, timeout_seconds=30,
             )
         )
+        remote_evidence, _ = _run_command(
+            SDK_REMOTE_COMMAND,
+            cwd=root,
+            evidence_dir=evidence_dir,
+            environment=environment,
+        )
+        steps.append(remote_evidence)
         revision = subprocess.run(
             ["git", "rev-parse", "HEAD"],
             cwd=root,
@@ -413,6 +607,12 @@ def run_validation(
         )
         steps.append(
             _run_dependency(
+                "git-lfs-install", ("git", "lfs", "install"), cwd=root,
+                evidence_dir=evidence_dir, environment=environment, timeout_seconds=30,
+            )
+        )
+        steps.append(
+            _run_dependency(
                 "git-lfs-pull", ("git", "lfs", "pull"), cwd=root,
                 evidence_dir=evidence_dir, environment=environment, timeout_seconds=600,
             )
@@ -425,22 +625,26 @@ def run_validation(
             )
         if expected_platform == "linux" and not os.access(compiler, os.X_OK):
             raise ValidationFailure(f"Linux compiler is not executable: {compiler}")
+        version_source = sdk / SDK_VERSION_SOURCE
+        if not version_source.is_file() or re.search(
+            rf'SDK_VERSION=\\?"{re.escape(SDK_VERSION)}\\?"',
+            version_source.read_text(encoding="utf-8"),
+        ) is None:
+            raise ValidationFailure(
+                f"SDK version {SDK_VERSION!r} is not declared by {version_source}"
+            )
 
         if not config_file.is_file():
             raise ValidationFailure(f"target config is missing: {config_file}")
         original_config = config_file.read_bytes()
-        steps.append(
-            _run_dependency(
-                "target-config-clean",
-                ("git", "diff", "--exit-code", "--", CONFIG_PATH.as_posix()),
-                cwd=sdk,
-                evidence_dir=evidence_dir,
-                environment=environment,
-                timeout_seconds=30,
-            )
-        )
 
-        for group in ("version", "setup", "configure", "verify-config"):
+        for group in (
+            "version",
+            "setup",
+            "clean-config",
+            "configure",
+            "verify-config",
+        ):
             for command in COMMAND_GROUPS[group]:
                 evidence, stdout = _run_command(
                     command,
@@ -477,6 +681,9 @@ def run_validation(
             )
         status = "passed"
     except Exception as error:  # Write evidence even for unexpected failures.
+        if isinstance(error, StepExecutionFailure):
+            if not steps or steps[-1].command_id != error.evidence.command_id:
+                steps.append(error.evidence)
         error_message = f"{type(error).__name__}: {error}"
         print(f"::error title=Get Started {expected_platform} build::{error_message}")
     finally:
@@ -499,6 +706,7 @@ def run_validation(
                 "release": platform_module.release(),
                 "machine": platform_module.machine(),
                 "python": platform_module.python_version(),
+                "runner_label": runner_label,
                 "runner_image_os": os.environ.get("ImageOS"),
                 "runner_image_version": os.environ.get("ImageVersion"),
             },
@@ -509,9 +717,20 @@ def run_validation(
                 "commit": CLI_COMMIT,
                 "version": CLI_VERSION,
             },
-            "sdk": {"chip": CHIP, "target": TARGET, "commit": sdk_commit},
+            "sdk": {
+                "documented_repository": SDK_REPOSITORY,
+                "documented_branch": SDK_BRANCH,
+                "version": SDK_VERSION,
+                "chip": CHIP,
+                "target": TARGET,
+                "commit": sdk_commit,
+            },
             "coverage": {
                 "source_static": "not_run_by_this_script",
+                "documented_repository_branch": "passed" if status == "passed" else "failed",
+                "repository_checkout": (
+                    "passed_by_github_actions" if status == "passed" else "failed"
+                ),
                 "environment": "passed" if status == "passed" else "failed",
                 "configure": "passed" if status == "passed" else "failed",
                 "firmware_build": "passed" if status == "passed" else "failed",
@@ -530,6 +749,134 @@ def run_validation(
         )
         print(json.dumps(summary, ensure_ascii=False, indent=2))
     return 0 if status == "passed" else 1
+
+
+def _expected_step_argv() -> dict[str, list[str]]:
+    expected = {
+        "git-version": ["git", "--version"],
+        SDK_REMOTE_COMMAND.command_id: list(SDK_REMOTE_COMMAND.argv),
+        "git-lfs-version": ["git", "lfs", "version"],
+        "git-lfs-install": ["git", "lfs", "install"],
+        "git-lfs-pull": ["git", "lfs", "pull"],
+    }
+    for group in (
+        "version",
+        "setup",
+        "clean-config",
+        "configure",
+        "verify-config",
+        "build",
+    ):
+        for command in COMMAND_GROUPS[group]:
+            expected[command.command_id] = list(command.argv)
+    return expected
+
+
+def validate_evidence(
+    *,
+    summary_path: Path,
+    expected_platform: str,
+    expected_sdk_commit: str,
+    expected_runner_label: str,
+) -> None:
+    """Fail closed when a non-HIL evidence bundle is incomplete or overstated."""
+    try:
+        data = json.loads(summary_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        raise ValidationFailure(f"cannot read evidence summary {summary_path}: {error}") from error
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+            raise ValidationFailure(message)
+
+    require(data.get("schema_version") == 1, "unexpected evidence schema_version")
+    require(data.get("status") == "passed", "evidence status is not passed")
+    require(data.get("platform") == expected_platform, "evidence platform mismatch")
+    require(data.get("error") is None, "passed evidence must not contain an error")
+
+    host = data.get("host") or {}
+    require(
+        str(host.get("machine", "")).casefold() in EXPECTED_MACHINES[expected_platform],
+        "evidence machine is not x86_64/AMD64",
+    )
+    require(host.get("runner_label") == expected_runner_label, "runner label mismatch")
+    require(
+        expected_runner_label == EXPECTED_RUNNER_LABELS[expected_platform],
+        "runner label does not match the canonical platform matrix",
+    )
+    require(host.get("runner_image_os"), "runner image OS is missing")
+    require(
+        str(host.get("runner_image_os")).casefold().startswith(
+            EXPECTED_IMAGE_OS_PREFIXES[expected_platform]
+        ),
+        "runner image OS does not match the canonical platform matrix",
+    )
+    require(host.get("runner_image_version"), "runner image version is missing")
+
+    cli = data.get("cli") or {}
+    require(cli.get("repository") == CLI_REPOSITORY, "FBB CLI repository mismatch")
+    require(cli.get("commit") == CLI_COMMIT, "FBB CLI commit mismatch")
+    require(cli.get("version") == CLI_VERSION, "FBB CLI version mismatch")
+    sdk = data.get("sdk") or {}
+    require(sdk.get("documented_repository") == SDK_REPOSITORY, "SDK repository mismatch")
+    require(sdk.get("documented_branch") == SDK_BRANCH, "SDK branch mismatch")
+    require(sdk.get("version") == SDK_VERSION, "SDK version mismatch")
+    require(sdk.get("chip") == CHIP, "SDK chip mismatch")
+    require(sdk.get("target") == TARGET, "SDK target mismatch")
+    require(
+        sdk.get("commit") == expected_sdk_commit.casefold(),
+        "SDK evidence commit does not match the workflow commit",
+    )
+
+    expected_coverage = {
+        "source_static": "not_run_by_this_script",
+        "documented_repository_branch": "passed",
+        "repository_checkout": "passed_by_github_actions",
+        "environment": "passed",
+        "configure": "passed",
+        "firmware_build": "passed",
+        "flash": "not_run",
+        "serial_monitor": "not_run",
+        "smoke": "not_run",
+        "hil": "not_run",
+    }
+    require(data.get("coverage") == expected_coverage, "coverage boundary mismatch")
+
+    expected_steps = _expected_step_argv()
+    steps = data.get("steps") or []
+    require(isinstance(steps, list), "steps must be a list")
+    require(
+        [step.get("command_id") for step in steps] == list(expected_steps),
+        "step order or command set differs from the canonical contract",
+    )
+    for step in steps:
+        command_id = step["command_id"]
+        require(step.get("argv") == expected_steps[command_id], f"argv mismatch: {command_id}")
+        require(step.get("exit_code") == 0, f"nonzero evidence exit code: {command_id}")
+        for log_key in ("stdout_log", "stderr_log"):
+            log_name = step.get(log_key)
+            require(isinstance(log_name, str) and log_name, f"missing {log_key}: {command_id}")
+            require(
+                (summary_path.parent / log_name).is_file(),
+                f"missing evidence log {log_name!r}: {command_id}",
+            )
+
+    artifacts = data.get("artifacts") or []
+    require(isinstance(artifacts, list), "artifacts must be a list")
+    require(
+        [item.get("path") for item in artifacts]
+        == [path.as_posix() for path in ARTIFACTS],
+        "artifact path set or order differs from the canonical contract",
+    )
+    for artifact in artifacts:
+        require(
+            isinstance(artifact.get("size_bytes"), int) and artifact["size_bytes"] > 0,
+            f"artifact is empty: {artifact.get('path')}",
+        )
+        require(
+            re.fullmatch(r"[0-9a-f]{64}", str(artifact.get("sha256", ""))) is not None,
+            f"artifact SHA-256 is invalid: {artifact.get('path')}",
+        )
 
 
 def _default_root() -> Path:
@@ -565,7 +912,24 @@ def parse_args(argv: Sequence[str]) -> argparse.Namespace:
     run_parser.add_argument(
         "--platform", choices=("windows", "linux"), required=True
     )
+    run_parser.add_argument(
+        "--runner-label",
+        choices=tuple(EXPECTED_RUNNER_LABELS.values()),
+        help="GitHub-hosted runner label recorded in evidence",
+    )
     run_parser.add_argument("--evidence-dir", type=Path, required=True)
+
+    evidence_parser = subparsers.add_parser(
+        "validate-evidence", help="validate a completed non-HIL evidence bundle"
+    )
+    evidence_parser.add_argument("--summary", type=Path, required=True)
+    evidence_parser.add_argument(
+        "--platform", choices=("windows", "linux"), required=True
+    )
+    evidence_parser.add_argument("--sdk-commit", required=True)
+    evidence_parser.add_argument(
+        "--runner-label", choices=tuple(EXPECTED_RUNNER_LABELS.values()), required=True
+    )
     return parser.parse_args(argv)
 
 
@@ -597,8 +961,21 @@ def main(argv: Sequence[str] | None = None) -> int:
         return run_validation(
             root=args.root,
             expected_platform=args.platform,
+            runner_label=args.runner_label,
             evidence_dir=args.evidence_dir,
         )
+    if args.command == "validate-evidence":
+        validate_evidence(
+            summary_path=args.summary,
+            expected_platform=args.platform,
+            expected_sdk_commit=args.sdk_commit,
+            expected_runner_label=args.runner_label,
+        )
+        print(
+            f"PASS validated {args.platform} non-HIL evidence: "
+            f"{len(_expected_step_argv())} steps, {len(ARTIFACTS)} artifacts"
+        )
+        return 0
     raise AssertionError(f"unhandled command: {args.command}")
 
 

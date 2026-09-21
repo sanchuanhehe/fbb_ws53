@@ -10,14 +10,17 @@ applies_to:
   host:
     - Windows 10/11 x86_64
     - Linux x86_64
-  cli: fbb >= 1.1.0（本页静态核对 1.2.1）
+  cli: fbb 1.2.1（SDK 最低要求 1.1.0）
   toolchain: hcc 7.3.0-20240618
 status: draft
 owner: WS53 SDK Maintainers
-verification_level: static
+verification_level: build
+last_verified: 2026-09-21
 source_refs:
   - .gitattributes
   - .github/scripts/get_started_cli.py
+  - .github/scripts/get_started_hook.py
+  - .github/workflows/docs-pages.yml
   - src/build/config/target_config/ws53/ws53.json
   - src/build/config/target_config/ws53/menuconfig/acore/ws53_liteos_app.config
   - src/application/Kconfig
@@ -49,7 +52,7 @@ upstream_refs:
 
 本教程只使用命令行和 FBB CLI，适用于 Windows PowerShell 或 Linux Bash。平台差异只出现在命令壳层、文件检查和串口发现；Kconfig、Target、构建命令、产物、烧录参数和成功判据完全相同。
 
-完成后，你会得到一个启用 Hello World 的 `ws53_liteos_app` 固件，将它烧录到 WS53 开发板，并从串口看到可重复验证的输出。本路径尚未在全新 Windows/Linux 环境实测，因此暂不承诺完成时间。
+完成后，你会得到一个启用 Hello World 的 `ws53_liteos_app` 固件，将它烧录到 WS53 开发板，并从串口看到可重复验证的输出。非 HIL 命令路径已在 GitHub-hosted Ubuntu 24.04 和 Windows Server 2025 x86_64 runner 上完成干净构建；这不是 Windows 10/11 桌面安装或开发板验证，因此完整教程仍暂不承诺完成时间。
 
 ## 选择主机系统
 
@@ -77,42 +80,15 @@ upstream_refs:
 
 在所用系统的终端中进入工作目录，获取 SDK 和 Git LFS 文件：
 
-```console
-git lfs install
-git clone --branch master --single-branch https://gitcode.com/HiSpark/fbb_ws53.git
-cd fbb_ws53
-git lfs pull
-```
+<!-- get-started-cli:checkout:begin -->
+<!-- get-started-cli:checkout:end -->
 
 检查当前系统使用的编译器文件，并进入 SDK 的 `src` 目录：
 
-=== "Windows"
+<!-- get-started-cli:sdk-platform-checks:begin -->
+<!-- get-started-cli:sdk-platform-checks:end -->
 
-    ```powershell
-    $compiler = Get-Item .\src\tools\bin\compiler\riscv\cc_riscv32_musl_b010\cc_riscv32_musl_win\libexec\gcc\riscv32-linux-musl\7.3.0\cc1.exe
-    if ($compiler.Length -lt 1MB) { throw "Git LFS objects are not hydrated" }
-    cd src
-    Test-Path .\build.py
-    Select-String -Path .\build\config\target_config\ws53\target_config.py -Pattern 'SDK_VERSION.*1\.10\.106'
-    ```
-
-    **预期结果：** Git LFS 下载完成且编译器文件不再是小于 1 MiB 的指针文件；`Test-Path` 输出 `True`，并能找到 `SDK_VERSION` 为 `1.10.106` 的源码行。
-
-=== "Linux"
-
-    ```bash
-    size=$(wc -c < ./src/tools/bin/compiler/riscv/cc_riscv32_musl_b010/cc_riscv32_musl/libexec/gcc/riscv32-linux-musl/7.3.0/cc1)
-    if [ "$size" -ge 1048576 ] && cd src && test -f ./build.py; then
-      echo "Git LFS objects: OK"
-      echo "SDK root: OK"
-      grep -n 'SDK_VERSION.*1\.10\.106' ./build/config/target_config/ws53/target_config.py
-    else
-      echo "SDK checkout is incomplete; stop before build" >&2
-      false
-    fi
-    ```
-
-    **预期结果：** Git LFS 下载完成且编译器文件不再是小于 1 MiB 的指针文件；终端输出 `Git LFS objects: OK` 和 `SDK root: OK`，并能找到 `SDK_VERSION` 为 `1.10.106` 的源码行。
+**预期结果：** Git LFS 下载完成且编译器文件不再是小于 1 MiB 的指针文件。Windows 的 `Test-Path` 输出 `True`；Linux 输出 `Git LFS objects: OK` 和 `SDK root: OK`。两个系统都能找到 `SDK_VERSION` 为 `1.10.106` 的源码行。
 
 如果克隆或 LFS 下载失败，先检查网络和 Git 凭据；如果检查没有得到预期结果，不要构建，重新取得完整 SDK 后再继续。
 
@@ -123,7 +99,7 @@ git lfs pull
 <!-- get-started-cli:version:begin -->
 <!-- get-started-cli:version:end -->
 
-本 SDK 要求 `fbb >= 1.1.0`。版本低于 `1.1.0` 时停止操作，从项目认可的发布渠道取得兼容版本，不要绕过版本检查继续构建。
+本教程固定验证 FBB CLI `1.2.1`；SDK 声明的 `1.1.0` 只是最低兼容版本，不表示 Nightly 覆盖了所有 `>= 1.1.0` 版本。若 `fbb -V` 未输出 `fbb 1.2.1`，请从项目认可的发布渠道取得该版本，不要绕过版本检查继续构建。
 
 仍在 SDK 的 `src` 目录中执行：
 
@@ -138,9 +114,8 @@ git lfs pull
 
 以下 4 个操作以全新 checkout 中未修改的默认配置为起点。执行前先检查该文件没有本地改动：
 
-```console
-git diff --exit-code -- build/config/target_config/ws53/menuconfig/acore/ws53_liteos_app.config
-```
+<!-- get-started-cli:clean-config:begin -->
+<!-- get-started-cli:clean-config:end -->
 
 命令必须以 `0` 退出。若存在本地改动，先另行保存并恢复自己的配置，不要用本教程的命令覆盖或误判已有 Sample 配置。
 
@@ -170,23 +145,10 @@ git diff --exit-code -- build/config/target_config/ws53/menuconfig/acore/ws53_li
 
 按所用命令壳层检查文件：
 
-=== "Windows"
+<!-- get-started-cli:artifact-checks:begin -->
+<!-- get-started-cli:artifact-checks:end -->
 
-    ```powershell
-    Test-Path .\output\ws53\acore\ws53_liteos_app\application.elf
-    Test-Path .\output\ws53\fwpkg\pack_all_core\ws53_liteos_app\ws53_liteos_app_all_in_one.fwpkg
-    ```
-
-    两行都应输出 `True`。
-
-=== "Linux"
-
-    ```bash
-    test -f ./output/ws53/acore/ws53_liteos_app/application.elf && echo "ELF: OK"
-    test -f ./output/ws53/fwpkg/pack_all_core/ws53_liteos_app/ws53_liteos_app_all_in_one.fwpkg && echo "FWPKG: OK"
-    ```
-
-    应输出 `ELF: OK` 和 `FWPKG: OK`。
+Windows 的两行都应输出 `True`；Linux 应输出 `ELF: OK` 和 `FWPKG: OK`。
 
 构建失败时保留完整日志，先重新运行 `fbb doctor`，再核对 Target 和第 3 步的配置。
 
@@ -278,4 +240,8 @@ Dev Drive 与 WSL 不是需要叠加执行的步骤。WSL 安装、USB 和串口
 
 ## 当前验证边界
 
-本页已静态核对 SDK 声明的 CLI 最低版本、FBB CLI `1.2.1` 的 `ws53` 双平台工具链清单、仓库内 Windows/Linux 工具链文件、Target、Kconfig 依赖、产物路径、串口参数和 Hello World 日志标志。本次文档变更尚未取得全新 Windows/Linux 主机安装、实际构建、烧录和目标板日志证据，因此页面保持 `draft` 和 `verification_level: static`。
+截至 2026-09-21，本页的非 HIL 路径已在 GitHub-hosted Ubuntu 24.04 和 Windows Server 2025 x86_64 runner 上通过环境检查、4 项配置切换、干净构建，以及 ELF/FWPKG 非空且为本次新生成的断言。因此页面保持 `draft`，验证等级为 `verification_level: build`。
+
+为防止文档与自动验证漂移，SDK/FBB CLI 版本、仓库地址、Windows/Linux 编译器检查、公共命令和产物路径只在 `.github/scripts/get_started_cli.py` 中维护。MkDocs 构建时由 hook 将同一份契约注入本页，Nightly 则按相同阶段和常量执行语义等价检查；其中 checkout 使用 GitHub Actions 固定到当次提交，并另行确认文档声明的 GitCode `master` 分支可解析。静态门禁会拒绝缺失、重复或写入标记区的受管内容，构建后门禁还会核对最终 HTML 中的命令和产物。
+
+验证没有覆盖 Windows 10/11 桌面安装、固件烧录、串口输出、Smoke 或开发板 HIL，不能据此声称 Hello World 已在目标板运行。Nightly 证据保留 14 天；上述未覆盖项继续作为 `not_run` 记录。

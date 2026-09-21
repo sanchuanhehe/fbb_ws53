@@ -28,6 +28,7 @@ from docs_static_baseline import (
     reconcile,
     update_section,
 )
+from get_started_cli import GENERATED_SECTIONS, render_section
 
 IGNORED_SCHEMES = {
     "data",
@@ -42,6 +43,15 @@ IGNORED_SCHEMES = {
 CSS_URL_RE = re.compile(r"url\(\s*(['\"]?)(.*?)\1\s*\)", re.IGNORECASE)
 SITE_URL_RE = re.compile(r"^site_url:\s*['\"]?([^'\"\s#]+)", re.MULTILINE)
 MAX_DETAIL_LINES = 40
+GET_STARTED_HOOK = ".github/scripts/get_started_hook.py"
+GET_STARTED_SOURCE_URI = "zh-CN/get-started/cli.md"
+# zh-CN is the default folder locale, so mkdocs-static-i18n removes the locale
+# prefix from its rendered URL.
+GET_STARTED_OUTPUT = Path("get-started/cli/index.html")
+FENCED_CODE_RE = re.compile(
+    r"^[ \t]*```[^\n]*\n(?P<body>.*?)^[ \t]*```[ \t]*$",
+    re.MULTILINE | re.DOTALL,
+)
 
 
 @dataclass(frozen=True)
@@ -90,6 +100,21 @@ class RenderedHTML(html.parser.HTMLParser):
                 target = item.strip().split()[0] if item.strip() else ""
                 if target:
                     self.references.append(WebReference(target, line, "srcset"))
+
+
+class RenderedText(html.parser.HTMLParser):
+    """Recover visible text from a rendered fragment, including highlighted code."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.parts: list[str] = []
+
+    def handle_data(self, data: str) -> None:
+        self.parts.append(data)
+
+    @property
+    def text(self) -> str:
+        return "".join(self.parts)
 
 
 def parse_args() -> argparse.Namespace:
@@ -320,6 +345,150 @@ def css_references(path: Path) -> tuple[list[WebReference], Finding | None]:
     return references, None
 
 
+def get_started_contract_findings(
+    root: Path, site_dir: Path
+) -> tuple[list[Finding], int, int]:
+    """Verify the effective hook and its rendered non-HIL command contract."""
+
+    findings: list[Finding] = []
+    expected_by_section = {
+        section: tuple(
+            line.strip()
+            for match in FENCED_CODE_RE.finditer(render_section(section))
+            for line in match.group("body").splitlines()
+            if line.strip()
+        )
+        for section in GENERATED_SECTIONS
+    }
+    expected_count = sum(len(values) for values in expected_by_section.values())
+    verified_count = 0
+
+    config_path = root / "mkdocs.yml"
+    try:
+        from mkdocs.config import load_config
+
+        config = load_config(config_file=str(config_path))
+    except Exception as error:
+        findings.append(
+            Finding(
+                "WEB006",
+                relative(config_path, root),
+                1,
+                f"cannot load effective MkDocs configuration to verify hooks: {error}",
+            )
+        )
+        return findings, verified_count, expected_count
+
+    hooks = config.get("hooks", {})
+    hook = hooks.get(GET_STARTED_HOOK) if isinstance(hooks, dict) else None
+    if hook is None:
+        findings.append(
+            Finding(
+                "WEB006",
+                relative(config_path, root),
+                1,
+                f"effective MkDocs hooks do not register {GET_STARTED_HOOK}",
+            )
+        )
+    else:
+        hook_file = getattr(hook, "__file__", None)
+        expected_hook_file = (root / GET_STARTED_HOOK).resolve()
+        if hook_file is None or Path(hook_file).resolve() != expected_hook_file:
+            findings.append(
+                Finding(
+                    "WEB006",
+                    relative(config_path, root),
+                    1,
+                    f"{GET_STARTED_HOOK} resolves to an unexpected module: {hook_file!r}",
+                )
+            )
+        hook_uri = getattr(hook, "CLI_PAGE", None)
+        if hook_uri != GET_STARTED_SOURCE_URI:
+            findings.append(
+                Finding(
+                    "WEB006",
+                    GET_STARTED_HOOK,
+                    1,
+                    f"hook target URI must be {GET_STARTED_SOURCE_URI!r}, got {hook_uri!r}",
+                )
+            )
+
+    output_path = site_dir / GET_STARTED_OUTPUT
+    output_rel = GET_STARTED_OUTPUT.as_posix()
+    if not exact_path_exists(output_path, site_dir) or not output_path.is_file():
+        findings.append(
+            Finding(
+                "WEB006",
+                output_rel,
+                1,
+                "rendered CLI Get Started page is absent at the default zh-CN URI",
+            )
+        )
+        return findings, verified_count, expected_count
+    try:
+        rendered = output_path.read_text(encoding="utf-8")
+    except UnicodeDecodeError as error:
+        findings.append(
+            Finding(
+                "WEB006",
+                output_rel,
+                1,
+                f"cannot inspect rendered CLI contract as UTF-8: {error}",
+            )
+        )
+        return findings, verified_count, expected_count
+
+    for section in GENERATED_SECTIONS:
+        begin_comment = f"<!-- get-started-cli:{section}:begin -->"
+        end_comment = f"<!-- get-started-cli:{section}:end -->"
+        begin_count = rendered.count(begin_comment)
+        end_count = rendered.count(end_comment)
+        if begin_count != 1 or end_count != 1:
+            findings.append(
+                Finding(
+                    "WEB006",
+                    output_rel,
+                    1,
+                    f"rendered section {section!r} must contain exactly one begin "
+                    f"and end marker (found {begin_count}/{end_count})",
+                )
+            )
+            continue
+        begin = rendered.index(begin_comment)
+        end = rendered.index(end_comment)
+        line = rendered.count("\n", 0, begin) + 1
+        if begin >= end:
+            findings.append(
+                Finding(
+                    "WEB006",
+                    output_rel,
+                    line,
+                    f"rendered section {section!r} has reversed markers",
+                )
+            )
+            continue
+
+        parser = RenderedText()
+        parser.feed(rendered[begin + len(begin_comment) : end])
+        visible_lines = [line.strip() for line in parser.text.splitlines()]
+        for value in expected_by_section[section]:
+            occurrences = visible_lines.count(value)
+            if occurrences == 1:
+                verified_count += 1
+                continue
+            findings.append(
+                Finding(
+                    "WEB006",
+                    output_rel,
+                    line,
+                    f"rendered section {section!r} must contain managed value "
+                    f"exactly once (found {occurrences}): {value}",
+                )
+            )
+
+    return findings, verified_count, expected_count
+
+
 def print_findings(findings: Iterable[Finding], blocking: bool) -> None:
     selected = sorted(
         (item for item in findings if item.blocking is blocking),
@@ -367,6 +536,10 @@ def main() -> int:
     site_url = discover_site_url(root, args.site_url)
     scheme, site_host, base = normalized_base(site_url)
     html_files, findings = parse_html_files(site_dir)
+    contract_findings, contract_verified, contract_expected = (
+        get_started_contract_findings(root, site_dir)
+    )
+    findings.extend(contract_findings)
     maintained_pages = maintained_output_paths(root, site_dir)
     external_count = 0
     checked_count = 0
@@ -501,6 +674,7 @@ def main() -> int:
     print(
         "Rendered site check: "
         f"html_files={len(html_files)} maintained_pages={len(maintained_pages)} "
+        f"get_started_contract={contract_verified}/{contract_expected} "
         f"internal_references={checked_count} "
         f"external_references_skipped={external_count} "
         f"blocking={len(blocking)} report_only={len(reports)} "

@@ -221,7 +221,17 @@ jobs:
         run: >-
           python .github/scripts/get_started_cli.py run
           --platform ${{ matrix.platform }}
+          --runner-label ${{ matrix.runner }}
           --evidence-dir artifacts/get-started-${{ matrix.platform }}
+
+      - name: Validate non-HIL build evidence
+        if: always()
+        run: >-
+          python .github/scripts/get_started_cli.py validate-evidence
+          --summary artifacts/get-started-${{ matrix.platform }}/summary.json
+          --platform ${{ matrix.platform }}
+          --runner-label ${{ matrix.runner }}
+          --sdk-commit ${{ github.sha }}
 
       - name: Upload non-HIL build evidence
         if: always()
@@ -230,7 +240,7 @@ jobs:
           name: get-started-${{ matrix.platform }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: artifacts/get-started-${{ matrix.platform }}
           retention-days: 14
-          if-no-files-found: warn
+          if-no-files-found: error
 
   nightly_result:
     name: Documentation / nightly result
